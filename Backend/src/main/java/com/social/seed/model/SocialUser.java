@@ -17,7 +17,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Node("SocialUser")
+@Node
 public class SocialUser {
 
     @Id
@@ -35,4 +35,7 @@ public class SocialUser {
     private Boolean onVacation;
     private Boolean isActive;
 
+    private Integer friendCount;
+    private Integer followersCount;
+    private Integer followingCount;
 }
