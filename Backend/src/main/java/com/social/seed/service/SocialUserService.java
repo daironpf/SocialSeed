@@ -55,9 +55,9 @@ public class SocialUserService {
             if (existByUserName && existByEmail){
                 response = "The email and the username already exists";
             } else if (existByEmail) {
-                response = "The email already exists";
+                response = String.format("The email [ %s ] already exists", socialUser.getEmail());
             } else {
-                response = "The username already exists";
+                response = String.format("The username [ %s ] already exists", socialUser.getUserName());
             }
         }
 

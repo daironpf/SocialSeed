@@ -1,0 +1,21 @@
+package com.social.seed.repository;
+
+import com.social.seed.model.HashTag;
+import org.springframework.data.neo4j.repository.Neo4jRepository;
+import org.springframework.data.neo4j.repository.query.Query;
+
+public interface HashTagRepository extends Neo4jRepository<HashTag, String> {
+
+    @Query("""
+            OPTIONAL MATCH (t:HashTag)
+            WHERE toLower(t.name) = toLower($name)
+            RETURN CASE WHEN t IS NOT NULL THEN true ELSE false END AS existUser
+            """)
+    Boolean existByName(String name);
+
+    @Query("""
+            MATCH (t:HashTag {id:$id})
+            SET t.name = $name
+            """)
+    void update(String id, String name);
+}
