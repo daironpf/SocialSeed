@@ -15,17 +15,16 @@ public class SocialUserService {
     @Autowired
     SocialUserRepository socialUserRepository;
 
-    //region crud
-    public ResponseEntity<SocialUser> getSocialUserById(String id) {
-        return socialUserRepository.findById(id)
-                .map(user -> new ResponseEntity<>(user, HttpStatus.OK))
-                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    //region CRUD
+    public Optional<SocialUser> getSocialUserById(String id) {
+        return socialUserRepository.findById(id);
     }
 
-    public ResponseEntity<String> createNewSocialUser(SocialUser socialUser) {
+
+    public ResponseEntity<Object> createNewSocialUser(SocialUser socialUser) {
 
         HttpStatus httpStatus;
-        String response = "";
+        Object response;
 
         boolean existByEmail = socialUserRepository.existByEmail(socialUser.getEmail());
         boolean existByUserName = socialUserRepository.existByUserName(socialUser.getUserName());
@@ -33,7 +32,7 @@ public class SocialUserService {
         //si no existe el email y el username entonces se procede a crear el usuario
         if (!existByEmail && !existByUserName){
             //create the social user with the base data
-            socialUserRepository.save(
+            response = socialUserRepository.save(
                     SocialUser.builder()
                             .userName(socialUser.getUserName())
                             .email(socialUser.getEmail())
@@ -50,8 +49,6 @@ public class SocialUserService {
             );
 
             httpStatus = HttpStatus.CREATED;
-            response = "The User was created successfully";
-
         }else {
             httpStatus = HttpStatus.CONFLICT;
 
@@ -59,10 +56,8 @@ public class SocialUserService {
                 response = "The email and the username already exists";
             } else if (existByEmail) {
                 response = "The email already exists";
-            } else if (existByUserName) {
-                response = "The username already exists";
             } else {
-                response = "Unknown conflict";
+                response = "The username already exists";
             }
         }
 
@@ -82,24 +77,28 @@ public class SocialUserService {
                 .orElse(HttpStatus.NOT_FOUND);
     }
 
-    public HttpStatus updateSocialUser(String userId, SocialUser newSocialUser) {
+    public ResponseEntity<SocialUser> updateSocialUser(String userId, SocialUser newSocialUser) {
+
         if (!userId.equals(newSocialUser.getId())) {
-            return HttpStatus.CONFLICT;
-        }
-
-        Optional<SocialUser> existingUser = socialUserRepository.findById(newSocialUser.getId());
-
-        if (existingUser.isPresent()) {
-            socialUserRepository.update(
-                newSocialUser.getId(),
-                newSocialUser.getFullName(),
-                newSocialUser.getDateBorn(),
-                newSocialUser.getLanguage()
-            );
-            return HttpStatus.OK;
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
         }else {
-            return HttpStatus.NOT_FOUND;
+            Optional<SocialUser> socialUser = socialUserRepository.findById(newSocialUser.getId());
+
+            if (socialUser.isPresent()){
+                socialUserRepository.update(
+                        newSocialUser.getId(),
+                        newSocialUser.getFullName(),
+                        newSocialUser.getDateBorn(),
+                        newSocialUser.getLanguage()
+                );
+
+                SocialUser savedSocialUser = socialUserRepository.findById(userId).get();
+                return ResponseEntity.status(HttpStatus.OK).body(savedSocialUser);
+            }else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
         }
+
     }
     //endregion
 }

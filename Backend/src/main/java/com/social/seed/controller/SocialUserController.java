@@ -1,5 +1,6 @@
 package com.social.seed.controller;
 
+import com.social.seed.model.Post;
 import com.social.seed.model.SocialUser;
 import com.social.seed.service.SocialUserService;
 import com.social.seed.util.ResponseDTO;
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api/v1/socialUser")
@@ -19,92 +23,59 @@ public class SocialUserController {
     @GetMapping("/getSocialUserById/{id}")
     public ResponseEntity<ResponseDTO> getSocialUserById(@PathVariable String id) {
 
-        ResponseEntity<SocialUser> socialUserResponse = socialUserService.getSocialUserById(id);
-
-        HttpStatus httpStatus = (HttpStatus) socialUserResponse.getStatusCode();
-        Object response = httpStatus == HttpStatus.OK ? socialUserResponse.getBody() : String.format("The User with the id [ %s ] was not found", id);
-        String message = httpStatus == HttpStatus.OK ? "Successfull" : "Error";
-
-        ResponseDTO responseDTO = new ResponseDTO(
-                httpStatus,
-                response,
-                message
-        );
-
-        return ResponseEntity.status(httpStatus).body(responseDTO);
+        return ResponseEntity.status(OK)
+                .body(socialUserService.getSocialUserById(id)
+                        .map(user -> new ResponseDTO(OK, user, "Successful"))
+                        .orElse(new ResponseDTO(NOT_FOUND, "Error", String.format("The User with the id [ %s ] was not found", id))));
     }
 
 
     @PostMapping("/createSocialUser")
     public ResponseEntity<ResponseDTO> createSocialUser(@RequestBody SocialUser socialUser){
 
-        ResponseEntity<String> responseCreate = socialUserService.createNewSocialUser(socialUser);
-
-        String message = responseCreate.getStatusCode() == HttpStatus.CREATED ? "Successfull" : "Error";
-
-        ResponseDTO responseDTO = new ResponseDTO(
-                (HttpStatus) responseCreate.getStatusCode(),
-                responseCreate.getBody(),
-                message
-        );
-
-        return ResponseEntity.status(responseCreate.getStatusCode()).body(responseDTO);
-    }
-
-    @DeleteMapping("/deleteSocialUser/{id}")
-    public ResponseEntity<ResponseDTO> deleteSocialUser(
-            HttpServletRequest request,
-            @PathVariable String id){
-
-        HttpStatus responseDeleted = socialUserService.deleteSocialUser(
-                request.getHeader("userId"),
-                id);
-
-        String message = responseDeleted == HttpStatus.OK ? "Successfull" : "Error";
-
-        String response = switch (responseDeleted) {
-            case OK -> String.format("The User with the id [ %s ] was deleted", id);
-            case NOT_FOUND -> String.format("The User with the id [ %s ] was not found", id);
-            case CONFLICT ->
-                    String.format("The User with the id [ %s ] is not the same to modify", request.getHeader("userId"));
-            default -> "Unexpected response";
+        ResponseEntity<Object> responseCreate = socialUserService.createNewSocialUser(socialUser);
+        HttpStatus status = (HttpStatus) responseCreate.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case CREATED -> new ResponseDTO(status, responseCreate.getBody(), String.format("The User with the email [ %s ] was Created", socialUser.getEmail()));
+            case CONFLICT -> new ResponseDTO(status, "Error", (String) responseCreate.getBody());
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
         };
 
-        ResponseDTO responseDTO = new ResponseDTO(
-                responseDeleted,
-                response,
-                message
-        );
-
-        return ResponseEntity.status(responseDeleted).body(responseDTO);
+        return ResponseEntity.status(status).body(responseDTO);
     }
 
     @PutMapping("/updateSocialUser")
     public ResponseEntity<ResponseDTO> updateSocialUser(
-            HttpServletRequest request,
+            @RequestHeader("userId") String userId,
             @RequestBody SocialUser socialUser){
 
-        HttpStatus updateResponse = socialUserService.updateSocialUser(
-                request.getHeader("userId"),
-                socialUser);
-
-        String message = updateResponse == HttpStatus.OK ? "Successfull" : "Error";
-
-        String response = switch (updateResponse) {
-            case OK -> String.format("The User with the id [ %s ] was Updated", socialUser.getId());
-            case NOT_FOUND -> String.format("The User with the id [ %s ] was not found", socialUser.getId());
-            case CONFLICT ->
-                    String.format("The User with the id [ %s ] is not the same to modify", request.getHeader("userId"));
-            default -> "Unexpected response";
+        ResponseEntity<SocialUser> userResponseEntity = socialUserService.updateSocialUser(userId, socialUser);
+        HttpStatus status = (HttpStatus) userResponseEntity.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, userResponseEntity.getBody(), String.format("The User with the id [ %s ] was Updated", socialUser.getId()));
+            case NOT_FOUND -> new ResponseDTO(status, "Error", String.format("The User with the id [ %s ] was not found", socialUser.getId()));
+            case CONFLICT -> new ResponseDTO(status, "Error", String.format("The User with the id [ %s ] is not the same to modify", userId));
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
         };
 
-        ResponseDTO responseDTO = new ResponseDTO(
-                updateResponse,
-                response,
-                message
-        );
+        return ResponseEntity.status(status).body(responseDTO);
+    }
 
-        return ResponseEntity.status(updateResponse).body(responseDTO);
+    @DeleteMapping("/deleteSocialUser/{id}")
+    public ResponseEntity<ResponseDTO> deleteSocialUser(
+            @RequestHeader("userId") String userId,
+            @PathVariable String id){
+
+        HttpStatus status = socialUserService.deleteSocialUser(userId, id);
+
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, "Successful", String.format("The User with the id [ %s ] was deleted", id));
+            case NOT_FOUND -> new ResponseDTO(status, "Error", String.format("The User with the id [ %s ] was not found", id));
+            case CONFLICT -> new ResponseDTO(status, "Error", String.format("The User with the id [ %s ] is not the same to modify", userId));
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
     }
     //endregion
 }
