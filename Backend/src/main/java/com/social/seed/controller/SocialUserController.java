@@ -94,5 +94,23 @@ public class SocialUserController {
 
         return ResponseEntity.status(status).body(responseDTO);
     }
+
+    @PostMapping("/updateSocialUserEmail/{idUserToUpdate}")
+    public ResponseEntity<ResponseDTO> updateSocialUserEmail(
+            @RequestHeader("userId") String idUserRequest,
+            @PathVariable String idUserToUpdate,
+            @RequestParam String newEmail){
+
+        ResponseEntity<Object> response = socialUserService.updateSocialUserEmail(idUserRequest, idUserToUpdate, newEmail);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, response.getBody(), String.format("The Email was changed to [ %s ]", newEmail));
+            case CONFLICT -> new ResponseDTO(status, "Error", (String) response.getBody());
+            case NOT_FOUND -> new ResponseDTO(status, "Error", String.format("The User with the id [ %s ] was not found", idUserRequest));
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
+    }
     //endregion
 }

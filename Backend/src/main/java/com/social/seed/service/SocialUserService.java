@@ -120,5 +120,23 @@ public class SocialUserService {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("The user who is requesting the userName change is not the owner of this");
         }
     }
+
+    public ResponseEntity<Object> updateSocialUserEmail(String idUserRequest, String idUserToUpdate, String newEmail) {
+        if (idUserToUpdate.equals(idUserRequest)) {
+            if (socialUserRepository.existsById(idUserToUpdate)){
+                if (!socialUserRepository.existByEmail(newEmail)){
+                    socialUserRepository.updateSocialUserEmail(idUserToUpdate, newEmail);
+                    SocialUser savedSocialUser = socialUserRepository.findById(idUserToUpdate).get();
+                    return ResponseEntity.status(HttpStatus.OK).body(savedSocialUser);
+                }else {
+                    return ResponseEntity.status(HttpStatus.CONFLICT).body(String.format("The Email [ %s ] already exists", newEmail));
+                }
+            }else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        }else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("The user who is requesting the Email change is not the owner of this");
+        }
+    }
     //endregion
 }
