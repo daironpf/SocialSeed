@@ -139,4 +139,51 @@ public class SocialUserService {
         }
     }
     //endregion
+
+    //region FOLLOW
+    public ResponseEntity<Object> followSocialUser(String idUserRequest, String idUserToFollow) {
+        if (idUserRequest.equals(idUserToFollow))
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("the user to be followed cannot be the same");
+
+        if (socialUserRepository.existsById(idUserRequest)){
+            if (socialUserRepository.existsById(idUserToFollow)){
+                if (!socialUserRepository.IsUserBFollowerOfUserA(idUserRequest, idUserToFollow)){
+                    socialUserRepository.createUserBFollowUserA(
+                            idUserRequest,
+                            idUserToFollow,
+                            LocalDateTime.now());
+
+                        return ResponseEntity.status(HttpStatus.OK).body(null);
+                }else {
+                    return ResponseEntity.status(HttpStatus.CONFLICT).body(String.format("You are already following the user with id [ %s ]", idUserToFollow));
+                }
+            }else{
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The User to follow has not been found");
+            }
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(String.format("The User with [ %s ] not found", idUserRequest));
+        }
+    }
+
+    public ResponseEntity<Object> unfollowSocialUser(String idUserRequest, String idUserToUnFollow) {
+        if (idUserRequest.equals(idUserToUnFollow))
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("the user to be unfollowed cannot be the same");
+
+        if (socialUserRepository.existsById(idUserRequest)){
+            if (socialUserRepository.existsById(idUserToUnFollow)){
+                if (socialUserRepository.IsUserBFollowerOfUserA(idUserRequest, idUserToUnFollow)){
+                    socialUserRepository.unFollowTheUserA(idUserRequest, idUserToUnFollow);
+
+                    return ResponseEntity.status(HttpStatus.OK).body(null);
+                }else {
+                    return ResponseEntity.status(HttpStatus.CONFLICT).body(String.format("You not following the user with id [ %s ]", idUserToUnFollow));
+                }
+            }else{
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The User to unfollow has not been found");
+            }
+        }else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(String.format("The User with [ %s ] not found", idUserRequest));
+        }
+    }
+    //endregion
 }

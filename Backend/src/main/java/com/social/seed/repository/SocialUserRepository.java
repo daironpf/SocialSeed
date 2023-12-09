@@ -60,4 +60,32 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
     @Query("MATCH (u:SocialUser {id: $id}) SET u.email = $newEmail")
     void updateSocialUserEmail(String id, String newEmail);
     //endregion
+
+    //region FOLLOW
+    @Query("""
+            MATCH (b:SocialUser {id: $user_b_id})
+            MATCH (a:SocialUser {id: $user_a_id})
+            OPTIONAL MATCH(b)<-[r:FOLLOWED_BY]-(a)
+            RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS following
+            """)
+    Boolean IsUserBFollowerOfUserA(String user_b_id, String user_a_id);
+
+    @Query("""
+            MATCH (b:SocialUser {id: $user_b_id})
+            MATCH (a:SocialUser {id: $user_a_id})
+            MERGE(b)<-[r:FOLLOWED_BY {followDate:$followDate}]-(a)
+            """)
+    void createUserBFollowUserA(
+            String user_b_id,
+            String user_a_id,
+            LocalDateTime followDate);
+
+    @Query("""
+            MATCH (b:SocialUser {id: $user_b_id})
+            MATCH (a:SocialUser {id: $user_a_id})
+            MATCH (b)<-[r:FOLLOWED_BY]-(a)
+            DELETE r
+            """)
+    void unFollowTheUserA(String user_b_id, String user_a_id);
+    //endregion
 }
