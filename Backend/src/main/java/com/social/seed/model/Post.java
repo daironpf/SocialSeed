@@ -29,6 +29,8 @@ public class Post {
 
     private Boolean isActive;
 
+    private int likedCount;
+
     @Relationship(type = "POSTED_BY")
     private PostedByRelationship author;
 }

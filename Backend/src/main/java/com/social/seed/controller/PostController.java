@@ -103,4 +103,39 @@ public class PostController {
         return ResponseEntity.status(status).body(responseDTO);
     }
     //endregion
+
+    //region LIKE
+    @PostMapping("/createLike/{idPostToLiked}")
+    public ResponseEntity<ResponseDTO> createSocialUserlikedPost(
+            @RequestHeader("userId") String idUserRequest,
+            @PathVariable String idPostToLiked){
+
+        ResponseEntity<Object> response = postService.createSocialUserlikedPost(idUserRequest, idPostToLiked);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, "Successful", "The LIKE was created Successful ");
+            case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
+    }
+
+    @PostMapping("/deleteLike/{idPostToLiked}")
+    public ResponseEntity<ResponseDTO> deleteSocialUserlikedPost(
+            @RequestHeader("userId") String idUserRequest,
+            @PathVariable String idPostToLiked){
+
+        ResponseEntity<Object> response = postService.deleteSocialUserlikedPost(idUserRequest, idPostToLiked);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, "Successful", "The LIKE was deleted Successful ");
+            case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
+    }
+
+    //endregion
 }

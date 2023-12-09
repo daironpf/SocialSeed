@@ -69,4 +69,33 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
             LocalDateTime now
     );
     //endregion
+
+    //region LIKE
+    @Query("""
+            MATCH (u:SocialUser {id: $idUserRequest})
+            MATCH (p:Post {id: $idPostToLiked})
+            OPTIONAL MATCH(u)-[r:LIKE]->(p)
+            RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS following
+            """)
+    boolean isUserByIdLikedPostById(String idUserRequest, String idPostToLiked);
+
+    @Query("""
+            MATCH (u:SocialUser {id: $idUserRequest})
+            MATCH (p:Post {id: $idPostToLiked})
+            MERGE (u)-[r:LIKE {likeDate: $likeDate}]->(p)
+            WITH p
+            SET p.likedCount = p.likedCount + 1
+            """)
+    void createUserByIdLikedPostById(String idUserRequest, String idPostToLiked, LocalDateTime likeDate);
+
+    @Query("""
+            MATCH (u:SocialUser {id: $idUserRequest})
+            MATCH (p:Post {id: $idPostToLiked})
+            MATCH (u)-[r:LIKE]->(p)
+            DELETE r
+            WITH p
+            SET p.likedCount = p.likedCount - 1
+            """)
+    void deleteUserByIdLikedPostById(String idUserRequest, String idPostToLiked);
+    //endregion
 }
