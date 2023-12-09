@@ -79,5 +79,13 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
             String user_b_id,
             String user_a_id,
             LocalDateTime followDate);
+
+    @Query("""
+            MATCH (b:SocialUser {id: $user_b_id})
+            MATCH (a:SocialUser {id: $user_a_id})
+            MATCH (b)<-[r:FOLLOWED_BY]-(a)
+            DELETE r
+            """)
+    void unFollowTheUserA(String user_b_id, String user_a_id);
     //endregion
 }

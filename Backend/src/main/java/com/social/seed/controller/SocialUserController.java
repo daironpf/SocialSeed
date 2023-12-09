@@ -130,5 +130,21 @@ public class SocialUserController {
 
         return ResponseEntity.status(status).body(responseDTO);
     }
+
+    @PostMapping("/unfollow/{idUserToUnFollow}")
+    public ResponseEntity<ResponseDTO> unfollowSocialUser(
+            @RequestHeader("userId") String idUserRequest,
+            @PathVariable String idUserToUnFollow){
+
+        ResponseEntity<Object> response = socialUserService.unfollowSocialUser(idUserRequest, idUserToUnFollow);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, "Successful", "The User unFollowed Successful ");
+            case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
+    }
     //endregion
 }
