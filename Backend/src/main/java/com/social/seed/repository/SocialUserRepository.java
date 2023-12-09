@@ -52,4 +52,9 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
             String language
     );
     //endregion
+
+    //region Update Special Props
+    @Query("MATCH (u:SocialUser {id: $id}) SET u.userName = $newUserName")
+    void updateSocialUserName(String id, String newUserName);
+    //endregion
 }

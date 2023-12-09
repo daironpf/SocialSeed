@@ -101,4 +101,24 @@ public class SocialUserService {
 
     }
     //endregion
+
+    //region Update Special Props
+    public ResponseEntity<Object> updateSocialUserName(String idUserRequest, String idUserToUpdate, String newUserName) {
+        if (idUserToUpdate.equals(idUserRequest)) {
+            if (socialUserRepository.existsById(idUserToUpdate)){
+                if (!socialUserRepository.existByUserName(newUserName)){
+                    socialUserRepository.updateSocialUserName(idUserToUpdate, newUserName);
+                    SocialUser savedSocialUser = socialUserRepository.findById(idUserToUpdate).get();
+                    return ResponseEntity.status(HttpStatus.OK).body(savedSocialUser);
+                }else {
+                    return ResponseEntity.status(HttpStatus.CONFLICT).body(String.format("The userName [ %s ] already exists", newUserName));
+                }
+            }else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+        }else {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("The user who is requesting the userName change is not the owner of this");
+        }
+    }
+    //endregion
 }

@@ -1,10 +1,8 @@
 package com.social.seed.controller;
 
-import com.social.seed.model.Post;
 import com.social.seed.model.SocialUser;
 import com.social.seed.service.SocialUserService;
 import com.social.seed.util.ResponseDTO;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +17,7 @@ public class SocialUserController {
     @Autowired
     SocialUserService socialUserService;
 
-    //region crud
+    //region CRUD
     @GetMapping("/getSocialUserById/{id}")
     public ResponseEntity<ResponseDTO> getSocialUserById(@PathVariable String id) {
 
@@ -28,7 +26,6 @@ public class SocialUserController {
                         .map(user -> new ResponseDTO(OK, user, "Successful"))
                         .orElse(new ResponseDTO(NOT_FOUND, "Error", String.format("The User with the id [ %s ] was not found", id))));
     }
-
 
     @PostMapping("/createSocialUser")
     public ResponseEntity<ResponseDTO> createSocialUser(@RequestBody SocialUser socialUser){
@@ -72,6 +69,26 @@ public class SocialUserController {
             case OK -> new ResponseDTO(status, "Successful", String.format("The User with the id [ %s ] was deleted", id));
             case NOT_FOUND -> new ResponseDTO(status, "Error", String.format("The User with the id [ %s ] was not found", id));
             case CONFLICT -> new ResponseDTO(status, "Error", String.format("The User with the id [ %s ] is not the same to modify", userId));
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
+    }
+    //endregion
+
+    //region Update Special Props
+    @PostMapping("/updateSocialUserName/{idUserToUpdate}")
+    public ResponseEntity<ResponseDTO> updateSocialUserName(
+            @RequestHeader("userId") String idUserRequest,
+            @PathVariable String idUserToUpdate,
+            @RequestParam String newUserName){
+
+        ResponseEntity<Object> response = socialUserService.updateSocialUserName(idUserRequest, idUserToUpdate, newUserName);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, response.getBody(), String.format("The User Name was changed to [ %s ]", newUserName));
+            case CONFLICT -> new ResponseDTO(status, "Error", (String) response.getBody());
+            case NOT_FOUND -> new ResponseDTO(status, "Error", String.format("The User with the id [ %s ] was not found", idUserRequest));
             default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
         };
 
