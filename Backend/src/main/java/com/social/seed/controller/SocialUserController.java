@@ -113,4 +113,22 @@ public class SocialUserController {
         return ResponseEntity.status(status).body(responseDTO);
     }
     //endregion
+
+    //region FOLLOWED_BY
+    @PostMapping("/follow/{idUserToFollow}")
+    public ResponseEntity<ResponseDTO> followSocialUser(
+            @RequestHeader("userId") String idUserRequest,
+            @PathVariable String idUserToFollow){
+
+        ResponseEntity<Object> response = socialUserService.followSocialUser(idUserRequest, idUserToFollow);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, "Successful", "The User Followed Successful ");
+            case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
+    }
+    //endregion
 }
