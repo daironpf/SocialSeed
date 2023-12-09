@@ -74,6 +74,9 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
             MATCH (b:SocialUser {id: $user_b_id})
             MATCH (a:SocialUser {id: $user_a_id})
             MERGE(b)<-[r:FOLLOWED_BY {followDate:$followDate}]-(a)
+            WITH a, b
+            SET a.followersCount = a.followersCount + 1,
+                b.followingCount = b.followingCount + 1
             """)
     void createUserBFollowUserA(
             String user_b_id,
@@ -85,6 +88,9 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
             MATCH (a:SocialUser {id: $user_a_id})
             MATCH (b)<-[r:FOLLOWED_BY]-(a)
             DELETE r
+            WITH a, b
+            SET a.followersCount = a.followersCount - 1,
+                b.followingCount = b.followingCount - 1
             """)
     void unFollowTheUserA(String user_b_id, String user_a_id);
     //endregion

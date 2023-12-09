@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -141,6 +142,7 @@ public class SocialUserService {
     //endregion
 
     //region FOLLOW
+    @Transactional
     public ResponseEntity<Object> followSocialUser(String idUserRequest, String idUserToFollow) {
         if (idUserRequest.equals(idUserToFollow))
             return ResponseEntity.status(HttpStatus.CONFLICT).body("the user to be followed cannot be the same");
@@ -165,6 +167,7 @@ public class SocialUserService {
         }
     }
 
+    @Transactional
     public ResponseEntity<Object> unfollowSocialUser(String idUserRequest, String idUserToUnFollow) {
         if (idUserRequest.equals(idUserToUnFollow))
             return ResponseEntity.status(HttpStatus.CONFLICT).body("the user to be unfollowed cannot be the same");
