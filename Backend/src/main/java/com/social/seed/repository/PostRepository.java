@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 public interface PostRepository extends Neo4jRepository<Post, String> {
-
+    //region gets
     @Override
     @Query(value ="""
                 MATCH (p:Post)
@@ -41,7 +41,7 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
                 RETURN count(p)
             """)
     Page<Post> getFeed(Pageable pageable);
-
+    //endregion
 
     //region CRUD
     @Query("""
@@ -97,5 +97,15 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
             SET p.likedCount = p.likedCount - 1
             """)
     void deleteUserByIdLikedPostById(String idUserRequest, String idPostToLiked);
+    //endregion
+
+    //region validate
+    @Query("""
+            MATCH (u:SocialUser {id: $idUser})
+            MATCH (p:Post {id: $idPost})
+            OPTIONAL MATCH(p)-[r:POSTED_BY]->(u)
+            RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS isAuthor
+            """)
+    boolean isUserAuthorOfThePostById(String idUser, String idPost);
     //endregion
 }
