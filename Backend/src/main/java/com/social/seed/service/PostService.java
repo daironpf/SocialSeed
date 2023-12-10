@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -50,6 +51,7 @@ public class PostService {
                             .content(post.getContent())
                             .imageUrl(post.getImageUrl())
                             .isActive(true)
+                            .likedCount(0)
                             .build()
             );
 
@@ -105,6 +107,68 @@ public class PostService {
         } else {
             return HttpStatus.NOT_FOUND;
         }
+    }
+    //endregion
+
+    //region LIKE
+    @Transactional
+    public ResponseEntity<Object> createSocialUserlikedPost(String idUserRequest, String idPostToLiked) {
+        if (!userExists(idUserRequest)) return userNotFoundResponse(idUserRequest);
+        if (!postExists(idPostToLiked)) return postNotFoundResponse(idPostToLiked);
+        if (userLikedPost(idUserRequest, idPostToLiked)) return alreadyLikedResponse(idPostToLiked);
+
+        postRepository.createUserByIdLikedPostById(idUserRequest, idPostToLiked, LocalDateTime.now());
+        return successResponse(null);
+    }
+
+    @Transactional
+    public ResponseEntity<Object> deleteSocialUserlikedPost(String idUserRequest, String idPostToLiked) {
+        if (!userExists(idUserRequest)) return userNotFoundResponse(idUserRequest);
+        if (!postExists(idPostToLiked)) return postNotFoundResponse(idPostToLiked);
+        if (!userLikedPost(idUserRequest, idPostToLiked)) return dontLikedResponse(idPostToLiked);
+
+        postRepository.deleteUserByIdLikedPostById(idUserRequest, idPostToLiked);
+        return successResponse(null);
+    }
+    //endregion
+
+    //region util validate
+    private boolean userExists(String userId) {
+        return socialUserRepository.existsById(userId);
+    }
+
+    private boolean postExists(String postId) {
+        return postRepository.existsById(postId);
+    }
+
+    private boolean userLikedPost(String userId, String postId) {
+        return postRepository.isUserByIdLikedPostById(userId, postId);
+    }
+    //endregion
+
+    //region util response
+    private ResponseEntity<Object> userNotFoundResponse(String userId) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(String.format("The User with the id [ %s ] not found", userId));
+    }
+
+    private ResponseEntity<Object> postNotFoundResponse(String postId) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(String.format("The Post with the id [ %s ] not found", postId));
+    }
+
+    private ResponseEntity<Object> alreadyLikedResponse(String postId) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(String.format("You are already LIKED the post with id [ %s ]", postId));
+    }
+
+    private ResponseEntity<Object> dontLikedResponse(String postId) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(String.format("The post with id [ %s ] does not have a LIKE from the user", postId));
+    }
+
+    private ResponseEntity<Object> successResponse(Object object) {
+        return ResponseEntity.status(HttpStatus.OK).body(object);
     }
     //endregion
 }

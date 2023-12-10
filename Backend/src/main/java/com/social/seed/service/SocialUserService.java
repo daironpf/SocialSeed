@@ -163,7 +163,7 @@ public class SocialUserService {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("The User to follow has not been found");
             }
         }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(String.format("The User with [ %s ] not found", idUserRequest));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(String.format("The User with the id [ %s ] not found", idUserRequest));
         }
     }
 
