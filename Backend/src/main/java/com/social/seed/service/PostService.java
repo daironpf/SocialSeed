@@ -2,8 +2,8 @@ package com.social.seed.service;
 
 import com.social.seed.model.Post;
 import com.social.seed.repository.PostRepository;
-import com.social.seed.repository.SocialUserRepository;
 import com.social.seed.util.ResponseService;
+import com.social.seed.util.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,33 +17,34 @@ import java.util.Optional;
 
 @Service
 public class PostService {
+    //region dependencies
     @Autowired
     PostRepository postRepository;
     @Autowired
-    SocialUserRepository socialUserRepository;
-    @Autowired
     ResponseService responseService;
+    @Autowired
+    ValidationService validationService;
+    //endregion
 
-    //region get
+    //region Get
     public Optional<Page<Post>> getAllPosts(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return Optional.of(postRepository.findAll(pageable));
     }
-
     public Optional<Page<Post>> getPostFeed(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return Optional.of(postRepository.getFeed(pageable));
     }
-
     //endregion
+
     //region CRUD
     public ResponseEntity<Object> getPostById(String postId) {
-        if (!postExists(postId)) return responseService.postNotFoundResponse(postId);
+        if (!validationService.postExistsById(postId)) return responseService.postNotFoundResponse(postId);
         return responseService.successResponse(postRepository.findById(postId).get());
     }
 
     public ResponseEntity<Object> createNewPost(Post post, String userId) {
-        if (!userExists(userId)) return responseService.userNotFoundResponse(userId);
+        if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
 
         Post newPost = postRepository.save(
                     Post.builder()
@@ -66,9 +67,9 @@ public class PostService {
     }
 
     public ResponseEntity<Object> updatePost(String userId, Post updatedPost) {
-        if (!userExists(userId)) return responseService.userNotFoundResponse(userId);
-        if (!postExists(updatedPost.getId())) return responseService.postNotFoundResponse(updatedPost.getId());
-        if (!userAuthorOfThePostById(userId, updatedPost.getId())) return responseService.isNotPostAuthor();
+        if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
+        if (!validationService.postExistsById(updatedPost.getId())) return responseService.postNotFoundResponse(updatedPost.getId());
+        if (!validationService.userAuthorOfThePostById(userId, updatedPost.getId())) return responseService.isNotPostAuthor();
         postRepository.update(
             updatedPost.getId(),
             updatedPost.getContent(),
@@ -80,9 +81,9 @@ public class PostService {
     }
 
     public ResponseEntity<Object> deletePost(String userId, String postId) {
-        if (!userExists(userId)) return responseService.userNotFoundResponse(userId);
-        if (!postExists(postId)) return responseService.postNotFoundResponse(postId);
-        if (!userAuthorOfThePostById(userId, postId)) return responseService.isNotPostAuthor();
+        if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
+        if (!validationService.postExistsById(postId)) return responseService.postNotFoundResponse(postId);
+        if (!validationService.userAuthorOfThePostById(userId, postId)) return responseService.isNotPostAuthor();
 
         postRepository.deleteById(postId);
         return responseService.successResponse(null);
@@ -92,9 +93,9 @@ public class PostService {
     //region LIKE
     @Transactional
     public ResponseEntity<Object> createSocialUserlikedPost(String userId, String postId) {
-        if (!userExists(userId)) return responseService.userNotFoundResponse(userId);
-        if (!postExists(postId)) return responseService.postNotFoundResponse(postId);
-        if (userLikedPost(userId, postId)) return responseService.alreadyLikedResponse(postId);
+        if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
+        if (!validationService.postExistsById(postId)) return responseService.postNotFoundResponse(postId);
+        if (validationService.userLikedPost(userId, postId)) return responseService.alreadyLikedResponse(postId);
 
         postRepository.createUserByIdLikedPostById(userId, postId, LocalDateTime.now());
         return responseService.successResponse(null);
@@ -102,30 +103,12 @@ public class PostService {
 
     @Transactional
     public ResponseEntity<Object> deleteSocialUserlikedPost(String idUserRequest, String idPostToLiked) {
-        if (!userExists(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
-        if (!postExists(idPostToLiked)) return responseService.postNotFoundResponse(idPostToLiked);
-        if (!userLikedPost(idUserRequest, idPostToLiked)) return responseService.dontLikedResponse(idPostToLiked);
+        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
+        if (!validationService.postExistsById(idPostToLiked)) return responseService.postNotFoundResponse(idPostToLiked);
+        if (!validationService.userLikedPost(idUserRequest, idPostToLiked)) return responseService.dontLikedResponse(idPostToLiked);
 
         postRepository.deleteUserByIdLikedPostById(idUserRequest, idPostToLiked);
         return responseService.successResponse(null);
-    }
-    //endregion
-
-    //region util validate
-    private boolean userExists(String userId) {
-        return socialUserRepository.existsById(userId);
-    }
-
-    private boolean postExists(String postId) {
-        return postRepository.existsById(postId);
-    }
-
-    private boolean userLikedPost(String userId, String postId) {
-        return postRepository.isUserByIdLikedPostById(userId, postId);
-    }
-
-    private boolean userAuthorOfThePostById(String userId, String postId) {
-        return postRepository.isUserAuthorOfThePostById(userId, postId);
     }
     //endregion
 }
