@@ -17,7 +17,7 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    //region gets
+    //region Gets
     @GetMapping("/getAllPosts")
     public ResponseEntity<ResponseDTO> getAllPosts(
             @RequestParam(defaultValue = "0") int page,
