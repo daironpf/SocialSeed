@@ -16,7 +16,8 @@ import static org.springframework.http.HttpStatus.OK;
 public class HashTagController {
     @Autowired
     HashTagService hashTagService;
-    //region gets
+
+    //region Gets
     @GetMapping("/getAllHashTag")
     public ResponseEntity<ResponseDTO> getAllHashTag(
             @RequestParam(defaultValue = "0") int page,
@@ -33,10 +34,15 @@ public class HashTagController {
     @GetMapping("/getHashTagById/{id}")
     public ResponseEntity<ResponseDTO> getHashTagById(@PathVariable String id) {
 
-        return ResponseEntity.status(OK)
-                .body(hashTagService.getHashTagById(id)
-                        .map(response -> new ResponseDTO(OK, response, "Successful"))
-                        .orElse(new ResponseDTO(NOT_FOUND, "Error", String.format("The HashTag with the id [ %s ] was not found", id))));
+        ResponseEntity<Object> response = hashTagService.getHashTagById(id);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, response.getBody(), "Successful");
+            case NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
     }
 
     @PostMapping("/createHashTag")
@@ -58,12 +64,11 @@ public class HashTagController {
     public ResponseEntity<ResponseDTO> updateHashTag(
             @RequestBody HashTag updateHashTag) {
 
-        ResponseEntity<HashTag> responseUpdate  = hashTagService.updateHashTag(updateHashTag);
-        HttpStatus status = (HttpStatus) responseUpdate.getStatusCode();
+        ResponseEntity<Object> response  = hashTagService.updateHashTag(updateHashTag);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
         ResponseDTO responseDTO = switch (status) {
-            case OK -> new ResponseDTO(status, responseUpdate.getBody(), String.format("The HashTag with the id [ %s ] was Updated", updateHashTag.getId()));
-            case NOT_FOUND -> new ResponseDTO(status, "Error", String.format("The HashTag with the id [ %s ] was not found", updateHashTag.getId()));
-            case CONFLICT -> new ResponseDTO(status, "Error", String.format("The HashTag with the name [ %s ] already exists ", updateHashTag.getName()));
+            case OK -> new ResponseDTO(status, response.getBody(), String.format("The HashTag with the id [ %s ] was Updated", updateHashTag.getId()));
+            case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
             default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
         };
 
@@ -74,15 +79,15 @@ public class HashTagController {
     public ResponseEntity<ResponseDTO> deleteHashTag(
             @PathVariable String id) {
 
-        HttpStatus status = hashTagService.deleteHashTag(id);
+        ResponseEntity<Object> response = hashTagService.deleteHashTag(id);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
         ResponseDTO responseDTO = switch (status) {
             case OK -> new ResponseDTO(status, "Successful", String.format("The HashTag with the id [ %s ] was Deleted", id));
-            case NOT_FOUND -> new ResponseDTO(status, "Error", String.format("The HashTag with the id [ %s ] was not found", id));
+            case NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
             default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
         };
 
         return ResponseEntity.status(status).body(responseDTO);
     }
-
     //endregion
 }

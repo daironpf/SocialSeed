@@ -26,7 +26,7 @@ public class PostService {
     ValidationService validationService;
     //endregion
 
-    //region Get
+    //region Gets
     public Optional<Page<Post>> getAllPosts(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return Optional.of(postRepository.findAll(pageable));

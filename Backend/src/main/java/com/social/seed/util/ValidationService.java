@@ -48,5 +48,8 @@ public class ValidationService {
     public boolean hashTagExistsByName(String name) {
         return hashTagRepository.existByName(name);
     }
+    public boolean hashTagExistsById(String tagId) {
+        return hashTagRepository.existsById(tagId);
+    }
     //endregion
 }

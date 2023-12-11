@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ResponseService {
+
     //region Success
     public ResponseEntity<Object> successResponse(Object object) {
         return ResponseEntity.status(HttpStatus.OK).body(object);
     }
-
     public ResponseEntity<Object> successCreatedResponse(Object object) {
         return ResponseEntity.status(HttpStatus.CREATED).body(object);
     }
@@ -21,15 +21,17 @@ public class ResponseService {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(message);
     }
-
     public ResponseEntity<Object> userNotFoundResponse(String userId) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(String.format("The User with the id [ %s ] not found", userId));
+                .body(String.format("The User with the id [ %s ] was not found", userId));
     }
-
     public ResponseEntity<Object> postNotFoundResponse(String postId) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(String.format("The Post with the id [ %s ] not found", postId));
+                .body(String.format("The Post with the id [ %s ] was not found", postId));
+    }
+    public ResponseEntity<Object> hashTagNotFoundResponse(String hashTagId) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(String.format("The HashTag with the id [ %s ] was not found", hashTagId));
     }
     //endregion
 
@@ -38,7 +40,6 @@ public class ResponseService {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(message);
     }
-
     public ResponseEntity<Object> alreadyLikedResponse(String postId) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(String.format("You are already LIKED the post with id [ %s ]", postId));
@@ -46,10 +47,6 @@ public class ResponseService {
     public ResponseEntity<Object> dontLikedResponse(String postId) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(String.format("The post with id [ %s ] does not have a LIKE from the user", postId));
-    }
-    public ResponseEntity<Object> dontFollow(String userId) {
-        return ResponseEntity.status(HttpStatus.CONFLICT)
-                .body(String.format("You not following the user with id [ %s ]", userId));
     }
     public ResponseEntity<Object> dontUnFollow(String userId) {
         return ResponseEntity.status(HttpStatus.CONFLICT)
@@ -59,7 +56,6 @@ public class ResponseService {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(String.format("You are already following the user with id [ %s ]", userId));
     }
-
     //endregion
 
     //region FORBIDDEN
@@ -67,7 +63,6 @@ public class ResponseService {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body("You are not the author of this post. Access denied.");
     }
-
     public ResponseEntity<Object> forbiddenResponseWithMessage(String message) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(message);
