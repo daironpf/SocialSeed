@@ -38,4 +38,5 @@ public class SocialUser {
     private Integer friendCount;
     private Integer followersCount;
     private Integer followingCount;
+    private Integer friendRequestCount;
 }
