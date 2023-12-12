@@ -145,4 +145,36 @@ public class SocialUserController {
         return ResponseEntity.status(status).body(responseDTO);
     }
     //endregion
+
+    //region Vacation Mode
+    @PostMapping("/activateVacationMode")
+    public ResponseEntity<ResponseDTO> activateVacationMode(
+            @RequestHeader("userId") String idUserRequest){
+
+        ResponseEntity<Object> response = socialUserService.activateVacationMode(idUserRequest);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, "Successful", (String) response.getBody());
+            case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
+    }
+
+    @PostMapping("/deactivateVacationMode")
+    public ResponseEntity<ResponseDTO> deactivateVacationMode(
+            @RequestHeader("userId") String idUserRequest){
+
+        ResponseEntity<Object> response = socialUserService.deactivateVacationMode(idUserRequest);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, "Successful", (String) response.getBody());
+            case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
+    }
+    //endregion
 }

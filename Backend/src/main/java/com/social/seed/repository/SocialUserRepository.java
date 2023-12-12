@@ -94,4 +94,22 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
             """)
     void unFollowTheUserA(String user_b_id, String user_a_id);
     //endregion
+
+    //region Vacation Mode
+    @Query("""
+            MATCH (u:SocialUser {id: $idUserRequest})
+            RETURN u.onVacation
+            """)
+    Boolean isVacationModeActivated(String idUserRequest);
+    @Query("""
+            MATCH (u:SocialUser {id: $idUserRequest})
+            SET u.onVacation = true
+            """)
+    void activateVacationMode(String idUserRequest);
+    @Query("""
+            MATCH (u:SocialUser {id: $idUserRequest})
+            SET u.onVacation = false
+            """)
+    void deactivateVacationMode(String idUserRequest);
+    //endregion
 }
