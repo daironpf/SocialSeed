@@ -31,7 +31,7 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
     Optional<SocialUser> findByEmail(String email);
     //endregion
 
-    //region crud
+    //region CRUD
     @Override
     @Query("""
             OPTIONAL MATCH (u:SocialUser {id: $id})
@@ -111,5 +111,28 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
             SET u.onVacation = false
             """)
     void deactivateVacationMode(String idUserRequest);
+    //endregion
+
+    //region Delete
+    @Override
+    @Query("""
+            MATCH (u:SocialUser {id: $id})
+            OPTIONAL MATCH (u)<-[:POSTED_BY]-(p)
+            FOREACH (_ IN CASE WHEN u IS NOT NULL THEN [1] ELSE [] END |
+                    SET u.isActive = false,
+                        u.isDeleted = true
+                )
+            FOREACH (_ IN CASE WHEN p IS NOT NULL THEN [1] ELSE [] END |
+                    SET p.isActive = false
+                )
+            """)
+    void deleteById(String id);
+
+    //verificar si el usuario está eliminado o no
+    @Query("""
+            MATCH (u:SocialUser {id: $id})
+            RETURN u.isDeleted
+            """)
+    Boolean isSocialUserDeleted(String id);
     //endregion
 }

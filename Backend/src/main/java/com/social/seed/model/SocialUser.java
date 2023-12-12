@@ -34,6 +34,7 @@ public class SocialUser {
 
     private Boolean onVacation;
     private Boolean isActive;
+    private Boolean isDeleted;
 
     private Integer friendCount;
     private Integer followersCount;
