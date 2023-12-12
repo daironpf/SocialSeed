@@ -1,5 +1,6 @@
 package com.social.seed.util;
 
+import com.social.seed.repository.FriendsRepository;
 import com.social.seed.repository.HashTagRepository;
 import com.social.seed.repository.PostRepository;
 import com.social.seed.repository.SocialUserRepository;
@@ -15,6 +16,8 @@ public class ValidationService {
     PostRepository postRepository;
     @Autowired
     HashTagRepository hashTagRepository;
+    @Autowired
+    FriendsRepository friendsRepository;
     //endregion
 
     //region SocialUser
@@ -52,4 +55,17 @@ public class ValidationService {
         return hashTagRepository.existsById(tagId);
     }
     //endregion
+
+    //region Friends
+    public boolean existsFriendship(String idUserRequest, String idUserToAcceptedFriendRequest) {
+        return friendsRepository.existsFriendship(idUserRequest, idUserToAcceptedFriendRequest);
+    }
+    public boolean existsFriendRequest(String idUserRequest, String idUserToBeFriend){
+        return friendsRepository.existsFriendRequest(idUserRequest, idUserToBeFriend);
+    }
+    public boolean existsFriendRequestByUserToAccept(String idUserRequest, String idUserToAcceptedFriendRequest) {
+        return friendsRepository.existsFriendRequestByUserToAccept(idUserRequest, idUserToAcceptedFriendRequest);
+    }
+    //endregion
+
 }

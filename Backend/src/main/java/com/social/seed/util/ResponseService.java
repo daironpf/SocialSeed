@@ -56,6 +56,18 @@ public class ResponseService {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(String.format("You are already following the user with id [ %s ]", userId));
     }
+    public ResponseEntity<Object> existsFriendRequest(String idUserToBeFriend) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(String.format("You already have a Friend Request to the user with id [ %s ]", idUserToBeFriend));
+    }
+    public ResponseEntity<Object> dontExistsFriendRequest(String idUserToBeFriend) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(String.format("You don't have a Friend Request to the user with id [ %s ]", idUserToBeFriend));
+    }
+    public ResponseEntity<Object> existsFriendship() {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body("The Friendship Relationship between users already exists");
+    }
     //endregion
 
     //region FORBIDDEN

@@ -45,6 +45,7 @@ public class SocialUserService {
                             .followersCount(0)
                             .friendCount(0)
                             .followingCount(0)
+                            .friendRequestCount(0)
                             .build()
         );
 
