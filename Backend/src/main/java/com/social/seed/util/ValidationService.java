@@ -33,6 +33,9 @@ public class ValidationService {
     public boolean isUserBFollowerOfUserA(String idUserRequest, String idUserToUnFollow){
         return socialUserRepository.IsUserBFollowerOfUserA(idUserRequest, idUserToUnFollow);
     }
+    public boolean isVacationModeActivated(String idUserRequest) {
+        return socialUserRepository.isVacationModeActivated(idUserRequest);
+    }
     //endregion
 
     //region Post

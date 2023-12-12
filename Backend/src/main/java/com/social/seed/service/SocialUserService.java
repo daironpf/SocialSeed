@@ -27,7 +27,6 @@ public class SocialUserService {
         if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
         return responseService.successResponse(socialUserRepository.findById(userId));
     }
-
     public ResponseEntity<Object> createNewSocialUser(SocialUser socialUser) {
         if (validationService.userExistByUserName(socialUser.getUserName())) return responseService.conflictResponseWithMessage(String.format("The userName [ %s ] already exists", socialUser.getUserName()));
         if (validationService.userExistByEmail(socialUser.getEmail())) return responseService.conflictResponseWithMessage(String.format("The Email [ %s ] already exists", socialUser.getEmail()));
@@ -51,7 +50,6 @@ public class SocialUserService {
 
         return responseService.successCreatedResponse(newSocialUser);
     }
-
     public ResponseEntity<Object> updateSocialUser(String userId, SocialUser newSocialUser) {
         if (!userId.equals(newSocialUser.getId())) return responseService.forbiddenResponseWithMessage("The user making the update request is not the owner of this.");
         if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
@@ -82,7 +80,6 @@ public class SocialUserService {
         socialUserRepository.updateSocialUserName(idUserToUpdate, newUserName);
         return responseService.successResponse(socialUserRepository.findById(idUserToUpdate).get());
     }
-
     public ResponseEntity<Object> updateSocialUserEmail(String idUserRequest, String idUserToUpdate, String newEmail) {
         if (!idUserToUpdate.equals(idUserRequest)) return responseService.forbiddenResponseWithMessage("The user who is requesting the Email change is not the owner of this");
         if (!validationService.userExistsById(idUserToUpdate)) return responseService.userNotFoundResponse(idUserRequest);
@@ -104,7 +101,6 @@ public class SocialUserService {
         socialUserRepository.createUserBFollowUserA(idUserRequest,idUserToFollow,LocalDateTime.now());
         return responseService.successResponse("The user was followed successfully.");
     }
-
     @Transactional
     public ResponseEntity<Object> unfollowSocialUser(String idUserRequest, String idUserToUnFollow) {
         if (idUserRequest.equals(idUserToUnFollow)) return responseService.forbiddenResponseWithMessage("the user to be unfollowed cannot be the same");
@@ -114,6 +110,23 @@ public class SocialUserService {
 
         socialUserRepository.unFollowTheUserA(idUserRequest, idUserToUnFollow);
         return responseService.successResponse("The user was unfollowed successfully.");
+    }
+    //endregion
+
+    //region Vacation Mode
+    public ResponseEntity<Object> activateVacationMode(String idUserRequest) {
+        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
+        if (validationService.isVacationModeActivated(idUserRequest)) return responseService.conflictResponseWithMessage("The Vacation Mode is already Active");
+
+        socialUserRepository.activateVacationMode(idUserRequest);
+        return responseService.successResponse("The vacation mode was Activated successfully.");
+    }
+    public ResponseEntity<Object> deactivateVacationMode(String idUserRequest) {
+        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
+        if (!validationService.isVacationModeActivated(idUserRequest)) return responseService.conflictResponseWithMessage("The Vacation Mode is already Deactivated");
+
+        socialUserRepository.deactivateVacationMode(idUserRequest);
+        return responseService.successResponse("The vacation mode was Deactivated successfully.");
     }
     //endregion
 }
