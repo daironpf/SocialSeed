@@ -177,4 +177,36 @@ public class SocialUserController {
         return ResponseEntity.status(status).body(responseDTO);
     }
     //endregion
+
+    //region Activated Mode
+    @PostMapping("/activateSocialUser")
+    public ResponseEntity<ResponseDTO> activateSocialUser(
+            @RequestHeader("userId") String idUserRequest){
+
+        ResponseEntity<Object> response = socialUserService.activateSocialUser(idUserRequest);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, "Successful", (String) response.getBody());
+            case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
+    }
+
+    @PostMapping("/deactivateSocialUser")
+    public ResponseEntity<ResponseDTO> deactivateSocialUser(
+            @RequestHeader("userId") String idUserRequest){
+
+        ResponseEntity<Object> response = socialUserService.deactivateSocialUser(idUserRequest);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, "Successful", (String) response.getBody());
+            case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
+    }
+    //endregion
 }

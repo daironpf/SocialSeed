@@ -132,4 +132,21 @@ public class SocialUserService {
         return responseService.successResponse("The vacation mode was Deactivated successfully.");
     }
     //endregion
+
+    //region Activated Mode
+    public ResponseEntity<Object> activateSocialUser(String idUserRequest) {
+        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
+        if (validationService.isSocialUserActivated(idUserRequest)) return responseService.conflictResponseWithMessage("The Social User is already Active");
+
+        socialUserRepository.activateSocialUser(idUserRequest);
+        return responseService.successResponse("The Social User was Activated successfully.");
+    }
+    public ResponseEntity<Object> deactivateSocialUser(String idUserRequest) {
+        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
+        if (!validationService.isSocialUserActivated(idUserRequest)) return responseService.conflictResponseWithMessage("The Social User is already Deactivated");
+
+        socialUserRepository.deactivateSocialUser(idUserRequest);
+        return responseService.successResponse("The Social User was Deactivated successfully.");
+    }
+    //endregion
 }

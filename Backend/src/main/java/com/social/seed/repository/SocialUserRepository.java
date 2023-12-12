@@ -128,11 +128,30 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
             """)
     void deleteById(String id);
 
-    //verificar si el usuario está eliminado o no
     @Query("""
             MATCH (u:SocialUser {id: $id})
             RETURN u.isDeleted
             """)
     Boolean isSocialUserDeleted(String id);
+    //endregion
+
+    //region Activated Mode
+    @Query("""
+            MATCH (u:SocialUser {id: $id})
+            RETURN u.isActive
+            """)
+    boolean isSocialUserActivated(String id);
+
+    @Query("""
+            MATCH (u:SocialUser {id: $id})
+            SET u.isActive= true
+            """)
+    void activateSocialUser(String id);
+
+    @Query("""
+            MATCH (u:SocialUser {id: $id})
+            SET u.isActive= false
+            """)
+    void deactivateSocialUser(String id);
     //endregion
 }

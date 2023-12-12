@@ -39,6 +39,9 @@ public class ValidationService {
     public boolean isSocialUserDeleted(String userId) {
         return socialUserRepository.isSocialUserDeleted(userId);
     }
+    public boolean isSocialUserActivated(String idUserRequest) {
+        return socialUserRepository.isSocialUserActivated(idUserRequest);
+    }
     //endregion
 
     //region Post
