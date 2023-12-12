@@ -36,6 +36,12 @@ public class ValidationService {
     public boolean isVacationModeActivated(String idUserRequest) {
         return socialUserRepository.isVacationModeActivated(idUserRequest);
     }
+    public boolean isSocialUserDeleted(String userId) {
+        return socialUserRepository.isSocialUserDeleted(userId);
+    }
+    public boolean isSocialUserActivated(String idUserRequest) {
+        return socialUserRepository.isSocialUserActivated(idUserRequest);
+    }
     //endregion
 
     //region Post
@@ -70,5 +76,4 @@ public class ValidationService {
         return friendsRepository.existsFriendRequestByUserToAccept(idUserRequest, idUserToAcceptedFriendRequest);
     }
     //endregion
-
 }

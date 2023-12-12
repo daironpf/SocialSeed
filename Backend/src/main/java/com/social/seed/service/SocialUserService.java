@@ -40,6 +40,7 @@ public class SocialUserService {
                             .language(socialUser.getLanguage())
                             .registrationDate(LocalDateTime.now())
                             .isActive(true)
+                            .isDeleted(false)
                             .onVacation(false)
                             .followersCount(0)
                             .friendCount(0)
@@ -63,8 +64,10 @@ public class SocialUserService {
         return responseService.successResponse(socialUserRepository.findById(userId).get());
     }
     public ResponseEntity<Object> deleteSocialUser(String userId, String id) {
+        //To Delete user the only way to make this is deactivate the user and all his post
         if (!userId.equals(id)) return responseService.forbiddenResponseWithMessage("The user making the delete request is not the owner of this.");
         if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
+        if (validationService.isSocialUserDeleted(userId)) return responseService.forbiddenResponseWithMessage("The user has already been Deleted");
 
         socialUserRepository.deleteById(id);
         return responseService.successResponse(null);
@@ -127,6 +130,23 @@ public class SocialUserService {
 
         socialUserRepository.deactivateVacationMode(idUserRequest);
         return responseService.successResponse("The vacation mode was Deactivated successfully.");
+    }
+    //endregion
+
+    //region Activated Mode
+    public ResponseEntity<Object> activateSocialUser(String idUserRequest) {
+        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
+        if (validationService.isSocialUserActivated(idUserRequest)) return responseService.conflictResponseWithMessage("The Social User is already Active");
+
+        socialUserRepository.activateSocialUser(idUserRequest);
+        return responseService.successResponse("The Social User was Activated successfully.");
+    }
+    public ResponseEntity<Object> deactivateSocialUser(String idUserRequest) {
+        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
+        if (!validationService.isSocialUserActivated(idUserRequest)) return responseService.conflictResponseWithMessage("The Social User is already Deactivated");
+
+        socialUserRepository.deactivateSocialUser(idUserRequest);
+        return responseService.successResponse("The Social User was Deactivated successfully.");
     }
     //endregion
 }
