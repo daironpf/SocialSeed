@@ -4,6 +4,8 @@ import com.social.seed.model.HashTag;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
+import java.util.Optional;
+
 public interface HashTagRepository extends Neo4jRepository<HashTag, String> {
 
     @Query("""
@@ -18,4 +20,10 @@ public interface HashTagRepository extends Neo4jRepository<HashTag, String> {
             SET t.name = $name
             """)
     void update(String id, String name);
+
+    @Query("""
+            MATCH (t:HashTag {name:$name})
+            RETURN t
+            """)
+    Optional<HashTag> findByName(String name);
 }

@@ -108,4 +108,14 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
             """)
     boolean isUserAuthorOfThePostById(String idUser, String idPost);
     //endregion
+
+    //region TAGGED_WITH
+    @Query("""
+            MATCH (p:Post {id: $idPost})
+            MATCH (t:HashTag {id: $idHashTag})
+            MERGE (p)-[:TAGGED_WITH]->(t)
+            SET t.postTaggedIn = COALESCE(t.postTaggedIn, 0) + 1
+            """)
+    void createRelationshipTaggedWithHashTag(String idPost, String idHashTag);
+    //endregion
 }

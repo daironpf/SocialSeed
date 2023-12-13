@@ -11,6 +11,7 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -33,4 +34,7 @@ public class Post {
 
     @Relationship(type = "POSTED_BY")
     private PostedByRelationship author;
+
+    @Relationship(type = "TAGGED_WITH")
+    private List<HashTag> hashTags;
 }

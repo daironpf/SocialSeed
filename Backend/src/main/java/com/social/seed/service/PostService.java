@@ -1,9 +1,12 @@
 package com.social.seed.service;
 
+import com.social.seed.model.HashTag;
 import com.social.seed.model.Post;
+import com.social.seed.repository.HashTagRepository;
 import com.social.seed.repository.PostRepository;
 import com.social.seed.util.ResponseService;
 import com.social.seed.util.ValidationService;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,12 +17,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+@Log4j2
 @Service
 public class PostService {
     //region dependencies
     @Autowired
     PostRepository postRepository;
+    @Autowired
+    HashTagRepository hashTagRepository;
     @Autowired
     ResponseService responseService;
     @Autowired
@@ -43,8 +51,28 @@ public class PostService {
         return responseService.successResponse(postRepository.findById(postId).get());
     }
 
+    public static String[] extractHashtags(String postContent) {
+        Pattern pattern = Pattern.compile("#\\w+");
+        Matcher matcher = pattern.matcher(postContent);
+
+        StringBuilder hashtagsBuilder = new StringBuilder();
+
+        while (matcher.find()) {
+            hashtagsBuilder.append(matcher.group()).append(" ");
+        }
+
+        // Eliminar el último espacio en blanco si es necesario
+        String hashtagsString = hashtagsBuilder.toString().trim();
+
+        // Dividir el resultado en un array de hashtags
+        return hashtagsString.split(" ");
+    }
+
+    @Transactional
     public ResponseEntity<Object> createNewPost(Post post, String userId) {
         if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
+
+        String[] hashtags = extractHashtags(post.getContent());
 
         Post newPost = postRepository.save(
                     Post.builder()
@@ -54,6 +82,29 @@ public class PostService {
                             .likedCount(0)
                             .build()
         );
+
+        // crea los hashtag si no existen actualmente
+        for (String hashtagText : hashtags) {
+            // Delete the "#" symbol from the text
+            String cleanedHashtagText = hashtagText.replace("#", "");
+
+            Optional<HashTag> hashTag = hashTagRepository.findByName(cleanedHashtagText);
+            // validate if the hashtag exists
+            if (hashTag.isPresent()){
+                // if it exists, the relationship is created
+                postRepository.createRelationshipTaggedWithHashTag(newPost.getId(), hashTag.get().getId());
+            }else {
+                // if the hashtag does not exist, create it and then create the relationship
+                HashTag savedNewHashTag = hashTagRepository.save(
+                        HashTag.builder()
+                                .name(cleanedHashtagText)
+                                .socialUserInterestIn(0)
+                                .postTaggedIn(0)
+                                .build()
+                );
+                postRepository.createRelationshipTaggedWithHashTag(newPost.getId(), savedNewHashTag.getId());
+            }
+        }
 
         postRepository.createPostedRelationship(
                     newPost.getId(),
