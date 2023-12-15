@@ -35,7 +35,8 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
     @Override
     @Query("""
             OPTIONAL MATCH (u:SocialUser {id: $id})
-            RETURN u
+            OPTIONAL MATCH (u)-[rt]->(t:HashTag)
+            RETURN u, collect(rt), collect(t)
             """)
     Optional<SocialUser> findById(String id);
 
