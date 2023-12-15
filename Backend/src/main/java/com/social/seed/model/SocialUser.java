@@ -40,4 +40,7 @@ public class SocialUser {
     private Integer followersCount;
     private Integer followingCount;
     private Integer friendRequestCount;
+
+    @Relationship(type = "INTERESTED_IN_HASHTAG")
+    private List<SocialUserInterestInHashTagRelationShip> hashTags;
 }

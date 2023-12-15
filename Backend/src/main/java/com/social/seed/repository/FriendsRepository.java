@@ -33,11 +33,11 @@ public interface FriendsRepository extends Neo4jRepository<SocialUser, String> {
     @Query("""
             MATCH (o:SocialUser {id: $idUserRequest})
             MATCH (d:SocialUser {id: $idUserToAcceptedFriendRequest})
-            MATCH (o)<-[r:REQUEST_FRIEND_TO]-(d)            
+            MATCH (o)<-[r:REQUEST_FRIEND_TO]-(d)
             SET o.friendRequestCount = o.friendRequestCount - 1,
                 o.friendCount = o.friendCount + 1,
                 d.friendCount = d.friendCount + 1
-            DELETE r    
+            DELETE r
             MERGE (o)-[:FRIEND_OF {friendshipDate: $friendshipDate}]->(d)
             """)
     void acceptedRequestFriendship(String idUserRequest, String idUserToAcceptedFriendRequest, LocalDateTime friendshipDate);
@@ -58,15 +58,6 @@ public interface FriendsRepository extends Neo4jRepository<SocialUser, String> {
             RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS existFriend
             """)
     Boolean existsFriendship(String idUserRequest, String idUserToBeFriend);
-//    @Query("""
-//            MATCH (o:SocialUser {id: $idUserRequest})
-//            MATCH (d:SocialUser {id: $idUserToDeleteFriendship})
-//            MATCH (o)<-[r:FRIEND_OF]-(d)
-//            DELETE r
-//            SET o.friendCount = o.friendCount - 1,
-//                d.friendCount = d.friendCount - 1
-//            """)
-//    void deleteFriendship(String idUserRequest, String idUserToDeleteFriendship);
 
     @Query("""
                 MATCH (o:SocialUser {id: $idUserRequest})

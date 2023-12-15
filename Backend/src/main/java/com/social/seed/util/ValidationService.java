@@ -1,9 +1,6 @@
 package com.social.seed.util;
 
-import com.social.seed.repository.FriendsRepository;
-import com.social.seed.repository.HashTagRepository;
-import com.social.seed.repository.PostRepository;
-import com.social.seed.repository.SocialUserRepository;
+import com.social.seed.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +15,8 @@ public class ValidationService {
     HashTagRepository hashTagRepository;
     @Autowired
     FriendsRepository friendsRepository;
+    @Autowired
+    SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository;
     //endregion
 
     //region SocialUser
@@ -74,6 +73,12 @@ public class ValidationService {
     }
     public boolean existsFriendRequestByUserToAccept(String idUserRequest, String idUserToAcceptedFriendRequest) {
         return friendsRepository.existsFriendRequestByUserToAccept(idUserRequest, idUserToAcceptedFriendRequest);
+    }
+    //endregion
+
+    //region Interest
+    public boolean existsInterest(String idUserRequest, String idHashTag) {
+        return socialUserInterestInHashTagRepository.existsInterest(idUserRequest, idHashTag);
     }
     //endregion
 }
