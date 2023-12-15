@@ -1,6 +1,7 @@
 package com.social.seed.service;
 
 import com.social.seed.repository.SocialUserInterestInHashTagRepository;
+import com.social.seed.repository.SocialUserRepository;
 import com.social.seed.util.ResponseService;
 import com.social.seed.util.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,8 @@ public class SocialUserInterestInHashTagService {
     @Autowired
     SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository;
     @Autowired
+    SocialUserRepository socialUserRepository;
+    @Autowired
     ValidationService validationService;
     @Autowired
     ResponseService responseService;
@@ -23,7 +26,7 @@ public class SocialUserInterestInHashTagService {
     public ResponseEntity<Object> addInterest(String idUserRequest, String idHashTag) {
         if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
         if (!validationService.hashTagExistsById(idHashTag)) return responseService.postNotFoundResponse(idHashTag);
-        if (validationService.existsInterest(idUserRequest, idHashTag)) return responseService.conflictResponseWithMessage("The Inerest already Exist.");
+        if (validationService.existsInterest(idUserRequest, idHashTag)) return responseService.conflictResponseWithMessage("The Interest already Exist.");
 
         socialUserInterestInHashTagRepository.addInterest(
                 idUserRequest,
@@ -31,6 +34,16 @@ public class SocialUserInterestInHashTagService {
                 LocalDateTime.now()
         );
 
-        return responseService.successResponse("The Interes in the HashTag by the Social User was created successfully.");
+        return responseService.successResponse(socialUserRepository.findById(idUserRequest).get());
+    }
+
+    public ResponseEntity<Object> deleteInterest(String idUserRequest, String idHashTag) {
+        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
+        if (!validationService.hashTagExistsById(idHashTag)) return responseService.postNotFoundResponse(idHashTag);
+        if (!validationService.existsInterest(idUserRequest, idHashTag)) return responseService.conflictResponseWithMessage("The Interest does not Exist.");
+
+        socialUserInterestInHashTagRepository.deleteInterest(idUserRequest, idHashTag);
+
+        return responseService.successResponse(socialUserRepository.findById(idUserRequest).get());
     }
 }

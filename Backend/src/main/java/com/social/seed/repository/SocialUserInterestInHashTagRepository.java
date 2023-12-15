@@ -11,6 +11,14 @@ public interface SocialUserInterestInHashTagRepository extends Neo4jRepository<H
     @Query("""
             MATCH (u:SocialUser {id: $idUserRequest})
             MATCH (t:HashTag {id: $idHashTag})
+            OPTIONAL MATCH (u)-[r:INTERESTED_IN_HASHTAG]->(t)
+            RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS existInterest
+            """)
+    Boolean existsInterest(String idUserRequest, String idHashTag);
+
+    @Query("""
+            MATCH (u:SocialUser {id: $idUserRequest})
+            MATCH (t:HashTag {id: $idHashTag})
             MERGE (u)-[r:INTERESTED_IN_HASHTAG {interestDate: $interestDate}]->(t)
             SET t.socialUserInterestIn = COALESCE(t.socialUserInterestIn, 0) + 1
             """)
@@ -19,8 +27,9 @@ public interface SocialUserInterestInHashTagRepository extends Neo4jRepository<H
     @Query("""
             MATCH (u:SocialUser {id: $idUserRequest})
             MATCH (t:HashTag {id: $idHashTag})
-            OPTIONAL MATCH (u)-[r:INTERESTED_IN_HASHTAG]->(t)
-            RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS existInterest
+            MATCH (u)-[r:INTERESTED_IN_HASHTAG]->(t)
+            DELETE r
+            SET t.socialUserInterestIn = t.socialUserInterestIn - 1
             """)
-    Boolean existsInterest(String idUserRequest, String idHashTag);
+    void deleteInterest(String idUserRequest, String idHashTag);
 }

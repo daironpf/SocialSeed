@@ -15,7 +15,6 @@ public class SocialUserInterestInHashTagController {
     SocialUserInterestInHashTagService socialUserInterestInHashTagService;
     //endregion
 
-
     @PostMapping("/addInterest/{idHashTag}")
     public ResponseEntity<ResponseDTO> addInterest(
             @RequestHeader("userId") String idUserRequest,
@@ -24,7 +23,7 @@ public class SocialUserInterestInHashTagController {
         ResponseEntity<Object> response = socialUserInterestInHashTagService.addInterest(idUserRequest, idHashTag);
         HttpStatus status = (HttpStatus) response.getStatusCode();
         ResponseDTO responseDTO = switch (status) {
-            case OK -> new ResponseDTO(status, "Successful", (String) response.getBody());
+            case OK -> new ResponseDTO(status, response.getBody(), "Successful");
             case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
             default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
         };
@@ -32,9 +31,19 @@ public class SocialUserInterestInHashTagController {
         return ResponseEntity.status(status).body(responseDTO);
     }
 
-//    addInterest(user, hashtag): Registra el interés del usuario en un hashtag.
-//    removeInterest(user, hashtag): Elimina el interés del usuario en un hashtag.
-//    getUserInterests(userId): Obtiene la lista de intereses de un usuario.
-//    getPopularHashtags(): Obtiene una lista de hashtags populares basada en la interacción de los usuarios.
+    @PostMapping("/deleteInterest/{idHashTag}")
+    public ResponseEntity<ResponseDTO> deleteInterest(
+            @RequestHeader("userId") String idUserRequest,
+            @PathVariable String idHashTag){
 
+        ResponseEntity<Object> response = socialUserInterestInHashTagService.deleteInterest(idUserRequest, idHashTag);
+        HttpStatus status = (HttpStatus) response.getStatusCode();
+        ResponseDTO responseDTO = switch (status) {
+            case OK -> new ResponseDTO(status, response.getBody(), "Successful");
+            case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
+            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
+        };
+
+        return ResponseEntity.status(status).body(responseDTO);
+    }
 }
