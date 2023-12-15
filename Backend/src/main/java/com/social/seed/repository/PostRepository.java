@@ -117,5 +117,13 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
             SET t.postTaggedIn = COALESCE(t.postTaggedIn, 0) + 1
             """)
     void createRelationshipTaggedWithHashTag(String idPost, String idHashTag);
+
+    @Query("""
+            MATCH (p:Post {id: $idPost})
+            MATCH (p)-[r:TAGGED_WITH]->(t)
+            DELETE r
+            SET t.postTaggedIn = t.postTaggedIn - 1
+            """)
+    void deleteAllRelationshipTaggedWithHashTag(String idPost);
     //endregion
 }
