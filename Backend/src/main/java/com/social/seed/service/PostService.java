@@ -6,6 +6,7 @@ import com.social.seed.repository.HashTagRepository;
 import com.social.seed.repository.PostRepository;
 import com.social.seed.util.ResponseService;
 import com.social.seed.util.ValidationService;
+
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -51,29 +52,10 @@ public class PostService {
         return responseService.successResponse(postRepository.findById(postId).get());
     }
 
-    public static String[] extractHashtags(String postContent) {
-        Pattern pattern = Pattern.compile("#\\w+");
-        Matcher matcher = pattern.matcher(postContent);
-
-        StringBuilder hashtagsBuilder = new StringBuilder();
-
-        while (matcher.find()) {
-            hashtagsBuilder.append(matcher.group()).append(" ");
-        }
-
-        // Eliminar el último espacio en blanco si es necesario
-        String hashtagsString = hashtagsBuilder.toString().trim();
-
-        // Dividir el resultado en un array de hashtags
-        return hashtagsString.split(" ");
-    }
-
     @Transactional
     public ResponseEntity<Object> createNewPost(Post post, String userId) {
         if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
-
-        String[] hashtags = extractHashtags(post.getContent());
-
+        // save the new post base properties
         Post newPost = postRepository.save(
                     Post.builder()
                             .content(post.getContent())
@@ -82,30 +64,11 @@ public class PostService {
                             .likedCount(0)
                             .build()
         );
-
-        // crea los hashtag si no existen actualmente
-        for (String hashtagText : hashtags) {
-            // Delete the "#" symbol from the text
-            String cleanedHashtagText = hashtagText.replace("#", "");
-
-            Optional<HashTag> hashTag = hashTagRepository.findByName(cleanedHashtagText);
-            // validate if the hashtag exists
-            if (hashTag.isPresent()){
-                // if it exists, the relationship is created
-                postRepository.createRelationshipTaggedWithHashTag(newPost.getId(), hashTag.get().getId());
-            }else {
-                // if the hashtag does not exist, create it and then create the relationship
-                HashTag savedNewHashTag = hashTagRepository.save(
-                        HashTag.builder()
-                                .name(cleanedHashtagText)
-                                .socialUserInterestIn(0)
-                                .postTaggedIn(0)
-                                .build()
-                );
-                postRepository.createRelationshipTaggedWithHashTag(newPost.getId(), savedNewHashTag.getId());
-            }
-        }
-
+        // extract the hashtags from the content of the post
+        String[] hashtags = extractHashtags(post.getContent());
+        // saved all the hashtags relationship with the post
+        saveAllTheHashtagsRelationshipWithPost(newPost.getId(), hashtags);
+        // create the posted by relationship
         postRepository.createPostedRelationship(
                     newPost.getId(),
                     userId,
@@ -117,6 +80,7 @@ public class PostService {
         );
     }
 
+    @Transactional
     public ResponseEntity<Object> updatePost(String userId, Post updatedPost) {
         if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
         if (!validationService.postExistsById(updatedPost.getId())) return responseService.postNotFoundResponse(updatedPost.getId());
@@ -127,6 +91,13 @@ public class PostService {
             LocalDateTime.now(),
             updatedPost.getImageUrl()
         );
+        //delete all the relationship TAGGED_WITH with the post
+        postRepository.deleteAllRelationshipTaggedWithHashTag(updatedPost.getId());
+        // extract the hashtags from the content of the post
+        String[] hashtags = extractHashtags(updatedPost.getContent());
+        // saved all the hashtags relationship with the post
+        saveAllTheHashtagsRelationshipWithPost(updatedPost.getId(), hashtags);
+        // return the new post
         Post savedPost = postRepository.findById(updatedPost.getId()).get();
         return responseService.successResponse(savedPost);
     }
@@ -160,6 +131,49 @@ public class PostService {
 
         postRepository.deleteUserByIdLikedPostById(idUserRequest, idPostToLiked);
         return responseService.successResponse(null);
+    }
+    //endregion
+
+    //region util
+    private static String[] extractHashtags(String postContent) {
+        Pattern pattern = Pattern.compile("#\\w+");
+        Matcher matcher = pattern.matcher(postContent);
+
+        StringBuilder hashtagsBuilder = new StringBuilder();
+
+        while (matcher.find()) {
+            hashtagsBuilder.append(matcher.group()).append(" ");
+        }
+
+        // Remove last white space if necessary
+        String hashtagsString = hashtagsBuilder.toString().trim();
+
+        // Split the result into an array of hashtags
+        return hashtagsString.split(" ");
+    }
+
+    private void saveAllTheHashtagsRelationshipWithPost(String idPost, String[] hashtags) {
+        for (String hashtagText : hashtags) {
+            // Delete the "#" symbol from the text
+            String cleanedHashtagText = hashtagText.replace("#", "");
+
+            Optional<HashTag> hashTag = hashTagRepository.findByName(cleanedHashtagText);
+            // validate if the hashtag exists
+            if (hashTag.isPresent()){
+                // if it exists, the relationship is created
+                postRepository.createRelationshipTaggedWithHashTag(idPost, hashTag.get().getId());
+            }else {
+                // if the hashtag does not exist, create it and then create the relationship
+                HashTag savedNewHashTag = hashTagRepository.save(
+                        HashTag.builder()
+                                .name(cleanedHashtagText)
+                                .socialUserInterestIn(0)
+                                .postTaggedIn(0)
+                                .build()
+                );
+                postRepository.createRelationshipTaggedWithHashTag(idPost, savedNewHashTag.getId());
+            }
+        }
     }
     //endregion
 }

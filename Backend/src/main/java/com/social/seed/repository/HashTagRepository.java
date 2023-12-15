@@ -22,7 +22,8 @@ public interface HashTagRepository extends Neo4jRepository<HashTag, String> {
     void update(String id, String name);
 
     @Query("""
-            MATCH (t:HashTag {name:$name})
+            MATCH (t:HashTag)
+            WHERE toLower(t.name) = toLower($name)
             RETURN t
             """)
     Optional<HashTag> findByName(String name);
