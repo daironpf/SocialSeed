@@ -2,9 +2,9 @@ package com.social.seed.util;
 
 import com.social.seed.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class ValidationService {
     //region dependencies
     @Autowired
@@ -74,9 +74,7 @@ public class ValidationService {
     public boolean existsFriendRequestByUserToAccept(String idUserRequest, String idUserToAcceptedFriendRequest) {
         return friendsRepository.existsFriendRequestByUserToAccept(idUserRequest, idUserToAcceptedFriendRequest);
     }
-    //endregion
 
-    //region Interest
     public boolean existsInterest(String idUserRequest, String idHashTag) {
         return socialUserInterestInHashTagRepository.existsInterest(idUserRequest, idHashTag);
     }

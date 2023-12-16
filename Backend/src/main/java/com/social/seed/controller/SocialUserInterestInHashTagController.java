@@ -3,47 +3,54 @@ package com.social.seed.controller;
 import com.social.seed.service.SocialUserInterestInHashTagService;
 import com.social.seed.util.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller to handle operations related to Social User interests in Hash Tags.
+ */
 @RestController
-@RequestMapping("/api/interestsInHashTagBySocialUser")
+@RequestMapping("/api/v0.0.1/interestsInHashTagBySocialUser")
 public class SocialUserInterestInHashTagController {
-    //region dependencies
+
+    //region Dependencies
     @Autowired
-    SocialUserInterestInHashTagService socialUserInterestInHashTagService;
+    private SocialUserInterestInHashTagService socialUserInterestInHashTagService;
     //endregion
 
+    /**
+     * Adds an interest in a Hash Tag for a specific user.
+     *
+     * @param idUserRequest The ID of the user making the request.
+     * @param idHashTag     The ID of the Hash Tag to add interest in.
+     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     */
     @PostMapping("/addInterest/{idHashTag}")
     public ResponseEntity<ResponseDTO> addInterest(
             @RequestHeader("userId") String idUserRequest,
-            @PathVariable String idHashTag){
+            @PathVariable String idHashTag) {
 
         ResponseEntity<Object> response = socialUserInterestInHashTagService.addInterest(idUserRequest, idHashTag);
-        HttpStatus status = (HttpStatus) response.getStatusCode();
-        ResponseDTO responseDTO = switch (status) {
-            case OK -> new ResponseDTO(status, response.getBody(), "Successful");
-            case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
-            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
-        };
-
-        return ResponseEntity.status(status).body(responseDTO);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
     }
 
+    /**
+     * Deletes an interest in a Hash Tag for a specific user.
+     *
+     * @param idUserRequest The ID of the user making the request.
+     * @param idHashTag     The ID of the Hash Tag to delete interest from.
+     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     */
     @PostMapping("/deleteInterest/{idHashTag}")
     public ResponseEntity<ResponseDTO> deleteInterest(
             @RequestHeader("userId") String idUserRequest,
-            @PathVariable String idHashTag){
+            @PathVariable String idHashTag) {
 
         ResponseEntity<Object> response = socialUserInterestInHashTagService.deleteInterest(idUserRequest, idHashTag);
-        HttpStatus status = (HttpStatus) response.getStatusCode();
-        ResponseDTO responseDTO = switch (status) {
-            case OK -> new ResponseDTO(status, response.getBody(), "Successful");
-            case CONFLICT,NOT_FOUND -> new ResponseDTO(status, "Error", (String) response.getBody());
-            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
-        };
-
-        return ResponseEntity.status(status).body(responseDTO);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
     }
 }
