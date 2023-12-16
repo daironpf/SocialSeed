@@ -3,78 +3,87 @@ package com.social.seed.controller;
 import com.social.seed.service.FriendsService;
 import com.social.seed.util.ResponseDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * Controller to handle operations related to friendships in the application.
+ */
 @RestController
-@RequestMapping("/api/v1/friend")
+@RequestMapping("/api/v0.0.1/friend")
 public class FriendsController {
+    //region Dependencies
     @Autowired
-    FriendsService friendsService;
+    private FriendsService friendsService;
+    //endregion
 
-    //request friendship
+    //region CRUD
+    /**
+     * Creates a friendship request.
+     *
+     * @param idUserRequest      The ID of the user initiating the request.
+     * @param idUserToBeFriend   The ID of the user to whom the request is sent.
+     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     */
     @PostMapping("/createRequest/{idUserToBeFriend}")
     public ResponseEntity<ResponseDTO> createRequestFriendship(
             @RequestHeader("userId") String idUserRequest,
-            @PathVariable String idUserToBeFriend){
-
+            @PathVariable String idUserToBeFriend) {
         ResponseEntity<Object> response = friendsService.createRequestFriendship(idUserRequest, idUserToBeFriend);
-        HttpStatus status = (HttpStatus) response.getStatusCode();
-        ResponseDTO responseDTO = switch (status) {
-            case OK -> new ResponseDTO(status, "Successful", (String) response.getBody());
-            case CONFLICT,NOT_FOUND,FORBIDDEN -> new ResponseDTO(status, "Error", (String) response.getBody());
-            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
-        };
-
-        return ResponseEntity.status(status).body(responseDTO);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
     }
-    //cancel friendship
+
+    /**
+     * Cancels a friendship request.
+     *
+     * @param idUserRequest                  The ID of the user canceling the request.
+     * @param idUserToCancelFriendRequest   The ID of the user to whom the request is canceled.
+     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     */
     @PostMapping("/cancelRequest/{idUserToCancelFriendRequest}")
     public ResponseEntity<ResponseDTO> cancelRequestFriendship(
             @RequestHeader("userId") String idUserRequest,
-            @PathVariable String idUserToCancelFriendRequest){
-
+            @PathVariable String idUserToCancelFriendRequest) {
         ResponseEntity<Object> response = friendsService.cancelRequestFriendship(idUserRequest, idUserToCancelFriendRequest);
-        HttpStatus status = (HttpStatus) response.getStatusCode();
-        ResponseDTO responseDTO = switch (status) {
-            case OK -> new ResponseDTO(status, "Successful", (String) response.getBody());
-            case CONFLICT,NOT_FOUND,FORBIDDEN -> new ResponseDTO(status, "Error", (String) response.getBody());
-            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
-        };
-
-        return ResponseEntity.status(status).body(responseDTO);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
     }
-    //accept friendship
+
+    /**
+     * Accepts a friendship request.
+     *
+     * @param idUserRequest                   The ID of the user accepting the request.
+     * @param idUserToAcceptedFriendRequest   The ID of the user whose request is accepted.
+     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     */
     @PostMapping("/acceptedRequest/{idUserToAcceptedFriendRequest}")
     public ResponseEntity<ResponseDTO> acceptedRequestFriendship(
             @RequestHeader("userId") String idUserRequest,
-            @PathVariable String idUserToAcceptedFriendRequest){
-
+            @PathVariable String idUserToAcceptedFriendRequest) {
         ResponseEntity<Object> response = friendsService.acceptedRequestFriendship(idUserRequest, idUserToAcceptedFriendRequest);
-        HttpStatus status = (HttpStatus) response.getStatusCode();
-        ResponseDTO responseDTO = switch (status) {
-            case OK -> new ResponseDTO(status, "Successful", (String) response.getBody());
-            case CONFLICT,NOT_FOUND,FORBIDDEN -> new ResponseDTO(status, "Error", (String) response.getBody());
-            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
-        };
-
-        return ResponseEntity.status(status).body(responseDTO);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
     }
-    //deleted friendship
+
+    /**
+     * Deletes an existing friendship.
+     *
+     * @param idUserRequest                   The ID of the user wishing to end the friendship.
+     * @param idUserToDeleteFriendship        The ID of the user with whom to stop being friends.
+     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     */
     @PostMapping("/deleteFriendship/{idUserToDeleteFriendship}")
     public ResponseEntity<ResponseDTO> deleteFriendship(
             @RequestHeader("userId") String idUserRequest,
-            @PathVariable String idUserToDeleteFriendship){
-
+            @PathVariable String idUserToDeleteFriendship) {
         ResponseEntity<Object> response = friendsService.deleteFriendship(idUserRequest, idUserToDeleteFriendship);
-        HttpStatus status = (HttpStatus) response.getStatusCode();
-        ResponseDTO responseDTO = switch (status) {
-            case OK -> new ResponseDTO(status, "Successful", (String) response.getBody());
-            case CONFLICT,NOT_FOUND,FORBIDDEN -> new ResponseDTO(status, "Error", (String) response.getBody());
-            default -> new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", "Unexpected error");
-        };
-
-        return ResponseEntity.status(status).body(responseDTO);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
     }
+    //endregion
 }
