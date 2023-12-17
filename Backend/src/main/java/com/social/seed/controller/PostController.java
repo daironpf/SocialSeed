@@ -24,7 +24,7 @@ public class PostController {
      *
      * @param page Page number for pagination (default is 0).
      * @param size Number of posts per page (default is 10).
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @GetMapping("/getAllPosts")
     public ResponseEntity<ResponseDTO> getAllPosts(
@@ -41,7 +41,7 @@ public class PostController {
      *
      * @param page Page number for pagination (default is 0).
      * @param size Number of posts per page (default is 10).
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @GetMapping("/getPostsFeed")
     public ResponseEntity<ResponseDTO> getPostsFeed(
@@ -59,7 +59,7 @@ public class PostController {
      * Retrieves a post by its ID.
      *
      * @param id The ID of the post to retrieve.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @GetMapping("/getPostById/{id}")
     public ResponseEntity<ResponseDTO> getPostById(@PathVariable String id) {
@@ -74,7 +74,7 @@ public class PostController {
      *
      * @param userId  The ID of the user creating the post.
      * @param newPost The new post data.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/createPost")
     public ResponseEntity<ResponseDTO> createPost(
@@ -91,7 +91,7 @@ public class PostController {
      *
      * @param userId       The ID of the user making the update request.
      * @param updatedPost  The updated post data.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PutMapping("/updatePost")
     public ResponseEntity<ResponseDTO> updatePost(
@@ -108,7 +108,7 @@ public class PostController {
      *
      * @param userId The ID of the user making the delete request.
      * @param id     The ID of the post to delete.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @DeleteMapping("/deletePost/{id}")
     public ResponseEntity<ResponseDTO> deletePost(
@@ -127,7 +127,7 @@ public class PostController {
      *
      * @param idUserRequest   The ID of the user making the request.
      * @param idPostToLiked   The ID of the post to be liked.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/createLike/{idPostToLiked}")
     public ResponseEntity<ResponseDTO> createSocialUserlikedPost(
@@ -144,7 +144,7 @@ public class PostController {
      *
      * @param idUserRequest   The ID of the user making the request.
      * @param idPostToLiked   The ID of the post to unlike.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/deleteLike/{idPostToLiked}")
     public ResponseEntity<ResponseDTO> deleteSocialUserlikedPost(

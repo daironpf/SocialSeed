@@ -23,7 +23,7 @@ public class FriendsController {
      *
      * @param idUserRequest      The ID of the user initiating the request.
      * @param idUserToBeFriend   The ID of the user to whom the request is sent.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/createRequest/{idUserToBeFriend}")
     public ResponseEntity<ResponseDTO> createRequestFriendship(
@@ -40,7 +40,7 @@ public class FriendsController {
      *
      * @param idUserRequest                  The ID of the user canceling the request.
      * @param idUserToCancelFriendRequest   The ID of the user to whom the request is canceled.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/cancelRequest/{idUserToCancelFriendRequest}")
     public ResponseEntity<ResponseDTO> cancelRequestFriendship(
@@ -57,7 +57,7 @@ public class FriendsController {
      *
      * @param idUserRequest                   The ID of the user accepting the request.
      * @param idUserToAcceptedFriendRequest   The ID of the user whose request is accepted.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/acceptedRequest/{idUserToAcceptedFriendRequest}")
     public ResponseEntity<ResponseDTO> acceptedRequestFriendship(
@@ -74,7 +74,7 @@ public class FriendsController {
      *
      * @param idUserRequest                   The ID of the user wishing to end the friendship.
      * @param idUserToDeleteFriendship        The ID of the user with whom to stop being friends.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/deleteFriendship/{idUserToDeleteFriendship}")
     public ResponseEntity<ResponseDTO> deleteFriendship(

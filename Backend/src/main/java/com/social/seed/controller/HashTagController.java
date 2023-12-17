@@ -21,7 +21,7 @@ public class HashTagController {
      *
      * @param page The page number (default is 0).
      * @param size The number of items per page (default is 10).
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @GetMapping("/getAllHashTag")
     public ResponseEntity<ResponseDTO> getAllHashTag(
@@ -39,7 +39,7 @@ public class HashTagController {
      * Retrieves a hashtag by its ID.
      *
      * @param id The ID of the hashtag.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @GetMapping("/getHashTagById/{id}")
     public ResponseEntity<ResponseDTO> getHashTagById(@PathVariable String id) {
@@ -53,7 +53,7 @@ public class HashTagController {
      * Creates a new hashtag.
      *
      * @param newHashTag The hashtag to be created.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/createHashTag")
     public ResponseEntity<ResponseDTO> createHashTag(@RequestBody HashTag newHashTag) {
@@ -67,7 +67,7 @@ public class HashTagController {
      * Updates an existing hashtag.
      *
      * @param updateHashTag The updated hashtag.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PutMapping("/updateHashTag")
     public ResponseEntity<ResponseDTO> updateHashTag(@RequestBody HashTag updateHashTag) {
@@ -81,7 +81,7 @@ public class HashTagController {
      * Deletes a hashtag by its ID.
      *
      * @param id The ID of the hashtag to be deleted.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @DeleteMapping("/deleteHashTag/{id}")
     public ResponseEntity<ResponseDTO> deleteHashTag(@PathVariable String id) {
