@@ -1,16 +1,6 @@
 package com.social.seed.repository;
 
 import com.social.seed.model.HashTag;
-//import org.junit.jupiter.api.Test;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.autoconfigure.data.neo4j.DataNeo4jTest;
-//import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.PageRequest;
-//import org.springframework.test.annotation.DirtiesContext;
-//
-//import java.util.Optional;
-//
-//import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
