@@ -9,8 +9,7 @@ public record ResponseDTO(
         HttpStatus status,
         Object response,
         String message,
-        String version,
-        Throwable error
+        String version
 ) {
     /**
      * Main constructor to create an instance of ResponseDTO.
@@ -18,21 +17,9 @@ public record ResponseDTO(
      * @param status   The HTTP status of the response.
      * @param response The API response.
      * @param message  A descriptive message.
-     * @param error    The associated exception (can be null).
-     */
-    private ResponseDTO(HttpStatus status, Object response, String message, Throwable error) {
-        this(status, response, message, "v0.0.1", error);
-    }
-
-    /**
-     * Convenience constructor to create an instance of ResponseDTO without handling exceptions.
-     *
-     * @param status   The HTTP status of the response.
-     * @param response The API response.
-     * @param message  A descriptive message.
      */
     public ResponseDTO(HttpStatus status, Object response, String message) {
-        this(status, response, message, null);
+        this(status, response, message, "v0.0.1");
     }
 
     /**
@@ -43,17 +30,36 @@ public record ResponseDTO(
      * @return The ResponseDTO instance.
      */
     public static ResponseDTO success(Object response, String message) {
-        return new ResponseDTO(HttpStatus.OK, response, message, null);
+        return new ResponseDTO(HttpStatus.OK, response, message);
     }
 
     /**
-     * Creates an instance of ResponseDTO with ERROR status.
+     * Creates an instance of ResponseDTO with NOT_FOUND status.
      *
      * @param message The error message.
-     * @param error   The associated exception.
      * @return The ResponseDTO instance.
      */
-    public static ResponseDTO error(String message, Throwable error) {
-        return new ResponseDTO(HttpStatus.INTERNAL_SERVER_ERROR, "Error", message, error);
+    public static ResponseDTO notFound(String message) {
+        return new ResponseDTO(HttpStatus.NOT_FOUND,"Error", message);
+    }
+
+    /**
+     * Creates an instance of ResponseDTO with CONFLICT status.
+     *
+     * @param message The error message.
+     * @return The ResponseDTO instance.
+     */
+    public static ResponseDTO conflict(String message) {
+        return new ResponseDTO(HttpStatus.CONFLICT, "Error", message);
+    }
+
+    /**
+     * Creates an instance of ResponseDTO with FORBIDDEN status.
+     *
+     * @param message The error message.
+     * @return The ResponseDTO instance.
+     */
+    public static ResponseDTO forbidden(String message) {
+        return new ResponseDTO(HttpStatus.FORBIDDEN, "Error", message);
     }
 }

@@ -23,7 +23,7 @@ public class SocialUserInterestInHashTagController {
      *
      * @param idUserRequest The ID of the user making the request.
      * @param idHashTag     The ID of the Hash Tag to add interest in.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/addInterest/{idHashTag}")
     public ResponseEntity<ResponseDTO> addInterest(
@@ -41,7 +41,7 @@ public class SocialUserInterestInHashTagController {
      *
      * @param idUserRequest The ID of the user making the request.
      * @param idHashTag     The ID of the Hash Tag to delete interest from.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/deleteInterest/{idHashTag}")
     public ResponseEntity<ResponseDTO> deleteInterest(

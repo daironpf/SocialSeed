@@ -1,13 +1,11 @@
 package com.social.seed.util;
 
-import com.social.seed.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ResponseService {
-
     public ResponseEntity<Object> successResponse(Object data, String message) {
         return new ResponseEntity<>(ResponseDTO.success(data, message), HttpStatus.OK);
     }
@@ -17,23 +15,19 @@ public class ResponseService {
     }
 
     public ResponseEntity<Object> conflictResponseWithMessage(String message) {
-        ResponseDTO responseDTO = new ResponseDTO(HttpStatus.CONFLICT, null, message, "0.0.1", null);
-        return new ResponseEntity<>(responseDTO, HttpStatus.CONFLICT);
+        return new ResponseEntity<>(ResponseDTO.conflict(message), HttpStatus.CONFLICT);
     }
-
 
     public ResponseEntity<Object> forbiddenResponseWithMessage(String message) {
-        ResponseDTO responseDTO = new ResponseDTO(HttpStatus.FORBIDDEN, null, message, "0.0.1", null);
-        return new ResponseEntity<>(responseDTO, HttpStatus.FORBIDDEN);
+        return new ResponseEntity<>(ResponseDTO.forbidden(message), HttpStatus.FORBIDDEN);
     }
 
-
     public ResponseEntity<Object> userNotFoundResponse(String userId) {
-        throw new NotFoundException(String.format("The user with id: %s not found.", userId));
+        return new ResponseEntity<>(ResponseDTO.notFound(String.format("The user with id: %s not found.", userId)), HttpStatus.NOT_FOUND);
     }
 
     public ResponseEntity<Object> NotFoundWithMessageResponse(String message) {
-        throw new NotFoundException(message);
+        return new ResponseEntity<>(ResponseDTO.notFound(message), HttpStatus.NOT_FOUND);
     }
 
     public ResponseEntity<Object> alreadyFollow(String userId) {
@@ -45,16 +39,14 @@ public class ResponseService {
     }
 
     public ResponseEntity<Object> postNotFoundResponse(String postId) {
-        throw new NotFoundException(String.format("Post not found with ID: %s", postId));
+        return new ResponseEntity<>(ResponseDTO.notFound(String.format("Post not found with ID: %s", postId)), HttpStatus.NOT_FOUND);
     }
 
     public ResponseEntity<Object> isNotPostAuthor() {
-        return forbiddenResponseWithMessage("The user making the request is not the author of the post.");
+        return forbiddenResponseWithMessage("The user making the request is not the Author of the Post.");
     }
 
     public ResponseEntity<Object> hashTagNotFoundResponse(String hashTagId) {
-        throw new NotFoundException(String.format("HashTag not found with ID: %s", hashTagId));
+        return new ResponseEntity<>(ResponseDTO.notFound(String.format("Hashtag not found with ID: %s", hashTagId)), HttpStatus.NOT_FOUND);
     }
-
-    // Add other specific error response methods as needed
 }

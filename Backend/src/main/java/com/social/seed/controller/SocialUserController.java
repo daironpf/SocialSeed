@@ -23,7 +23,7 @@ public class SocialUserController {
      * Retrieve a Social User by ID.
      *
      * @param id The ID of the Social User to retrieve.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @GetMapping("/getSocialUserById/{id}")
     public ResponseEntity<ResponseDTO> getSocialUserById(@PathVariable String id) {
@@ -37,7 +37,7 @@ public class SocialUserController {
      * Create a new Social User.
      *
      * @param socialUser The Social User object to create.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/createSocialUser")
     public ResponseEntity<ResponseDTO> createSocialUser(@RequestBody SocialUser socialUser) {
@@ -52,7 +52,7 @@ public class SocialUserController {
      *
      * @param userId     The ID of the user making the request.
      * @param socialUser The updated Social User object.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PutMapping("/updateSocialUser")
     public ResponseEntity<ResponseDTO> updateSocialUser(
@@ -69,7 +69,7 @@ public class SocialUserController {
      *
      * @param userId The ID of the user making the request.
      * @param id     The ID of the Social User to delete.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @DeleteMapping("/deleteSocialUser/{id}")
     public ResponseEntity<ResponseDTO> deleteSocialUser(
@@ -89,7 +89,7 @@ public class SocialUserController {
      * @param idUserRequest  The ID of the user making the request.
      * @param idUserToUpdate The ID of the Social User to update.
      * @param newUserName    The new username to set.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/updateSocialUserName/{idUserToUpdate}")
     public ResponseEntity<ResponseDTO> updateSocialUserName(
@@ -108,7 +108,7 @@ public class SocialUserController {
      * @param idUserRequest  The ID of the user making the request.
      * @param idUserToUpdate The ID of the Social User to update.
      * @param newEmail       The new email to set.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/updateSocialUserEmail/{idUserToUpdate}")
     public ResponseEntity<ResponseDTO> updateSocialUserEmail(
@@ -128,7 +128,7 @@ public class SocialUserController {
      *
      * @param idUserRequest The ID of the user making the request.
      * @param idUserToFollow The ID of the Social User to follow.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/follow/{idUserToFollow}")
     public ResponseEntity<ResponseDTO> followSocialUser(
@@ -145,7 +145,7 @@ public class SocialUserController {
      *
      * @param idUserRequest The ID of the user making the request.
      * @param idUserToUnFollow The ID of the Social User to unfollow.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/unfollow/{idUserToUnFollow}")
     public ResponseEntity<ResponseDTO> unfollowSocialUser(
@@ -163,7 +163,7 @@ public class SocialUserController {
      * Activate vacation mode for a Social User.
      *
      * @param idUserRequest The ID of the user making the request.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/activateVacationMode")
     public ResponseEntity<ResponseDTO> activateVacationMode(
@@ -178,7 +178,7 @@ public class SocialUserController {
      * Deactivate vacation mode for a Social User.
      *
      * @param idUserRequest The ID of the user making the request.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/deactivateVacationMode")
     public ResponseEntity<ResponseDTO> deactivateVacationMode(
@@ -195,7 +195,7 @@ public class SocialUserController {
      * Activate a Social User.
      *
      * @param idUserRequest The ID of the user making the request.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/activateSocialUser")
     public ResponseEntity<ResponseDTO> activateSocialUser(
@@ -210,7 +210,7 @@ public class SocialUserController {
      * Deactivate a Social User.
      *
      * @param idUserRequest The ID of the user making the request.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     * @return ResponseEntity with a ResponseDTO.
      */
     @PostMapping("/deactivateSocialUser")
     public ResponseEntity<ResponseDTO> deactivateSocialUser(
