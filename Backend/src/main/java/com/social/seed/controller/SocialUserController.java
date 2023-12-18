@@ -3,6 +3,7 @@ package com.social.seed.controller;
 import com.social.seed.model.SocialUser;
 import com.social.seed.util.ResponseDTO;
 import com.social.seed.service.SocialUserService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * Controller to handle operations related to Social Users in the application.
  */
+@Tag(name = "SocialUser", description = "SocialUser Module")
 @RestController
 @RequestMapping("/api/v0.0.1/socialUser")
 public class SocialUserController {
