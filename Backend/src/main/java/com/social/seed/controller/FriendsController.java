@@ -2,6 +2,7 @@ package com.social.seed.controller;
 
 import com.social.seed.service.FriendsService;
 import com.social.seed.util.ResponseDTO;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
  * Controller to handle operations related to friendships in the application.
  */
 @RestController
+@Tag(name = "Friends", description = "Friends Module")
 @RequestMapping("/api/v0.0.1/friend")
 public class FriendsController {
     //region Dependencies

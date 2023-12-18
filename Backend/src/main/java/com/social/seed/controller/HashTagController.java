@@ -3,11 +3,13 @@ package com.social.seed.controller;
 import com.social.seed.model.HashTag;
 import com.social.seed.service.HashTagService;
 import com.social.seed.util.ResponseDTO;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Tag(name = "HashTag", description = "HashTag Module")
 @RequestMapping("/api/v0.0.1/hashTag")
 public class HashTagController {
     //region Dependencies

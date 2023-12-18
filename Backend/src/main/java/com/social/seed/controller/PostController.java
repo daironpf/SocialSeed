@@ -3,6 +3,7 @@ package com.social.seed.controller;
 import com.social.seed.model.Post;
 import com.social.seed.service.PostService;
 import com.social.seed.util.ResponseDTO;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
  * Controller class handling API endpoints related to posts.
  */
 @RestController
+@Tag(name = "Post", description = "Post Module")
 @RequestMapping("/api/v0.0.1/post")
 public class PostController {
     //region Dependencies
