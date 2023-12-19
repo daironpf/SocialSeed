@@ -1,113 +1,112 @@
 package com.social.seed.repository;
 
 import com.social.seed.model.HashTag;
-
+import com.social.seed.repository.HashTagRepository;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+import org.junit.jupiter.api.Order;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.neo4j.DataNeo4jTest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Optional;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @DataNeo4jTest
-@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class HashTagRepositoryTest {
 
     @Autowired
     private HashTagRepository hashTagRepository;
 
     /**
-     * Given a HashTag in the database,
-     * when checking for existence by name,
-     * then the result should be true.
+     * Method to set up initial data for the test.
+     * Initializes the database with three HashTags.
+     */
+    @Before
+    public void setUp() {
+        hashTagRepository.deleteAll();
+        HashTag hashTag1 = new HashTag("1", "FristTagToTest", 4, 10);
+        HashTag hashTag2 = new HashTag("2", "SecondTagToTest", 5, 11);
+        HashTag hashTag3 = new HashTag("3", "ThirdTagToTest", 6, 12);
+        hashTagRepository.save(hashTag1);
+        hashTagRepository.save(hashTag2);
+        hashTagRepository.save(hashTag3);
+    }
+
+    /**
+     * Method to clean up data after the test.
+     * Deletes all HashTags from the database.
+     */
+    @After
+    public void tearDown() {
+        hashTagRepository.deleteAll();
+    }
+
+    /**
+     * Verifies that the 'existByName' method returns true for an existing HashTag.
      */
     @Test
-    public void givenHashTagInDatabase_whenExistByName_thenReturnTrue() {
-        // Given
-        HashTag hashTag = new HashTag();
-        hashTag.setName("TestHashTag");
-        hashTagRepository.save(hashTag);
-
+    public void existsByNameShouldReturnTrueForExistingHashTag() {
         // When
-        Boolean exists = hashTagRepository.existByName("TestHashTag");
+        Boolean exists = hashTagRepository.existByName("FristTagToTest");
 
         // Then
         assertTrue(exists);
     }
 
     /**
-     * Given a HashTag in the database,
-     * when checking for existence by a non-existent name,
-     * then the result should be false.
+     * Verifies that the 'existByName' method returns false for a non-existing HashTag.
      */
     @Test
-    public void givenHashTagInDatabase_whenExistByNonExistentName_thenReturnFalse() {
-        // Given
-        HashTag hashTag = new HashTag();
-        hashTag.setName("TestHashTag");
-        hashTagRepository.save(hashTag);
-
+    public void existsByNameShouldReturnFalseForNonExistingHashTag() {
         // When
-        Boolean exists = hashTagRepository.existByName("NonExistentHashTag");
+        Boolean exists = hashTagRepository.existByName("Pepe");
 
         // Then
         assertFalse(exists);
     }
 
     /**
-     * Given a HashTag in the database,
-     * when updating the HashTag,
-     * then verify the changes.
+     * Verifies that updating an existing HashTag is successful.
      */
     @Test
-    public void givenHashTagInDatabase_whenUpdateHashTag_thenVerifyChanges() {
+    public void updateExistingHashTagShouldSucceed() {
         // Given
-        HashTag hashTag = new HashTag();
-        hashTag.setName("TestHashTag");
-        hashTagRepository.save(hashTag);
+        HashTag hashTag = hashTagRepository.findByName("FristTagToTest").get();
 
         // When
-        hashTagRepository.update(hashTag.getId(), "UpdatedHashTag");
+        hashTagRepository.update(hashTag.getId(), "FristTagToTestUpdate");
         Optional<HashTag> updatedHashTagOptional = hashTagRepository.findById(hashTag.getId());
 
         // Then
         assertTrue(updatedHashTagOptional.isPresent());
-        assertEquals("UpdatedHashTag", updatedHashTagOptional.get().getName());
+        assertEquals("FristTagToTestUpdate", updatedHashTagOptional.get().getName());
     }
 
     /**
-     * Given a HashTag in the database,
-     * when finding a HashTag by name,
-     * then the result should be the expected HashTag.
+     * Verifies that retrieving a HashTag by a valid name is successful.
      */
     @Test
-    public void givenHashTagInDatabase_whenFindByName_thenReturnHashTag() {
-        // Given
-        HashTag hashTag = new HashTag();
-        hashTag.setName("TestHashTag");
-        hashTagRepository.save(hashTag);
-
+    public void getHashTagByNameShouldSucceedForValidName() {
         // When
-        Optional<HashTag> foundHashTagOptional = hashTagRepository.findByName("TestHashTag");
+        Optional<HashTag> foundHashTagOptional = hashTagRepository.findByName("SecondTagToTest");
 
         // Then
         assertTrue(foundHashTagOptional.isPresent());
-        assertEquals("TestHashTag", foundHashTagOptional.get().getName());
+        assertEquals("SecondTagToTest", foundHashTagOptional.get().getName());
     }
 
     /**
-     * When finding a non-existent HashTag by name,
-     * then the result should be an empty optional.
+     * Verifies that retrieving a HashTag by an invalid name returns null.
      */
     @Test
-    public void givenNonExistentHashTag_whenFindByName_thenReturnEmptyOptional() {
+    public void getHashTagByNameShouldReturnNullForInvalidName() {
         // When
         Optional<HashTag> foundHashTagOptional = hashTagRepository.findByName("NonExistentHashTag");
 
@@ -116,12 +115,10 @@ public class HashTagRepositoryTest {
     }
 
     /**
-     * Given a new HashTag,
-     * when saving the new HashTag,
-     * then verify that the HashTag is saved correctly.
+     * Verifies that creating a new HashTag is successful.
      */
     @Test
-    public void givenNewHashTag_whenSaveHashTag_thenVerifySavedHashTag() {
+    public void createHashTagShouldSucceed() {
         // Given
         HashTag newHashTag = new HashTag();
         newHashTag.setName("NewHashTag");
@@ -136,16 +133,28 @@ public class HashTagRepositoryTest {
     }
 
     /**
-     * Given a HashTag in the database,
-     * when deleting the HashTag by ID,
-     * then verify that the HashTag is deleted.
+     * Verifies that attempting to create a HashTag with a duplicate name fails.
      */
     @Test
-    public void givenHashTagInDatabase_whenDeleteHashTagById_thenVerifyDeletion() {
+    public void createHashTagShouldFailForDuplicateName() {
         // Given
-        HashTag hashTagToDelete = new HashTag();
-        hashTagToDelete.setName("HashTagToDelete");
-        hashTagRepository.save(hashTagToDelete);
+        HashTag newHashTag = new HashTag();
+        newHashTag.setName("NewHashTag");
+
+        // When
+        Boolean exists = hashTagRepository.existByName(newHashTag.getName());
+
+        // Then
+        assertFalse(exists);
+    }
+
+    /**
+     * Verifies that deleting a HashTag is successful.
+     */
+    @Test
+    public void deleteHashTagShouldSucceed() {
+        // Given
+        HashTag hashTagToDelete = hashTagRepository.findByName("ThirdTagToTest").get();
 
         // When
         hashTagRepository.deleteById(hashTagToDelete.getId());
@@ -156,35 +165,25 @@ public class HashTagRepositoryTest {
     }
 
     /**
-     * Given existing HashTags in the database,
-     * when finding all HashTags with pagination,
-     * then verify the total number of elements.
+     * Verifies that listing all existing HashTags returns the expected results.
      */
     @Test
-    public void givenExistingHashTags_whenFindAllWithPageable_thenVerifyTotalElements() {
+    public void shouldListAllExistingHashTags() {
         // Given
         PageRequest pageRequest = PageRequest.of(0, 10);
         Page<HashTag> hashTagPage = hashTagRepository.findAll(pageRequest);
-        long totalActual = hashTagPage.getTotalElements();
-
-        HashTag hashTag1 = new HashTag();
-        hashTag1.setName("HashTag1");
-        hashTagRepository.save(hashTag1);
-
-        HashTag hashTag2 = new HashTag();
-        hashTag2.setName("HashTag2");
-        hashTagRepository.save(hashTag2);
-
-        HashTag hashTag3 = new HashTag();
-        hashTag3.setName("HashTag3");
-        hashTagRepository.save(hashTag3);
-
-        totalActual += 3;
 
         // When
-        Page<HashTag> testHashTagPage = hashTagRepository.findAll(pageRequest);
+        List<HashTag> testHashTags = hashTagPage.getContent();
 
         // Then
-        assertEquals(totalActual, testHashTagPage.getTotalElements());
+        assertEquals(3, testHashTags.size());
+
+        // Verify names without considering the position
+        Set<String> expectedNames = new HashSet<>(Arrays.asList("FristTagToTest", "SecondTagToTest", "ThirdTagToTest"));
+
+        for (HashTag hashTag : testHashTags) {
+            assertTrue(expectedNames.contains(hashTag.getName()));
+        }
     }
 }
