@@ -109,7 +109,6 @@ public class SocialUserService {
     public ResponseEntity<Object> deleteSocialUser(String userId, String id) {
         if (!userId.equals(id)) return responseService.forbiddenResponseWithMessage("The user making the delete request is not the owner of this.");
         if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
-        if (validationService.isSocialUserDeleted(userId)) return responseService.forbiddenResponseWithMessage("The user has already been Deleted");
 
         socialUserRepository.deleteById(id);
 

@@ -35,9 +35,7 @@ public class ValidationService {
     public boolean isVacationModeActivated(String idUserRequest) {
         return socialUserRepository.isVacationModeActivated(idUserRequest);
     }
-    public boolean isSocialUserDeleted(String userId) {
-        return socialUserRepository.isSocialUserDeleted(userId);
-    }
+
     public boolean isSocialUserActivated(String idUserRequest) {
         return socialUserRepository.isSocialUserActivated(idUserRequest);
     }
