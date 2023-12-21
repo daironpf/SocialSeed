@@ -7,7 +7,6 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public interface PostRepository extends Neo4jRepository<Post, String> {
     //region gets
