@@ -5,7 +5,6 @@ import com.social.seed.model.SocialUser;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.jupiter.api.Order;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.neo4j.DataNeo4jTest;
@@ -272,7 +271,7 @@ public class SocialUserRepositoryTest {
                 gelacio.get().getId(),
                 maria.get().getId()
         );
-        // Verificado que SI existe la relacion de Seguidor de (b)<-[r:FOLLOWED_BY]-(a)
+        // Verify if Exist (b)<-[r:FOLLOWED_BY]-(a)
         assertTrue(IsUserBFollowerOfUserA);
 
         // When
@@ -286,7 +285,7 @@ public class SocialUserRepositoryTest {
                 gelacio.get().getId(),
                 maria.get().getId()
         );
-        // Verificado que NO existe la relacion de Seguidor de (b)<-[r:FOLLOWED_BY]-(a)
+        // Verify if NOT Exist (b)<-[r:FOLLOWED_BY]-(a)
         assertFalse(IsUserBFollowerOfUserA);
     }
 
