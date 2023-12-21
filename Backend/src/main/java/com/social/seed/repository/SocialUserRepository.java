@@ -119,21 +119,14 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
     @Query("""
             MATCH (u:SocialUser {id: $id})
             OPTIONAL MATCH (u)<-[:POSTED_BY]-(p)
-            FOREACH (_ IN CASE WHEN u IS NOT NULL THEN [1] ELSE [] END |
-                    SET u.isActive = false,
-                        u.isDeleted = true
+            FOREACH (_ IN CASE WHEN u IS NOT NULL THEN [1] ELSE [] END |                    
+                    DETACH DELETE u
                 )
             FOREACH (_ IN CASE WHEN p IS NOT NULL THEN [1] ELSE [] END |
-                    SET p.isActive = false
+                    DETACH DELETE p
                 )
             """)
     void deleteById(String id);
-
-    @Query("""
-            MATCH (u:SocialUser {id: $id})
-            RETURN u.isDeleted
-            """)
-    Boolean isSocialUserDeleted(String id);
     //endregion
 
     //region Activated Mode
