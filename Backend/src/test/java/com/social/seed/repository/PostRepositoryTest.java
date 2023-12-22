@@ -157,7 +157,7 @@ public class PostRepositoryTest {
         );
 
         // When
-        Boolean existLiked = postRepository.isUserByIdLikedPostById(
+        boolean existLiked = postRepository.isUserByIdLikedPostById(
                 user1.getId(), post2.getId()
         );
 
@@ -314,7 +314,7 @@ public class PostRepositoryTest {
                 _user.getId(),
                 LocalDateTime.now()
         );
-    };
+    }
 
     public static String[] extractHashtags(String postContent) {
         Pattern pattern = Pattern.compile("#\\w+");
