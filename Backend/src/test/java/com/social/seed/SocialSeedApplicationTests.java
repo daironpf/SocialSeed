@@ -1,6 +1,7 @@
 package com.social.seed;
 
 import com.social.seed.repository.HashTagRepositoryTest;
+import com.social.seed.repository.PostRepositoryTest;
 import com.social.seed.repository.SocialUserRepositoryTest;
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;
@@ -13,7 +14,8 @@ public class SocialSeedApplicationTests {
 	public static void main(String[] args) {
 		Result result = JUnitCore.runClasses(
 				HashTagRepositoryTest.class,
-				SocialUserRepositoryTest.class
+				SocialUserRepositoryTest.class,
+				PostRepositoryTest.class
 				/* Otras clases de prueba si las tienes */
 		);
 
