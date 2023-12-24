@@ -16,6 +16,7 @@ Social Seed provides a solid starting point for creating a personalized social n
 ## This is the Graph Data Model used for the project
 ![This is the Graph Data Model used for the project](https://github.com/daironpf/SocialSeed/blob/main/Neo4j/Graph%20Data%20Model/SocialSeed%20(SS).png)
 
+<!--
 ## Getting Started
 
 1. Clone the repository: `git clone git@github.com:daironpf/SocialSeed.git`
@@ -23,6 +24,7 @@ Social Seed provides a solid starting point for creating a personalized social n
 3. Navigate to the `frontend` directory and install Vue.js dependencies: `cd frontend && npm install`
 4. Run the Vue.js application: `npm run serve`
 5. Run the Spring Boot application: `./mvnw spring-boot:run`
+-->
 
 ## Customization
 
