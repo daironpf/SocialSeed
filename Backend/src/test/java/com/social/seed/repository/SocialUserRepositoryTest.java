@@ -1,169 +1,56 @@
 package com.social.seed.repository;
 
 import com.social.seed.model.SocialUser;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.neo4j.DataNeo4jTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
 @DataNeo4jTest
-public class SocialUserRepositoryTest {
+class SocialUserRepositoryTest {
 
     @Autowired
-    private SocialUserRepository socialUserRepository;
+    private SocialUserRepository underTest;
 
-    /**
-     * Set up test data before each test.
-     */
-    @Before
-    public void setUp(){
-        // clean all
-        socialUserRepository.deleteAll();
-
-        // Adding test data
-        // user #1
-        socialUserRepository.save(
-                SocialUser.builder()
-                        .userName("maria1")
-                        .email("maria1@gmail.com")
-                        .dateBorn(LocalDateTime.parse("1992-01-04T00:00:00"))
-                        .fullName("Maria del Laurel Perez")
-                        .language("ES")
-                        .registrationDate(LocalDateTime.now())
-                        .isActive(true)
-                        .isDeleted(false)
-                        .onVacation(false)
-                        .followersCount(0)
-                        .friendCount(0)
-                        .followingCount(0)
-                        .friendRequestCount(0)
-                        .build()
-        );
-        // user #2
-        socialUserRepository.save(
-                SocialUser.builder()
-                        .userName("daisi97")
-                        .email("daisi97@gmail.com")
-                        .dateBorn(LocalDateTime.parse("1987-02-04T00:00:00"))
-                        .fullName("Daisisi Ferexy Zoan")
-                        .language("EN")
-                        .registrationDate(LocalDateTime.now())
-                        .isActive(true)
-                        .isDeleted(false)
-                        .onVacation(false)
-                        .followersCount(0)
-                        .friendCount(0)
-                        .followingCount(0)
-                        .friendRequestCount(0)
-                        .build()
-        );
-        // user #3
-        socialUserRepository.save(
-                SocialUser.builder()
-                        .userName("gelacio32")
-                        .email("gelacio32@gmail.com")
-                        .dateBorn(LocalDateTime.parse("1962-10-11T00:00:00"))
-                        .fullName("Gelacio Perez Perez")
-                        .language("ES")
-                        .registrationDate(LocalDateTime.now())
-                        .isActive(true)
-                        .isDeleted(false)
-                        .onVacation(false)
-                        .followersCount(0)
-                        .friendCount(0)
-                        .followingCount(0)
-                        .friendRequestCount(0)
-                        .build()
-        );
+    @BeforeEach
+    void setUp() {
+        createTestData();
     }
 
-    /**
-     * Clean up test data after each test.
-     */
-    @After
-    public void tearDown() {
-        socialUserRepository.deleteAll();
+    @AfterEach
+    void tearDown() {
+        cleanAllData();
     }
 
-    /**
-     * Verifies that a user exists by email.
-     */
     @Test
-    public void existsByEmailShouldReturnTrueForExistingSocialUser() {
-        // When
-        Boolean userExists = socialUserRepository.existByEmail("gelacio32@gmail.com");
-
-        // Then
-        assertTrue(userExists);
+    void shouldCheckWhenSocialUserByEmailExists() {
+        assertUserByEmailExists("maria1@gmail.com", true);
+        assertUserByEmailExists("noemailexist@gmail.com", false);
     }
 
-    /**
-     * Verifies that a user does not exist by email.
-     */
     @Test
-    public void existsByEmailShouldReturnFalseForNonExistingSocialUser() {
-        // When
-        Boolean userExists = socialUserRepository.existByEmail("emailnoexist.com");
-
-        // Then
-        assertFalse(userExists);
+    void shouldCheckWhenSocialUserByUserNameExists() {
+        assertUserByUserNameExists("gelacio32", true);
+        assertUserByUserNameExists("usernamenoexist", false);
     }
 
-    /**
-     * Verifies that a user exists by username.
-     */
     @Test
-    public void existsByUserNameShouldReturnTrueForExistingSocialUser() {
-        // When
-        Boolean userExists = socialUserRepository.existByUserName("gelacio32");
+    void findByEmailShouldReturnExistingSocialUser() {
+        // given
+        Boolean userExists = underTest.existByEmail("gelacio32@gmail.com");
+        assertThat(userExists).isTrue();
 
-        // Then
-        assertTrue(userExists);
-    }
+        // when
+        Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
-    /**
-     * Verifies that a user does not exist by username.
-     */
-    @Test
-    public void existsByUserNameShouldReturnFalseForNonExistingSocialUser() {
-        // When
-        Boolean userExists = socialUserRepository.existByUserName("usernamenoexist");
-
-        // Then
-        assertFalse(userExists);
-    }
-
-    /**
-     * Verifies that finding a user by email returns the correct information.
-     */
-    @Test
-    public void findByEmailShouldReturnExistingSocialUser(){
-        // Given
-        Boolean userExists = socialUserRepository.existByEmail("gelacio32@gmail.com");
-        assertTrue(userExists);
-
-        // When
-        Optional<SocialUser> socialUser = socialUserRepository.findByEmail("gelacio32@gmail.com");
-
-        // Then
-        assertTrue(socialUser.isPresent());
-        assertEquals("gelacio32", socialUser.get().getUserName());
-        assertEquals("gelacio32@gmail.com", socialUser.get().getEmail());
-        assertEquals("Gelacio Perez Perez", socialUser.get().getFullName());
-        assertEquals("ES", socialUser.get().getLanguage());
-        assertTrue(socialUser.get().getIsActive());
-        assertFalse(socialUser.get().getIsDeleted());
-        assertFalse(socialUser.get().getOnVacation());
+        // then
+        assertSocialUserProperties(socialUser.orElseThrow());
     }
 
     /**
@@ -171,25 +58,24 @@ public class SocialUserRepositoryTest {
      */
     @Test
     public void updateExistingSocialUserSucceed() {
-        // Given
-        Boolean userExists = socialUserRepository.existByEmail("gelacio32@gmail.com");
-        assertTrue(userExists);
-        Optional<SocialUser> socialUserToUpdate = socialUserRepository.findByEmail("gelacio32@gmail.com");
+        // given
+        assertUserByEmailExists("gelacio32@gmail.com", true);
+        Optional<SocialUser> socialUserToUpdate = underTest.findByEmail("gelacio32@gmail.com");
 
-        // When
-        socialUserRepository.update(
+        // when
+        underTest.update(
                 socialUserToUpdate.get().getId(),
                 "Nombre Actualizado Completo",
                 LocalDateTime.parse("1999-01-01T00:00:00"),
                 "EN"
         );
-        Optional<SocialUser> updatedSocialUser = socialUserRepository.findByEmail("gelacio32@gmail.com");
+        Optional<SocialUser> updatedSocialUser = underTest.findByEmail("gelacio32@gmail.com");
 
-        // Then
-        assertTrue(updatedSocialUser.isPresent());
-        assertEquals("Nombre Actualizado Completo", updatedSocialUser.get().getFullName());
-        assertEquals("EN", updatedSocialUser.get().getLanguage());
-        assertEquals(LocalDateTime.parse("1999-01-01T00:00:00"), updatedSocialUser.get().getDateBorn());
+        // then
+        assertThat(updatedSocialUser.isPresent()).isTrue();
+        assertThat(updatedSocialUser.get().getFullName()).isEqualTo("Nombre Actualizado Completo");
+        assertThat(updatedSocialUser.get().getLanguage()).isEqualTo("EN");
+        assertThat(updatedSocialUser.get().getDateBorn()).isEqualTo(LocalDateTime.parse("1999-01-01T00:00:00"));
     }
 
     /**
@@ -197,18 +83,17 @@ public class SocialUserRepositoryTest {
      */
     @Test
     public void updateExistingSocialUserNameSucceed(){
-        // Given
-        Boolean userExists = socialUserRepository.existByEmail("gelacio32@gmail.com");
-        assertTrue(userExists);
-        Optional<SocialUser> socialUserToUpdate = socialUserRepository.findByEmail("gelacio32@gmail.com");
+        // given
+        assertUserByEmailExists("gelacio32@gmail.com", true);
+        Optional<SocialUser> socialUserToUpdate = underTest.findByEmail("gelacio32@gmail.com");
 
-        // When
-        socialUserRepository.updateSocialUserName(socialUserToUpdate.get().getId(), "nuevoUsuario");
-        Optional<SocialUser> updatedSocialUser = socialUserRepository.findByEmail("gelacio32@gmail.com");
+        // when
+        underTest.updateSocialUserName(socialUserToUpdate.get().getId(), "nuevoUsuario");
+        Optional<SocialUser> updatedSocialUser = underTest.findByEmail("gelacio32@gmail.com");
 
-        // Then
-        assertTrue(updatedSocialUser.isPresent());
-        assertEquals("nuevoUsuario", updatedSocialUser.get().getUserName());
+        // then
+        assertThat(updatedSocialUser.isPresent()).isTrue();
+        assertThat(updatedSocialUser.get().getUserName()).isEqualTo("nuevoUsuario");
     }
 
     /**
@@ -216,42 +101,41 @@ public class SocialUserRepositoryTest {
      */
     @Test
     public void updateExistingSocialUserEmailSucceed(){
-        // Given
-        Boolean userExists = socialUserRepository.existByEmail("gelacio32@gmail.com");
-        assertTrue(userExists);
-        Optional<SocialUser> socialUserToUpdate = socialUserRepository.findByEmail("gelacio32@gmail.com");
+        // given
+        assertUserByEmailExists("gelacio32@gmail.com", true);
+        Optional<SocialUser> socialUserToUpdate = underTest.findByEmail("gelacio32@gmail.com");
 
-        // When
-        socialUserRepository.updateSocialUserEmail(socialUserToUpdate.get().getId(), "nuevoemail@gmail.com");
-        Optional<SocialUser> updatedSocialUser = socialUserRepository.findById(socialUserToUpdate.get().getId());
+        // when
+        underTest.updateSocialUserEmail(socialUserToUpdate.get().getId(), "nuevoemail@gmail.com");
+        Optional<SocialUser> updatedSocialUser = underTest.findById(socialUserToUpdate.get().getId());
 
-        // Then
-        assertTrue(updatedSocialUser.isPresent());
-        assertEquals("nuevoemail@gmail.com", updatedSocialUser.get().getEmail());
+        // then
+        assertThat(updatedSocialUser.isPresent()).isTrue();
+        assertThat(updatedSocialUser.get().getEmail()).isEqualTo("nuevoemail@gmail.com");
     }
 
     /**
      * Verifies that a user B is a follower of user A.
      */
     @Test
-    public void IsUserBFollowerOfUserA(){
-        // Given
-        Optional<SocialUser> gelacio = socialUserRepository.findByEmail("gelacio32@gmail.com");
-        Optional<SocialUser> maria = socialUserRepository.findByEmail("maria1@gmail.com");
-        socialUserRepository.createUserBFollowUserA(
+    public void IsUserBFollowerOfTheUserA(){
+        // given
+        Optional<SocialUser> gelacio = underTest.findByEmail("gelacio32@gmail.com");
+        Optional<SocialUser> maria = underTest.findByEmail("maria1@gmail.com");
+        underTest.createUserBFollowUserA(
                 gelacio.get().getId(),
                 maria.get().getId(),
                 LocalDateTime.now()
         );
 
-        // When
-        Boolean IsUserBFollowerOfUserA = socialUserRepository.IsUserBFollowerOfUserA(
+        // when
+        Boolean IsUserBFollowerOfUserA = underTest.IsUserBFollowerOfUserA(
                 gelacio.get().getId(),
                 maria.get().getId()
         );
 
-        // Then
-        assertTrue(IsUserBFollowerOfUserA);
+        // then
+        assertThat(IsUserBFollowerOfUserA).isTrue();
     }
 
     /**
@@ -259,34 +143,34 @@ public class SocialUserRepositoryTest {
      */
     @Test
     public void unFollowUserA_shouldRemoveFollowerB(){
-        // Given
-        Optional<SocialUser> gelacio = socialUserRepository.findByEmail("gelacio32@gmail.com");
-        Optional<SocialUser> maria = socialUserRepository.findByEmail("maria1@gmail.com");
-        socialUserRepository.createUserBFollowUserA(
+        // given
+        Optional<SocialUser> gelacio = underTest.findByEmail("gelacio32@gmail.com");
+        Optional<SocialUser> maria = underTest.findByEmail("maria1@gmail.com");
+        underTest.createUserBFollowUserA(
                 gelacio.get().getId(),
                 maria.get().getId(),
                 LocalDateTime.now()
         );
-        Boolean IsUserBFollowerOfUserA = socialUserRepository.IsUserBFollowerOfUserA(
+        Boolean IsUserBFollowerOfUserA = underTest.IsUserBFollowerOfUserA(
                 gelacio.get().getId(),
                 maria.get().getId()
         );
         // Verify if Exist (b)<-[r:FOLLOWED_BY]-(a)
-        assertTrue(IsUserBFollowerOfUserA);
+        assertThat(IsUserBFollowerOfUserA).isTrue();
 
-        // When
-        socialUserRepository.unFollowTheUserA(
+        // when
+        underTest.unFollowTheUserA(
                 gelacio.get().getId(),
                 maria.get().getId()
         );
 
-        // Then
-        IsUserBFollowerOfUserA = socialUserRepository.IsUserBFollowerOfUserA(
+        // then
+        IsUserBFollowerOfUserA = underTest.IsUserBFollowerOfUserA(
                 gelacio.get().getId(),
                 maria.get().getId()
         );
         // Verify if NOT Exist (b)<-[r:FOLLOWED_BY]-(a)
-        assertFalse(IsUserBFollowerOfUserA);
+        assertThat(IsUserBFollowerOfUserA).isFalse();
     }
 
     /**
@@ -294,14 +178,14 @@ public class SocialUserRepositoryTest {
      */
     @Test
     public void isVacationModeDeactivatedShouldReturnTrue() {
-        //Given
-        Optional<SocialUser> socialUser = socialUserRepository.findByEmail("gelacio32@gmail.com");
+        // given
+        Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
-        // When
-        Boolean vacationMode = socialUserRepository.isVacationModeActivated(socialUser.get().getId());
+        // when
+        Boolean vacationMode = underTest.isVacationModeActivated(socialUser.get().getId());
 
-        // Then
-        assertFalse(vacationMode);
+        // then
+        assertThat(vacationMode).isFalse();
     }
 
     /**
@@ -310,15 +194,16 @@ public class SocialUserRepositoryTest {
     @Test
     public void activateVacationModeActivatesModeSuccessfully() {
         //Given
-        Optional<SocialUser> socialUser = socialUserRepository.findByEmail("gelacio32@gmail.com");
+        Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When
-        socialUserRepository.activateVacationMode(socialUser.get().getId());
+        underTest.activateVacationMode(socialUser.get().getId());
 
         // Then
-        Boolean vacationMode = socialUserRepository.isVacationModeActivated(socialUser.get().getId());
-        assertTrue(vacationMode);
+        Boolean vacationMode = underTest.isVacationModeActivated(socialUser.get().getId());
+        assertThat(vacationMode).isTrue();
     }
+
 
     /**
      * Verifies that deactivating vacation mode is successful.
@@ -326,14 +211,14 @@ public class SocialUserRepositoryTest {
     @Test
     public void deactivateVacationModeActivatesModeSuccessfully() {
         //Given
-        Optional<SocialUser> socialUser = socialUserRepository.findByEmail("gelacio32@gmail.com");
+        Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When
-        socialUserRepository.deactivateVacationMode(socialUser.get().getId());
+        underTest.deactivateVacationMode(socialUser.get().getId());
 
         // Then
-        Boolean vacationMode = socialUserRepository.isVacationModeActivated(socialUser.get().getId());
-        assertFalse(vacationMode);
+        Boolean vacationMode = underTest.isVacationModeActivated(socialUser.get().getId());
+        assertThat(vacationMode).isFalse();
     }
 
     /**
@@ -342,16 +227,14 @@ public class SocialUserRepositoryTest {
     @Test
     public void deleteExistingSocialUserShouldSucceed() {
         // Given
-        Boolean userExists = socialUserRepository.existByEmail("gelacio32@gmail.com");
-        assertTrue(userExists);
-        Optional<SocialUser> socialUser = socialUserRepository.findByEmail("gelacio32@gmail.com");
+        Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When
-        socialUserRepository.deleteById(socialUser.get().getId());
+        underTest.deleteById(socialUser.get().getId());
 
         // Then
-        Optional<SocialUser> deleteSocialUser = socialUserRepository.findByEmail("gelacio32@gmail.com");
-        assertFalse(deleteSocialUser.isPresent());
+        Optional<SocialUser> deleteSocialUser = underTest.findByEmail("gelacio32@gmail.com");
+        assertThat(deleteSocialUser.isPresent()).isFalse();
     }
 
     /**
@@ -360,13 +243,13 @@ public class SocialUserRepositoryTest {
     @Test
     public void isSocialUserActivatedShouldReturnTrue() {
         //Given
-        Optional<SocialUser> socialUser = socialUserRepository.findByEmail("gelacio32@gmail.com");
+        Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When
-        boolean socialUserActivated = socialUserRepository.isSocialUserActivated(socialUser.get().getId());
+        boolean socialUserActivated = underTest.isSocialUserActivated(socialUser.get().getId());
 
         // Then
-        assertTrue(socialUserActivated);
+        assertThat(socialUserActivated).isTrue();
     }
 
     /**
@@ -375,14 +258,14 @@ public class SocialUserRepositoryTest {
     @Test
     public void shouldActivateSocialUserWhenGivenUserId() {
         //Given
-        Optional<SocialUser> socialUser = socialUserRepository.findByEmail("gelacio32@gmail.com");
+        Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When
-        socialUserRepository.activateSocialUser(socialUser.get().getId());
-        boolean socialUserActivated = socialUserRepository.isSocialUserActivated(socialUser.get().getId());
+        underTest.activateSocialUser(socialUser.get().getId());
+        boolean socialUserActivated = underTest.isSocialUserActivated(socialUser.get().getId());
 
         // Then
-        assertTrue(socialUserActivated);
+        assertThat(socialUserActivated).isTrue();
     }
 
     /**
@@ -391,13 +274,66 @@ public class SocialUserRepositoryTest {
     @Test
     public void shouldDeactivateSocialUserWhenGivenUserId() {
         //Given
-        Optional<SocialUser> socialUser = socialUserRepository.findByEmail("gelacio32@gmail.com");
+        Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When
-        socialUserRepository.deactivateSocialUser(socialUser.get().getId());
-        boolean socialUserActivated = socialUserRepository.isSocialUserActivated(socialUser.get().getId());
+        underTest.deactivateSocialUser(socialUser.get().getId());
+        boolean socialUserActivated = underTest.isSocialUserActivated(socialUser.get().getId());
 
         // Then
-        assertFalse(socialUserActivated);
+        assertThat(socialUserActivated).isFalse();
     }
+
+    // region util
+    private void assertUserByEmailExists(String email, boolean expected) {
+        assertThat(underTest.existByEmail(email)).isEqualTo(expected);
+    }
+
+    private void assertUserByUserNameExists(String userName, boolean expected) {
+        assertThat(underTest.existByUserName(userName)).isEqualTo(expected);
+    }
+
+    private void assertSocialUserProperties(SocialUser socialUser) {
+        assertThat(socialUser.getUserName()).isEqualTo("gelacio32");
+        assertThat(socialUser.getEmail()).isEqualTo("gelacio32@gmail.com");
+        assertThat(socialUser.getFullName()).isEqualTo("Gelacio Perez Perez");
+        assertThat(socialUser.getLanguage()).isEqualTo("ES");
+        assertThat(socialUser.getIsActive()).isTrue();
+        assertThat(socialUser.getIsDeleted()).isFalse();
+        assertThat(socialUser.getOnVacation()).isFalse();
+    }
+
+    private void createTestData() {
+        // user #1
+        underTest.save(createSocialUser("maria1", "maria1@gmail.com", "1992-01-04T00:00:00", "Maria del Laurel Perez", "ES"));
+
+        // user #2
+        underTest.save(createSocialUser("daisi97", "daisi97@gmail.com", "1987-02-04T00:00:00", "Daisisi Ferexy Zoan", "EN"));
+
+        // user #3
+        underTest.save(createSocialUser("gelacio32", "gelacio32@gmail.com", "1962-10-11T00:00:00", "Gelacio Perez Perez", "ES"));
+    }
+
+    private SocialUser createSocialUser(String userName, String email, String dateBorn, String fullName, String language) {
+        return SocialUser.builder()
+                .userName(userName)
+                .email(email)
+                .dateBorn(LocalDateTime.parse(dateBorn))
+                .fullName(fullName)
+                .language(language)
+                .registrationDate(LocalDateTime.now())
+                .isActive(true)
+                .isDeleted(false)
+                .onVacation(false)
+                .followersCount(0)
+                .friendCount(0)
+                .followingCount(0)
+                .friendRequestCount(0)
+                .build();
+    }
+
+    private void cleanAllData() {
+        underTest.deleteAll();
+    }
+    // endregion
 }
