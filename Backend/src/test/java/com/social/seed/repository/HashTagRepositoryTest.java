@@ -16,7 +16,6 @@
 package com.social.seed.repository;
 
 import com.social.seed.model.HashTag;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,7 +29,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
 /**
  * Unit tests for the {@link HashTagRepository}, focusing on testing individual methods and functionalities
  * in isolation for managing {@link HashTag}.

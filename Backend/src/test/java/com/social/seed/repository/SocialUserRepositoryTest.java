@@ -1,3 +1,18 @@
+/*
+ * Copyright 2011-2023 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.social.seed.repository;
 
 import com.social.seed.model.SocialUser;
@@ -13,17 +28,13 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Unit tests for the {@link SocialUserRepository} class.
- * These tests cover various functionalities of the repository for managing social users.
+ * These tests cover various functionalities of the repository for managing {@link SocialUser}.
  * <p>
  * The test class is annotated with {@code @DataNeo4jTest}, indicating that it's a Spring Data Neo4j test
  * and will be using a Neo4j test slice context for efficient testing.
  * <p>
- * Each test method is responsible for testing a specific aspect of the SocialUserRepository,
- * such as checking user existence, finding users, updating user details, managing followers, and handling vacation mode.
- * <p>
- * Utility methods are provided for setting up test data, cleaning up after tests, and asserting expected conditions.
- * <p>
- * Regions are defined for different sections of the test class, making it easy to navigate and understand.
+ *  @author Dairon Pérez Frías
+ *  @since 2023-12-24
  */
 @DataNeo4jTest
 class SocialUserRepositoryTest {
@@ -91,7 +102,7 @@ class SocialUserRepositoryTest {
     @Test
     void findByEmailShouldReturnExistingSocialUser() {
         // Given: A social user with a specific email exists
-        Boolean userExists = underTest.existByEmail("gelacio32@gmail.com");
+        boolean userExists = underTest.existByEmail("gelacio32@gmail.com");
         assertThat(userExists).isTrue();
 
         // When: Trying to find a social user by email
@@ -116,7 +127,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUserToUpdate = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Updating the existing social user's properties
-        assertThat(socialUserToUpdate.isPresent()).isTrue();
+        assertThat(socialUserToUpdate).isPresent();
         underTest.update(
                 socialUserToUpdate.get().getId(),
                 "Updated Full Name",
@@ -126,10 +137,14 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> updatedSocialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // Then: Verifies that the updated social user's properties are as expected
-        assertThat(updatedSocialUser.isPresent()).isTrue();
-        assertThat(updatedSocialUser.get().getFullName()).isEqualTo("Updated Full Name");
-        assertThat(updatedSocialUser.get().getLanguage()).isEqualTo("EN");
-        assertThat(updatedSocialUser.get().getDateBorn()).isEqualTo(LocalDateTime.parse("1999-01-01T00:00:00"));
+        assertThat(updatedSocialUser)
+                .isPresent()
+                .satisfies(actualUser -> {
+                    SocialUser user = actualUser.get();
+                    assertThat(user.getFullName()).isEqualTo("Updated Full Name");
+                    assertThat(user.getLanguage()).isEqualTo("EN");
+                    assertThat(user.getDateBorn()).isEqualTo(LocalDateTime.parse("1999-01-01T00:00:00"));
+                });
     }
 
     /**
@@ -144,12 +159,12 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUserToUpdate = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Updating the existing social user's username
-        assertThat(socialUserToUpdate.isPresent()).isTrue();
+        assertThat(socialUserToUpdate).isPresent();
         underTest.updateSocialUserName(socialUserToUpdate.get().getId(), "newUsername");
         Optional<SocialUser> updatedSocialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // Then: Verifies that the updated social user's username is as expected
-        assertThat(updatedSocialUser.isPresent()).isTrue();
+        assertThat(updatedSocialUser).isPresent();
         assertThat(updatedSocialUser.get().getUserName()).isEqualTo("newUsername");
     }
 
@@ -165,12 +180,12 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUserToUpdate = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Updating the existing social user's email
-        assertThat(socialUserToUpdate.isPresent()).isTrue();
+        assertThat(socialUserToUpdate).isPresent();
         underTest.updateSocialUserEmail(socialUserToUpdate.get().getId(), "newemail@gmail.com");
         Optional<SocialUser> updatedSocialUser = underTest.findById(socialUserToUpdate.get().getId());
 
         // Then: Verifies that the updated social user's email is as expected
-        assertThat(updatedSocialUser.isPresent()).isTrue();
+        assertThat(updatedSocialUser).isPresent();
         assertThat(updatedSocialUser.get().getEmail()).isEqualTo("newemail@gmail.com");
     }
     // endregion
@@ -188,8 +203,8 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> maria = underTest.findByEmail("maria1@gmail.com");
 
         // When: Creating a relationship where Maria follows Gelacio
-        assertThat(gelacio.isPresent()).isTrue();
-        assertThat(maria.isPresent()).isTrue();
+        assertThat(gelacio).isPresent();
+        assertThat(maria).isPresent();
         underTest.createUserBFollowUserA(
                 gelacio.get().getId(),
                 maria.get().getId(),
@@ -216,8 +231,8 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> maria = underTest.findByEmail("maria1@gmail.com");
 
         // Creating a relationship where Maria follows Gelacio
-        assertThat(gelacio.isPresent()).isTrue();
-        assertThat(maria.isPresent()).isTrue();
+        assertThat(gelacio).isPresent();
+        assertThat(maria).isPresent();
         underTest.createUserBFollowUserA(
                 gelacio.get().getId(),
                 maria.get().getId(),
@@ -258,7 +273,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Checking if the vacation mode is deactivated for the user
-        assertThat(socialUser.isPresent()).isTrue();
+        assertThat(socialUser).isPresent();
         Boolean vacationMode = underTest.isVacationModeActivated(socialUser.get().getId());
 
         // Then: Verifies that the vacation mode is deactivated
@@ -275,7 +290,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Activating vacation mode for the user
-        assertThat(socialUser.isPresent()).isTrue();
+        assertThat(socialUser).isPresent();
         underTest.activateVacationMode(socialUser.get().getId());
 
         // Then: Verifies that the vacation mode is activated successfully
@@ -293,7 +308,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Deactivating vacation mode for the user
-        assertThat(socialUser.isPresent()).isTrue();
+        assertThat(socialUser).isPresent();
         underTest.deactivateVacationMode(socialUser.get().getId());
 
         // Then: Verifies that the vacation mode is deactivated successfully
@@ -313,12 +328,12 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Deleting the social user
-        assertThat(socialUser.isPresent()).isTrue();
+        assertThat(socialUser).isPresent();
         underTest.deleteById(socialUser.get().getId());
 
         // Then: Verifies that the social user is successfully deleted
         Optional<SocialUser> deleteSocialUser = underTest.findByEmail("gelacio32@gmail.com");
-        assertThat(deleteSocialUser.isPresent()).isFalse();
+        assertThat(deleteSocialUser).isEmpty();
     }
 
     /**
@@ -331,7 +346,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Checking if the user is activated
-        assertThat(socialUser.isPresent()).isTrue();
+        assertThat(socialUser).isPresent();
         boolean socialUserActivated = underTest.isSocialUserActivated(socialUser.get().getId());
 
         // Then: Verifies that the user is activated
@@ -348,7 +363,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Activating the user
-        assertThat(socialUser.isPresent()).isTrue();
+        assertThat(socialUser).isPresent();
         underTest.activateSocialUser(socialUser.get().getId());
 
         // Then: Verifies that the user is activated successfully
@@ -366,7 +381,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Deactivating the user
-        assertThat(socialUser.isPresent()).isTrue();
+        assertThat(socialUser).isPresent();
         underTest.deactivateSocialUser(socialUser.get().getId());
 
         // Then: Verifies that the user is deactivated successfully
