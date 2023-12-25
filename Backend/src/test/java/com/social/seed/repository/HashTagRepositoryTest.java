@@ -94,13 +94,13 @@ public class HashTagRepositoryTest {
     public void shouldUpdateExistingHashTagSuccessfully() {
         // Given: An existing HashTag with a specific name
         String name = "FirstTagToTest";
-        assertHashTagByNameExists(name, true);
-        HashTag hashTag = underTest.findByName(name).get();
+        Optional<HashTag> hashTag = underTest.findByName(name);
+        assertThat(hashTag).isPresent();
 
         // When: Updating the existing HashTag properties
         String newName = "FirstTagToTestUpdate";
-        underTest.update(hashTag.getId(), newName);
-        Optional<HashTag> updatedHashTagOptional = underTest.findById(hashTag.getId());
+        underTest.update(hashTag.get().getId(), newName);
+        Optional<HashTag> updatedHashTagOptional = underTest.findById(hashTag.get().getId());
 
         // Then: Verifies that the updated HashTag property is as expected
         assertThat(updatedHashTagOptional)
