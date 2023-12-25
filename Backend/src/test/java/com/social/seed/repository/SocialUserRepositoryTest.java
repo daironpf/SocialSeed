@@ -14,15 +14,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Unit tests for the {@link SocialUserRepository} class.
  * These tests cover various functionalities of the repository for managing social users.
- *
+ * <p>
  * The test class is annotated with {@code @DataNeo4jTest}, indicating that it's a Spring Data Neo4j test
  * and will be using a Neo4j test slice context for efficient testing.
- *
+ * <p>
  * Each test method is responsible for testing a specific aspect of the SocialUserRepository,
  * such as checking user existence, finding users, updating user details, managing followers, and handling vacation mode.
- *
+ * <p>
  * Utility methods are provided for setting up test data, cleaning up after tests, and asserting expected conditions.
- *
+ * <p>
  * Regions are defined for different sections of the test class, making it easy to navigate and understand.
  */
 @DataNeo4jTest
@@ -31,7 +31,7 @@ class SocialUserRepositoryTest {
     @Autowired
     private SocialUserRepository underTest;
 
-    // region Setup and Teardown
+    // region Setup and Tear down
     /**
      * This method is executed before each test case to set up the necessary test data.
      * It calls the createTestData method to populate the repository with sample SocialUser data.
@@ -116,6 +116,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUserToUpdate = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Updating the existing social user's properties
+        assertThat(socialUserToUpdate.isPresent()).isTrue();
         underTest.update(
                 socialUserToUpdate.get().getId(),
                 "Updated Full Name",
@@ -143,6 +144,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUserToUpdate = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Updating the existing social user's username
+        assertThat(socialUserToUpdate.isPresent()).isTrue();
         underTest.updateSocialUserName(socialUserToUpdate.get().getId(), "newUsername");
         Optional<SocialUser> updatedSocialUser = underTest.findByEmail("gelacio32@gmail.com");
 
@@ -163,6 +165,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUserToUpdate = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Updating the existing social user's email
+        assertThat(socialUserToUpdate.isPresent()).isTrue();
         underTest.updateSocialUserEmail(socialUserToUpdate.get().getId(), "newemail@gmail.com");
         Optional<SocialUser> updatedSocialUser = underTest.findById(socialUserToUpdate.get().getId());
 
@@ -185,6 +188,8 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> maria = underTest.findByEmail("maria1@gmail.com");
 
         // When: Creating a relationship where Maria follows Gelacio
+        assertThat(gelacio.isPresent()).isTrue();
+        assertThat(maria.isPresent()).isTrue();
         underTest.createUserBFollowUserA(
                 gelacio.get().getId(),
                 maria.get().getId(),
@@ -211,6 +216,8 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> maria = underTest.findByEmail("maria1@gmail.com");
 
         // Creating a relationship where Maria follows Gelacio
+        assertThat(gelacio.isPresent()).isTrue();
+        assertThat(maria.isPresent()).isTrue();
         underTest.createUserBFollowUserA(
                 gelacio.get().getId(),
                 maria.get().getId(),
@@ -251,6 +258,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Checking if the vacation mode is deactivated for the user
+        assertThat(socialUser.isPresent()).isTrue();
         Boolean vacationMode = underTest.isVacationModeActivated(socialUser.get().getId());
 
         // Then: Verifies that the vacation mode is deactivated
@@ -267,6 +275,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Activating vacation mode for the user
+        assertThat(socialUser.isPresent()).isTrue();
         underTest.activateVacationMode(socialUser.get().getId());
 
         // Then: Verifies that the vacation mode is activated successfully
@@ -284,6 +293,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Deactivating vacation mode for the user
+        assertThat(socialUser.isPresent()).isTrue();
         underTest.deactivateVacationMode(socialUser.get().getId());
 
         // Then: Verifies that the vacation mode is deactivated successfully
@@ -303,6 +313,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Deleting the social user
+        assertThat(socialUser.isPresent()).isTrue();
         underTest.deleteById(socialUser.get().getId());
 
         // Then: Verifies that the social user is successfully deleted
@@ -320,6 +331,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Checking if the user is activated
+        assertThat(socialUser.isPresent()).isTrue();
         boolean socialUserActivated = underTest.isSocialUserActivated(socialUser.get().getId());
 
         // Then: Verifies that the user is activated
@@ -336,6 +348,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Activating the user
+        assertThat(socialUser.isPresent()).isTrue();
         underTest.activateSocialUser(socialUser.get().getId());
 
         // Then: Verifies that the user is activated successfully
@@ -353,6 +366,7 @@ class SocialUserRepositoryTest {
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
         // When: Deactivating the user
+        assertThat(socialUser.isPresent()).isTrue();
         underTest.deactivateSocialUser(socialUser.get().getId());
 
         // Then: Verifies that the user is deactivated successfully
