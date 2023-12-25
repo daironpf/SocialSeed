@@ -1,187 +1,267 @@
+/*
+ * Copyright 2011-2023 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.social.seed.repository;
 
 import com.social.seed.model.HashTag;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.neo4j.DataNeo4jTest;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
+/**
+ * Unit tests for the {@link HashTagRepository}, focusing on testing individual methods and functionalities
+ * in isolation for managing {@link HashTag}.
+ * <p>
+ * The tests use the {@code @DataNeo4jTest} annotation to provide an embedded Neo4j environment
+ * for the repository layer.
+ * <p>
+ * @author Dairon Pérez Frías
+ * @since 2023-12-25
+ */
 @DataNeo4jTest
 public class HashTagRepositoryTest {
 
     @Autowired
-    private HashTagRepository hashTagRepository;
+    private HashTagRepository underTest;
 
+    // region Setup and Tear down
     /**
-     * Method to set up initial data for the test.
-     * Initializes the database with three HashTags.
+     * This method is executed before each test case to set up the necessary test data.
+     * It calls the createTestData method to populate the repository with sample HashTag data.
      */
-    @Before
-    public void setUp() {
-        hashTagRepository.deleteAll();
-        HashTag hashTag1 = new HashTag("1", "FristTagToTest", 4, 10);
-        HashTag hashTag2 = new HashTag("2", "SecondTagToTest", 5, 11);
-        HashTag hashTag3 = new HashTag("3", "ThirdTagToTest", 6, 12);
-        hashTagRepository.save(hashTag1);
-        hashTagRepository.save(hashTag2);
-        hashTagRepository.save(hashTag3);
+    @BeforeEach
+    void setUp() {
+        cleanAllData();
+        createTestData();
     }
 
     /**
-     * Method to clean up data after the test.
-     * Deletes all HashTags from the database.
+     * This method is executed after each test case to clean up any data created during testing.
+     * It calls the cleanAllData method to delete all HashTag from the repository.
      */
-    @After
+    @AfterEach
     public void tearDown() {
-        hashTagRepository.deleteAll();
+        cleanAllData();
     }
+    // endregion
 
+    // region Existence Checks
     /**
-     * Verifies that the 'existByName' method returns true for an existing HashTag.
+     * Tests whether the HashTagRepository correctly determines the existence of a HashTag by name.
+     * It asserts that the repository returns true when the HashTag with the specified name exists,
+     * and false when the HashTag with the specified name does not exist.
      */
     @Test
-    public void existsByNameShouldReturnTrueForExistingHashTag() {
-        // When
-        Boolean exists = hashTagRepository.existByName("FristTagToTest");
+    public void shouldCheckWhenHashTagByNameExists() {
+        // Verifies if a HashTag with a given name exists
+        assertHashTagByNameExists("FirstTagToTest", true);
 
-        // Then
-        assertTrue(exists);
+        // Verifies if a HashTag with a non-existing name returns false
+        assertHashTagByNameExists("Pepe", false);
     }
+    // endregion
 
-    /**
-     * Verifies that the 'existByName' method returns false for a non-existing HashTag.
-     */
-    @Test
-    public void existsByNameShouldReturnFalseForNonExistingHashTag() {
-        // When
-        Boolean exists = hashTagRepository.existByName("Pepe");
-
-        // Then
-        assertFalse(exists);
-    }
-
+    // region Update Operations
     /**
      * Verifies that updating an existing HashTag is successful.
+     * It ensures that the HashTagRepository correctly updates the properties of an existing HashTag,
+     * including the name, and asserts that the updated HashTag's name matches the expected value after the update operation.
      */
     @Test
-    public void updateExistingHashTagShouldSucceed() {
-        // Given
-        HashTag hashTag = hashTagRepository.findByName("FristTagToTest").get();
+    public void shouldUpdateExistingHashTagSuccessfully() {
+        // Given: An existing HashTag with a specific name
+        String name = "FirstTagToTest";
+        assertHashTagByNameExists(name, true);
+        HashTag hashTag = underTest.findByName(name).get();
 
+        // When: Updating the existing HashTag properties
+        String newName = "FirstTagToTestUpdate";
+        underTest.update(hashTag.getId(), newName);
+        Optional<HashTag> updatedHashTagOptional = underTest.findById(hashTag.getId());
+
+        // Then: Verifies that the updated HashTag property is as expected
+        assertThat(updatedHashTagOptional)
+                .isPresent()
+                .map(HashTag::getName)
+                .contains(newName);
+
+    }
+    // endregion
+
+    // region Find by Name
+    /**
+     * Verifies that retrieving a HashTag by name is successful for a valid name.
+     * It checks if the HashTagRepository correctly finds a HashTag by name,
+     * asserts that the HashTag is present, and verifies that its name matches the expected value.
+     */
+    @Test
+    public void shouldRetrieveHashTagByNameSuccessfullyForValidName() {
         // When
-        hashTagRepository.update(hashTag.getId(), "FristTagToTestUpdate");
-        Optional<HashTag> updatedHashTagOptional = hashTagRepository.findById(hashTag.getId());
+        Optional<HashTag> foundHashTagOptional = underTest.findByName("SecondTagToTest");
 
         // Then
-        assertTrue(updatedHashTagOptional.isPresent());
-        assertEquals("FristTagToTestUpdate", updatedHashTagOptional.get().getName());
+        assertThat(foundHashTagOptional)
+                .isPresent()
+                .hasValueSatisfying(hashTag -> assertThat(hashTag.getName()).isEqualTo("SecondTagToTest"));
     }
 
     /**
-     * Verifies that retrieving a HashTag by a valid name is successful.
+     * Verifies that retrieving a HashTag by name returns null for an invalid name.
+     * It checks if the HashTagRepository correctly handles the case when a HashTag with the specified name does not exist,
+     * asserts that the HashTag is not present.
      */
     @Test
-    public void getHashTagByNameShouldSucceedForValidName() {
+    public void shouldRetrieveNullForInvalidHashTagByName() {
         // When
-        Optional<HashTag> foundHashTagOptional = hashTagRepository.findByName("SecondTagToTest");
+        Optional<HashTag> foundHashTagOptional = underTest.findByName("NonExistentHashTag");
 
         // Then
-        assertTrue(foundHashTagOptional.isPresent());
-        assertEquals("SecondTagToTest", foundHashTagOptional.get().getName());
+        assertThat(foundHashTagOptional).isNotPresent();
     }
+    // endregion
 
+    // region create
     /**
-     * Verifies that retrieving a HashTag by an invalid name returns null.
+     * Tests the repository's ability to successfully create and save a new HashTag.
+     * It ensures that the repository correctly saves the HashTag and retrieves it by ID,
+     * asserting that the saved HashTag's name matches the expected value.
      */
     @Test
-    public void getHashTagByNameShouldReturnNullForInvalidName() {
-        // When
-        Optional<HashTag> foundHashTagOptional = hashTagRepository.findByName("NonExistentHashTag");
-
-        // Then
-        assertFalse(foundHashTagOptional.isPresent());
-    }
-
-    /**
-     * Verifies that creating a new HashTag is successful.
-     */
-    @Test
-    public void createHashTagShouldSucceed() {
-        // Given
+    public void shouldSucceedWhenCreatingHashTag() {
+        // Given: A new HashTag with a specific name
         HashTag newHashTag = new HashTag();
         newHashTag.setName("NewHashTag");
 
-        // When
-        hashTagRepository.save(newHashTag);
-        Optional<HashTag> savedHashTagOptional = hashTagRepository.findById(newHashTag.getId());
+        // When: Saving the new HashTag
+        underTest.save(newHashTag);
+        Optional<HashTag> savedHashTagOptional = underTest.findById(newHashTag.getId());
 
-        // Then
-        assertTrue(savedHashTagOptional.isPresent());
-        assertEquals("NewHashTag", savedHashTagOptional.get().getName());
+        // Then: Verifies that the saved HashTag's name is as expected
+        assertThat(savedHashTagOptional)
+                .isPresent()
+                .map(HashTag::getName)
+                .contains("NewHashTag");
     }
+    // endregion
 
+    // region delete
     /**
-     * Verifies that attempting to create a HashTag with a duplicate name fails.
+     * Tests the repository's ability to successfully delete a HashTag.
+     * It retrieves a HashTag by name, deletes it by ID, and verifies that the HashTag is no longer present in the repository.
      */
     @Test
-    public void createHashTagShouldFailForDuplicateName() {
-        // Given
-        HashTag newHashTag = new HashTag();
-        newHashTag.setName("NewHashTag");
+    public void shouldSucceedWhenDeletingHashTag() {
+        // Given: An existing HashTag with a specific name
+        Optional<HashTag> hashTagToDelete = underTest.findByName("ThirdTagToTest");
+        assertThat(hashTagToDelete).isPresent();
 
-        // When
-        Boolean exists = hashTagRepository.existByName(newHashTag.getName());
+        // When: Deleting the existing HashTag
+        underTest.deleteById(hashTagToDelete.get().getId());
+        Optional<HashTag> deletedHashTagOptional = underTest.findById(hashTagToDelete.get().getId());
 
-        // Then
-        assertFalse(exists);
+        // Then: Verifies that the HashTag is no longer present in the repository
+        assertThat(deletedHashTagOptional).isEmpty();
     }
+    // endregion
 
+    // region List All
     /**
-     * Verifies that deleting a HashTag is successful.
+     * Tests the repository's ability to list all existing HashTags.
+     * It retrieves all HashTags using pagination, verifies the total count, and checks if the expected HashTag names are present.
      */
     @Test
-    public void deleteHashTagShouldSucceed() {
-        // Given
-        HashTag hashTagToDelete = hashTagRepository.findByName("ThirdTagToTest").get();
-
-        // When
-        hashTagRepository.deleteById(hashTagToDelete.getId());
-        Optional<HashTag> deletedHashTagOptional = hashTagRepository.findById(hashTagToDelete.getId());
-
-        // Then
-        assertFalse(deletedHashTagOptional.isPresent());
-    }
-
-    /**
-     * Verifies that listing all existing HashTags returns the expected results.
-     */
-    @Test
-    public void shouldListAllExistingHashTags() {
-        // Given
+    void shouldListAllExistingHashTags() {
+        // Given: Page request for the first page with 10 items
         PageRequest pageRequest = PageRequest.of(0, 10);
-        Page<HashTag> hashTagPage = hashTagRepository.findAll(pageRequest);
 
-        // When
+        // When: Retrieving all HashTags using pagination
+        Page<HashTag> hashTagPage = underTest.findAll(pageRequest);
         List<HashTag> testHashTags = hashTagPage.getContent();
 
-        // Then
-        assertEquals(3, testHashTags.size());
+        // Then: Verifies the total count and checks if the expected HashTag names are present
+        assertThat(hashTagPage.getTotalElements()).isEqualTo(3);
 
-        // Verify names without considering the position
-        Set<String> expectedNames = new HashSet<>(Arrays.asList("FristTagToTest", "SecondTagToTest", "ThirdTagToTest"));
+        Set<String> expectedNames = Set.of("FirstTagToTest", "SecondTagToTest", "ThirdTagToTest");
+        Set<String> actualNames = testHashTags.stream().map(HashTag::getName).collect(Collectors.toSet());
 
-        for (HashTag hashTag : testHashTags) {
-            assertTrue(expectedNames.contains(hashTag.getName()));
-        }
+        assertThat(actualNames).isEqualTo(expectedNames);
     }
+    //endregion
+
+    // region Utility Methods
+    /**
+     * Asserts whether a HashTag with the given name exists as expected.
+     *
+     * @param name    The name of the HashTag to check for existence.
+     * @param expected The expected result (true if the HashTag exists, false otherwise).
+     */
+    private void assertHashTagByNameExists(String name, boolean expected) {
+        assertThat(underTest.existByName(name)).isEqualTo(expected);
+    }
+
+    /**
+     * Creates test data by saving three HashTag into the repository.
+     * User #1: FirstTagToTest
+     * User #2: SecondTagToTest
+     * User #3: ThirdTagToTest
+     */
+    private void createTestData() {
+        // hashTag #1
+        underTest.save(createHashTag("1", "FirstTagToTest", 4, 10));
+
+        // hashTag #2
+        underTest.save(createHashTag("2", "SecondTagToTest", 5, 11));
+
+        // hashTag #3
+        underTest.save(createHashTag("3", "ThirdTagToTest", 6, 12));
+    }
+
+    /**
+     * Creates a new HashTag instance with the given properties.
+     *
+     * @param id                    The unique identifier of the hashtag.
+     * @param name                  The name of the hashtag.
+     * @param socialUserInterestIn The count of social users interested in this hashtag.
+     * @param postTaggedIn          The count of posts tagged with this hashtag.
+     * @return A new HashTag instance with the specified properties.
+     */
+    private HashTag createHashTag(String id, String name, int socialUserInterestIn, int postTaggedIn) {
+        return HashTag.builder()
+                .id(id)
+                .name(name)
+                .socialUserInterestIn(socialUserInterestIn)
+                .postTaggedIn(postTaggedIn)
+                .build();
+    }
+
+    /**
+     * Cleans all data by deleting all social users from the repository.
+     */
+    private void cleanAllData() {
+        underTest.deleteAll();
+    }
+    // endregion
 }
