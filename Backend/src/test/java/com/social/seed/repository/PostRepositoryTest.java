@@ -94,14 +94,17 @@ public class PostRepositoryTest {
 
         // Then: Verifies that the Post is present and its content matches the expected content
         assertThat(post)
+                .as("The retrieved Post should be present and have matching content")
                 .isPresent()
                 .map(Post::getContent)
                 .isEqualTo(Optional.of(post1.getContent()));
     }
-
-
     // endregion
 
+    /**
+     * Tests the method to list all existing posts, ensuring that the correct number of posts is retrieved and that
+     * each post has the expected content.
+     */
     @Test
     public void shouldListAllExistingPost() {
         // Given
@@ -112,7 +115,9 @@ public class PostRepositoryTest {
         List<Post> testPosts = posts.getContent();
 
         // Then
-        assertThat(testPosts.size()).isEqualTo(3);
+        assertThat(testPosts)
+                .as("The number of retrieved posts should match the expected count")
+                .hasSize(3);
 
         // Verify names without considering the position
         Set<String> expectedContent = new HashSet<>(Arrays.asList(
@@ -122,228 +127,338 @@ public class PostRepositoryTest {
         );
 
         for (Post post : testPosts) {
-            assertThat(expectedContent.contains(post.getContent())).isTrue();
+            assertThat(expectedContent.contains(post.getContent()))
+                    .as("Each retrieved post should have expected content")
+                    .isTrue();
         }
     }
-//
-//    @Test
-//    public void updateExistingPostShouldSucceed() {
-//        // Given
-//        Post postToUpdate = underTest.findById(post1.getId()).get();
-//
-//        // When
-//        underTest.update(
-//                postToUpdate.getId(),
-//                "Estoy Testeando este post",
-//                LocalDateTime.parse("1909-01-01T00:00:00"),
-//                "/nueva/url/img.jpg"
-//        );
-//        Optional<Post> postUpdated = underTest.findById(post1.getId());
-//
-//        // Then
-//        assertTrue(postUpdated.isPresent());
-//        assertNotEquals(post1.getContent(), postUpdated.get().getContent());
-//        assertEquals("Estoy Testeando este post",postUpdated.get().getContent());
-//
-//        assertNotEquals(post1.getUpdateDate(), postUpdated.get().getUpdateDate());
-//        assertEquals(LocalDateTime.parse("1909-01-01T00:00:00"), postUpdated.get().getUpdateDate());
-//
-//        assertNotEquals(post1.getImageUrl(), postUpdated.get().getImageUrl());
-//        assertEquals("/nueva/url/img.jpg", postUpdated.get().getImageUrl());
-//    }
-//
-//    @Test
-//    public void createNewPostShouldSucceed() {
-//        // When
-//        Post newPost = underTest.save(
-//                Post.builder()
-//                        .content("My create post is #NewPost to the #Eternity")
-//                        .updateDate(LocalDateTime.now())
-//                        .imageUrl("images/myloved.jpg")
-//                        .isActive(true)
-//                        .likedCount(0)
-//                        .build()
-//        );
-//        saveHashtagsInPost(newPost, user1);
-//
-//        Optional<Post> savedPost = underTest.findById(newPost.getId());
-//
-//        // Then
-//        assertTrue(savedPost.isPresent());
-//        assertEquals("My create post is #NewPost to the #Eternity", savedPost.get().getContent());
-//        assertEquals(user1.getId(), savedPost.get().getAuthor().getAuthor().getId());
-//
-//        // Verify names without considering the position
-//        Set<String> expectedHashTag = new HashSet<>(Arrays.asList(
-//                "NewPost",
-//                "Eternity"
-//                )
-//        );
-//
-//        List<HashTag> hashTags = savedPost.get().getHashTags();
-//
-//        for (HashTag tag: hashTags) {
-//            assertTrue(expectedHashTag.contains(tag.getName()));
-//            assertEquals(1, tag.getPostTaggedIn());
-//        }
-//
-//    }
-//
-//    //region LIKE
-//    @Test
-//    public void existsLikedBetweenSocialUserAndPostShouldReturnTrue() {
-//        // Given
-//        underTest.createUserByIdLikedPostById(
-//                user1.getId(),
-//                post2.getId(),
-//                LocalDateTime.now()
-//        );
-//
-//        // When
-//        boolean existLiked = underTest.isUserByIdLikedPostById(
-//                user1.getId(), post2.getId()
-//        );
-//
-//        // Then
-//        assertTrue(existLiked);
-//    }
-//
-//    @Test
-//    public void doNotExistsLikedBetweenSocialUserAndPostShouldReturnFalse() {
-//        // When
-//        boolean existLiked = underTest.isUserByIdLikedPostById(
-//                user1.getId(), post3.getId()
-//        );
-//
-//        // Then
-//        assertFalse(existLiked);
-//    }
-//
-//    @Test
-//    public void createLikedBetweenSocialUserAndPostShouldSuccessful() {
-//        // Given
-//        underTest.createUserByIdLikedPostById(
-//                user1.getId(),
-//                post1.getId(),
-//                LocalDateTime.now()
-//        );
-//
-//        // When
-//        boolean existLiked = underTest.isUserByIdLikedPostById(
-//                user1.getId(), post1.getId()
-//        );
-//
-//        // Then
-//        Post resultPost = underTest.findById(post1.getId()).get();
-//        assertEquals(1,resultPost.getLikedCount());
-//        assertTrue(existLiked);
-//    }
-//
-//    @Test
-//    public void deleteLikedBetweenSocialUserAndPostShouldSuccessful() {
-//        // Given
-//        underTest.createUserByIdLikedPostById(
-//                user1.getId(),
-//                post1.getId(),
-//                LocalDateTime.now()
-//        );
-//        boolean existLiked = underTest.isUserByIdLikedPostById(
-//                user1.getId(), post1.getId()
-//        );
-//        assertTrue(existLiked);
-//
-//        // When
-//        underTest.deleteUserByIdLikedPostById(
-//                user1.getId(), post1.getId()
-//        );
-//
-//        // Then
-//        existLiked = underTest.isUserByIdLikedPostById(
-//                user1.getId(), post1.getId()
-//        );
-//        assertFalse(existLiked);
-//    }
-//    //endregion
-//
-//    @Test
-//    public void isUserAuthorOfThePostByIdShouldReturnTrue() {
-//        // Given
-//        Post newPost = underTest.save(
-//                Post.builder()
-//                        .content("I feel #Happy Today because of you :)")
-//                        .updateDate(LocalDateTime.now())
-//                        .imageUrl("images/imge.jpg")
-//                        .isActive(true)
-//                        .likedCount(0)
-//                        .build()
-//        );
-//        saveHashtagsInPost(newPost, user1);
-//
-//        // When
-//        boolean isAuthor = underTest.isUserAuthorOfThePostById(user1.getId(), newPost.getId());
-//
-//        // Then
-//        assertTrue(isAuthor);
-//    }
-//
-//    @Test
-//    public void createRelationshipTaggedWithHashTagShouldSuccessful() {
-//        // Given
-//        Post newPost = underTest.save(
-//                Post.builder()
-//                        .content("I feel #Happy Today because of you :)")
-//                        .updateDate(LocalDateTime.now())
-//                        .imageUrl("images/imge.jpg")
-//                        .isActive(true)
-//                        .likedCount(0)
-//                        .build()
-//        );
-//        // revisar que cuando no existe # en el texto da un error contando como que se creó un hashtag
-//        saveHashtagsInPost(newPost, user1);
-//        Post resultPost = underTest.findById(newPost.getId()).get();
-//        assertEquals(1,resultPost.getHashTags().size());
-//
-//        HashTag newHashTag = new HashTag("uno", "Today", 6, 12);
-//        hashTagRepository.save(newHashTag);
-//
-//        // When
-//        underTest.createRelationshipTaggedWithHashTag(
-//                newPost.getId(),
-//                newHashTag.getId()
-//        );
-//
-//        // Then
-//        resultPost = underTest.findById(newPost.getId()).get();
-//        assertEquals(2,resultPost.getHashTags().size());
-//        //assertTrue(existLiked);
-//    }
-//
-//    @Test
-//    public void deleteAllRelationshipTaggedWithHashTagShouldSuccessful() {
-//        // Given
-//        Post newPost = underTest.save(
-//                Post.builder()
-//                        .content("I feel #Happy Today #because of you :)")
-//                        .updateDate(LocalDateTime.now())
-//                        .imageUrl("images/imge.jpg")
-//                        .isActive(true)
-//                        .likedCount(0)
-//                        .build()
-//        );
-//        // revisar que cuando no existe # en el texto da un error contando como que se creó un hashtag
-//        saveHashtagsInPost(newPost, user1);
-//        Post resultPost = underTest.findById(newPost.getId()).get();
-//        assertEquals(2,resultPost.getHashTags().size());
-//
-//        // When
-//        underTest.deleteAllRelationshipTaggedWithHashTag(newPost.getId());
-//
-//        // Then
-//        resultPost = underTest.findById(newPost.getId()).get();
-//        assertEquals(0,resultPost.getHashTags().size());
-//    }
+
+    /**
+     * Tests the method to update an existing post, ensuring that the post is successfully updated with the new content,
+     * update date, and image URL.
+     */
+    @Test
+    public void updateExistingPostShouldSucceed() {
+        // Given
+        Post postToUpdate = underTest.findById(post1.getId()).get();
+
+        // When
+        underTest.update(
+                postToUpdate.getId(),
+                "Here testing the content, new content :)",
+                LocalDateTime.parse("1909-01-01T00:00:00"),
+                "/nueva/url/img.jpg"
+        );
+        Optional<Post> postUpdated = underTest.findById(post1.getId());
+
+        // Then
+        assertThat(postUpdated)
+                .as("The updated Post should be present")
+                .isPresent();
+        assertThat(postUpdated.get().getContent())
+                .as("The content of the updated Post should not be equal to the original content")
+                .usingComparator(String::compareToIgnoreCase)
+                .isNotEqualTo(post1.getContent());
+        assertThat(postUpdated.get().getUpdateDate())
+                .as("The update date of the Post should match the expected update date")
+                .isEqualTo(LocalDateTime.parse("1909-01-01T00:00:00"));
+        assertThat(postUpdated.get().getImageUrl())
+                .as("The image URL of the Post should not be equal to the original image URL")
+                .usingComparator(String::compareToIgnoreCase)
+                .isNotEqualTo(post1.getImageUrl());
+    }
+
+    /**
+     * Tests the method to create a new post, ensuring that the post is saved successfully with the correct content,
+     * author, and hashtags.
+     */
+    @Test
+    public void createNewPostShouldSucceed() {
+        // When: Creating a new post
+        Post newPost = underTest.save(
+                Post.builder()
+                        .content("My create post is #NewPost to the #Eternity")
+                        .updateDate(LocalDateTime.now())
+                        .imageUrl("images/myloved.jpg")
+                        .isActive(true)
+                        .likedCount(0)
+                        .build()
+        );
+
+        // Saving hashtags associated with the new post
+        saveHashtagsInPost(newPost, user1);
+
+        // Retrieving the saved post from the database
+        Optional<Post> savedPost = underTest.findById(newPost.getId());
+
+        // Then: Verifying the results
+
+        // Ensure that the post is present in the database
+        assertThat(savedPost)
+                .as("The saved Post should be present in the database")
+                .isPresent();
+
+        // Verify that the content of the saved post matches the expected content
+        assertThat(savedPost.get().getContent())
+                .usingComparator(String::compareToIgnoreCase)
+                .withFailMessage("Contents should be equal")
+                .isEqualTo("My create post is #NewPost to the #Eternity");
+
+        // Verify that the author's ID of the saved post matches user1's ID
+        assertThat(savedPost.get().getAuthor().getAuthor().getId())
+                .withFailMessage("The post author's ID should be equal to user1's ID")
+                .isEqualTo(user1.getId());
+
+        // Verify hashtags without considering the position
+
+        // Define expected hashtags
+        Set<String> expectedHashTags = new HashSet<>(Arrays.asList(
+                "NewPost",
+                "Eternity"
+        ));
+
+        // Retrieve actual hashtags from the saved post
+        List<HashTag> actualHashTags = savedPost.get().getHashTags();
+
+        // Verify that the actual hashtags match the expected hashtags
+        assertThat(actualHashTags)
+                .as("Verify that the actual hashtags match the expected hashtags")
+                .extracting(HashTag::getName)
+                .containsExactlyInAnyOrderElementsOf(expectedHashTags);
+
+        // Verify that each hashtag is tagged in only one post
+        assertThat(actualHashTags)
+                .as("Verify that each hashtag is tagged in only one post")
+                .extracting(HashTag::getPostTaggedIn)
+                .containsOnly(1);
+    }
+
+    //region LIKE
+    /**
+     * Tests the method to check if a liked relationship exists between a social user and a post,
+     * ensuring the correct result when the relationship exists.
+     * It creates a liked relationship between user1 and post2,
+     * checks if user1 has liked post2, and verifies that the result is true,
+     * indicating that user1 has liked post2.
+     */
+    @Test
+    public void existsLikedBetweenSocialUserAndPostShouldReturnTrue() {
+        // Given: Creating a liked relationship between user1 and post2
+        underTest.createUserByIdLikedPostById(
+                user1.getId(),
+                post2.getId(),
+                LocalDateTime.now()
+        );
+
+        // When: Checking if user1 has liked post2
+        boolean expected = underTest.isUserByIdLikedPostById(
+                user1.getId(), post2.getId()
+        );
+
+        // Then: Verifying the result
+        // Ensure that the result is true, indicating that user1 has liked post2
+        assertThat(expected)
+                .as("Ensure that the result is true, indicating that user1 has liked post2")
+                .isTrue();
+    }
+
+    /**
+     * Tests the method to check if a liked relationship exists between a social user and a post,
+     * ensuring the correct result when the relationship does not exist.
+     * It checks if user1 has liked post3, and verifies that the result is false,
+     * indicating that user1 has not liked post3.
+     */
+    @Test
+    public void doNotExistsLikedBetweenSocialUserAndPostShouldReturnFalse() {
+        // When: Checking if user1 has liked post3
+        boolean actualResult = underTest.isUserByIdLikedPostById(
+                user1.getId(), post3.getId()
+        );
+
+        // Then: Verifying the result
+
+        // Ensure that the result is false, indicating that user1 has not liked post3
+        assertThat(actualResult)
+                .as("Ensure that the result is false, indicating that user1 has not liked post3")
+                .isFalse();
+    }
+
+    /**
+     * Tests the method to create a liked relationship between a social user and a post, ensuring success.
+     * It creates a liked relationship between user1 and post1, checks if user1 has liked post1,
+     * retrieves the updated post from the database, and verifies that the liked count is now 1
+     * and user1 has successfully liked post1.
+     */
+    @Test
+    public void createLikedBetweenSocialUserAndPostShouldSuccessful() {
+        // Given: Creating a liked relationship between user1 and post1
+        underTest.createUserByIdLikedPostById(
+                user1.getId(),
+                post1.getId(),
+                LocalDateTime.now()
+        );
+
+        // When: Checking if user1 has liked post1
+        boolean existLiked = underTest.isUserByIdLikedPostById(
+                user1.getId(), post1.getId()
+        );
+
+        // Then: Verifying the results
+
+        // Retrieve the updated post from the database
+        Post resultPost = underTest.findById(post1.getId()).orElseThrow();
+
+        // Verify that the liked count of post1 is now 1
+        assertThat(resultPost.getLikedCount())
+                .as("Verify that the liked count of post1 is now 1")
+                .isEqualTo(1);
+
+        // Verify that user1 has successfully liked post1
+        assertThat(existLiked)
+                .as("Verify that user1 has successfully liked post1")
+                .isTrue();
+    }
+
+    /**
+     * Tests the method to delete a liked relationship between a social user and a post, ensuring success.
+     * It creates a liked relationship between user1 and post1, checks if the relationship exists before deletion,
+     * deletes the liked relationship, and verifies the results after deletion.
+     */
+    @Test
+    public void deleteLikedBetweenSocialUserAndPostShouldSuccessful() {
+        // Given: Creating a liked relationship between user1 and post1
+        underTest.createUserByIdLikedPostById(
+                user1.getId(),
+                post1.getId(),
+                LocalDateTime.now()
+        );
+
+        // Check if the liked relationship exists before deletion
+        boolean existLikedBeforeDeletion = underTest.isUserByIdLikedPostById(
+                user1.getId(), post1.getId()
+        );
+        assertThat(existLikedBeforeDeletion)
+                .as("Check if the liked relationship exists before deletion")
+                .isTrue();
+
+        // When: Deleting the liked relationship between user1 and post1
+        underTest.deleteUserByIdLikedPostById(
+                user1.getId(), post1.getId()
+        );
+
+        // Then: Verifying the results after deletion
+
+        // Check if the liked relationship no longer exists after deletion
+        boolean existLikedAfterDeletion = underTest.isUserByIdLikedPostById(
+                user1.getId(), post1.getId()
+        );
+        assertThat(existLikedAfterDeletion)
+                .as("Check if the liked relationship no longer exists after deletion")
+                .isFalse();
+    }
+    //endregion
+
+    /**
+     * Tests the method to check if a user is the author of a post by ID.
+     * It creates a new post authored by user1, saves hashtags associated with the new post,
+     * checks if user1 is the author of the new post, and verifies the result.
+     */
+    @Test
+    public void isUserAuthorOfThePostByIdShouldReturnTrue() {
+        // Given: Creating a new post authored by user1
+        Post newPost = underTest.save(
+                Post.builder()
+                        .content("I feel #Happy Today because of you :)")
+                        .updateDate(LocalDateTime.now())
+                        .imageUrl("images/imge.jpg")
+                        .isActive(true)
+                        .likedCount(0)
+                        .build()
+        );
+        // Save hashtags associated with the new post
+        saveHashtagsInPost(newPost, user1);
+
+        // When: Checking if user1 is the author of the new post
+        boolean isAuthor = underTest.isUserAuthorOfThePostById(user1.getId(), newPost.getId());
+
+        // Then: Verifying the result
+
+        // Ensure that user1 is the author of the new post
+        assertThat(isAuthor)
+                .as("Expected user1 to be the author of the post")
+                .isTrue();
+    }
+
+    /**
+     * Tests the successful creation of a relationship between a post and a hashtag.
+     * It creates a new post by user1, ensures that the post has no hashtags initially,
+     * creates and saves a new hashtag, creates a relationship between the post and the hashtag,
+     * and verifies that the post now has two hashtags with the expected names.
+     */
+    @Test
+    public void createRelationshipTaggedWithHashTagShouldBeSuccessful() {
+        // Given: Create a new post by user1
+        Post newPost = createTestPost("I feel #Happy Today because of you :)", "aqui/img.png");
+
+        // Ensure that the post has no hashtags initially
+        assertThat(newPost.getHashTags())
+                .as("Ensure that the post has no hashtags initially")
+                .hasSize(1);
+
+        // Create and save a new hashtag
+        HashTag newHashTag = new HashTag("uno", "Today", 6, 12);
+        hashTagRepository.save(newHashTag);
+
+        // When: Creating a relationship between the post and the hashtag
+        underTest.createRelationshipTaggedWithHashTag(newPost.getId(), newHashTag.getId());
+
+        // Then: Verify the results
+
+        // Retrieve the updated post from the database
+        Optional<Post> updatedPost = underTest.findById(newPost.getId());
+        assertThat(updatedPost)
+                .as("Retrieve the updated post from the database")
+                .isPresent();
+
+        // Verify that the post now has two hashtags
+        assertThat(updatedPost.get().getHashTags())
+                .as("Verify that the post now has two hashtags")
+                .hasSize(2);
+
+        assertThat(updatedPost.get().getHashTags())
+                .as("Verify that the post's hashtags are as expected")
+                .extracting(HashTag::getName)
+                .containsExactlyInAnyOrder("Happy", "Today");
+    }
+
+    /**
+     * Tests the successful deletion of all relationships between a post and hashtags.
+     * It ensures that the post initially has one or more hashtags, deletes all relationships,
+     * and verifies that the post no longer has any hashtags after deletion.
+     */
+    @Test
+    public void deleteAllRelationshipTaggedWithHashTagShouldBeSuccessful() {
+        // Given: Ensure that post1 initially has one or more hashtags
+        assertThat(post1.getHashTags())
+                .as("Ensure that post1 initially has one or more hashtags")
+                .isNotEmpty(); // Use isNotEmpty for clarity
+
+        // When: Deleting all relationships with hashtags for post1
+        underTest.deleteAllRelationshipTaggedWithHashTag(post1.getId());
+
+        // Then: Verify that post1 no longer has any hashtags
+        Post updatedPost = underTest.findById(post1.getId()).orElseThrow();
+        assertThat(updatedPost.getHashTags())
+                .as("Verify that post1 no longer has any hashtags")
+                .isEmpty();
+    }
 
     //region utils
+    /**
+     * Saves hashtags associated with a post and creates a "posted by" relationship.
+     * @param _post The post to save hashtags for.
+     * @param _user The user who posted the post.
+     */
     private void saveHashtagsInPost(Post _post, SocialUser _user){
         // Extract the hashtags from the content of the post
         String[] hashtags = extractHashtags(_post.getContent());
@@ -359,6 +474,11 @@ public class PostRepositoryTest {
         );
     }
 
+    /**
+     * Extracts hashtags from the content of a post using a regular expression.
+     * @param postContent The content of the post.
+     * @return An array of hashtags extracted from the content.
+     */
     public static String[] extractHashtags(String postContent) {
         Pattern pattern = Pattern.compile("#\\w+");
         Matcher matcher = pattern.matcher(postContent);
@@ -376,6 +496,13 @@ public class PostRepositoryTest {
         return hashtagsString.split(" ");
     }
 
+    /**
+     * Saves relationships between a post and the hashtags extracted from its content.
+     * If a hashtag doesn't exist, it is created before establishing the relationship.
+     *
+     * @param idPost   The ID of the post to establish relationships with hashtags.
+     * @param hashtags An array of hashtags extracted from the content of the post.
+     */
     private void saveAllTheHashtagsRelationshipWithPost(String idPost, String[] hashtags) {
         for (String hashtagText : hashtags) {
             // Delete the "#" symbol from the text
@@ -401,13 +528,19 @@ public class PostRepositoryTest {
         }
     }
 
+    /**
+     * Deletes all data from the Post repository, cleaning up the test environment.
+     */
     private void cleanAllData() {
         underTest.deleteAll();
     }
 
+    /**
+     * Creates and saves test data for users and posts to be used in unit tests.
+     * It creates a test user (user1) and three test posts (post1, post2, post3).
+     */
     private void createTestData() {
-        // Adding test data
-        // User
+        // Creating and saving a test user
         this.user1 = socialUserRepository.save(
                 SocialUser.builder()
                         .userName("maria1")
@@ -425,13 +558,23 @@ public class PostRepositoryTest {
                         .friendRequestCount(0)
                         .build()
         );
-        // Posts
+
+        // Creating and saving three test posts
         this.post1 = createTestPost("Today I am very #Happy to share with all of you my #FirstPost","images/miprimer.jpg");
         this.post2 = createTestPost("My #FirstPost is a Huge change in my #live","images/miotro.jpg");
-        this.post3 = createTestPost("My #Post is the onlyOne i #loved","images/myloved.jpg");
+        this.post3 = createTestPost("My #Post is the onlyOne I #loved","images/myloved.jpg");
     }
 
+    /**
+     * Creates and saves a test Post with the specified content and image URL.
+     * The method also associates hashtags with the created post.
+     *
+     * @param content   The content of the post.
+     * @param imageUrl  The URL of the image attached to the post.
+     * @return The created Post object with associated hashtags.
+     */
     private Post createTestPost(String content, String imageUrl) {
+        // Create a new Post and save it
         Post post = underTest.save(
                 Post.builder()
                         .content(content)
@@ -441,8 +584,11 @@ public class PostRepositoryTest {
                         .likedCount(0)
                         .build()
         );
+
+        // Save hashtags associated with the new post
         saveHashtagsInPost(post, user1);
 
+        // Return the saved Post object
         return underTest.findById(post.getId()).get();
     }
     //endregion
