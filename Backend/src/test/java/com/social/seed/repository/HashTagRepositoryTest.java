@@ -222,9 +222,9 @@ public class HashTagRepositoryTest {
 
     /**
      * Creates test data by saving three HashTag into the repository.
-     * User #1: FirstTagToTest
-     * User #2: SecondTagToTest
-     * User #3: ThirdTagToTest
+     * HashTag #1: FirstTagToTest
+     * HashTag #2: SecondTagToTest
+     * HashTag #3: ThirdTagToTest
      */
     private void createTestData() {
         // hashTag #1
@@ -256,7 +256,7 @@ public class HashTagRepositoryTest {
     }
 
     /**
-     * Cleans all data by deleting all social users from the repository.
+     * Deletes all data from the Repository, cleaning up the test environment.
      */
     private void cleanAllData() {
         underTest.deleteAll();

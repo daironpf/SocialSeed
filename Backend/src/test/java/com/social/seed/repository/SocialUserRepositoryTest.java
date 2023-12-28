@@ -472,7 +472,7 @@ class SocialUserRepositoryTest {
     }
 
     /**
-     * Cleans all data by deleting all social users from the repository.
+     * Deletes all data from the Repository, cleaning up the test environment.
      */
     private void cleanAllData() {
         underTest.deleteAll();

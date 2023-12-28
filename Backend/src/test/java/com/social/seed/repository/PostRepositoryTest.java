@@ -529,7 +529,7 @@ public class PostRepositoryTest {
     }
 
     /**
-     * Deletes all data from the Post repository, cleaning up the test environment.
+     * Deletes all data from the Repository, cleaning up the test environment.
      */
     private void cleanAllData() {
         underTest.deleteAll();
