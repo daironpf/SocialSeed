@@ -74,7 +74,7 @@ class FriendsRepositoryTest {
 
         // Then: Verifies the friend request count for user2 and checks for the existence of the friend request
         SocialUser user2Result = socialUserRepository.findById(user2.getId()).get();
-        assertThat(user2Result.getFriendRequestCount()).isEqualTo(1);
+        assertThat(user2Result.getFriendRequestCount()).isEqualTo(user2.getFriendRequestCount()+1);
         boolean actual = underTest.existsFriendRequest(user1.getId(), user2.getId());
         assertThat(actual).isTrue();
     }
