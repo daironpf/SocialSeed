@@ -1,5 +1,6 @@
 package com.social.seed.repository;
 
+import com.social.seed.model.HashTag;
 import com.social.seed.model.SocialUser;
 
 import java.time.LocalDateTime;
@@ -31,6 +32,24 @@ public class TestUtils {
                 .friendCount(0)
                 .followingCount(0)
                 .friendRequestCount(0)
+                .build();
+    }
+
+    /**
+     * Creates a new HashTag instance with the given properties.
+     *
+     * @param id                    The unique identifier of the hashtag.
+     * @param name                  The name of the hashtag.
+     * @param socialUserInterestIn The count of social users interested in this hashtag.
+     * @param postTaggedIn          The count of posts tagged with this hashtag.
+     * @return A new HashTag instance with the specified properties.
+     */
+    public static HashTag createHashTag(String id, String name, int socialUserInterestIn, int postTaggedIn) {
+        return HashTag.builder()
+                .id(id)
+                .name(name)
+                .socialUserInterestIn(socialUserInterestIn)
+                .postTaggedIn(postTaggedIn)
                 .build();
     }
 }

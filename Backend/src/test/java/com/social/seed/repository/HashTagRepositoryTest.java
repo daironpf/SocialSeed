@@ -228,31 +228,13 @@ public class HashTagRepositoryTest {
      */
     private void createTestData() {
         // hashTag #1
-        underTest.save(createHashTag("1", "FirstTagToTest", 4, 10));
+        underTest.save(TestUtils.createHashTag("1", "FirstTagToTest", 4, 10));
 
         // hashTag #2
-        underTest.save(createHashTag("2", "SecondTagToTest", 5, 11));
+        underTest.save(TestUtils.createHashTag("2", "SecondTagToTest", 5, 11));
 
         // hashTag #3
-        underTest.save(createHashTag("3", "ThirdTagToTest", 6, 12));
-    }
-
-    /**
-     * Creates a new HashTag instance with the given properties.
-     *
-     * @param id                    The unique identifier of the hashtag.
-     * @param name                  The name of the hashtag.
-     * @param socialUserInterestIn The count of social users interested in this hashtag.
-     * @param postTaggedIn          The count of posts tagged with this hashtag.
-     * @return A new HashTag instance with the specified properties.
-     */
-    private HashTag createHashTag(String id, String name, int socialUserInterestIn, int postTaggedIn) {
-        return HashTag.builder()
-                .id(id)
-                .name(name)
-                .socialUserInterestIn(socialUserInterestIn)
-                .postTaggedIn(postTaggedIn)
-                .build();
+        underTest.save(TestUtils.createHashTag("3", "ThirdTagToTest", 6, 12));
     }
 
     /**
