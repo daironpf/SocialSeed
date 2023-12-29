@@ -1,12 +1,10 @@
 package com.social.seed.repository;
 
 import com.social.seed.model.SocialUser;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
-@Component
-public class Util {
+public class TestUtils {
 
     /**
      * Creates a SocialUser object with the specified properties.
@@ -18,7 +16,7 @@ public class Util {
      * @param language   The language preference of the social user.
      * @return A SocialUser object with the specified properties.
      */
-    public SocialUser createSocialUser(String userName, String email, String dateBorn, String fullName, String language) {
+    public static SocialUser createSocialUser(String userName, String email, String dateBorn, String fullName, String language) {
         return SocialUser.builder()
                 .userName(userName)
                 .email(email)

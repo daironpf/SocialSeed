@@ -434,41 +434,13 @@ class SocialUserRepositoryTest {
      */
     private void createTestData() {
         // user #1
-        underTest.save(createSocialUser("maria1", "maria1@gmail.com", "1992-01-04T00:00:00", "Maria del Laurel Perez", "ES"));
+        underTest.save(TestUtils.createSocialUser("maria1", "maria1@gmail.com", "1992-01-04T00:00:00", "Maria del Laurel Perez", "ES"));
 
         // user #2
-        underTest.save(createSocialUser("lucas7", "lucas7@gmail.com", "1987-02-04T00:00:00", "Lucas Des Von", "EN"));
+        underTest.save(TestUtils.createSocialUser("lucas7", "lucas7@gmail.com", "1987-02-04T00:00:00", "Lucas Des Von", "EN"));
 
         // user #3
-        underTest.save(createSocialUser("gelacio32", "gelacio32@gmail.com", "1962-10-11T00:00:00", "Gelacio Perez Perez", "ES"));
-    }
-
-    /**
-     * Creates a SocialUser object with the specified properties.
-     *
-     * @param userName   The username of the social user.
-     * @param email      The email of the social user.
-     * @param dateBorn   The date of birth of the social user in the format "yyyy-MM-dd'T'HH:mm:ss".
-     * @param fullName   The full name of the social user.
-     * @param language   The language preference of the social user.
-     * @return A SocialUser object with the specified properties.
-     */
-    private SocialUser createSocialUser(String userName, String email, String dateBorn, String fullName, String language) {
-        return SocialUser.builder()
-                .userName(userName)
-                .email(email)
-                .dateBorn(LocalDateTime.parse(dateBorn))
-                .fullName(fullName)
-                .language(language)
-                .registrationDate(LocalDateTime.now())
-                .isActive(true)
-                .isDeleted(false)
-                .onVacation(false)
-                .followersCount(0)
-                .friendCount(0)
-                .followingCount(0)
-                .friendRequestCount(0)
-                .build();
+        underTest.save(TestUtils.createSocialUser("gelacio32", "gelacio32@gmail.com", "1962-10-11T00:00:00", "Gelacio Perez Perez", "ES"));
     }
 
     /**

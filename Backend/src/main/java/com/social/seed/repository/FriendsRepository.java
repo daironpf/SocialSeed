@@ -47,7 +47,7 @@ public interface FriendsRepository extends Neo4jRepository<SocialUser, String> {
             OPTIONAL MATCH(o)<-[r:REQUEST_FRIEND_TO]-(d)
             RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS existRequestToAccepted
             """)
-    Boolean existsFriendRequestByUserToAccept(String idUserRequest, String idUserToAcceptedFriendRequest);
+    boolean existsFriendRequestByUserToAccept(String idUserRequest, String idUserToAcceptedFriendRequest);
     //endregion
 
     //region FRIEND_OF
@@ -57,7 +57,7 @@ public interface FriendsRepository extends Neo4jRepository<SocialUser, String> {
             OPTIONAL MATCH(b)-[r:FRIEND_OF]-(a)
             RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS existFriend
             """)
-    Boolean existsFriendship(String idUserRequest, String idUserToBeFriend);
+    boolean existsFriendship(String idUserRequest, String idUserToBeFriend);
 
     @Query("""
                 MATCH (o:SocialUser {id: $idUserRequest})
