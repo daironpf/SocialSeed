@@ -49,6 +49,7 @@ class SocialUserRepositoryTest {
      */
     @BeforeEach
     void setUp() {
+        cleanAllData();
         createTestData();
     }
 
