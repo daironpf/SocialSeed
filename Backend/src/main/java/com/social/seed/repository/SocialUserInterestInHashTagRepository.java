@@ -14,7 +14,7 @@ public interface SocialUserInterestInHashTagRepository extends Neo4jRepository<H
             OPTIONAL MATCH (u)-[r:INTERESTED_IN_HASHTAG]->(t)
             RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS existInterest
             """)
-    Boolean existsInterest(String idUserRequest, String idHashTag);
+    boolean existsInterest(String idUserRequest, String idHashTag);
 
     @Query("""
             MATCH (u:SocialUser {id: $idUserRequest})
@@ -32,4 +32,11 @@ public interface SocialUserInterestInHashTagRepository extends Neo4jRepository<H
             SET t.socialUserInterestIn = t.socialUserInterestIn - 1
             """)
     void deleteInterest(String idUserRequest, String idHashTag);
+
+    @Override
+    @Query("""
+            MATCH (:SocialUser)-[r:INTERESTED_IN_HASHTAG]->(:HashTag)
+            DELETE r
+            """)
+    void deleteAll();
 }
