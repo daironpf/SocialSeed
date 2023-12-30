@@ -5,6 +5,14 @@ on:
       - main
   pull_request:
     types: [opened, synchronize, reopened]
+
+env:
+  # POSTGRESQL_VERSION: 13.1
+  # POSTGRESQL_DB: amigoscode
+  # POSTGRESQL_USER: postgres
+  # POSTGRESQL_PASSWORD: password
+  JAVA_VERSION: 21
+    
 jobs:
   build:
     name: Build and analyze
@@ -13,10 +21,10 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
-      - name: Set up JDK 21
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
         uses: actions/setup-java@v3
         with:
-          java-version: 21
+          java-version: ${{ env.JAVA_VERSION }}
           distribution: 'zulu' # Alternative distribution options are available.
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
