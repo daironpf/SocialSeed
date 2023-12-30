@@ -15,7 +15,10 @@
 	<description>Social Seed is a seed from which you will grow your Social Network</description>
 	<properties>
 		<java.version>21</java.version>
+		<sonar.organization>socialseed</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -37,14 +40,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-<!--&lt;!&ndash;		 https://mvnrepository.com/artifact/junit/junit &ndash;&gt;-->
-<!--		<dependency>-->
-<!--			<groupId>junit</groupId>-->
-<!--			<artifactId>junit</artifactId>-->
-<!--			<version>4.13.2</version>-->
-<!--			<scope>test</scope>-->
-<!--		</dependency>-->
 
 		<!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
 		<dependency>
