@@ -6,11 +6,9 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
-env:
-  # POSTGRESQL_VERSION: 13.1
-  # POSTGRESQL_DB: amigoscode
+env:  
   NEO4J_USER: neo4j
-  NEO4J_PASSWORD: neo4jtesting
+  NEO4J_PASSWORD: neo4jSocial
   JAVA_VERSION: 21
     
 jobs:
@@ -19,18 +17,28 @@ jobs:
     runs-on: ubuntu-latest
     services:
       neo4j:
-        image: neo4j:5.15.0
-        env:          
-          NEO4J_USER: ${{ env.NEO4J_USER }}
-          NEO4J_PASSWORD: ${{ env.NEO4J_PASSWORD }}
+        image: neo4j:5.15.0-enterprise
+        env:
+          NEO4J_dbms_security_procedures_unrestricted: apoc.*
+          NEO4J_dbms_connector_bolt_enabled: "true"
+          NEO4J_apoc_import_file_enabled: "true"
+          NEO4J_apoc_export_file_enabled: "true"
+          NEO4J_apoc_import_file_use__neo4j__config: "true"
+          NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+          NEO4J_dbms_security_auth__enabled: "false"
+          NEO4J_dbms_connector_bolt_advertised__address: localhost:7687
+          NEO4JLABS_PLUGINS: '["apoc"]'
+          NEO4J_AUTH: ${{ env.NEO4J_USER }}/${{ env.NEO4J_PASSWORD }}
+        options: >-
+          --health-cmd "cypher-shell 'match (n) return count(n)'"
+          --health-timeout 10s
+          --health-retries 20
+          --health-interval 10s
+          --health-start-period 30s
         ports:
           - 7687:7687
                 
-    steps:    
-      # - uses: baptouuuu/setup-neo4j@v1.2.0
-      #   with:
-      #     tag: '5.15.0-enterprise' # optional 
-          
+    steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
