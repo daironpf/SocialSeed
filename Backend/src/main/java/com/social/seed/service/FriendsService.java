@@ -29,7 +29,7 @@ public class FriendsService {
     @Transactional
     public ResponseEntity<Object> createRequestFriendship(String idUserRequest, String idUserToBeFriend) {
         if (idUserRequest.equals(idUserToBeFriend)) {
-            return responseService.forbiddenResponseWithMessage("The user to be Friend cannot be the same.");
+            return responseService.forbiddenDuplicateSocialUser();
         }
         if (!validationService.userExistsById(idUserRequest)) {
             return responseService.userNotFoundResponse(idUserRequest);
@@ -45,13 +45,13 @@ public class FriendsService {
         }
 
         friendsRepository.createFriendRequest(idUserRequest, idUserToBeFriend, LocalDateTime.now());
-        return responseService.successResponse("The friendship request was created successfully.","Successful");
+        return responseService.successResponse("The friendship request was created successfully.");
     }
 
     @Transactional
     public ResponseEntity<Object> cancelRequestFriendship(String idUserRequest, String idUserToCancelFriendRequest) {
         if (idUserRequest.equals(idUserToCancelFriendRequest)) {
-            return responseService.forbiddenResponseWithMessage("The user cannot be the same.");
+            return responseService.forbiddenDuplicateSocialUser();
         }
         if (!validationService.userExistsById(idUserRequest)) {
             return responseService.userNotFoundResponse(idUserRequest);
@@ -67,13 +67,13 @@ public class FriendsService {
         }
 
         friendsRepository.cancelRequestFriendship(idUserRequest, idUserToCancelFriendRequest);
-        return responseService.successResponse("The friendship request was canceled successfully.","Successful");
+        return responseService.successResponse("The friendship request was canceled successfully.");
     }
 
     @Transactional
     public ResponseEntity<Object> acceptedRequestFriendship(String idUserRequest, String idUserToAcceptedFriendRequest) {
         if (idUserRequest.equals(idUserToAcceptedFriendRequest)) {
-            return responseService.forbiddenResponseWithMessage("The user cannot be the same.");
+            return responseService.forbiddenDuplicateSocialUser();
         }
         if (!validationService.userExistsById(idUserRequest)) {
             return responseService.userNotFoundResponse(idUserRequest);
@@ -89,13 +89,13 @@ public class FriendsService {
         }
 
         friendsRepository.acceptedRequestFriendship(idUserRequest, idUserToAcceptedFriendRequest, LocalDateTime.now());
-        return responseService.successResponse("The friendship request was accepted successfully.","Successful");
+        return responseService.successResponse("The friendship request was accepted successfully.");
     }
 
     @Transactional
     public ResponseEntity<Object> deleteFriendship(String idUserRequest, String idUserToDeleteFriendship) {
         if (idUserRequest.equals(idUserToDeleteFriendship)) {
-            return responseService.forbiddenResponseWithMessage("The user cannot be the same.");
+            return responseService.forbiddenDuplicateSocialUser();
         }
         if (!validationService.userExistsById(idUserRequest)) {
             return responseService.userNotFoundResponse(idUserRequest);
@@ -108,6 +108,6 @@ public class FriendsService {
         }
 
         friendsRepository.deleteFriendship(idUserRequest, idUserToDeleteFriendship);
-        return responseService.successResponse("The Friendship Relationship was deleted successfully.","Successful");
+        return responseService.successResponse("The Friendship Relationship was deleted successfully.");
     }
 }
