@@ -35,7 +35,7 @@ public class HashTagService {
         Page<HashTag> hashTags = hashTagRepository.findAll(pageable);
 
         if (hashTags.isEmpty()) return responseService.NotFoundWithMessageResponse("No posts available.");
-        return responseService.successResponseHashTag(hashTags);
+        return responseService.successResponse(hashTags);
     }
     //endregion
 
@@ -45,7 +45,7 @@ public class HashTagService {
         if (hashTag.isEmpty()){
             return responseService.hashTagNotFoundResponse(id);
         }
-        return responseService.successResponseHashTag(hashTag);
+        return responseService.successResponse(hashTag);
     }
 
     @Transactional
