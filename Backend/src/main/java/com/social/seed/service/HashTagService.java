@@ -12,15 +12,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 public class HashTagService {
     //region dependencies
+    private final HashTagRepository hashTagRepository;
+    private final ResponseService responseService;
+    private final ValidationService validationService;
+
     @Autowired
-    HashTagRepository hashTagRepository;
-    @Autowired
-    ResponseService responseService;
-    @Autowired
-    ValidationService validationService;
+    public HashTagService(HashTagRepository hashTagRepository, ResponseService responseService, ValidationService validationService) {
+        this.hashTagRepository = hashTagRepository;
+        this.responseService = responseService;
+        this.validationService = validationService;
+    }
     //endregion
 
     //region Gets
@@ -29,14 +35,17 @@ public class HashTagService {
         Page<HashTag> hashTags = hashTagRepository.findAll(pageable);
 
         if (hashTags.isEmpty()) return responseService.NotFoundWithMessageResponse("No posts available.");
-        return responseService.successResponse(hashTags, "Successful");
+        return responseService.successResponseHashTag(hashTags);
     }
     //endregion
 
     //region CRUD
     public ResponseEntity<Object> getHashTagById(String id) {
-        if (!validationService.hashTagExistsById(id)) return responseService.hashTagNotFoundResponse(id);
-        return responseService.successResponse(hashTagRepository.findById(id).get(), "Successful");
+        Optional<HashTag> hashTag = hashTagRepository.findById(id);
+        if (hashTag.isEmpty()){
+            return responseService.hashTagNotFoundResponse(id);
+        }
+        return responseService.successResponseHashTag(hashTag);
     }
 
     @Transactional
@@ -66,7 +75,11 @@ public class HashTagService {
         }
 
         hashTagRepository.update(updatedHashTag.getId(), updatedHashTag.getName());
-        return responseService.successResponse(hashTagRepository.findById(updatedHashTag.getId()).get(), "Updated");
+        Optional<HashTag> hashTag = hashTagRepository.findById(updatedHashTag.getId());
+        if (hashTag.isPresent()) {
+            return responseService.successResponse(hashTag.get(), "Updated");
+        }
+        return null;
     }
 
     @Transactional
