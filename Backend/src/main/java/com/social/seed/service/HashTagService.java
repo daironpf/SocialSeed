@@ -34,7 +34,7 @@ public class HashTagService {
         Pageable pageable = PageRequest.of(page, size);
         Page<HashTag> hashTags = hashTagRepository.findAll(pageable);
 
-        if (hashTags.isEmpty()) return responseService.NotFoundWithMessageResponse("No posts available.");
+        if (hashTags.isEmpty()) return responseService.notFoundWithMessageResponse("No posts available.");
         return responseService.successResponse(hashTags);
     }
     //endregion

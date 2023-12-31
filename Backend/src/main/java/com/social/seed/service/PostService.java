@@ -49,7 +49,7 @@ public class PostService {
         Pageable pageable = PageRequest.of(page, size);
         Page<Post> posts = postRepository.findAll(pageable);
 
-        if (posts.isEmpty()) return responseService.NotFoundWithMessageResponse("No posts available.");
+        if (posts.isEmpty()) return responseService.notFoundWithMessageResponse("No posts available.");
 
         return responseService.successResponse(posts);
     }
@@ -65,7 +65,7 @@ public class PostService {
         Pageable pageable = PageRequest.of(page, size);
         Page<Post> posts = postRepository.getFeed(pageable);
 
-        if (posts.isEmpty()) return responseService.NotFoundWithMessageResponse("No posts available.");
+        if (posts.isEmpty()) return responseService.notFoundWithMessageResponse("No posts available.");
 
         return responseService.successResponse(posts);
     }

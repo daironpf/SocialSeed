@@ -177,7 +177,7 @@ public class SocialUserService {
                     "the user to be followed cannot be the same");
         }
         if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
-        if (!validationService.userExistsById(idUserToFollow)) return responseService.NotFoundWithMessageResponse("The User to be followed has not been found");
+        if (!validationService.userExistsById(idUserToFollow)) return responseService.notFoundWithMessageResponse("The User to be followed has not been found");
         if (validationService.isUserBFollowerOfUserA(idUserRequest, idUserToFollow)) return responseService.alreadyFollow(idUserToFollow);
 
         socialUserRepository.createUserBFollowUserA(idUserRequest, idUserToFollow, LocalDateTime.now());
@@ -196,7 +196,7 @@ public class SocialUserService {
     public ResponseEntity<Object> unfollowSocialUser(String idUserRequest, String idUserToUnFollow) {
         if (idUserRequest.equals(idUserToUnFollow)) return responseService.forbiddenResponseWithMessage("the user to be unfollowed cannot be the same");
         if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
-        if (!validationService.userExistsById(idUserToUnFollow)) return responseService.NotFoundWithMessageResponse("The User to unfollow has not been found");
+        if (!validationService.userExistsById(idUserToUnFollow)) return responseService.notFoundWithMessageResponse("The User to unfollow has not been found");
         if (!validationService.isUserBFollowerOfUserA(idUserRequest, idUserToUnFollow)) return responseService.dontUnFollow(idUserToUnFollow);
 
         socialUserRepository.unFollowTheUserA(idUserRequest, idUserToUnFollow);

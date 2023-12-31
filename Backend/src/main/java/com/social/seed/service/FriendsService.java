@@ -60,7 +60,7 @@ public class FriendsService {
             return responseService.userNotFoundResponse(idUserToCancelFriendRequest);
         }
         if (!validationService.existsFriendRequest(idUserRequest, idUserToCancelFriendRequest)) {
-            return responseService.NotFoundWithMessageResponse("The Friend Request does not exist");
+            return responseService.notFoundWithMessageResponse("The Friend Request does not exist");
         }
         if (validationService.existsFriendship(idUserRequest, idUserToCancelFriendRequest)) {
             return responseService.conflictResponseWithMessage("The Friendship already exists");
@@ -82,7 +82,7 @@ public class FriendsService {
             return responseService.userNotFoundResponse(idUserToAcceptedFriendRequest);
         }
         if (!validationService.existsFriendRequestByUserToAccept(idUserRequest, idUserToAcceptedFriendRequest)) {
-            return responseService.NotFoundWithMessageResponse("The Friendship Request does not exist.");
+            return responseService.notFoundWithMessageResponse("The Friendship Request does not exist.");
         }
         if (validationService.existsFriendship(idUserRequest, idUserToAcceptedFriendRequest)) {
             return responseService.conflictResponseWithMessage("The Friendship already exists.");
