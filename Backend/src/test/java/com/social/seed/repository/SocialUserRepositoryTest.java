@@ -213,7 +213,7 @@ class SocialUserRepositoryTest {
         );
 
         // Then: Verifies that Maria is a follower of Gelacio
-        Boolean IsUserBFollowerOfUserA = underTest.IsUserBFollowerOfUserA(
+        Boolean IsUserBFollowerOfUserA = underTest.isUserBFollowerOfUserA(
                 gelacio.get().getId(),
                 maria.get().getId()
         );
@@ -241,7 +241,7 @@ class SocialUserRepositoryTest {
         );
 
         // Verify if the relationship exists (Maria follows Gelacio)
-        Boolean IsUserBFollowerOfUserA = underTest.IsUserBFollowerOfUserA(
+        Boolean IsUserBFollowerOfUserA = underTest.isUserBFollowerOfUserA(
                 gelacio.get().getId(),
                 maria.get().getId()
         );
@@ -254,7 +254,7 @@ class SocialUserRepositoryTest {
         );
 
         // Then: Verifies that follower B (Maria) is no longer following user A (Gelacio)
-        IsUserBFollowerOfUserA = underTest.IsUserBFollowerOfUserA(
+        IsUserBFollowerOfUserA = underTest.isUserBFollowerOfUserA(
                 gelacio.get().getId(),
                 maria.get().getId()
         );

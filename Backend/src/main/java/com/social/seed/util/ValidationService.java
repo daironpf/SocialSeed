@@ -7,16 +7,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class ValidationService {
     //region dependencies
+    private final SocialUserRepository socialUserRepository;
+    private final PostRepository postRepository;
+    private final HashTagRepository hashTagRepository;
+    private final FriendsRepository friendsRepository;
+    private final SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository;
+
     @Autowired
-    SocialUserRepository socialUserRepository;
-    @Autowired
-    PostRepository postRepository;
-    @Autowired
-    HashTagRepository hashTagRepository;
-    @Autowired
-    FriendsRepository friendsRepository;
-    @Autowired
-    SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository;
+    public ValidationService(SocialUserRepository socialUserRepository, PostRepository postRepository, HashTagRepository hashTagRepository, FriendsRepository friendsRepository, SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository) {
+        this.socialUserRepository = socialUserRepository;
+        this.postRepository = postRepository;
+        this.hashTagRepository = hashTagRepository;
+        this.friendsRepository = friendsRepository;
+        this.socialUserInterestInHashTagRepository = socialUserInterestInHashTagRepository;
+    }
+
     //endregion
 
     //region SocialUser
@@ -30,7 +35,7 @@ public class ValidationService {
         return socialUserRepository.existsById(userId);
     }
     public boolean isUserBFollowerOfUserA(String idUserRequest, String idUserToUnFollow){
-        return socialUserRepository.IsUserBFollowerOfUserA(idUserRequest, idUserToUnFollow);
+        return socialUserRepository.isUserBFollowerOfUserA(idUserRequest, idUserToUnFollow);
     }
     public boolean isVacationModeActivated(String idUserRequest) {
         return socialUserRepository.isVacationModeActivated(idUserRequest);

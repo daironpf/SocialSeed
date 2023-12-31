@@ -64,36 +64,36 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
 
     //region FOLLOW
     @Query("""
-            MATCH (b:SocialUser {id: $user_b_id})
-            MATCH (a:SocialUser {id: $user_a_id})
+            MATCH (b:SocialUser {id: $userBId})
+            MATCH (a:SocialUser {id: $userAId})
             OPTIONAL MATCH(b)<-[r:FOLLOWED_BY]-(a)
             RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS following
             """)
-    Boolean IsUserBFollowerOfUserA(String user_b_id, String user_a_id);
+    Boolean isUserBFollowerOfUserA(String userBId, String userAId);
 
     @Query("""
-            MATCH (b:SocialUser {id: $user_b_id})
-            MATCH (a:SocialUser {id: $user_a_id})
+            MATCH (b:SocialUser {id: $userBId})
+            MATCH (a:SocialUser {id: $userAId})
             MERGE(b)<-[r:FOLLOWED_BY {followDate:$followDate}]-(a)
             WITH a, b
             SET a.followersCount = a.followersCount + 1,
                 b.followingCount = b.followingCount + 1
             """)
     void createUserBFollowUserA(
-            String user_b_id,
-            String user_a_id,
+            String userBId,
+            String userAId,
             LocalDateTime followDate);
 
     @Query("""
-            MATCH (b:SocialUser {id: $user_b_id})
-            MATCH (a:SocialUser {id: $user_a_id})
+            MATCH (b:SocialUser {id: $userBId})
+            MATCH (a:SocialUser {id: $userAId})
             MATCH (b)<-[r:FOLLOWED_BY]-(a)
             DELETE r
             WITH a, b
             SET a.followersCount = a.followersCount - 1,
                 b.followingCount = b.followingCount - 1
             """)
-    void unFollowTheUserA(String user_b_id, String user_a_id);
+    void unFollowTheUserA(String userBId, String userAId);
     //endregion
 
     //region Vacation Mode
