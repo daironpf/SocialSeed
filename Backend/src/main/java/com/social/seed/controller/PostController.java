@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v0.0.1/post")
 public class PostController {
     //region Dependencies
+    private final PostService postService;
+
     @Autowired
-    PostService postService;
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
     //endregion
 
     //region Gets
