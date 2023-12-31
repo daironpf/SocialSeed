@@ -22,14 +22,19 @@ import java.util.regex.Pattern;
 @Service
 public class PostService {
     //region Dependencies
+    private final PostRepository postRepository;
+    private final HashTagRepository hashTagRepository;
+    private final ResponseService responseService;
+    private final ValidationService validationService;
+
     @Autowired
-    PostRepository postRepository;
-    @Autowired
-    HashTagRepository hashTagRepository;
-    @Autowired
-    ResponseService responseService;
-    @Autowired
-    ValidationService validationService;
+    public PostService(PostRepository postRepository, HashTagRepository hashTagRepository, ResponseService responseService, ValidationService validationService) {
+        this.postRepository = postRepository;
+        this.hashTagRepository = hashTagRepository;
+        this.responseService = responseService;
+        this.validationService = validationService;
+    }
+
     //endregion
 
     //region Gets
@@ -46,7 +51,7 @@ public class PostService {
 
         if (posts.isEmpty()) return responseService.NotFoundWithMessageResponse("No posts available.");
 
-        return responseService.successResponse(posts, "Successful");
+        return responseService.successResponse(posts);
     }
 
     /**
@@ -62,7 +67,7 @@ public class PostService {
 
         if (posts.isEmpty()) return responseService.NotFoundWithMessageResponse("No posts available.");
 
-        return responseService.successResponse(posts, "Successful");
+        return responseService.successResponse(posts);
     }
     //endregion
 
@@ -76,7 +81,7 @@ public class PostService {
     public ResponseEntity<Object> getPostById(String postId) {
         if (!validationService.postExistsById(postId)) return responseService.postNotFoundResponse(postId);
 
-        return responseService.successResponse(postRepository.findById(postId).get(), "Successful");
+        return responseService.successResponse(postRepository.findById(postId).get());
     }
 
     /**
@@ -113,9 +118,10 @@ public class PostService {
                 LocalDateTime.now()
         );
 
-        return responseService.successCreatedResponse(
-                postRepository.findById(newPost.getId()).get()
-        );
+        Optional<Post> post1 = postRepository.findById(newPost.getId());
+        if (post1.isEmpty()) return responseService.postNotFoundResponse(newPost.getId());
+
+        return responseService.successCreatedResponse(post1.get());
     }
 
     /**
@@ -147,7 +153,7 @@ public class PostService {
         // Save all the hashtags relationship with the post
         saveAllTheHashtagsRelationshipWithPost(updatedPost.getId(), hashtags);
 
-        return responseService.successResponse(postRepository.findById(updatedPost.getId()).get(), "Updated");
+        return responseService.successResponseWithMessage(postRepository.findById(updatedPost.getId()).get(), "Updated");
     }
 
     /**
@@ -164,7 +170,7 @@ public class PostService {
 
         postRepository.deleteById(postId);
 
-        return responseService.successResponse("The Post was deleted.", "Successful");
+        return responseService.successResponse("The Post was deleted.");
     }
     //endregion
 
@@ -183,7 +189,7 @@ public class PostService {
         if (validationService.userLikedPost(userId, postId)) return responseService.conflictResponseWithMessage("The Post is already liked by this user");
 
         postRepository.createUserByIdLikedPostById(userId, postId, LocalDateTime.now());
-        return responseService.successResponse("The Post was Liked.", "Successful");
+        return responseService.successResponse("The Post was Liked.");
     }
 
     /**
@@ -200,7 +206,7 @@ public class PostService {
         if (!validationService.userLikedPost(idUserRequest, idPostToLiked)) return responseService.conflictResponseWithMessage("The Post is Not liked by this user");
 
         postRepository.deleteUserByIdLikedPostById(idUserRequest, idPostToLiked);
-        return responseService.successResponse("The Like was Deleted.", "Successful");
+        return responseService.successResponse("The Like was Deleted.");
     }
     //endregion
 
