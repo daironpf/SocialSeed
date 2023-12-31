@@ -76,10 +76,7 @@ public class HashTagService {
 
         hashTagRepository.update(updatedHashTag.getId(), updatedHashTag.getName());
         Optional<HashTag> hashTag = hashTagRepository.findById(updatedHashTag.getId());
-        if (hashTag.isPresent()) {
-            return responseService.successResponse(hashTag.get(), "Updated");
-        }
-        return null;
+        return hashTag.map(tag -> responseService.successResponseWithMessage(tag, "Updated")).orElse(null);
     }
 
     @Transactional
@@ -87,7 +84,7 @@ public class HashTagService {
         if (!validationService.hashTagExistsById(id)) return responseService.hashTagNotFoundResponse(id);
 
         hashTagRepository.deleteById(id);
-        return responseService.successResponse("The HashTag was Deleted.","Successful");
+        return responseService.successResponseWithMessage("The HashTag was Deleted.","Successful");
     }
     //endregion
 }
