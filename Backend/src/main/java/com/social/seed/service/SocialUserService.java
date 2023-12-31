@@ -18,12 +18,17 @@ import java.time.LocalDateTime;
 public class SocialUserService {
 
     //region Dependencies
+    private final SocialUserRepository socialUserRepository;
+    private final ResponseService responseService;
+    private final ValidationService validationService;
+    
     @Autowired
-    private SocialUserRepository socialUserRepository;
-    @Autowired
-    private ResponseService responseService;
-    @Autowired
-    private ValidationService validationService;
+    public SocialUserService(SocialUserRepository socialUserRepository, ResponseService responseService, ValidationService validationService) {
+        this.socialUserRepository = socialUserRepository;
+        this.responseService = responseService;
+        this.validationService = validationService;
+    }
+
     //endregion
 
     /**
@@ -35,7 +40,7 @@ public class SocialUserService {
     public ResponseEntity<Object> getSocialUserById(String userId) {
         if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
 
-        return responseService.successResponse(socialUserRepository.findById(userId), "Successful");
+        return responseService.successResponse(socialUserRepository.findById(userId));
     }
 
     /**
@@ -96,7 +101,7 @@ public class SocialUserService {
                 newSocialUser.getLanguage()
         );
 
-        return responseService.successResponse(socialUserRepository.findById(userId).get(), "Successful");
+        return responseService.successResponse(socialUserRepository.findById(userId).get());
     }
 
     /**
@@ -112,7 +117,7 @@ public class SocialUserService {
 
         socialUserRepository.deleteById(id);
 
-        return responseService.successResponse("The user was deleted.", "Successful");
+        return responseService.successResponse("The user was deleted.");
     }
 
     /**
@@ -133,7 +138,7 @@ public class SocialUserService {
 
         socialUserRepository.updateSocialUserName(idUserToUpdate, newUserName);
 
-        return responseService.successResponse(socialUserRepository.findById(idUserToUpdate).get(),
+        return responseService.successResponseWithMessage(socialUserRepository.findById(idUserToUpdate).get(),
                 "The username was updated successfully.");
     }
 
@@ -154,7 +159,7 @@ public class SocialUserService {
 
         socialUserRepository.updateSocialUserEmail(idUserToUpdate, newEmail);
 
-        return responseService.successResponse(socialUserRepository.findById(idUserToUpdate).get(),
+        return responseService.successResponseWithMessage(socialUserRepository.findById(idUserToUpdate).get(),
                 "The email was updated successfully.");
     }
 
@@ -177,7 +182,7 @@ public class SocialUserService {
 
         socialUserRepository.createUserBFollowUserA(idUserRequest, idUserToFollow, LocalDateTime.now());
 
-        return responseService.successResponse("The user was followed successfully.", "Successful");
+        return responseService.successResponse("The user was followed successfully.");
     }
 
     /**
@@ -196,7 +201,7 @@ public class SocialUserService {
 
         socialUserRepository.unFollowTheUserA(idUserRequest, idUserToUnFollow);
 
-        return responseService.successResponse("The user was unfollowed successfully.", "Successful");
+        return responseService.successResponse("The user was unfollowed successfully.");
     }
 
     /**
@@ -211,7 +216,7 @@ public class SocialUserService {
 
         socialUserRepository.activateVacationMode(idUserRequest);
 
-        return responseService.successResponse("The vacation mode was Activated successfully.", "Successful");
+        return responseService.successResponse("The vacation mode was Activated successfully.");
     }
 
     /**
@@ -226,7 +231,7 @@ public class SocialUserService {
 
         socialUserRepository.deactivateVacationMode(idUserRequest);
 
-        return responseService.successResponse("The vacation mode was Deactivated successfully.", "Successful");
+        return responseService.successResponse("The vacation mode was Deactivated successfully.");
     }
 
     /**
@@ -241,7 +246,7 @@ public class SocialUserService {
 
         socialUserRepository.activateSocialUser(idUserRequest);
 
-        return responseService.successResponse("The Social User was Activated successfully.", "Successful");
+        return responseService.successResponse("The Social User was Activated successfully.");
     }
 
     /**
@@ -256,6 +261,6 @@ public class SocialUserService {
 
         socialUserRepository.deactivateSocialUser(idUserRequest);
 
-        return responseService.successResponse("The Social User was Deactivated successfully.", "Successful");
+        return responseService.successResponse("The Social User was Deactivated successfully.");
     }
 }
