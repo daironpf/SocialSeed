@@ -13,12 +13,17 @@ import java.time.LocalDateTime;
 @Service
 public class FriendsService {
     //region dependencies
+    private final FriendsRepository friendsRepository;
+    private final ResponseService responseService;
+    private final ValidationService validationService;
+
     @Autowired
-    private FriendsRepository friendsRepository;
-    @Autowired
-    private ResponseService responseService;
-    @Autowired
-    private ValidationService validationService;
+    public FriendsService(FriendsRepository friendsRepository, ResponseService responseService, ValidationService validationService) {
+        this.friendsRepository = friendsRepository;
+        this.responseService = responseService;
+        this.validationService = validationService;
+    }
+
     //endregion
 
     @Transactional
