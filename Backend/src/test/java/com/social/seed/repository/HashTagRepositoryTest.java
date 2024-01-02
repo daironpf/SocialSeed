@@ -40,7 +40,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 2023-12-25
  */
 @DataNeo4jTest
-public class HashTagRepositoryTest {
+class HashTagRepositoryTest {
 
     @Autowired
     private HashTagRepository underTest;
@@ -61,7 +61,7 @@ public class HashTagRepositoryTest {
      * It calls the cleanAllData method to delete all HashTag from the repository.
      */
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         cleanAllData();
     }
     // endregion
@@ -73,7 +73,7 @@ public class HashTagRepositoryTest {
      * and false when the HashTag with the specified name does not exist.
      */
     @Test
-    public void shouldCheckWhenHashTagByNameExists() {
+    void shouldCheckWhenHashTagByNameExists() {
         // Verifies if a HashTag with a given name exists
         assertHashTagByNameExists("FirstTagToTest", true);
 
@@ -89,7 +89,7 @@ public class HashTagRepositoryTest {
      * including the name, and asserts that the updated HashTag's name matches the expected value after the update operation.
      */
     @Test
-    public void shouldUpdateExistingHashTagSuccessfully() {
+    void shouldUpdateExistingHashTagSuccessfully() {
         // Given: An existing HashTag with a specific name
         String name = "FirstTagToTest";
         Optional<HashTag> hashTag = underTest.findByName(name);
@@ -116,7 +116,7 @@ public class HashTagRepositoryTest {
      * asserts that the HashTag is present, and verifies that its name matches the expected value.
      */
     @Test
-    public void shouldRetrieveHashTagByNameSuccessfullyForValidName() {
+    void shouldRetrieveHashTagByNameSuccessfullyForValidName() {
         // When
         Optional<HashTag> foundHashTagOptional = underTest.findByName("SecondTagToTest");
 
@@ -132,7 +132,7 @@ public class HashTagRepositoryTest {
      * asserts that the HashTag is not present.
      */
     @Test
-    public void shouldRetrieveNullForInvalidHashTagByName() {
+    void shouldRetrieveNullForInvalidHashTagByName() {
         // When
         Optional<HashTag> foundHashTagOptional = underTest.findByName("NonExistentHashTag");
 
@@ -148,7 +148,7 @@ public class HashTagRepositoryTest {
      * asserting that the saved HashTag's name matches the expected value.
      */
     @Test
-    public void shouldSucceedWhenCreatingHashTag() {
+    void shouldSucceedWhenCreatingHashTag() {
         // Given: A new HashTag with a specific name
         HashTag newHashTag = new HashTag();
         newHashTag.setName("NewHashTag");
@@ -171,7 +171,7 @@ public class HashTagRepositoryTest {
      * It retrieves a HashTag by name, deletes it by ID, and verifies that the HashTag is no longer present in the repository.
      */
     @Test
-    public void shouldSucceedWhenDeletingHashTag() {
+    void shouldSucceedWhenDeletingHashTag() {
         // Given: An existing HashTag with a specific name
         Optional<HashTag> hashTagToDelete = underTest.findByName("ThirdTagToTest");
         assertThat(hashTagToDelete).isPresent();

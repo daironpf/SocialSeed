@@ -45,7 +45,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 2023-12-25
  */
 @DataNeo4jTest
-public class PostRepositoryTest {
+class PostRepositoryTest {
     //region dependencies
     @Autowired
     private PostRepository underTest;
@@ -68,7 +68,7 @@ public class PostRepositoryTest {
      * It calls the createTestData method to populate the repository with sample Post data.
      */
     @BeforeEach
-    public void setUp(){
+    void setUp(){
         cleanAllData();
         createTestData();
     }
@@ -78,7 +78,7 @@ public class PostRepositoryTest {
      * It calls the cleanAllData method to delete all Post from the repository.
      */
     @AfterEach
-    public void tearDown(){ cleanAllData();}
+    void tearDown(){ cleanAllData();}
     //endregion
 
     // region Existence Checks
@@ -88,7 +88,7 @@ public class PostRepositoryTest {
      * and its content matches the expected content.
      */
     @Test
-    public void existsByIdShouldReturnTrueForExistingPost() {
+    void existsByIdShouldReturnTrueForExistingPost() {
         // When: Retrieving a Post by its ID
         Optional<Post> post = underTest.findById(post1.getId());
 
@@ -106,7 +106,7 @@ public class PostRepositoryTest {
      * each post has the expected content.
      */
     @Test
-    public void shouldListAllExistingPost() {
+    void shouldListAllExistingPost() {
         // Given
         PageRequest pageRequest = PageRequest.of(0, 10);
         Page<Post> posts = underTest.findAll(pageRequest);
@@ -127,9 +127,9 @@ public class PostRepositoryTest {
         );
 
         for (Post post : testPosts) {
-            assertThat(expectedContent.contains(post.getContent()))
+            assertThat(expectedContent)
                     .as("Each retrieved post should have expected content")
-                    .isTrue();
+                    .contains(post.getContent());
         }
     }
 
@@ -138,7 +138,7 @@ public class PostRepositoryTest {
      * update date, and image URL.
      */
     @Test
-    public void updateExistingPostShouldSucceed() {
+    void updateExistingPostShouldSucceed() {
         // Given
         Post postToUpdate = underTest.findById(post1.getId()).get();
 
@@ -173,7 +173,7 @@ public class PostRepositoryTest {
      * author, and hashtags.
      */
     @Test
-    public void createNewPostShouldSucceed() {
+    void createNewPostShouldSucceed() {
         // When: Creating a new post
         Post newPost = underTest.save(
                 Post.builder()
@@ -242,7 +242,7 @@ public class PostRepositoryTest {
      * indicating that user1 has liked post2.
      */
     @Test
-    public void existsLikedBetweenSocialUserAndPostShouldReturnTrue() {
+    void existsLikedBetweenSocialUserAndPostShouldReturnTrue() {
         // Given: Creating a liked relationship between user1 and post2
         underTest.createUserByIdLikedPostById(
                 user1.getId(),
@@ -269,7 +269,7 @@ public class PostRepositoryTest {
      * indicating that user1 has not liked post3.
      */
     @Test
-    public void doNotExistsLikedBetweenSocialUserAndPostShouldReturnFalse() {
+    void doNotExistsLikedBetweenSocialUserAndPostShouldReturnFalse() {
         // When: Checking if user1 has liked post3
         boolean actualResult = underTest.isUserByIdLikedPostById(
                 user1.getId(), post3.getId()
@@ -290,7 +290,7 @@ public class PostRepositoryTest {
      * and user1 has successfully liked post1.
      */
     @Test
-    public void createLikedBetweenSocialUserAndPostShouldSuccessful() {
+    void createLikedBetweenSocialUserAndPostShouldSuccessful() {
         // Given: Creating a liked relationship between user1 and post1
         underTest.createUserByIdLikedPostById(
                 user1.getId(),
@@ -325,7 +325,7 @@ public class PostRepositoryTest {
      * deletes the liked relationship, and verifies the results after deletion.
      */
     @Test
-    public void deleteLikedBetweenSocialUserAndPostShouldSuccessful() {
+    void deleteLikedBetweenSocialUserAndPostShouldSuccessful() {
         // Given: Creating a liked relationship between user1 and post1
         underTest.createUserByIdLikedPostById(
                 user1.getId(),
@@ -364,7 +364,7 @@ public class PostRepositoryTest {
      * checks if user1 is the author of the new post, and verifies the result.
      */
     @Test
-    public void isUserAuthorOfThePostByIdShouldReturnTrue() {
+    void isUserAuthorOfThePostByIdShouldReturnTrue() {
         // Given: Creating a new post authored by user1
         Post newPost = underTest.save(
                 Post.builder()
@@ -396,7 +396,7 @@ public class PostRepositoryTest {
      * and verifies that the post now has two hashtags with the expected names.
      */
     @Test
-    public void createRelationshipTaggedWithHashTagShouldBeSuccessful() {
+    void createRelationshipTaggedWithHashTagShouldBeSuccessful() {
         // Given: Create a new post by user1
         Post newPost = createTestPost("I feel #Happy Today because of you :)", "aqui/img.png");
 
@@ -437,7 +437,7 @@ public class PostRepositoryTest {
      * and verifies that the post no longer has any hashtags after deletion.
      */
     @Test
-    public void deleteAllRelationshipTaggedWithHashTagShouldBeSuccessful() {
+    void deleteAllRelationshipTaggedWithHashTagShouldBeSuccessful() {
         // Given: Ensure that post1 initially has one or more hashtags
         assertThat(post1.getHashTags())
                 .as("Ensure that post1 initially has one or more hashtags")
@@ -479,7 +479,7 @@ public class PostRepositoryTest {
      * @param postContent The content of the post.
      * @return An array of hashtags extracted from the content.
      */
-    public static String[] extractHashtags(String postContent) {
+    static String[] extractHashtags(String postContent) {
         Pattern pattern = Pattern.compile("#\\w+");
         Matcher matcher = pattern.matcher(postContent);
 

@@ -122,7 +122,7 @@ class SocialUserRepositoryTest {
      * the expected values after the update operation.
      */
     @Test
-    public void updateExistingSocialUserSucceed() {
+    void updateExistingSocialUserSucceed() {
         // Given: An existing social user with a specific email
         assertUserByEmailExists("gelacio32@gmail.com", true);
         Optional<SocialUser> socialUserToUpdate = underTest.findByEmail("gelacio32@gmail.com");
@@ -154,7 +154,7 @@ class SocialUserRepositoryTest {
      * and asserts that the updated user's username matches the expected value after the update operation.
      */
     @Test
-    public void updateExistingSocialUserNameSucceed(){
+    void updateExistingSocialUserNameSucceed(){
         // Given: An existing social user with a specific email
         assertUserByEmailExists("gelacio32@gmail.com", true);
         Optional<SocialUser> socialUserToUpdate = underTest.findByEmail("gelacio32@gmail.com");
@@ -175,7 +175,7 @@ class SocialUserRepositoryTest {
      * and asserts that the updated user's email matches the expected value after the update operation.
      */
     @Test
-    public void updateExistingSocialUserEmailSucceed(){
+    void updateExistingSocialUserEmailSucceed(){
         // Given: An existing social user with a specific email
         assertUserByEmailExists("gelacio32@gmail.com", true);
         Optional<SocialUser> socialUserToUpdate = underTest.findByEmail("gelacio32@gmail.com");
@@ -198,7 +198,7 @@ class SocialUserRepositoryTest {
      * and asserts that the result is true after the relationship is established.
      */
     @Test
-    public void IsUserBFollowerOfTheUserA(){
+    void IsUserBFollowerOfTheUserA(){
         // Given: Two social users, Gelacio and Maria
         Optional<SocialUser> gelacio = underTest.findByEmail("gelacio32@gmail.com");
         Optional<SocialUser> maria = underTest.findByEmail("maria1@gmail.com");
@@ -226,7 +226,7 @@ class SocialUserRepositoryTest {
      * unfollows user A, and asserts that follower B is no longer following user A after the unfollow operation.
      */
     @Test
-    public void unFollowUserA_shouldRemoveFollowerB(){
+    void unFollowUserA_shouldRemoveFollowerB(){
         // Given: Two social users, Gelacio and Maria
         Optional<SocialUser> gelacio = underTest.findByEmail("gelacio32@gmail.com");
         Optional<SocialUser> maria = underTest.findByEmail("maria1@gmail.com");
@@ -269,7 +269,7 @@ class SocialUserRepositoryTest {
      * It checks if a specific social user's vacation mode is deactivated and asserts that the result is true.
      */
     @Test
-    public void isVacationModeDeactivatedShouldReturnTrue() {
+    void isVacationModeDeactivatedShouldReturnTrue() {
         // Given: A specific social user (Gelacio)
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
@@ -286,7 +286,7 @@ class SocialUserRepositoryTest {
      * It activates vacation mode for a specific social user and asserts that the vacation mode is activated successfully.
      */
     @Test
-    public void activateVacationModeActivatesModeSuccessfully() {
+    void activateVacationModeActivatesModeSuccessfully() {
         // Given: A specific social user (Gelacio)
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
@@ -304,7 +304,7 @@ class SocialUserRepositoryTest {
      * It deactivates vacation mode for a specific social user and asserts that the vacation mode is deactivated successfully.
      */
     @Test
-    public void deactivateVacationModeActivatesModeSuccessfully() {
+    void deactivateVacationModeActivatesModeSuccessfully() {
         // Given: A specific social user (Gelacio)
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
@@ -324,7 +324,7 @@ class SocialUserRepositoryTest {
      * It deletes a specific social user and asserts that the user is successfully deleted from the repository.
      */
     @Test
-    public void deleteExistingSocialUserShouldSucceed() {
+    void deleteExistingSocialUserShouldSucceed() {
         // Given: A specific social user (Gelacio)
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
@@ -342,7 +342,7 @@ class SocialUserRepositoryTest {
      * It checks if a specific social user is activated and asserts that the result is true.
      */
     @Test
-    public void isSocialUserActivatedShouldReturnTrue() {
+    void isSocialUserActivatedShouldReturnTrue() {
         // Given: A specific social user (Gelacio)
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
@@ -359,7 +359,7 @@ class SocialUserRepositoryTest {
      * It activates a specific social user and asserts that the user is successfully activated.
      */
     @Test
-    public void shouldActivateSocialUserWhenGivenUserId() {
+    void shouldActivateSocialUserWhenGivenUserId() {
         // Given: A specific social user (Gelacio)
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
@@ -377,7 +377,7 @@ class SocialUserRepositoryTest {
      * It deactivates a specific social user and asserts that the user is successfully deactivated.
      */
     @Test
-    public void shouldDeactivateSocialUserWhenGivenUserId() {
+    void shouldDeactivateSocialUserWhenGivenUserId() {
         // Given: A specific social user (Gelacio)
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
 
