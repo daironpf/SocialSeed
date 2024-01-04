@@ -1,0 +1,67 @@
+name: SonarCloud
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+env:  
+  NEO4J_USER: neo4j
+  NEO4J_PASSWORD: neo4jSocial
+  JAVA_VERSION: 21
+    
+jobs:
+  build:
+    name: Build and analyze
+    runs-on: ubuntu-latest
+    services:
+      neo4j:
+        image: neo4j:5.15.0-enterprise
+        env:
+          NEO4J_dbms_security_procedures_unrestricted: apoc.*
+          NEO4J_dbms_connector_bolt_enabled: "true"
+          NEO4J_apoc_import_file_enabled: "true"
+          NEO4J_apoc_export_file_enabled: "true"
+          NEO4J_apoc_import_file_use__neo4j__config: "true"
+          NEO4J_ACCEPT_LICENSE_AGREEMENT: "yes"
+          NEO4J_dbms_security_auth__enabled: "false"
+          NEO4J_dbms_connector_bolt_advertised__address: localhost:7687
+          NEO4JLABS_PLUGINS: '["apoc"]'
+          NEO4J_AUTH: ${{ env.NEO4J_USER }}/${{ env.NEO4J_PASSWORD }}
+        options: >-
+          --health-cmd "cypher-shell 'match (n) return count(n)'"
+          --health-timeout 10s
+          --health-retries 20
+          --health-interval 10s
+          --health-start-period 30s
+        ports:
+          - 7687:7687
+                
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      - name: Set up JDK ${{ env.JAVA_VERSION }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: ${{ env.JAVA_VERSION }}
+          distribution: 'zulu' # Alternative distribution options are available.
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Build and analyze
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=daironpf_SocialSeed -f Backend/pom.xml
+

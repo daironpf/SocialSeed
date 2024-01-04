@@ -6,13 +6,19 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ResponseService {
-    public ResponseEntity<Object> successResponse(Object data, String message) {
+    public ResponseEntity<Object> successResponse(Object data) {
+        return new ResponseEntity<>(ResponseDTO.success(data, "Successful"), HttpStatus.OK);
+    }
+
+    public ResponseEntity<Object> successResponseWithMessage(Object data, String message) {
         return new ResponseEntity<>(ResponseDTO.success(data, message), HttpStatus.OK);
     }
 
     public ResponseEntity<Object> successCreatedResponse(Object data) {
-        return new ResponseEntity<>(ResponseDTO.success(data, "Successful"), HttpStatus.CREATED);
+        return new ResponseEntity<>(ResponseDTO.success(data, "Created Successful"), HttpStatus.CREATED);
     }
+
+
 
     public ResponseEntity<Object> conflictResponseWithMessage(String message) {
         return new ResponseEntity<>(ResponseDTO.conflict(message), HttpStatus.CONFLICT);
@@ -22,11 +28,15 @@ public class ResponseService {
         return new ResponseEntity<>(ResponseDTO.forbidden(message), HttpStatus.FORBIDDEN);
     }
 
+    public ResponseEntity<Object> forbiddenDuplicateSocialUser() {
+        return forbiddenResponseWithMessage("The user cannot be the same.");
+    }
+
     public ResponseEntity<Object> userNotFoundResponse(String userId) {
         return new ResponseEntity<>(ResponseDTO.notFound(String.format("The user with id: %s not found.", userId)), HttpStatus.NOT_FOUND);
     }
 
-    public ResponseEntity<Object> NotFoundWithMessageResponse(String message) {
+    public ResponseEntity<Object> notFoundWithMessageResponse(String message) {
         return new ResponseEntity<>(ResponseDTO.notFound(message), HttpStatus.NOT_FOUND);
     }
 

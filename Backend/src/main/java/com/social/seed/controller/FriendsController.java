@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v0.0.1/friend")
 public class FriendsController {
     //region Dependencies
+    private final FriendsService friendsService;
+
     @Autowired
-    private FriendsService friendsService;
+    public FriendsController(FriendsService friendsService) {
+        this.friendsService = friendsService;
+    }
     //endregion
 
     //region CRUD

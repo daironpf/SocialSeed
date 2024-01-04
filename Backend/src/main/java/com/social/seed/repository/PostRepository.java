@@ -57,16 +57,12 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
     );
 
     @Query("""
-            MATCH (p:Post {id: $id_post})
-            MATCH (u:SocialUser {id: $id_author})
+            MATCH (p:Post {id: $idpost})
+            MATCH (u:SocialUser {id: $idauthor})
             MERGE (p)-[:POSTED_BY {postDate: $now}]->(u)
             SET p.updateDate = $now
             """)
-    void createPostedRelationship(
-            String id_post,
-            String id_author,
-            LocalDateTime now
-    );
+    void createPostedRelationship(String idpost, String idauthor, LocalDateTime now);
     //endregion
 
     //region LIKE

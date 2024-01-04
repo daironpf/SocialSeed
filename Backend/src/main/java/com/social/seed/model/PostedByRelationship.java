@@ -2,7 +2,6 @@ package com.social.seed.model;
 
 import lombok.Data;
 import org.springframework.data.neo4j.core.schema.*;
-import org.springframework.data.neo4j.core.support.UUIDStringGenerator;
 
 import java.time.LocalDateTime;
 

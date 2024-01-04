@@ -18,14 +18,19 @@ import java.time.LocalDateTime;
 public class SocialUserInterestInHashTagService {
 
     //region Dependencies
+    private final SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository;
+    private final SocialUserRepository socialUserRepository;
+    private final ValidationService validationService;
+    private final ResponseService responseService;
+
     @Autowired
-    private SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository;
-    @Autowired
-    private SocialUserRepository socialUserRepository;
-    @Autowired
-    private ValidationService validationService;
-    @Autowired
-    private ResponseService responseService;
+    public SocialUserInterestInHashTagService(SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository, SocialUserRepository socialUserRepository, ValidationService validationService, ResponseService responseService) {
+        this.socialUserInterestInHashTagRepository = socialUserInterestInHashTagRepository;
+        this.socialUserRepository = socialUserRepository;
+        this.validationService = validationService;
+        this.responseService = responseService;
+    }
+
     //endregion
 
     /**
@@ -48,7 +53,7 @@ public class SocialUserInterestInHashTagService {
                 LocalDateTime.now()
         );
 
-        return responseService.successResponse(socialUserRepository.findById(idUserRequest).get(), "Successful");
+        return responseService.successResponse(socialUserRepository.findById(idUserRequest).get());
     }
 
     /**
@@ -67,6 +72,6 @@ public class SocialUserInterestInHashTagService {
         // Delete the interest
         socialUserInterestInHashTagRepository.deleteInterest(idUserRequest, idHashTag);
 
-        return responseService.successResponse(socialUserRepository.findById(idUserRequest).get(), "Successful");
+        return responseService.successResponse(socialUserRepository.findById(idUserRequest).get());
     }
 }
