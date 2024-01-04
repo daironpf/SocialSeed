@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.*;
 public class SocialUserInterestInHashTagController {
 
     //region Dependencies
+    private final SocialUserInterestInHashTagService socialUserInterestInHashTagService;
+
     @Autowired
-    private SocialUserInterestInHashTagService socialUserInterestInHashTagService;
+    public SocialUserInterestInHashTagController(SocialUserInterestInHashTagService socialUserInterestInHashTagService) {
+        this.socialUserInterestInHashTagService = socialUserInterestInHashTagService;
+    }
+
     //endregion
 
     /**

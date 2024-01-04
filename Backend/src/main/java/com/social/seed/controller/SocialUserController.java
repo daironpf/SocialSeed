@@ -16,8 +16,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v0.0.1/socialUser")
 public class SocialUserController {
     //region Dependencies
+    private final SocialUserService socialUserService;
+
     @Autowired
-    SocialUserService socialUserService;
+    public SocialUserController(SocialUserService socialUserService) {
+        this.socialUserService = socialUserService;
+    }
+
     //endregion
 
     //region CRUD
