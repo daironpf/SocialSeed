@@ -1,11 +1,26 @@
 version: "3.8"
 services:
+  java_app:
+    container_name: app_ss
+    image: ssapp:1.0.0
+    build: .
+    ports:
+      - 8081:8081
+    environment:
+      - DATABASE_URI=bolt://neo4j:7687
+      - DATABASE_USERNAME=neo4j
+      - DATABASE_PASSWORD=neo4jSocial
+    depends_on:
+      - neo4j
+    networks:
+      - net  
   neo4j:
+    container_name: neo4j_ss 
     image: neo4j:5.15.0-enterprise
     ports:
-      - 7474:7474
-      - 7687:7687
-    restart: unless-stopped
+      - "7474:7474"
+      - "7687:7687"
+    restart: always
     environment:
       - NEO4J_AUTH=neo4j/neo4jSocial
       - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes
@@ -14,4 +29,7 @@ services:
       - ./neo4j/conf:/conf
       - ./neo4j/logs:/logs
       - ./neo4j/plugins:/plugins
-   
+    networks:
+    - net
+networks:
+  net:    
