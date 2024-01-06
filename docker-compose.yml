@@ -2,7 +2,7 @@ version: "3.8"
 services:
   java_app:
     container_name: app_ss
-    image: SocialSeed:0.0.1
+    image: social-seed:0.0.1
     build: .
     ports:
       - 8081:8081
