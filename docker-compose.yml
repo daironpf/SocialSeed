@@ -1,11 +1,11 @@
 version: "3.8"
 services:
-  java_app:
-    container_name: app_ss
+  social-seed-app:
+    container_name: app_social_seed
     image: social-seed:0.0.1
     build: .
     ports:
-      - 8081:8081
+      - "8081:8081"
     environment:
       - DATABASE_URI=bolt://neo4j:7687
       - DATABASE_USERNAME=neo4j
