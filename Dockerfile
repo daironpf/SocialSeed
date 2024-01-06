@@ -1,4 +1,4 @@
-FROM openjdk:23-jdk-Slim
+FROM openjdk:23-jdk-slim
 
 # ejecutar ./mvnw clean package -DskipTests.. saltar los test porque no hay conexion
 # copiar el .jar en la raiz de nuestra imagen  
