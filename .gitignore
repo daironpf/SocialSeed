@@ -33,3 +33,8 @@ Neo4j/conf/
 Neo4j/data/
 Neo4j/logs/
 Neo4j/plugins/
+
+Neo4j/conf
+Neo4j/data
+Neo4j/logs
+Neo4j/plugins
