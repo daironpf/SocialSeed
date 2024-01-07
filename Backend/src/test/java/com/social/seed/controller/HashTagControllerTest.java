@@ -1,8 +1,9 @@
 package com.social.seed.controller;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.social.seed.controller.HashTagController;
+import com.social.seed.model.HashTag;
 import com.social.seed.service.HashTagService;
 import com.social.seed.util.ResponseDTO;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,79 +11,58 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.data.neo4j.DataNeo4jTest;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.test.web.servlet.MvcResult;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
-
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(MockitoExtension.class)
-@WebMvcTest(HashTagControllerTest.class)
+//@ExtendWith(MockitoExtension.class)
+//@WebMvcTest(HashTagController.class)
 class HashTagControllerTest {
     @Autowired
     private MockMvc mockMvc;
     @InjectMocks
-    private HashTagControllerTest hashTagControllerTest;
-    @Mock
+    private HashTagController underTest;
+    @MockBean
     private HashTagService hashTagService;
+
+    @Autowired
+    private ObjectMapper objectMapper; // Agregada instancia de ObjectMapper
+
+    private HashTag hashTag1;
 
     @BeforeEach
     void setUp() {
+        hashTag1 = new HashTag("1", "PrimerHashTag", 0, 0);
     }
 
-    @AfterEach
-    void tearDown() {
-    }
+//    @Test
+    public void testGetHashTagById() throws Exception {
+        // Configurar el comportamiento del servicio mock
+        when(hashTagService.getHashTagById(hashTag1.getId())).thenReturn(ResponseEntity.ok(hashTag1));
 
-    @Test
-    void getAllHashTag() {
-    }
+        // Realizar la solicitud HTTP y verificar la respuesta
+        MvcResult result = mockMvc.perform(get("/api/v0.0.1/hashTag/getHashTagById/{id}", hashTag1.getId()))
+                .andExpect(status().isOk())
+                .andReturn();
 
-    @Test
-    void getHashTagById() throws Exception {
-        // Configuración del servicio mock
-        when(hashTagService.getHashTagById("1")).thenReturn("Hola desde el servicio");
+        // Convertir la respuesta a un objeto HashTag
+        HashTag responseHashTag = objectMapper.readValue(result.getResponse().getContentAsString(), HashTag.class);
 
-        // Ejecutar la solicitud HTTP y verificar la respuesta
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/mensaje"))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("Hola desde el servicio"));
+        // Verificar que el servicio fue llamado
+        verify(hashTagService, times(1)).getHashTagById(hashTag1.getId());
 
-        // Verificar que el método del servicio fue llamado
-        verify(hashTagService, times(1)).generarMensaje();
-
-    }
-
-    @Test
-    void testGetHashTagById() throws Exception {
-        // Mock del servicio para devolver una ResponseEntity simulada
-        String hashtagId = "123";
-        ResponseDTO fakeResponseDTO = new ResponseDTO(HttpStatus.OK,"OK", "Datos simulados");
-        ResponseEntity<Object> fakeServiceResponse = new ResponseEntity<>(fakeResponseDTO, HttpStatus.OK);
-
-        when(hashTagService.getHashTagById(hashtagId)).thenReturn(fakeServiceResponse);
-
-        // Llamada al controlador y verificación de la respuesta
-        ResponseEntity<ResponseDTO> actualResponse = hashTagControllerTest.getHashTagById(hashtagId);
-
-        assertThat(actualResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(actualResponse.getBody()).isEqualTo(fakeResponseDTO);
-    }
-
-    @Test
-    void createHashTag() {
-    }
-
-    @Test
-    void updateHashTag() {
-    }
-
-    @Test
-    void deleteHashTag() {
+        // Asegurarse de que el HashTag obtenido coincida con el esperado
+        assertThat(responseHashTag.getId()).isEqualTo(hashTag1.getId());
+        assertThat(responseHashTag.getName()).isEqualTo("TestHashTag");
     }
 }
