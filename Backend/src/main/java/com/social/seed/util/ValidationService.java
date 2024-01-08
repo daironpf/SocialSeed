@@ -31,9 +31,7 @@ public class ValidationService {
     public boolean userExistByUserName(String userName) {
         return socialUserRepository.existByUserName(userName);
     }
-    public boolean userExistsById(String userId) {
-        return socialUserRepository.existsById(userId);
-    }
+    public boolean userExistsById(String userId) { return socialUserRepository.existsById(userId); }
     public boolean isUserBFollowerOfUserA(String idUserRequest, String idUserToUnFollow){
         return socialUserRepository.isUserBFollowerOfUserA(idUserRequest, idUserToUnFollow);
     }

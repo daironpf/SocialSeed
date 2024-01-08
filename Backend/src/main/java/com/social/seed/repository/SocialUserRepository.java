@@ -29,6 +29,12 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
             RETURN u
             """)
     Optional<SocialUser> findByEmail(String email);
+
+    @Query("""
+            OPTIONAL MATCH (u:SocialUser {userName: $userName})
+            RETURN u
+            """)
+    Optional<SocialUser> findByUserName(String userName);
     //endregion
 
     //region CRUD

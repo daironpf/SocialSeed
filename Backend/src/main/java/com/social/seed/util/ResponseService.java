@@ -36,6 +36,10 @@ public class ResponseService {
         return new ResponseEntity<>(ResponseDTO.notFound(String.format("The user with id: %s not found.", userId)), HttpStatus.NOT_FOUND);
     }
 
+    public ResponseEntity<Object> userByNameNotFoundResponse(String userName) {
+        return new ResponseEntity<>(ResponseDTO.notFound(String.format("The User with userName: %s not found.", userName)), HttpStatus.NOT_FOUND);
+    }
+
     public ResponseEntity<Object> notFoundWithMessageResponse(String message) {
         return new ResponseEntity<>(ResponseDTO.notFound(message), HttpStatus.NOT_FOUND);
     }
