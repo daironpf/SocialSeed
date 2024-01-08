@@ -55,8 +55,7 @@ class SocialUserServiceTest {
     private ValidationService validationService;
     // endregion
 
-    // region variables
-    // Sample social user for testing
+    // region Sample social user for testing
     private SocialUser socialUser1;
     // endregion
 
@@ -76,14 +75,14 @@ class SocialUserServiceTest {
     void shouldReturnSuccessResponseWithSocialUserDetailsForValidUserName() {
         // Arrange
         when(responseService.successResponse(any())).thenCallRealMethod();
-        when(socialUserRepository.findByUserName("maria1")).thenReturn(Optional.of(socialUser1));
-        when(validationService.userExistByUserName("maria1")).thenReturn(true);
+        when(socialUserRepository.findByUserName(socialUser1.getUserName())).thenReturn(Optional.of(socialUser1));
+        when(validationService.userExistByUserName(socialUser1.getUserName())).thenReturn(true);
 
         // Act
-        ResponseEntity<Object> responseEntity = underTest.getSocialUserByUserName("maria1");
+        ResponseEntity<Object> responseEntity = underTest.getSocialUserByUserName(socialUser1.getUserName());
 
         // Assert
-        verify(socialUserRepository, times(1)).findByUserName("maria1");
+        verify(socialUserRepository, times(1)).findByUserName(socialUser1.getUserName());
 
         assertThat(responseEntity).isNotNull();
 
@@ -96,6 +95,80 @@ class SocialUserServiceTest {
 
         // Verify social user details
         TestUtils.assertSocialUserEquals(socialUserResponse, socialUser1);
+    }
+
+    /**
+     * Tests the behavior of the {@link SocialUserService#getSocialUserByUserName(String)} method
+     * when retrieving social user details for invalid UserName.
+     */
+    @Test
+    void shouldReturnNotFoundResponseForNonExistUserName() {
+        // Arrange
+        when(responseService.notFoundWithMessageResponse(any())).thenCallRealMethod();
+        when(validationService.userExistByUserName("fakeUser")).thenReturn(false);
+
+        // Act
+        ResponseEntity<Object> responseEntity = underTest.getSocialUserByUserName("fakeUser");
+
+        // Assert
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The User with userName: [ %s ] was not found.", "fakeUser"));
+    }
+
+    /**
+     * Tests the behavior of the {@link SocialUserService#getSocialUserByEmail(String)} method
+     * when retrieving social user details for a valid Email.
+     */
+    @Test
+    void shouldReturnSuccessResponseWithSocialUserDetailsForValidEmail() {
+        // Arrange
+        when(responseService.successResponse(any())).thenCallRealMethod();
+        when(socialUserRepository.findByEmail(socialUser1.getEmail())).thenReturn(Optional.of(socialUser1));
+        when(validationService.userExistByEmail(socialUser1.getEmail())).thenReturn(true);
+
+        // Act
+        ResponseEntity<Object> responseEntity = underTest.getSocialUserByEmail(socialUser1.getEmail());
+
+        // Assert
+        verify(socialUserRepository, times(1)).findByEmail(socialUser1.getEmail());
+
+        assertThat(responseEntity).isNotNull();
+
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+        SocialUser socialUserResponse = ((Optional<SocialUser>) response.response()).orElse(null);
+
+        // Verify response details
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+
+        // Verify social user details
+        TestUtils.assertSocialUserEquals(socialUserResponse, socialUser1);
+    }
+
+    /**
+     * Tests the behavior of the {@link SocialUserService#getSocialUserByEmail(String)} method
+     * when retrieving social user details for invalid Email.
+     */
+    @Test
+    void shouldReturnNotFoundResponseForNonExistEmail() {
+        // Arrange
+        when(responseService.notFoundWithMessageResponse(any())).thenCallRealMethod();
+        when(validationService.userExistByEmail("fake@email.test")).thenReturn(false);
+
+        // Act
+        ResponseEntity<Object> responseEntity = underTest.getSocialUserByEmail("fake@email.test");
+
+        // Assert
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The User with email: [ %s ] was not found.", "fake@email.test"));
     }
     // endregion
 }

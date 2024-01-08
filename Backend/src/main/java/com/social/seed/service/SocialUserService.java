@@ -35,13 +35,27 @@ public class SocialUserService {
     /**
      * Retrieves a Social User by UserName.
      *
-     * @param UserName The UserName of the Social User to retrieve.
+     * @param userName The UserName of the Social User to retrieve.
      * @return ResponseEntity with the response mapped to a ResponseDTO.
      */
-    public ResponseEntity<Object> getSocialUserByUserName(String UserName) {
-        if (!validationService.userExistByUserName(UserName)) return responseService.userByNameNotFoundResponse(UserName);
+    public ResponseEntity<Object> getSocialUserByUserName(String userName) {
+        if (!validationService.userExistByUserName(userName)) return
+                responseService.notFoundWithMessageResponse(String.format("The User with userName: [ %s ] was not found.", userName));
 
-        return responseService.successResponse(socialUserRepository.findByUserName(UserName));
+        return responseService.successResponse(socialUserRepository.findByUserName(userName));
+    }
+
+    /**
+     * Retrieves a Social User by Email.
+     *
+     * @param email The Email of the Social User to retrieve.
+     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     */
+    public ResponseEntity<Object> getSocialUserByEmail(String email) {
+        if (!validationService.userExistByEmail(email)) return
+                responseService.notFoundWithMessageResponse(String.format("The User with email: [ %s ] was not found.", email));
+
+        return responseService.successResponse(socialUserRepository.findByEmail(email));
     }
     // endregion
 
