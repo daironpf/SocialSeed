@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.social.seed.repository;
+package com.social.seed.utils;
 
 import com.social.seed.model.HashTag;
 import com.social.seed.model.SocialUser;
@@ -70,11 +70,36 @@ public class TestUtils {
                 .build();
     }
 
+    /**
+     * Asserts that two instances of {@link SocialUser} are equal in terms of their properties.
+     *
+     * @param actual   The actual SocialUser instance obtained during testing.
+     * @param expected The expected SocialUser instance with the predefined values for comparison.
+     *
+     * @throws AssertionError If the actual and expected SocialUser instances are not equal.
+     */
     public static void assertSocialUserEquals(SocialUser actual, SocialUser expected) {
+        // Ensure that the actual SocialUser instance is not null
         assertThat(actual).isNotNull();
+
+        // Compare individual properties for equality
+        assertThat(actual.getId()).isEqualTo(expected.getId());
+
+        assertThat(actual.getDateBorn()).isEqualTo(expected.getDateBorn());
+        assertThat(actual.getRegistrationDate()).isEqualTo(expected.getRegistrationDate());
+
+        assertThat(actual.getFullName()).isEqualTo(expected.getFullName());
         assertThat(actual.getUserName()).isEqualTo(expected.getUserName());
         assertThat(actual.getEmail()).isEqualTo(expected.getEmail());
-        assertThat(actual.getDateBorn()).isEqualTo(expected.getDateBorn());
-        assertThat(actual.getFullName()).isEqualTo(expected.getFullName());
+        assertThat(actual.getLanguage()).isEqualTo(expected.getLanguage());
+
+        assertThat(actual.getOnVacation()).isEqualTo(expected.getOnVacation());
+        assertThat(actual.getIsActive()).isEqualTo(expected.getIsActive());
+        assertThat(actual.getIsDeleted()).isEqualTo(expected.getIsDeleted());
+
+        assertThat(actual.getFriendCount()).isEqualTo(expected.getFriendCount());
+        assertThat(actual.getFollowersCount()).isEqualTo(expected.getFollowersCount());
+        assertThat(actual.getFollowingCount()).isEqualTo(expected.getFollowingCount());
+        assertThat(actual.getFriendRequestCount()).isEqualTo(expected.getFriendRequestCount());
     }
 }

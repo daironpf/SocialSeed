@@ -17,7 +17,7 @@ package com.social.seed.service;
 
 import com.social.seed.model.SocialUser;
 import com.social.seed.repository.SocialUserRepository;
-import com.social.seed.repository.TestUtils;
+import com.social.seed.utils.TestUtils;
 import com.social.seed.util.ResponseDTO;
 import com.social.seed.util.ResponseService;
 import com.social.seed.util.ValidationService;

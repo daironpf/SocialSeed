@@ -16,6 +16,7 @@
 package com.social.seed.repository;
 
 import com.social.seed.model.SocialUser;
+import com.social.seed.utils.TestUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
