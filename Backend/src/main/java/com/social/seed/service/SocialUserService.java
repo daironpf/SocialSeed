@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Service
 public class SocialUserService {
 
-    //region Dependencies
+    // region Dependencies
     private final SocialUserRepository socialUserRepository;
     private final ResponseService responseService;
     private final ValidationService validationService;
@@ -29,8 +29,23 @@ public class SocialUserService {
         this.validationService = validationService;
     }
 
-    //endregion
+    // endregion
 
+    // region Find by
+    /**
+     * Retrieves a Social User by UserName.
+     *
+     * @param UserName The UserName of the Social User to retrieve.
+     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     */
+    public ResponseEntity<Object> getSocialUserByUserName(String UserName) {
+        if (!validationService.userExistByUserName(UserName)) return responseService.userByNameNotFoundResponse(UserName);
+
+        return responseService.successResponse(socialUserRepository.findByUserName(UserName));
+    }
+    // endregion
+
+    // region CRUD
     /**
      * Retrieves a Social User by ID.
      *
@@ -119,7 +134,9 @@ public class SocialUserService {
 
         return responseService.successResponse("The user was deleted.");
     }
+    // endregion
 
+    // region Update Operations
     /**
      * Updates the username of a Social User.
      *
@@ -162,7 +179,9 @@ public class SocialUserService {
         return responseService.successResponseWithMessage(socialUserRepository.findById(idUserToUpdate).get(),
                 "The email was updated successfully.");
     }
+    // endregion
 
+    // region Relationship Management
     /**
      * Allows a user to follow another user.
      *
@@ -203,7 +222,9 @@ public class SocialUserService {
 
         return responseService.successResponse("The user was unfollowed successfully.");
     }
+    // endregion
 
+    // region Vacation Mode Operations
     /**
      * Activates Vacation Mode for a Social User.
      *
@@ -233,7 +254,9 @@ public class SocialUserService {
 
         return responseService.successResponse("The vacation mode was Deactivated successfully.");
     }
+    // endregion
 
+    // region Activation Operations
     /**
      * Activates a Social User.
      *
@@ -263,4 +286,5 @@ public class SocialUserService {
 
         return responseService.successResponse("The Social User was Deactivated successfully.");
     }
+    // endregion
 }

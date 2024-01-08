@@ -93,7 +93,7 @@ class SocialUserRepositoryTest {
     }
     // endregion
 
-    // region Find by Email
+    // region Find by
     /**
      * Tests whether the SocialUserRepository can successfully find an existing social user by email.
      * It verifies that the repository correctly indicates the existence of the social user by email,
@@ -108,6 +108,25 @@ class SocialUserRepositoryTest {
 
         // When: Trying to find a social user by email
         Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
+
+        // Then: Verifies that the existing social user's properties are as expected
+        assertSocialUserProperties(socialUser.orElseThrow());
+    }
+
+    /**
+     * Tests whether the SocialUserRepository can successfully find an existing social user by userName.
+     * It verifies that the repository correctly indicates the existence of the social user by userName,
+     * retrieves the social user using the findByUserName method, and asserts that the retrieved user's
+     * properties match the expected values.
+     */
+    @Test
+    void findByUserNameShouldReturnExistingSocialUser() {
+        // Given: A social user with a specific email exists
+        boolean userExists = underTest.existByUserName("gelacio32");
+        assertThat(userExists).isTrue();
+
+        // When: Trying to find a social user by email
+        Optional<SocialUser> socialUser = underTest.findByUserName("gelacio32");
 
         // Then: Verifies that the existing social user's properties are as expected
         assertSocialUserProperties(socialUser.orElseThrow());

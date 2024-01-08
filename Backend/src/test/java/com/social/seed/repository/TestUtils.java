@@ -20,6 +20,8 @@ import com.social.seed.model.SocialUser;
 
 import java.time.LocalDateTime;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class TestUtils {
 
     /**
@@ -66,5 +68,13 @@ public class TestUtils {
                 .socialUserInterestIn(socialUserInterestIn)
                 .postTaggedIn(postTaggedIn)
                 .build();
+    }
+
+    public static void assertSocialUserEquals(SocialUser actual, SocialUser expected) {
+        assertThat(actual).isNotNull();
+        assertThat(actual.getUserName()).isEqualTo(expected.getUserName());
+        assertThat(actual.getEmail()).isEqualTo(expected.getEmail());
+        assertThat(actual.getDateBorn()).isEqualTo(expected.getDateBorn());
+        assertThat(actual.getFullName()).isEqualTo(expected.getFullName());
     }
 }
