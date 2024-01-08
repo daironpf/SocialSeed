@@ -54,6 +54,20 @@ public class SocialUserController {
                 .status(response.getStatusCode())
                 .body((ResponseDTO) response.getBody());
     }
+
+    /**
+     * Retrieve a Social User by Email.
+     *
+     * @param email The Email of the Social User to retrieve.
+     * @return ResponseEntity with a ResponseDTO.
+     */
+    @GetMapping("/getSocialUserByEmail/{email}")
+    public ResponseEntity<ResponseDTO> getSocialUserByEmail(@PathVariable String email) {
+        ResponseEntity<Object> response = socialUserService.getSocialUserByEmail(email);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
+    }
     // endregion
 
     //region CRUD

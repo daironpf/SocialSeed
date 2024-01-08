@@ -43,6 +43,12 @@ class SocialUserRepositoryTest {
     @Autowired
     private SocialUserRepository underTest;
 
+    // region Sample social user for testing
+    private SocialUser socialUser1;
+    private SocialUser socialUser2;
+    private SocialUser socialUser3;
+    // endregion
+
     // region Setup and Tear down
     /**
      * This method is executed before each test case to set up the necessary test data.
@@ -97,21 +103,17 @@ class SocialUserRepositoryTest {
     // region Find by
     /**
      * Tests whether the SocialUserRepository can successfully find an existing social user by email.
-     * It verifies that the repository correctly indicates the existence of the social user by email,
-     * retrieves the social user using the findByEmail method, and asserts that the retrieved user's
+     * Retrieves the social user using the findByEmail method, and asserts that the retrieved user's
      * properties match the expected values.
      */
     @Test
     void findByEmailShouldReturnExistingSocialUser() {
-        // Given: A social user with a specific email exists
-        boolean userExists = underTest.existByEmail("gelacio32@gmail.com");
-        assertThat(userExists).isTrue();
-
         // When: Trying to find a social user by email
-        Optional<SocialUser> socialUser = underTest.findByEmail("gelacio32@gmail.com");
+        Optional<SocialUser> expectedSocialUser = underTest.findByEmail(socialUser1.getEmail());
 
         // Then: Verifies that the existing social user's properties are as expected
-        assertSocialUserProperties(socialUser.orElseThrow());
+        assertThat(expectedSocialUser).isPresent();
+        TestUtils.assertSocialUserEquals(socialUser1,expectedSocialUser.get());
     }
 
     /**
@@ -455,13 +457,13 @@ class SocialUserRepositoryTest {
      */
     private void createTestData() {
         // user #1
-        underTest.save(TestUtils.createSocialUser("maria1", "maria1@gmail.com", "1992-01-04T00:00:00", "Maria del Laurel Perez", "ES"));
+        socialUser1 = underTest.save(TestUtils.createSocialUser("maria1", "maria1@gmail.com", "1992-01-04T00:00:00", "Maria del Laurel Perez", "ES"));
 
         // user #2
-        underTest.save(TestUtils.createSocialUser("lucas7", "lucas7@gmail.com", "1987-02-04T00:00:00", "Lucas Des Von", "EN"));
+        socialUser2 = underTest.save(TestUtils.createSocialUser("lucas7", "lucas7@gmail.com", "1987-02-04T00:00:00", "Lucas Des Von", "EN"));
 
         // user #3
-        underTest.save(TestUtils.createSocialUser("gelacio32", "gelacio32@gmail.com", "1962-10-11T00:00:00", "Gelacio Perez Perez", "ES"));
+        socialUser3 = underTest.save(TestUtils.createSocialUser("gelacio32", "gelacio32@gmail.com", "1962-10-11T00:00:00", "Gelacio Perez Perez", "ES"));
     }
 
     /**
