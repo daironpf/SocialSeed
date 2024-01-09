@@ -18,8 +18,6 @@ public class ResponseService {
         return new ResponseEntity<>(ResponseDTO.success(data, "Created Successful"), HttpStatus.CREATED);
     }
 
-
-
     public ResponseEntity<Object> conflictResponseWithMessage(String message) {
         return new ResponseEntity<>(ResponseDTO.conflict(message), HttpStatus.CONFLICT);
     }
@@ -33,7 +31,7 @@ public class ResponseService {
     }
 
     public ResponseEntity<Object> userNotFoundResponse(String userId) {
-        return new ResponseEntity<>(ResponseDTO.notFound(String.format("The user with id: %s not found.", userId)), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(ResponseDTO.notFound(String.format("The user with id: [ %s ] was not found.", userId)), HttpStatus.NOT_FOUND);
     }
 
     public ResponseEntity<Object> userByNameNotFoundResponse(String userName) {
