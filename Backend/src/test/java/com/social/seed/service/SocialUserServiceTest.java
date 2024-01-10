@@ -90,6 +90,7 @@ class SocialUserServiceTest {
         SocialUser socialUserResponse = ((Optional<SocialUser>) response.response()).orElse(null);
 
         // Verify response details
+        assertThat(response).isNotNull();
         assertThat(response.status()).isEqualTo(HttpStatus.OK);
         assertThat(response.message()).isEqualTo("Successful");
 
@@ -115,6 +116,7 @@ class SocialUserServiceTest {
         ResponseDTO response = (ResponseDTO) responseEntity.getBody();
 
         // Verify response details
+        assertThat(response).isNotNull();
         assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(response.message()).isEqualTo(String.format("The User with userName: [ %s ] was not found.", "fakeUser"));
     }
@@ -142,6 +144,7 @@ class SocialUserServiceTest {
         SocialUser socialUserResponse = ((Optional<SocialUser>) response.response()).orElse(null);
 
         // Verify response details
+        assertThat(response).isNotNull();
         assertThat(response.status()).isEqualTo(HttpStatus.OK);
         assertThat(response.message()).isEqualTo("Successful");
 
@@ -167,8 +170,957 @@ class SocialUserServiceTest {
         ResponseDTO response = (ResponseDTO) responseEntity.getBody();
 
         // Verify response details
+        assertThat(response).isNotNull();
         assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
         assertThat(response.message()).isEqualTo(String.format("The User with email: [ %s ] was not found.", "fake@email.test"));
     }
+    // endregion
+
+    // region CRUD
+    /**
+     * Tests the behavior of the {@link SocialUserService#getSocialUserById(String)} method
+     * when retrieving Social User details for a valid ID.
+     */
+    @Test
+    void shouldReturnSuccessResponseWithSocialUserDetailsForValidId() {
+        // Arrange
+        when(responseService.successResponse(any())).thenCallRealMethod();
+        when(socialUserRepository.findById(socialUser1.getId())).thenReturn(Optional.of(socialUser1));
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
+
+        // Act
+        ResponseEntity<Object> responseEntity = underTest.getSocialUserById(socialUser1.getId());
+
+        // Assert
+        verify(socialUserRepository, times(1)).findById(socialUser1.getId());
+        assertThat(responseEntity).isNotNull();
+
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+        SocialUser socialUserResponse = ((Optional<SocialUser>) response.response()).orElse(null);
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+
+        // Verify social user details
+        TestUtils.assertSocialUserEquals(socialUserResponse, socialUser1);
+    }
+
+    /**
+     * Tests the behavior of the {@link SocialUserService#getSocialUserById(String)} method
+     * when retrieving social user details for invalid ID.
+     */
+    @Test
+    void shouldReturnNotFoundResponseForNonExistId() {
+        // Arrange
+        when(responseService.userNotFoundResponse(any())).thenCallRealMethod();
+        when(validationService.userExistsById("fakeId")).thenReturn(false);
+
+        // Act
+        ResponseEntity<Object> responseEntity = underTest.getSocialUserById("fakeId");
+
+        // Assert
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", "fakeId"));
+    }
+
+    // region Create New SocialUser
+    @Test
+    void createSocialUser_Success() {
+        // Mock validationService
+        when(validationService.userExistByUserName(anyString())).thenReturn(false);
+        when(validationService.userExistByEmail(anyString())).thenReturn(false);
+
+        // Mock repository save
+        when(socialUserRepository.save(any())).thenReturn(socialUser1);
+
+        // Mock success response
+        when(responseService.successCreatedResponse(any())).thenCallRealMethod();
+
+        // Call the method
+        ResponseEntity<Object> responseEntity = underTest.createNewSocialUser(socialUser1);
+
+        // Verify interactions
+        verify(validationService, times(1)).userExistByUserName(anyString());
+        verify(validationService, times(1)).userExistByEmail(anyString());
+        verify(socialUserRepository, times(1)).save(any());
+
+        // Assert
+        assertThat(responseEntity).isNotNull();
+
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+        assert response != null;
+        SocialUser socialUserResponse = (SocialUser) response.response();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Created Successful");
+
+        // Verify social user details
+        TestUtils.assertSocialUserEquals(socialUserResponse, socialUser1);
+    }
+
+    @Test
+    void createSocialUser_Conflict_UserName() {
+        // Mocking the validation service
+        when(validationService.userExistByUserName(anyString())).thenReturn(true);
+
+        // Mocking the conflict response
+        when(responseService.conflictResponseWithMessage(any())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.createNewSocialUser(socialUser1);
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.message()).isEqualTo(String.format("The userName [ %s ] already exists", socialUser1.getUserName()));
+    }
+
+    @Test
+    void createSocialUser_Conflict_Email() {
+        // Mocking the validation service
+        when(validationService.userExistByUserName(anyString())).thenReturn(false);
+        when(validationService.userExistByEmail(anyString())).thenReturn(true);
+
+        // Mocking the conflict response
+        when(responseService.conflictResponseWithMessage(any())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.createNewSocialUser(socialUser1);
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.message()).isEqualTo(String.format("The Email [ %s ] already exists", socialUser1.getEmail()));
+    }
+    // endregion
+
+    // region Update Social User
+    @Test
+    void updateSocialUser_Success() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+
+        // Mocking the repository update and findById methods
+        when(socialUserRepository.findById(anyString())).thenReturn(Optional.of(socialUser1));
+        doNothing().when(socialUserRepository).update(anyString(), any(), any(), any());
+
+        // Mocking the success response
+        when(responseService.successResponse(any())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.updateSocialUser(socialUser1.getId(), socialUser1);
+
+        // Assert
+        assertThat(responseEntity).isNotNull();
+
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+        assert response != null;
+        SocialUser socialUserResponse = (SocialUser) response.response();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+
+        // Verify social user details
+        TestUtils.assertSocialUserEquals(socialUserResponse, socialUser1);
+    }
+
+    @Test
+    void updateSocialUser_Forbidden_UserRequestIsNotTheOwner() {
+        // Mocking the conflict response
+        when(responseService.forbiddenResponseWithMessage(any())).thenCallRealMethod();
+
+        // Calling the actual service method with a different userId
+        ResponseEntity<Object> responseEntity = underTest.updateSocialUser("differentUserId", socialUser1);
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.FORBIDDEN);
+        assertThat(response.message()).isEqualTo("The user making the update request is not the owner of this.");
+    }
+
+    @Test
+    void updateSocialUser_UserNotFound() {
+        // Mocking the validation service for user not found
+        when(validationService.userExistsById(anyString())).thenReturn(false);
+
+        // Mocking the user not found response
+        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.updateSocialUser(socialUser1.getId(), socialUser1);
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
+    }
+    // endregion
+
+    // region Delete Social User
+    @Test
+    void deleteSocialUser_Success() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+
+        // Mocking the repository deleteById method
+        doNothing().when(socialUserRepository).deleteById(anyString());
+
+        // Mocking the success response
+        when(responseService.successResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.deleteSocialUser("userIdToDelete", "userIdToDelete");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+    }
+
+    @Test
+    void deleteSocialUser_Forbidden_UserRequestIsNotTheOwner() {
+        // Mocking the success response
+        when(responseService.forbiddenResponseWithMessage(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method with a different userId
+        ResponseEntity<Object> responseEntity = underTest.deleteSocialUser("differentUserId", "userIdToDelete");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.FORBIDDEN);
+        assertThat(response.message()).isEqualTo("The user making the delete request is not the owner of this.");
+    }
+
+    @Test
+    void deleteSocialUser_UserNotFound() {
+        // Mocking the validation service for user not found
+        when(validationService.userExistsById(anyString())).thenReturn(false);
+
+        // Mocking the user not found response
+        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.deleteSocialUser(socialUser1.getId(),socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
+    }
+    // endregion
+
+    // region Update SocialUser Name
+    @Test
+    void updateSocialUserName_Success() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.userExistByUserName(anyString())).thenReturn(false);
+
+        // Mocking the repository updateSocialUserName and findById methods
+        doNothing().when(socialUserRepository).updateSocialUserName(anyString(), anyString());
+        when(socialUserRepository.findById(anyString())).thenReturn(Optional.of(socialUser1));
+
+        // Mocking the success response
+        when(responseService.successResponseWithMessage(any(), anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.updateSocialUserName("userId", "userId", "newUserName");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("The username was updated successfully.");
+    }
+
+    @Test
+    void updateSocialUserName_Forbidden_UserRequestIsNotTheOwner() {
+        // Mocking the validation service
+        when(responseService.forbiddenResponseWithMessage(any())).thenCallRealMethod();
+
+        // Calling the actual service method with a different userId
+        ResponseEntity<Object> responseEntity = underTest.updateSocialUserName("differentUserId", "userIdToUpdate", "newUserName");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.FORBIDDEN);
+        assertThat(response.message()).isEqualTo("The user who is requesting the userName change is not the owner of this");
+    }
+
+    @Test
+    void updateSocialUserName_UserNotFound() {
+        // Mocking the validation service for user not found
+        when(validationService.userExistsById(anyString())).thenReturn(false);
+
+        // Mocking the user not found response
+        when(responseService.userNotFoundResponse(any())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.updateSocialUserName(socialUser1.getId(),socialUser1.getId(), "newUserName");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.",socialUser1.getId()));
+    }
+
+    @Test
+    void updateSocialUserName_Conflict_NameAlreadyExists() {
+        // Mocking the validation service for existing userName
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.userExistByUserName(anyString())).thenReturn(true);
+
+        // Mocking the conflict response
+        when(responseService.conflictResponseWithMessage(any())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.updateSocialUserName(socialUser1.getId(),socialUser1.getId(), "existingUserName");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.message()).isEqualTo(String.format("The userName [ %s ] already exists", "existingUserName"));
+    }
+    // endregion
+
+    // region Update Email
+    @Test
+    void updateSocialUserEmail_Success() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.userExistByEmail(anyString())).thenReturn(false);
+
+        // Mocking the repository updateSocialUserEmail and findById methods
+        doNothing().when(socialUserRepository).updateSocialUserEmail(anyString(), anyString());
+        when(socialUserRepository.findById(anyString())).thenReturn(Optional.of(socialUser1));
+
+        // Mocking the success response
+        when(responseService.successResponseWithMessage(any(), anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.updateSocialUserEmail(socialUser1.getId(),socialUser1.getId(), "newEmail");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("The email was updated successfully.");
+    }
+
+    @Test
+    void updateSocialUserEmail_Forbidden_UserRequestIsNotTheOwner() {
+        // Mocking the response
+        when(responseService.forbiddenResponseWithMessage(any())).thenCallRealMethod();
+
+        // Calling the actual service method with a different userId
+        ResponseEntity<Object> responseEntity = underTest.updateSocialUserEmail("differentUserId", socialUser1.getId(), "newEmail");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.FORBIDDEN);
+        assertThat(response.message()).isEqualTo("The user who is requesting the Email change is not the owner of this");
+    }
+
+    @Test
+    void updateSocialUserEmail_UserNotFound() {
+        // Mocking the validation service for user not found
+        when(validationService.userExistsById(anyString())).thenReturn(false);
+
+        // Mocking the user not found response
+        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.updateSocialUserEmail(socialUser1.getId(),socialUser1.getId(), "newEmail");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.",socialUser1.getId()));
+    }
+
+    @Test
+    void updateSocialUserEmail_Conflict_EmailAlreadyExists() {
+        // Mocking the validation service for existing email
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.userExistByEmail(anyString())).thenReturn(true);
+
+        // Mocking the conflict response
+        when(responseService.conflictResponseWithMessage(any())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.updateSocialUserEmail(socialUser1.getId(), socialUser1.getId(), socialUser1.getEmail());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.message()).isEqualTo(String.format("The Email [ %s ] already exists",socialUser1.getEmail()));
+    }
+    // endregion
+    // endregion
+
+    // region Follow
+    @Test
+    void followSocialUser_Success() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.isUserBFollowerOfUserA(anyString(), anyString())).thenReturn(false);
+
+        // Mocking the repository createUserBFollowUserA method
+        doNothing().when(socialUserRepository).createUserBFollowUserA(anyString(), anyString(), any());
+
+        // Mocking the success response
+        when(responseService.successResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.followSocialUser(socialUser1.getId(), "userIdToFollow");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+    }
+
+    @Test
+    void followSocialUser_Forbidden_SameUser() {
+        // Mocking the success response
+        when(responseService.forbiddenResponseWithMessage(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method with the same userIds
+        ResponseEntity<Object> responseEntity = underTest.followSocialUser(socialUser1.getId(),socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.FORBIDDEN);
+        assertThat(response.message()).isEqualTo("the user to be followed cannot be the same");
+    }
+
+    @Test
+    void followSocialUser_UserNotFound() {
+        // Mocking the validation service for user not found
+        when(validationService.userExistsById("userIdToFollow")).thenReturn(true);
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(false);
+
+        // Mocking the user not found response
+        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.followSocialUser(socialUser1.getId(), "userIdToFollow");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.",socialUser1.getId()));
+
+        // Verify to the second parameter
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
+        when(validationService.userExistsById("userIdToFollow")).thenReturn(false);
+
+        // Calling the actual service method
+        responseEntity = underTest.followSocialUser(socialUser1.getId(), "userIdToFollow");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.","userIdToFollow"));
+    }
+
+    @Test
+    void followSocialUser_AlreadyFollowed() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.isUserBFollowerOfUserA(anyString(), anyString())).thenReturn(true);
+
+        // Mocking the already followed response
+        when(responseService.conflictResponseWithMessage(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.followSocialUser(socialUser1.getId(),"userIdToFollow");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.message()).isEqualTo(String.format("User %s is already being followed.", "userIdToFollow"));
+    }
+    // endregion
+
+    // region unfollow
+    @Test
+    void unfollowSocialUser_Success() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.isUserBFollowerOfUserA(anyString(), anyString())).thenReturn(true);
+
+        // Mocking the repository unFollowTheUserA method
+        doNothing().when(socialUserRepository).unFollowTheUserA(anyString(), anyString());
+
+        // Mocking the success response
+        when(responseService.successResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.unfollowSocialUser(socialUser1.getId(), "userIdToUnfollow");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+    }
+
+    @Test
+    void unfollowSocialUser_Forbidden_SameUser() {
+        // Mocking the success response
+        when(responseService.forbiddenResponseWithMessage(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method with the same userIds
+        ResponseEntity<Object> responseEntity = underTest.unfollowSocialUser(socialUser1.getId(), socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.FORBIDDEN);
+        assertThat(response.message()).isEqualTo("the user to be unfollowed cannot be the same");
+    }
+
+    @Test
+    void unfollowSocialUser_UserNotFound() {
+        // Mocking the validation service for user not found
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.userExistsById("userIdToUnfollow")).thenReturn(false);
+
+        // Mocking the user not found response
+        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.unfollowSocialUser(socialUser1.getId(), "userIdToUnfollow");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", "userIdToUnfollow"));
+
+        // Verify to the first parameter
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(false);
+
+        // Calling the actual service method
+        responseEntity = underTest.unfollowSocialUser(socialUser1.getId(), "userIdToUnfollow");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
+    }
+
+    @Test
+    void unfollowSocialUser_DontUnfollow() {
+        // Mocking the validation service for not following
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.isUserBFollowerOfUserA(anyString(), anyString())).thenReturn(false);
+
+        // Mocking they don't unfollow response
+        when(responseService.dontUnFollow(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.unfollowSocialUser(socialUser1.getId(), "userIdToUnfollow");
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.message()).isEqualTo(String.format("User %s is not being followed.", "userIdToUnfollow"));
+    }
+    // endregion
+
+    // region VacationMode
+    // region Activate
+
+    @Test
+    void activateVacationMode_Success() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.isVacationModeActivated(anyString())).thenReturn(false);
+
+        // Mocking the success response
+        when(responseService.successResponse(anyString())).thenCallRealMethod();
+
+        // Mocking the repository unFollowTheUserA method
+        doNothing().when(socialUserRepository).activateVacationMode(anyString());
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.activateVacationMode(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+    }
+
+    @Test
+    void activateVacationMode_UserNotFound() {
+        // Mocking the validation service
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(false);
+
+        // Mocking the success response
+        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.activateVacationMode(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
+    }
+
+    @Test
+    void activateVacationMode_AlreadyActive() {
+        // Mocking the validation service
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
+        when(validationService.isVacationModeActivated(socialUser1.getId())).thenReturn(true);
+
+        // Mocking the success response
+        when(responseService.conflictResponseWithMessage(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.activateVacationMode(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.message()).isEqualTo("The Vacation Mode is already Active");
+    }
+
+    // endregion
+
+    // region DeActivate
+    @Test
+    void deActivateVacationMode_Success() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.isVacationModeActivated(anyString())).thenReturn(true);
+
+        // Mocking the success response
+        when(responseService.successResponse(anyString())).thenCallRealMethod();
+
+        // Mocking the repository unFollowTheUserA method
+        doNothing().when(socialUserRepository).deactivateVacationMode(anyString());
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.deactivateVacationMode(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+    }
+
+    @Test
+    void deActivateVacationMode_UserNotFound() {
+        // Mocking the validation service
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(false);
+
+        // Mocking the success response
+        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.deactivateVacationMode(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
+    }
+
+    @Test
+    void deActivateVacationMode_isAlreadyDeactivated() {
+        // Mocking the validation service
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
+        when(validationService.isVacationModeActivated(socialUser1.getId())).thenReturn(false);
+
+        // Mocking the success response
+        when(responseService.conflictResponseWithMessage(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.deactivateVacationMode(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.message()).isEqualTo("The Vacation Mode is already Deactivated");
+    }
+    // endregion
+    // endregion
+
+    // region ActivateMode
+
+    // region Activate
+    @Test
+    void activateSocialUser_Success() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.isSocialUserActivated(anyString())).thenReturn(false);
+
+        // Mocking the success response
+        when(responseService.successResponse(anyString())).thenCallRealMethod();
+
+        // Mocking the repository unFollowTheUserA method
+        doNothing().when(socialUserRepository).activateSocialUser(anyString());
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.activateSocialUser(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+    }
+
+    @Test
+    void activateSocialUser_UserNotFound() {
+        // Mocking the validation service
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(false);
+
+        // Mocking the success response
+        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.activateSocialUser(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
+    }
+
+    @Test
+    void activateSocialUser_isAlreadyActivated() {
+        // Mocking the validation service
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
+        when(validationService.isSocialUserActivated(socialUser1.getId())).thenReturn(true);
+
+        // Mocking the success response
+        when(responseService.conflictResponseWithMessage(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.activateSocialUser(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.message()).isEqualTo("The Social User is already Active");
+    }
+    // endregion
+
+    // region DeActivate
+    @Test
+    void DeActivateSocialUser_Success() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.isSocialUserActivated(anyString())).thenReturn(true);
+
+        // Mocking the success response
+        when(responseService.successResponse(anyString())).thenCallRealMethod();
+
+        // Mocking the repository unFollowTheUserA method
+        doNothing().when(socialUserRepository).deactivateSocialUser(anyString());
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.deactivateSocialUser(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+    }
+
+    @Test
+    void DeActivateSocialUser_UserNotFound() {
+        // Mocking the validation service
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(false);
+
+        // Mocking the success response
+        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.deactivateSocialUser(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
+    }
+
+    @Test
+    void DeActivateSocialUser_isAlreadyActivated() {
+        // Mocking the validation service
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
+        when(validationService.isSocialUserActivated(socialUser1.getId())).thenReturn(true);
+
+        // Mocking the success response
+        when(responseService.conflictResponseWithMessage(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.activateSocialUser(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.message()).isEqualTo("The Social User is already Active");
+    }
+    // endregion
+
     // endregion
 }
