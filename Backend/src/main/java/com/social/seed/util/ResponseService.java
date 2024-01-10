@@ -27,27 +27,19 @@ public class ResponseService {
     }
 
     public ResponseEntity<Object> forbiddenDuplicateSocialUser() {
-        return forbiddenResponseWithMessage("The user cannot be the same.");
+        return new ResponseEntity<>(ResponseDTO.forbidden("The user cannot be the same."), HttpStatus.FORBIDDEN);
     }
 
     public ResponseEntity<Object> userNotFoundResponse(String userId) {
         return new ResponseEntity<>(ResponseDTO.notFound(String.format("The user with id: [ %s ] was not found.", userId)), HttpStatus.NOT_FOUND);
     }
 
-    public ResponseEntity<Object> userByNameNotFoundResponse(String userName) {
-        return new ResponseEntity<>(ResponseDTO.notFound(String.format("The User with userName: %s not found.", userName)), HttpStatus.NOT_FOUND);
-    }
-
     public ResponseEntity<Object> notFoundWithMessageResponse(String message) {
         return new ResponseEntity<>(ResponseDTO.notFound(message), HttpStatus.NOT_FOUND);
     }
 
-    public ResponseEntity<Object> alreadyFollow(String userId) {
-        return conflictResponseWithMessage(String.format("User %s is already being followed.", userId));
-    }
-
     public ResponseEntity<Object> dontUnFollow(String userId) {
-        return conflictResponseWithMessage(String.format("User %s is not being followed.", userId));
+        return new ResponseEntity<>(ResponseDTO.conflict(String.format("User %s is not being followed.", userId)), HttpStatus.CONFLICT);
     }
 
     public ResponseEntity<Object> postNotFoundResponse(String postId) {
@@ -55,7 +47,7 @@ public class ResponseService {
     }
 
     public ResponseEntity<Object> isNotPostAuthor() {
-        return forbiddenResponseWithMessage("The user making the request is not the Author of the Post.");
+        return new ResponseEntity<>(ResponseDTO.forbidden("The user making the request is not the Author of the Post."), HttpStatus.FORBIDDEN);
     }
 
     public ResponseEntity<Object> hashTagNotFoundResponse(String hashTagId) {

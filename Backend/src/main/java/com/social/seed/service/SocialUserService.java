@@ -225,7 +225,7 @@ public class SocialUserService {
         }
         if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
         if (!validationService.userExistsById(idUserToFollow)) return responseService.notFoundWithMessageResponse("The User to be followed has not been found");
-        if (validationService.isUserBFollowerOfUserA(idUserRequest, idUserToFollow)) return responseService.alreadyFollow(idUserToFollow);
+        if (validationService.isUserBFollowerOfUserA(idUserRequest, idUserToFollow)) return responseService.conflictResponseWithMessage(String.format("User %s is already being followed.", idUserToFollow));
 
         socialUserRepository.createUserBFollowUserA(idUserRequest, idUserToFollow, LocalDateTime.now());
 

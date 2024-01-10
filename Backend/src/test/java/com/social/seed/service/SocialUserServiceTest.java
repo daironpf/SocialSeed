@@ -690,12 +690,12 @@ class SocialUserServiceTest {
 
     @Test
     void followSocialUser_AlreadyFollowed() {
-        // Mocking the validation service for already followed
+        // Mocking the validation service
         when(validationService.userExistsById(anyString())).thenReturn(true);
         when(validationService.isUserBFollowerOfUserA(anyString(), anyString())).thenReturn(true);
 
         // Mocking the already followed response
-        when(responseService.alreadyFollow(anyString())).thenCallRealMethod();
+        when(responseService.conflictResponseWithMessage(anyString())).thenCallRealMethod();
 
         // Calling the actual service method
         ResponseEntity<Object> responseEntity = underTest.followSocialUser(socialUser1.getId(),"userIdToFollow");
@@ -707,7 +707,7 @@ class SocialUserServiceTest {
         // Verify response details
         assertThat(response).isNotNull();
         assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
-        assertThat(response.message()).isEqualTo("The User to be followed has not been found");
+        assertThat(response.message()).isEqualTo(String.format("User %s is already being followed.", "userIdToFollow"));
     }
     // endregion
 
