@@ -837,7 +837,146 @@ class SocialUserServiceTest {
     // endregion
 
     // region VacationMode
-    
+    // region Activate
 
+    @Test
+    void activateVacationMode_Success() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.isVacationModeActivated(anyString())).thenReturn(false);
+
+        // Mocking the success response
+        when(responseService.successResponse(anyString())).thenCallRealMethod();
+
+        // Mocking the repository unFollowTheUserA method
+        doNothing().when(socialUserRepository).activateVacationMode(anyString());
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.activateVacationMode(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+    }
+
+    @Test
+    void activateVacationMode_UserNotFound() {
+        // Mocking the validation service
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(false);
+
+        // Mocking the success response
+        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.activateVacationMode(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
+    }
+
+    @Test
+    void activateVacationMode_AlreadyActive() {
+        // Mocking the validation service
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
+        when(validationService.isVacationModeActivated(socialUser1.getId())).thenReturn(true);
+
+        // Mocking the success response
+        when(responseService.conflictResponseWithMessage(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.activateVacationMode(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.message()).isEqualTo("The Vacation Mode is already Active");
+    }
+
+    // endregion
+
+    // region DeActivate
+    @Test
+    void deActivateVacationMode_Success() {
+        // Mocking the validation service
+        when(validationService.userExistsById(anyString())).thenReturn(true);
+        when(validationService.isVacationModeActivated(anyString())).thenReturn(true);
+
+        // Mocking the success response
+        when(responseService.successResponse(anyString())).thenCallRealMethod();
+
+        // Mocking the repository unFollowTheUserA method
+        doNothing().when(socialUserRepository).deactivateVacationMode(anyString());
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.deactivateVacationMode(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+    }
+
+    @Test
+    void deActivateVacationMode_UserNotFound() {
+        // Mocking the validation service
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(false);
+
+        // Mocking the success response
+        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.deactivateVacationMode(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
+        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
+    }
+
+    @Test
+    void deActivateVacationMode_isAlreadyDeactivated() {
+        // Mocking the validation service
+        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
+        when(validationService.isVacationModeActivated(socialUser1.getId())).thenReturn(false);
+
+        // Mocking the success response
+        when(responseService.conflictResponseWithMessage(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.deactivateVacationMode(socialUser1.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
+        assertThat(response.message()).isEqualTo("The Vacation Mode is already Deactivated");
+    }
+    // endregion
     // endregion
 }
