@@ -81,6 +81,13 @@ class HashTagRepositoryTest {
         // Verifies if a HashTag with a non-existing name returns false
         assertHashTagByNameExists("Pepe", false);
     }
+
+    @Test
+    void shouldCheckWhenHashTagByIdExists() {
+        assertHashTagByIdExists("1",true);
+
+        assertHashTagByIdExists("noId",false);
+    }
     // endregion
 
     // region Update Operations
@@ -219,6 +226,10 @@ class HashTagRepositoryTest {
      */
     private void assertHashTagByNameExists(String name, boolean expected) {
         assertThat(underTest.existByName(name)).isEqualTo(expected);
+    }
+
+    private void assertHashTagByIdExists(String id, boolean expected) {
+        assertThat(underTest.existById(id)).isEqualTo(expected);
     }
 
     /**
