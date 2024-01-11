@@ -155,4 +155,38 @@ public class TestUtils {
                 .as("Error in 'friendRequestCount' property comparison")
                 .isEqualTo(expected.getFriendRequestCount());
     }
+
+    /**
+     * Asserts that two instances of {@link HashTag} are equal in terms of their properties.
+     *
+     * @param actual   The actual HashTag instance obtained during testing.
+     * @param expected The expected HashTag instance with the predefined values for comparison.
+     *
+     * @throws AssertionError If the actual and expected HashTag instances are not equal.
+     *                        The error details in the assertions can help identify which properties differ.
+     */
+    public static void assertHashTagEquals(HashTag actual, HashTag expected) {
+        // Ensure that the actual SocialUser instance is not null
+        assertThat(actual).as("Actual HashTag instance should not be null").isNotNull();
+
+        // Check for potential errors in the 'id' property comparison
+        assertThat(actual.getId())
+                .as("Error in 'id' property comparison")
+                .isEqualTo(expected.getId());
+
+        // Check for potential errors in the 'name' property comparison
+        assertThat(actual.getName())
+                .as("Error in 'name' property comparison")
+                .isEqualTo(expected.getName());
+
+        // Check for potential errors in the 'socialUserInterestIn' property comparison
+        assertThat(actual.getSocialUserInterestIn())
+                .as("Error in 'socialUserInterestIn' property comparison")
+                .isEqualTo(expected.getSocialUserInterestIn());
+
+        // Check for potential errors in the 'postTaggedIn' property comparison
+        assertThat(actual.getPostTaggedIn())
+                .as("Error in 'postTaggedIn' property comparison")
+                .isEqualTo(expected.getPostTaggedIn());
+    }
 }

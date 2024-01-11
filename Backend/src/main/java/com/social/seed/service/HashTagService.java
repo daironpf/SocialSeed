@@ -41,11 +41,8 @@ public class HashTagService {
 
     //region CRUD
     public ResponseEntity<Object> getHashTagById(String id) {
-        Optional<HashTag> hashTag = hashTagRepository.findById(id);
-        if (hashTag.isEmpty()){
-            return responseService.hashTagNotFoundResponse(id);
-        }
-        return responseService.successResponse(hashTag);
+        if (!validationService.hashTagExistsById(id)) return responseService.hashTagNotFoundResponse(id);
+        return responseService.successResponse(hashTagRepository.findById(id));
     }
 
     @Transactional
