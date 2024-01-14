@@ -1,5 +1,6 @@
 package com.social.seed.service;
 
+import com.social.seed.model.SocialUser;
 import com.social.seed.repository.SocialUserInterestInHashTagRepository;
 import com.social.seed.repository.SocialUserRepository;
 import com.social.seed.util.ResponseService;
@@ -42,9 +43,12 @@ public class SocialUserInterestInHashTagService {
      */
     @Transactional
     public ResponseEntity<Object> addInterest(String idUserRequest, String idHashTag) {
-        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
-        if (!validationService.hashTagExistsById(idHashTag)) return responseService.hashTagNotFoundResponse(idHashTag);
-        if (validationService.existsInterest(idUserRequest, idHashTag)) return responseService.conflictResponseWithMessage("The Interest already exists");
+        if (!validationService.userExistsById(idUserRequest))
+            return responseService.userNotFoundResponse(idUserRequest);
+        if (!validationService.hashTagExistsById(idHashTag))
+            return responseService.hashTagNotFoundResponse(idHashTag);
+        if (validationService.existsInterest(idUserRequest, idHashTag))
+            return responseService.conflictResponseWithMessage("The Interest already exists");
 
         // Add the interest and timestamp
         socialUserInterestInHashTagRepository.addInterest(
@@ -53,7 +57,8 @@ public class SocialUserInterestInHashTagService {
                 LocalDateTime.now()
         );
 
-        return responseService.successResponse(socialUserRepository.findById(idUserRequest).get());
+        SocialUser response = socialUserRepository.findById(idUserRequest).get();
+        return responseService.successResponse(response);
     }
 
     /**
@@ -65,9 +70,12 @@ public class SocialUserInterestInHashTagService {
      */
     @Transactional
     public ResponseEntity<Object> deleteInterest(String idUserRequest, String idHashTag) {
-        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
-        if (!validationService.hashTagExistsById(idHashTag)) return responseService.hashTagNotFoundResponse(idHashTag);
-        if (!validationService.existsInterest(idUserRequest, idHashTag)) return responseService.conflictResponseWithMessage("The Interest does not exist");
+        if (!validationService.userExistsById(idUserRequest))
+            return responseService.userNotFoundResponse(idUserRequest);
+        if (!validationService.hashTagExistsById(idHashTag))
+            return responseService.hashTagNotFoundResponse(idHashTag);
+        if (!validationService.existsInterest(idUserRequest, idHashTag))
+            return responseService.conflictResponseWithMessage("The Interest does not exist");
 
         // Delete the interest
         socialUserInterestInHashTagRepository.deleteInterest(idUserRequest, idHashTag);
