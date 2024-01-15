@@ -16,6 +16,7 @@
 package com.social.seed.utils;
 
 import com.social.seed.model.HashTag;
+import com.social.seed.model.Post;
 import com.social.seed.model.SocialUser;
 
 import java.time.LocalDateTime;
@@ -188,5 +189,49 @@ public class TestUtils {
         assertThat(actual.getPostTaggedIn())
                 .as("Error in 'postTaggedIn' property comparison")
                 .isEqualTo(expected.getPostTaggedIn());
+    }
+
+    /**
+     * Asserts that two instances of {@link com.social.seed.model.Post} are equal in terms of their properties.
+     *
+     * @param actual   The actual Post instance obtained during testing.
+     * @param expected The expected Post instance with the predefined values for comparison.
+     *
+     * @throws AssertionError If the actual and expected Post instances are not equal.
+     *                        The error details in the assertions can help identify which properties differ.
+     */
+    public static void assertPostEquals(Post actual, Post expected) {
+        // Ensure that the actual Post instance is not null
+        assertThat(actual).as("Actual Post instance should not be null").isNotNull();
+
+        // Check for potential errors in the 'id' property comparison
+        assertThat(actual.getId())
+                .as("Error in 'id' property comparison")
+                .isEqualTo(expected.getId());
+
+        // Check for potential errors in the 'content' property comparison
+        assertThat(actual.getContent())
+                .as("Error in 'content' property comparison")
+                .isEqualTo(expected.getContent());
+
+        // Check for potential errors in the 'updateDate' property comparison
+        assertThat(actual.getUpdateDate())
+                .as("Error in 'updateDate' property comparison")
+                .isEqualTo(expected.getUpdateDate());
+
+        // Check for potential errors in the 'imageUrl' property comparison
+        assertThat(actual.getImageUrl())
+                .as("Error in 'imageUrl' property comparison")
+                .isEqualTo(expected.getImageUrl());
+
+        // Check for potential errors in the 'isActive' property comparison
+        assertThat(actual.getIsActive())
+                .as("Error in 'isActive' property comparison")
+                .isEqualTo(expected.getIsActive());
+
+        // Check for potential errors in the 'likedCount' property comparison
+        assertThat(actual.getLikedCount())
+                .as("Error in 'likedCount' property comparison")
+                .isEqualTo(expected.getLikedCount());
     }
 }
