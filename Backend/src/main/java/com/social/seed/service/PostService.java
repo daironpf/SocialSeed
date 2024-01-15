@@ -79,9 +79,10 @@ public class PostService {
      * @return ResponseEntity with the response mapped to a ResponseDTO.
      */
     public ResponseEntity<Object> getPostById(String postId) {
-        if (!validationService.postExistsById(postId)) return responseService.postNotFoundResponse(postId);
-
-        return responseService.successResponse(postRepository.findById(postId).get());
+        if (!validationService.postExistsById(postId))
+            return responseService.postNotFoundResponse(postId);
+        Post post = postRepository.findById(postId).get();
+        return responseService.successResponse(post);
     }
 
     /**
@@ -93,7 +94,8 @@ public class PostService {
      */
     @Transactional
     public ResponseEntity<Object> createNewPost(Post post, String userId) {
-        if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
+        if (!validationService.userExistsById(userId))
+            return responseService.userNotFoundResponse(userId);
 
         // Save the new post base properties
         Post newPost = postRepository.save(
