@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 public class PostedByRelationship {
 
     @RelationshipId
+//    @Property("identifier")
     private Long id;
 
     @Property

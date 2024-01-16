@@ -16,13 +16,13 @@ public interface HashTagRepository extends Neo4jRepository<HashTag, String> {
     Boolean existByName(String name);
 
     @Query("""
-            OPTIONAL MATCH (t:HashTag {id:$id})
+            OPTIONAL MATCH (t:HashTag {identifier:$id})
             RETURN CASE WHEN t IS NOT NULL THEN true ELSE false END AS existUser
             """)
     Boolean existById(String id);
 
     @Query("""
-            MATCH (t:HashTag {id:$id})
+            MATCH (t:HashTag {identifier:$id})
             SET t.name = $name
             """)
     void update(String id, String name);

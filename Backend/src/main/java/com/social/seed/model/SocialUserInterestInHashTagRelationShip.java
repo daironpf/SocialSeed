@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @RelationshipProperties
 public class SocialUserInterestInHashTagRelationShip {
     @RelationshipId
+//    @Property(name = "identifier")
     private Long id;
 
     @Property

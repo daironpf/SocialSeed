@@ -59,7 +59,7 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
 
     //region CRUD
     @Query("""
-            MATCH (p:Post {id: $id})
+            MATCH (p:Post {identifier: $id})
             SET p.content = $content,
                 p.updateDate = $updateDate,
                 p.imageUrl = $imageUrl
@@ -72,8 +72,8 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
     );
 
     @Query("""
-            MATCH (p:Post {id: $idpost})
-            MATCH (u:SocialUser {id: $idauthor})
+            MATCH (p:Post {identifier: $idpost})
+            MATCH (u:SocialUser {identifier: $idauthor})
             MERGE (p)-[:POSTED_BY {postDate: $now}]->(u)
             SET p.updateDate = $now
             """)
@@ -82,16 +82,16 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
 
     //region LIKE
     @Query("""
-            MATCH (u:SocialUser {id: $idUserRequest})
-            MATCH (p:Post {id: $idPostToLiked})
+            MATCH (u:SocialUser {identifier: $idUserRequest})
+            MATCH (p:Post {identifier: $idPostToLiked})
             OPTIONAL MATCH(u)-[r:LIKE]->(p)
             RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS following
             """)
     boolean isUserByIdLikedPostById(String idUserRequest, String idPostToLiked);
 
     @Query("""
-            MATCH (u:SocialUser {id: $idUserRequest})
-            MATCH (p:Post {id: $idPostToLiked})
+            MATCH (u:SocialUser {identifier: $idUserRequest})
+            MATCH (p:Post {identifier: $idPostToLiked})
             MERGE (u)-[r:LIKE {likeDate: $likeDate}]->(p)
             WITH p
             SET p.likedCount = p.likedCount + 1
@@ -99,8 +99,8 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
     void createUserByIdLikedPostById(String idUserRequest, String idPostToLiked, LocalDateTime likeDate);
 
     @Query("""
-            MATCH (u:SocialUser {id: $idUserRequest})
-            MATCH (p:Post {id: $idPostToLiked})
+            MATCH (u:SocialUser {identifier: $idUserRequest})
+            MATCH (p:Post {identifier: $idPostToLiked})
             MATCH (u)-[r:LIKE]->(p)
             DELETE r
             WITH p
@@ -111,8 +111,8 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
 
     //region validate
     @Query("""
-            MATCH (u:SocialUser {id: $idUser})
-            MATCH (p:Post {id: $idPost})
+            MATCH (u:SocialUser {identifier: $idUser})
+            MATCH (p:Post {identifier: $idPost})
             OPTIONAL MATCH(p)-[r:POSTED_BY]->(u)
             RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS isAuthor
             """)
@@ -121,15 +121,15 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
 
     //region TAGGED_WITH
     @Query("""
-            MATCH (p:Post {id: $idPost})
-            MATCH (t:HashTag {id: $idHashTag})
+            MATCH (p:Post {identifier: $idPost})
+            MATCH (t:HashTag {identifier: $idHashTag})
             MERGE (p)-[:TAGGED_WITH]->(t)
             SET t.postTaggedIn = COALESCE(t.postTaggedIn, 0) + 1
             """)
     void createRelationshipTaggedWithHashTag(String idPost, String idHashTag);
 
     @Query("""
-            MATCH (p:Post {id: $idPost})
+            MATCH (p:Post {identifier: $idPost})
             MATCH (p)-[r:TAGGED_WITH]->(t)
             DELETE r
             SET t.postTaggedIn = t.postTaggedIn - 1

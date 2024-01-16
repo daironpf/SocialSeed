@@ -40,14 +40,14 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
     //region CRUD
     @Override
     @Query("""
-            OPTIONAL MATCH (u:SocialUser {id: $id})
+            OPTIONAL MATCH (u:SocialUser {identifier: $id})
             OPTIONAL MATCH (u)-[rt]->(t:HashTag)
             RETURN u, collect(rt), collect(t)
             """)
     Optional<SocialUser> findById(String id);
 
     @Query("""
-            MATCH (u:SocialUser {id: $id})
+            MATCH (u:SocialUser {identifier: $id})
             SET u.fullName = $fullName,
                 u.dateBorn = $dateBorn,
                 u.language = $language
@@ -61,25 +61,25 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
     //endregion
 
     //region Update Special Props
-    @Query("MATCH (u:SocialUser {id: $id}) SET u.userName = $newUserName")
+    @Query("MATCH (u:SocialUser {identifier: $id}) SET u.userName = $newUserName")
     void updateSocialUserName(String id, String newUserName);
 
-    @Query("MATCH (u:SocialUser {id: $id}) SET u.email = $newEmail")
+    @Query("MATCH (u:SocialUser {identifier: $id}) SET u.email = $newEmail")
     void updateSocialUserEmail(String id, String newEmail);
     //endregion
 
     //region FOLLOW
     @Query("""
-            MATCH (b:SocialUser {id: $userBId})
-            MATCH (a:SocialUser {id: $userAId})
+            MATCH (b:SocialUser {identifier: $userBId})
+            MATCH (a:SocialUser {identifier: $userAId})
             OPTIONAL MATCH(b)<-[r:FOLLOWED_BY]-(a)
             RETURN CASE WHEN r IS NOT NULL THEN true ELSE false END AS following
             """)
     Boolean isUserBFollowerOfUserA(String userBId, String userAId);
 
     @Query("""
-            MATCH (b:SocialUser {id: $userBId})
-            MATCH (a:SocialUser {id: $userAId})
+            MATCH (b:SocialUser {identifier: $userBId})
+            MATCH (a:SocialUser {identifier: $userAId})
             MERGE(b)<-[r:FOLLOWED_BY {followDate:$followDate}]-(a)
             WITH a, b
             SET a.followersCount = a.followersCount + 1,
@@ -91,8 +91,8 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
             LocalDateTime followDate);
 
     @Query("""
-            MATCH (b:SocialUser {id: $userBId})
-            MATCH (a:SocialUser {id: $userAId})
+            MATCH (b:SocialUser {identifier: $userBId})
+            MATCH (a:SocialUser {identifier: $userAId})
             MATCH (b)<-[r:FOLLOWED_BY]-(a)
             DELETE r
             WITH a, b
@@ -104,17 +104,17 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
 
     //region Vacation Mode
     @Query("""
-            MATCH (u:SocialUser {id: $idUserRequest})
+            MATCH (u:SocialUser {identifier: $idUserRequest})
             RETURN u.onVacation
             """)
     Boolean isVacationModeActivated(String idUserRequest);
     @Query("""
-            MATCH (u:SocialUser {id: $idUserRequest})
+            MATCH (u:SocialUser {identifier: $idUserRequest})
             SET u.onVacation = true
             """)
     void activateVacationMode(String idUserRequest);
     @Query("""
-            MATCH (u:SocialUser {id: $idUserRequest})
+            MATCH (u:SocialUser {identifier: $idUserRequest})
             SET u.onVacation = false
             """)
     void deactivateVacationMode(String idUserRequest);
@@ -123,7 +123,7 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
     //region Delete
     @Override
     @Query("""
-            MATCH (u:SocialUser {id: $id})
+            MATCH (u:SocialUser {identifier: $id})
             OPTIONAL MATCH (u)<-[:POSTED_BY]-(p)
             FOREACH (_ IN CASE WHEN u IS NOT NULL THEN [1] ELSE [] END |                    
                     DETACH DELETE u
@@ -137,19 +137,19 @@ public interface SocialUserRepository extends Neo4jRepository<SocialUser, String
 
     //region Activated Mode
     @Query("""
-            MATCH (u:SocialUser {id: $id})
+            MATCH (u:SocialUser {identifier: $id})
             RETURN u.isActive
             """)
     boolean isSocialUserActivated(String id);
 
     @Query("""
-            MATCH (u:SocialUser {id: $id})
+            MATCH (u:SocialUser {identifier: $id})
             SET u.isActive= true
             """)
     void activateSocialUser(String id);
 
     @Query("""
-            MATCH (u:SocialUser {id: $id})
+            MATCH (u:SocialUser {identifier: $id})
             SET u.isActive= false
             """)
     void deactivateSocialUser(String id);
