@@ -80,7 +80,7 @@ class HashTagServiceValidatorTest {
 
 
     @Test
-    void aroundGetHashTagById_UserNotFound() throws Throwable {
+    void aroundGetHashTagById_HashTagNotFound() throws Throwable {
         // Mocking the validation service for HashTag not found
         when(validationService.hashTagExistsById(hashTag1.getId())).thenReturn(false);
 
