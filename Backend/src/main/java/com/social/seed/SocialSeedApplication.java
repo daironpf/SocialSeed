@@ -22,8 +22,10 @@ import io.swagger.v3.oas.annotations.info.License;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 
+@EnableAspectJAutoProxy
 @EnableNeo4jRepositories
 @SpringBootApplication
 @ComponentScan(basePackages = "com.social.seed")
