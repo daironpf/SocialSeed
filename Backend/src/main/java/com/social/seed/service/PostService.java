@@ -1,3 +1,18 @@
+/*
+ * Copyright 2011-2023 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.social.seed.service;
 
 import com.social.seed.model.HashTag;
@@ -5,7 +20,6 @@ import com.social.seed.model.Post;
 import com.social.seed.repository.HashTagRepository;
 import com.social.seed.repository.PostRepository;
 import com.social.seed.util.ResponseService;
-import com.social.seed.util.ValidationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,21 +32,24 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
+/**
+ * Class for operations related to managing the {@link Post} model.
+ * <p>
+ * Author: Dairon Pérez Frías
+ * Since: 2024-01-17
+ */
 @Service
 public class PostService {
     //region Dependencies
     private final PostRepository postRepository;
     private final HashTagRepository hashTagRepository;
     private final ResponseService responseService;
-    private final ValidationService validationService;
 
     @Autowired
-    public PostService(PostRepository postRepository, HashTagRepository hashTagRepository, ResponseService responseService, ValidationService validationService) {
+    public PostService(PostRepository postRepository, HashTagRepository hashTagRepository, ResponseService responseService) {
         this.postRepository = postRepository;
         this.hashTagRepository = hashTagRepository;
         this.responseService = responseService;
-        this.validationService = validationService;
     }
 
     //endregion
@@ -79,9 +96,8 @@ public class PostService {
      * @return ResponseEntity with the response mapped to a ResponseDTO.
      */
     public ResponseEntity<Object> getPostById(String postId) {
-        if (!validationService.postExistsById(postId))
-            return responseService.postNotFoundResponse(postId);
         Post post = postRepository.findById(postId).get();
+
         return responseService.successResponse(post);
     }
 
@@ -94,9 +110,6 @@ public class PostService {
      */
     @Transactional
     public ResponseEntity<Object> createNewPost(Post post, String userId) {
-        if (!validationService.userExistsById(userId))
-            return responseService.userNotFoundResponse(userId);
-
         // Save the new post base properties
         Post newPost = postRepository.save(
                 Post.builder()
@@ -135,10 +148,7 @@ public class PostService {
      */
     @Transactional
     public ResponseEntity<Object> updatePost(String userId, Post updatedPost) {
-        if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
-        if (!validationService.postExistsById(updatedPost.getId())) return responseService.postNotFoundResponse(updatedPost.getId());
-        if (!validationService.userAuthorOfThePostById(userId, updatedPost.getId())) return responseService.isNotPostAuthor();
-
+        // Update the Post base properties
         postRepository.update(
                 updatedPost.getId(),
                 updatedPost.getContent(),
@@ -166,10 +176,6 @@ public class PostService {
      * @return ResponseEntity with the response mapped to a ResponseDTO.
      */
     public ResponseEntity<Object> deletePost(String userId, String postId) {
-        if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
-        if (!validationService.postExistsById(postId)) return responseService.postNotFoundResponse(postId);
-        if (!validationService.userAuthorOfThePostById(userId, postId)) return responseService.isNotPostAuthor();
-
         postRepository.deleteById(postId);
 
         return responseService.successResponse("The Post was deleted.");
@@ -186,11 +192,8 @@ public class PostService {
      */
     @Transactional
     public ResponseEntity<Object> createSocialUserlikedPost(String userId, String postId) {
-        if (!validationService.userExistsById(userId)) return responseService.userNotFoundResponse(userId);
-        if (!validationService.postExistsById(postId)) return responseService.postNotFoundResponse(postId);
-        if (validationService.userLikedPost(userId, postId)) return responseService.conflictResponseWithMessage("The Post is already liked by this user");
-
         postRepository.createUserByIdLikedPostById(userId, postId, LocalDateTime.now());
+
         return responseService.successResponse("The Post was Liked.");
     }
 
@@ -203,11 +206,8 @@ public class PostService {
      */
     @Transactional
     public ResponseEntity<Object> deleteSocialUserlikedPost(String idUserRequest, String idPostToLiked) {
-        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
-        if (!validationService.postExistsById(idPostToLiked)) return responseService.postNotFoundResponse(idPostToLiked);
-        if (!validationService.userLikedPost(idUserRequest, idPostToLiked)) return responseService.conflictResponseWithMessage("The Post is Not liked by this user");
-
         postRepository.deleteUserByIdLikedPostById(idUserRequest, idPostToLiked);
+
         return responseService.successResponse("The Like was Deleted.");
     }
     //endregion

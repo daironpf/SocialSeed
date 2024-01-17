@@ -35,10 +35,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Aspect
 @Component
 public class FriendsServiceValidator {
+    //region dependencies
+    private final ValidationService validationService;
+    private final ResponseService responseService;
+
     @Autowired
-    private ValidationService validationService;
-    @Autowired
-    private ResponseService responseService;
+    public FriendsServiceValidator(ValidationService validationService, ResponseService responseService) {
+        this.validationService = validationService;
+        this.responseService = responseService;
+    }
+    //endregion
 
     @Around("execution(* com.social.seed.service.FriendsService.createRequestFriendship(String, String)) && args(idUserRequest, idUserToBeFriend)")
     @Transactional

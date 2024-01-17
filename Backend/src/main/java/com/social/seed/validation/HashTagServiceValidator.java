@@ -35,11 +35,17 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Aspect
 @Component
-public class HashtagServiceValidator {
-    @Autowired
+public class HashTagServiceValidator {
+    //region dependencies
     private ValidationService validationService;
-    @Autowired
     private ResponseService responseService;
+
+    @Autowired
+    public HashTagServiceValidator(ValidationService validationService, ResponseService responseService) {
+        this.validationService = validationService;
+        this.responseService = responseService;
+    }
+    //endregion
 
     @Around("execution(* com.social.seed.service.HashTagService.getHashTagById(String)) && args(id)")
     public ResponseEntity<Object> aroundGetHashTagById(ProceedingJoinPoint joinPoint, String id) throws Throwable {
@@ -91,4 +97,3 @@ public class HashtagServiceValidator {
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
 }
-
