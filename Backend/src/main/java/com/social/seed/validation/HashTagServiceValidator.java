@@ -37,8 +37,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Component
 public class HashTagServiceValidator {
     //region dependencies
-    private ValidationService validationService;
-    private ResponseService responseService;
+    private final ValidationService validationService;
+    private final ResponseService responseService;
 
     @Autowired
     public HashTagServiceValidator(ValidationService validationService, ResponseService responseService) {
