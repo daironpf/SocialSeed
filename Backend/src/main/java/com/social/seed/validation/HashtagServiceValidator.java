@@ -38,7 +38,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class HashtagServiceValidator {
     @Autowired
     private ValidationService validationService;
-
     @Autowired
     private ResponseService responseService;
 
