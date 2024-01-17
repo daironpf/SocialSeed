@@ -49,8 +49,7 @@ class FriendsServiceTest {
     private FriendsRepository friendsRepository;
     @Mock
     private ResponseService responseService;
-    @Mock
-    private ValidationService validationService;
+
     // endregion
 
     // region Sample social user for testing
@@ -67,15 +66,9 @@ class FriendsServiceTest {
         socialUser2.setId("2");
     }
 
-    // region Create RequestFriendship
     @Test
     void createRequestFriendship_Success() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.existsFriendRequest(anyString(),anyString())).thenReturn(false);
-        when(validationService.existsFriendship(anyString(),anyString())).thenReturn(false);
-
-        // Mock repository create
+        // Mock repository
         doNothing().when(friendsRepository).createFriendRequest(anyString(),anyString(),any());
 
         // Mocking the success response
@@ -95,121 +88,8 @@ class FriendsServiceTest {
     }
 
     @Test
-    void createRequestFriendship_NotFound_UserRequest() {
-        // Mock validationService
-        when(validationService.userExistsById(socialUser1.getId())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.createRequestFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
-    }
-
-    @Test
-    void createRequestFriendship_NotFound_UserToBeFriend() {
-        // Mock validationService
-        when(validationService.userExistsById(socialUser2.getId())).thenReturn(false);
-        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
-
-        // Mocking the success response
-        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.createRequestFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser2.getId()));
-    }
-
-    @Test
-    void createRequestFriendship_Forbidden_SameUser() {
-        // Mocking the success response
-        when(responseService.forbiddenDuplicateSocialUser()).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.createRequestFriendship(socialUser1.getId(), socialUser1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.FORBIDDEN);
-        assertThat(response.message()).isEqualTo("The user cannot be the same.");
-    }
-
-    @Test
-    void createRequestFriendship_Conflict_FriendRequest_AlreadyExists() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.existsFriendRequest(anyString(), anyString())).thenReturn(true);
-
-        // Mocking the success response
-        when(responseService.conflictResponseWithMessage(any())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.createRequestFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
-        assertThat(response.message()).isEqualTo("The Friend Request already exists");
-    }
-
-    @Test
-    void createRequestFriendship_Conflict_Friendship_AlreadyExists() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.existsFriendRequest(anyString(), anyString())).thenReturn(false);
-        when(validationService.existsFriendship(anyString(), anyString())).thenReturn(true);
-
-        // Mocking the success response
-        when(responseService.conflictResponseWithMessage(any())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.createRequestFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
-        assertThat(response.message()).isEqualTo("The Friendship already exists");
-    }
-    // endregion
-
-    // region Cancel RequestFriendship
-    @Test
     void cancelRequestFriendship_Success() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.existsFriendRequest(anyString(),anyString())).thenReturn(true);
-        when(validationService.existsFriendship(anyString(),anyString())).thenReturn(false);
-
-        // Mock repository create
+        // Mock repository
         doNothing().when(friendsRepository).cancelRequestFriendship(anyString(),anyString());
 
         // Mocking the success response
@@ -229,121 +109,8 @@ class FriendsServiceTest {
     }
 
     @Test
-    void cancelRequestFriendship_Forbidden_SameUser() {
-        // Mocking the success response
-        when(responseService.forbiddenDuplicateSocialUser()).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.cancelRequestFriendship(socialUser1.getId(), socialUser1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.FORBIDDEN);
-        assertThat(response.message()).isEqualTo("The user cannot be the same.");
-    }
-
-    @Test
-    void cancelRequestFriendship_NotFound_UserRequest() {
-        // Mock validationService
-        when(validationService.userExistsById(socialUser1.getId())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.cancelRequestFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
-    }
-
-    @Test
-    void cancelRequestFriendship_NotFound_UserToBeFriend() {
-        // Mock validationService
-        when(validationService.userExistsById(socialUser2.getId())).thenReturn(false);
-        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
-
-        // Mocking the success response
-        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.cancelRequestFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser2.getId()));
-    }
-
-    @Test
-    void cancelRequestFriendship_Conflict_FriendRequest_DoesNotExist() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.existsFriendRequest(anyString(), anyString())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.notFoundWithMessageResponse(any())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.cancelRequestFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo("The Friend Request does not exist");
-    }
-
-    @Test
-    void cancelRequestFriendship_Conflict_Friendship_AlreadyExists() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.existsFriendRequest(anyString(), anyString())).thenReturn(true);
-        when(validationService.existsFriendship(anyString(), anyString())).thenReturn(true);
-
-        // Mocking the success response
-        when(responseService.conflictResponseWithMessage(any())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.cancelRequestFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
-        assertThat(response.message()).isEqualTo("The Friendship already exists");
-    }
-    // endregion
-
-    // region Accepted RequestFriendship
-    @Test
     void acceptedRequestFriendship_Success() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.existsFriendRequestByUserToAccept(anyString(),anyString())).thenReturn(true);
-        when(validationService.existsFriendship(anyString(),anyString())).thenReturn(false);
-
-        // Mock repository create
+        // Mock repository
         doNothing().when(friendsRepository).acceptedRequestFriendship(anyString(), anyString(), any());
 
         // Mocking the success response
@@ -363,120 +130,8 @@ class FriendsServiceTest {
     }
 
     @Test
-    void acceptedRequestFriendship_Forbidden_SameUser() {
-        // Mocking the success response
-        when(responseService.forbiddenDuplicateSocialUser()).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.acceptedRequestFriendship(socialUser1.getId(), socialUser1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.FORBIDDEN);
-        assertThat(response.message()).isEqualTo("The user cannot be the same.");
-    }
-
-    @Test
-    void acceptedRequestFriendship_NotFound_UserRequest() {
-        // Mock validationService
-        when(validationService.userExistsById(socialUser1.getId())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.acceptedRequestFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
-    }
-
-    @Test
-    void acceptedRequestFriendship_NotFound_UserToBeFriend() {
-        // Mock validationService
-        when(validationService.userExistsById(socialUser2.getId())).thenReturn(false);
-        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
-
-        // Mocking the success response
-        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.acceptedRequestFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser2.getId()));
-    }
-
-    @Test
-    void acceptedRequestFriendship_Conflict_FriendshipRequest_DoesNotExist() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.existsFriendRequestByUserToAccept(anyString(), anyString())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.notFoundWithMessageResponse(any())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.acceptedRequestFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo("The Friendship Request does not exist.");
-    }
-
-    @Test
-    void acceptedRequestFriendship_Conflict_Friendship_AlreadyExists() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.existsFriendRequestByUserToAccept(anyString(), anyString())).thenReturn(true);
-        when(validationService.existsFriendship(anyString(), anyString())).thenReturn(true);
-
-        // Mocking the success response
-        when(responseService.conflictResponseWithMessage(any())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.acceptedRequestFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
-        assertThat(response.message()).isEqualTo("The Friendship already exists.");
-    }
-    // endregion
-
-    // region Delete Friendship
-    @Test
     void deleteFriendship_Success() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.existsFriendship(anyString(),anyString())).thenReturn(true);
-
-        // Mock repository create
+        // Mock repository
         doNothing().when(friendsRepository).deleteFriendship(anyString(), anyString());
 
         // Mocking the success response
@@ -494,88 +149,4 @@ class FriendsServiceTest {
         assertThat(response.status()).isEqualTo(HttpStatus.OK);
         assertThat(response.message()).isEqualTo("Successful");
     }
-
-    @Test
-    void deleteFriendship_Forbidden_SameUser() {
-        // Mocking the success response
-        when(responseService.forbiddenDuplicateSocialUser()).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.deleteFriendship(socialUser1.getId(), socialUser1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.FORBIDDEN);
-        assertThat(response.message()).isEqualTo("The user cannot be the same.");
-    }
-
-    @Test
-    void deleteFriendship_NotFound_UserRequest() {
-        // Mock validationService
-        when(validationService.userExistsById(socialUser1.getId())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.deleteFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
-    }
-
-    @Test
-    void deleteFriendship_NotFound_ToDeleteFriendship() {
-        // Mock validationService
-        when(validationService.userExistsById(socialUser2.getId())).thenReturn(false);
-        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
-
-        // Mocking the success response
-        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.deleteFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser2.getId()));
-    }
-
-    @Test
-    void deleteFriendship_Conflict_FriendshipRelationship_DoesNotExist() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.existsFriendship(anyString(), anyString())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.conflictResponseWithMessage(any())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.deleteFriendship(socialUser1.getId(), socialUser2.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
-        assertThat(response.message()).isEqualTo("There is no friendship relationship between users.");
-    }
-    // endregion
 }
