@@ -19,7 +19,6 @@ import com.social.seed.model.SocialUser;
 import com.social.seed.repository.FriendsRepository;
 import com.social.seed.util.ResponseDTO;
 import com.social.seed.util.ResponseService;
-import com.social.seed.util.ValidationService;
 import com.social.seed.utils.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,7 +48,6 @@ class FriendsServiceTest {
     private FriendsRepository friendsRepository;
     @Mock
     private ResponseService responseService;
-
     // endregion
 
     // region Sample social user for testing

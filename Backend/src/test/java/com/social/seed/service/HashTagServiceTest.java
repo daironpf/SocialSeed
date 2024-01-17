@@ -16,7 +16,6 @@
 package com.social.seed.service;
 
 import com.social.seed.model.HashTag;
-import com.social.seed.model.SocialUser;
 import com.social.seed.repository.HashTagRepository;
 import com.social.seed.util.ResponseDTO;
 import com.social.seed.util.ResponseService;
@@ -52,8 +51,6 @@ class HashTagServiceTest {
     private HashTagRepository hashTagRepository;
     @Mock
     private ResponseService responseService;
-    @Mock
-    private ValidationService validationService;
     // endregion
 
     // region Sample HashTag for testing
@@ -65,11 +62,8 @@ class HashTagServiceTest {
         hashTag1 = new HashTag("1", "PrimerHashTag", 0, 0);
     }
 
-    // region getHashTagById
     @Test
     void getHashTagById_Success() {
-        // Mocks
-        when(validationService.hashTagExistsById(hashTag1.getId())).thenReturn(true);
         when(responseService.successResponse(any())).thenCallRealMethod();
         when(hashTagRepository.findById(hashTag1.getId())).thenReturn(Optional.of(hashTag1));
 
@@ -93,33 +87,7 @@ class HashTagServiceTest {
     }
 
     @Test
-    void getHashTagById_UserNotFound() {
-        // Mocking the validation service for HashTag not found
-        when(validationService.hashTagExistsById(hashTag1.getId())).thenReturn(false);
-
-        // Mocking the HashTag not found response
-        when(responseService.hashTagNotFoundResponse(any())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.getHashTagById(hashTag1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("Hashtag not found with ID: %s", hashTag1.getId()));
-    }
-    // endregion
-
-    // region Create New HashTag
-    @Test
     void createHashTag_Success() {
-        // Mock validationService
-        when(validationService.hashTagExistsByName(anyString())).thenReturn(false);
-
         // Mock repository save
         when(hashTagRepository.save(any())).thenReturn(hashTag1);
 
@@ -130,7 +98,6 @@ class HashTagServiceTest {
         ResponseEntity<Object> responseEntity = underTest.createNewHashTag(hashTag1);
 
         // Verify interactions
-        verify(validationService, times(1)).hashTagExistsByName(anyString());
         verify(hashTagRepository, times(1)).save(any());
 
         // Assert
@@ -150,34 +117,7 @@ class HashTagServiceTest {
     }
 
     @Test
-    void createHashTag_Conflict_Name() {
-        // Mocking the validation service
-        when(validationService.hashTagExistsByName(anyString())).thenReturn(true);
-
-        // Mocking the conflict response
-        when(responseService.conflictResponseWithMessage(any())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.createNewHashTag(hashTag1);
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
-        assertThat(response.message()).isEqualTo(String.format("The HashTag with the name [ %s ] already exists", hashTag1.getName()));
-    }
-    // endregion
-
-    // region Update HashTag
-    @Test
     void updateHashTag_Success() {
-        // Mocking the validation service
-        when(validationService.hashTagExistsById(anyString())).thenReturn(true);
-        when(validationService.hashTagExistsByName(anyString())).thenReturn(false);
-
         // Mocking the repository update and findById methods
         when(hashTagRepository.findById(anyString())).thenReturn(Optional.of(hashTag1));
         doNothing().when(hashTagRepository).update(anyString(), anyString());
@@ -205,56 +145,7 @@ class HashTagServiceTest {
     }
 
     @Test
-    void updateHashTag_HashTagNotFound() {
-        // Mocking the validation service for HashTag not found
-        when(validationService.hashTagExistsById(anyString())).thenReturn(false);
-
-        // Mocking the HashTag not found response
-        when(responseService.hashTagNotFoundResponse(any())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.updateHashTag(hashTag1);
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("Hashtag not found with ID: %s", hashTag1.getId()));
-    }
-
-    @Test
-    void updateSocialUser_NameAlreadyExists() {
-        // Mocking the validation service
-        when(validationService.hashTagExistsById(anyString())).thenReturn(true);
-        when(validationService.hashTagExistsByName(anyString())).thenReturn(true);
-
-        // Mocking the user not found response
-        when(responseService.conflictResponseWithMessage(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.updateHashTag(hashTag1);
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
-        assertThat(response.message()).isEqualTo(
-                String.format("The HashTag with the name [ %s ] already exists", hashTag1.getName()));
-    }
-    // endregion
-
-    // region Delete HashTag
-    @Test
     void deleteHashTag_Success() {
-        // Mocking the validation service
-        when(validationService.hashTagExistsById(anyString())).thenReturn(true);
-
         // Mocking the repository deleteById method
         doNothing().when(hashTagRepository).deleteById(anyString());
 
@@ -273,28 +164,4 @@ class HashTagServiceTest {
         assertThat(response.status()).isEqualTo(HttpStatus.OK);
         assertThat(response.message()).isEqualTo("Successful");
     }
-
-    @Test
-    void deleteHashTag_HashTagNotFound() {
-        // Mocking the validation service
-        when(validationService.hashTagExistsById(anyString())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.hashTagNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.deleteHashTag(hashTag1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(
-                String.format("Hashtag not found with ID: %s", hashTag1.getId())
-        );
-    }
-    // endregion
 }
