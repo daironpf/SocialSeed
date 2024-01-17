@@ -36,7 +36,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Aspect
 @Component
 public class PostServiceValidator {
-    //region dependencies
+
+    //region Dependencies
     private final ValidationService validationService;
     private final ResponseService responseService;
 
