@@ -1,13 +1,26 @@
+/*
+ * Copyright 2011-2023 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.social.seed.service;
 
 import com.social.seed.model.HashTag;
 import com.social.seed.model.Post;
-import com.social.seed.model.SocialUser;
 import com.social.seed.repository.HashTagRepository;
 import com.social.seed.repository.PostRepository;
 import com.social.seed.util.ResponseDTO;
 import com.social.seed.util.ResponseService;
-import com.social.seed.util.ValidationService;
 import com.social.seed.utils.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,28 +53,18 @@ class PostServiceTest {
     private PostRepository postRepository;
     @Mock
     private HashTagRepository hashTagRepository;
-
     @Mock
     private ResponseService responseService;
-    @Mock
-    private ValidationService validationService;
     // endregion
 
     // region Sample Post for testing
     private Post post1;
-    private SocialUser socialUser1;
-    private HashTag hashTag1;
+    private final String idUserRequest = "user1";
     // endregion
 
     @BeforeEach
     void setUp() {
         // Initialize sample data for testing
-        // HashTag
-        hashTag1 = new HashTag("1", "PrimerHashTag", 0, 0);
-        // SocialUser
-        socialUser1 = TestUtils.createSocialUser("maria1", "maria1@gmail.com", "1992-01-04T00:00:00", "Maria del Laurel Perez", "ES");
-        socialUser1.setId("1");
-        // Post
         post1 = new Post(
                 "1",
                 "This is the First #Post",
@@ -77,8 +80,7 @@ class PostServiceTest {
     // region Get Post By: ID
     @Test
     void getPostById_Success() {
-        // Mocks
-        when(validationService.postExistsById(any())).thenReturn(true);
+        // Mock
         when(responseService.successResponse(any())).thenCallRealMethod();
         when(postRepository.findById(post1.getId())).thenReturn(Optional.of(post1));
 
@@ -101,36 +103,7 @@ class PostServiceTest {
         // Verify HashTag details
         TestUtils.assertPostEquals(postResponse, post1);
     }
-
-    @Test
-    void getPostById_PostNotFound() {
-        // Mocks
-        when(validationService.postExistsById(any())).thenReturn(false);
-
-        // Mocking the Post not found response
-        when(responseService.postNotFoundResponse(any())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.getPostById(post1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("Post not found with ID: %s", post1.getId()));
-    }
     // endregion
-
-    @Test
-    void getAllPosts() {
-    }
-
-    @Test
-    void getPostFeed() {
-    }
 
     // region Create New Post
     @Test
@@ -139,23 +112,19 @@ class PostServiceTest {
         HashTag hashTag2 = new HashTag("2", "Post", 0, 0);
 
         // Mocks
-        when(validationService.userExistsById(any())).thenReturn(true);
         when(postRepository.findById(post1.getId())).thenReturn(Optional.of(post1));
 
         // Mocking the Response
         when(responseService.successCreatedResponse(any())).thenCallRealMethod();
 
         // Mock repository
-        // PostRepository
         when(postRepository.save(any())).thenReturn(post1);
         doNothing().when(postRepository).createPostedRelationship(any(), any(), any());
         doNothing().when(postRepository).createRelationshipTaggedWithHashTag(any(), any());
-
-        // HashTagRepository
         when(hashTagRepository.findByName(any())).thenReturn(Optional.of(hashTag2));
 
         // Call the method
-        ResponseEntity<Object> responseEntity = underTest.createNewPost(post1,socialUser1.getId());
+        ResponseEntity<Object> responseEntity = underTest.createNewPost(post1,idUserRequest);
 
         // Verify interactions
         verify(postRepository, times(1)).save(any());
@@ -182,14 +151,12 @@ class PostServiceTest {
         HashTag hashTag2 = new HashTag("2", "Post", 0, 0);
 
         // Mocks
-        when(validationService.userExistsById(any())).thenReturn(true);
         when(postRepository.findById(post1.getId())).thenReturn(Optional.of(post1));
 
         // Mocking the Response
         when(responseService.successCreatedResponse(any())).thenCallRealMethod();
 
         // Mock repository
-        // PostRepository
         when(postRepository.save(any())).thenReturn(post1);
         doNothing().when(postRepository).createPostedRelationship(any(), any(), any());
         doNothing().when(postRepository).createRelationshipTaggedWithHashTag(any(), any());
@@ -199,7 +166,7 @@ class PostServiceTest {
         when(hashTagRepository.save(any())).thenReturn(hashTag2);
 
         // Call the method
-        ResponseEntity<Object> responseEntity = underTest.createNewPost(post1,socialUser1.getId());
+        ResponseEntity<Object> responseEntity = underTest.createNewPost(post1,idUserRequest);
 
         // Verify interactions
         verify(postRepository, times(1)).save(any());
@@ -219,27 +186,6 @@ class PostServiceTest {
         // Verify social user details
         TestUtils.assertPostEquals(postResponse, post1);
     }
-
-    @Test
-    void createNewPost_NotFound_SocialUser() {
-        // Mocks
-        when(validationService.userExistsById(any())).thenReturn(false);
-
-        // Mocking the Response
-        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.createNewPost(post1, socialUser1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
-    }
     // endregion
 
     // region Update Post
@@ -248,25 +194,18 @@ class PostServiceTest {
         // HashTag
         HashTag hashTag2 = new HashTag("2", "Post", 0, 0);
 
-        // Mock Validations
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.postExistsById(any())).thenReturn(true);
-        when(validationService.userAuthorOfThePostById(any(),any())).thenReturn(true);
-
         // Mock Repository
         doNothing().when(postRepository).update(any(), any(), any(), any());
         doNothing().when(postRepository).deleteAllRelationshipTaggedWithHashTag(anyString());
         doNothing().when(postRepository).createRelationshipTaggedWithHashTag(any(), any());
         when(postRepository.findById(any())).thenReturn(Optional.of(post1));
-
-        // HashTagRepository
         when(hashTagRepository.findByName(any())).thenReturn(Optional.of(hashTag2));
 
         // Mocking the Response
         when(responseService.successResponseWithMessage(any(), any())).thenCallRealMethod();
 
         // Call the method
-        ResponseEntity<Object> responseEntity = underTest.updatePost(socialUser1.getId(), post1);
+        ResponseEntity<Object> responseEntity = underTest.updatePost(idUserRequest, post1);
 
         // Verify interactions
         verify(postRepository, times(1)).update(any(), any(), any(), any());
@@ -276,36 +215,25 @@ class PostServiceTest {
 
         ResponseDTO response = (ResponseDTO) responseEntity.getBody();
         assert response != null;
-        Post postResponse = (Post) response.response();
 
         // Verify response details
         assertThat(response).isNotNull();
         assertThat(response.status()).isEqualTo(HttpStatus.OK);
         assertThat(response.message()).isEqualTo("Updated");
-
-        // Verify social user details
-//        TestUtils.assertSocialUserEquals(socialUserResponse, socialUser1);
-
-
     }
     // endregion
 
     // Region Delete Post
     @Test
     void deletePost_Success() {
-        // Mock Validations
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.postExistsById(any())).thenReturn(true);
-        when(validationService.userAuthorOfThePostById(any(),any())).thenReturn(true);
-
         // Mocking the Response
         when(responseService.successResponse(any())).thenCallRealMethod();
 
-        // Mocking the repository deleteById method
+        // Mocking the repository
         doNothing().when(postRepository).deleteById(anyString());
 
         // Call the method
-        ResponseEntity<Object> responseEntity = underTest.deletePost(socialUser1.getId(), post1.getId());
+        ResponseEntity<Object> responseEntity = underTest.deletePost(idUserRequest, post1.getId());
 
         // Assertions
         assertThat(responseEntity).isNotNull();
@@ -320,20 +248,15 @@ class PostServiceTest {
 
     // region Create SocialUser -Liked-> Post
     @Test
-    void createSocialUserlikedPost_Success() {
-        // Mock Validations
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.postExistsById(any())).thenReturn(true);
-        when(validationService.userLikedPost(any(),any())).thenReturn(false);
-
+    void createSocialUserLikedPost_Success() {
         // Mocking the Response
         when(responseService.successResponse(any())).thenCallRealMethod();
 
-        // Mocking the repository deleteById method
+        // Mocking the repository
         doNothing().when(postRepository).createUserByIdLikedPostById(anyString(),anyString(),any());
 
         // Call the method
-        ResponseEntity<Object> responseEntity = underTest.createSocialUserlikedPost(socialUser1.getId(), post1.getId());
+        ResponseEntity<Object> responseEntity = underTest.createSocialUserlikedPost(idUserRequest, post1.getId());
 
         // Assertions
         assertThat(responseEntity).isNotNull();
@@ -348,20 +271,15 @@ class PostServiceTest {
 
     // region Delete SocialUser -Liked-> Post
     @Test
-    void deleteSocialUserlikedPost_Success() {
-        // Mock Validations
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.postExistsById(any())).thenReturn(true);
-        when(validationService.userLikedPost(any(),any())).thenReturn(true);
-
+    void deleteSocialUserLikedPost_Success() {
         // Mocking the Response
         when(responseService.successResponse(any())).thenCallRealMethod();
 
-        // Mocking the repository deleteById method
+        // Mocking the repository
         doNothing().when(postRepository).deleteUserByIdLikedPostById(anyString(),anyString());
 
         // Call the method
-        ResponseEntity<Object> responseEntity = underTest.deleteSocialUserlikedPost(socialUser1.getId(), post1.getId());
+        ResponseEntity<Object> responseEntity = underTest.deleteSocialUserlikedPost(idUserRequest, post1.getId());
 
         // Assertions
         assertThat(responseEntity).isNotNull();

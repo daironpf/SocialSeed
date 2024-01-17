@@ -122,7 +122,7 @@ public class PostServiceValidator {
             return responseService.conflictResponseWithMessage("The Post is already liked by this user");
         }
 
-        // Continuar con la ejecución normal del método
+        // Continue
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
 
@@ -141,7 +141,7 @@ public class PostServiceValidator {
             return responseService.conflictResponseWithMessage("The Post is Not liked by this user");
         }
 
-        // Continuar con la ejecución normal del método
+        // Continue
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
 }
