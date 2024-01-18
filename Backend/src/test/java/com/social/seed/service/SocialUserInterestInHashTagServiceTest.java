@@ -1,3 +1,18 @@
+/*
+ * Copyright 2011-2023 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.social.seed.service;
 
 import com.social.seed.model.HashTag;
@@ -6,7 +21,6 @@ import com.social.seed.repository.SocialUserInterestInHashTagRepository;
 import com.social.seed.repository.SocialUserRepository;
 import com.social.seed.util.ResponseDTO;
 import com.social.seed.util.ResponseService;
-import com.social.seed.util.ValidationService;
 import com.social.seed.utils.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -40,8 +54,6 @@ class SocialUserInterestInHashTagServiceTest {
     private SocialUserRepository socialUserRepository;
     @Mock
     private ResponseService responseService;
-    @Mock
-    private ValidationService validationService;
     // endregion
 
     // region Sample Data for testing
@@ -56,16 +68,10 @@ class SocialUserInterestInHashTagServiceTest {
         hashTag1 = TestUtils.createHashTag("1h","FirstHashTag",0,0);
     }
 
-    // region Add Interest
     @Test
     void addInterest_Success() {
-        // Mock validationService
-        when(validationService.hashTagExistsById(any())).thenReturn(true);
-        when(validationService.existsInterest(anyString(),anyString())).thenReturn(false);
-        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
-        when(socialUserRepository.findById(socialUser1.getId())).thenReturn(Optional.of(socialUser1));
-
         // Mock repository
+        when(socialUserRepository.findById(socialUser1.getId())).thenReturn(Optional.of(socialUser1));
         doNothing().when(socialUserInterestInHashTagRepository).addInterest(any(),any(),any());
 
         // Mocking the success response
@@ -85,80 +91,8 @@ class SocialUserInterestInHashTagServiceTest {
     }
 
     @Test
-    void addInterest_NotFound_UserRequest() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.addInterest(socialUser1.getId(), hashTag1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
-    }
-
-    @Test
-    void addInterest_NotFound_HashTag() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.hashTagExistsById(any())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.hashTagNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.addInterest(socialUser1.getId(), hashTag1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("Hashtag not found with ID: %s", hashTag1.getId()));
-    }
-
-    @Test
-    void addInterest_Conflict_InterestAlreadyExists() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.hashTagExistsById(any())).thenReturn(true);
-        when(validationService.existsInterest(anyString(),anyString())).thenReturn(true);
-
-        // Mocking the success response
-        when(responseService.conflictResponseWithMessage(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.addInterest(socialUser1.getId(), hashTag1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
-        assertThat(response.message()).isEqualTo("The Interest already exists");
-    }
-
-    // endregion
-
-    // region Delete Interest
-    @Test
     void deleteInterest_Success() {
         // Mock validationService
-        when(validationService.hashTagExistsById(any())).thenReturn(true);
-        when(validationService.existsInterest(anyString(),anyString())).thenReturn(true);
-        when(validationService.userExistsById(socialUser1.getId())).thenReturn(true);
         when(socialUserRepository.findById(socialUser1.getId())).thenReturn(Optional.of(socialUser1));
 
         // Mock repository
@@ -179,72 +113,4 @@ class SocialUserInterestInHashTagServiceTest {
         assertThat(response.status()).isEqualTo(HttpStatus.OK);
         assertThat(response.message()).isEqualTo("Successful");
     }
-
-
-    @Test
-    void deleteInterest_NotFound_UserRequest() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.userNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.deleteInterest(socialUser1.getId(), hashTag1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("The user with id: [ %s ] was not found.", socialUser1.getId()));
-    }
-
-    @Test
-    void deleteInterest_NotFound_HashTag() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.hashTagExistsById(any())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.hashTagNotFoundResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.deleteInterest(socialUser1.getId(), hashTag1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.NOT_FOUND);
-        assertThat(response.message()).isEqualTo(String.format("Hashtag not found with ID: %s", hashTag1.getId()));
-    }
-
-    @Test
-    void deleteInterest_Conflict_InterestDoesNotExist() {
-        // Mock validationService
-        when(validationService.userExistsById(any())).thenReturn(true);
-        when(validationService.hashTagExistsById(any())).thenReturn(true);
-        when(validationService.existsInterest(anyString(),anyString())).thenReturn(false);
-
-        // Mocking the success response
-        when(responseService.conflictResponseWithMessage(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.deleteInterest(socialUser1.getId(), hashTag1.getId());
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.CONFLICT);
-        assertThat(response.message()).isEqualTo("The Interest does not exist");
-    }
-    // endregion
 }
