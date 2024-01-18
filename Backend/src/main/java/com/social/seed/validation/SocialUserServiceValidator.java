@@ -121,8 +121,12 @@ public class SocialUserServiceValidator {
         if (!idUserToUpdate.equals(idUserRequest)) {
             return responseService.forbiddenResponseWithMessage("The user who is requesting the userName change is not the owner of this");
         }
-        if (!validationService.userExistsById(idUserToUpdate)) return responseService.userNotFoundResponse(idUserRequest);
-        if (validationService.userExistByUserName(newUserName)) return responseService.conflictResponseWithMessage(String.format("The userName [ %s ] already exists", newUserName));
+        if (!validationService.userExistsById(idUserToUpdate)) {
+            return responseService.userNotFoundResponse(idUserRequest);
+        }
+        if (validationService.userExistByUserName(newUserName)) {
+            return responseService.conflictResponseWithMessage(String.format("The userName [ %s ] already exists", newUserName));
+        }
 
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
@@ -132,8 +136,12 @@ public class SocialUserServiceValidator {
         if (!idUserToUpdate.equals(idUserRequest)) {
             return responseService.forbiddenResponseWithMessage("The user who is requesting the Email change is not the owner of this");
         }
-        if (!validationService.userExistsById(idUserToUpdate)) return responseService.userNotFoundResponse(idUserRequest);
-        if (validationService.userExistByEmail(newEmail)) return responseService.conflictResponseWithMessage( String.format("The Email [ %s ] already exists", newEmail));
+        if (!validationService.userExistsById(idUserToUpdate)) {
+            return responseService.userNotFoundResponse(idUserRequest);
+        }
+        if (validationService.userExistByEmail(newEmail)) {
+            return responseService.conflictResponseWithMessage(String.format("The Email [ %s ] already exists", newEmail));
+        }
 
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
@@ -146,19 +154,33 @@ public class SocialUserServiceValidator {
             return responseService.forbiddenResponseWithMessage(
                     "the user to be followed cannot be the same");
         }
-        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
-        if (!validationService.userExistsById(idUserToFollow)) return responseService.userNotFoundResponse(idUserToFollow);
-        if (validationService.isUserBFollowerOfUserA(idUserRequest, idUserToFollow)) return responseService.conflictResponseWithMessage(String.format("User %s is already being followed.", idUserToFollow));
+        if (!validationService.userExistsById(idUserRequest)) {
+            return responseService.userNotFoundResponse(idUserRequest);
+        }
+        if (!validationService.userExistsById(idUserToFollow)) {
+            return responseService.userNotFoundResponse(idUserToFollow);
+        }
+        if (validationService.isUserBFollowerOfUserA(idUserRequest, idUserToFollow)) {
+            return responseService.conflictResponseWithMessage(String.format("User %s is already being followed.", idUserToFollow));
+        }
 
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
 
     @Around("execution(* com.social.seed.service.SocialUserService.unfollowSocialUser(String, String)) && args(idUserRequest, idUserToUnFollow)")
     public ResponseEntity<Object> aroundUnfollowSocialUser(ProceedingJoinPoint joinPoint, String idUserRequest, String idUserToUnFollow) throws Throwable {
-        if (idUserRequest.equals(idUserToUnFollow)) return responseService.forbiddenResponseWithMessage("the user to be unfollowed cannot be the same");
-        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
-        if (!validationService.userExistsById(idUserToUnFollow)) return responseService.userNotFoundResponse(idUserToUnFollow);
-        if (!validationService.isUserBFollowerOfUserA(idUserRequest, idUserToUnFollow)) return responseService.dontUnFollow(idUserToUnFollow);
+        if (idUserRequest.equals(idUserToUnFollow)) {
+            return responseService.forbiddenResponseWithMessage("the user to be unfollowed cannot be the same");
+        }
+        if (!validationService.userExistsById(idUserRequest)) {
+            return responseService.userNotFoundResponse(idUserRequest);
+        }
+        if (!validationService.userExistsById(idUserToUnFollow)) {
+            return responseService.userNotFoundResponse(idUserToUnFollow);
+        }
+        if (!validationService.isUserBFollowerOfUserA(idUserRequest, idUserToUnFollow)) {
+            return responseService.dontUnFollow(idUserToUnFollow);
+        }
 
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
@@ -167,16 +189,24 @@ public class SocialUserServiceValidator {
     // region Vacation Mode Operations
     @Around("execution(* com.social.seed.service.SocialUserService.activateVacationMode(String)) && args(idUserRequest)")
     public ResponseEntity<Object> aroundActivateVacationMode(ProceedingJoinPoint joinPoint, String idUserRequest) throws Throwable {
-        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
-        if (validationService.isVacationModeActivated(idUserRequest)) return responseService.conflictResponseWithMessage("The Vacation Mode is already Active");
+        if (!validationService.userExistsById(idUserRequest)) {
+            return responseService.userNotFoundResponse(idUserRequest);
+        }
+        if (validationService.isVacationModeActivated(idUserRequest)) {
+            return responseService.conflictResponseWithMessage("The Vacation Mode is already Active");
+        }
 
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
 
     @Around("execution(* com.social.seed.service.SocialUserService.deactivateVacationMode(String)) && args(idUserRequest)")
     public ResponseEntity<Object> aroundDeactivateVacationMode(ProceedingJoinPoint joinPoint, String idUserRequest) throws Throwable {
-        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
-        if (!validationService.isVacationModeActivated(idUserRequest)) return responseService.conflictResponseWithMessage("The Vacation Mode is already Deactivated");
+        if (!validationService.userExistsById(idUserRequest)) {
+            return responseService.userNotFoundResponse(idUserRequest);
+        }
+        if (!validationService.isVacationModeActivated(idUserRequest)) {
+            return responseService.conflictResponseWithMessage("The Vacation Mode is already Deactivated");
+        }
 
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
@@ -185,16 +215,24 @@ public class SocialUserServiceValidator {
     // region Activation Operations
     @Around("execution(* com.social.seed.service.SocialUserService.activateSocialUser(String)) && args(idUserRequest)")
     public ResponseEntity<Object> aroundActivateSocialUser(ProceedingJoinPoint joinPoint, String idUserRequest) throws Throwable {
-        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
-        if (validationService.isSocialUserActivated(idUserRequest)) return responseService.conflictResponseWithMessage("The Social User is already Active");
+        if (!validationService.userExistsById(idUserRequest)) {
+            return responseService.userNotFoundResponse(idUserRequest);
+        }
+        if (validationService.isSocialUserActivated(idUserRequest)) {
+            return responseService.conflictResponseWithMessage("The Social User is already Active");
+        }
 
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
 
     @Around("execution(* com.social.seed.service.SocialUserService.deactivateSocialUser(String)) && args(idUserRequest)")
     public ResponseEntity<Object> aroundDeactivateSocialUser(ProceedingJoinPoint joinPoint, String idUserRequest) throws Throwable {
-        if (!validationService.userExistsById(idUserRequest)) return responseService.userNotFoundResponse(idUserRequest);
-        if (!validationService.isSocialUserActivated(idUserRequest)) return responseService.conflictResponseWithMessage("The Social User is already Deactivated");
+        if (!validationService.userExistsById(idUserRequest)) {
+            return responseService.userNotFoundResponse(idUserRequest);
+        }
+        if (!validationService.isSocialUserActivated(idUserRequest)) {
+            return responseService.conflictResponseWithMessage("The Social User is already Deactivated");
+        }
 
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
