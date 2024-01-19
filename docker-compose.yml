@@ -15,7 +15,7 @@ services:
     networks:
       - net  
   neo4j:
-    container_name: neo4j_ss 
+    container_name: neo4j_social_seed_db 
     image: neo4j:5.15.0-enterprise
     ports:
       - "7474:7474"
@@ -31,5 +31,15 @@ services:
       - ./neo4j/plugins:/plugins
     networks:
     - net
+  fake-graph:
+    container_name: fake_graph_service
+    image: python:3.11.2-slim
+    volumes:
+      - ./fake_graph:/app
+    command: "python /app/generate.py"
+    depends_on:
+      - social-seed-app
+    networks:
+      - net  
 networks:
   net:    
