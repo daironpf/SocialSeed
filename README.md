@@ -44,3 +44,7 @@ Thanks for choosing Social Seed as the starting point for your social network jo
 ---
 
 **Note:** This README will be updated as the project progresses, currently everything I want to achieve is reflected here and where I am going can be seen in the code.
+
+
+Si quieres levantar el proyecto con los datos de prueba generados por el fake graph entonces ejecuta este comando:
+GENERATE_FAKE_GRAPH=true docker-compose up --build fake-graph

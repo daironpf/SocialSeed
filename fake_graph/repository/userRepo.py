@@ -63,7 +63,9 @@ class UserRepo:
             # Guardar el fichero
             file_name = f"{__path__}/user_{id_file}.csv"
             df.to_csv(file_name,index=False)
-            file.writelines(file_name + "\n")
+
+            file_name_to_docker = f"usuarios/user_{id_file}.csv"
+            file.writelines(file_name_to_docker + "\n")
             del data, df, file_name
             gc.collect()
 
@@ -71,7 +73,7 @@ class UserRepo:
         crear_nodos_en_paralelo(total=TOTAL_SOCIAL_USER, func=crear, descript=descript+': '+format(TOTAL_SOCIAL_USER, ','))
         
         # Save the Data to Neo4j
-        def save(ruta):        
+        def save(ruta): 
                         conn.query_insert("""LOAD CSV WITH HEADERS FROM "file:///{ruta}" AS row
                             CALL {{
                                 WITH row
