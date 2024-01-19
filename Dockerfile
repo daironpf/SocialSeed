@@ -15,9 +15,13 @@ WORKDIR /app
 COPY --from=python-base /usr/local /usr/local
 
 # Install Python dependencies
-# RUN apt-get update \
-#     && apt-get install -y python3-dev build-essential \
-#     && pip3 install neo4j pandas tqdm faker
+RUN apt-get update -y
+RUN apt-get install -y python3-dev build-essential
+RUN apt-get update -y --fix-missing
+
+COPY fake_graph/requirements.txt requirements.txt
+
+RUN pip install -r requirements.txt
 
 EXPOSE 8081
 # ejectuta el .jar a traves de java cuando el contenedor levante
