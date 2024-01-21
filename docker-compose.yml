@@ -1,5 +1,5 @@
 version: "3.8"
-services:
+services:  
   # Noe4j database config
   neo4j:
     container_name: neo4j_social_seed_db 
@@ -18,7 +18,7 @@ services:
       - ./neo4j/conf:/conf
       - ./neo4j/logs:/logs
       - ./neo4j/plugins:/plugins
-      - ./fake_graph_service/app/temp:/import
+      - import_data:/import
     networks:
       - net
   # Social Seed Api in Java config
@@ -45,6 +45,7 @@ services:
       context: ./fake_graph    
     volumes:
       - ./fake_graph:/app
+      - import_data:/app/temp
     depends_on:
       - neo4j
     environment:
@@ -54,5 +55,9 @@ services:
       sh -c "if [ '$GENERATE_FAKE_GRAPH' = 'true' ]; then python /app/generate.py; else sleep infinity; fi"    
     networks:
       - net
+volumes:
+  import_data:
+    driver_opts:
+      o: bind
 networks:
   net:
