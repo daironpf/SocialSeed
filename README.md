@@ -47,4 +47,9 @@ Thanks for choosing Social Seed as the starting point for your social network jo
 
 
 Si quieres levantar el proyecto con los datos de prueba generados por el fake graph entonces ejecuta este comando:
+in linux o gitbash:
 GENERATE_FAKE_GRAPH=true docker-compose up --build fake-graph
+
+in windows terminal:
+$env:GENERATE_FAKE_GRAPH="true" ; docker-compose up --build fake-graph
+
