@@ -15,9 +15,10 @@ def wait_for_neo4j():
             # print(f"Waiting for Neo4j to start... Error: {e}")
             time.sleep(2)
 
+from libs.load import *
 if __name__ == "__main__":
    wait_for_neo4j()
-   from libs.load import *
+   
    #%% SocialUsers
    users.cargar()
 

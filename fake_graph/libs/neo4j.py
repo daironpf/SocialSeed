@@ -1,4 +1,5 @@
 from neo4j import GraphDatabase
+from load.configuration import config
 
 class Neo4jConnection:
     def __init__(self, uri, user, password):
@@ -27,3 +28,8 @@ class Neo4jConnection:
         result = tx.run(query, **parameters) if parameters else tx.run(query)
         return result.data()
 
+conn = Neo4jConnection(
+    config.get('neo4j', 'uri'),
+    config.get('neo4j', 'user'),
+    config.get('neo4j', 'password')
+)

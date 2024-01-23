@@ -1,6 +1,6 @@
 print("STARTING THE CREATION OF THE FAKE GRAPH")
 import time
-from libs.config import conn
+from libs.neo4j import conn
 
 tiempo_inicio = time.time()
  

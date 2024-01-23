@@ -1,9 +1,9 @@
-from libs.config import conn
-from libs.const import TOTAL_SOCIAL_USER
+from libs.neo4j import conn
+from load.const import TOTAL_SOCIAL_USER
 from libs.procesar_en_lotes import cargar_nodos_a_neo4j, crear_nodos_en_paralelo
 from libs.util import camino_al_modulo
 from tqdm import tqdm
-from libs.config import fake
+from load.faker import fake
 import pandas as pd
 from libs.fecha import generar_fecha_nacimiento, generar_fecha_registro
 import random, re, gc
@@ -70,7 +70,7 @@ class UserRepo:
             gc.collect()
 
         # Creamos los nodos en paralelo
-        crear_nodos_en_paralelo(total=TOTAL_SOCIAL_USER, func=crear, descript=descript+': '+format(TOTAL_SOCIAL_USER, ','))
+        crear_nodos_en_paralelo(total=TOTAL_SOCIAL_USER, func=crear, descript = f'{descript}: {TOTAL_SOCIAL_USER:,}')
         
         # Save the Data to Neo4j
         def save(ruta): 
