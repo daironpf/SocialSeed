@@ -48,6 +48,7 @@ services:
       - import_data:/app/temp
     depends_on:
       - neo4j
+      - social-seed-app
     environment:
       - GENERATE_FAKE_GRAPH
       - DATABASE_URI=bolt://neo4j:7687
