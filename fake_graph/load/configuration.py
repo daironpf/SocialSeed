@@ -1,3 +1,10 @@
+"""
+A utility class for reading and retrieving configurations from a .conf file.
+
+Author: Dairon Pérez Frías
+github: https://github.com/daironpf
+License: Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+"""
 import configparser
 
 class Configuration:
@@ -12,8 +19,8 @@ class Configuration:
         return self.config.get(section, key)
     
     def get_uri_neo4j(self):
-        location_server = config.get('neo4j','location_server')
-        uri = config.get('neo4j', f'uri_{location_server}')
+        location_server = self.get('neo4j','location_server')
+        uri = self.get('neo4j', f'uri_{location_server}')
         return uri
 
 config = Configuration('conf/generate.conf')
