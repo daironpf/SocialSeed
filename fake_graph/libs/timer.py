@@ -2,7 +2,7 @@
 A utility class for timing processes.
 
 Author: Dairon Pérez Frías
-github: https://github.com/daironpf
+GitHub: https://github.com/daironpf
 License: Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
 """
 import time
