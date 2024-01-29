@@ -10,5 +10,10 @@ class Configuration:
 
     def get(self, section, key):
         return self.config.get(section, key)
+    
+    def get_uri_neo4j(self):
+        location_server = config.get('neo4j','location_server')
+        uri = config.get('neo4j', f'uri_{location_server}')
+        return uri
 
 config = Configuration('conf/generate.conf')
