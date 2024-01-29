@@ -29,7 +29,7 @@ class Neo4jConnection:
         return result.data()
 
 conn = Neo4jConnection(
-    config.get('neo4j', 'uri'),
+    config.get_uri_neo4j(),
     config.get('neo4j', 'user'),
     config.get('neo4j', 'password')
 )
