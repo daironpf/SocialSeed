@@ -59,3 +59,32 @@ class Neo4jLoader:
             os.remove(self.path_file)
         except Exception as e:
             print(f"Error: {e}")
+
+    def cargar_relaciones_a_neo4j(self, func, descript):
+        # Cargamos el fichero lista.txt
+        with open("temp/lista.txt", "r") as file:
+            filenames = file.read().splitlines()
+
+            #max_workers = os.cpu_count() or 1
+            # Procesar cada archivo en paralelo con reintento
+            with concurrent.futures.ThreadPoolExecutor(1) as executor:
+                with tqdm(total=len(filenames), desc=descript, leave=True) as pbar:
+                    # Utilizar executor.submit() para ejecutar la función func en paralelo para cada nombre de archivo
+                    futures = [executor.submit(func, ruta=nombre_archivo) for nombre_archivo in filenames]
+
+                    # Esperar a que todos los futuros se completen con reintento
+                    for future in concurrent.futures.as_completed(futures):
+                        while True:
+                            try:
+                                result = future.result()
+                                break  # Si tiene éxito, salimos del bucle de reintento
+                            except Exception as e:
+                                print(f"Error: {str(e)}. Reintentando en 1 segundo...")
+                                time.sleep(10)  # Esperar antes de reintentar
+                        pbar.update(1)
+
+                # Actualizar el progreso total
+                pbar.refresh()
+
+        # Cierra la conexión con la base de datos de Neo4j
+        os.remove("temp/lista.txt")
