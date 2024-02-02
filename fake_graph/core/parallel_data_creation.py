@@ -9,7 +9,7 @@ import concurrent.futures
 import os
 from tqdm import tqdm
 
-from libs.util import get_idn_ranges
+from libs.idn_range_calculator import IDNRangeCalculator
 
 class ParallelDataCreation:
 
@@ -33,7 +33,9 @@ class ParallelDataCreation:
         """
         try:            
             # Get the list of IDNs to divide the work into smaller parts
-            id_ranges = get_idn_ranges(total)
+            # id_ranges = get_idn_ranges(total)
+            id_ranges = IDNRangeCalculator.calculate_ranges(total)
+
             # Get the maximum number of workers (threads)
             max_workers = os.cpu_count() or 1
             # Open the file where the list of paths for the files to be created is located
