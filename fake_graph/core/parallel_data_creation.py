@@ -12,12 +12,6 @@ from tqdm import tqdm
 from libs.util import get_idn_ranges
 
 class ParallelDataCreation:
-    """
-    Class responsible for parallel data creation.
-
-    Attributes:
-        None
-    """
 
     def __init__(self):
         pass
