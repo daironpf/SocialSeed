@@ -37,3 +37,14 @@ class SocialUserController:
             int(config.get('users', 'friends_per_user_min')),
             int(config.get('users', 'friends_per_user_max'))
         )
+    
+    def followers(self):
+        """
+        Create and Load the followers relationship between SocialUser nodes.
+        This method delegates the task create of loading followers relationship to the repository.
+        """
+
+        self.__repo.load_followers(
+            int(config.get('users', 'follow_per_user_min')),
+            int(config.get('users', 'follow_per_user_max'))
+        )

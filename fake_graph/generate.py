@@ -9,8 +9,7 @@ if __name__ == "__main__":
     #%% SocialUsers
     users.load()
     users.friends()
-
-    # users.seguidores()
+    users.followers()
 
     #%% Post
     # posts.cargar()
