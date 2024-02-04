@@ -63,10 +63,13 @@ class BuildRelationship:
                             relaciones.add((idn_nodo_origen, idn_nodo_destino))
 
             df = pd.DataFrame(relaciones, columns=['nodo_origen_id', 'nodo_destino_id'])
-            # Guardar el fichero
-            file_name = f"{__path__}/{name_relation_file}_{id_file}.json"    
-            df.to_json(file_name,orient="records")
-            file.writelines(file_name + "\n")
+            # Save the file
+            file_name = f"{__path__}/{name_relation_file}_{id_file}.csv"
+            df.to_csv(file_name, index=False)
+
+            # Save the path to read from import folder
+            file_name_to_read = f"{modulo_name}/{name_relation_file}_{id_file}.csv"
+            file.writelines(file_name_to_read + "\n")
             del data, df, file_name
             gc.collect()
 

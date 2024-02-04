@@ -7,7 +7,7 @@ from load.initialize import users
 
 if __name__ == "__main__":
     #%% SocialUsers
-    # users.load()
+    users.load()
     users.friends()
 
     # users.seguidores()

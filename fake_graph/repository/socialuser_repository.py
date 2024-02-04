@@ -1,20 +1,20 @@
 from libs.neo4j import Neo4jConnection
 from libs.fecha import generar_fecha_nacimiento, generar_fecha_registro
 from libs.loader import Loader
+from libs.string_generator import StringGenerator
+from libs.path import Path
 
 from core.parallel_data_creation import ParallelDataCreation
 from core.neo4j_loader import Neo4jLoader
 from core.build_relationships import BuildRelationship
-from libs.string_generator import StringGenerator
+from core.neo4j_load_relationships_with_time import Neo4jLoadRealationshipsWithTime
 
 from tqdm import tqdm
 from load.faker import fake
 import pandas as pd
 import random, gc
-from libs.path import Path
 
 unicos = set()
-
 
 class SocialUserRepository:
     global unicos
@@ -26,6 +26,7 @@ class SocialUserRepository:
         self.neo4j_loader = Neo4jLoader()
         self.parallel_process_data = ParallelDataCreation()
         self.build_relationship = BuildRelationship()
+        self.save_relations_with_time = Neo4jLoadRealationshipsWithTime()
 
     # %% Create and Load the data of SocialUser
     def load_nodes(self):        
@@ -63,10 +64,8 @@ class SocialUserRepository:
                     user_name = StringGenerator.generate_username(fullName)
                     if user_name not in unicos:
                         break
-                # email = generar_direccion_email(user_name,fake)
 
                 email = StringGenerator.generate_email(user_name)
-
                 language = 'ES'
                 onVacation = random.choice([True, False])
                 isActive = random.choice([True, False])
@@ -120,8 +119,7 @@ class SocialUserRepository:
         conn.close()
 
     # %% Create and Load the Friends relationship
-    def load_friends(self, friends_per_user_min, friends_per_user_max):
-        print(self.TOTAL_SOCIAL_USER)
+    def load_friends(self, friends_per_user_min, friends_per_user_max):        
         self.build_relationship.crear_relaciones_NaM(
                 A_TOTAL = self.TOTAL_SOCIAL_USER,
                 B_TOTAL = self.TOTAL_SOCIAL_USER,
@@ -134,9 +132,7 @@ class SocialUserRepository:
                 name_relation_file = "amigos"
                 )
         
-        from core.neo4j_load_relationships import Neo4jLoadRealationships
-        save_relaciones = Neo4jLoadRealationships()
-        save_relaciones.almacenar_relacion_con_prop_tiempo_en_relacion(
+        self.save_relations_with_time.store_relation_with_time_property(
                             nodo_inicio = "SocialUser",
                             nodo_destino = "SocialUser",
                             nombre_relacion = "FRIEND_OF",
@@ -146,14 +142,16 @@ class SocialUserRepository:
                             nombre_prop_nueva = "friendshipDate")
         
         # Total de amigos que tiene el usuario en cuestion, private int friendCount;
-        # loader = Loader("Calculating the Total Friends",
-        #         "The total friend count has been assigned to the .friendCount property on the (:SocialUser) node").start()
-        # conn = Neo4jConnection()
-        # conn.query_insert("""
-        #             CALL apoc.periodic.iterate(
-        #                 "MATCH (u:SocialUser) RETURN u, [(u)-[:FRIEND_OF]-(amigo) | amigo] AS amigos",
-        #                 "WITH u, amigos
-        #                     SET u.friendCount = size(amigos)",
-        #             {batchSize: 10000, parallel: false})""")
-        # loader.stop()
-        # conn.close()     
+        loader = Loader("Calculating the Total Friends",
+                "The total friend count has been assigned to the .friendCount property on the (:SocialUser) node").start()
+        conn = Neo4jConnection()
+        conn.query_insert("""
+                          CALL {
+                            MATCH (u:SocialUser)
+                            OPTIONAL MATCH (u)-[:FRIEND_OF]-(amigo)
+                            WITH u, COLLECT(amigo) AS amigos
+                            SET u.friendCount = size(amigos)
+                          } IN TRANSACTIONS OF 1000 ROWS
+                        """)
+        loader.stop()
+        conn.close()

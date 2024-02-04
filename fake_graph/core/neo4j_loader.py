@@ -62,7 +62,7 @@ class Neo4jLoader:
 
     def cargar_relaciones_a_neo4j(self, func, descript):
         # Cargamos el fichero lista.txt
-        with open("temp/lista.txt", "r") as file:
+        with open(self.path_file, "r") as file:
             filenames = file.read().splitlines()
 
             #max_workers = os.cpu_count() or 1
@@ -87,4 +87,4 @@ class Neo4jLoader:
                 pbar.refresh()
 
         # Cierra la conexión con la base de datos de Neo4j
-        os.remove("temp/lista.txt")
+        # os.remove("temp/lista.txt")
