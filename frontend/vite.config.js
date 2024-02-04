@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     port: 8080,
   },
-
+  // plugins
   plugins: [
     vue(),
   ],
@@ -22,6 +22,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  // define
   define: {
     __APP_VERSION__: JSON.stringify('v0.0.1')
   }
