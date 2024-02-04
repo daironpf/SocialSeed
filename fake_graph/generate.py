@@ -1,28 +1,21 @@
-import socket
-import time
+from libs.timer import Timer
+timer = Timer()
+start_time = timer.begin()
 
-neo4j_host = "neo4j"
-neo4j_port = 7474
+# load the configurations, mount the connections and create the constraints
+from load.initialize import users
 
-def wait_for_neo4j():
-    while True:
-        try:
-            # Intenta establecer una conexión con Neo4j
-            with socket.create_connection((neo4j_host, neo4j_port), timeout=5):
-                print("Neo4j is available!")
-                break
-        except (socket.error, socket.timeout) as e:
-            # print(f"Waiting for Neo4j to start... Error: {e}")
-            time.sleep(2)
-
-from libs.load import *
 if __name__ == "__main__":
-   wait_for_neo4j()
-   
-   #%% SocialUsers
-   users.cargar()
+    #%% SocialUsers
+    users.load()
+    users.friends()
 
-print(f"The graph with Fake Data has been successfully created in Neo4j.")
-#%%
+    # users.seguidores()
 
-final()
+    #%% Post
+    # posts.cargar()
+    # users.posted_posts()
+    # users.like_posts()
+
+    #%% End of generate code
+    timer.end(start_time)
