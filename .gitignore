@@ -28,6 +28,7 @@ replay_pid*
 
 .vscode/
 .vscode
+/.vscode/
 
 Neo4j/conf/
 Neo4j/data/
