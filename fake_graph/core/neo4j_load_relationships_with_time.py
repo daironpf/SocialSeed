@@ -23,7 +23,7 @@ class Neo4jLoadRealationshipsWithTime:
         
         conn = Neo4jConnection()
         # Save the Data to Neo4j
-        def insertar(path):            
+        def insertar(path):
             conn.query_insert("""LOAD CSV WITH HEADERS FROM "file:///{path}" AS row
                     CALL{{
                         WITH row
@@ -46,5 +46,5 @@ class Neo4jLoadRealationshipsWithTime:
                                 nombre_prop_B = nombre_prop_B,
                                 nombre_prop_nueva = nombre_prop_nueva))                        
         
-        self.neo4j_loader.load_nodes(task_func=insertar, description=descript)
+        self.neo4j_loader.load_relationships(task_func=insertar, description=descript)
         conn.close()

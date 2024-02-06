@@ -58,7 +58,7 @@ class SocialUserRepository:
         This method generates user data in batches, saves it to CSV files, and loads it into the Neo4j database.
         """        
         # Define column names for user data
-        columnas = ['dateBorn', 'registrationDate', 'fullName', 'userName', 'email', 'language', 'onVacation',
+        columnas = ['idn','dateBorn', 'registrationDate', 'fullName', 'userName', 'email', 'language', 'onVacation',
                     'isActive', "friendRequestCount"]
         
         global unicos
@@ -86,7 +86,8 @@ class SocialUserRepository:
             data = []
 
             # Generate user data in the specified range
-            for _ in tqdm(range(idn_end - idn_begin + 1), desc=descript_lotes, leave=False):                
+            for i in tqdm(range(idn_end - idn_begin + 1), desc=descript_lotes, leave=False):
+                idn = idn_begin + i
                 dateBorn = generar_fecha_nacimiento()
                 registrationDate = generar_fecha_registro(dateBorn)
                 # falta eliminar las tildes del nickname
@@ -106,7 +107,7 @@ class SocialUserRepository:
                 isActive = random.choice([True, False])
 
                 unicos.add(user_name)
-                data.append([dateBorn, registrationDate, fullName, user_name, email, language, onVacation, isActive, 0])
+                data.append([idn, dateBorn, registrationDate, fullName, user_name, email, language, onVacation, isActive, 0])
 
             # Create a DataFrame and save it to a CSV file
             df = pd.DataFrame(data, columns=columnas)            
@@ -129,34 +130,30 @@ class SocialUserRepository:
         # Save the Data to Neo4j
         conn = Neo4jConnection()
 
-        def save(ruta):
+        def save(path):
             """
             Saves user data from CSV files to Neo4j.
 
             Args:
-                ruta (str): Path to the CSV file.
+                path (str): Path to the CSV file.
             """
-            conn.query_insert("""LOAD CSV WITH HEADERS FROM "file:///{ruta}" AS row
+            conn.query_insert("""LOAD CSV WITH HEADERS FROM "file:///{path}" AS row
                             CALL {{
-                                WITH row
-                                    MERGE (id:IdNumerico {{name:'SocialUser'}})
-                                        ON CREATE SET id.total = 1
-                                        ON MATCH SET id.total = id.total + 1
-                                    WITH id.total AS nid, row
-                                        MERGE (u:SocialUser {{identifier:randomUUID(),
-                                            idn: nid,
-                                            dateBorn : localdatetime(row.dateBorn),
-                                            registrationDate : localdatetime(row.registrationDate),
-                                            fullName : row.fullName,
-                                            userName : row.userName,
-                                            email : row.email,
-                                            language : row.language,
-                                            onVacation : row.onVacation,
-                                            isActive : row.isActive,
-                                            friendRequestCount : row.friendRequestCount
-                                        }})
+                                WITH row                                    
+                                MERGE (u:SocialUser {{identifier:randomUUID(),
+                                    idn: toInteger(row.idn),
+                                    dateBorn : localdatetime(row.dateBorn),
+                                    registrationDate : localdatetime(row.registrationDate),
+                                    fullName : row.fullName,
+                                    userName : row.userName,
+                                    email : row.email,
+                                    language : row.language,
+                                    onVacation : row.onVacation,
+                                    isActive : row.isActive,
+                                    friendRequestCount : row.friendRequestCount
+                                }})
                             }} IN TRANSACTIONS OF 1000 ROWS
-                                          """.format(ruta=ruta))
+                                          """.format(path=path))
 
         self.neo4j_loader.load_nodes(task_func=save, description="Storing Users")
         conn.close()
@@ -262,7 +259,7 @@ class SocialUserRepository:
                             MATCH (u:SocialUser)
                             OPTIONAL MATCH (u)<-[:FOLLOWED_BY]-(follower)
                             WITH u, COUNT(follower) AS followersCount
-                            SET u.followersCount = followersCount
+                            SET u.followersCount = toInteger(followersCount)
                           } IN TRANSACTIONS OF 5000 ROWS
                     """)
         loader.stop()
