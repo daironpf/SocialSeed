@@ -3,7 +3,7 @@ timer = Timer()
 start_time = timer.begin()
 
 # load the configurations, mount the connections and create the constraints
-from load.initialize import users
+from load.initialize import users, posts
 
 if __name__ == "__main__":
     #%% SocialUsers
@@ -12,7 +12,7 @@ if __name__ == "__main__":
     users.followers()
 
     #%% Post
-    # posts.cargar()
+    posts.load()
     # users.posted_posts()
     # users.like_posts()
 

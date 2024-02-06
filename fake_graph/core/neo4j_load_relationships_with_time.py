@@ -23,8 +23,8 @@ class Neo4jLoadRealationshipsWithTime:
         
         conn = Neo4jConnection()
         # Save the Data to Neo4j
-        def insertar(ruta):            
-            conn.query_insert("""LOAD CSV WITH HEADERS FROM "file:///{ruta}" AS row                
+        def insertar(path):            
+            conn.query_insert("""LOAD CSV WITH HEADERS FROM "file:///{path}" AS row
                     CALL{{
                         WITH row
                             MATCH (o:{nodo_inicio} {{idn: toInteger(row.nodo_origen_id)}})
@@ -38,7 +38,7 @@ class Neo4jLoadRealationshipsWithTime:
                                 WITH r, now, lowerBounds, durationInSeconds, offset, lowerBounds + duration({{seconds:offset}}) as inbetweenDate
                                     set r.{nombre_prop_nueva} = localdatetime(inbetweenDate)
                     }} IN TRANSACTIONS OF 1000 ROWS
-                            """.format(ruta=ruta,
+                            """.format(path=path,
                                 nodo_inicio=nodo_inicio,                            
                                 nodo_destino=nodo_destino, 
                                 relacion=relacion,

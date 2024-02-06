@@ -39,7 +39,7 @@ class Neo4jLoader:
                 with concurrent.futures.ThreadPoolExecutor(1) as executor:
                     with tqdm(total=len(filenames), desc=description, leave=True) as progress_bar:
                         # Submit tasks to threads and execute them in parallel for each file name
-                        futures = [executor.submit(task_func, ruta=file_name) for file_name in filenames]
+                        futures = [executor.submit(task_func, path=file_name) for file_name in filenames]
 
                         # Wait for all futures to complete with retry
                         for future in concurrent.futures.as_completed(futures):

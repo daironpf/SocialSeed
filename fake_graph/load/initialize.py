@@ -15,3 +15,7 @@ from controller.socialuser_controller import SocialUserController
 total_user = int(config.get('users', 'TOTAL_SOCIAL_USERS'))
 users = SocialUserController(total_user)
 
+# mount the Controller to posts in the variable posts
+from controller.post_controller import PostController
+total_post = int(config.get('posts', 'prop'))*total_user
+posts = PostController(total_post)
