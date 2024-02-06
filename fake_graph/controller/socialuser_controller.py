@@ -19,7 +19,8 @@ class SocialUserController:
         Initialize the SocialUserController with a SocialUserRepository instance.
         """
         self.__repo = SocialUserRepository(total_user)
-    
+        self.total_user = total_user
+            
     def load(self):
         """
         Create and load the SocialUser data.
@@ -48,3 +49,8 @@ class SocialUserController:
             int(config.get('users', 'follow_per_user_min')),
             int(config.get('users', 'follow_per_user_max'))
         )
+    
+    # usuario publica post
+    def posted_posts(self):
+        total_post = int(config.get('posts', 'prop')) * self.total_user
+        self.__repo.load_posted_post(total_post)

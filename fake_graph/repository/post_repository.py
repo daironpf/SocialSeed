@@ -134,7 +134,7 @@ class PostRepository:
                             CALL {{
                                 WITH row
                                 MERGE (p:Post {{identifier:randomUUID(),
-                                    idn: row.idn,
+                                    idn: toInteger(row.idn),
                                     content: row.content,
                                     imageUrl: row.imageUrl,
                                     updateDate : localdatetime(row.updateDate),

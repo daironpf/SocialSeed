@@ -13,7 +13,7 @@ if __name__ == "__main__":
 
     #%% Post
     posts.load()
-    # users.posted_posts()
+    users.posted_posts()
     # users.like_posts()
 
     #%% End of generate code

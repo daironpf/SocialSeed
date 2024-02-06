@@ -16,6 +16,7 @@ from core.parallel_data_creation import ParallelDataCreation
 from core.neo4j_loader import Neo4jLoader
 from core.build_relationships import BuildRelationship
 from core.neo4j_load_relationships_with_time import Neo4jLoadRealationshipsWithTime
+from core.neo4j_load_relationships import Neo4jLoadRealationships
 
 # Import necessary libraries and modules
 from tqdm import tqdm
@@ -50,6 +51,7 @@ class SocialUserRepository:
         self.parallel_process_data = ParallelDataCreation()
         self.build_relationship = BuildRelationship()
         self.save_relations_with_time = Neo4jLoadRealationshipsWithTime()
+        self.save_relations = Neo4jLoadRealationships()
     
     def load_nodes(self):
         """
@@ -223,7 +225,7 @@ class SocialUserRepository:
                         descript = "(SocialUser)-[:FOLLOWED_BY]->(SocialUser)",
                         descript_g = "Creating Batches of Followers",
                         descript_l = "Creating Followers",
-                        modulo_name = "usuarios",
+                        modulo_name = self.modulo_name,
                         name_relation_file = "seguidores")
         
         # Store relationships with time property
@@ -265,3 +267,53 @@ class SocialUserRepository:
         loader.stop()
 
         conn.close()
+
+    #%% Build and Save: (Post)-[:POSTED_BY]->(SocialUser)
+    def load_posted_post(self,TOTAL_POST):
+        self.build_relationship.crear_relaciones_Na1(
+                        A_TOTAL = TOTAL_POST,
+                        B_TOTAL = self.TOTAL_SOCIAL_USER,
+                        descript =  "(Post)-[:POSTED_BY]->(SocialUser)",                        
+                        descript_g = "Creating Batches of Posts Published by Users",
+                        modulo_name = self.modulo_name,
+                        name_relation_file = "posted_Post")
+        
+        # save the relationship
+        self.save_relations.save_relationships(nodo_inicio="Post",
+                            nodo_destino="SocialUser",
+                            nombre_relacion="POSTED_BY",
+                            descript = "Storing: (Post)-[:POSTED_BY]->(SocialUser)",
+                            direccion_o_d=True)
+        
+        # Assigning a valid time for the Post publication
+        loader = Loader("Assigning a valid time for the Post publication",
+                "The exact moment when the Post was posted has been recorded in the property: postDate of the relationship: POSTED_BY").start()
+        conn = Neo4jConnection()
+        conn.query_insert("""
+                          CALL {
+                            MATCH (t:Post)-[r:POSTED_BY]->(o:SocialUser)
+                            WITH r, datetime.realtime() as now, datetime(o.registrationDate) as lowerBounds
+                                    WITH r, now, lowerBounds, duration.inSeconds(lowerBounds, now) as durationInSeconds
+                                    WITH r, now, lowerBounds, durationInSeconds, durationInSeconds.seconds / 2 as offset
+                                    WITH r, now, lowerBounds, durationInSeconds, offset, lowerBounds + duration({seconds:offset}) as inbetweenDate
+                                    set r.postDate = localdatetime(inbetweenDate)
+                            } IN TRANSACTIONS OF 1000 ROWS
+                          """)
+        loader.stop()
+
+        # Assigning a valid update time for the Post, based on the publication moment
+        loader = Loader("Assigning a valid update time for the Post, based on the publication moment",
+                        "The exact moment of the last update has been recorded in the property: updateDate of the Post").start()
+        
+        conn.query_insert("""
+                          CALL {
+                            MATCH (p:Post)-[r:POSTED_BY]->(u)                            
+                            WITH p, r, datetime.realtime() as now, datetime(r.postDate) as lowerBounds
+                                    WITH p, now, lowerBounds, duration.inSeconds(lowerBounds, now) as durationInSeconds
+                                    WITH p, now, lowerBounds, durationInSeconds, durationInSeconds.seconds / 2 as offset
+                                    WITH p, now, lowerBounds, durationInSeconds, offset, lowerBounds + duration({seconds:offset}) as inbetweenDate
+                                    set p.updateDate = localdatetime(inbetweenDate)
+                            } IN TRANSACTIONS OF 1000 ROWS
+                          """)
+        conn.close()
+        loader.stop()

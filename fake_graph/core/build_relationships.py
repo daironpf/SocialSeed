@@ -79,3 +79,43 @@ class BuildRelationship:
             task_func=crear, 
             description=f"Building: {descript}"
         )
+
+
+    #%% Building relacion de N a 1 donde: A - Review solo puede estar relacionada a un B, pero B puede tener varios A
+    def crear_relaciones_Na1(self, A_TOTAL, B_TOTAL, descript, descript_g, modulo_name, name_relation_file):
+        __path__ = Path.get_module_path(modulo_name)
+        
+        # Crea el dataSet con los Valores
+        def crear(data):                
+            rango_idns = data["rango_idn"]
+            file = data["file"]
+            id_file = data["i"]        
+            idn_begin = rango_idns[0]
+            idn_end = rango_idns[1]
+            relaciones = set()
+            
+            for i in tqdm(range(idn_end-idn_begin+1),  desc=descript_g, leave=False):
+                # Creo la relacion de A a B siendo un B un id int random en rango de 1 a total_b
+                idn_nodo_destino = random.randint(1, B_TOTAL)
+                relaciones.add((idn_begin+i, idn_nodo_destino))
+            
+            df = pd.DataFrame(relaciones, columns=['nodo_origen_id', 'nodo_destino_id'])
+            # Save the file
+            file_name = f"{__path__}/{name_relation_file}_{id_file}.csv"
+            df.to_csv(file_name, index=False)
+
+            # Save the path to read from import folder
+            file_name_to_read = f"{modulo_name}/{name_relation_file}_{id_file}.csv"
+            file.writelines(file_name_to_read + "\n")
+            del data, df, file_name
+            gc.collect()
+
+        # Ejecuta los metodos para crear las Relaciones en paralelo    
+        # crear_relaciones_en_paralelo(total=A_TOTAL, func=crear, descript=f"Building: {descript}")
+
+        # Ejecuta los metodos para crear las Relaciones en paralelo
+        self.parallel_process_data.generate_data_in_ranges(
+            total=A_TOTAL, 
+            task_func=crear, 
+            description=f"Building: {descript}"
+        )
