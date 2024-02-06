@@ -1,5 +1,5 @@
 """
-A controller class for managing SocialUser entities.
+A controller class for managing SocialUser.
 
 Author: Dairon Pérez Frías
 GitHub: https://github.com/daironpf
@@ -10,7 +10,7 @@ from load.configuration import config
 
 class SocialUserController:
     """
-    A controller class for managing SocialUser entities.    
+    A controller class for managing SocialUser.    
     Attributes:
         __repo (SocialUserRepository): The repository for handling SocialUser data.
     """
@@ -50,8 +50,7 @@ class SocialUserController:
             int(config.get('users', 'follow_per_user_min')),
             int(config.get('users', 'follow_per_user_max'))
         )
-    
-    # usuario publica post
+        
     def posted_posts(self):
         """
         Create and Load the POSTED_BY relationship between SocialUser and Post nodes.
@@ -59,4 +58,15 @@ class SocialUserController:
         """
                 
         self.__repo.load_posted_post(self.total_post)
-    
+        
+    def liked_posts(self):
+        """
+        Create and Load the LIKE relationship between SocialUser and Post nodes.
+        This method delegates the task create of loading relationship to the repository.
+        """
+                
+        self.__repo.load_liked_posts(
+            self.total_post,
+            int(config.get('users', 'post_liked_per_user_min')),
+            int(config.get('users', 'post_liked_per_user_max'))
+            )

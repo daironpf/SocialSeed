@@ -131,7 +131,6 @@ class SocialUserRepository:
 
         # Save the Data to Neo4j
         conn = Neo4jConnection()
-
         def save(path):
             """
             Saves user data from CSV files to Neo4j.
@@ -204,10 +203,10 @@ class SocialUserRepository:
                             SET u.friendCount = size(amigos)
                           } IN TRANSACTIONS OF 1000 ROWS
                         """)
-        loader.stop()
         conn.close()
-
-     # Create and load the Follows relationship
+        loader.stop()
+        
+    # Create and load the Follows relationship
     def load_followers(self, follow_per_user_min, follow_per_user_max):
         """
         Creates and loads follower relationships between users.
@@ -268,8 +267,8 @@ class SocialUserRepository:
 
         conn.close()
 
-    #%% Build and Save: (Post)-[:POSTED_BY]->(SocialUser)
-    def load_posted_post(self,TOTAL_POST):
+    # Build and Save: (Post)-[:POSTED_BY]->(SocialUser)
+    def load_posted_post(self, TOTAL_POST):
         self.build_relationship.crear_relaciones_Na1(
                         A_TOTAL = TOTAL_POST,
                         B_TOTAL = self.TOTAL_SOCIAL_USER,
@@ -286,9 +285,9 @@ class SocialUserRepository:
                             direccion_o_d=True)
         
         # Assigning a valid time for the Post publication
-        loader = Loader("Assigning a valid time for the Post publication",
-                "The exact moment when the Post was posted has been recorded in the property: postDate of the relationship: POSTED_BY").start()
         conn = Neo4jConnection()
+        loader = Loader("Assigning a valid time for the Post publication",
+                "The exact moment when the Post was posted has been recorded in the property: postDate of the relationship: POSTED_BY").start()        
         conn.query_insert("""
                           CALL {
                             MATCH (t:Post)-[r:POSTED_BY]->(o:SocialUser)
@@ -315,5 +314,42 @@ class SocialUserRepository:
                                     set p.updateDate = localdatetime(inbetweenDate)
                             } IN TRANSACTIONS OF 1000 ROWS
                           """)
+        conn.close()
+        loader.stop()
+        
+    # Build and Save: (Post)<-[:LIKE]-(SocialUser)
+    def load_liked_posts(self, TOTAL_POST, post_liked_per_user_min, post_liked_per_user_max):
+        self.build_relationship.crear_relaciones_NaM(
+                A_TOTAL = self.TOTAL_SOCIAL_USER,
+                B_TOTAL = TOTAL_POST,
+                rel_min = post_liked_per_user_min,
+                rel_max = post_liked_per_user_max,
+                descript =  "(SocialUser)-[:LIKE]->(Post)",
+                descript_g = "Creating Batches of User Reactions to Posts",
+                descript_l = "Creating LIKE",                        
+                modulo_name = self.modulo_name,
+                name_relation_file = "likes")
+
+        # save the relationship
+        self.save_relations.save_relationships(nodo_inicio="SocialUser",
+                            nodo_destino="Post",
+                            nombre_relacion="LIKE",
+                            descript="Storing: (SocialUser)-[:LIKE]->(Post)")
+        
+        # Assigning a valid time for the LIKE relationship
+        conn = Neo4jConnection()
+        loader = Loader("Assigning a valid time for when the user gave a LIKE to the Post",
+                        "The exact moment when the user reacted to the Post has been recorded in the property: likeDate of the relationship: LIKE").start()
+        conn.query_insert("""
+                          CALL {
+                            MATCH (p:Post)<-[r:LIKE]-(u)
+                            MATCH (p)-[rp:POSTED_BY]->(us)                            
+                            WITH r, datetime.realtime() as now, datetime(rp.postDate) as lowerBounds
+                                    WITH r, now, lowerBounds, duration.inSeconds(lowerBounds, now) as durationInSeconds
+                                    WITH r, now, lowerBounds, durationInSeconds, durationInSeconds.seconds / 2 as offset
+                                    WITH r, now, lowerBounds, durationInSeconds, offset, lowerBounds + duration({seconds:offset}) as inbetweenDate
+                                    set r.likeDate = localdatetime(inbetweenDate)
+                            } IN TRANSACTIONS OF 1000 ROWS
+                          """)        
         conn.close()
         loader.stop()

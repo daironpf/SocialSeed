@@ -1,7 +1,19 @@
+"""
+A controller class for managing Post.
+
+Author: Dairon Pérez Frías
+GitHub: https://github.com/daironpf
+License: Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
+"""
 from repository.post_repository import PostRepository
 from load.configuration import config
 
 class PostController:
+    """
+    A controller class for managing Post.
+    Attributes:
+        __repo (PostRepository): The repository for handling Post data and his HashTag.
+    """
 
     def __init__(self) -> None:
         self.total_user = int(config.get('users', 'TOTAL_SOCIAL_USERS'))
