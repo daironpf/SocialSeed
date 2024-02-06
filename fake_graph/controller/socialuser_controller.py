@@ -14,12 +14,13 @@ class SocialUserController:
     Attributes:
         __repo (SocialUserRepository): The repository for handling SocialUser data.
     """
-    def __init__(self, total_user) -> None:
+    def __init__(self) -> None:
         """
         Initialize the SocialUserController with a SocialUserRepository instance.
         """
-        self.__repo = SocialUserRepository(total_user)
-        self.total_user = total_user
+        self.total_user = int(config.get('users', 'TOTAL_SOCIAL_USERS'))
+        self.total_post = int(config.get('posts', 'prop')) * self.total_user
+        self.__repo = SocialUserRepository(self.total_user)        
             
     def load(self):
         """
@@ -52,5 +53,10 @@ class SocialUserController:
     
     # usuario publica post
     def posted_posts(self):
-        total_post = int(config.get('posts', 'prop')) * self.total_user
-        self.__repo.load_posted_post(total_post)
+        """
+        Create and Load the POSTED_BY relationship between SocialUser and Post nodes.
+        This method delegates the task create of loading relationship to the repository.
+        """
+                
+        self.__repo.load_posted_post(self.total_post)
+    

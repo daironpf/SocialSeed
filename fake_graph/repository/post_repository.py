@@ -35,18 +35,17 @@ class PostRepository:
         self.build_relationship = BuildRelationship()
         self.save_relations_with_time = Neo4jLoadRealationshipsWithTime()
         
-    def load_nodes(self):        
+    def load_nodes(self, 
+                    hashtag_per_post_min,
+                    hashtag_per_post_max,
+                    words_per_post_min,
+                    words_per_post_max):
         #Variables
         columnas = ['idn','content','updateDate','imageUrl','isActive','hashtags']
         base_url = 'https://socialseed.com/sdn/images/'
         
         descript='Creating Post'
         descript_lotes='Creating Batches of Posts'
-
-        hashtag_per_post_min = int(config.get('posts', 'hashtag_per_post_min'))
-        hashtag_per_post_max = int(config.get('posts', 'hashtag_per_post_max'))
-        words_per_post_min = int(config.get('posts', 'words_per_post_min'))
-        words_per_post_max = int(config.get('posts', 'words_per_post_max'))
 
         # Get the path to the user module
         __path__ = Path.get_module_path(self.modulo_name)

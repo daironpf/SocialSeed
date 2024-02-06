@@ -14,7 +14,7 @@ if __name__ == "__main__":
     #%% Post
     posts.load()
     users.posted_posts()
-    # users.like_posts()
+    #users.liked_posts()
 
     #%% End of generate code
     timer.end(start_time)

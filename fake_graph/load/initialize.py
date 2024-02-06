@@ -7,15 +7,10 @@ checker.wait_for_neo4j()
 from load.neo4j_constraint_creator import load_constraints
 load_constraints()
 
-# load config file
-from load.configuration import config
-
 # mount the Controller to users in the variable users
 from controller.socialuser_controller import SocialUserController
-total_user = int(config.get('users', 'TOTAL_SOCIAL_USERS'))
-users = SocialUserController(total_user)
+users = SocialUserController()
 
 # mount the Controller to posts in the variable posts
 from controller.post_controller import PostController
-total_post = int(config.get('posts', 'prop'))*total_user
-posts = PostController(total_post)
+posts = PostController()
