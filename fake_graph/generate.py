@@ -21,14 +21,15 @@ from load.initialize import users, posts
 if __name__ == "__main__":
     # Create and load SocialUsers
     users.load()
-    # Create and load Post data
+    # # Create and load Post data
     posts.load()
 
-    # Create and load data for relationships
+    # # Create and load data for relationships
     users.friends()
     users.followers()
     users.posted_posts()
     users.liked_posts()
+    users.interested_in_hashtag()
 
     # End of generate code
     timer.end(start_time)

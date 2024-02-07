@@ -353,3 +353,51 @@ class SocialUserRepository:
                           """)        
         conn.close()
         loader.stop()
+
+    # Build and Save: (HashTag)<-[:INTERESTED_IN_HASHTAG]-(SocialUser)
+    def load_interested_in_hashtag(self, TOTAL_HASHTAG, interest_hashtag_per_user_min, interest_hashtag_per_user_max):
+        self.build_relationship.crear_relaciones_NaM(
+                A_TOTAL = self.TOTAL_SOCIAL_USER,
+                B_TOTAL = TOTAL_HASHTAG,
+                rel_min = interest_hashtag_per_user_min,
+                rel_max = interest_hashtag_per_user_max,
+                descript =  "(SocialUser)-[:INTERESTED_IN_HASHTAG]->(HashTag)",
+                descript_g = "Creating Batches of User interested in HashTag",
+                descript_l = "Creating INTERESTED_IN_HASHTAG",
+                modulo_name = self.modulo_name,
+                name_relation_file = "interest_in_hashtag")
+
+        # save the relationship
+        self.save_relations.save_relationships(
+                nodo_inicio="SocialUser",
+                nodo_destino="HashTag",
+                nombre_relacion="INTERESTED_IN_HASHTAG",
+                descript="Storing: (SocialUser)-[:INTERESTED_IN_HASHTAG]->(HashTag)")
+        
+        # Assigning a valid time for the INTERESTED_IN_HASHTAG relationship
+        conn = Neo4jConnection()
+        loader = Loader("Assigning a valid time for when the user interested to the HashTag",
+                        "The exact moment when the user interested to the HashTag has been recorded in the property: interestDate of the relationship: INTERESTED_IN_HASHTAG").start()
+        conn.query_insert("""
+                          CALL {
+                            MATCH (h:HashTag)<-[r:INTERESTED_IN_HASHTAG]-(u:SocialUser)
+                            WITH r, datetime.realtime() as now, datetime(u.registrationDate) as lowerBounds
+                                    WITH r, now, lowerBounds, duration.inSeconds(lowerBounds, now) as durationInSeconds
+                                    WITH r, now, lowerBounds, durationInSeconds, durationInSeconds.seconds / 2 as offset
+                                    WITH r, now, lowerBounds, durationInSeconds, offset, lowerBounds + duration({seconds:offset}) as inbetweenDate
+                                    set r.interestDate = localdatetime(inbetweenDate)
+                            } IN TRANSACTIONS OF 1000 ROWS
+                          """)
+        loader.stop()
+
+        loader = Loader("Calculates the total number of interested users for each HashTag",
+                        "Store the total number of interested users for each HashTag in the property: socialUserInterestIn of the HashTag node").start()
+        conn.query_insert("""
+                          CALL {
+                            MATCH (h:HashTag)<-[r:INTERESTED_IN_HASHTAG]-(u:SocialUser)
+                            WITH h, COUNT(u) AS total
+                            SET h.socialUserInterestIn = total
+                            } IN TRANSACTIONS OF 1000 ROWS
+                          """)
+        conn.close()
+        loader.stop()

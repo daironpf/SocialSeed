@@ -70,3 +70,20 @@ class SocialUserController:
             int(config.get('users', 'post_liked_per_user_min')),
             int(config.get('users', 'post_liked_per_user_max'))
             )
+
+    def interested_in_hashtag(self):
+        
+        from libs.neo4j import Neo4jConnection
+        conn = Neo4jConnection()
+        result = conn.query("""
+            match (h:HashTag) 
+            return h.idn as idn order by h.idn desc limit 1
+            """)
+        total_hash_tag = result[0]['idn']
+        conn.close()
+
+        self.__repo.load_interested_in_hashtag(
+            total_hash_tag,
+            int(config.get('users', 'interest_hashtag_per_user_min')),
+            int(config.get('users', 'interest_hashtag_per_user_max'))
+            )
