@@ -53,6 +53,8 @@ GENERATE_FAKE_GRAPH=true docker-compose up --build fake-graph
 in windows terminal:
 $env:GENERATE_FAKE_GRAPH="true" ; docker-compose up --build fake-graph
 
+---
+
 I extend my sincere gratitude to JetBrains for generously providing me with their licenses for open source projects to work with their software, which has allowed for faster and more comfortable development.
 
 ![JetBrains logo support](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
