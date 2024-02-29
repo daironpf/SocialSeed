@@ -1,20 +1,31 @@
-<template lang="html">
-  <main></main>
-  <div id="app">
-    <router-view></router-view>
-  </div>
-</template>
+<script setup>
+import {RouterView, RouterLink} from "vue-router";
 
-<script setup lang="ts">
-import { defineProps } from 'vue';
-import { useRoute } from 'vue-router';
-
-const route = useRoute();
-
-// Puedes acceder a la ruta actual a través de la variable `route`
-console.log('Ruta actual:', route);
 </script>
 
-<style scoped>
+<template lang="html">
+  <main>
+    <div class="links">
+      <RouterLink active-class="active" to="/">Home</RouterLink>
+      <RouterLink active-class="active" to="/about">About</RouterLink>
+    </div>
+    <RouterView />
+  </main>
+</template>
 
+
+
+<style scoped>
+.links {
+  padding: 20px
+}
+
+.links a {
+  margin: 0 5px
+}
+
+.active{
+  font-weight: bold;
+  background-color: burlywood;
+}
 </style>
