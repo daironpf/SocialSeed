@@ -1,31 +1,23 @@
 <script setup>
-import {RouterView, RouterLink} from "vue-router";
+import {RouterView} from "vue-router";
+import HeaderView from "@/views/HeaderView.vue";
 
 </script>
 
 <template lang="html">
   <main>
-    <div class="links">
-      <RouterLink active-class="active" to="/">Home</RouterLink>
-      <RouterLink active-class="active" to="/about">About</RouterLink>
+    <HeaderView />
+    <div id="contenido">
+      <RouterView />
     </div>
-    <RouterView />
   </main>
 </template>
 
 
 
 <style scoped>
-.links {
-  padding: 20px
-}
-
-.links a {
-  margin: 0 5px
-}
-
-.active{
-  font-weight: bold;
-  background-color: burlywood;
-}
+  #contenido {
+    margin-top: 90px;
+    margin-left: 30px;
+  }
 </style>
