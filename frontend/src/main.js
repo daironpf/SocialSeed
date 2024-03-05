@@ -26,7 +26,3 @@ app.component('fa', FontAwesomeIcon)
 
 app.mount('#app')
 
-// createApp(App)
-//     .component('fa', FontAwesomeIcon)
-//     .use(router)
-//     .mount('#app');

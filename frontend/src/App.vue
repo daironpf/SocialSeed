@@ -7,7 +7,7 @@ import HeaderView from "@/views/HeaderView.vue";
 <template lang="html">
   <main>
     <HeaderView />
-    <div id="contenido">
+    <div>
       <RouterView />
     </div>
   </main>
@@ -16,8 +16,5 @@ import HeaderView from "@/views/HeaderView.vue";
 
 
 <style scoped>
-  #contenido {
-    margin-top: 90px;
-    margin-left: 30px;
-  }
+
 </style>
