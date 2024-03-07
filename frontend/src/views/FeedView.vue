@@ -205,78 +205,78 @@
     <!-- Lateral Derecho -->
     <div class="basis-1/4 bg-gray-200">
 
-      <div class="flex flex-row justify-between">
-<!--        Sugerencias de Amistad-->
-        <p class="font-bold">Pedir Amistad</p>
-        <p>
-          <fa icon="fa-solid fa-sync" class="text-gray-500 "/>
-        </p>
-      </div>
-<!--      Sugerencia N -->
-      <div class="bg-gray-50 rounded-lg shadow ml-3 mr-3 p-2">
-<!--        Zona de Recomendaciones para Amigos-->
-        <div class="flex flex-row">
-<!--          Encabezado-->
-          <img src="/img/vegapunk.jfif" alt="Foto de usuario" class="w-12 h-12 rounded-full mr-4">
-          <div>
+      <div>
+        <!--        Sugerencias de Amistad-->
+        <div class="flex flex-row justify-between">
+
+          <p class="font-bold">Pedir Amistad</p>
+          <p>
+            <fa icon="fa-solid fa-sync" class="text-gray-500 "/>
+          </p>
+        </div>
+  <!--      Sugerencia N -->
+        <div class="bg-gray-50 rounded-lg shadow ml-3 mr-3 p-2">
+  <!--        Zona de Recomendaciones para Amigos-->
+          <div class="flex flex-row">
+  <!--          Encabezado-->
+            <img src="/img/vegapunk.jfif" alt="Foto de usuario" class="w-12 h-12 rounded-full mr-4">
             <div>
-              <p>VegaPunk</p>
-              <span class="text-xs">SocialUser</span>
+              <div>
+                <p>VegaPunk</p>
+                <span class="text-xs">SocialUser</span>
+              </div>
+              <div class="flex pt-3">
+                <!-- Botonera -->
+                <span class="ml-2 mr-2 bg-sky-200">Pedir Amistad</span>
+                <span class="ml-2 mr-2 bg-sky-200"> C </span>
+              </div>
             </div>
-            <div class="flex pt-3">
-              <!-- Botonera -->
-              <span class="ml-2 mr-2 bg-sky-200">Pedir Amistad</span>
-              <span class="ml-2 mr-2 bg-sky-200"> C </span>
+          </div>
+
+        </div>
+
+        <!--      Sugerencia N-1 -->
+        <div class="bg-gray-50 rounded-lg shadow ml-3 mr-3 p-2 mt-2">
+          <!--        Zona de Recomendaciones para Amigos-->
+          <div class="flex flex-row">
+            <!--          Encabezado-->
+            <img src="/img/vegapunk.jfif" alt="Foto de usuario" class="w-12 h-12 rounded-full mr-4">
+            <div>
+              <div>
+                <p>VegaPunk</p>
+                <span class="text-xs">SocialUser</span>
+              </div>
+              <div class="flex pt-3">
+                <!-- Botonera -->
+                <span class="ml-2 mr-2 bg-sky-200">Pedir Amistad</span>
+                <span class="ml-2 mr-2 bg-sky-200"> C </span>
+              </div>
             </div>
           </div>
         </div>
 
-      </div>
-
-      <!--      Sugerencia N-1 -->
-      <div class="bg-gray-50 rounded-lg shadow ml-3 mr-3 p-2 mt-2">
-        <!--        Zona de Recomendaciones para Amigos-->
-        <div class="flex flex-row">
-          <!--          Encabezado-->
-          <img src="/img/vegapunk.jfif" alt="Foto de usuario" class="w-12 h-12 rounded-full mr-4">
-          <div>
+        <!--      Sugerencia N-2 -->
+        <div class="bg-gray-50 rounded-lg shadow ml-3 mr-3 p-2 mt-2">
+          <!--        Zona de Recomendaciones para Amigos-->
+          <div class="flex flex-row">
+            <!--          Encabezado-->
+            <img src="/img/vegapunk.jfif" alt="Foto de usuario" class="w-12 h-12 rounded-full mr-4">
             <div>
-              <p>VegaPunk</p>
-              <span class="text-xs">SocialUser</span>
-            </div>
-            <div class="flex pt-3">
-              <!-- Botonera -->
-              <span class="ml-2 mr-2 bg-sky-200">Pedir Amistad</span>
-              <span class="ml-2 mr-2 bg-sky-200"> C </span>
+              <div>
+                <p>VegaPunk</p>
+                <span class="text-xs">SocialUser</span>
+              </div>
+              <div class="flex pt-3">
+                <!-- Botonera -->
+                <span class="ml-2 mr-2 bg-sky-200">Pedir Amistad</span>
+                <span class="ml-2 mr-2 bg-sky-200"> C </span>
+              </div>
             </div>
           </div>
         </div>
+        <a href="">Ver todas las recomendaciones</a>
       </div>
 
-      <!--      Sugerencia N-2 -->
-      <div class="bg-gray-50 rounded-lg shadow ml-3 mr-3 p-2 mt-2">
-        <!--        Zona de Recomendaciones para Amigos-->
-        <div class="flex flex-row">
-          <!--          Encabezado-->
-          <img src="/img/vegapunk.jfif" alt="Foto de usuario" class="w-12 h-12 rounded-full mr-4">
-          <div>
-            <div>
-              <p>VegaPunk</p>
-              <span class="text-xs">SocialUser</span>
-            </div>
-            <div class="flex pt-3">
-              <!-- Botonera -->
-              <span class="ml-2 mr-2 bg-sky-200">Pedir Amistad</span>
-              <span class="ml-2 mr-2 bg-sky-200"> C </span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-
-      <a href="">Ver todas las recomendaciones</a>
     </div>
 
   </div>
