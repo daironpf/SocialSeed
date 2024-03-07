@@ -18,11 +18,12 @@ import {
     faImage,
     faClock,
     faThumbsUp,
-    faComment
+    faComment,
+    faSync
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
-library.add(faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, faThumbsUp, faComment);
+library.add(faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, faThumbsUp, faComment, faSync);
 
 const app = createApp(App);
 app.use(router)
