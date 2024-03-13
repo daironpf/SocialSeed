@@ -10,7 +10,7 @@ const props = defineProps({
   <div class="bg-gray-50 rounded-lg shadow-lg m-1 ml-10 mr-10 p-4">
     <!-- Zona del usuario autor del post -->
     <div class="flex items-center mb-4">
-      <img src="/img/tesla.png" alt="Foto de perfil de Nikola Tesla" class="w-12 h-12 rounded-full mr-4">
+      <img src="/img/random_avatars/2.png" alt="Foto de perfil de Nikola Tesla" class="w-12 h-12 rounded-full mr-4">
       <div>
         <p class="font-bold">{{post.author.author.fullName}}</p>
         <p class="text-gray-700">Innovador incansable con una mente brillante y una visión revolucionaria para el futuro.</p>
