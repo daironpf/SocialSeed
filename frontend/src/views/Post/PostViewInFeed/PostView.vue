@@ -1,16 +1,24 @@
 <script setup>
 const props = defineProps({
-  post: Object
+  post: Object,
+
 })
+
 
 </script>
 
 <template>
-  <!--        publicacion N-->
   <div class="bg-gray-50 rounded-lg shadow-lg m-1 ml-10 mr-10 p-4">
     <!-- Zona del usuario autor del post -->
     <div class="flex items-center mb-4">
-      <img src="/img/random_avatars/2.png" alt="Foto de perfil de Nikola Tesla" class="w-12 h-12 rounded-full mr-4">
+      <!-- Verificamos si existe post.author y post.author.author.profileImage -->
+      <img v-if="post.author && post.author.author && post.author.author.profileImage"
+           :src="post.author.author.profileImage"
+           :alt="post.author.author.fullName"
+           class="w-12 h-12 rounded-full mr-4">
+      <!-- Si no existe, puedes manejar un caso alternativo -->
+<!--      <img v-else src="ruta/a/imagen/por/defecto.jpg" alt="Imagen de perfil por defecto">-->
+
       <div>
         <p class="font-bold">{{post.author.author.fullName}}</p>
         <p class="text-gray-700">Innovador incansable con una mente brillante y una visión revolucionaria para el futuro.</p>
