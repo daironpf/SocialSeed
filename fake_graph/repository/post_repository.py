@@ -134,10 +134,13 @@ class PostRepository:
                                 WITH row
                                 MERGE (p:Post {{identifier:randomUUID(),
                                     idn: toInteger(row.idn),
+                              
                                     content: row.content,
                                     imageUrl: row.imageUrl,
+                              
                                     updateDate : localdatetime(row.updateDate),
-                                    isActive : row.isActive                                    
+                              
+                                    isActive : toBoolean(row.isActive)
                                 }})
                                 WITH row, p, split(row.hashtags, ".") AS valores
                                 FOREACH (val IN valores |

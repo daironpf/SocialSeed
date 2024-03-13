@@ -143,15 +143,20 @@ class SocialUserRepository:
                                 WITH row                                    
                                 MERGE (u:SocialUser {{identifier:randomUUID(),
                                     idn: toInteger(row.idn),
+                              
                                     dateBorn : localdatetime(row.dateBorn),
                                     registrationDate : localdatetime(row.registrationDate),
+                              
                                     fullName : row.fullName,
                                     userName : row.userName,
                                     email : row.email,
                                     language : row.language,
-                                    onVacation : row.onVacation,
-                                    isActive : row.isActive,
-                                    friendRequestCount : row.friendRequestCount
+                              
+                                    onVacation : toBoolean(row.onVacation),
+                                    isActive : toBoolean(row.isActive),
+                                    isDeleted : toBoolean("false"),
+                              
+                                    friendRequestCount : toInteger(row.friendRequestCount)
                                 }})
                             }} IN TRANSACTIONS OF 1000 ROWS
                                           """.format(path=path))
