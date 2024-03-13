@@ -1,5 +1,4 @@
 <script setup>
-
 import PostViewInFeed from "@/views/Post/PostViewInFeed.vue";
 import CreateNewPostView from "@/views/Post/CreateNewPostView.vue";
 import RightSideView from "@/views/RightSide/RightSideView.vue";
@@ -15,18 +14,13 @@ import LeftSideView from "@/views/LeftSide/LeftSideView.vue";
     <div class="basis-1/2 bg-gray-200">
       <CreateNewPostView />
 
-
-<!--      Zona de Publicaciones del Feed-->
-      <div class="flex flex-col">
-        <PostViewInFeed />
-      </div>
+      <!--      Zona de Publicaciones del Feed-->
+      <PostViewInFeed />
     </div>
 
     <!-- Lateral Derecho -->
     <RightSideView />
   </div>
-
-
 </template>
 
 <style scoped>

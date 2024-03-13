@@ -33,6 +33,7 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
             
                 MATCH (p)-[r:POSTED_BY]->(u:SocialUser)
                 RETURN p, r, u
+                
             """,
             countQuery = """
                 MATCH (p:Post)

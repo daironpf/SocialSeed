@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import { createApp, provide } from 'vue'
 import App from './App.vue'
 import router from "@/router/index.js";
 
@@ -25,9 +25,12 @@ import {
 /* add icons to the library */
 library.add(faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, faThumbsUp, faComment, faSync);
 
+/* constant values */
+const api_url = "http://127.0.0.1:8081/api/v0.0.1/";
+
 const app = createApp(App);
 app.use(router)
 app.component('fa', FontAwesomeIcon)
-
+app.provide('apiUrl',api_url)
 app.mount('#app')
 
