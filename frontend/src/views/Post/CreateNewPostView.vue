@@ -1,11 +1,13 @@
 <script setup>
+import {ref} from "vue";
 
+const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
 </script>
 
 <template>
   <div class="bg-gray-50 rounded-lg shadow m-1 ml-10 mr-10 p-2">
     <div class="max-w-lg mx-auto flex items-center border-b border-gray-300 pb-4 mb-4">
-      <img src="/img/user-perfil.jpg" alt="Foto de usuario" class="w-12 h-12 rounded-full mr-4">
+      <img :src="currentUser.profileImage" alt="Foto de usuario" class="w-12 h-12 rounded-full mr-4">
       <button class="flex-1 px-4 py-2 bg-gray-50 text-gray-500 rounded-full border border-gray-400 hover:bg-gray-100 focus:outline-none focus:bg-gray-100">
         Crear publicación
       </button>

@@ -13,7 +13,7 @@ async function cargarDatos() {
     const response = await fetch(apiUrl + 'post/getAllPosts');
     const data = await response.json();
 
-    console.log(data)
+    console.log('Respuesta Completa del GET', data)
     console.log('Status: '+data.status)
     console.log('Content: '+data.message)
     console.log('Version: '+data.version)

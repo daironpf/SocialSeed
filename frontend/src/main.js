@@ -29,8 +29,8 @@ library.add(faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, faThumb
 const api_url = "http://127.0.0.1:8081/api/v0.0.1/";
 
 const app = createApp(App);
-app.use(router)
-app.component('fa', FontAwesomeIcon)
-app.provide('apiUrl',api_url)
-app.mount('#app')
+app.use(router);
+app.component('fa', FontAwesomeIcon);
+app.provide('apiUrl',api_url);
+app.mount('#app');
 
