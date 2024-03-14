@@ -61,7 +61,7 @@ class SocialUserRepository:
         """        
         # Define column names for user data
         columnas = ['idn','dateBorn', 'registrationDate', 'fullName', 'userName', 'email', 'language', 'onVacation',
-                    'isActive', 'friendRequestCount','profileImage']
+                    'isActive', 'friendRequestCount','profileImage','bio']
         
         global unicos
         descript = 'Creating Users'
@@ -110,9 +110,11 @@ class SocialUserRepository:
 
                 profileImage = f'/img/random_avatars/{random.randint(1, 40)}.png'
 
+                bio = fake.sentence()
+
                 unicos.add(user_name)
                 data.append([idn, dateBorn, registrationDate, fullName, user_name, email, 
-                             language, onVacation, isActive, 0, profileImage])
+                             language, onVacation, isActive, 0, profileImage, bio])
 
             # Create a DataFrame and save it to a CSV file
             df = pd.DataFrame(data, columns=columnas)            
@@ -155,6 +157,7 @@ class SocialUserRepository:
                                     email : row.email,
                                     language : row.language,
                                     profileImage : row.profileImage,
+                                    bio : row.bio,
                               
                                     onVacation : toBoolean(row.onVacation),
                                     isActive : toBoolean(row.isActive),

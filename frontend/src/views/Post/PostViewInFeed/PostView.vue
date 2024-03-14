@@ -21,7 +21,7 @@ const props = defineProps({
 
       <div>
         <p class="font-bold">{{post.author.author.fullName}}</p>
-        <p class="text-gray-700">Innovador incansable con una mente brillante y una visión revolucionaria para el futuro.</p>
+        <p class="text-gray-700">{{post.author.author.bio}}</p>
       </div>
     </div>
     <div>

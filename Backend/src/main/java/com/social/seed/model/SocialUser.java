@@ -30,6 +30,7 @@ public class SocialUser {
     private String email;
     private String language;
     private String profileImage;
+    private String bio;
 
     private Boolean onVacation;
     private Boolean isActive;

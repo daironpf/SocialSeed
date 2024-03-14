@@ -1,4 +1,10 @@
-import random
+from faker import Faker
 
-profileImage = f'/img/random_avatars/{random.randint(1, 40)}.png'
-print(profileImage)
+# Crear una instancia de Faker
+faker = Faker()
+
+# Generar una oración ficticia
+oracion = faker.sentence()
+
+# Imprimir la oración generada
+print(oracion)
