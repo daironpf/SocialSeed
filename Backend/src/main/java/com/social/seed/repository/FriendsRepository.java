@@ -5,6 +5,7 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface FriendsRepository extends Neo4jRepository<SocialUser, String> {
     //region REQUEST_FRIEND_TO
@@ -70,5 +71,16 @@ public interface FriendsRepository extends Neo4jRepository<SocialUser, String> {
                 )
             """)
     void deleteFriendship(String idUserRequest, String idUserToDeleteFriendship);
+    //endregion
+
+    //region Recommendations
+    @Query("""
+            MATCH (o:SocialUser {identifier: $idUserRequest})
+            MATCH (u:SocialUser)
+            WHERE u <> o AND NOT (u)-[:FRIEND_OF]->(o)
+            RETURN u
+            LIMIT 3
+            """)
+    List<SocialUser> getLiteFriendRecommendationsForUserById(String idUserRequest);
     //endregion
 }

@@ -15,6 +15,7 @@
  */
 package com.social.seed.service;
 
+import com.social.seed.model.SocialUser;
 import com.social.seed.repository.FriendsRepository;
 import com.social.seed.util.ResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * Service class focusing on operations related to managing Friends Relationship.
@@ -69,5 +71,11 @@ public class FriendsService {
         friendsRepository.deleteFriendship(idUserRequest, idUserToDeleteFriendship);
 
         return responseService.successResponse("The Friendship Relationship was deleted successfully.");
+    }
+
+    public ResponseEntity<Object> getLiteFriendRecommendationsForUserById(String idUserRequest) {
+        List<SocialUser> recommendations = friendsRepository.getLiteFriendRecommendationsForUserById(idUserRequest);
+
+        return responseService.successResponse(recommendations);
     }
 }
