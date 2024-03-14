@@ -152,7 +152,7 @@
     </div>
 
     <!--        Sugerencias de Páginas a Seguir  -->
-    <div>
+    <div class="invisible">
       <div class="flex flex-row justify-between mt-5 b-2">
 
         <p class="font-bold">Páginas a Seguir</p>
@@ -224,7 +224,7 @@
     </div>
 
     <!--        Sugerencias de Grupos a Unirse  -->
-    <div>
+    <div class="invisible">
       <div class="flex flex-row justify-between mt-5 b-2">
 
         <p class="font-bold">Grupos a Unirse</p>
