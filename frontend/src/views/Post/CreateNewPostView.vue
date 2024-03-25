@@ -1,67 +1,37 @@
-<script setup>
-import {ref} from "vue";
-
-const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
-
-function showDialog(){
-  let dialog = document.getElementById("dialog");
-  dialog.classList.remove('hidden');
-  dialog.classList.add('flex');
-  setTimeout(()=>{
-    dialog.classList.add('opacity-100');
-  }, 20);
-}
-
-function hideDialog() {
-  let dialog = document.getElementById("dialog");
-  dialog.classList.add('opacity-0');
-  dialog.classList.remove('opacity-100');
-
-  setTimeout(()=>{
-    dialog.classList.add('hidden');
-    dialog.classList.remove('flex');
-  }, 500);
-}
-</script>
-
 <template>
   <div class="bg-gray-50 rounded-lg shadow m-1 ml-10 mr-10 p-2">
     <div class="max-w-lg mx-auto flex items-center border-b border-gray-300 pb-4 mb-4">
       <img :src="currentUser.profileImage" alt="Foto de usuario" class="w-12 h-12 rounded-full mr-4">
-      <button
-          onclick="showDialog()"
-          class="flex-1 px-4 py-2 bg-gray-50 text-gray-600 rounded border border-gray-400 shadow-md
-      hover:bg-gray-100
-      focus:outline-none focus:bg-gray-100">
+      <button @click="showDialog" class="flex-1 px-4 py-2 bg-gray-50 text-gray-600 rounded border border-gray-400 shadow-md hover:bg-gray-100 focus:outline-none focus:bg-gray-100">
         Crear publicación
       </button>
 
-      <div
-          onclick="hideDialog()"
-          id="dialog"
-          class="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen justify-center item-center
-            opacity-0 hidden transition-opacity duration-500">
-        <div
-            onclick="event.stopImmediatePropagation()"
-            class="bg-white rounded shadow-md w-[25%] h-[30%] mt-[10%] flex gap-5 flex-col overflow-hidden">
-          <!-- Contenido -->
-            <div class="flex-grow">
-              <h1 class="font-bold text-center text-lg mb-2 text-gray-700">Create Post</h1>
-              <p class="text-gray-600">
-                Are you sure you want to deactive your account? All of your data
-                will be permanently removed. This action cannot be undone.
-              </p>
+      <div v-if="isDialogOpen"
+           class="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center"
+           @click="hideDialog">
+        <div class="bg-white rounded shadow-md w-[40%] h-[50%] flex flex-col" @click.stop>
+          <!-- Encabezado -->
+          <div class="flex items-center justify-between p-4 border-b border-gray-300">
+            <div class="flex items-center">
+              <img :src="currentUser.profileImage" alt="Foto de usuario" class="w-8 h-8 rounded-full mr-2">
+              <span class="text-gray-700 font-semibold">{{ currentUser.fullName }}</span>
             </div>
+            <button @click="hideDialog" class="text-gray-600 hover:text-gray-800 focus:outline-none">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+          <!-- Contenido -->
+          <div class="p-4 flex-grow">
+            <textarea class="w-full h-full border border-gray-300 rounded-md p-2" placeholder="Escribe tu publicación aquí..." @click.stop></textarea>
+          </div>
           <!-- Botones-->
           <div class="bg-gray-100 p-3 px-6 justify-end flex gap-4">
-            <button
-                onclick="hideDialog()"
-                class="bg-white border-[1px] border-gray-300 rounded px-4 py-2 text-black cursor-pointer hover:bg-gray-100">Cancel</button>
+            <button @click="hideDialog" class="bg-white border-[1px] border-gray-300 rounded px-4 py-2 text-black cursor-pointer hover:bg-gray-100">Cancelar</button>
             <button class="bg-blue-400 rounded px-4 py-2 text-white cursor-pointer hover:bg-blue-600">Publicar</button>
           </div>
         </div>
-
-
       </div>
     </div>
 
@@ -70,18 +40,33 @@ function hideDialog() {
       <div class="flex flex-row">
         <div class="basis-1/6"></div>
         <div class="basis-2/6 flex items-center mb-4 hover:bg-gray-100 focus:outline-none focus:bg-gray-100">
-          <fa icon="fa-solid fa-image" class="text-blue-500"/>
-          <p class="ml-2">Imagen</p>
+          <!-- Icono e texto -->
+          Imagen
         </div>
         <div class="basis-2/6 flex items-center mb-4 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 ml-4">
-          <fa icon="fa-solid fa-clock" class="text-blue-500"/>
-          <p class="ml-2">Programar</p>
+          <!-- Icono e texto -->
+          Video
         </div>
         <div class="basis-1/6"></div>
       </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from "vue";
+
+const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
+const isDialogOpen = ref(false);
+
+function showDialog() {
+  isDialogOpen.value = true;
+}
+
+function hideDialog() {
+  isDialogOpen.value = false;
+}
+</script>
 
 <style scoped>
 
