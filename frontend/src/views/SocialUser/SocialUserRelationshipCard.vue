@@ -2,8 +2,6 @@
 const props = defineProps({
   user: Object,
 })
-
-
 </script>
 
 <template>
