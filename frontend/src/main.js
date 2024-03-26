@@ -19,11 +19,12 @@ import {
     faClock,
     faThumbsUp,
     faComment,
-    faSync
+    faSync,
+    faPencil
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
-library.add(faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, faThumbsUp, faComment, faSync);
+library.add(faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, faThumbsUp, faComment, faSync, faPencil);
 
 /* constant values */
 const api_url = "http://127.0.0.1:8081/api/v0.0.1/";

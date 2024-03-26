@@ -16,54 +16,96 @@
               <img :src="currentUser.profileImage" alt="Foto de usuario" class="w-8 h-8 rounded-full mr-2">
               <span class="text-gray-700 font-semibold">{{ currentUser.fullName }}</span>
             </div>
-            <button @click="hideDialog" class="text-gray-600 hover:text-gray-800 focus:outline-none">
+            <button @click="hideDialog"
+                    class="text-gray-600
+                    hover:text-gray-800
+                    focus:outline-none
+                    focus:border rounded-full p-3 hover:bg-gray-200">
               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </button>
+
           </div>
           <!-- Contenido -->
           <div class="p-4 flex-grow">
             <textarea
                 v-model="postContent"
-                class="w-full h-full border border-gray-300 rounded-md p-2"
+                class="w-full h-full rounded-md p-2"
                 placeholder="Escribe tu publicación aquí..."
+                style="resize: none; border: none;"
                 @click.stop>
-
             </textarea>
           </div>
-          <!-- Botones-->
-          <div class="bg-gray-100 p-3 px-6 justify-end flex gap-4">
-            <button
-                @click="hideDialog"
-                class="bg-white border-[1px] border-gray-300 rounded px-4 py-2 text-black cursor-pointer hover:bg-gray-100">
-              Cancelar
-            </button>
-            <button
-                @click="publishPost"
-                class="bg-blue-400 rounded px-4 py-2 text-white cursor-pointer hover:bg-blue-600">
-              Publicar
-            </button>
+
+          <!-- Barra de Botones-->
+          <div class="flex justify-between bg-gray-100 border">
+
+            <!-- Botones Izquierdos-->
+            <div class="pl-4 flex gap-3">
+              <div class="flex items-center">
+                <div class="h-12 w-12 bg-gray-200 rounded rounded-full flex items-center justify-center
+                hover:bg-gray-300 focus:outline-none focus:bg-gray-100 cursor-pointer">
+                  <fa icon=" fa-solid fa-image" class="text-blue-400 text-xl"/>
+                </div>
+              </div>
+              <div class="flex items-center">
+                <div class="h-12 w-12 bg-gray-200 rounded rounded-full flex items-center justify-center
+                hover:bg-gray-300 focus:outline-none focus:bg-gray-100 cursor-pointer">
+                  <fa icon="fa-solid fa-clock" class="text-purple-500 text-xl"/>
+                </div>
+              </div>
+            </div>
+
+            <!-- Botones Derechos-->
+            <div class="p-3 px-6 flex gap-4">
+              <button
+                  @click="hideDialog"
+                  class="bg-white border-[1px] border-gray-300 rounded px-4 py-2 text-black cursor-pointer hover:bg-gray-100">
+                Cancelar
+              </button>
+              <button
+                  @click="publishPost"
+                  class="bg-blue-400 rounded px-4 py-2 text-white cursor-pointer hover:bg-blue-600">
+                Publicar
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Botones para personalizar el Post -->
+    <div class="max-w-lg mx-auto">
+      <div class="flex justify-between">
+        <div class="flex items-center mb-4">
+          <div class="p-2 w-full rounded-lg flex items-center justify-center hover:bg-gray-200 focus:outline-none focus:bg-gray-100 cursor-pointer">
+            <!-- Icono e texto -->
+            <fa icon="fa-solid fa-image" class="text-blue-400"/>
+            <p class="pl-2 text-gray-500"> Imagen </p>
+          </div>
+        </div>
+        <div class="flex items-center mb-4">
+          <div class="p-2 w-full rounded-lg flex items-center justify-center hover:bg-gray-200 focus:outline-none focus:bg-gray-100 cursor-pointer">
+            <!-- Icono e texto -->
+            <fa icon="fa-solid fa-pencil" class="text-yellow-600"/>
+            <p @click="showDialog" class="pl-2 text-gray-500">Escribir Post</p>
+          </div>
+        </div>
+        <div class="flex items-center mb-4">
+          <div class="p-2 w-full rounded-lg flex items-center justify-center hover:bg-gray-200 focus:outline-none focus:bg-gray-100 cursor-pointer">
+            <!-- Icono e texto -->
+            <fa icon="fa-solid fa-clock" class="text-purple-500"/>
+            <p class="pl-2 text-gray-500">Programar Post</p>
           </div>
         </div>
       </div>
     </div>
 
-    <!--      Botones para personalizar el Post-->
-    <div class="max-w-lg mx-auto">
-      <div class="flex flex-row">
-        <div class="basis-1/6"></div>
-        <div class="basis-2/6 flex items-center mb-4 hover:bg-gray-100 focus:outline-none focus:bg-gray-100">
-          <!-- Icono e texto -->
-          Imagen
-        </div>
-        <div class="basis-2/6 flex items-center mb-4 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 ml-4">
-          <!-- Icono e texto -->
-          Video
-        </div>
-        <div class="basis-1/6"></div>
-      </div>
-    </div>
+
+
   </div>
 
   <!-- Ventana emergente de notificación -->
