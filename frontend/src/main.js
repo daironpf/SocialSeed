@@ -20,11 +20,19 @@ import {
     faThumbsUp,
     faComment,
     faSync,
-    faPencil
+    faPencil,
+    faEarth,
+    faSortDown,
+    faUserGroup,
+    faLock,
+    faUsers,
+    faUserFriends,
+    faUsersBetweenLines,
+    faUsersLine
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
-library.add(faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, faThumbsUp, faComment, faSync, faPencil);
+library.add(faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, faThumbsUp, faComment, faSync, faPencil, faEarth, faSortDown, faUserGroup, faLock, faUsers, faUserFriends, faUsersBetweenLines, faUsersLine);
 
 /* constant values */
 const api_url = "http://127.0.0.1:8081/api/v0.0.1/";

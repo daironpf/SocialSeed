@@ -10,6 +10,7 @@
            class="fixed left-0 top-0 bg-black bg-opacity-50 w-screen h-screen flex justify-center items-center"
            @click="hideDialog">
         <div class="bg-white rounded shadow-md w-[40%] h-[50%] flex flex-col" @click.stop>
+
           <!-- Encabezado -->
           <div class="flex items-center justify-between p-4 border-b border-gray-300">
             <div class="flex items-center">
@@ -25,8 +26,8 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
               </svg>
             </button>
-
           </div>
+
           <!-- Contenido -->
           <div class="p-4 flex-grow">
             <textarea
@@ -59,11 +60,15 @@
 
             <!-- Botones Derechos-->
             <div class="p-3 px-6 flex gap-4">
+              <!-- Botón de visibilidad -->
               <button
-                  @click="hideDialog"
-                  class="bg-white border-[1px] border-gray-300 rounded px-4 py-2 text-black cursor-pointer hover:bg-gray-100">
-                Cancelar
+                  @click="showModal = true"
+                  class="bg-white rounded-full px-4 py-2 flex items-center space-x-2 text-black cursor-pointer hover:bg-gray-100">
+                <fa :icon="selectedOption.icon" class="text-gray-600"></fa>
+                <span class="text-sm">{{ selectedOption.label }}</span>
+                <fa icon="fa-solid fa-sort-down" class="text-gray-600"></fa>
               </button>
+
               <button
                   @click="publishPost"
                   class="bg-blue-400 rounded px-4 py-2 text-white cursor-pointer hover:bg-blue-600">
@@ -103,15 +108,26 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
 
   <!-- Ventana emergente de notificación -->
   <div v-if="notificationVisible" class="fixed inset-x-0 bottom-0 z-50 flex justify-center mb-4">
     <div class="bg-green-400 text-white p-4 rounded-md shadow-md">
       {{ notificationMessage }}
+    </div>
+  </div>
+
+  <!-- Ventana modal para visibilidad-->
+  <div v-if="showModal" class="fixed inset-0 flex items-center justify-center z-50 bg-gray-900 bg-opacity-50">
+    <div class="bg-white rounded-lg p-6 w-80">
+      <h2 class="text-lg font-semibold mb-4 text-center">Seleccionar Visibilidad</h2>
+      <div class="flex flex-col gap-2">
+        <button v-for="(option, index) in options" :key="index" @click="selectVisibility(option)" class="bg-gray-100 hover:bg-gray-200 rounded-md flex items-center justify-center px-4 py-2">
+          <fa :icon="option.icon" class="text-gray-600 pr-3"></fa>
+          <span>{{ option.label }}</span>
+        </button>
+      </div>
+      <button @click="showModal = false" class="mt-4 bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300 w-full">Cerrar</button>
     </div>
   </div>
 </template>
@@ -173,6 +189,22 @@ function showNotification(message) {
     notificationVisible.value = false;
   }, 5000); // La notificación desaparecerá después de 5 segundos
 }
+
+// visibilidad
+const showModal = ref(false);
+const options = [
+  { label: 'Público', value: 'public', icon: 'fa-solid fa-earth'},
+  { label: 'Amigos', value: 'friends', icon: 'fa-solid fa-user-friends' },
+  { label: 'Privado', value: 'private', icon: 'fa-solid fa-lock'},
+  { label: 'Seguidores', value: 'followers', icon: 'fa-solid fa-users-line'},
+  { label: 'Seguidores & Amigos', value: 'followers-plus-friends', icon: 'fa-solid fa-users-between-lines'}
+];
+const selectedOption = ref(options[0]);
+const selectVisibility = (option) => {
+  selectedOption.value = option;
+  // Aquí puedes hacer algo con la opción seleccionada, como enviarla al servidor, etc.
+  showModal.value = false;
+};
 </script>
 
 <style scoped>
