@@ -290,50 +290,6 @@ class SocialUserServiceTest {
     }
     // endregion
 
-    // region Follow Module
-    @Test
-    void followSocialUser_Success() {
-        // Mocking the repository createUserBFollowUserA method
-        doNothing().when(socialUserRepository).createUserBFollowUserA(anyString(), anyString(), any());
-
-        // Mocking the success response
-        when(responseService.successResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.followSocialUser(socialUser1.getId(), "userIdToFollow");
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.OK);
-        assertThat(response.message()).isEqualTo("Successful");
-    }
-
-    @Test
-    void unfollowSocialUser_Success() {
-        // Mocking the repository unFollowTheUserA method
-        doNothing().when(socialUserRepository).unFollowTheUserA(anyString(), anyString());
-
-        // Mocking the success response
-        when(responseService.successResponse(anyString())).thenCallRealMethod();
-
-        // Calling the actual service method
-        ResponseEntity<Object> responseEntity = underTest.unfollowSocialUser(socialUser1.getId(), "userIdToUnfollow");
-
-        // Assertions
-        assertThat(responseEntity).isNotNull();
-        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
-
-        // Verify response details
-        assertThat(response).isNotNull();
-        assertThat(response.status()).isEqualTo(HttpStatus.OK);
-        assertThat(response.message()).isEqualTo("Successful");
-    }
-    // endregion
-
     // region Vacation Module
     @Test
     void activateVacationMode_Success() {

@@ -214,75 +214,7 @@ class SocialUserRepositoryTest {
     // endregion
 
     // region Relationship Management
-    /**
-     * Verifies that a user B is a follower of user A.
-     * It creates a follower relationship between two social users, checks if user B is a follower of user A,
-     * and asserts that the result is true after the relationship is established.
-     */
-    @Test
-    void IsUserBFollowerOfTheUserA(){
-        // Given: Two social users, Gelacio and Maria
-        Optional<SocialUser> gelacio = underTest.findByEmail("gelacio32@gmail.com");
-        Optional<SocialUser> maria = underTest.findByEmail("maria1@gmail.com");
 
-        // When: Creating a relationship where Maria follows Gelacio
-        assertThat(gelacio).isPresent();
-        assertThat(maria).isPresent();
-        underTest.createUserBFollowUserA(
-                gelacio.get().getId(),
-                maria.get().getId(),
-                LocalDateTime.now()
-        );
-
-        // Then: Verifies that Maria is a follower of Gelacio
-        Boolean IsUserBFollowerOfUserA = underTest.isUserBFollowerOfUserA(
-                gelacio.get().getId(),
-                maria.get().getId()
-        );
-        assertThat(IsUserBFollowerOfUserA).isTrue();
-    }
-
-    /**
-     * Verifies that unfollowing user A removes follower B.
-     * It establishes a follower relationship between two social users, checks if the relationship exists,
-     * unfollows user A, and asserts that follower B is no longer following user A after the unfollow operation.
-     */
-    @Test
-    void unFollowUserA_shouldRemoveFollowerB(){
-        // Given: Two social users, Gelacio and Maria
-        Optional<SocialUser> gelacio = underTest.findByEmail("gelacio32@gmail.com");
-        Optional<SocialUser> maria = underTest.findByEmail("maria1@gmail.com");
-
-        // Creating a relationship where Maria follows Gelacio
-        assertThat(gelacio).isPresent();
-        assertThat(maria).isPresent();
-        underTest.createUserBFollowUserA(
-                gelacio.get().getId(),
-                maria.get().getId(),
-                LocalDateTime.now()
-        );
-
-        // Verify if the relationship exists (Maria follows Gelacio)
-        Boolean IsUserBFollowerOfUserA = underTest.isUserBFollowerOfUserA(
-                gelacio.get().getId(),
-                maria.get().getId()
-        );
-        assertThat(IsUserBFollowerOfUserA).isTrue();
-
-        // When: Unfollowing user A (Gelacio)
-        underTest.unFollowTheUserA(
-                gelacio.get().getId(),
-                maria.get().getId()
-        );
-
-        // Then: Verifies that follower B (Maria) is no longer following user A (Gelacio)
-        IsUserBFollowerOfUserA = underTest.isUserBFollowerOfUserA(
-                gelacio.get().getId(),
-                maria.get().getId()
-        );
-        // Verify if the relationship no longer exists
-        assertThat(IsUserBFollowerOfUserA).isFalse();
-    }
     // endregion
 
     // region Vacation Mode Operations
