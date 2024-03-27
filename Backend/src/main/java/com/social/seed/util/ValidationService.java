@@ -1,9 +1,26 @@
+/*
+ * Copyright 2011-2023 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.social.seed.util;
 
 import com.social.seed.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+/**
+ * Service to handle operations related to Validate Data in the application.
+ */
 @Component
 public class ValidationService {
     //region dependencies
@@ -12,14 +29,22 @@ public class ValidationService {
     private final HashTagRepository hashTagRepository;
     private final FriendsRepository friendsRepository;
     private final SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository;
+    private final FollowRelationshipRepository followRelationshipRepository;
 
     @Autowired
-    public ValidationService(SocialUserRepository socialUserRepository, PostRepository postRepository, HashTagRepository hashTagRepository, FriendsRepository friendsRepository, SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository) {
+    public ValidationService(
+            SocialUserRepository socialUserRepository,
+            PostRepository postRepository,
+            HashTagRepository hashTagRepository,
+            FriendsRepository friendsRepository,
+            SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository,
+            FollowRelationshipRepository followRelationshipRepository) {
         this.socialUserRepository = socialUserRepository;
         this.postRepository = postRepository;
         this.hashTagRepository = hashTagRepository;
         this.friendsRepository = friendsRepository;
         this.socialUserInterestInHashTagRepository = socialUserInterestInHashTagRepository;
+        this.followRelationshipRepository = followRelationshipRepository;
     }
 
     //endregion
@@ -33,7 +58,7 @@ public class ValidationService {
     }
     public boolean userExistsById(String userId) { return socialUserRepository.existsById(userId); }
     public boolean isUserBFollowerOfUserA(String idUserRequest, String idUserToUnFollow){
-        return socialUserRepository.isUserBFollowerOfUserA(idUserRequest, idUserToUnFollow);
+        return followRelationshipRepository.isUserBFollowerOfUserA(idUserRequest, idUserToUnFollow);
     }
     public boolean isVacationModeActivated(String idUserRequest) {
         return socialUserRepository.isVacationModeActivated(idUserRequest);
