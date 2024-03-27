@@ -27,6 +27,7 @@ import java.time.LocalDateTime;
 
 /**
  * Service class handling operations related to Social Users.
+ * @author Dairon Pérez Frías
  */
 @Service
 public class SocialUserService {
@@ -166,36 +167,6 @@ public class SocialUserService {
         socialUserRepository.updateSocialUserEmail(idUserToUpdate, newEmail);
         return responseService.successResponseWithMessage(socialUserRepository.findById(idUserToUpdate).get(),
                 "The email was updated successfully.");
-    }
-    // endregion
-
-    // region Relationship Management
-    /**
-     * Allows a user to follow another user.
-     *
-     * @param idUserRequest The ID of the user making the request.
-     * @param idUserToFollow The ID of the user to be followed.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
-     */
-    @Transactional
-    public ResponseEntity<Object> followSocialUser(String idUserRequest, String idUserToFollow) {
-        // Create a Follow relationship
-        socialUserRepository.createUserBFollowUserA(idUserRequest, idUserToFollow, LocalDateTime.now());
-        return responseService.successResponse("The user was followed successfully.");
-    }
-
-    /**
-     * Allows a user to unfollow another user.
-     *
-     * @param idUserRequest The ID of the user making the request.
-     * @param idUserToUnFollow The ID of the user to be unfollowed.
-     * @return ResponseEntity with the response mapped to a ResponseDTO.
-     */
-    @Transactional
-    public ResponseEntity<Object> unfollowSocialUser(String idUserRequest, String idUserToUnFollow) {
-        // Unfollow User
-        socialUserRepository.unFollowTheUserA(idUserRequest, idUserToUnFollow);
-        return responseService.successResponse("The user was unfollowed successfully.");
     }
     // endregion
 

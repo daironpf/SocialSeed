@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 
 /**
  * Controller to handle operations related to Social Users in the application.
+ * @author Dairon Pérez Frías
  */
 @Tag(name = "SocialUser", description = "SocialUser Module")
 @RestController
@@ -37,7 +38,6 @@ public class SocialUserController {
     public SocialUserController(SocialUserService socialUserService) {
         this.socialUserService = socialUserService;
     }
-
     //endregion
 
     // region Gets
@@ -68,7 +68,7 @@ public class SocialUserController {
                 .status(response.getStatusCode())
                 .body((ResponseDTO) response.getBody());
     }
-    // endregion
+    //endregion
 
     //region CRUD
     /**
@@ -174,41 +174,7 @@ public class SocialUserController {
     }
     //endregion
 
-    //region FOLLOW
-    /**
-     * Follow another Social User.
-     *
-     * @param idUserRequest The ID of the user making the request.
-     * @param idUserToFollow The ID of the Social User to follow.
-     * @return ResponseEntity with a ResponseDTO.
-     */
-    @PostMapping("/follow/{idUserToFollow}")
-    public ResponseEntity<ResponseDTO> followSocialUser(
-            @RequestHeader("userId") String idUserRequest,
-            @PathVariable String idUserToFollow) {
-        ResponseEntity<Object> response = socialUserService.followSocialUser(idUserRequest, idUserToFollow);
-        return ResponseEntity
-                .status(response.getStatusCode())
-                .body((ResponseDTO) response.getBody());
-    }
 
-    /**
-     * Unfollow another Social User.
-     *
-     * @param idUserRequest The ID of the user making the request.
-     * @param idUserToUnFollow The ID of the Social User to unfollow.
-     * @return ResponseEntity with a ResponseDTO.
-     */
-    @PostMapping("/unfollow/{idUserToUnFollow}")
-    public ResponseEntity<ResponseDTO> unfollowSocialUser(
-            @RequestHeader("userId") String idUserRequest,
-            @PathVariable String idUserToUnFollow) {
-        ResponseEntity<Object> response = socialUserService.unfollowSocialUser(idUserRequest, idUserToUnFollow);
-        return ResponseEntity
-                .status(response.getStatusCode())
-                .body((ResponseDTO) response.getBody());
-    }
-    //endregion
 
     //region VacationMode
     /**
