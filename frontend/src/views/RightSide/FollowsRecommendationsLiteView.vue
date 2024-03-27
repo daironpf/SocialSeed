@@ -1,7 +1,6 @@
 <script setup>
-import SocialUserRelationshipCard from "@/views/SocialUser/SocialUserToFriendCard.vue";
 import {inject, onMounted, ref} from "vue";
-import SocialUserToFriendCard from "@/views/SocialUser/SocialUserToFriendCard.vue";
+import SocialUserToFollowCard from "@/views/SocialUser/SocialUserToFollowCard.vue";
 
 const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
 const apiUrl = inject('apiUrl')
@@ -10,11 +9,11 @@ const socialUsers = ref([]);
 
 async function cargarDatos() {
   try {
-    const response = await fetch(apiUrl + 'friend/friend-recommendations-lite/' + currentUser.value.id);
+    const response = await fetch(apiUrl + 'follow/follow-recommendations-lite/' + currentUser.value.id);
     const data = await response.json();
 
     socialUsers.value = data.response;
-    console.log('Recomendacion de Amigos', data)
+    console.log('Recomendacion de usuarios a Seguir', data)
 
   } catch (e) {
     console.error(e);
@@ -27,17 +26,17 @@ onMounted(() => {
 </script>
 
 <template>
-  <!--        Sugerencias de Amistad-->
+  <!--        Sugerencias de Usuarios a Seguir  -->
   <div>
-    <div class="flex flex-row justify-between">
+    <div class="flex flex-row justify-between mt-5 b-2">
 
-      <p class="font-bold">Pedir Amistad</p>
+      <p class="font-bold">Usuarios a Seguir</p>
       <p>
         <fa icon="fa-solid fa-sync" class="text-gray-500 "/>
       </p>
     </div>
 
-    <SocialUserToFriendCard
+    <SocialUserToFollowCard
         v-for="user in socialUsers"
         :user="user"
         :key="user.id"
