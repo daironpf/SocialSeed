@@ -69,8 +69,10 @@ public interface FollowRelationshipRepository extends Neo4jRepository<SocialUser
     @Query("""
             MATCH (o:SocialUser {identifier: $idUserRequest})
             MATCH (u:SocialUser)
-            WHERE u <> o AND NOT (u)-[:FRIEND_OF]->(o)
+            WHERE u <> o AND NOT (u)-[:FOLLOWED_BY]->(o)
+            WITH u, rand() AS random
             RETURN u
+            ORDER BY random
             LIMIT 3
             """)
     List<SocialUser> getLiteFriendRecommendationsForUserById(String idUserRequest);
