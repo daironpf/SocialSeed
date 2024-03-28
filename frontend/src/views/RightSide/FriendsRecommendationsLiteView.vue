@@ -43,7 +43,7 @@ onMounted(() => {
         :key="user.id"
     />
 
-    <a href="">Ver todas las recomendaciones</a>
+    <div class="font-semibold text-gray-600">>> Ver todas las recomendaciones</div>
   </div>
 </template>
 
