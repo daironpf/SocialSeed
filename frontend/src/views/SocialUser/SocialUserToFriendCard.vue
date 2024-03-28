@@ -15,6 +15,7 @@ const props = defineProps({
         <div>
           <h2 class="text-md font-semibold">{{user.fullName}}</h2>
           <p class="text-sm text-gray-600">@{{user.userName}}</p>
+          <span class="text-sm text-gray-600"><span class="font-semibold">23</span> amigos en común</span>
         </div>
       </div>
       <div>
