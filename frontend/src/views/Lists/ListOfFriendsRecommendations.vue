@@ -10,6 +10,9 @@ const apiUrl = inject('apiUrl')
 const socialUsers = ref([]);
 const loading = ref(false);
 
+const PAGE_SIZE = 9;
+let currentPage = 0;
+
 async function cargarDatos() {
   try {
     loading.value = true;
@@ -20,15 +23,18 @@ async function cargarDatos() {
             userId: currentUser.value.id,
           },
           params: {
-            page: 0,
-            size: 12,
+            page: currentPage,
+            size: PAGE_SIZE,
           },
         }
     );
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    await new Promise(resolve => setTimeout(resolve, 1));
 
-    socialUsers.value = response.data.response.content;
+    // socialUsers.value = response.data.response.content;
+    // Agregar las nuevas tarjetas a la lista existente
+    socialUsers.value = [...socialUsers.value, ...response.data.response.content];
+
     console.log('Paginación de Amigos', response.data);
   } catch (error) {
     console.error(error);
@@ -41,9 +47,9 @@ onMounted(() => {
   cargarDatos();
 });
 
-async function recargarSugerencias() {
+async function cargarMasSugerencias() {
+  currentPage++; // Incrementa el número de página para cargar más tarjetas
   await cargarDatos();
-  console.log('por recargar sugerencia: ',loading.value)
 }
 </script>
 
@@ -52,7 +58,7 @@ async function recargarSugerencias() {
     <!-- Latelar Izquierdo -->
     <LeftSideView />
 
-    <!-- Zona de Posts en el Feed -->
+    <!-- Zona Central -->
     <div class="basis-1/2 bg-gray-200">
 
       <div class="flex flex-wrap justify-around space-x4">
@@ -63,6 +69,14 @@ async function recargarSugerencias() {
             class=""
         />
       </div>
+
+      <!-- Botón para cargar más sugerencias -->
+      <div class="flex items-center justify-center mt-5">
+        <button @click="cargarMasSugerencias" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Cargar más sugerencias
+        </button>
+      </div>
+
     </div>
 
     <!-- Lateral Derecho -->
