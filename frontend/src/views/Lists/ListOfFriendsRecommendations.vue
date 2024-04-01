@@ -60,6 +60,9 @@ async function cargarMasSugerencias() {
 
     <!-- Zona Central -->
     <div class="basis-1/2 bg-gray-200">
+      <h2 class="text-center font-bold mb-3 text-xl ">
+        Recomendaciones de SocialUser que pueden ser tus amigos
+      </h2>
 
       <div class="flex flex-wrap justify-around space-x4">
         <SocialUserToFriendCardVertical
