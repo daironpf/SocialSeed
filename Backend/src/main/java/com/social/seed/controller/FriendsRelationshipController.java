@@ -1,6 +1,6 @@
 package com.social.seed.controller;
 
-import com.social.seed.service.FriendsService;
+import com.social.seed.service.FriendsRelationshipService;
 import com.social.seed.util.ResponseDTO;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @Tag(name = "Friends", description = "Friends Module")
 @RequestMapping("/api/v0.0.1/friend")
-public class FriendsController {
+public class FriendsRelationshipController {
     //region Dependencies
-    private final FriendsService friendsService;
+    private final FriendsRelationshipService friendsRelationshipService;
 
     @Autowired
-    public FriendsController(FriendsService friendsService) {
-        this.friendsService = friendsService;
+    public FriendsRelationshipController(FriendsRelationshipService friendsRelationshipService) {
+        this.friendsRelationshipService = friendsRelationshipService;
     }
     //endregion
 
@@ -35,7 +35,7 @@ public class FriendsController {
     public ResponseEntity<ResponseDTO> createRequestFriendship(
             @RequestHeader("userId") String idUserRequest,
             @PathVariable String idUserToBeFriend) {
-        ResponseEntity<Object> response = friendsService.createRequestFriendship(idUserRequest, idUserToBeFriend);
+        ResponseEntity<Object> response = friendsRelationshipService.createRequestFriendship(idUserRequest, idUserToBeFriend);
         return ResponseEntity
                 .status(response.getStatusCode())
                 .body((ResponseDTO) response.getBody());
@@ -52,7 +52,7 @@ public class FriendsController {
     public ResponseEntity<ResponseDTO> cancelRequestFriendship(
             @RequestHeader("userId") String idUserRequest,
             @PathVariable String idUserToCancelFriendRequest) {
-        ResponseEntity<Object> response = friendsService.cancelRequestFriendship(idUserRequest, idUserToCancelFriendRequest);
+        ResponseEntity<Object> response = friendsRelationshipService.cancelRequestFriendship(idUserRequest, idUserToCancelFriendRequest);
         return ResponseEntity
                 .status(response.getStatusCode())
                 .body((ResponseDTO) response.getBody());
@@ -69,7 +69,7 @@ public class FriendsController {
     public ResponseEntity<ResponseDTO> acceptedRequestFriendship(
             @RequestHeader("userId") String idUserRequest,
             @PathVariable String idUserToAcceptedFriendRequest) {
-        ResponseEntity<Object> response = friendsService.acceptedRequestFriendship(idUserRequest, idUserToAcceptedFriendRequest);
+        ResponseEntity<Object> response = friendsRelationshipService.acceptedRequestFriendship(idUserRequest, idUserToAcceptedFriendRequest);
         return ResponseEntity
                 .status(response.getStatusCode())
                 .body((ResponseDTO) response.getBody());
@@ -86,7 +86,7 @@ public class FriendsController {
     public ResponseEntity<ResponseDTO> deleteFriendship(
             @RequestHeader("userId") String idUserRequest,
             @PathVariable String idUserToDeleteFriendship) {
-        ResponseEntity<Object> response = friendsService.deleteFriendship(idUserRequest, idUserToDeleteFriendship);
+        ResponseEntity<Object> response = friendsRelationshipService.deleteFriendship(idUserRequest, idUserToDeleteFriendship);
         return ResponseEntity
                 .status(response.getStatusCode())
                 .body((ResponseDTO) response.getBody());
@@ -102,7 +102,7 @@ public class FriendsController {
      */
     @GetMapping("/friend-recommendations-lite/{idUserRequest}")
     public ResponseEntity<ResponseDTO> getLiteFriendRecommendationsForUserById(@PathVariable String idUserRequest){
-        ResponseEntity<Object> response = friendsService.getLiteFriendRecommendationsForUserById(idUserRequest);
+        ResponseEntity<Object> response = friendsRelationshipService.getLiteFriendRecommendationsForUserById(idUserRequest);
         return ResponseEntity
                 .status(response.getStatusCode())
                 .body((ResponseDTO) response.getBody());

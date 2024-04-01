@@ -7,7 +7,7 @@ import org.springframework.data.neo4j.repository.query.Query;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public interface FriendsRepository extends Neo4jRepository<SocialUser, String> {
+public interface FriendsRelationshipRepository extends Neo4jRepository<SocialUser, String> {
     //region REQUEST_FRIEND_TO
     @Query("""
             MATCH (b:SocialUser {identifier: $idUserRequest})

@@ -27,7 +27,7 @@ public class ValidationService {
     private final SocialUserRepository socialUserRepository;
     private final PostRepository postRepository;
     private final HashTagRepository hashTagRepository;
-    private final FriendsRepository friendsRepository;
+    private final FriendsRelationshipRepository friendsRelationshipRepository;
     private final SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository;
     private final FollowRelationshipRepository followRelationshipRepository;
 
@@ -36,13 +36,13 @@ public class ValidationService {
             SocialUserRepository socialUserRepository,
             PostRepository postRepository,
             HashTagRepository hashTagRepository,
-            FriendsRepository friendsRepository,
+            FriendsRelationshipRepository friendsRelationshipRepository,
             SocialUserInterestInHashTagRepository socialUserInterestInHashTagRepository,
             FollowRelationshipRepository followRelationshipRepository) {
         this.socialUserRepository = socialUserRepository;
         this.postRepository = postRepository;
         this.hashTagRepository = hashTagRepository;
-        this.friendsRepository = friendsRepository;
+        this.friendsRelationshipRepository = friendsRelationshipRepository;
         this.socialUserInterestInHashTagRepository = socialUserInterestInHashTagRepository;
         this.followRelationshipRepository = followRelationshipRepository;
     }
@@ -92,13 +92,13 @@ public class ValidationService {
 
     //region Friends
     public boolean existsFriendship(String idUserRequest, String idUserToAcceptedFriendRequest) {
-        return friendsRepository.existsFriendship(idUserRequest, idUserToAcceptedFriendRequest);
+        return friendsRelationshipRepository.existsFriendship(idUserRequest, idUserToAcceptedFriendRequest);
     }
     public boolean existsFriendRequest(String idUserRequest, String idUserToBeFriend){
-        return friendsRepository.existsFriendRequest(idUserRequest, idUserToBeFriend);
+        return friendsRelationshipRepository.existsFriendRequest(idUserRequest, idUserToBeFriend);
     }
     public boolean existsFriendRequestByUserToAccept(String idUserRequest, String idUserToAcceptedFriendRequest) {
-        return friendsRepository.existsFriendRequestByUserToAccept(idUserRequest, idUserToAcceptedFriendRequest);
+        return friendsRelationshipRepository.existsFriendRequestByUserToAccept(idUserRequest, idUserToAcceptedFriendRequest);
     }
 
     public boolean existsInterest(String idUserRequest, String idHashTag) {

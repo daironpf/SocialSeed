@@ -15,6 +15,7 @@
  */
 package com.social.seed.validation;
 
+import com.social.seed.service.FriendsRelationshipService;
 import com.social.seed.util.ResponseService;
 import com.social.seed.util.ValidationService;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -26,7 +27,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Validator class for the {@link com.social.seed.service.FriendsService}, focusing on validating and ensuring consistency
+ * Validator class for the {@link FriendsRelationshipService}, focusing on validating and ensuring consistency
  * in the operations related to managing { Friends within the SocialSeed application }.
  * <p>
  * Author: Dairon Pérez Frías
@@ -46,7 +47,7 @@ public class FriendsServiceValidator {
     }
     //endregion
 
-    @Around("execution(* com.social.seed.service.FriendsService.createRequestFriendship(String, String)) && args(idUserRequest, idUserToBeFriend)")
+    @Around("execution(* com.social.seed.service.FriendsRelationshipService.createRequestFriendship(String, String)) && args(idUserRequest, idUserToBeFriend)")
     @Transactional
     public ResponseEntity<Object> aroundCreateFriendshipRequest(ProceedingJoinPoint joinPoint, String idUserRequest, String idUserToBeFriend) throws Throwable {
         if (idUserRequest.equals(idUserToBeFriend)) {
@@ -69,7 +70,7 @@ public class FriendsServiceValidator {
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
 
-    @Around("execution(* com.social.seed.service.FriendsService.cancelRequestFriendship(String, String)) && args(requesterUserId, targetUserId)")
+    @Around("execution(* com.social.seed.service.FriendsRelationshipService.cancelRequestFriendship(String, String)) && args(requesterUserId, targetUserId)")
     @Transactional
     public ResponseEntity<Object> aroundCancelRequestFriendship(ProceedingJoinPoint joinPoint, String requesterUserId, String targetUserId) throws Throwable {
         if (requesterUserId.equals(targetUserId)) {
@@ -96,7 +97,7 @@ public class FriendsServiceValidator {
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
 
-    @Around("execution(* com.social.seed.service.FriendsService.acceptedRequestFriendship(String, String)) && args(requesterUserId, targetUserId)")
+    @Around("execution(* com.social.seed.service.FriendsRelationshipService.acceptedRequestFriendship(String, String)) && args(requesterUserId, targetUserId)")
     @Transactional
     public ResponseEntity<Object> aroundAcceptedRequestFriendship(ProceedingJoinPoint joinPoint, String requesterUserId, String targetUserId) throws Throwable {
         if (requesterUserId.equals(targetUserId)) {
@@ -124,7 +125,7 @@ public class FriendsServiceValidator {
     }
 
 
-    @Around("execution(* com.social.seed.service.FriendsService.deleteFriendship(String, String)) && args(requesterUserId, targetUserId)")
+    @Around("execution(* com.social.seed.service.FriendsRelationshipService.deleteFriendship(String, String)) && args(requesterUserId, targetUserId)")
     @Transactional
     public ResponseEntity<Object> aroundDeleteFriendship(ProceedingJoinPoint joinPoint, String requesterUserId, String targetUserId) throws Throwable {
         if (requesterUserId.equals(targetUserId)) {

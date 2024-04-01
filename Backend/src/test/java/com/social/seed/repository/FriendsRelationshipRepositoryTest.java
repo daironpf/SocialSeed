@@ -30,7 +30,7 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Unit tests for the {@link FriendsRepository}, focusing on testing individual methods and functionalities
+ * Unit tests for the {@link FriendsRelationshipRepository}, focusing on testing individual methods and functionalities
  * in isolation for managing { Friends Relationships between SocialUsers }.
  * <p>
  * The tests use the {@code @DataNeo4jTest} annotation to provide an embedded Neo4j environment
@@ -40,11 +40,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  * @since 2023-12-27
  */
 @DataNeo4jTest
-class FriendsRepositoryTest {
+class FriendsRelationshipRepositoryTest {
 
     // region dependencies
     @Autowired
-    private FriendsRepository underTest;
+    private FriendsRelationshipRepository underTest;
     @Autowired
     private SocialUserRepository socialUserRepository;
     // endregion
