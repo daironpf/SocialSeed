@@ -4,6 +4,7 @@ import NotFoundView from "@/views/NotFoundView.vue";
 import SocialUserProfileView from "@/views/SocialUserProfileView.vue";
 import PostDetailsView from "@/views/PostDetailsView.vue";
 import LoginView from "@/views/LoginView.vue";
+import ListOfFriendsRecommendations from "@/views/Lists/ListOfFriendsRecommendations.vue";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +32,12 @@ const router = createRouter({
             name: "post-details",
             meta: { showHeader: true },
             component: PostDetailsView
+        },
+        {
+            path: "/list/friends-recommendations",
+            name: "list-of-friends-recommendations",
+            meta: { showHeader: true },
+            component: ListOfFriendsRecommendations
         },
         {
             path: "/:pathMatch(.*)*",
