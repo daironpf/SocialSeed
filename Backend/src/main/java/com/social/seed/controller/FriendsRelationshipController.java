@@ -107,5 +107,22 @@ public class FriendsRelationshipController {
                 .status(response.getStatusCode())
                 .body((ResponseDTO) response.getBody());
     }
+
+    /**
+     * Retrieves lite recommendations to the SocialUser of the idUserRequest.
+     *
+     * @param idUserRequest The ID of the user to recommendation SocialUser to being friends.
+     * @return ResponseEntity with a ResponseDTO.
+     */
+    @GetMapping("/friend-recommendations/")
+    public ResponseEntity<ResponseDTO> getFriendRecommendationsForUserById(
+            @RequestHeader("userId") String idUserRequest,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size){
+        ResponseEntity<Object> response = friendsRelationshipService.getFriendRecommendationsForUserById(idUserRequest, page, size);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
+    }
     //endregion
 }

@@ -1,6 +1,8 @@
 package com.social.seed.repository;
 
 import com.social.seed.model.SocialUser;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
@@ -84,5 +86,23 @@ public interface FriendsRelationshipRepository extends Neo4jRepository<SocialUse
             LIMIT 3
             """)
     List<SocialUser> getLiteFriendRecommendationsForUserById(String idUserRequest);
+
+    @Query(value = """
+                MATCH (o:SocialUser {identifier: $idUserRequest})
+                MATCH (u:SocialUser)
+                WHERE u <> o AND NOT (u)-[:FRIEND_OF]-(o)
+                //WITH u, rand() AS random
+                RETURN u
+                SKIP $skip
+                LIMIT $limit
+                //ORDER BY random
+            """,
+            countQuery = """
+                MATCH (o:SocialUser {identifier: $idUserRequest})
+                MATCH (u:SocialUser)
+                WHERE u <> o AND NOT (u)-[:FRIEND_OF]-(o)
+                RETURN count(u)
+                    """)
+    Page<SocialUser> getFriendRecommendationsForUserById(String idUserRequest, Pageable pageable);
     //endregion
 }

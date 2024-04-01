@@ -19,6 +19,9 @@ import com.social.seed.model.SocialUser;
 import com.social.seed.repository.FriendsRelationshipRepository;
 import com.social.seed.util.ResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,6 +78,15 @@ public class FriendsRelationshipService {
 
     public ResponseEntity<Object> getLiteFriendRecommendationsForUserById(String idUserRequest) {
         List<SocialUser> recommendations = friendsRelationshipRepository.getLiteFriendRecommendationsForUserById(idUserRequest);
+
+        return responseService.successResponse(recommendations);
+    }
+
+    public ResponseEntity<Object> getFriendRecommendationsForUserById(String idUserRequest, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<SocialUser> recommendations = friendsRelationshipRepository.getFriendRecommendationsForUserById(idUserRequest, pageable);
+
+        if (recommendations.isEmpty()) return responseService.notFoundWithMessageResponse("No SocialUsers available.");
 
         return responseService.successResponse(recommendations);
     }
