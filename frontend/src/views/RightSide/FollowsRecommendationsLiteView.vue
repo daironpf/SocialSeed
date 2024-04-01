@@ -54,7 +54,12 @@ async function recargarSugerencias() {
     </div>
     <div v-else class="text-gray-600">Cargando...</div>
 
-    <div class="font-semibold text-gray-600">>> Ver todas las recomendaciones</div>
+    <!-- Ver todas las recomendaciones -->
+    <div class="font-semibold text-gray-600 mb-4">
+      <router-link to="/list/follow-recommendations">
+        >> Ver todas las recomendaciones
+      </router-link>
+    </div>
   </div>
 </template>
 
