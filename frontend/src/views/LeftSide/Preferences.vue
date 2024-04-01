@@ -8,16 +8,16 @@
     <div class="grid grid-cols-1 divide-y">
       <div class="text-center font-bold">Preferencias</div>
       <div class="flex justify-between items-center">
-        <p class="font-bold"># Futbol </p><span class="bg-blue-200 rounded-full px-2 text-white self-end">30</span>
+        <p class="font-bold"># Futbol </p><span class="font-semibold px-2 self-end">30</span>
       </div>
       <div class="flex justify-between items-center">
-        <p class="font-bold"># ChatGPT </p><span class="bg-blue-200 rounded-full px-2 text-white self-end">10</span>
+        <p class="font-bold"># ChatGPT </p><span class="font-semibold px-2 self-end">10</span>
       </div>
       <div class="flex justify-between items-center">
-        <p class="font-bold"># One Piece </p><span class="bg-blue-200 rounded-full px-2 text-white self-end">134</span>
+        <p class="font-bold"># One Piece </p><span class="font-semibold px-2 self-end">134</span>
       </div>
       <div class="flex justify-between items-center">
-        <p class="font-bold"># Memes </p><span class="bg-blue-200 rounded-full px-2 text-white self-end">534</span>
+        <p class="font-bold"># Memes </p><span class="font-semibold px-2 self-end">534</span>
       </div>
     </div>
   </div>
