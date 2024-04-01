@@ -2,7 +2,8 @@
 import { ref, inject, onMounted } from "vue";
 import LeftSideView from "@/views/LeftSide/LeftSideView.vue";
 import RightSideView from "@/views/RightSide/RightSideView.vue";
-import SocialUserToFriendCard from "@/views/SocialUser/SocialUserToFriendCard.vue";
+import SocialUserToFriendCardVertical from "@/views/SocialUser/SocialUserToFriendCardVertical.vue";
+import axios from "axios";
 
 const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
 const apiUrl = inject('apiUrl')
@@ -12,13 +13,23 @@ const loading = ref(false);
 async function cargarDatos() {
   try {
     loading.value = true;
-    const response = await fetch(apiUrl + 'friend/friend-recommendations-lite/' + currentUser.value.id);
+    const response = await axios.get(
+        `${apiUrl}friend/friend-recommendations/`,
+        {
+          headers: {
+            userId: currentUser.value.id,
+          },
+          params: {
+            page: 0,
+            size: 12,
+          },
+        }
+    );
 
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const data = await response.json();
-    socialUsers.value = data.response;
-    console.log('Recomendacion de Amigos', data);
+    socialUsers.value = response.data.response.content;
+    console.log('Paginación de Amigos', response.data);
   } catch (error) {
     console.error(error);
   } finally {
@@ -44,17 +55,14 @@ async function recargarSugerencias() {
     <!-- Zona de Posts en el Feed -->
     <div class="basis-1/2 bg-gray-200">
 
-      <div class="flex flex-wrap">
-        <SocialUserToFriendCard
+      <div class="flex flex-wrap justify-around space-x4">
+        <SocialUserToFriendCardVertical
             v-for="user in socialUsers"
             :user="user"
             :key="user.id"
-            class="w-1/3 m-4"
+            class=""
         />
       </div>
-
-
-
     </div>
 
     <!-- Lateral Derecho -->
