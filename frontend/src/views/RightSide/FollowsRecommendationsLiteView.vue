@@ -1,22 +1,36 @@
 <script setup>
 import {inject, onMounted, ref} from "vue";
 import SocialUserToFollowCard from "@/views/SocialUser/SocialUserToFollowCard.vue";
+import axios from "axios";
 
 const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
 const apiUrl = inject('apiUrl')
 const socialUsers = ref([]);
 const loading = ref(false);
 
+const PAGE_SIZE = 4;
+let currentPage = 0;
+
 async function cargarDatos() {
   try {
     loading.value = true;
-    const response = await fetch(apiUrl + 'follow/follow-recommendations-lite/' + currentUser.value.id);
+    const response = await axios.get(
+        `${apiUrl}follow/follow-recommendations/`,
+        {
+          headers: {
+            userId: currentUser.value.id,
+          },
+          params: {
+            page: currentPage,
+            size: PAGE_SIZE,
+          },
+        }
+    );
 
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Agregar las nuevas tarjetas a la lista existente
+    socialUsers.value = response.data.response.content;
 
-    const data = await response.json();
-    socialUsers.value = data.response;
-    console.log('Recomendacion de usuarios a Seguir', data)
+    console.log('Paginación de usuarios a Seguir', response.data);
   } catch (error) {
     console.error(error);
   } finally {
@@ -28,9 +42,9 @@ onMounted(() => {
   cargarDatos();
 });
 
-async function recargarSugerencias() {
+async function cargarMasSugerencias() {
+  currentPage++; // Incrementa el número de página para cargar más tarjetas
   await cargarDatos();
-  console.log('por recargar sugerencia: ',loading.value)
 }
 </script>
 
@@ -39,7 +53,7 @@ async function recargarSugerencias() {
   <div>
     <div class="flex flex-row justify-between items-center mb-4">
       <p class="font-bold">Usuarios a Seguir</p>
-      <button @click="recargarSugerencias" :disabled="loading" class="flex items-center focus:outline-none">
+      <button @click="cargarMasSugerencias" :disabled="loading" class="flex items-center focus:outline-none">
         <fa icon="fa-solid fa-sync" class="text-gray-500" :class="{ 'animate-spin': loading }" />
       </button>
     </div>
