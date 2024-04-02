@@ -17,9 +17,11 @@ package com.social.seed.service;
 
 import com.social.seed.model.SocialUser;
 import com.social.seed.repository.FollowRelationshipRepository;
-import com.social.seed.repository.SocialUserRepository;
 import com.social.seed.util.ResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -77,8 +79,19 @@ public class FollowRelationshipService {
     // endregion
 
     //region Gets
-    public ResponseEntity<Object> getLiteFollowRecommendationsForUserById(String idUserRequest) {
-        List<SocialUser> recommendations = followRelationshipRepository.getLiteFriendRecommendationsForUserById(idUserRequest);
+    /**
+     * Retrieves lite recommendations to the SocialUser of the idUserRequest.
+     *
+     * @param idUserRequest The ID of the user to recommendation SocialUser to follow.
+     * @param page the number of page.
+     * @param size the size of the page or the amount of elements in the page.
+     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     */
+    public ResponseEntity<Object> getFollowRecommendationsForUserById(String idUserRequest, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<SocialUser> recommendations = followRelationshipRepository.getFollowRecommendationsForUserById(idUserRequest, pageable);
+
+        if (recommendations.isEmpty()) return responseService.notFoundWithMessageResponse("No SocialUsers available.");
 
         return responseService.successResponse(recommendations);
     }
