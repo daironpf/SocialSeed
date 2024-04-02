@@ -57,13 +57,9 @@ public class ValidationService {
         return socialUserRepository.existByUserName(userName);
     }
     public boolean userExistsById(String userId) { return socialUserRepository.existsById(userId); }
-    public boolean isUserBFollowerOfUserA(String idUserRequest, String idUserToUnFollow){
-        return followRelationshipRepository.isUserBFollowerOfUserA(idUserRequest, idUserToUnFollow);
-    }
     public boolean isVacationModeActivated(String idUserRequest) {
         return socialUserRepository.isVacationModeActivated(idUserRequest);
     }
-
     public boolean isSocialUserActivated(String idUserRequest) {
         return socialUserRepository.isSocialUserActivated(idUserRequest);
     }
@@ -100,7 +96,15 @@ public class ValidationService {
     public boolean existsFriendRequestByUserToAccept(String idUserRequest, String idUserToAcceptedFriendRequest) {
         return friendsRelationshipRepository.existsFriendRequestByUserToAccept(idUserRequest, idUserToAcceptedFriendRequest);
     }
+    //endregion
 
+    //region Follow
+    public boolean isUserBFollowerOfUserA(String idUserRequest, String idUserToUnFollow){
+        return followRelationshipRepository.isUserBFollowerOfUserA(idUserRequest, idUserToUnFollow);
+    }
+    //endregion
+
+    //region SocialUserInterestInHashTag
     public boolean existsInterest(String idUserRequest, String idHashTag) {
         return socialUserInterestInHashTagRepository.existsInterest(idUserRequest, idHashTag);
     }
