@@ -59,6 +59,7 @@ public class FollowRelationshipServiceValidator {
         if (!validationService.userExistsById(idUserToFollow)) {
             return responseService.userNotFoundResponse(idUserToFollow);
         }
+        // valida si ya el usuario id:idUserRequest está siguiendo al usuario id:idUserToFollow
         if (validationService.isUserBFollowerOfUserA(idUserRequest, idUserToFollow)) {
             return responseService.conflictResponseWithMessage("You are already following the user");
         }
@@ -79,9 +80,20 @@ public class FollowRelationshipServiceValidator {
         if (!validationService.userExistsById(idUserToUnFollow)) {
             return responseService.userNotFoundResponse(idUserToUnFollow);
         }
-        // valida si ya el usuario id:idUserRequest está siguiendo al usuario id:idUserToFollow
+        // valida si ya el usuario id:idUserRequest no está siguiendo al usuario id:idUserToUnFollow
         if (!validationService.isUserBFollowerOfUserA(idUserRequest, idUserToUnFollow)) {
             return responseService.conflictResponseWithMessage("Doesn't follow the user yet");
+        }
+
+        // Continue
+        return (ResponseEntity<Object>) joinPoint.proceed();
+    }
+
+    @Around("execution(* com.social.seed.service.FollowRelationshipService.getFollowRecommendationsForUserById(String, int, int)) && args(idUserRequest, page, size)")
+    @Transactional
+    public ResponseEntity<Object> aroundGetFollowRecommendationsForUserById(ProceedingJoinPoint joinPoint, String idUserRequest, int page, int size) throws Throwable {
+        if (!validationService.userExistsById(idUserRequest)) {
+            return responseService.userNotFoundResponse(idUserRequest);
         }
 
         // Continue
