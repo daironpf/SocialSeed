@@ -76,12 +76,6 @@ public class FriendsRelationshipService {
         return responseService.successResponse("The Friendship Relationship was deleted successfully.");
     }
 
-    public ResponseEntity<Object> getLiteFriendRecommendationsForUserById(String idUserRequest) {
-        List<SocialUser> recommendations = friendsRelationshipRepository.getLiteFriendRecommendationsForUserById(idUserRequest);
-
-        return responseService.successResponse(recommendations);
-    }
-
     public ResponseEntity<Object> getFriendRecommendationsForUserById(String idUserRequest, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<SocialUser> recommendations = friendsRelationshipRepository.getFriendRecommendationsForUserById(idUserRequest, pageable);

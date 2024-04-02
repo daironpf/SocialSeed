@@ -95,21 +95,7 @@ public class FriendsRelationshipController {
 
     //region GET
     /**
-     * Retrieves lite recommendations to the SocialUser of the idUserRequest.
-     *
-     * @param idUserRequest The ID of the user to recommendation SocialUser to being friends.
-     * @return ResponseEntity with a ResponseDTO.
-     */
-    @GetMapping("/friend-recommendations-lite/{idUserRequest}")
-    public ResponseEntity<ResponseDTO> getLiteFriendRecommendationsForUserById(@PathVariable String idUserRequest){
-        ResponseEntity<Object> response = friendsRelationshipService.getLiteFriendRecommendationsForUserById(idUserRequest);
-        return ResponseEntity
-                .status(response.getStatusCode())
-                .body((ResponseDTO) response.getBody());
-    }
-
-    /**
-     * Retrieves lite recommendations to the SocialUser of the idUserRequest.
+     * Retrieves Recommendations to the SocialUser of the idUserRequest.
      *
      * @param idUserRequest The ID of the user to recommendation SocialUser to being friends.
      * @return ResponseEntity with a ResponseDTO.
