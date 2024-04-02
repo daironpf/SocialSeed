@@ -23,7 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * Controller to handle operations related to Follow Relationship between SocialUser in the application.
+ * Controller to handle operations related to Follow Relationship in SocialUser in the application.
  * @author Dairon Pérez Frías
  */
 @Tag(name = "FollowRelationship", description = "Follow Relationship Module")
@@ -44,11 +44,17 @@ public class FollowRelationshipController {
      * Retrieves lite recommendations to the SocialUser of the idUserRequest.
      *
      * @param idUserRequest The ID of the user to recommendation SocialUser to follow.
+     * @param page the number of page.
+     * @param size the size of the page or the amount of elements in the page.
      * @return ResponseEntity with a ResponseDTO.
      */
-    @GetMapping("/follow-recommendations-lite/{idUserRequest}")
-    public ResponseEntity<ResponseDTO> getLiteFollowRecommendationsForUserById(@PathVariable String idUserRequest){
-        ResponseEntity<Object> response = followRelationshipService.getLiteFollowRecommendationsForUserById(idUserRequest);
+    @GetMapping("/follow-recommendations/")
+    public ResponseEntity<ResponseDTO> getFollowRecommendationsForUserById(
+            @RequestHeader("userId") String idUserRequest,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+        ResponseEntity<Object> response = followRelationshipService.getFollowRecommendationsForUserById(idUserRequest, page, size);
         return ResponseEntity
                 .status(response.getStatusCode())
                 .body((ResponseDTO) response.getBody());
