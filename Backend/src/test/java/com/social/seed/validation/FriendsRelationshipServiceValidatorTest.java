@@ -30,7 +30,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 /**
- * Test class for the {@link FriendsServiceValidator}, focusing on testing individual methods and functionalities
+ * Test class for the {@link FriendsRelationshipServiceValidator}, focusing on testing individual methods and functionalities
  * for managing { The Validator data for Friends }.
  * <p>
  * @author Dairon Pérez Frías
@@ -39,7 +39,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class FriendsRelationshipServiceValidatorTest {
     @InjectMocks
-    private FriendsServiceValidator underTest;
+    private FriendsRelationshipServiceValidator underTest;
     @Mock
     private ValidationService validationService;
     @Mock

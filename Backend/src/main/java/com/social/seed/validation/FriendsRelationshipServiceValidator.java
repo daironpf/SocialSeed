@@ -35,13 +35,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Aspect
 @Component
-public class FriendsServiceValidator {
+public class FriendsRelationshipServiceValidator {
     //region dependencies
     private final ValidationService validationService;
     private final ResponseService responseService;
 
     @Autowired
-    public FriendsServiceValidator(ValidationService validationService, ResponseService responseService) {
+    public FriendsRelationshipServiceValidator(ValidationService validationService, ResponseService responseService) {
         this.validationService = validationService;
         this.responseService = responseService;
     }
@@ -124,7 +124,6 @@ public class FriendsServiceValidator {
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
 
-
     @Around("execution(* com.social.seed.service.FriendsRelationshipService.deleteFriendship(String, String)) && args(requesterUserId, targetUserId)")
     @Transactional
     public ResponseEntity<Object> aroundDeleteFriendship(ProceedingJoinPoint joinPoint, String requesterUserId, String targetUserId) throws Throwable {
@@ -142,6 +141,17 @@ public class FriendsServiceValidator {
 
         if (!validationService.existsFriendship(requesterUserId, targetUserId)) {
             return responseService.conflictResponseWithMessage("There is no friendship relationship between users.");
+        }
+
+        // Continue
+        return (ResponseEntity<Object>) joinPoint.proceed();
+    }
+
+    @Around("execution(* com.social.seed.service.FriendsRelationshipService.getFriendRecommendationsForUserById(String, int, int)) && args(idUserRequest, page, size)")
+    @Transactional
+    public ResponseEntity<Object> aroundGetFriendRecommendationsForUserById(ProceedingJoinPoint joinPoint, String idUserRequest, int page, int size) throws Throwable {
+        if (!validationService.userExistsById(idUserRequest)) {
+            return responseService.userNotFoundResponse(idUserRequest);
         }
 
         // Continue
