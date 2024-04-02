@@ -41,10 +41,7 @@ public class FollowRelationshipServiceValidator {
     private final ResponseService responseService;
 
     @Autowired
-    public FollowRelationshipServiceValidator(
-            ValidationService validationService,
-            ResponseService responseService
-    ) {
+    public FollowRelationshipServiceValidator(ValidationService validationService, ResponseService responseService) {
         this.validationService = validationService;
         this.responseService = responseService;
     }
@@ -52,7 +49,7 @@ public class FollowRelationshipServiceValidator {
 
     @Around("execution(* com.social.seed.service.FollowRelationshipService.followSocialUser(String, String)) && args(idUserRequest, idUserToFollow)")
     @Transactional
-    public ResponseEntity<Object> aroundFollowSocialUser(ProceedingJoinPoint joinPoint, String idUserRequest, String idUserToFollow) throws Throwable {
+    public ResponseEntity<Object> aroundCreateFriendshipRequest(ProceedingJoinPoint joinPoint, String idUserRequest, String idUserToFollow) throws Throwable {
         if (idUserRequest.equals(idUserToFollow)) {
             return responseService.forbiddenDuplicateSocialUser();
         }
@@ -62,9 +59,29 @@ public class FollowRelationshipServiceValidator {
         if (!validationService.userExistsById(idUserToFollow)) {
             return responseService.userNotFoundResponse(idUserToFollow);
         }
-        // valida si ya el usuario id:idUserRequest está siguiendo al usuario id:idUserToFollow
         if (validationService.isUserBFollowerOfUserA(idUserRequest, idUserToFollow)) {
-            return responseService.conflictResponseWithMessage("you are already following the user");
+            return responseService.conflictResponseWithMessage("You are already following the user");
+        }
+
+        // Continue
+        return (ResponseEntity<Object>) joinPoint.proceed();
+    }
+
+    @Around("execution(* com.social.seed.service.FollowRelationshipService.unfollowSocialUser(String, String)) && args(idUserRequest, idUserToUnFollow)")
+    @Transactional
+    public ResponseEntity<Object> aroundUnFollowSocialUser(ProceedingJoinPoint joinPoint, String idUserRequest, String idUserToUnFollow) throws Throwable {
+        if (idUserRequest.equals(idUserToUnFollow)) {
+            return responseService.forbiddenDuplicateSocialUser();
+        }
+        if (!validationService.userExistsById(idUserRequest)) {
+            return responseService.userNotFoundResponse(idUserRequest);
+        }
+        if (!validationService.userExistsById(idUserToUnFollow)) {
+            return responseService.userNotFoundResponse(idUserToUnFollow);
+        }
+        // valida si ya el usuario id:idUserRequest está siguiendo al usuario id:idUserToFollow
+        if (!validationService.isUserBFollowerOfUserA(idUserRequest, idUserToUnFollow)) {
+            return responseService.conflictResponseWithMessage("Doesn't follow the user yet");
         }
 
         // Continue
