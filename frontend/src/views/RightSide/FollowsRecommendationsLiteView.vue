@@ -27,7 +27,7 @@ async function cargarDatos() {
         }
     );
 
-    // Agregar las nuevas tarjetas a la lista existente
+    // Refrescar las tarjetas con N=PAGE_SIZE Nuevas
     socialUsers.value = response.data.response.content;
 
     console.log('Paginación de usuarios a Seguir', response.data);

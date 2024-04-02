@@ -29,8 +29,6 @@ async function cargarDatos() {
         }
     );
 
-    await new Promise(resolve => setTimeout(resolve, 1));
-
     // socialUsers.value = response.data.response.content;
     // Agregar las nuevas tarjetas a la lista existente
     socialUsers.value = [...socialUsers.value, ...response.data.response.content];
