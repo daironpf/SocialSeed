@@ -2,6 +2,7 @@
 const props = defineProps({
   user: Object,
 })
+
 </script>
 
 <template>
@@ -13,8 +14,10 @@ const props = defineProps({
       <div class="flex items-center">
         <img :src="user.profileImage" alt="Foto de usuario" class="w-16 h-16 rounded-full mr-4">
         <div>
-          <h2 class="text-md font-semibold">{{user.fullName}}</h2>
-          <p class="text-sm text-gray-600">@{{user.userName}}</p>
+          <router-link :to="/su-profile/"+user.id>
+            <h2 class="text-md font-semibold">{{user.fullName}}</h2>
+            <p class="text-sm text-gray-600">@{{user.userName}}</p>
+          </router-link>
           <span class="text-sm font-semibold ">Te sigue</span>
         </div>
       </div>

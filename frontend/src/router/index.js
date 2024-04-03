@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import FeedView from "@/views/FeedView.vue";
 import NotFoundView from "@/views/NotFoundView.vue";
-import SocialUserProfileView from "@/views/SocialUserProfileView.vue";
+import SocialUserProfileView from "@/views/SocialUser/Profile/SocialUserProfileView.vue";
 import PostDetailsView from "@/views/PostDetailsView.vue";
 import LoginView from "@/views/LoginView.vue";
 import ListOfFriendsRecommendations from "@/views/Lists/ListOfFriendsRecommendations.vue";
