@@ -13,6 +13,9 @@ Social Seed provides a solid starting point for creating a personalized social n
 - **Scalable:** Easily scale your social network as your community grows.
 - **Open-Source:** Being open-source, it encourages collaboration and contributions.
 
+## DevBlog #1
+https://github.com/daironpf/SocialSeed/assets/45364687/fb688225-99f0-44b9-9fc3-7d604845385f
+
 ## This is the Graph Data Model used for the project
 ![This is the Graph Data Model used for the project](https://github.com/daironpf/SocialSeed/blob/main/Neo4j/Graph%20Data%20Model/SocialSeed%20(SS).png)
 
