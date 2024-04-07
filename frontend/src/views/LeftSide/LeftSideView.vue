@@ -7,7 +7,7 @@ import Publications from "@/views/LeftSide/Publications.vue";
 
 <template>
   <div class="basis-1/4  m-1 bg-gray-200">
-    <ProfileView />
+    <ProfileView :user="'me'"/>
 
     <Preferences />
 

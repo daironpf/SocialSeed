@@ -1,8 +1,34 @@
 <script setup>
-import {ref} from "vue";
+import {inject, onMounted, ref} from "vue";
+import axios from "axios";
 
-const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
-console.log('Usuario Actual: ', currentUser.value);
+const props = defineProps({
+  user: String,
+})
+
+const currentUser = ref({});
+const apiUrl = inject('apiUrl')
+
+async function userDataLoad(userId) {
+  try {
+    const response = await axios.get(
+        `${apiUrl}socialUser/getSocialUserById/${userId}`
+    );
+
+    currentUser.value = response.data.response;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
+onMounted(() => {
+  if (props.user === "me"){
+    currentUser.value = JSON.parse(localStorage.getItem('currentUser'));
+  } else {
+    userDataLoad(props.user)
+  }
+});
 
 </script>
 

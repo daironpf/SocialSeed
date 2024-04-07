@@ -2,22 +2,26 @@
 
 import LeftSideView from "@/views/LeftSide/LeftSideView.vue";
 import RightSideView from "@/views/RightSide/RightSideView.vue";
-import CreateNewPostView from "@/views/Post/CreateNewPostView.vue";
-import PostViewInFeed from "@/views/Post/PostViewInFeed.vue";
+
+import { useRoute } from 'vue-router'
+import LeftSideSocialUserProfile from "@/views/SocialUser/Profile/LeftSideSocialUserProfile.vue";
+
+const route = useRoute()
+const userId = route.params.id
 </script>
 
 <template>
   <div class="my-20 mx-3 flex flex-row">
     <!-- Latelar Izquierdo -->
-    <LeftSideView />
+    <LeftSideSocialUserProfile :userId="userId" />
 
-    <!-- Zona de Posts en el Feed -->
+    <!-- Zona Central -->
     <div class="basis-1/2 bg-gray-200">
-     
+        Trabajando
     </div>
 
     <!-- Lateral Derecho -->
-    <RightSideView />
+    <RightSideView/>
   </div>
 </template>
 

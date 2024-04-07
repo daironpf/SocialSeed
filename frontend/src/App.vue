@@ -16,7 +16,7 @@ const showHeader = computed(() => {
   <main>
     <HeaderView v-if="showHeader" />
     <div>
-      <RouterView />
+      <RouterView :key="$route.fullPath"/>
     </div>
   </main>
 </template>
