@@ -60,4 +60,18 @@ public class SocialUserInterestInHashTagController {
                 .status(response.getStatusCode())
                 .body((ResponseDTO) response.getBody());
     }
+
+    /**
+     * Retrieve a Data of Interest for HashTag by SocialUser ID.
+     *
+     * @param userId The ID of the Social User to find.
+     * @return ResponseEntity with a ResponseDTO.
+     */
+    @GetMapping("/getInterestBySocialUserId/{userId}")
+    public ResponseEntity<ResponseDTO> getInterestBySocialUserId(@PathVariable String userId) {
+        ResponseEntity<Object> response = socialUserInterestInHashTagService.getInterestBySocialUserId(userId);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
+    }
 }

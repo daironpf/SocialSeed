@@ -15,6 +15,7 @@
  */
 package com.social.seed.service;
 
+import com.social.seed.model.HashTag;
 import com.social.seed.model.SocialUser;
 import com.social.seed.repository.SocialUserInterestInHashTagRepository;
 import com.social.seed.repository.SocialUserRepository;
@@ -25,6 +26,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Service class responsible for managing interests of Social Users in Hash Tags.
@@ -78,5 +81,17 @@ public class SocialUserInterestInHashTagService {
         socialUserInterestInHashTagRepository.deleteInterest(idUserRequest, idHashTag);
 
         return responseService.successResponse(socialUserRepository.findById(idUserRequest).get());
+    }
+
+    /**
+     * Get interests in a Hash Tag for a specific user.
+     *
+     * @param idUserRequest The ID of the user making the request.
+     * @return ResponseEntity with the response mapped to a ResponseDTO.
+     */
+    public ResponseEntity<Object> getInterestBySocialUserId(String idUserRequest) {
+        Optional<List<HashTag>> reponse = socialUserInterestInHashTagRepository.getInterestBySocialUserId(idUserRequest);
+
+        return responseService.successResponse(reponse.get());
     }
 }

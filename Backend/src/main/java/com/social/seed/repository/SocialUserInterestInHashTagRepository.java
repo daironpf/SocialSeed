@@ -1,10 +1,13 @@
 package com.social.seed.repository;
 
 import com.social.seed.model.HashTag;
+import com.social.seed.model.SocialUser;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 public interface SocialUserInterestInHashTagRepository extends Neo4jRepository<HashTag, String> {
 
@@ -39,4 +42,11 @@ public interface SocialUserInterestInHashTagRepository extends Neo4jRepository<H
             DELETE r
             """)
     void deleteAll();
+
+    @Query("""
+            OPTIONAL MATCH (u:SocialUser {identifier: $idUserRequest})
+            OPTIONAL MATCH (u)-[INTERESTED_IN_HASHTAG]->(t:HashTag)
+            RETURN t
+            """)
+    Optional<List<HashTag>> getInterestBySocialUserId(String idUserRequest);
 }
