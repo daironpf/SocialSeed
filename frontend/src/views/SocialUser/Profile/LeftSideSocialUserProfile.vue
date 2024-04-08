@@ -4,6 +4,7 @@ import Preferences from "@/views/LeftSide/Preferences.vue";
 import Publications from "@/views/LeftSide/Publications.vue";
 import {inject, onMounted, ref} from "vue";
 import axios from "axios";
+import PreferencesSocialUserProfileView from "@/views/SocialUser/Profile/PreferencesSocialUserProfileView.vue";
 
 const props = defineProps({
   userId: String,
@@ -15,7 +16,7 @@ const props = defineProps({
   <div class="basis-1/4  m-1 bg-gray-200">
     <ProfileView :user="props.userId" />
 
-    <Preferences />
+    <PreferencesSocialUserProfileView :user="props.userId" />
 
     <Publications />
   </div>
