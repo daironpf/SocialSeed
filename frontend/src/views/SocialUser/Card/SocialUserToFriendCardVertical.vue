@@ -1,6 +1,7 @@
 <script setup>
 const props = defineProps({
   user: Object,
+  request: Boolean
 })
 </script>
 
@@ -22,15 +23,29 @@ const props = defineProps({
           <span class="text-slate-700 dark:text-slate-500" >
             <span class="font-semibold">23</span> amigos en común
           </span>
+          <div>
+            <span class="text-sm font-semibold ">Te sigue</span>
+          </div>
+          <div>
+            <span class="text-sm font-semibold ">Es tu Amigo</span>
+          </div>
         </div>
       </div>
 
-      <div class="mt-4 mb-2">
+      <div v-if="props.request"
+          class="mt-2 mb-2">
         <!-- Botón de Pedir Amistad -->
         <button class="bg-blue-300 hover:bg-blue-500 text-white font-semibold
-        py-2 px-4 rounded-lg w-30 h-15 focus:outline-none focus:shadow-outline">
+        p-2 m-2 rounded-lg w-30 h-15 focus:outline-none focus:shadow-outline">
           <fa icon="fa-solid fa-user-plus" class="text-white-600"/>
           Amistad
+        </button>
+
+        <!-- Botón de Seguir -->
+        <button class="bg-blue-300 hover:bg-blue-500 text-white font-semibold
+          p-2 rounded-lg w-30 focus:outline-none focus:shadow-outline">
+          <fa icon="fa-solid fa-person-circle-plus" class="text-white-600"/>
+          Seguir
         </button>
       </div>
     </div>
