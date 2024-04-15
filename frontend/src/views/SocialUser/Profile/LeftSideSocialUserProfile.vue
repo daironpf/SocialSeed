@@ -1,9 +1,5 @@
 <script setup>
 import ProfileView from "@/views/LeftSide/ProfileView.vue";
-import Preferences from "@/views/LeftSide/Preferences.vue";
-import Publications from "@/views/LeftSide/Publications.vue";
-import {inject, onMounted, ref} from "vue";
-import axios from "axios";
 import PreferencesSocialUserProfileView from "@/views/SocialUser/Profile/PreferencesSocialUserProfileView.vue";
 
 const props = defineProps({
@@ -17,10 +13,7 @@ const props = defineProps({
     <ProfileView :user="props.userId" />
 
     <PreferencesSocialUserProfileView :user="props.userId" />
-
-    <Publications />
   </div>
-
 </template>
 
 <style scoped>
