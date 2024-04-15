@@ -14,19 +14,19 @@ import BaseTooltip from "@/views/utils/BaseTooltip.vue";
 
     <div class="flex items-center">
       <BaseTooltip
-          :content="`Total de publicaciones hechas con este HashTag: ${hashtag.postTaggedIn}`"
+          :content="`Total de publicaciones hechas con este HashTag: ${props.hashtag.postTaggedIn}`"
           placement="bottom">
         <p class="p-2">
           <fa icon="fa-solid fa-pen-to-square text-blue-300" />
-          <span class="font-semibold">{{ hashtag.postTaggedIn }}</span>
+          <span class="font-semibold">{{ props.hashtag.postTaggedIn }}</span>
         </p>
       </BaseTooltip>
       <BaseTooltip
-          :content="`Total de Usuarios interesados en este HashTag: ${hashtag.socialUserInterestIn}`"
+          :content="`Total de Usuarios interesados en este HashTag: ${props.hashtag.socialUserInterestIn}`"
           placement="bottom">
       <p >
         <fa icon="fa-solid fa-user text-blue-300" />
-        <span class="font-semibold">{{ hashtag.socialUserInterestIn }}</span>
+        <span class="font-semibold">{{ props.hashtag.socialUserInterestIn }}</span>
       </p>
       </BaseTooltip>
     </div>
