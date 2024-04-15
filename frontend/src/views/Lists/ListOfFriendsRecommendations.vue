@@ -66,6 +66,7 @@ async function cargarMasSugerencias() {
         <SocialUserToFriendCardVertical
             v-for="user in socialUsers"
             :user="user"
+            :request=true
             :key="user.id"
             class=""
         />
@@ -77,7 +78,6 @@ async function cargarMasSugerencias() {
           Cargar más sugerencias
         </button>
       </div>
-
     </div>
 
     <!-- Lateral Derecho -->
