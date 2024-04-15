@@ -91,7 +91,27 @@ public interface FriendsRelationshipRepository extends Neo4jRepository<SocialUse
                 MATCH (u:SocialUser)
                 WHERE u <> o AND NOT (u)-[:FRIEND_OF]-(o)
                 RETURN count(u)
-                    """)
+            """)
     Page<SocialUser> getFriendRecommendationsForUserById(String idUserRequest, Pageable pageable);
     //endregion
+
+    //region Get
+    @Query(value = """
+                MATCH (o:SocialUser {identifier: $idUserToFind})
+                MATCH (u:SocialUser)
+                WHERE (u)-[:FRIEND_OF]-(o)
+                RETURN u
+                SKIP $skip
+                LIMIT $limit
+                //ORDER BY random
+            """,
+            countQuery = """
+                MATCH (o:SocialUser {identifier: $idUserToFind})
+                MATCH (u:SocialUser)
+                WHERE (u)-[:FRIEND_OF]-(o)
+                RETURN count(u)
+            """)
+    Page<SocialUser> getFriendsOfUserById(String idUserToFind, Pageable pageable);
+    //endregion
+
 }

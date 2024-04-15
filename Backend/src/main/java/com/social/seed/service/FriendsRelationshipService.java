@@ -84,4 +84,13 @@ public class FriendsRelationshipService {
 
         return responseService.successResponse(recommendations);
     }
+
+    public ResponseEntity<Object> getFriendsOfUserById(String idUserRequest, String idUserToFind, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<SocialUser> friends = friendsRelationshipRepository.getFriendsOfUserById(idUserToFind, pageable);
+
+        if (friends.isEmpty()) return responseService.notFoundWithMessageResponse("No Friends available.");
+
+        return responseService.successResponse(friends);
+    }
 }

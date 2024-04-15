@@ -111,4 +111,26 @@ public class FriendsRelationshipController {
                 .body((ResponseDTO) response.getBody());
     }
     //endregion
+
+    //region GET
+    /**
+     * Returns the Friends of a SocialUser based on their user ID.
+     *
+     * @param idUserRequest The ID of the user to Request.
+     * @param idUserToFind The ID of the user to returns friends.
+     * @return ResponseEntity with a ResponseDTO.
+     */
+    @GetMapping("/friendsOf/{idUserToFind}")
+    public ResponseEntity<ResponseDTO> getFriendsOfUserById(
+
+            @RequestHeader("userId") String idUserRequest,
+            @PathVariable String idUserToFind,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size){
+        ResponseEntity<Object> response = friendsRelationshipService.getFriendsOfUserById(idUserRequest, idUserToFind, page, size);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
+    }
+    //endregion
 }
