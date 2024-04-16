@@ -157,4 +157,19 @@ public class FriendsRelationshipServiceValidator {
         // Continue
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
+
+    @Around("execution(* com.social.seed.service.FriendsRelationshipService.getFriendsOfUserById(String, String, int, int)) && args(idUserRequest, idUserToFind, page, size)")
+    @Transactional
+    public ResponseEntity<Object> aroundGetFriendsOfUserById(ProceedingJoinPoint joinPoint, String idUserRequest, String idUserToFind, int page, int size) throws Throwable {
+        if (!validationService.userExistsById(idUserRequest)) {
+            return responseService.userNotFoundResponse(idUserRequest);
+        }
+
+        if (!validationService.userExistsById(idUserToFind)) {
+            return responseService.userNotFoundResponse(idUserToFind);
+        }
+
+        // Continue
+        return (ResponseEntity<Object>) joinPoint.proceed();
+    }
 }
