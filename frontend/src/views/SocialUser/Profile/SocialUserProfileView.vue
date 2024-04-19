@@ -3,7 +3,8 @@ import RightSideView from "@/views/RightSide/RightSideView.vue";
 import { useRoute } from 'vue-router'
 import LeftSideSocialUserProfile from "@/views/SocialUser/Profile/LeftSideSocialUserProfile.vue";
 import {ref} from "vue";
-import ListOfFriendsView from "@/views/SocialUser/Profile/ListOfFriendsView.vue";
+import ListOfFriendsView from "@/views/SocialUser/Profile/Lists/ListOfFriendsView.vue";
+import ListOfPostsView from "@/views/SocialUser/Profile/Lists/ListOfPostsView.vue";
 
 const route = useRoute()
 const userId = route.params.id
@@ -63,9 +64,7 @@ const user = {
         </div>
         <div v-else-if="activeTab === 'posts'">
           <!-- Renderizar lista de publicaciones -->
-          <ul>
-            <li v-for="post in user.posts" :key="post">{{ post }}</li>
-          </ul>
+          <ListOfPostsView :userId="userId" />
         </div>
       </div>
     </div>

@@ -267,4 +267,15 @@ public class PostService {
         }
     }
     //endregion
+
+    //region Get
+    public ResponseEntity<Object> getAllPostsByUserId(String userId, String userIdRequest, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Post> posts = postRepository.getAllPostsByUserId(userIdRequest, pageable);
+
+        if (posts.isEmpty()) return responseService.notFoundWithMessageResponse("No posts available.");
+
+        return responseService.successResponse(posts);
+    }
+    //endregion
 }

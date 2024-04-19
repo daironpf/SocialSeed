@@ -137,4 +137,21 @@ public interface PostRepository extends Neo4jRepository<Post, String> {
             """)
     void deleteAllRelationshipTaggedWithHashTag(String idPost);
     //endregion
+
+    //region Get
+    @Query(value ="""
+                MATCH (p:Post)-[rp:POSTED_BY]->(u:SocialUser {identifier: $userIdRequest})
+                //WHERE p.isActive = true
+                WITH p, u, rp ORDER BY rp.postDate DESC
+                RETURN p, rp, u
+                SKIP $skip LIMIT $limit
+            """,
+            countQuery = """
+                MATCH (p:Post)-[rp:POSTED_BY]->(u:SocialUser {identifier: $userIdRequest})
+                //WHERE p.isActive = true
+                WITH p, rp ORDER BY rp.postDate DESC
+                RETURN count(p)
+            """)
+    Page<Post> getAllPostsByUserId(String userIdRequest, Pageable pageable);
+    //endregion
 }

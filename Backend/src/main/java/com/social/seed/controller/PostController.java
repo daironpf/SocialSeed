@@ -43,6 +43,27 @@ public class PostController {
     }
 
     /**
+     * Retrieves all posts with pagination.
+     *
+     * @param userId the id of the user
+     * @param userIdRequest the id user to request all his post
+     * @param page Page number for pagination (default is 0).
+     * @param size Number of posts per page (default is 10).
+     * @return ResponseEntity with a ResponseDTO.
+     */
+    @GetMapping("/getAllPostsByUserId/{userIdRequest}")
+    public ResponseEntity<ResponseDTO> getAllPostsByUserId(
+            @RequestHeader("userId") String userId,
+            @PathVariable String userIdRequest,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        ResponseEntity<Object> response = postService.getAllPostsByUserId(userId, userIdRequest, page, size);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
+    }
+
+    /**
      * Retrieves the user's post feed with pagination.
      *
      * @param page Page number for pagination (default is 0).
