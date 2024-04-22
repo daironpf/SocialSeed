@@ -5,11 +5,12 @@ import LeftSideSocialUserProfile from "@/views/SocialUser/Profile/LeftSideSocial
 import {ref} from "vue";
 import ListOfFriendsView from "@/views/SocialUser/Profile/Lists/ListOfFriendsView.vue";
 import ListOfPostsView from "@/views/SocialUser/Profile/Lists/ListOfPostsView.vue";
+import ListOfFollowsView from "@/views/SocialUser/Profile/Lists/ListOfFollowsView.vue";
 
 const route = useRoute()
 const userId = route.params.id
 
-const activeTab = ref('friends');
+const activeTab = ref('posts');
 
 const user = {
   // Datos del usuario
@@ -41,7 +42,8 @@ const user = {
 
         <!-- Botón de Seguidos -->
         <div class="text-center">
-          <p class="font-bold text-gray-700">Seguidos</p>
+          <p @click="activeTab = 'follows'"
+             class="font-bold text-gray-700">Seguidos</p>
         </div>
 
         <!-- Botón de Seguidores -->
@@ -56,11 +58,9 @@ const user = {
           <!-- Renderizar lista de amigos -->
           <ListOfFriendsView :userId="userId" />
         </div>
-        <div v-else-if="activeTab === 'followers'">
+        <div v-else-if="activeTab === 'follows'">
           <!-- Renderizar lista de seguidores -->
-          <ul>
-            <li v-for="follower in user.followers" :key="follower">{{ follower }}</li>
-          </ul>
+          <ListOfFollowsView :userId="userId" />
         </div>
         <div v-else-if="activeTab === 'posts'">
           <!-- Renderizar lista de publicaciones -->
