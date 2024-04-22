@@ -6,6 +6,7 @@ import {ref} from "vue";
 import ListOfFriendsView from "@/views/SocialUser/Profile/Lists/ListOfFriendsView.vue";
 import ListOfPostsView from "@/views/SocialUser/Profile/Lists/ListOfPostsView.vue";
 import ListOfFollowsView from "@/views/SocialUser/Profile/Lists/ListOfFollowsView.vue";
+import ListOfFollowersView from "@/views/SocialUser/Profile/Lists/ListOfFollowersView.vue";
 
 const route = useRoute()
 const userId = route.params.id
@@ -65,6 +66,10 @@ const user = {
         <div v-else-if="activeTab === 'posts'">
           <!-- Renderizar lista de publicaciones -->
           <ListOfPostsView :userId="userId" />
+        </div>
+        <div v-else-if="activeTab === 'followers'">
+          <!-- Renderizar lista de seguidores -->
+          <ListOfFollowersView :userId="userId" />
         </div>
       </div>
     </div>
