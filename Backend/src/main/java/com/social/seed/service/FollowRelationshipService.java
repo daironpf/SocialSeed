@@ -112,5 +112,23 @@ public class FollowRelationshipService {
 
         return responseService.successResponse(response);
     }
+
+    /**
+     * Retrieves a paginated list of followers for the specified user.
+     *
+     * @param userId The ID of the authenticated user requesting the list of followed users.
+     * @param idUserRequest The ID of the user for whom to retrieve the list of followed users.
+     * @param page The page number for pagination.
+     * @param size The size of each page or the number of elements per page.
+     * @return ResponseEntity containing the list of followers users wrapped in an appropriate response object.
+     */
+    public ResponseEntity<Object> getFollowersBySocialUserId(String userId, String idUserRequest, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<SocialUser> response = followRelationshipRepository.getFollowersBySocialUserId(idUserRequest, pageable);
+
+        if (response.isEmpty()) return responseService.notFoundWithMessageResponse("No SocialUsers available.");
+
+        return responseService.successResponse(response);
+    }
     //endregion
 }

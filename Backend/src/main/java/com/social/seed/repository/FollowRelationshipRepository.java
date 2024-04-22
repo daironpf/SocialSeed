@@ -97,5 +97,18 @@ public interface FollowRelationshipRepository extends Neo4jRepository<SocialUser
                 RETURN count(o)
             """)
     Page<SocialUser> getFollowingForUserById(String idUserRequest, Pageable pageable);
+
+    @Query(value = """
+                MATCH (o:SocialUser {identifier: $idUserRequest})-[fb:FOLLOWED_BY]->(u:SocialUser)
+                RETURN u
+                ORDER BY fb.followDate
+                SKIP $skip
+                LIMIT $limit
+            """,
+            countQuery = """
+                MATCH (o:SocialUser {identifier: $idUserRequest})-[fb:FOLLOWED_BY]->(u:SocialUser)
+                RETURN count(o)
+            """)
+    Page<SocialUser> getFollowersBySocialUserId(String idUserRequest, Pageable pageable);
     //endregion
 }

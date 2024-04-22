@@ -82,6 +82,30 @@ public class FollowRelationshipController {
                 .body((ResponseDTO) response.getBody());
     }
 
+    /**
+     * Retrieves a paginated list of followers for the specified user.
+     *
+     * @param idUserRequest The ID of the user for whom to retrieve the list of followers.
+     * @param userId The ID of the authenticated user making the request.
+     * @param page The page number for pagination (default is 0).
+     * @param size The size of each page or the number of elements per page (default is 10).
+     * @return ResponseEntity containing a ResponseDTO with the paginated list of followers.
+     */
+    @GetMapping("/followers/{idUserRequest}")
+    public ResponseEntity<ResponseDTO> getFollowersBySocialUserId(
+            @PathVariable String idUserRequest,
+            @RequestHeader("userId") String userId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+        // Retrieves a paginated list of followers for the specified user.
+        ResponseEntity<Object> response = followRelationshipService.getFollowersBySocialUserId(userId, idUserRequest, page, size);
+
+        // Constructs and returns a ResponseEntity containing a ResponseDTO with the paginated list of followers.
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
+    }
     //endregion
 
     /**
