@@ -27,7 +27,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Service class handling operations related to Follow Relationship.
@@ -89,11 +88,29 @@ public class FollowRelationshipService {
      */
     public ResponseEntity<Object> getFollowRecommendationsForUserById(String idUserRequest, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<SocialUser> recommendations = followRelationshipRepository.getFollowRecommendationsForUserById(idUserRequest, pageable);
+        Page<SocialUser> response = followRelationshipRepository.getFollowRecommendationsForUserById(idUserRequest, pageable);
 
-        if (recommendations.isEmpty()) return responseService.notFoundWithMessageResponse("No SocialUsers available.");
+        if (response.isEmpty()) return responseService.notFoundWithMessageResponse("No SocialUsers available.");
 
-        return responseService.successResponse(recommendations);
+        return responseService.successResponse(response);
+    }
+
+    /**
+     * Retrieves a paginated list of users followed by the specified user.
+     *
+     * @param userId The ID of the authenticated user requesting the list of followed users.
+     * @param idUserRequest The ID of the user for whom to retrieve the list of followed users.
+     * @param page The page number for pagination.
+     * @param size The size of each page or the number of elements per page.
+     * @return ResponseEntity containing the list of followed users wrapped in an appropriate response object.
+     */
+    public ResponseEntity<Object> getFollowingForUserById(String userId, String idUserRequest, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<SocialUser> response = followRelationshipRepository.getFollowingForUserById(idUserRequest, pageable);
+
+        if (response.isEmpty()) return responseService.notFoundWithMessageResponse("No SocialUsers available.");
+
+        return responseService.successResponse(response);
     }
     //endregion
 }

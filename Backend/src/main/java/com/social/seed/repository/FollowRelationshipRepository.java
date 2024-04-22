@@ -66,7 +66,7 @@ public interface FollowRelationshipRepository extends Neo4jRepository<SocialUser
     void unFollowTheUserA(String userBId, String userAId);
     //endregion
 
-    //region Recommendations
+    //region Get
     @Query(value = """
                 MATCH (o:SocialUser {identifier: $idUserRequest})
                 MATCH (u:SocialUser)
@@ -82,7 +82,20 @@ public interface FollowRelationshipRepository extends Neo4jRepository<SocialUser
                 MATCH (u:SocialUser)
                 WHERE u <> o AND NOT (u)-[:FOLLOWED_BY]->(o)
                 RETURN count(u)
-                    """)
+            """)
     Page<SocialUser> getFollowRecommendationsForUserById(String idUserRequest, Pageable pageable);
+
+    @Query(value = """
+                MATCH (o:SocialUser {identifier: $idUserRequest})<-[fb:FOLLOWED_BY]-(u:SocialUser)
+                RETURN u
+                ORDER BY fb.followDate
+                SKIP $skip
+                LIMIT $limit
+            """,
+            countQuery = """
+                MATCH (o:SocialUser {identifier: $idUserRequest})<-[fb:FOLLOWED_BY]-(u:SocialUser)
+                RETURN count(o)
+            """)
+    Page<SocialUser> getFollowingForUserById(String idUserRequest, Pageable pageable);
     //endregion
 }
