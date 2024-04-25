@@ -69,22 +69,34 @@ public interface FollowRelationshipRepository extends Neo4jRepository<SocialUser
 
     //region Get
     @Query(value = """
-                MATCH (o:SocialUser {identifier: $idUserRequest})
-                MATCH (u:SocialUser)
-                WHERE u <> o AND NOT (u)-[:FOLLOWED_BY]->(o)
-                //WITH u, rand() AS random
-                RETURN u
+                MATCH (au:SocialUser {identifier: $idUserRequest})
+                MATCH (uf:SocialUser)
+                WHERE au <> uf AND NOT (uf)-[:FOLLOWED_BY]->(au)
+
+                WITH uf, au
                 SKIP $skip
                 LIMIT $limit
-                //ORDER BY random
+
+                // find relationship with authenticated user
+                OPTIONAL MATCH (au)-[rfriend:FRIEND_OF]-(uf)
+                OPTIONAL MATCH (au)-[rfollower:FOLLOWED_BY]->(uf)
+                OPTIONAL MATCH (au)-[:FRIEND_OF]-(mf)-[:FRIEND_OF]-(uf)
+
+                // Determine if the users are...
+                WITH uf,
+                    COUNT(rfriend) > 0 AS isFriend,
+                    COUNT(rfollower) > 0 AS isFollower,
+                    COUNT(mf) AS mutualFriends
+
+                RETURN uf, isFriend, isFollower, mutualFriends, COALESCE(false, null) as isFollow
             """,
             countQuery = """
-                MATCH (o:SocialUser {identifier: $idUserRequest})
-                MATCH (u:SocialUser)
-                WHERE u <> o AND NOT (u)-[:FOLLOWED_BY]->(o)
-                RETURN count(u)
+                MATCH (au:SocialUser {identifier: $idUserRequest})
+                MATCH (uf:SocialUser)
+                WHERE uf <> au AND NOT (uf)-[:FOLLOWED_BY]->(au)
+                RETURN count(au)
             """)
-    Page<SocialUser> getFollowRecommendationsForUserById(String idUserRequest, Pageable pageable);
+    Page<SocialUserCard> getFollowRecommendationsForUserById(String idUserRequest, Pageable pageable);
 
     @Query(value = """
                 MATCH (o:SocialUser {identifier: $idUserRequest})<-[fb:FOLLOWED_BY]-(uf:SocialUser)

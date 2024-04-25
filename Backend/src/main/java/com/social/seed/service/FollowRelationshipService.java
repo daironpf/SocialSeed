@@ -89,7 +89,7 @@ public class FollowRelationshipService {
      */
     public ResponseEntity<Object> getFollowRecommendationsForUserById(String idUserRequest, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<SocialUser> response = followRelationshipRepository.getFollowRecommendationsForUserById(idUserRequest, pageable);
+        Page<SocialUserCard> response = followRelationshipRepository.getFollowRecommendationsForUserById(idUserRequest, pageable);
 
         if (response.isEmpty()) return responseService.notFoundWithMessageResponse("No SocialUsers available.");
 
