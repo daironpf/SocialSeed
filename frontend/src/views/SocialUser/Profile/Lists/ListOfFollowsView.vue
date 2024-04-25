@@ -1,7 +1,7 @@
 <script setup>
 import axios from "axios";
 import {inject, onMounted, ref} from "vue";
-import SocialUserToFriendCardVertical from "@/views/SocialUser/Card/SocialUserToFriendCardVertical.vue";
+import SocialUserToFriendCardVertical from "@/views/SocialUser/Card/SocialUserVerticalCard.vue";
 
 const props = defineProps({
   userId: String,

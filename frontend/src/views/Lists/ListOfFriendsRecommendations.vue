@@ -2,7 +2,7 @@
 import { ref, inject, onMounted } from "vue";
 import LeftSideView from "@/views/LeftSide/LeftSideView.vue";
 import RightSideView from "@/views/RightSide/RightSideView.vue";
-import SocialUserToFriendCardVertical from "@/views/SocialUser/Card/SocialUserToFriendCardVertical.vue";
+import SocialUserToFriendCardVertical from "@/views/SocialUser/Card/SocialUserVerticalCard.vue";
 import axios from "axios";
 
 const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
