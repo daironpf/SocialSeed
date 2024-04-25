@@ -79,7 +79,7 @@ public class FriendsRelationshipService {
 
     public ResponseEntity<Object> getFriendRecommendationsForUserById(String idUserRequest, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<SocialUser> recommendations = friendsRelationshipRepository.getFriendRecommendationsForUserById(idUserRequest, pageable);
+        Page<SocialUserCard> recommendations = friendsRelationshipRepository.getFriendRecommendationsForUserById(idUserRequest, pageable);
 
         if (recommendations.isEmpty()) return responseService.notFoundWithMessageResponse("No SocialUsers available.");
 

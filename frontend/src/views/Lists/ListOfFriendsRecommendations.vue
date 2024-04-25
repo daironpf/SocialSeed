@@ -2,7 +2,7 @@
 import { ref, inject, onMounted } from "vue";
 import LeftSideView from "@/views/LeftSide/LeftSideView.vue";
 import RightSideView from "@/views/RightSide/RightSideView.vue";
-import SocialUserToFriendCardVertical from "@/views/SocialUser/Card/SocialUserVerticalCard.vue";
+import SocialUserVerticalCard from "@/views/SocialUser/Card/SocialUserVerticalCard.vue";
 import axios from "axios";
 
 const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
@@ -63,7 +63,7 @@ async function cargarMasSugerencias() {
       </h2>
 
       <div class="flex flex-wrap justify-around space-x4">
-        <SocialUserToFriendCardVertical
+        <SocialUserVerticalCard
             v-for="user in socialUsers"
             :user="user"
             :request=true

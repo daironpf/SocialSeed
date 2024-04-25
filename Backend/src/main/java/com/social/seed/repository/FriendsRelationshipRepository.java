@@ -8,7 +8,6 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public interface FriendsRelationshipRepository extends Neo4jRepository<SocialUser, String> {
     //region REQUEST_FRIEND_TO
@@ -76,27 +75,37 @@ public interface FriendsRelationshipRepository extends Neo4jRepository<SocialUse
     void deleteFriendship(String idUserRequest, String idUserToDeleteFriendship);
     //endregion
 
-    //region Recommendations
+    //region Get
     @Query(value = """
-                MATCH (o:SocialUser {identifier: $idUserRequest})
-                MATCH (u:SocialUser)
-                WHERE u <> o AND NOT (u)-[:FRIEND_OF]-(o)
-                //WITH u, rand() AS random
-                RETURN u
+                MATCH (au:SocialUser {identifier: $idUserRequest})
+                MATCH (uf:SocialUser)
+                WHERE au <> uf AND NOT (uf)-[:FRIEND_OF]-(au)
+
+                WITH uf, au
                 SKIP $skip
                 LIMIT $limit
-                //ORDER BY random
+
+                // find relationship with authenticated user
+                OPTIONAL MATCH (au)<-[rfollow:FOLLOWED_BY]-(uf)
+                OPTIONAL MATCH (au)-[rfollower:FOLLOWED_BY]->(uf)
+                OPTIONAL MATCH (au)-[:FRIEND_OF]-(mf)-[:FRIEND_OF]-(uf)
+
+                // Determine if the users are...
+                WITH uf,
+                    COUNT(rfollow) > 0 AS isFollow,
+                    COUNT(rfollower) > 0 AS isFollower,
+                    COUNT(mf) AS mutualFriends
+
+                RETURN uf, isFollower, isFollow, mutualFriends, COALESCE(false, null) as isFriend
             """,
             countQuery = """
-                MATCH (o:SocialUser {identifier: $idUserRequest})
-                MATCH (u:SocialUser)
-                WHERE u <> o AND NOT (u)-[:FRIEND_OF]-(o)
-                RETURN count(u)
+                MATCH (au:SocialUser {identifier: $idUserRequest})
+                MATCH (uf:SocialUser)
+                WHERE au <> uf AND NOT (uf)-[:FRIEND_OF]-(au)
+                RETURN count(uf)
             """)
-    Page<SocialUser> getFriendRecommendationsForUserById(String idUserRequest, Pageable pageable);
-    //endregion
+    Page<SocialUserCard> getFriendRecommendationsForUserById(String idUserRequest, Pageable pageable);
 
-    //region Get
     @Query(value = """
                 MATCH (o:SocialUser {identifier: $idUserToFind})-[fo:FRIEND_OF]-(friend)
                 WITH friend
