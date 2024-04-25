@@ -1,7 +1,7 @@
 <script setup>
 import axios from "axios";
 import {inject, onMounted, ref} from "vue";
-import SocialUserToFriendCardVertical from "@/views/SocialUser/Card/SocialUserVerticalCard.vue";
+import SocialUserVerticalCard from "@/views/SocialUser/Card/SocialUserVerticalCard.vue";
 
 const props = defineProps({
   userId: String,
@@ -50,12 +50,11 @@ async function cargarMasSugerencias() {
   currentPage++; // Incrementa el número de página para cargar más tarjetas
   await cargarDatos();
 }
-
 </script>
 
 <template>
   <div class="flex flex-wrap justify-around space-x4">
-    <SocialUserToFriendCardVertical
+    <SocialUserVerticalCard
         v-for="user in socialUsers"
         :user="user"
         :request=true
