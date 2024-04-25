@@ -20,7 +20,9 @@ const props = defineProps({
             <h2 class="text-md font-semibold mb-1">{{user.fullName}}</h2>
             <p class="text-sm text-gray-600 ">@{{user.userName}}</p>
           </router-link>
-          <span class="text-slate-700 dark:text-slate-500" >
+          <span
+              v-if="user.mutualFriends"
+              class="text-slate-700 dark:text-slate-500" >
             <span class="font-semibold">
               {{user.mutualFriends}}
             </span> amigos en común
