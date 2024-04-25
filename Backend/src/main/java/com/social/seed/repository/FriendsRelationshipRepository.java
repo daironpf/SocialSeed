@@ -106,23 +106,25 @@ public interface FriendsRelationshipRepository extends Neo4jRepository<SocialUse
 
                 // find the authenticated user
                 MATCH (au:SocialUser {identifier: $userId})
-                
+
                 // find relationship with authenticated user
                 OPTIONAL MATCH (au)-[rfriend:FRIEND_OF]-(friend)
                 OPTIONAL MATCH (au)-[rfollower:FOLLOWED_BY]->(friend)
+                OPTIONAL MATCH (au)<-[rfollow:FOLLOWED_BY]-(friend)
                 OPTIONAL MATCH (au)-[:FRIEND_OF]-(mf)-[:FRIEND_OF]-(friend)
-                
+
                 // Determine if the users are...
                 WITH friend,
                     COUNT(rfriend) > 0 AS isFriend,
                     COUNT(rfollower) > 0 AS isFollower,
+                    COUNT(rfollow) > 0 AS isFollow,
                     COUNT(mf) AS mutualFriends
 
-                RETURN friend, isFriend, isFollower, mutualFriends
+                RETURN friend, isFriend, isFollower, isFollow, mutualFriends
             """,
             countQuery = """
                 MATCH (:SocialUser {identifier: $idUserToFind})-[:FRIEND_OF]-(friend)
-                RETURN count(friends)
+                RETURN count(friend)
             """)
     Page<SocialUserCard> getFriendsOfUserById(String userId, String idUserToFind, Pageable pageable);
     //endregion

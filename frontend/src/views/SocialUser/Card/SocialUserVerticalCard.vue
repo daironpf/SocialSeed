@@ -33,6 +33,11 @@ const props = defineProps({
                 class="text-sm font-semibold ">Te sigue</span>
           </div>
           <div>
+            <span
+                v-if="user.isFollow"
+                class="text-sm font-semibold ">Lo sigues</span>
+          </div>
+          <div>
             <span v-if="user.isFriend"
                   class="text-sm font-semibold ">Es tu Amigo</span>
           </div>

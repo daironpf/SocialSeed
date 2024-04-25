@@ -29,6 +29,7 @@ public record SocialUserCard(
 
         Boolean isFriend,
         Boolean isFollower,
+        Boolean isFollow,
         Integer mutualFriends,
 
         List<SocialUserInterestInHashTagRelationShip>hashTags
