@@ -1,5 +1,6 @@
 package com.social.seed.repository;
 
+import com.social.seed.dto.SocialUserCard;
 import com.social.seed.model.SocialUser;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -97,21 +98,33 @@ public interface FriendsRelationshipRepository extends Neo4jRepository<SocialUse
 
     //region Get
     @Query(value = """
-                MATCH (o:SocialUser {identifier: $idUserToFind})
-                MATCH (u:SocialUser)
-                WHERE (u)-[:FRIEND_OF]-(o)
-                RETURN u
+                MATCH (o:SocialUser {identifier: $idUserToFind})-[fo:FRIEND_OF]-(friend)
+                WITH friend
+                ORDER BY fo.friendshipDate
                 SKIP $skip
                 LIMIT $limit
-                //ORDER BY random
+
+                // find the authenticated user
+                MATCH (au:SocialUser {identifier: $userId})
+                
+                // find relationship with authenticated user
+                OPTIONAL MATCH (au)-[rfriend:FRIEND_OF]-(friend)
+                OPTIONAL MATCH (au)-[rfollower:FOLLOWED_BY]->(friend)
+                OPTIONAL MATCH (au)-[:FRIEND_OF]-(mf)-[:FRIEND_OF]-(friend)
+                
+                // Determine if the users are...
+                WITH friend,
+                    COUNT(rfriend) > 0 AS isFriend,
+                    COUNT(rfollower) > 0 AS isFollower,
+                    COUNT(mf) AS mutualFriends
+
+                RETURN friend, isFriend, isFollower, mutualFriends
             """,
             countQuery = """
-                MATCH (o:SocialUser {identifier: $idUserToFind})
-                MATCH (u:SocialUser)
-                WHERE (u)-[:FRIEND_OF]-(o)
-                RETURN count(u)
+                MATCH (:SocialUser {identifier: $idUserToFind})-[:FRIEND_OF]-(friend)
+                RETURN count(friends)
             """)
-    Page<SocialUser> getFriendsOfUserById(String idUserToFind, Pageable pageable);
+    Page<SocialUserCard> getFriendsOfUserById(String userId, String idUserToFind, Pageable pageable);
     //endregion
 
 }

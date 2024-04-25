@@ -15,6 +15,7 @@
  */
 package com.social.seed.service;
 
+import com.social.seed.dto.SocialUserCard;
 import com.social.seed.model.SocialUser;
 import com.social.seed.repository.FriendsRelationshipRepository;
 import com.social.seed.util.ResponseService;
@@ -85,9 +86,9 @@ public class FriendsRelationshipService {
         return responseService.successResponse(recommendations);
     }
 
-    public ResponseEntity<Object> getFriendsOfUserById(String idUserRequest, String idUserToFind, int page, int size) {
+    public ResponseEntity<Object> getFriendsOfUserById(String userId, String idUserToFind, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<SocialUser> friends = friendsRelationshipRepository.getFriendsOfUserById(idUserToFind, pageable);
+        Page<SocialUserCard> friends = friendsRelationshipRepository.getFriendsOfUserById(userId, idUserToFind, pageable);
 
         if (friends.isEmpty()) return responseService.notFoundWithMessageResponse("No Friends available.");
 
