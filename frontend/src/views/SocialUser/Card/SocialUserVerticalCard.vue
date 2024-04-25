@@ -57,7 +57,7 @@ const props = defineProps({
 
         <!-- Botón de Seguir -->
         <button
-            v-if="!user.isFollower"
+            v-if="!user.isFollow"
             class="bg-blue-300 hover:bg-blue-500 text-white font-semibold
           p-2 rounded-lg w-30 focus:outline-none focus:shadow-outline">
           <fa icon="fa-solid fa-person-circle-plus" class="text-white-600"/>

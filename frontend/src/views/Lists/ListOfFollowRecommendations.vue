@@ -2,9 +2,8 @@
 import { ref, inject, onMounted } from "vue";
 import LeftSideView from "@/views/LeftSide/LeftSideView.vue";
 import RightSideView from "@/views/RightSide/RightSideView.vue";
-import axios from "axios";
-import SocialUserToFollowCardVertical from "@/views/SocialUser/Card/SocialUserToFollowCardVertical.vue";
 import SocialUserVerticalCard from "@/views/SocialUser/Card/SocialUserVerticalCard.vue";
+import axios from "axios";
 
 const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
 const apiUrl = inject('apiUrl')
@@ -18,7 +17,7 @@ async function cargarDatos() {
   try {
     loading.value = true;
     const response = await axios.get(
-        `${apiUrl}friend/friend-recommendations/`,
+        `${apiUrl}follow/follow-recommendations/`,
         {
           headers: {
             userId: currentUser.value.id,
