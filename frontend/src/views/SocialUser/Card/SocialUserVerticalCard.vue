@@ -54,6 +54,13 @@ const props = defineProps({
           <fa icon="fa-solid fa-user-plus" class="text-white-600"/>
           Amistad
         </button>
+        <button
+            v-if="user.isFriend"
+            class="bg-red-300 hover:bg-red-500 text-white font-semibold
+        p-2 m-2 rounded-lg w-30 h-15 focus:outline-none focus:shadow-outline">
+          <fa icon="fa-solid fa-user-plus" class="text-white-600"/>
+            Cancelar
+        </button>
 
         <!-- Botón de Seguir -->
         <button
@@ -62,6 +69,13 @@ const props = defineProps({
           p-2 rounded-lg w-30 focus:outline-none focus:shadow-outline">
           <fa icon="fa-solid fa-person-circle-plus" class="text-white-600"/>
           Seguir
+        </button>
+        <button
+            v-if="user.isFollow"
+            class="bg-red-300 hover:bg-blue-500 text-white font-semibold
+          p-2 rounded-lg w-30 focus:outline-none focus:shadow-outline">
+          <fa icon="fa-solid fa-person-circle-plus" class="text-white-600"/>
+          Dejar de Seguir
         </button>
       </div>
     </div>
