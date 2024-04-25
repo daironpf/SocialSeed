@@ -87,17 +87,33 @@ public interface FollowRelationshipRepository extends Neo4jRepository<SocialUser
     Page<SocialUser> getFollowRecommendationsForUserById(String idUserRequest, Pageable pageable);
 
     @Query(value = """
-                MATCH (o:SocialUser {identifier: $idUserRequest})<-[fb:FOLLOWED_BY]-(u:SocialUser)
-                RETURN u
+                MATCH (o:SocialUser {identifier: $idUserRequest})<-[fb:FOLLOWED_BY]-(uf:SocialUser)
+                WITH uf
                 ORDER BY fb.followDate
                 SKIP $skip
                 LIMIT $limit
+
+                // find the authenticated user
+                MATCH (au:SocialUser {identifier: $userId})
+
+                // find relationship with authenticated user
+                OPTIONAL MATCH (au)-[rfriend:FRIEND_OF]-(uf)
+                OPTIONAL MATCH (au)-[rfollower:FOLLOWED_BY]->(uf)
+                OPTIONAL MATCH (au)-[:FRIEND_OF]-(mf)-[:FRIEND_OF]-(uf)
+
+                // Determine if the users are...
+                WITH uf,
+                    COUNT(rfriend) > 0 AS isFriend,
+                    COUNT(rfollower) > 0 AS isFollower,
+                    COUNT(mf) AS mutualFriends
+
+                RETURN uf, isFriend, isFollower, mutualFriends
             """,
             countQuery = """
                 MATCH (o:SocialUser {identifier: $idUserRequest})<-[fb:FOLLOWED_BY]-(u:SocialUser)
                 RETURN count(o)
             """)
-    Page<SocialUser> getFollowingForUserById(String idUserRequest, Pageable pageable);
+    Page<SocialUserCard> getFollowingForUserById(String userId, String idUserRequest, Pageable pageable);
 
     @Query(value = """
                 // find followers
