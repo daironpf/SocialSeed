@@ -15,6 +15,7 @@
  */
 package com.social.seed.service;
 
+import com.social.seed.dto.SocialUserCard;
 import com.social.seed.model.SocialUser;
 import com.social.seed.repository.FollowRelationshipRepository;
 import com.social.seed.util.ResponseService;
@@ -124,7 +125,7 @@ public class FollowRelationshipService {
      */
     public ResponseEntity<Object> getFollowersBySocialUserId(String userId, String idUserRequest, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
-        Page<SocialUser> response = followRelationshipRepository.getFollowersBySocialUserId(idUserRequest, pageable);
+        Page<SocialUserCard> response = followRelationshipRepository.getFollowersBySocialUserId(userId, idUserRequest, pageable);
 
         if (response.isEmpty()) return responseService.notFoundWithMessageResponse("No SocialUsers available.");
 
