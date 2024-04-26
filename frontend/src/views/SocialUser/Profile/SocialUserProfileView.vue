@@ -8,16 +8,20 @@ import ListOfPostsView from "@/views/SocialUser/Profile/Lists/ListOfPostsView.vu
 import ListOfFollowsView from "@/views/SocialUser/Profile/Lists/ListOfFollowsView.vue";
 import ListOfFollowersView from "@/views/SocialUser/Profile/Lists/ListOfFollowersView.vue";
 
+const currentUser = ref({});
+let userId = ""
 const route = useRoute()
-const userId = route.params.id
+
+if (route.params.id == "me"){
+  currentUser.value = JSON.parse(localStorage.getItem('currentUser'));
+  userId = currentUser.value.id;
+}else {
+  userId = route.params.id;
+}
+
 
 const activeTab = ref('posts');
 
-const user = {
-  // Datos del usuario
-  followers: ['Seguidor 1', 'Seguidor 2', 'Seguidor 3'],
-  posts: ['Publicación 1', 'Publicación 2', 'Publicación 3']
-};
 </script>
 <template>
   <div class="my-20 mx-3 flex flex-row">
@@ -31,28 +35,30 @@ const user = {
         <!-- Botón de Publicaciones -->
         <div :class="{ 'active-tab': activeTab === 'posts' }" class="text-center relative">
           <p @click="activeTab = 'posts'"
-             class="font-bold text-gray-700">Publicaciones</p>
+             class="hover:cursor-pointer font-bold text-gray-700">Publicaciones</p>
           <div v-if="activeTab === 'posts'" class="border-b-2 border-blue-500 absolute bottom-0 left-0 right-0"></div>
         </div>
 
         <!-- Botón de Amigos -->
         <div :class="{ 'active-tab': activeTab === 'friends' }" class="text-center relative">
           <p @click="activeTab = 'friends'"
-             class="font-bold text-gray-700">Amigos</p>
+             class="hover:cursor-pointer font-bold text-gray-700">Amigos</p>
           <div v-if="activeTab === 'friends'" class="border-b-2 border-blue-500 absolute bottom-0 left-0 right-0"></div>
         </div>
 
         <!-- Botón de Seguidos -->
         <div :class="{ 'active-tab': activeTab === 'follows' }" class="text-center relative">
           <p @click="activeTab = 'follows'"
-             class="font-bold text-gray-700">Seguidos</p>
+             class="hover:cursor-pointer font-bold text-gray-700">Seguidos</p>
           <div v-if="activeTab === 'follows'" class="border-b-2 border-blue-500 absolute bottom-0 left-0 right-0"></div>
         </div>
 
         <!-- Botón de Seguidores -->
-        <div :class="{ 'active-tab': activeTab === 'followers' }" class="text-center relative">
+        <div
+            :class="{ 'active-tab': activeTab === 'followers' }"
+            class="text-center relative">
           <p @click="activeTab = 'followers'"
-             class="font-bold text-gray-700">Seguidores</p>
+             class="hover:cursor-pointer font-bold text-gray-700">Seguidores</p>
           <div v-if="activeTab === 'followers'" class="border-b-2 border-blue-500 absolute bottom-0 left-0 right-0"></div>
         </div>
       </div>
