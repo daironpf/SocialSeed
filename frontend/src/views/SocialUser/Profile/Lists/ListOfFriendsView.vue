@@ -48,7 +48,7 @@ onMounted(() => {
 });
 
 async function cargarMasSugerencias() {
-  currentPage++; // Incrementa el número de página para cargar más tarjetas
+  currentPage++;
   await cargarDatos();
 }
 
@@ -63,6 +63,13 @@ async function cargarMasSugerencias() {
         :key="user.id"
         class=""
     />
+  </div>
+
+  <!-- Botón para cargar más sugerencias -->
+  <div class="flex items-center justify-center mt-5">
+    <button @click="cargarMasSugerencias" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Cargar más sugerencias
+    </button>
   </div>
 </template>
 
