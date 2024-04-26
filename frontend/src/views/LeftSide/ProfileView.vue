@@ -40,6 +40,19 @@ onMounted(() => {
       <img :src="currentUser.profileImage" class="rounded-full w-16 h-16 border border-white border-2 -mt-11 mx-auto" alt="">
       <h1 class="text-xl font-bold text-color-black text-center mt-2">{{ currentUser.fullName }}</h1>
       <p class="text-gray-700 text-center">{{ currentUser.bio }}</p>
+      <!--      Follows  panel-->
+      <div class="flex justify-center items-center space-x-4 mt-3">
+        <span>
+          <span class="text-black text-md font-bold">{{ currentUser.friendCount }}</span> Amigos
+        </span>
+        <span>
+          <span class="text-black text-md font-bold">{{ currentUser.followingCount }}</span> Siguiendo
+        </span>
+        <span>
+          <span class="text-black text-md font-bold">{{ currentUser.followersCount }}</span> Seguidores
+        </span>
+      </div>
+
     </div>
   </div>
 </template>
