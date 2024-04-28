@@ -1,36 +1,59 @@
 <script setup>
-import {inject, ref} from "vue";
+import {inject, ref, defineProps, defineEmits} from "vue";
 import axios from "axios";
 
+// Props
 const props = defineProps({
   user: Object,
   request: Boolean
 })
 
+const emits = defineEmits(['userFollowed']);
+
+// LocalStorage
 const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
-const apiUrl = inject('apiUrl')
+
+// Injected dependency
+const apiUrl = inject('apiUrl');
+
+// Hover state
 const hover = ref({follow:false,friend:false});
 
+// Function to follow a user
 async function followUser(userId) {
   try {
     const response = await axios.post(
         `${apiUrl}follow/follow/${props.user.id}`,
+        null, // No data in the body
         {
           headers: {
-            userId: currentUser.value.id,
-          },
+            userId: currentUser.value.id
+          }
         }
     );
+
+    if (response.status === 200) {
+      props.user.isFollow = true;
+      emits('userFollowed', 'Usuario Seguido Exitosamente');
+    }
+
     console.log(response.data); // You can handle the response as you wish
   } catch (error) {
     console.error('Error in following user:', error);
-    // You can handle the error as you wish
+    // You can handle the error as you wish, e.g., show a notification to the user
   }
+}
+
+// Function to handle user authentication
+function getCurrentUser() {
+  return JSON.parse(localStorage.getItem('currentUser'));
 }
 
 </script>
 
 <template>
+
+
   <div class="bg-gray-50 rounded-lg shadow-md w-64 pl-3 pr-3 pt-4 pb-3 item-center m-1">
     <!-- Profile picture -->
     <div class="flex items-center flex-col">
