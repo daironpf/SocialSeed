@@ -1,12 +1,33 @@
 <script setup>
-import {ref} from "vue";
+import {inject, ref} from "vue";
+import axios from "axios";
 
 const props = defineProps({
   user: Object,
   request: Boolean
 })
 
+const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
+const apiUrl = inject('apiUrl')
 const hover = ref({follow:false,friend:false});
+
+async function followUser(userId) {
+  try {
+    const response = await axios.post(
+        `${apiUrl}follow/follow/${props.user.id}`,
+        {
+          headers: {
+            userId: currentUser.value.id,
+          },
+        }
+    );
+    console.log(response.data); // You can handle the response as you wish
+  } catch (error) {
+    console.error('Error in following user:', error);
+    // You can handle the error as you wish
+  }
+}
+
 </script>
 
 <template>
@@ -66,6 +87,7 @@ const hover = ref({follow:false,friend:false});
         <!-- Botón de Seguir -->
         <button
             v-if="!user.isFollow"
+            @click="followUser(user.id)"
             class="bg-blue-300 text-sm font-bold
             text-white p-2 rounded-lg w-28 focus:outline-none focus:shadow-outline
             hover:bg-blue-500
