@@ -20,7 +20,7 @@ const apiUrl = inject('apiUrl');
 const hover = ref({follow:false,friend:false});
 
 // Function to follow a user
-async function followUser(userId) {
+async function followUser() {
   try {
     const response = await axios.post(
         `${apiUrl}follow/follow/${props.user.id}`,
@@ -110,7 +110,7 @@ function getCurrentUser() {
         <!-- Botón de Seguir -->
         <button
             v-if="!user.isFollow"
-            @click="followUser(user.id)"
+            @click="followUser()"
             class="bg-blue-300 text-sm font-bold
             text-white p-2 rounded-lg w-28 focus:outline-none focus:shadow-outline
             hover:bg-blue-500

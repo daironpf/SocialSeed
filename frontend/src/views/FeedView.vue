@@ -1,8 +1,8 @@
 <script setup>
 import PostViewInFeed from "@/views/Post/PostViewInFeed.vue";
 import CreateNewPostView from "@/views/Post/CreateNewPostView.vue";
-import RightSideView from "@/views/RightSide/RightSideView.vue";
-import LeftSideView from "@/views/LeftSide/LeftSideView.vue";
+import RightSideView from "@/views/Feed/RightSide/RightSideView.vue";
+import LeftSideView from "@/views/Feed/LeftSide/LeftSideView.vue";
 </script>
 
 <template>
