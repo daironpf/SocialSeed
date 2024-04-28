@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineProps, onMounted, onUserEvent } from 'vue';
+import { ref, onMounted, onUserEvent } from 'vue';
 
 const props = defineProps({
   message: String
