@@ -39,7 +39,8 @@ import {
 library.add(faBan, faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, faThumbsUp, faComment, faSync, faPencil, faEarth, faSortDown, faUserGroup, faLock, faUsers, faUserFriends, faUsersBetweenLines, faUsersLine, faUserPlus, faPersonCirclePlus, faPenToSquare);
 
 /* constant values */
-const api_url = "http://127.0.0.1:8081/api/v0.0.1/";
+// const api_url = "http://127.0.0.1:8081/api/v0.0.1/";
+const api_url = "http://54.183.246.185:8081/api/v0.0.1/";
 
 const app = createApp(App);
 app.use(router);
