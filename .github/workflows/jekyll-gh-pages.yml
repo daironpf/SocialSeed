@@ -39,7 +39,7 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
-        working-directory: ./frontend  # Specify the working directory for npm run build
+        working-directory: frontend  # Specify the working directory for npm run build
       - name: Deploy to GitHub Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
