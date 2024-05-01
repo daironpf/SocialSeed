@@ -15,6 +15,7 @@ const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
 
 // Injected dependency
 const apiUrl = inject('apiUrl');
+const s3Url = inject('s3Url');
 
 // Hover state
 const hover = ref({follow:false,friend:false});
@@ -59,7 +60,7 @@ function getCurrentUser() {
     <div class="flex items-center flex-col">
       <!-- User data -->
       <div class="h-44 flex items-center flex-col">
-        <img :src="user.profileImage"
+        <img :src="s3Url + user.profileImage"
              alt="Foto de usuario"
              class="w-16 h-16 rounded-full mr-4 mb-2">
         <div>

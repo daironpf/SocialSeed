@@ -8,6 +8,7 @@ const props = defineProps({
 
 const currentUser = ref({});
 const apiUrl = inject('apiUrl')
+const s3Url = inject('s3Url');
 
 async function userDataLoad(userId) {
   try {
@@ -37,7 +38,7 @@ onMounted(() => {
     <!--        Perfil-->
     <div class="bg-cover  h-20 rounded-t-lg" style="background-image: url('/img/background-user-test.jpg')"></div>
     <div class="p-4">
-      <img :src="currentUser.profileImage" class="rounded-full w-16 h-16 border border-white border-2 -mt-11 mx-auto" alt="">
+      <img :src="s3Url + currentUser.profileImage" class="rounded-full w-16 h-16 border border-white border-2 -mt-11 mx-auto" alt="">
       <h1 class="text-xl font-bold text-color-black text-center mt-2">{{ currentUser.fullName }}</h1>
       <p class="text-gray-700 text-center">{{ currentUser.bio }}</p>
       <!--      Follows  panel-->

@@ -2,7 +2,7 @@
 import RightSideView from "@/views/Feed/RightSide/RightSideView.vue";
 import { useRoute } from 'vue-router'
 import LeftSideSocialUserProfile from "@/views/SocialUser/Profile/LeftSideSocialUserProfile.vue";
-import {ref} from "vue";
+import {inject, ref} from "vue";
 import ListOfFriendsView from "@/views/SocialUser/Profile/Lists/ListOfFriendsView.vue";
 import ListOfPostsView from "@/views/SocialUser/Profile/Lists/ListOfPostsView.vue";
 import ListOfFollowsView from "@/views/SocialUser/Profile/Lists/ListOfFollowsView.vue";
@@ -11,6 +11,7 @@ import ListOfFollowersView from "@/views/SocialUser/Profile/Lists/ListOfFollower
 const currentUser = ref({});
 let userId = ""
 const route = useRoute()
+
 
 if (route.params.id == "me"){
   currentUser.value = JSON.parse(localStorage.getItem('currentUser'));

@@ -41,10 +41,12 @@ library.add(faBan, faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, 
 /* constant values */
 // const api_url = "http://127.0.0.1:8081/api/v0.0.1/";
 const api_url = "http://54.183.246.185:8081/api/v0.0.1/";
+const s3_url = "https://socialseed-apirest.s3.us-west-1.amazonaws.com";
 
 const app = createApp(App);
 app.use(router);
 app.component('fa', FontAwesomeIcon);
 app.provide('apiUrl',api_url);
+app.provide('s3Url',s3_url);
 app.mount('#app');
 
