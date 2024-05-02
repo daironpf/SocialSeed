@@ -45,6 +45,32 @@ async function followUser() {
   }
 }
 
+// Function to follow a user
+async function unFollowUser() {
+  try {
+    const response = await axios.post(
+        `${apiUrl}follow/unfollow/${props.user.id}`,
+        null, // No data in the body
+        {
+          headers: {
+            userId: currentUser.value.id
+          }
+        }
+    );
+
+    if (response.status === 200) {
+      props.user.isFollow = false;
+      emits('userFollowed', 'Usuario Seguido Exitosamente');
+    }
+
+    console.log(response.data); // You can handle the response as you wish
+  } catch (error) {
+    console.error('Error in following user:', error);
+    // You can handle the error as you wish, e.g., show a notification to the user
+  }
+}
+
+
 // Function to handle user authentication
 function getCurrentUser() {
   return JSON.parse(localStorage.getItem('currentUser'));
@@ -121,6 +147,7 @@ function getCurrentUser() {
         </button>
         <button
             v-if="user.isFollow"
+            @click="unFollowUser()"
             @mouseover="hover.follow = true"
             @mouseout="hover.follow = false"
             class="text-sm font-bold bg-white text-black border
