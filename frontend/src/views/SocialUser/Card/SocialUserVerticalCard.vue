@@ -1,6 +1,8 @@
 <script setup>
 import {inject, ref} from "vue";
 import axios from "axios";
+import FollowButton from "@/views/SocialUser/Card/Button/followButton.vue";
+import UnfollowButton from "@/views/SocialUser/Card/Button/unfollowButton.vue";
 
 // Props
 const props = defineProps({
@@ -8,74 +10,26 @@ const props = defineProps({
   request: Boolean
 })
 
-const emits = defineEmits(['userFollowed']);
+// Transform user to Reactive
+const socialUser = ref(props.user);
 
 // LocalStorage
 const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
 
-// Injected dependency
-const apiUrl = inject('apiUrl');
+// url to load images
 const s3Url = inject('s3Url');
 
 // Hover state
 const hover = ref({follow:false,friend:false});
-
-// Function to follow a user
-async function followUser() {
-  try {
-    const response = await axios.post(
-        `${apiUrl}follow/follow/${props.user.id}`,
-        null, // No data in the body
-        {
-          headers: {
-            userId: currentUser.value.id
-          }
-        }
-    );
-
-    if (response.status === 200) {
-      props.user.isFollow = true;
-      emits('userFollowed', 'Usuario Seguido Exitosamente');
-    }
-
-    console.log(response.data); // You can handle the response as you wish
-  } catch (error) {
-    console.error('Error in following user:', error);
-    // You can handle the error as you wish, e.g., show a notification to the user
-  }
-}
-
-// Function to follow a user
-async function unFollowUser() {
-  try {
-    const response = await axios.post(
-        `${apiUrl}follow/unfollow/${props.user.id}`,
-        null, // No data in the body
-        {
-          headers: {
-            userId: currentUser.value.id
-          }
-        }
-    );
-
-    if (response.status === 200) {
-      props.user.isFollow = false;
-      emits('userFollowed', 'Usuario Seguido Exitosamente');
-    }
-
-    console.log(response.data); // You can handle the response as you wish
-  } catch (error) {
-    console.error('Error in following user:', error);
-    // You can handle the error as you wish, e.g., show a notification to the user
-  }
-}
-
 
 // Function to handle user authentication
 function getCurrentUser() {
   return JSON.parse(localStorage.getItem('currentUser'));
 }
 
+function updateStatusFollow(status){
+  socialUser.value.isFollow = status;
+}
 </script>
 
 <template>
@@ -86,23 +40,23 @@ function getCurrentUser() {
     <div class="flex items-center flex-col">
       <!-- User data -->
       <div class="h-44 flex items-center flex-col">
-        <img :src="s3Url + user.profileImage"
+        <img :src="s3Url + socialUser.profileImage"
              alt="Foto de usuario"
              class="w-16 h-16 rounded-full mr-4 mb-2">
         <div>
-          <router-link :to="{ name: 'su-profile', params: { id: user.id }}">
-            <h2 class="text-md font-semibold mb-1">{{user.fullName}}</h2>
-            <p class="text-sm text-gray-600 ">@{{user.userName}}</p>
+          <router-link :to="{ name: 'su-profile', params: { id: socialUser.id }}">
+            <h2 class="text-md font-semibold mb-1">{{socialUser.fullName}}</h2>
+            <p class="text-sm text-gray-600 ">@{{socialUser.userName}}</p>
           </router-link>
           <span
               v-if="user.mutualFriends"
               class="text-slate-700 dark:text-slate-500" >
             <span class="font-semibold">
-              {{user.mutualFriends}}
+              {{socialUser.mutualFriends}}
             </span> amigos en común
           </span>
           <div
-              v-if="user.isFollower"
+              v-if="socialUser.isFollower"
               class="pt-1 ">
             <span>
               <span class="text-black-100 pt-1 pb-1 text-sm font-semibold">Te sigue</span>
@@ -115,7 +69,7 @@ function getCurrentUser() {
       <div class="mt-2 mb-1" v-if="props.request">
         <!-- Botón de Pedir Amistad -->
         <button
-            v-if="!user.isFriend"
+            v-if="!socialUser.isFriend"
             class="bg-blue-300 text-sm font-bold mr-1
             text-white p-2 rounded-lg w-28 focus:outline-none focus:shadow-outline
             hover:bg-blue-500">
@@ -123,7 +77,7 @@ function getCurrentUser() {
           Amistad
         </button>
         <button
-            v-if="user.isFriend"
+            v-if="socialUser.isFriend"
             @mouseover="hover.friend = true"
             @mouseout="hover.friend = false"
           class="text-sm font-bold bg-white text-black border p-2 mr-1 rounded-lg w-28 h-15
@@ -134,28 +88,18 @@ function getCurrentUser() {
           {{ hover.friend ? ' Amistad' : 'Amigos' }}
         </button>
 
-        <!-- Botón de Seguir -->
-        <button
-            v-if="!user.isFollow"
-            @click="followUser()"
-            class="bg-blue-300 text-sm font-bold
-            text-white p-2 rounded-lg w-28 focus:outline-none focus:shadow-outline
-            hover:bg-blue-500
-            ">
-          <fa icon="fa-solid fa-person-circle-plus" class="text-white-600"/>
-          Seguir
-        </button>
-        <button
-            v-if="user.isFollow"
-            @click="unFollowUser()"
-            @mouseover="hover.follow = true"
-            @mouseout="hover.follow = false"
-            class="text-sm font-bold bg-white text-black border
-            hover:bg-red-100 hover:text-red-600 hover:border-red-400
-            p-2 rounded-lg w-28 focus:outline-none focus:shadow-outline">
-          <fa v-if="hover.follow" icon="fa-solid fa-ban" class="text-red-600"/>
-          {{ hover.follow ? 'Seguir' : 'Siguiendo' }}
-        </button>
+        <follow-button
+            v-if="!socialUser.isFollow"
+            @updateStatusFollow="updateStatusFollow"
+            :userIdRequest = "currentUser.id"
+            :userIdTarget = "socialUser.id"
+        />
+        <unfollow-button
+            v-if="socialUser.isFollow"
+            @updateStatusFollow="updateStatusFollow"
+            :userIdRequest = "currentUser.id"
+            :userIdTarget = "socialUser.id"
+        />
 
       </div>
     </div>
