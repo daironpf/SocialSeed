@@ -142,6 +142,7 @@ public interface FollowRelationshipRepository extends Neo4jRepository<SocialUser
 
                 // find relationship with authenticated user
                 OPTIONAL MATCH (au)-[rfriend:FRIEND_OF]-(uf)
+                OPTIONAL MATCH (au)-[rrquest:REQUEST_FRIEND_TO]-(uf)
                 OPTIONAL MATCH (au)-[rfollower:FOLLOWED_BY]->(uf)
                 OPTIONAL MATCH (au)<-[rfollow:FOLLOWED_BY]-(uf)
                 OPTIONAL MATCH (au)-[:FRIEND_OF]-(mf)-[:FRIEND_OF]-(uf)
@@ -149,11 +150,12 @@ public interface FollowRelationshipRepository extends Neo4jRepository<SocialUser
                 // Determine if the users are...
                 WITH uf,
                     COUNT(rfriend) > 0 AS isFriend,
+                    COUNT(rrquest) > 0 AS isRequestFriendship,
                     COUNT(rfollower) > 0 AS isFollower,
                     COUNT(rfollow) > 0 AS isFollow,
                     COUNT(mf) AS mutualFriends
 
-                RETURN uf, isFriend, isFollower, isFollow, mutualFriends
+                RETURN uf, isFriend, isRequestFriendship, isFollower, isFollow, mutualFriends
             """,
             countQuery = """
                 MATCH (o:SocialUser {identifier: $idUserRequest})-[fb:FOLLOWED_BY]->(u:SocialUser)

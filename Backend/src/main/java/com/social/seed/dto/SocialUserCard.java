@@ -28,6 +28,7 @@ public record SocialUserCard(
         Integer friendRequestCount,
 
         Boolean isFriend,
+        Boolean isRequestFriendship,
         Boolean isFollower,
         Boolean isFollow,
         Integer mutualFriends,
