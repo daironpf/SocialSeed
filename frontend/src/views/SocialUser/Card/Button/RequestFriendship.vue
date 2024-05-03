@@ -12,7 +12,7 @@ const props = defineProps({
 const apiUrl = inject('apiUrl');
 
 // Emits
-const emit = defineEmits(['updateStatusOfIsRequestFriendship'])
+const emit = defineEmits(['updateStatusOfIsRequestFriendshipSending'])
 
 // Function to request Friendship a user
 async function requestFriendship() {
@@ -28,8 +28,8 @@ async function requestFriendship() {
     );
 
     if (response.status === 200) {
-      // update the isRequestFriendship status
-      emit('updateStatusOfIsRequestFriendship', true);
+      // update the IsRequestFriendshipSending status
+      emit('updateStatusOfIsRequestFriendshipSending', true);
     }
     console.log(response.data);
   } catch (error) {

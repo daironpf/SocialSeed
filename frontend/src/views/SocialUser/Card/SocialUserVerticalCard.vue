@@ -32,10 +32,10 @@ function updateStatusFollow(status){
   socialUser.value.isFollow = status;
 }
 
-function updateStatusOfIsRequestFriendship(status){
-  console.warn("before: isRequestFriendship: ",status);
-  socialUser.value.isRequestFriendship = status;
-  console.warn("after: isRequestFriendship: ",status);
+function updateStatusOfIsRequestFriendshipSending(status){
+  console.warn("before: isRequestFriendship: ",socialUser.value.isRequestFriendshipSending);
+  socialUser.value.isRequestFriendshipSending = status;
+  console.warn("after: isRequestFriendship: ",socialUser.value.isRequestFriendshipSending);
 }
 </script>
 
@@ -76,11 +76,13 @@ function updateStatusOfIsRequestFriendship(status){
       <div class="mt-2 mb-1" v-if="props.request">
         <!-- Friend Buttons Sections-->
         <RequestFriendship
-            v-if="!socialUser.isFriend"
-            @updateStatusOfIsRequestFriendship="updateStatusOfIsRequestFriendship"
+            v-if="!socialUser.isFriend && !socialUser.isRequestFriendshipSending && !socialUser.isRequestFriendshipReceived"
+            @updateStatusOfIsRequestFriendshipSending="updateStatusOfIsRequestFriendshipSending"
             :userIdRequest = "currentUser.id"
             :userIdTarget = "socialUser.id"
         />
+
+
 
         <button
             v-if="socialUser.isFriend"

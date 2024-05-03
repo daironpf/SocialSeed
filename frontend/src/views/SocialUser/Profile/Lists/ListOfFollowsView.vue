@@ -34,7 +34,7 @@ async function cargarDatos() {
     // Agregar las nuevas tarjetas a la lista existente
     socialUsers.value = [...socialUsers.value, ...response.data.response.content];
 
-    console.log('Amigos', response.data);
+    console.log('Response Follows: ', response.data);
   } catch (error) {
     console.error(error);
   } finally {
