@@ -34,4 +34,4 @@ build/
 .vscode
 
 ### secrets ###
-src/main/resources/application-aws.properties
+src/main/resources/application-aura.properties

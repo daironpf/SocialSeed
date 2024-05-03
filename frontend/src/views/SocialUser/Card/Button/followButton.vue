@@ -1,5 +1,5 @@
 <script setup>
-import {inject, ref} from "vue";
+import {inject} from "vue";
 import axios from "axios";
 
 // Props

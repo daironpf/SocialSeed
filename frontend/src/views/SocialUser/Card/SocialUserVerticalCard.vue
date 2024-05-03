@@ -88,6 +88,7 @@ function updateStatusFollow(status){
           {{ hover.friend ? ' Amistad' : 'Amigos' }}
         </button>
 
+        <!-- Follow Buttons Sections-->
         <follow-button
             v-if="!socialUser.isFollow"
             @updateStatusFollow="updateStatusFollow"
@@ -100,7 +101,6 @@ function updateStatusFollow(status){
             :userIdRequest = "currentUser.id"
             :userIdTarget = "socialUser.id"
         />
-
       </div>
     </div>
   </div>
