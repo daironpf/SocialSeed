@@ -7,6 +7,7 @@ import LoginView from "@/views/LoginView.vue";
 import ListOfFriendsRecommendations from "@/views/Lists/ListOfFriendsRecommendations.vue";
 import ListOfFollowRecommendations from "@/views/Lists/ListOfFollowRecommendations.vue";
 import {loadLocaleMessages, setI18nLanguage, SUPPORT_LOCALES, i18n, DEFAULT_LOCALE} from "@/libs/app-i18n";
+import { getCurrentUser } from "@/services/local-storage.js";
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -57,15 +58,13 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'))
-    const locale = currentUser?.language ?? DEFAULT_LOCALE
+    const locale = getCurrentUser()?.language ?? DEFAULT_LOCALE
 
     // load locale messages
     if (!i18n.global.availableLocales.includes(locale)) {
         await loadLocaleMessages(i18n, locale)
     }
 
-    setI18nLanguage
     // set i18n language
     setI18nLanguage(i18n, locale)
 
