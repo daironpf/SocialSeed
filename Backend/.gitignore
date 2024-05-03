@@ -32,3 +32,6 @@ build/
 ### VS Code ###
 .vscode/
 .vscode
+
+### secrets ###
+src/main/resources/application-aws.properties
