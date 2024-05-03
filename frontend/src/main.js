@@ -1,5 +1,4 @@
-import { createApp, provide } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue'
 import router from "@/router/index.js";
 import { i18n } from '@/libs/app-i18n/index.js';
 import { FontAwesomeIcon } from '@/libs/app-icons/index.js';
