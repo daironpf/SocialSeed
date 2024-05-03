@@ -1,50 +1,17 @@
-import { createApp, provide } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue'
 import router from "@/router/index.js";
-
-/* import the fontawesome core */
-import { library } from '@fortawesome/fontawesome-svg-core';
-
-/* import font awesome icon component */
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-
-/* import specific icons */
-import {
-    faBan,
-    faHome,
-    faUser,
-    faBell,
-    faEnvelope,
-    faCog,
-    faImage,
-    faClock,
-    faThumbsUp,
-    faComment,
-    faSync,
-    faPencil,
-    faEarth,
-    faSortDown,
-    faUserGroup,
-    faLock,
-    faUsers,
-    faUserFriends,
-    faUsersBetweenLines,
-    faUsersLine,
-    faUserPlus,
-    faPersonCirclePlus,
-    faPenToSquare
-} from "@fortawesome/free-solid-svg-icons";
-
-/* add icons to the library */
-library.add(faBan, faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, faThumbsUp, faComment, faSync, faPencil, faEarth, faSortDown, faUserGroup, faLock, faUsers, faUserFriends, faUsersBetweenLines, faUsersLine, faUserPlus, faPersonCirclePlus, faPenToSquare);
+import { i18n } from '@/libs/app-i18n/index.js';
+import { FontAwesomeIcon } from '@/libs/app-icons/index.js';
+import App from './App.vue'
 
 /* constant values */
-const api_url = "http://127.0.0.1:8081/api/v0.0.1/";
-// const api_url = "http://54.183.246.185:8081/api/v0.0.1/";
+// const api_url = "http://127.0.0.1:8081/api/v0.0.1/";
+const api_url = "http://54.183.246.185:8081/api/v0.0.1/";
 const s3_url = "https://socialseed-apirest.s3.us-west-1.amazonaws.com";
 
 const app = createApp(App);
 app.use(router);
+app.use(i18n);
 app.component('fa', FontAwesomeIcon);
 app.provide('apiUrl',api_url);
 app.provide('s3Url',s3_url);

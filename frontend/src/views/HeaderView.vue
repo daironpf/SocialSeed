@@ -6,7 +6,7 @@ import {RouterLink} from "vue-router";
   <div id="encabezado" class="w-full bg-blue-500 text-white py-4 fixed top-0 z-50">
     <div class="container mx-auto flex justify-between items-center">
       <RouterLink to="/">
-        <div class="logo text-2xl font-bold">SocialSeed</div>
+        <div class="logo text-2xl font-bold">{{ $t('appName') }}</div>
       </RouterLink>
 
       <nav class="menu">
