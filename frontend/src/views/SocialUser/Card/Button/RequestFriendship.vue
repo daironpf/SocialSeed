@@ -12,13 +12,13 @@ const props = defineProps({
 const apiUrl = inject('apiUrl');
 
 // Emits
-const emit = defineEmits(['updateStatusFollow'])
+const emit = defineEmits(['updateStatusOfIsRequestFriendship'])
 
-// Function to follow a user
-async function followUser() {
+// Function to request Friendship a user
+async function requestFriendship() {
   try {
     const response = await axios.post(
-        `${apiUrl}follow/follow/${props.userIdTarget}`,
+        `${apiUrl}friend/createRequest/${props.userIdTarget}`,
         null, // No data in the body
         {
           headers: {
@@ -28,26 +28,24 @@ async function followUser() {
     );
 
     if (response.status === 200) {
-      // update the isFollow status
-      emit('updateStatusFollow', true);
+      // update the isRequestFriendship status
+      emit('updateStatusOfIsRequestFriendship', true);
     }
     console.log(response.data);
   } catch (error) {
-    console.error('Error in following user:', error);
+    console.error('Error in request friendship to user:', error);
   }
 }
 </script>
 
 <template>
-  <!--  Follow Button-->
   <button
-      @click="followUser()"
-      class="bg-blue-300 text-sm font-bold
+      @click="requestFriendship()"
+      class="bg-blue-300 text-sm font-bold mr-1
             text-white p-2 rounded-lg w-28 focus:outline-none focus:shadow-outline
-            hover:bg-blue-500
-            ">
-    <fa icon="fa-solid fa-person-circle-plus" class="text-white-600"/>
-    Seguir
+            hover:bg-blue-500">
+    <fa icon="fa-solid fa-user-plus" class="text-white-600"/>
+    Amistad
   </button>
 </template>
 

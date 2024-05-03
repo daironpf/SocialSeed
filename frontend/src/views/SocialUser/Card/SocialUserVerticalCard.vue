@@ -3,6 +3,7 @@ import {inject, ref} from "vue";
 import axios from "axios";
 import FollowButton from "@/views/SocialUser/Card/Button/followButton.vue";
 import UnfollowButton from "@/views/SocialUser/Card/Button/unfollowButton.vue";
+import RequestFriendship from "@/views/SocialUser/Card/Button/RequestFriendship.vue";
 
 // Props
 const props = defineProps({
@@ -29,6 +30,12 @@ function getCurrentUser() {
 
 function updateStatusFollow(status){
   socialUser.value.isFollow = status;
+}
+
+function updateStatusOfIsRequestFriendship(status){
+  console.warn("before: isRequestFriendship: ",status);
+  socialUser.value.isRequestFriendship = status;
+  console.warn("after: isRequestFriendship: ",status);
 }
 </script>
 
@@ -67,15 +74,14 @@ function updateStatusFollow(status){
 
       <!-- Options Buttons -->
       <div class="mt-2 mb-1" v-if="props.request">
-        <!-- Botón de Pedir Amistad -->
-        <button
+        <!-- Friend Buttons Sections-->
+        <RequestFriendship
             v-if="!socialUser.isFriend"
-            class="bg-blue-300 text-sm font-bold mr-1
-            text-white p-2 rounded-lg w-28 focus:outline-none focus:shadow-outline
-            hover:bg-blue-500">
-          <fa icon="fa-solid fa-user-plus" class="text-white-600"/>
-          Amistad
-        </button>
+            @updateStatusOfIsRequestFriendship="updateStatusOfIsRequestFriendship"
+            :userIdRequest = "currentUser.id"
+            :userIdTarget = "socialUser.id"
+        />
+
         <button
             v-if="socialUser.isFriend"
             @mouseover="hover.friend = true"
