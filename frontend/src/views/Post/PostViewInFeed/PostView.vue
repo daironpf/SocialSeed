@@ -1,9 +1,12 @@
 <script setup>
+import {inject} from "vue";
+
 const props = defineProps({
   post: Object,
 
 })
 
+const s3Url = inject('s3Url');
 
 </script>
 
@@ -13,7 +16,7 @@ const props = defineProps({
     <div class="flex items-center mb-4">
       <!-- Verificamos si existe post.author y post.author.author.profileImage -->
       <img v-if="post.author && post.author.author && post.author.author.profileImage"
-           :src="post.author.author.profileImage"
+           :src="s3Url + post.author.author.profileImage"
            :alt="post.author.author.fullName"
            class="w-12 h-12 rounded-full mr-4">
       <!-- Si no existe, puedes manejar un caso alternativo -->

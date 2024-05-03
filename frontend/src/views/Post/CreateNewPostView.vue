@@ -1,7 +1,7 @@
 <template>
   <div class="bg-gray-50 rounded-lg shadow m-1 ml-10 mr-10 p-2">
     <div class="max-w-lg mx-auto flex items-center border-b border-gray-300 pb-4 mb-4">
-      <img :src="currentUser.profileImage" alt="Foto de usuario" class="w-12 h-12 rounded-full mr-4">
+      <img :src="s3Url + currentUser.profileImage" alt="Foto de usuario" class="w-12 h-12 rounded-full mr-4">
       <button @click="showDialog" class="flex-1 px-4 py-2 bg-gray-50 text-gray-600 rounded border border-gray-400 shadow-md hover:bg-gray-100 focus:outline-none focus:bg-gray-100">
         Crear publicación
       </button>
@@ -14,7 +14,7 @@
           <!-- Encabezado -->
           <div class="flex items-center justify-between p-4 border-b border-gray-300">
             <div class="flex items-center">
-              <img :src="currentUser.profileImage" alt="Foto de usuario" class="w-8 h-8 rounded-full mr-2">
+              <img :src="s3Url + currentUser.profileImage" alt="Foto de usuario" class="w-8 h-8 rounded-full mr-2">
               <span class="text-gray-700 font-semibold">{{ currentUser.fullName }}</span>
             </div>
             <button @click="hideDialog"
@@ -141,6 +141,7 @@ const postContent = ref('');
 const apiUrl = inject('apiUrl');
 const notificationVisible = ref(false);
 const notificationMessage = ref('');
+const s3Url = inject('s3Url');
 
 function showDialog() {
   isDialogOpen.value = true;

@@ -1,8 +1,8 @@
 <script setup>
 
-import ProfileView from "@/views/LeftSide/ProfileView.vue";
-import Preferences from "@/views/LeftSide/Preferences.vue";
-import Publications from "@/views/LeftSide/Publications.vue";
+import ProfileView from "@/views/Feed/LeftSide/ProfileView.vue";
+import Preferences from "@/views/Feed/LeftSide/Preferences.vue";
+import Publications from "@/views/Feed/LeftSide/Publications.vue";
 </script>
 
 <template>

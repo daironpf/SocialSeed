@@ -1,7 +1,7 @@
 <script setup>
 import { ref, inject, onMounted } from "vue";
-import LeftSideView from "@/views/LeftSide/LeftSideView.vue";
-import RightSideView from "@/views/RightSide/RightSideView.vue";
+import LeftSideView from "@/views/Feed/LeftSide/LeftSideView.vue";
+import RightSideView from "@/views/Feed/RightSide/RightSideView.vue";
 import SocialUserVerticalCard from "@/views/SocialUser/Card/SocialUserVerticalCard.vue";
 import axios from "axios";
 

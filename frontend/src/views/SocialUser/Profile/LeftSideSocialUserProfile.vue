@@ -1,5 +1,5 @@
 <script setup>
-import ProfileView from "@/views/LeftSide/ProfileView.vue";
+import ProfileView from "@/views/Feed/LeftSide/ProfileView.vue";
 import PreferencesSocialUserProfileView from "@/views/SocialUser/Profile/PreferencesSocialUserProfileView.vue";
 
 const props = defineProps({
