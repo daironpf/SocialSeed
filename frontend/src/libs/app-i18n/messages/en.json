@@ -1,3 +1,7 @@
 {
-  "appName": "SocialSeed"
+  "appName": "SocialSeed",
+  "friend": "Friend",
+  "follow": "Follow",
+  "following": "Following",
+  "unfollowMessage": "By clicking here, you'll unfollow the user"
 }

@@ -1,6 +1,7 @@
 <script setup>
 import {inject, ref} from "vue";
 import axios from "axios";
+import BaseTooltip from "@/views/utils/BaseTooltip.vue";
 
 // Props
 const props = defineProps({
@@ -41,24 +42,30 @@ async function unFollowUser() {
     // You can handle the error as you wish, e.g., show a notification to the user
   }
 }
-
-
 </script>
 
 <template>
   <!--  unFollow Button-->
-  <button
-    @click="unFollowUser()"
-    @mouseover="hover.follow = true"
-    @mouseout="hover.follow = false"
-    class="button-vertical bg-white text-black
-          hover:bg-red-100 hover:text-red-600 hover:border-red-400
-          focus:outline-none focus:shadow-outline">
-    <fa v-if="hover.follow"
-        icon="fa-solid fa-ban"
-        class="text-red-600"/>
-    {{ hover.follow ? 'Seguir' : 'Siguiendo' }}
-  </button>
+    <BaseTooltip
+        :content="$t('unfollowMessage')"
+        placement="bottom">
+          <button
+              @click="unFollowUser()"
+              @mouseover="hover.follow = true"
+              @mouseout="hover.follow = false"
+              class="button-vertical bg-white text-black
+                hover:bg-red-100 hover:text-red-600 hover:border-red-400
+                focus:outline-none focus:shadow-outline">
+            <span v-if="!hover.follow">
+              {{ $t('following') }}
+            </span>
+            <span v-else>
+              <fa icon="fa-solid fa-ban" class="text-red-600 mr-1"/>
+              {{ $t('follow') }}
+            </span>
+          </button>
+    </BaseTooltip>
+
 </template>
 
 <style scoped>

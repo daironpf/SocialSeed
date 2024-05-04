@@ -1,3 +1,7 @@
 {
-  "appName": "SocialSeed"
+  "appName": "SocialSeed",
+  "friend": "Amigo",
+  "follow": "Seguir",
+  "following": "Siguiendo",
+  "unfollowMessage": "Al hacer clic aquí, dejarás de seguir al usuario"
 }
