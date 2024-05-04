@@ -2,6 +2,7 @@
 import {computed} from "vue";
 import {RouterView, useRouter} from "vue-router";
 import HeaderView from "@/views/HeaderView.vue";
+import "@/assets/main.css";
 
 const router = useRouter();
 const showHeader = computed(() => {
