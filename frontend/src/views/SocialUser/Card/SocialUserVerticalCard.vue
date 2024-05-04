@@ -3,7 +3,9 @@ import {inject, ref} from "vue";
 import axios from "axios";
 import FollowButton from "@/views/SocialUser/Card/Button/followButton.vue";
 import UnfollowButton from "@/views/SocialUser/Card/Button/unfollowButton.vue";
-import RequestFriendship from "@/views/SocialUser/Card/Button/RequestFriendship.vue";
+import sendRequestFriendshipButton from "@/views/SocialUser/Card/Button/sendRequestFriendshipButton.vue";
+import cancelRequestFriendshipButton from "@/views/SocialUser/Card/Button/cancelRequestFriendshipButton.vue";
+import cancelFriendshipButton from "@/views/SocialUser/Card/Button/cancelFriendshipButton.vue";
 
 // Props
 const props = defineProps({
@@ -37,11 +39,17 @@ function updateStatusOfIsRequestFriendshipSending(status){
   socialUser.value.isRequestFriendshipSending = status;
   console.warn("after: isRequestFriendship: ",socialUser.value.isRequestFriendshipSending);
 }
+
+function updateStatusOfIsFriend(status){
+  console.warn("before: isRequestFriendship: ",socialUser.value.isFriend);
+  socialUser.value.isFriend = status;
+  console.warn("after: isRequestFriendship: ",socialUser.value.isFriend);
+}
+
+
 </script>
 
 <template>
-
-
   <div class="bg-gray-50 rounded-lg shadow-md w-64 pl-3 pr-3 pt-4 pb-3 item-center m-1">
     <!-- Profile picture -->
     <div class="flex items-center flex-col">
@@ -75,26 +83,32 @@ function updateStatusOfIsRequestFriendshipSending(status){
       <!-- Options Buttons -->
       <div class="mt-2 mb-1" v-if="props.request">
         <!-- Friend Buttons Sections-->
-        <RequestFriendship
+        <sendRequestFriendshipButton
             v-if="!socialUser.isFriend && !socialUser.isRequestFriendshipSending && !socialUser.isRequestFriendshipReceived"
             @updateStatusOfIsRequestFriendshipSending="updateStatusOfIsRequestFriendshipSending"
             :userIdRequest = "currentUser.id"
             :userIdTarget = "socialUser.id"
         />
 
-
-
-        <button
+        <cancelFriendshipButton
             v-if="socialUser.isFriend"
-            @mouseover="hover.friend = true"
-            @mouseout="hover.friend = false"
-          class="text-sm font-bold bg-white text-black border p-2 mr-1 rounded-lg w-28 h-15
-          focus:outline-none focus:shadow-outline
-          hover:bg-red-100 hover:text-red-600 hover:border-red-400
-          ">
-          <fa v-if="hover.friend" icon="fa-solid fa-ban" class="text-red-600"/>
-          {{ hover.friend ? ' Amistad' : 'Amigos' }}
-        </button>
+            @updateStatusOfIsFriend="updateStatusOfIsFriend"
+            :userIdRequest = "currentUser.id"
+            :userIdTarget = "socialUser.id"
+        />
+
+
+<!--        <button-->
+<!--            v-if="socialUser.isFriend"-->
+<!--            @mouseover="hover.friend = true"-->
+<!--            @mouseout="hover.friend = false"-->
+<!--          class="text-sm font-bold bg-white text-black border p-2 mr-1 rounded-lg w-28 h-15-->
+<!--          focus:outline-none focus:shadow-outline-->
+<!--          hover:bg-red-100 hover:text-red-600 hover:border-red-400-->
+<!--          ">-->
+<!--          <fa v-if="hover.friend" icon="fa-solid fa-ban" class="text-red-600"/>-->
+<!--          {{ hover.friend ? ' Amistad' : 'Amigos' }}-->
+<!--        </button>-->
 
         <!-- Follow Buttons Sections-->
         <follow-button

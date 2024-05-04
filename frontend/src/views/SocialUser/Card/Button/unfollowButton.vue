@@ -51,10 +51,12 @@ async function unFollowUser() {
     @click="unFollowUser()"
     @mouseover="hover.follow = true"
     @mouseout="hover.follow = false"
-    class="text-sm font-bold bg-white text-black border
+    class="button-vertical bg-white text-black
           hover:bg-red-100 hover:text-red-600 hover:border-red-400
-          p-2 rounded-lg w-28 focus:outline-none focus:shadow-outline">
-    <fa v-if="hover.follow" icon="fa-solid fa-ban" class="text-red-600"/>
+          focus:outline-none focus:shadow-outline">
+    <fa v-if="hover.follow"
+        icon="fa-solid fa-ban"
+        class="text-red-600"/>
     {{ hover.follow ? 'Seguir' : 'Siguiendo' }}
   </button>
 </template>

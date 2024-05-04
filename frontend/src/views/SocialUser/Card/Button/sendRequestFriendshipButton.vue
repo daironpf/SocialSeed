@@ -41,9 +41,9 @@ async function requestFriendship() {
 <template>
   <button
       @click="requestFriendship()"
-      class="bg-blue-300 text-sm font-bold mr-1
-            text-white p-2 rounded-lg w-28 focus:outline-none focus:shadow-outline
-            hover:bg-blue-500">
+      class="button-vertical bg-blue-300 mr-1 text-white
+            hover:bg-blue-500
+            focus:outline-none focus:shadow-outline">
     <fa icon="fa-solid fa-user-plus" class="text-white-600"/>
     Amistad
   </button>
