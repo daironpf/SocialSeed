@@ -3,5 +3,6 @@
   "friend": "Amigo",
   "follow": "Seguir",
   "following": "Siguiendo",
-  "unfollowMessage": "Al hacer clic aquí, dejarás de seguir al usuario"
+  "unfollowMessage": "Al hacer clic aquí, dejarás de seguir al usuario",
+  "followMessage": "Al hacer clic aquí, empezarás a seguir al usuario"
 }

@@ -1,6 +1,7 @@
 <script setup>
 import {inject} from "vue";
 import axios from "axios";
+import BaseTooltip from "@/views/utils/BaseTooltip.vue";
 
 // Props
 const props = defineProps({
@@ -40,15 +41,19 @@ async function followUser() {
 
 <template>
   <!--  Follow Button-->
-  <button
-      @click="followUser()"
-      class="button-vertical bg-blue-300 text-white
-            hover:bg-blue-500
-            focus:outline-none focus:shadow-outline
-            ">
-    <fa icon="fa-solid fa-person-circle-plus" class="text-white-600"/>
-    Seguir
-  </button>
+  <BaseTooltip
+      :content="$t('followMessage')"
+      placement="bottom">
+        <button
+            @click="followUser()"
+            class="button-vertical bg-blue-300 text-white
+                  hover:bg-blue-500
+                  focus:outline-none focus:shadow-outline
+                  ">
+          <fa icon="fa-solid fa-person-circle-plus" class="text-white-600"/>
+          {{ $t('follow') }}
+        </button>
+  </BaseTooltip>
 </template>
 
 <style scoped>
