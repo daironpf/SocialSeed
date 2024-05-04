@@ -1,47 +1,31 @@
 <script setup>
-import {inject, ref} from "vue";
-import axios from "axios";
+import {ref} from "vue";
 import BaseTooltip from "@/views/utils/BaseTooltip.vue";
+import FollowService from "@/services/follow-service.js";
 
 // Props
 const props = defineProps({
-  userIdRequest: String,
   userIdTarget: String
 })
 
 // Hover state
 const hover = ref({follow:false});
 
-// Injected dependency
-const apiUrl = inject('apiUrl');
-
 // Emits
 const emit = defineEmits(['updateStatusFollow'])
 
-// Function to unfollow a user
+// Llamada para dejar de seguir a un usuario
 async function unFollowUser() {
-  try {
-    const response = await axios.post(
-        `${apiUrl}follow/unfollow/${props.userIdTarget}`,
-        null, // No data in the body
-        {
-          headers: {
-            userId: props.userIdRequest
-          }
-        }
-    );
-
-    if (response.status === 200) {
-      // update the isFollow status
-      emit('updateStatusFollow', false);
-    }
-
-    console.log(response.data); // You can handle the response as you wish
-  } catch (error) {
-    console.error('Error in following user:', error);
-    // You can handle the error as you wish, e.g., show a notification to the user
-  }
+  FollowService.unfollowUser(props.userIdTarget)
+      .then(data => {
+        console.log('Usuario dejado de seguir con éxito:', data);
+        emit('updateStatusFollow', false);
+      })
+      .catch(error => {
+        console.error('Error al dejar de seguir al usuario:', error);
+      });
 }
+
 </script>
 
 <template>

@@ -1,8 +1,7 @@
 <script setup>
 import {inject, ref} from "vue";
-import axios from "axios";
 import FollowButton from "@/views/SocialUser/Card/Button/followButton.vue";
-import UnfollowButton from "@/views/SocialUser/Card/Button/unfollowButton.vue";
+import unFollowButton from "@/views/SocialUser/Card/Button/unFollowButton.vue";
 import sendRequestFriendshipButton from "@/views/SocialUser/Card/Button/sendRequestFriendshipButton.vue";
 import cancelRequestFriendshipButton from "@/views/SocialUser/Card/Button/cancelRequestFriendshipButton.vue";
 import cancelFriendshipButton from "@/views/SocialUser/Card/Button/cancelFriendshipButton.vue";
@@ -114,13 +113,11 @@ function updateStatusOfIsFriend(status){
         <follow-button
             v-if="!socialUser.isFollow"
             @updateStatusFollow="updateStatusFollow"
-            :userIdRequest = "currentUser.id"
             :userIdTarget = "socialUser.id"
         />
-        <unfollow-button
+        <unFollowButton
             v-if="socialUser.isFollow"
             @updateStatusFollow="updateStatusFollow"
-            :userIdRequest = "currentUser.id"
             :userIdTarget = "socialUser.id"
         />
       </div>
