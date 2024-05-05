@@ -19,30 +19,18 @@ const socialUser = ref(props.user);
 const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
 
 // url to load images
-const s3Url = inject('s3Url');
-
-// Hover state
-const hover = ref({follow:false,friend:false});
-
-// Function to handle user authentication
-function getCurrentUser() {
-  return JSON.parse(localStorage.getItem('currentUser'));
-}
+const imgUrl = inject('imgUrl');
 
 function updateStatusFollow(status){
   socialUser.value.isFollow = status;
 }
 
 function updateStatusOfIsRequestFriendshipSending(status){
-  console.warn("before: isRequestFriendship: ",socialUser.value.isRequestFriendshipSending);
   socialUser.value.isRequestFriendshipSending = status;
-  console.warn("after: isRequestFriendship: ",socialUser.value.isRequestFriendshipSending);
 }
 
 function updateStatusOfIsFriend(status){
-  console.warn("before: isRequestFriendship: ",socialUser.value.isFriend);
   socialUser.value.isFriend = status;
-  console.warn("after: isRequestFriendship: ",socialUser.value.isFriend);
 }
 
 
@@ -54,7 +42,7 @@ function updateStatusOfIsFriend(status){
     <div class="flex items-center flex-col">
       <!-- User data -->
       <div class="h-44 flex items-center flex-col">
-        <img :src="s3Url + socialUser.profileImage"
+        <img :src="imgUrl + socialUser.profileImage"
              alt="Foto de usuario"
              class="w-16 h-16 rounded-full mr-4 mb-2">
         <div>

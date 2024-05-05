@@ -6,7 +6,8 @@ const props = defineProps({
 
 })
 
-const s3Url = inject('s3Url');
+// url to load images
+const imgUrl = inject('imgUrl');
 
 </script>
 
@@ -16,7 +17,7 @@ const s3Url = inject('s3Url');
     <div class="flex items-center mb-4">
       <!-- Verificamos si existe post.author y post.author.author.profileImage -->
       <img v-if="post.author && post.author.author && post.author.author.profileImage"
-           :src="s3Url + post.author.author.profileImage"
+           :src="imgUrl + post.author.author.profileImage"
            :alt="post.author.author.fullName"
            class="w-12 h-12 rounded-full mr-4">
       <!-- Si no existe, puedes manejar un caso alternativo -->

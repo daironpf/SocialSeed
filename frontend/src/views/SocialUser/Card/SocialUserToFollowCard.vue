@@ -5,7 +5,8 @@ const props = defineProps({
   user: Object,
 })
 
-const s3Url = inject('s3Url');
+// url to load images
+const imgUrl = inject('imgUrl');
 
 </script>
 
@@ -16,7 +17,7 @@ const s3Url = inject('s3Url');
     <div class="flex items-center justify-between">
       <!-- Información del Usuario -->
       <div class="flex items-center">
-        <img :src="s3Url + user.profileImage" alt="Foto de usuario" class="w-16 h-16 rounded-full mr-4">
+        <img :src="imgUrl + user.profileImage" alt="Foto de usuario" class="w-16 h-16 rounded-full mr-4">
         <div>
           <router-link :to="{ name: 'su-profile', params: { id: user.id }}">
             <h2 class="text-md font-semibold">{{user.fullName}}</h2>
