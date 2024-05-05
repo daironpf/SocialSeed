@@ -26,6 +26,25 @@ const FriendService = {
         } catch (error) {
             console.error('Error in send friend request:', error.message);
         }
+    },
+    async cancelSendRequestFriendship(userIdTarget) {
+        try {
+            const response = await axios.post(
+                `${currentUrl}friend/cancelRequest/${userIdTarget}`,
+                null, // No data in the body
+                {
+                    headers: {
+                        userId: currentUser.id
+                    }
+                }
+            );
+
+            if (response.status === 200) {
+                return response.data;
+            }
+        } catch (error) {
+            console.error('Error in cancel friend request:', error.message);
+        }
     }
 };
 

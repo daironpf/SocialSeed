@@ -3,7 +3,9 @@
   "friend": "Friend",
   "follow": "Follow",
   "following": "Following",
+  "request": "Request",
   "unfollowMessage": "By clicking here, you'll unfollow the user",
   "followMessage": "By clicking here, you'll start following the user",
-  "sendFriendRequest": "Click to send friend request"
+  "sendFriendRequest": "Click to send friend request",
+  "cancelFriendRequest": "Click to cancel the friend request"
 }

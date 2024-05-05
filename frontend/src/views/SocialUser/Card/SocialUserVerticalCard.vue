@@ -83,6 +83,11 @@ function updateStatusOfIsFriend(status){
             :userIdTarget = "socialUser.id"
         />
 
+        <cancel-request-friendship-button
+            v-if="socialUser.isRequestFriendshipSending"
+            @updateStatusOfIsRequestFriendshipSending="updateStatusOfIsRequestFriendshipSending"
+            :userIdTarget = "socialUser.id"
+        />
 
 <!--        <button-->
 <!--            v-if="socialUser.isFriend"-->

@@ -3,7 +3,9 @@
   "friend": "Amigo",
   "follow": "Seguir",
   "following": "Siguiendo",
+  "request": "Petición",
   "unfollowMessage": "Al hacer clic aquí, dejarás de seguir al usuario",
   "followMessage": "Al hacer clic aquí, empezarás a seguir al usuario",
-  "sendFriendRequest": "Haz clic para enviar solicitud de amistad"
+  "sendFriendRequest": "Haz clic para enviar solicitud de amistad",
+  "cancelFriendRequest": "Haz clic para cancelar la solicitud de amistad"
 }
