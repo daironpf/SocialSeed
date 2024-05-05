@@ -4,5 +4,6 @@
   "follow": "Follow",
   "following": "Following",
   "unfollowMessage": "By clicking here, you'll unfollow the user",
-  "followMessage": "By clicking here, you'll start following the user"
+  "followMessage": "By clicking here, you'll start following the user",
+  "sendFriendRequest": "Click to send friend request"
 }
