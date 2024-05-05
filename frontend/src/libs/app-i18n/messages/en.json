@@ -7,5 +7,6 @@
   "unfollowMessage": "By clicking here, you'll unfollow the user",
   "followMessage": "By clicking here, you'll start following the user",
   "sendFriendRequest": "Click to send friend request",
-  "cancelFriendRequest": "Click to cancel the friend request"
+  "cancelFriendRequest": "Click to cancel the friend request",
+  "clickToShowManageOptions": "Click to show management options and decide how to proceed"
 }

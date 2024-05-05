@@ -7,5 +7,6 @@
   "unfollowMessage": "Al hacer clic aquí, dejarás de seguir al usuario",
   "followMessage": "Al hacer clic aquí, empezarás a seguir al usuario",
   "sendFriendRequest": "Haz clic para enviar solicitud de amistad",
-  "cancelFriendRequest": "Haz clic para cancelar la solicitud de amistad"
+  "cancelFriendRequest": "Haz clic para cancelar la solicitud de amistad",
+  "clickToShowManageOptions": "Haz clic para que decidas cómo proceder con la petición de amistad"
 }

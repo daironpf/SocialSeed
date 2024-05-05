@@ -5,6 +5,7 @@ import unFollowButton from "@/views/SocialUser/Card/Button/unFollowButton.vue";
 import sendRequestFriendshipButton from "@/views/SocialUser/Card/Button/sendRequestFriendshipButton.vue";
 import cancelRequestFriendshipButton from "@/views/SocialUser/Card/Button/cancelRequestFriendshipButton.vue";
 import cancelFriendshipButton from "@/views/SocialUser/Card/Button/cancelFriendshipButton.vue";
+import RequestFriendshipReceived from "@/views/SocialUser/Card/Button/requestFriendshipReceived.vue";
 
 // Props
 const props = defineProps({
@@ -15,9 +16,6 @@ const props = defineProps({
 // Transform user to Reactive
 const socialUser = ref(props.user);
 
-// LocalStorage
-const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
-
 // url to load images
 const imgUrl = inject('imgUrl');
 
@@ -27,6 +25,10 @@ function updateStatusFollow(status){
 
 function updateStatusOfIsRequestFriendshipSending(status){
   socialUser.value.isRequestFriendshipSending = status;
+}
+
+function updateStatusOfIsRequestFriendshipReceived(status){
+  socialUser.value.isRequestFriendshipReceived = status;
 }
 
 function updateStatusOfIsFriend(status){
@@ -79,13 +81,18 @@ function updateStatusOfIsFriend(status){
         <cancelFriendshipButton
             v-if="socialUser.isFriend"
             @updateStatusOfIsFriend="updateStatusOfIsFriend"
-            :userIdRequest = "currentUser.id"
             :userIdTarget = "socialUser.id"
         />
 
         <cancel-request-friendship-button
             v-if="socialUser.isRequestFriendshipSending"
             @updateStatusOfIsRequestFriendshipSending="updateStatusOfIsRequestFriendshipSending"
+            :userIdTarget = "socialUser.id"
+        />
+
+        <request-friendship-received
+            v-if="socialUser.isRequestFriendshipReceived"
+            @updateStatusOfIsRequestFriendshipReceived="updateStatusOfIsRequestFriendshipReceived"
             :userIdTarget = "socialUser.id"
         />
 

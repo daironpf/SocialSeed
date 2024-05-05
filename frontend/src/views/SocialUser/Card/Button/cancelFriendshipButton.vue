@@ -1,10 +1,9 @@
 <script setup>
 import {inject, ref} from "vue";
-import axios from "axios";
+
 
 // Props
 const props = defineProps({
-  userIdRequest: String,
   userIdTarget: String
 })
 
