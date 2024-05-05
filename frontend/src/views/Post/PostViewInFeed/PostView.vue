@@ -29,7 +29,7 @@ const imgUrl = inject('imgUrl');
       </div>
     </div>
     <div>
-      <p class="text-lg text-gray-800 text-lg">
+      <p class="text-gray-800 text-lg">
         {{post.content}}
       </p>
     </div>
