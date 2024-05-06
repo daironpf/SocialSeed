@@ -12,7 +12,7 @@ const props = defineProps({
 })
 
 // Emits
-const emit =defineEmits(['close-modal','update-request-received']);
+const emit =defineEmits(['close-modal','updateRequestReceived','updateStatusOfIsFriend']);
 
 // Function to Cancel Received Request Friendship
 async function cancelReceivedRequest() {
@@ -20,10 +20,24 @@ async function cancelReceivedRequest() {
       .then(data => {
         console.log('Cancel the Received Request Friendship successful:', data);
         emit('close-modal');
-        emit('update-request-received');
+        emit('updateRequestReceived');
       })
       .catch(error => {
         console.error('Error in Send Request Friendship:', error);
+      })
+}
+
+// Accept the Received Request Friendship
+async function acceptReceivedRequest() {
+  FriendService.acceptReceivedRequestFriendship(props.userIdTarget)
+      .then(data => {
+        console.log('Cancel the Received Request Friendship successful:', data);
+        emit('close-modal');
+        emit('updateRequestReceived');
+        emit('updateStatusOfIsFriend');
+      })
+      .catch(error => {
+        console.error('Error in Accept Request Friendship:', error);
       })
 }
 </script>
@@ -73,6 +87,7 @@ async function cancelReceivedRequest() {
                   :content="$t('clickToBecomeFriends')"
                   placement="bottom">
                 <button
+                    @click="acceptReceivedRequest()"
                     class="button-vertical bg-blue-300 mr-1 text-white
                   hover:bg-blue-500
                   focus:outline-none focus:shadow-outline">

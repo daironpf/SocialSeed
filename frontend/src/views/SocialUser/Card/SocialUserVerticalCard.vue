@@ -31,8 +31,8 @@ function toggleStatusOfIsRequestFriendshipReceived(){
   socialUser.value.isRequestFriendshipReceived = !socialUser.value.isRequestFriendshipReceived;
 }
 
-function updateStatusOfIsFriend(status){
-  socialUser.value.isFriend = status;
+function toggleStatusOfIsFriend(){
+  socialUser.value.isFriend = !socialUser.value.isFriend;
 }
 
 
@@ -80,7 +80,7 @@ function updateStatusOfIsFriend(status){
 
         <cancelFriendshipButton
             v-if="socialUser.isFriend"
-            @updateStatusOfIsFriend="updateStatusOfIsFriend"
+            @updateStatusOfIsFriend="toggleStatusOfIsFriend"
             :userIdTarget = "socialUser.id"
         />
 
@@ -92,7 +92,8 @@ function updateStatusOfIsFriend(status){
 
         <RequestFriendshipReceived
             v-if="socialUser.isRequestFriendshipReceived"
-            @update-request-received="toggleStatusOfIsRequestFriendshipReceived"
+            @updateStatusOfIsFriend="toggleStatusOfIsFriend"
+            @updateRequestReceived="toggleStatusOfIsRequestFriendshipReceived"
             :userIdTarget = "socialUser.id"
         />
 
