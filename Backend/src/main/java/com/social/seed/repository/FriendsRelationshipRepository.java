@@ -142,4 +142,14 @@ public interface FriendsRelationshipRepository extends Neo4jRepository<SocialUse
     Page<SocialUserCard> getFriendsOfUserById(String userId, String idUserToFind, Pageable pageable);
     //endregion
 
+    //  Received Request
+    @Query("""
+            MATCH (o:SocialUser {identifier: $idUserRequest})
+            MATCH (d:SocialUser {identifier: $idUserToCancelFriendRequest})
+            MATCH (o)<-[r:REQUEST_FRIEND_TO]-(d)
+            DELETE r
+            """)
+    void cancelReceivedRequestFriendship(String idUserRequest, String idUserToCancelFriendRequest);
+    //endregion
+
 }

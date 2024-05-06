@@ -147,4 +147,25 @@ class FriendsRelationshipServiceTest {
         assertThat(response.status()).isEqualTo(HttpStatus.OK);
         assertThat(response.message()).isEqualTo("Successful");
     }
+
+    @Test
+    void cancelReceivedRequest_Success() {
+        // Mock repository
+        doNothing().when(friendsRelationshipRepository).cancelReceivedRequestFriendship(anyString(),anyString());
+
+        // Mocking the success response
+        when(responseService.successResponse(anyString())).thenCallRealMethod();
+
+        // Calling the actual service method
+        ResponseEntity<Object> responseEntity = underTest.cancelReceivedRequest(socialUser1.getId(), socialUser2.getId());
+
+        // Assertions
+        assertThat(responseEntity).isNotNull();
+        ResponseDTO response = (ResponseDTO) responseEntity.getBody();
+
+        // Verify response details
+        assertThat(response).isNotNull();
+        assertThat(response.status()).isEqualTo(HttpStatus.OK);
+        assertThat(response.message()).isEqualTo("Successful");
+    }
 }

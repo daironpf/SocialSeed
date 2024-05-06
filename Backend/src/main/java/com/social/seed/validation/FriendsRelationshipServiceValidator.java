@@ -172,4 +172,31 @@ public class FriendsRelationshipServiceValidator {
         // Continue
         return (ResponseEntity<Object>) joinPoint.proceed();
     }
+
+    @Around("execution(* com.social.seed.service.FriendsRelationshipService.cancelReceivedRequest(String, String)) && args(requesterUserId, targetUserId)")
+    @Transactional
+    public ResponseEntity<Object> aroundCancelReceivedRequest(ProceedingJoinPoint joinPoint, String requesterUserId, String targetUserId) throws Throwable {
+        if (requesterUserId.equals(targetUserId)) {
+            return responseService.forbiddenDuplicateSocialUser();
+        }
+
+        if (!validationService.userExistsById(requesterUserId)) {
+            return responseService.userNotFoundResponse(requesterUserId);
+        }
+
+        if (!validationService.userExistsById(targetUserId)) {
+            return responseService.userNotFoundResponse(targetUserId);
+        }
+
+        if (!validationService.existsFriendRequest(requesterUserId, targetUserId)) {
+            return responseService.notFoundWithMessageResponse("The Friend Request does not exist");
+        }
+
+        if (validationService.existsFriendship(requesterUserId, targetUserId)) {
+            return responseService.conflictResponseWithMessage("The Friendship already exists");
+        }
+
+        // Continue
+        return (ResponseEntity<Object>) joinPoint.proceed();
+    }
 }

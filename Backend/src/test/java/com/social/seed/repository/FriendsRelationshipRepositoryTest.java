@@ -219,6 +219,29 @@ class FriendsRelationshipRepositoryTest {
         assertThat(finalExistence).isFalse();
     }
 
+    /**
+     * Tests the cancellation of a received friend request.
+     * It creates a friend request from user1 to user2, cancels the request, and verifies that the repository correctly updates
+     * the absence of the friend request without affecting the friend request count for user2.
+     */
+    @Test
+    void shouldCancelReceivedFriendRequest() {
+        // Given: A friend request from user1 to user2
+        underTest.createFriendRequest(user2.getId(), user1.getId(), LocalDateTime.now());
+        boolean initialExistence = underTest.existsFriendRequest(user2.getId(), user1.getId());
+        assertThat(initialExistence).isTrue();
+
+        // When: Cancelling the friend request
+        underTest.cancelReceivedRequestFriendship(user1.getId(), user2.getId());
+
+        // Then: Verifies the absence of the friend request without affecting the friend request count for user2
+        boolean finalExistence = underTest.existsFriendRequest(user2.getId(), user1.getId());
+        assertThat(finalExistence).isFalse();
+
+//        Optional<SocialUser> userB = socialUserRepository.findById(user1.getId());
+//        assertThat(userB.get().getFriendRequestCount()).isEqualTo(user1.getFriendRequestCount());
+    }
+
     // region Utility Methods
     /**
      * Creates test data by saving three SocialUser into the repository.

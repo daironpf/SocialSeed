@@ -110,9 +110,7 @@ public class FriendsRelationshipController {
                 .status(response.getStatusCode())
                 .body((ResponseDTO) response.getBody());
     }
-    //endregion
 
-    //region GET
     /**
      * Returns the Friends of a SocialUser based on their user ID.
      *
@@ -128,6 +126,25 @@ public class FriendsRelationshipController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size){
         ResponseEntity<Object> response = friendsRelationshipService.getFriendsOfUserById(idUserRequest, idUserToFind, page, size);
+        return ResponseEntity
+                .status(response.getStatusCode())
+                .body((ResponseDTO) response.getBody());
+    }
+    //endregion
+
+    // Received Request
+    /**
+     * Cancels a received friendship request.
+     *
+     * @param idUserRequest                  The ID of the user canceling the request.
+     * @param idUserToCancelFriendRequest   The ID of the user to whom the request is canceled.
+     * @return ResponseEntity with a ResponseDTO.
+     */
+    @PostMapping("/cancelReceivedRequest/{idUserToCancelFriendRequest}")
+    public ResponseEntity<ResponseDTO> cancelReceivedRequest(
+            @RequestHeader("userId") String idUserRequest,
+            @PathVariable String idUserToCancelFriendRequest) {
+        ResponseEntity<Object> response = friendsRelationshipService.cancelReceivedRequest(idUserRequest, idUserToCancelFriendRequest);
         return ResponseEntity
                 .status(response.getStatusCode())
                 .body((ResponseDTO) response.getBody());

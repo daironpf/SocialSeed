@@ -94,4 +94,13 @@ public class FriendsRelationshipService {
 
         return responseService.successResponse(friends);
     }
+
+    // Received Request
+    @Transactional
+    public ResponseEntity<Object> cancelReceivedRequest(String idUserRequest, String idUserToCancelFriendRequest) {
+        friendsRelationshipRepository.cancelReceivedRequestFriendship(idUserRequest, idUserToCancelFriendRequest);
+
+        return responseService.successResponse("The received friendship request was canceled successfully.");
+    }
+    //endregion
 }
