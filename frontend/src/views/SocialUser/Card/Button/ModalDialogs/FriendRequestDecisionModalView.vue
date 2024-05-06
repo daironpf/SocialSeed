@@ -40,6 +40,11 @@ async function acceptReceivedRequest() {
         console.error('Error in Accept Request Friendship:', error);
       })
 }
+
+async function blockSocialUser(){
+  emit('close-modal');
+  emit('updateRequestReceived');
+}
 </script>
 
 <template>
@@ -112,6 +117,7 @@ async function acceptReceivedRequest() {
                   :content="$t('blockUserToPreventFriendRequest')"
                   placement="bottom">
                 <button
+                    @click="blockSocialUser()"
                     class="button-vertical bg-white text-red-400 ml-1
                   hover:bg-red-200 hover:text-orange-700 hover:border-red-300
                   focus:outline-none focus:shadow-outline">
