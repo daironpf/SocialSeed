@@ -1,14 +1,31 @@
 <script setup>
 import BaseTooltip from "@/views/utils/BaseTooltip.vue";
+import FriendService from "@/services/friend-service.js";
+import {data} from "autoprefixer";
 
-defineProps({
+const props = defineProps({
   modalActive: {
     type: Boolean,
     default: false,
-  }
+  },
+  userIdTarget: String
 })
 
-defineEmits(['close-modal']);
+// Emits
+const emit =defineEmits(['close-modal','update-request-received']);
+
+// Function to Cancel Received Request Friendship
+async function cancelReceivedRequest() {
+  FriendService.cancelReceivedRequestFriendship(props.userIdTarget)
+      .then(data => {
+        console.log('Cancel the Received Request Friendship successful:', data);
+        emit('close-modal');
+        emit('update-request-received');
+      })
+      .catch(error => {
+        console.error('Error in Send Request Friendship:', error);
+      })
+}
 </script>
 
 <template>
@@ -67,6 +84,7 @@ defineEmits(['close-modal']);
                 :content="$t('cancelFriendRequest')"
                 placement="bottom">
                 <button
+                    @click="cancelReceivedRequest()"
                     class="button-vertical bg-white text-red-500
                   hover:bg-red-100 hover:text-red-600 hover:border-red-400
                   focus:outline-none focus:shadow-outline">

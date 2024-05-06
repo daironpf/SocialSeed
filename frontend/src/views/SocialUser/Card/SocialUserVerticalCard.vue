@@ -27,8 +27,8 @@ function updateStatusOfIsRequestFriendshipSending(status){
   socialUser.value.isRequestFriendshipSending = status;
 }
 
-function updateStatusOfIsRequestFriendshipReceived(status){
-  socialUser.value.isRequestFriendshipReceived = status;
+function toggleStatusOfIsRequestFriendshipReceived(){
+  socialUser.value.isRequestFriendshipReceived = !socialUser.value.isRequestFriendshipReceived;
 }
 
 function updateStatusOfIsFriend(status){
@@ -90,9 +90,9 @@ function updateStatusOfIsFriend(status){
             :userIdTarget = "socialUser.id"
         />
 
-        <request-friendship-received
+        <RequestFriendshipReceived
             v-if="socialUser.isRequestFriendshipReceived"
-            @updateStatusOfIsRequestFriendshipReceived="updateStatusOfIsRequestFriendshipReceived"
+            @update-request-received="toggleStatusOfIsRequestFriendshipReceived"
             :userIdTarget = "socialUser.id"
         />
 

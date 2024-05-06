@@ -13,11 +13,11 @@ const props = defineProps({
 const hover = ref({cancel:false});
 
 // Emits
-const emit = defineEmits(['updateStatusOfIsRequestFriendshipSending'])
+const emit = defineEmits(['update-request-received'])
 
 // Function to request Friendship a user
-async function manageRequestFriendshipRecived() {
-// @click="manageRequestFriendshipRecived()"
+async function updateStatusOfIsRequestFriendshipReceived() {
+  emit('update-request-received')
 }
 
 const modalActive = ref(null);
@@ -46,8 +46,10 @@ const toggleModal = () => {
     </button>
   </BaseTooltip>
   <FriendRequestDecisionModalView
+      :userIdTarget="userIdTarget"
       :modalActive="modalActive"
       @close-modal="toggleModal"
+      @update-request-received="updateStatusOfIsRequestFriendshipReceived"
   />
 </template>
 
