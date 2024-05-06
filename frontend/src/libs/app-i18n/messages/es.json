@@ -1,6 +1,8 @@
 {
   "appName": "SocialSeed",
   "friend": "Amigo",
+  "friendship": "Amistad",
+  "friends": "Son Amigos",
   "follow": "Seguir",
   "following": "Siguiendo",
   "request": "Petición",

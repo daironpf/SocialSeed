@@ -83,6 +83,25 @@ const FriendService = {
         } catch (error) {
             console.error('Error in cancel received friend request:', error.message);
         }
+    },
+    async cancelFriendship(userIdTarget) {
+        try {
+            const response = await axios.post(
+                `${currentUrl}friend/deleteFriendship/${userIdTarget}`,
+                null, // No data in the body
+                {
+                    headers: {
+                        userId: currentUser.id
+                    }
+                }
+            );
+
+            if (response.status === 200) {
+                return response.data;
+            }
+        } catch (error) {
+            console.error('Error in delete friendship:', error.message);
+        }
     }
 };
 

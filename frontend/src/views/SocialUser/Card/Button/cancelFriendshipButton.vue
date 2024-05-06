@@ -1,6 +1,6 @@
 <script setup>
-import {inject, ref} from "vue";
-
+import {ref} from "vue";
+import FriendService from "@/services/friend-service.js";
 
 // Props
 const props = defineProps({
@@ -10,16 +10,22 @@ const props = defineProps({
 // Hover state
 const hover = ref({follow:false});
 
-// Injected dependency
-const apiUrl = inject('apiUrl');
-
 // Emits
-const emit = defineEmits(['updateStatusFollow'])
+const emit = defineEmits(['updateStatusOfIsFriend'])
 
 // Function to cancel Friendship
 async function cancelFriendship(){
+  FriendService.cancelFriendship(props.userIdTarget)
+      .then(data => {
+        console.log('Se eliminó la amistad entre los usuarios:', data);
+        emit('updateStatusOfIsFriend');
+      })
+      .catch(error => {
+        console.error('Error in drop friendship:', error);
+      });
 
 }
+
 </script>
 
 <template>
@@ -32,7 +38,7 @@ async function cancelFriendship(){
             hover:bg-red-100 hover:text-red-600 hover:border-red-400
             focus:outline-none focus:shadow-outline">
     <fa v-if="hover.friend" icon="fa-solid fa-ban" class="text-red-600"/>
-    {{ hover.friend ? 'Amistad' : 'Son Amigos' }}
+    {{ hover.friend ? $t('friendship') : $t('friends') }}
   </button>
 </template>
 

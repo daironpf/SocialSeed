@@ -97,17 +97,6 @@ function toggleStatusOfIsFriend(){
             :userIdTarget = "socialUser.id"
         />
 
-<!--        <button-->
-<!--            v-if="socialUser.isFriend"-->
-<!--            @mouseover="hover.friend = true"-->
-<!--            @mouseout="hover.friend = false"-->
-<!--          class="text-sm font-bold bg-white text-black border p-2 mr-1 rounded-lg w-28 h-15-->
-<!--          focus:outline-none focus:shadow-outline-->
-<!--          hover:bg-red-100 hover:text-red-600 hover:border-red-400-->
-<!--          ">-->
-<!--          <fa v-if="hover.friend" icon="fa-solid fa-ban" class="text-red-600"/>-->
-<!--          {{ hover.friend ? ' Amistad' : 'Amigos' }}-->
-<!--        </button>-->
 
         <!-- Follow Buttons Sections-->
         <follow-button
