@@ -8,5 +8,11 @@
   "followMessage": "By clicking here, you'll start following the user",
   "sendFriendRequest": "Click to send friend request",
   "cancelFriendRequest": "Click to cancel the friend request",
-  "clickToShowManageOptions": "Click to show management options and decide how to proceed"
+  "clickToShowManageOptions": "Click to show management options and decide how to proceed",
+  "clickToBecomeFriends": "Click to become a friend",
+  "acceptRequest": "Accept",
+  "block": "Block",
+  "blockUserToPreventFriendRequest": "Block this user to prevent future friend requests",
+  "friend_request_decision_modal_message": "What action would you like to take with this friend request?",
+  "friend_request_decision_modal_title": "Responding to Friend Requests"
 }

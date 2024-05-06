@@ -2,6 +2,7 @@
 import {ref} from "vue";
 import BaseTooltip from "@/views/utils/BaseTooltip.vue";
 import FriendService from "@/services/friend-service.js";
+import FriendRequestDecisionModalView from "@/views/SocialUser/Card/Button/ModalDialogs/FriendRequestDecisionModalView.vue";
 
 // Props
 const props = defineProps({
@@ -16,8 +17,13 @@ const emit = defineEmits(['updateStatusOfIsRequestFriendshipSending'])
 
 // Function to request Friendship a user
 async function manageRequestFriendshipRecived() {
-
+// @click="manageRequestFriendshipRecived()"
 }
+
+const modalActive = ref(null);
+const toggleModal = () => {
+  modalActive.value = !modalActive.value;
+};
 </script>
 
 <template>
@@ -25,7 +31,7 @@ async function manageRequestFriendshipRecived() {
       :content="$t('clickToShowManageOptions')"
       placement="bottom">
     <button
-        @click="manageRequestFriendshipRecived()"
+        @click="toggleModal"
         @mouseover="hover.cancel = true"
         @mouseout="hover.cancel = false"
         class="button-vertical bg-white text-black mr-1
@@ -39,6 +45,10 @@ async function manageRequestFriendshipRecived() {
             </span>
     </button>
   </BaseTooltip>
+  <FriendRequestDecisionModalView
+      :modalActive="modalActive"
+      @close-modal="toggleModal"
+  />
 </template>
 
 <style scoped>

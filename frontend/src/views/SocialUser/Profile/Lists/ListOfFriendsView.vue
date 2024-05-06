@@ -31,8 +31,7 @@ async function cargarDatos() {
         }
     );
 
-    // socialUsers.value = response.data.response.content;
-    // Agregar las nuevas tarjetas a la lista existente
+    // Add the new cards..
     socialUsers.value = [...socialUsers.value, ...response.data.response.content];
 
     console.log('Response Friends: ', response.data);
@@ -51,7 +50,6 @@ async function cargarMasSugerencias() {
   currentPage++;
   await cargarDatos();
 }
-
 </script>
 
 <template>
