@@ -1,7 +1,6 @@
 <script setup>
 import {ref} from "vue";
 import BaseTooltip from "@/views/utils/BaseTooltip.vue";
-import FriendService from "@/services/friend-service.js";
 import FriendRequestDecisionModalView from "@/views/SocialUser/Card/Button/ModalDialogs/FriendRequestDecisionModalView.vue";
 
 // Props

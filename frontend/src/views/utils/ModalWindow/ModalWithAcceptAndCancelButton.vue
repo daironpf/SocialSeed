@@ -1,49 +1,39 @@
 <script setup>
 import BaseTooltip from "@/views/utils/BaseTooltip.vue";
-import FriendService from "@/services/friend-service.js";
 import {FontAwesomeIcon as Fa} from "@fortawesome/vue-fontawesome";
+import {TypeOfModals} from "@/libs/constants/TypeOfModals.js";
 
 const props = defineProps({
   modalActive: {
     type: Boolean,
     default: false,
   },
-  userIdTarget: String
+  title:{
+    type: String,
+    default: "Title Here"
+  },
+  message:{
+    type: String,
+    default: "Message to user was Here"
+  },
+  modalType:{
+    type: TypeOfModals
+  }
 })
 
 // Emits
-const emit =defineEmits(['close-modal','updateRequestReceived','updateStatusOfIsFriend']);
+const emit =defineEmits(['close-modal','accept-button','cancel-button']);
 
-// Function to Cancel Received Request Friendship
-async function cancelReceivedRequest() {
-  FriendService.cancelReceivedRequestFriendship(props.userIdTarget)
-      .then(data => {
-        console.log('Cancel the Received Request Friendship successful:', data);
-        emit('close-modal');
-        emit('updateRequestReceived');
-      })
-      .catch(error => {
-        console.error('Error in Send Request Friendship:', error);
-      })
+// This function will be called when user click in Cancel Button
+async function cancelButtonRequest() {
+  console.log('Click in Cancel-Button was Received');
+  emit('cancel-button');
 }
 
-// Accept the Received Request Friendship
-async function acceptReceivedRequest() {
-  FriendService.acceptReceivedRequestFriendship(props.userIdTarget)
-      .then(data => {
-        console.log('Cancel the Received Request Friendship successful:', data);
-        emit('close-modal');
-        emit('updateRequestReceived');
-        emit('updateStatusOfIsFriend');
-      })
-      .catch(error => {
-        console.error('Error in Accept Request Friendship:', error);
-      })
-}
-
-async function blockSocialUser(){
-  emit('close-modal');
-  emit('updateRequestReceived');
+// This function will be called when user click in Accept Button
+async function acceptButtonRequest() {
+  console.log('Click in Accept-Button was Received');
+  emit('accept-button');
 }
 </script>
 
@@ -63,11 +53,11 @@ async function blockSocialUser(){
                     rounded-t-lg border-b border-gray-300 pt-2 pb-2 pl-4 pr-3 bg-red-500">
               <!-- Title -->
               <div class="flex items-center">
-                <div>
+                <div v-if="TypeOfModals.Warning">
                   <fa icon="fa-solid fa-triangle-exclamation" class="text-white w-8 h-8 mr-4"/>
                 </div>
                 <h2 class="font-bold text-lg text-white">
-                  {{ $t('friend_request_decision_modal_title') }}
+                  {{ title }}
                 </h2>
 
               </div>
@@ -85,9 +75,9 @@ async function blockSocialUser(){
 
             <!-- Body-->
             <div class="mb-7 mt-7 ml-3 mr-3 text-gray-600 font-bold">
-                <p>
-                  {{ $t('friend_request_decision_modal_message')}}
-                </p>
+              <p>
+                {{ message }}
+              </p>
             </div>
 
             <!-- Buttons Section-->
@@ -96,41 +86,24 @@ async function blockSocialUser(){
                   :content="$t('clickToBecomeFriends')"
                   placement="bottom">
                 <button
-                    @click="acceptReceivedRequest()"
+                    @click="acceptButtonRequest"
                     class="button-vertical bg-blue-300 mr-1 text-white border-blue-300
                   hover:bg-blue-500 hover:border-blue-500
                   focus:outline-none focus:shadow-outline">
-                  {{ $t('acceptRequest')}}
+                  Accept
                 </button>
               </BaseTooltip>
 
               <BaseTooltip
-                :content="$t('cancelFriendRequest')"
-                placement="bottom">
+                  :content="$t('cancelFriendRequest')"
+                  placement="bottom">
                 <button
-                    @click="cancelReceivedRequest()"
+                    @click="cancelButtonRequest"
                     class="button-vertical bg-white text-red-500
                   hover:bg-red-100 hover:text-red-600 hover:border-red-400
                   focus:outline-none focus:shadow-outline">
                   <fa icon="fa-solid fa-ban" class="text-red-600 mr-1"/>
-                  {{ $t('request')}}
-                </button>
-              </BaseTooltip>
-
-              <BaseTooltip
-                  :content="$t('blockUserToPreventFriendRequest')"
-                  placement="bottom">
-                <button
-                    @click="blockSocialUser()"
-                    class="button-vertical text-white bg-red-300 border-red-300 ml-1
-                  hover:border-red-500 hover:bg-red-500
-                  focus:outline-none focus:shadow-outline">
-                <fa icon="fa-solid fa-person-circle-xmark"
-                    class="hover:cursor-pointer
-                           focus:outline-none focus:shadow-outline
-                           text-md text-white w-5 h-4 border-red-400
-                            "/>
-                  {{ $t('block')}}
+                  Cancel
                 </button>
               </BaseTooltip>
             </div>
