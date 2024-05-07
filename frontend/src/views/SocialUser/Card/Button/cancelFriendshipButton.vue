@@ -6,7 +6,8 @@ import { TypeOfModals } from "@/libs/constants/TypeOfModals.js";
 
 // Props
 const props = defineProps({
-  userIdTarget: String
+  userIdTarget: String,
+  fullName: String
 })
 
 // Hover state
@@ -17,23 +18,22 @@ const emit = defineEmits(['updateStatusOfIsFriend'])
 
 // Function to cancel Friendship
 async function cancelFriendship(){
-  console.log('Here cancel the friendship relationship between users');
-
-  // FriendService.cancelFriendship(props.userIdTarget)
-  //     .then(data => {
-  //       console.log('Se eliminó la amistad entre los usuarios:', data);
-  //       emit('updateStatusOfIsFriend');
-  //     })
-  //     .catch(error => {
-  //       console.error('Error in drop friendship:', error);
-  //     });
-
+  FriendService.cancelFriendship(props.userIdTarget)
+      .then(data => {
+        console.log('Cancel the friendship relationship between users:', data);
+        emit('updateStatusOfIsFriend');
+      })
+      .catch(error => {
+        console.error('Error in cancel friendship:', error);
+      });
+  toggleModal()
 }
 
 const modalActive = ref(false);
-const modalType = ref('');
 
-modalType.value = TypeOfModals.Warning;
+const modalType = ref("");
+modalType.value = "Warning";
+
 const toggleModal = () => {
   modalActive.value = !modalActive.value;
 };
@@ -54,8 +54,8 @@ const toggleModal = () => {
 
   <ModalWithAcceptAndCancelButton
       :modalActive="modalActive"
-      :title="$t('clickToShowManageOptions')"
-      :message="$t('blockUserToPreventFriendRequest')"
+      :title="$t('confirmCancelFriendship')"
+      :message="$t('confirmCancelFriendshipMessage') + props.fullName+' ?'"
       :modalType="modalType"
       @close-modal="toggleModal"
       @accept-button="cancelFriendship"

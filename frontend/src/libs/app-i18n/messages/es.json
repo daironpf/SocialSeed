@@ -16,5 +16,7 @@
   "block": "Bloquear",
   "blockUserToPreventFriendRequest": "Bloquear este usuario para evitar futuras solicitudes de amistad",
   "friend_request_decision_modal_message": "¿Qué acción deseas tomar con esta solicitud de amistad?",
-  "friend_request_decision_modal_title": "Respuesta a Solicitudes de Amistad"
+  "friend_request_decision_modal_title": "Respuesta a Solicitudes de Amistad",
+  "confirmCancelFriendship": "Confirmación para cancelar amistad",
+  "confirmCancelFriendshipMessage": "¿Estás seguro de que quieres cancelar la amistad con "
 }

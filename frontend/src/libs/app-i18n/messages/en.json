@@ -16,5 +16,7 @@
   "block": "Block",
   "blockUserToPreventFriendRequest": "Block this user to prevent future friend requests",
   "friend_request_decision_modal_message": "What action would you like to take with this friend request?",
-  "friend_request_decision_modal_title": "Responding to Friend Requests"
+  "friend_request_decision_modal_title": "Responding to Friend Requests",
+  "confirmCancelFriendship": "Confirmation to cancel friendship",
+  "confirmCancelFriendshipMessage": "Are you sure you want to cancel friendship with "
 }
