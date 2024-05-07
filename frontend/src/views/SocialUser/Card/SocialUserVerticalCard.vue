@@ -82,6 +82,7 @@ function toggleStatusOfIsFriend(){
             v-if="socialUser.isFriend"
             @updateStatusOfIsFriend="toggleStatusOfIsFriend"
             :userIdTarget = "socialUser.id"
+            :full-name = "socialUser.fullName"
         />
 
         <cancel-request-friendship-button
