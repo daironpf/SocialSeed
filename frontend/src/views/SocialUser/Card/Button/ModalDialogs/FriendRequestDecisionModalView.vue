@@ -2,6 +2,7 @@
 import BaseTooltip from "@/views/utils/BaseTooltip.vue";
 import FriendService from "@/services/friend-service.js";
 import {data} from "autoprefixer";
+import {FontAwesomeIcon as Fa} from "@fortawesome/vue-fontawesome";
 
 const props = defineProps({
   modalActive: {
@@ -56,22 +57,27 @@ async function blockSocialUser(){
         <Transition name="modal-inner">
           <div
               v-if="modalActive"
-              class="pt-2 pb-2 pl-1 pr-1 rounded bg-white self-start mt-32 max-w-screen-md">
+              class="p-0 rounded-lg bg-white self-start mt-32 max-w-screen-md">
 
             <!-- Header-->
-            <div class="flex items-center justify-between border-b border-gray-300 pb-2 pl-4">
+            <div class="flex items-center justify-between
+                    rounded-t-lg border-b border-gray-300 pt-2 pb-2 pl-4 pr-3 bg-red-500">
               <!-- Title -->
               <div class="flex items-center">
-                <h2 class="font-bold">
+                <div>
+                  <fa icon="fa-solid fa-triangle-exclamation" class="text-white w-8 h-8 mr-4"/>
+                </div>
+                <h2 class="font-bold text-lg text-white">
                   {{ $t('friend_request_decision_modal_title') }}
                 </h2>
+
               </div>
               <!-- Close Button-->
               <button @click="$emit('close-modal')"
-                      class="text-gray-600
-                    hover:text-gray-800
+                      class="text-white
+                    hover:text-white
                     focus:outline-none
-                    focus:border rounded-full p-3 hover:bg-gray-200">
+                    focus:border rounded-full p-1 hover:bg-red-400">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -79,22 +85,21 @@ async function blockSocialUser(){
             </div>
 
             <!-- Body-->
-            <div>
-                <h1 class="text-black font-semibold"></h1>
-                <p class="font-semibold m-3 mt-6 ">
+            <div class="mb-7 mt-7 ml-3 mr-3 text-gray-600 font-bold">
+                <p>
                   {{ $t('friend_request_decision_modal_message')}}
                 </p>
             </div>
 
             <!-- Buttons Section-->
-            <div class="mt-4 flex justify-center">
+            <div class="mt-4 flex rounded-b-md justify-end p-4 mb-0 bg-gray-300">
               <BaseTooltip
                   :content="$t('clickToBecomeFriends')"
                   placement="bottom">
                 <button
                     @click="acceptReceivedRequest()"
-                    class="button-vertical bg-blue-300 mr-1 text-white
-                  hover:bg-blue-500
+                    class="button-vertical bg-blue-300 mr-1 text-white border-blue-300
+                  hover:bg-blue-500 hover:border-blue-500
                   focus:outline-none focus:shadow-outline">
                   {{ $t('acceptRequest')}}
                 </button>
@@ -118,13 +123,13 @@ async function blockSocialUser(){
                   placement="bottom">
                 <button
                     @click="blockSocialUser()"
-                    class="button-vertical bg-white text-red-400 ml-1
-                  hover:bg-red-200 hover:text-orange-700 hover:border-red-300
+                    class="button-vertical text-white bg-red-300 border-red-300 ml-1
+                  hover:border-red-500 hover:bg-red-500
                   focus:outline-none focus:shadow-outline">
                 <fa icon="fa-solid fa-person-circle-xmark"
                     class="hover:cursor-pointer
                            focus:outline-none focus:shadow-outline
-                           text-md text-red-600 w-5 h-4
+                           text-md text-white w-5 h-4 border-red-400
                             "/>
                   {{ $t('block')}}
                 </button>

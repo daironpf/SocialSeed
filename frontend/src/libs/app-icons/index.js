@@ -29,10 +29,11 @@ import {
     faUserPlus,
     faPersonCirclePlus,
     faPenToSquare,
-    faPersonCircleXmark
+    faPersonCircleXmark,
+    faTriangleExclamation
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
-library.add(faBan, faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, faThumbsUp, faComment, faSync, faPencil, faEarth, faSortDown, faUserGroup, faLock, faUsers, faUserFriends, faUsersBetweenLines, faUsersLine, faUserPlus, faPersonCirclePlus, faPenToSquare, faPersonCircleXmark);
+library.add(faBan, faHome, faUser, faBell, faEnvelope, faCog, faImage, faClock, faThumbsUp, faComment, faSync, faPencil, faEarth, faSortDown, faUserGroup, faLock, faUsers, faUserFriends, faUsersBetweenLines, faUsersLine, faUserPlus, faPersonCirclePlus, faPenToSquare, faPersonCircleXmark, faTriangleExclamation);
 
 export {FontAwesomeIcon};
