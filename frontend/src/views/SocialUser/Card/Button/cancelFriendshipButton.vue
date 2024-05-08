@@ -31,8 +31,8 @@ async function cancelFriendship(){
 
 const modalActive = ref(false);
 
-const modalType = ref("");
-modalType.value = "Warning";
+const modalType = ref(TypeOfModals);
+modalType.value = TypeOfModals.WARNING;
 
 const toggleModal = () => {
   modalActive.value = !modalActive.value;

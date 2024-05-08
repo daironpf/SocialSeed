@@ -1,6 +1,6 @@
-export const TypeOfModals = {
-    Warning: 'warning',
-    Information: 'information',
-    Alert: 'alert',
-    Error: 'error'
-};
+export const TypeOfModals = Object.freeze({
+    WARNING: 'warning',
+    INFORMATION: 'information',
+    ALERT: 'alert',
+    ERROR: 'error'
+});

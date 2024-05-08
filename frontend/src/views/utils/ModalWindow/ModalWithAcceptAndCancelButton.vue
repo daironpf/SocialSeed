@@ -17,7 +17,7 @@ const props = defineProps({
     default: "Message to user was Here"
   },
   modalType:{
-    type: String
+    type: TypeOfModals
   }
 })
 
@@ -50,10 +50,10 @@ async function acceptButtonRequest() {
 
             <!-- Header-->
             <div class="flex items-center justify-between rounded-t-lg border-b border-gray-300 pt-2 pb-2 pl-4 pr-3"
-                  :class="{'bg-red-500': modalType === 'Warning'}">
+                  :class="{'bg-red-500': modalType === TypeOfModals.WARNING}">
               <!-- Title -->
               <div class="flex items-center">
-                <div v-if="modalType == 'Warning'">
+                <div v-if="modalType == TypeOfModals.WARNING">
                   <fa icon="fa-solid fa-triangle-exclamation" class="text-white w-8 h-8 mr-4"/>
                 </div>
                 <h2 class="font-bold text-lg text-white">
