@@ -17,7 +17,7 @@ const props = defineProps({
     default: "Message to user was Here"
   },
   modalType:{
-    type: TypeOfModals
+    type: String
   }
 })
 
