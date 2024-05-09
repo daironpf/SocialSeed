@@ -1,8 +1,7 @@
 <script setup>
 import {ref} from "vue";
 import FriendService from "@/services/friend-service.js";
-import ModalWithAcceptAndCancelButton from "@/views/utils/ModalWindow/ModalWithAcceptAndCancelButton.vue";
-import { TypeOfModals } from "@/libs/constants/TypeOfModals.js";
+import WarningModalWindowView from "@/views/utils/ModalWindow/WarningModalWindowView.vue";
 
 // Props
 const props = defineProps({
@@ -31,9 +30,6 @@ async function cancelFriendship(){
 
 const modalActive = ref(false);
 
-const modalType = ref(TypeOfModals);
-modalType.value = TypeOfModals.WARNING;
-
 const toggleModal = () => {
   modalActive.value = !modalActive.value;
 };
@@ -52,11 +48,12 @@ const toggleModal = () => {
     {{ hover.friend ? $t('friendship') : $t('friends') }}
   </button>
 
-  <ModalWithAcceptAndCancelButton
+  <WarningModalWindowView
       :modalActive="modalActive"
       :title="$t('confirmCancelFriendship')"
       :message="$t('confirmCancelFriendshipMessage') + props.fullName+' ?'"
-      :modalType="modalType"
+      :acceptBtnText="$t('proceed')"
+      :cancelBtnText="$t('cancel')"
       @close-modal="toggleModal"
       @accept-button="cancelFriendship"
       @cancel-button="toggleModal"

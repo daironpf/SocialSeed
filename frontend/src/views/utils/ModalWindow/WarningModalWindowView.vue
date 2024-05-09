@@ -1,7 +1,5 @@
 <script setup>
-import BaseTooltip from "@/views/utils/BaseTooltip.vue";
 import {FontAwesomeIcon as Fa} from "@fortawesome/vue-fontawesome";
-import {TypeOfModals} from "@/libs/constants/TypeOfModals.js";
 
 const props = defineProps({
   modalActive: {
@@ -16,7 +14,10 @@ const props = defineProps({
     type: String,
     default: "Message to user was Here"
   },
-  modalType:{
+  cancelBtnText:{
+    type: String
+  },
+  acceptBtnText:{
     type: String
   }
 })
@@ -49,11 +50,10 @@ async function acceptButtonRequest() {
               class="p-0 rounded-lg bg-white self-start mt-32 max-w-screen-md">
 
             <!-- Header-->
-            <div class="flex items-center justify-between rounded-t-lg border-b border-gray-300 pt-2 pb-2 pl-4 pr-3"
-                  :class="{'bg-red-500': modalType === TypeOfModals.WARNING}">
+            <div class="flex items-center justify-between rounded-t-lg border-b border-gray-300 pt-2 pb-2 pl-4 pr-3 bg-red-500">
               <!-- Title -->
               <div class="flex items-center">
-                <div v-if="modalType == TypeOfModals.WARNING">
+                <div>
                   <fa icon="fa-solid fa-triangle-exclamation" class="text-white w-8 h-8 mr-4"/>
                 </div>
                 <h2 class="font-bold text-lg text-white">
@@ -84,19 +84,18 @@ async function acceptButtonRequest() {
             <div class="mt-4 flex rounded-b-md justify-end p-4 mb-0 bg-gray-300">
               <button
                   @click="cancelButtonRequest"
-                  class="button-vertical bg-white text-red-500
-                  hover:bg-red-100 hover:text-red-600 hover:border-red-400
+                  class="button-vertical bg-white text-black
+                  hover:bg-white-100 hover:text-black hover:border-gray-500
                   focus:outline-none focus:shadow-outline">
-                <fa icon="fa-solid fa-ban" class="text-red-600 mr-1"/>
-                Cancel
+                  {{ cancelBtnText }}
               </button>
 
               <button
                     @click="acceptButtonRequest"
-                    class="button-vertical bg-blue-300 ml-1 text-white border-blue-300
-                  hover:bg-blue-500 hover:border-blue-500
+                    class="button-vertical bg-red-300 ml-1 text-white border-red-300
+                  hover:bg-red-500 hover:border-red-500
                   focus:outline-none focus:shadow-outline">
-                  Accept
+                  {{ acceptBtnText }}
               </button>
             </div>
 
