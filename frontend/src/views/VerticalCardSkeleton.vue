@@ -11,7 +11,6 @@
       viewBox="0 0 160 160"
       preserveAspectRatio="none"
   >
-    <title id="loading-aria">Loading...</title>
     <rect
         x="0"
         y="0"
@@ -22,12 +21,12 @@
     ></rect>
     <defs>
       <clipPath id="clip-path">
-        <circle cx="76" cy="31" r="31" />
+        <circle cx="80" cy="31" r="25" />
         <rect x="0" y="95" rx="3" ry="3" width="115" height="6" />
         <rect x="0" y="114" rx="3" ry="3" width="160" height="6" />
-        <rect x="0" y="135" rx="0" ry="0" width="70" height="20" />
+        <rect x="0" y="135" rx="4" ry="4" width="70" height="20" />
         <rect x="0" y="76" rx="3" ry="3" width="160" height="6" />
-        <rect x="85" y="135" rx="0" ry="0" width="70" height="20" />
+        <rect x="85" y="135" rx="4" ry="4" width="70" height="20" />
       </clipPath>
       <linearGradient id="fill">
         <stop

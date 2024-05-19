@@ -14,7 +14,6 @@ const targetElement = ref(null);
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      console.log('INFO [InfinityScroll]: Intersection Observer is working!', { entry });
       if (entry.isIntersecting && props.hasMoreElements) {
         emit(LOAD_MORE_EVENT);
       }
@@ -28,6 +27,6 @@ onMounted(() => {
 <template>
   <div :class="props.class">
     <slot></slot>
-    <div ref="targetElement"></div>
   </div>
+  <div ref="targetElement"></div>
 </template>

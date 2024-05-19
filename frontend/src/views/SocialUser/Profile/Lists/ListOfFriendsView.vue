@@ -1,42 +1,32 @@
 <script setup>
-import axios from "axios";
-import {inject, ref} from "vue";
+import {ref} from "vue";
 import SocialUserVerticalCard from "@/views/SocialUser/Card/SocialUserVerticalCard.vue";
-import { getCurrentUser } from '@/services/local-storage.js';
+import {getCurrentUser} from '@/services/local-storage.js';
 import InfinityScroll from '@/views/InfinityScroll.vue';
-import CardSkeleton from "@/views/VerticalCardSkeleton.vue";
 import ListVerticalCardsSkeleton from "@/views/ListVerticalCardsSkeleton.vue";
+import FriendService from '@/services/friend-service.js';
 
 const props = defineProps({
   userId: String,
 })
 
 const currentUser = ref(getCurrentUser());
-const apiUrl = inject('apiUrl')
 const socialUsers = ref([]);
 const loading = ref(false);
 const hasMoreFriends = ref(true);
 
-const PAGE_SIZE = 9;
+const PAGE_SIZE = 10;
 let currentPage = 0;
 
 async function loadFriends() {
   try {
     loading.value = true;
-    const response = await axios.get(
-        `${apiUrl}friend/friendsOf/${props.userId}`,
-        {
-          headers: {
-            userId: currentUser.value.id,
-          },
-          params: {
-            page: currentPage,
-            size: PAGE_SIZE,
-          },
-        }
-    );
 
-    const newFriends = response.data.response.content;
+    const newFriends = await FriendService.getFriends({
+      currentPage,
+      pageSize: PAGE_SIZE,
+      userId: currentUser.value.id,
+    });
 
     // Add the new cards
     socialUsers.value = socialUsers.value.concat(newFriends);
@@ -46,17 +36,15 @@ async function loadFriends() {
       hasMoreFriends.value = false;
     }
 
-    console.log('Response Friends: ', response.data);
+    // increase the counter and prepare it for the next data load
+    currentPage++;
+
+    console.log('INFO [ListOfFriendsView] Response Friends: ', newFriends);
   } catch (error) {
-    console.error(error);
+    console.error('ERROR [ListOfFriendsView] Could not load friends', error);
   } finally {
     loading.value = false;
   }
-}
-
-async function cargarMasSugerencias() {
-  currentPage++;
-  await loadFriends();
 }
 </script>
 
@@ -64,7 +52,7 @@ async function cargarMasSugerencias() {
   <InfinityScroll
       class="flex flex-wrap justify-around space-x4"
       :hasMoreElements="hasMoreFriends"
-      @LoadMoreElements="cargarMasSugerencias">
+      @LoadMoreElements="loadFriends">
     <SocialUserVerticalCard
         v-for="user in socialUsers"
         :user="user"
@@ -73,5 +61,5 @@ async function cargarMasSugerencias() {
         class=""
     />
   </InfinityScroll>
-  <ListVerticalCardsSkeleton v-if="loading" />
+  <ListVerticalCardsSkeleton v-if="loading"/>
 </template>
