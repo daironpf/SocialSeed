@@ -1,7 +1,6 @@
 import axios from "axios";
 import {getCurrentUser} from "@/services/local-storage.js";
 
-// TODO EXPORTAR UN OBJETO HTTP CLIENT
 const HttpClient = {
     async get(url, config) {
         const currentUser = getCurrentUser();
