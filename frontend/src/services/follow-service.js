@@ -1,7 +1,8 @@
 // Importar Axios
 import axios from 'axios';
-import { dataUtil } from './data-util.js'
-import { getCurrentUser } from "@/services/local-storage.js";
+import {dataUtil} from './data-util.js'
+import {getCurrentUser} from "@/services/local-storage.js";
+import HttpClient from "@/libs/http-client/index.js";
 
 let currentUser = getCurrentUser();
 let currentUrl = dataUtil.CURRENT_URL;
@@ -46,6 +47,28 @@ const FollowService = {
         } catch (error) {
             throw new Error('Error in unfollowing user: ' + error.message);
         }
+    },
+
+    async getFollows({userId, page = 0, pageSize = 12}) {
+        const config = {params: {page, size: pageSize}};
+
+        const response = await HttpClient.get(
+            `${currentUrl}follow/following/${userId}`,
+            config
+        );
+
+        return response?.response?.content ?? [];
+    },
+
+    async getFollowers({userId, page = 0, pageSize = 12}) {
+        const config = {params: {page, size: pageSize}};
+
+        const response = await HttpClient.get(
+            `${currentUrl}follow/followers/${userId}`,
+            config
+        );
+
+        return response?.response?.content ?? [];
     }
 };
 
