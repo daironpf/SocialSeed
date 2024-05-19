@@ -2,7 +2,7 @@
 import axios from 'axios';
 import {dataUtil} from './data-util.js'
 import {getCurrentUser} from "@/services/local-storage.js";
-import * as httpClient from "@/libs/http-client";
+import HttpClient from "@/libs/http-client";
 
 let currentUser = getCurrentUser();
 let currentUrl = dataUtil.CURRENT_URL;
@@ -105,10 +105,10 @@ const FriendService = {
         }
     },
 
-    async getFriends({userId, currentPage = 0, pageSize = 10}) {
+    async getFriends({userId, currentPage = 0, pageSize = 12}) {
         const config = { params: {page: currentPage, size: pageSize } };
 
-        const response = await httpClient.get(
+        const response = await HttpClient.get(
             `${currentUrl}friend/friendsOf/${userId}`,
             config,
         );
