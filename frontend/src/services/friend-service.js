@@ -1,7 +1,8 @@
 // Importar Axios
 import axios from 'axios';
-import { dataUtil } from './data-util.js'
-import { getCurrentUser } from "@/services/local-storage.js";
+import {dataUtil} from './data-util.js'
+import {getCurrentUser} from "@/services/local-storage.js";
+import * as httpClient from "@/libs/http-client";
 
 let currentUser = getCurrentUser();
 let currentUrl = dataUtil.CURRENT_URL;
@@ -102,6 +103,17 @@ const FriendService = {
         } catch (error) {
             console.error('Error in delete friendship:', error.message);
         }
+    },
+
+    async getFriends({userId, currentPage = 0, pageSize = 10}) {
+        const config = { params: {page: currentPage, size: pageSize } };
+
+        const response = await httpClient.get(
+            `${currentUrl}friend/friendsOf/${userId}`,
+            config,
+        );
+
+        return response?.response?.content ?? [];
     }
 };
 
