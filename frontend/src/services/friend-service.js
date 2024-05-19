@@ -105,8 +105,8 @@ const FriendService = {
         }
     },
 
-    async getFriends({userId, currentPage = 0, pageSize = 12}) {
-        const config = { params: {page: currentPage, size: pageSize } };
+    async getFriends({userId, page = 0, pageSize = 12}) {
+        const config = { params: { page, size: pageSize } };
 
         const response = await HttpClient.get(
             `${currentUrl}friend/friendsOf/${userId}`,

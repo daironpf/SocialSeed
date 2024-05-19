@@ -1,7 +1,6 @@
 <script setup>
 import {ref} from "vue";
 import SocialUserVerticalCard from "@/views/SocialUser/Card/SocialUserVerticalCard.vue";
-import {getCurrentUser} from '@/services/local-storage.js';
 import InfinityScroll from '@/components/InfinityScroll.vue';
 import ListVerticalCardsSkeleton from "@/components/skeletons/ListSocialUserVerticalCardsSkeleton.vue";
 
@@ -22,7 +21,7 @@ async function loadSocialUsers() {
     loading.value = true;
 
     const usersToAdd = await loadDataFn({
-      currentPage,
+      page: currentPage,
       pageSize: PAGE_SIZE,
       userId,
     });
