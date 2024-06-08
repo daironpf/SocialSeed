@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
-import router from "@/router/index.js";
-import { i18n } from '@/libs/app-i18n/index.js';
-import { FontAwesomeIcon } from '@/libs/app-icons/index.js';
+import router from "@/core/router/index.js";
+import { i18n } from '@/core/libs/app-i18n/index.js';
+import { FontAwesomeIcon } from '@/core/libs/app-icons/index.js';
 import App from './App.vue'
 import './style.css'
 
