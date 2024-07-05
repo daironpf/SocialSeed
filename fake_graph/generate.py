@@ -6,6 +6,8 @@ Author: Dairon Pérez Frías
 GitHub: https://github.com/daironpf
 License: Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0)
 """
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
 # Import Timer class from libs
 from libs.timer import Timer
 
