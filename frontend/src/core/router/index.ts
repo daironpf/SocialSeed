@@ -16,16 +16,16 @@ const listOfFollowRecommendations = () => import(/* webpackChunkName: "ListOfFol
 // Define the routes with appropriate types
 const routes: Array<RouteRecordRaw> = [
     {
-        path: "/",
-        name: "feed",
-        meta: { showHeader: true },
-        component: feed
-    },
-    {
         path: "/login",
         name: "login",
         meta: { showHeader: false },
         component: LoginView
+    },
+    {
+        path: "/",
+        name: "feed",
+        meta: { showHeader: true },
+        component: feed
     },
     {
         path: "/su-profile/:id",
@@ -33,6 +33,23 @@ const routes: Array<RouteRecordRaw> = [
         meta: { showHeader: true },
         component: profile
     },
+    // {
+    //     path: '/settings',
+    //     name: 'Settings',
+    //     component: SettingsView,
+    //     children: [
+    //         {
+    //             path: 'account',
+    //             name: 'AccountSettings',
+    //             component: AccountView
+    //         },
+    //         {
+    //             path: 'privacy',
+    //             name: 'PrivacySettings',
+    //             component: PrivacyView
+    //         }
+    //     ]
+    // },
     {
         path: "/post/:id",
         name: "post-details",
