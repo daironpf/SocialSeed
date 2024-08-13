@@ -1,20 +1,20 @@
-<script setup>
-import {inject, ref} from 'vue';
+<script setup lang="ts">
+import { inject, ref, Ref } from 'vue';
 import { useRouter } from 'vue-router';
 
-// Variables
-const email = ref('');
-const password = ref('');
-const error = ref('');
+// Tipos de las variables
+const email: Ref<string> = ref('');
+const password: Ref<string> = ref('');
+const error: Ref<string> = ref('');
 const router = useRouter();
 
-const apiUrl = inject('apiUrl')
-const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));
+const apiUrl = inject<string>('apiUrl');
+const currentUser: Ref<any | null> = ref(JSON.parse(localStorage.getItem('currentUser') ?? 'null'));
 
-const login = async () => {
+const login = async (): Promise<void> => {
   try {
     const response = await validateEmail(email.value, password.value);
-    if (response.ok) {
+    if (response && response.ok) {
       const userData = await response.json();
       localStorage.setItem('currentUser', JSON.stringify(userData.response)); // Almacena el usuario en localStorage
       currentUser.value = userData.response; // Actualiza la variable de usuario
@@ -22,19 +22,19 @@ const login = async () => {
       router.push({ name: 'feed' });
 
     } else {
-      error.value = 'Credenciales inválidas, por favor inténtalo de nuevo.';
+      error.value = 'Invalid credentials, please try again.';
     }
 
-  } catch (err) {
-    console.error('Error al iniciar sesión:', err);
-    error.value = 'Se produjo un error al iniciar sesión. Por favor, inténtalo de nuevo más tarde.';
+  } catch (err: any) {
+    console.error('Error logging in:', err);
+    error.value = 'An error occurred while logging in. Please try again later.';
   }
 };
 
-
-const validateEmail = async (email, password) => {
+const validateEmail = async (email: string, password: string): Promise<Response | undefined> => {
   try {
-    const response = await fetch(apiUrl + 'socialUser/getSocialUserByEmail/'+email);
+    if (!apiUrl) throw new Error('API URL is not provided');
+    const response = await fetch(`${apiUrl}socialUser/getSocialUserByEmail/${email}`);
     return response;
   } catch (e) {
     console.error(e);

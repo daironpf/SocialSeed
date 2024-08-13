@@ -1,31 +1,31 @@
-<script setup>
-import {ref} from "vue";
+<script setup lang="ts">
+import { ref, defineProps, defineEmits } from "vue";
 import BaseTooltip from "@/components/BaseTooltip.vue";
-import FollowService from "@/core/services/follow-service.js";
+import FollowService from "@/core/a mover/follow-service.ts";
 
 // Props
-const props = defineProps({
+const props = defineProps<{
   userIdTarget: String
-})
+}>();
 
 // Hover state
-const hover = ref({follow:false});
+const hover = ref<{follow: boolean}>({ follow: false });
 
 // Emits
-const emit = defineEmits(['updateStatusFollow'])
+const emit = defineEmits<{
+  (event: 'updateStatusFollow', status: boolean): void;
+}>();
 
 // Llamada para dejar de seguir a un usuario
 async function unFollowUser() {
-  FollowService.unfollowUser(props.userIdTarget)
-      .then(data => {
-        console.log('Usuario dejado de seguir con éxito:', data);
-        emit('updateStatusFollow', false);
-      })
-      .catch(error => {
-        console.error('Error al dejar de seguir al usuario:', error);
-      });
+  try {
+    const data = await FollowService.unfollowUser(props.userIdTarget);
+    console.log('Usuario dejado de seguir con éxito:', data);
+    emit('updateStatusFollow', false);
+  } catch (error) {
+    console.error('Error al dejar de seguir al usuario:', error);
+  }
 }
-
 </script>
 
 <template>
@@ -34,7 +34,7 @@ async function unFollowUser() {
         :content="$t('unfollowMessage')"
         placement="bottom">
           <button
-              @click="unFollowUser()"
+              @click="unFollowUser"
               @mouseover="hover.follow = true"
               @mouseout="hover.follow = false"
               class="button-vertical bg-white text-black
@@ -49,9 +49,4 @@ async function unFollowUser() {
             </span>
           </button>
     </BaseTooltip>
-
 </template>
-
-<style scoped>
-
-</style>

@@ -1,6 +1,6 @@
 <script setup>
 import BaseTooltip from "@/components/BaseTooltip.vue";
-import FriendService from "@/core/services/friend-service.js";
+import FriendService from "@/core/a mover/friend-service.ts";
 import {FontAwesomeIcon as Fa} from "@fortawesome/vue-fontawesome";
 
 const props = defineProps({

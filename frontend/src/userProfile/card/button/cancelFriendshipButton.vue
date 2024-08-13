@@ -1,6 +1,6 @@
 <script setup>
 import {ref} from "vue";
-import FriendService from "@/core/services/friend-service.js";
+import FriendService from "@/core/a mover/friend-service.ts";
 import WarningModalWindowView from "@/components/ModalWindow/WarningModalWindowView.vue";
 
 // Props

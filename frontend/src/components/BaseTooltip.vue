@@ -23,34 +23,33 @@
 * source code link: https://www.youtube.com/watch?v=kfjVorSv_rI
 */
 
-<script setup>
-import {ref} from "vue";
-import {arrow, computePosition, flip, offset, shift} from "@floating-ui/dom";
+<script setup lang="ts">
+import { ref, Ref } from "vue";
+import { arrow, computePosition, flip, offset, shift } from "@floating-ui/dom";
 
-const  props = defineProps({
-  content: String,
-  placement: {
-    type: String,
-    default: "bottom"
-  }
-});
+const props = defineProps<{
+  content: string;
+  placement?: string;
+}>();
 
-const referenceRef = ref();
-const floatingRef = ref();
-const arrowRef = ref();
+const referenceRef = ref<HTMLElement | null>(null);
+const floatingRef = ref<HTMLElement | null>(null);
+const arrowRef = ref<HTMLElement | null>(null);
 const isHidden = ref(true);
 
-async function calculatePosition(){
-  const {x, y, middlewareData, placement} = await computePosition(
+async function calculatePosition() {
+  if (!referenceRef.value || !floatingRef.value) return;
+
+  const { x, y, middlewareData, placement } = await computePosition(
       referenceRef.value,
       floatingRef.value,
       {
-        placement: props.placement,
+        placement: props.placement || "bottom",
         middleware: [
           offset(8),
           flip(),
-          shift({padding: 5}),
-          arrow({element: arrowRef.value}),
+          shift({ padding: 5 }),
+          arrow({ element: arrowRef.value }),
         ],
       }
   );
@@ -60,9 +59,9 @@ async function calculatePosition(){
     top: `${y}px`,
   });
 
-  const {x: arrowX, y: arrowY} = middlewareData.arrow;
+  const { x: arrowX, y: arrowY } = middlewareData.arrow || {};
 
-  const opposedSide = {
+  const opposedSide: { [key: string]: string } = {
     left: "right",
     right: "left",
     bottom: "top",
@@ -70,17 +69,16 @@ async function calculatePosition(){
   }[placement.split("-")[0]];
 
   Object.assign(arrowRef.value.style, {
-    left: arrowX ? `${arrowX}px`: "",
-    top: arrowY ? `${arrowY}px`: "",
+    left: arrowX ? `${arrowX}px` : "",
+    top: arrowY ? `${arrowY}px` : "",
     bottom: "",
     right: "",
     [opposedSide]: "-4px"
-  })
+  });
 }
 
 function hide() {
   isHidden.value = true;
-
 }
 
 function show() {
@@ -91,27 +89,28 @@ function show() {
 
 <template>
   <div class="inline-block">
+    <div
+        @mouseenter="show"
+        @mouseleave="hide"
+        @focus="show"
+        @blur="hide"
+        ref="referenceRef"
+        class="inline-block"
+    >
+      <slot/>
+    </div>
+    <div
+        ref="floatingRef"
+        :class="[
+        'absolute top-0 left-0 z-50 bg-gray-700 text-sm text-white px-3 py-1.5 rounded-md cursor-default',
+        isHidden && 'hidden'
+      ]"
+    >
+      {{ props.content }}
       <div
-          @mouseenter="show"
-          @mouseleave="hide"
-          @focus="show"
-          @blur="hide"
-          ref="referenceRef"
-          class="inline-block">
-        <slot/>
-      </div>
-      <div
-          ref="floatingRef"
-          :class="[
-                'absolute top-0 left-0 z-50 bg-gray-700 text-sm text-white px-3 py-1.5 rounded-md cursor-default',
-                isHidden && 'hidden'
-            ]">
-
-        {{ props.content }}
-        <div
-            class="absolute bg-gray-700 h-[8px] w-[8px] rotate-45"
-            ref="arrowRef"
-        ></div>
-      </div>
+          class="absolute bg-gray-700 h-[8px] w-[8px] rotate-45"
+          ref="arrowRef"
+      ></div>
+    </div>
   </div>
 </template>

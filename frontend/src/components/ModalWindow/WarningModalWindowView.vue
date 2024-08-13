@@ -1,39 +1,29 @@
-<script setup>
+<script setup lang="ts">
 import {FontAwesomeIcon as Fa} from "@fortawesome/vue-fontawesome";
 
-const props = defineProps({
-  modalActive: {
-    type: Boolean,
-    default: false,
-  },
-  title:{
-    type: String,
-    default: "Title Here"
-  },
-  message:{
-    type: String,
-    default: "Message to user was Here"
-  },
-  cancelBtnText:{
-    type: String
-  },
-  acceptBtnText:{
-    type: String
-  }
-})
+interface ModalWindowProps {
+  modalActive: Boolean
+  title: String;
+  message: String;
+  cancelBtnText?: string; // Propiedad opcional
+  acceptBtnText?: string; // Propiedad opcional
+}
 
-// Emits
+// Definición de las props utilizando la interfaz
+const props = defineProps<ModalWindowProps>();
+
+// Definición de los eventos emitidos
 const emit =defineEmits(['close-modal','accept-button','cancel-button']);
 
-// This function will be called when user click in Cancel button
+// Función que se llama al hacer clic en el botón de cancelar
 async function cancelButtonRequest() {
   console.log('Click in Cancel-button was Received');
   emit('cancel-button');
 }
 
-// This function will be called when user click in Accept button
+// Función que se llama al hacer clic en el botón de aceptar
 async function acceptButtonRequest() {
-  console.log('Click in Accept-button was Received');
+  console.log('Click en Accept-button recibido');
   emit('accept-button');
 }
 </script>
@@ -42,60 +32,62 @@ async function acceptButtonRequest() {
   <Teleport to="body">
     <Transition name="modal-outer">
       <div
-          v-show="modalActive"
-          class="absolute w-full bg-black bg-opacity-30 h-screen top-0 left-0 flex justify-center px-8">
+          v-show="props.modalActive"
+          class="absolute w-full bg-black bg-opacity-30 h-screen top-0 left-0 flex justify-center px-8"
+      >
         <Transition name="modal-inner">
           <div
-              v-if="modalActive"
-              class="p-0 rounded-lg bg-white self-start mt-32 max-w-screen-md">
-
-            <!-- Header-->
+              v-if="props.modalActive"
+              class="p-0 rounded-lg bg-white self-start mt-32 max-w-screen-md"
+          >
+            <!-- Header -->
             <div class="flex items-center justify-between rounded-t-lg border-b border-gray-300 pt-2 pb-2 pl-4 pr-3 bg-red-500">
               <!-- Title -->
               <div class="flex items-center">
                 <div>
-                  <fa icon="fa-solid fa-triangle-exclamation" class="text-white w-8 h-8 mr-4"/>
+                  <Fa icon="fa-solid fa-triangle-exclamation" class="text-white w-8 h-8 mr-4"/>
                 </div>
                 <h2 class="font-bold text-lg text-white">
-                  {{ title }}
+                  {{ props.title }}
                 </h2>
-
               </div>
-              <!-- Close button-->
+              <!-- Close button -->
               <button @click="$emit('close-modal')"
                       class="text-white
-                    hover:text-white
-                    focus:outline-none
-                    focus:border rounded-full p-1 hover:bg-red-400">
+                      hover:text-white
+                      focus:outline-none
+                      focus:border rounded-full p-1 hover:bg-red-400">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
               </button>
             </div>
 
-            <!-- Body-->
+            <!-- Body -->
             <div class="mb-7 mt-7 ml-3 mr-3 text-gray-600 font-bold">
               <p>
-                {{ message }}
+                {{ props.message }}
               </p>
             </div>
 
-            <!-- Buttons Section-->
+            <!-- Buttons Section -->
             <div class="mt-4 flex rounded-b-md justify-end p-4 mb-0 bg-gray-300">
               <button
                   @click="cancelButtonRequest"
                   class="button-vertical bg-white text-black
-                  hover:bg-white-100 hover:text-black hover:border-gray-500
-                  focus:outline-none focus:shadow-outline">
-                  {{ cancelBtnText }}
+                hover:bg-white-100 hover:text-black hover:border-gray-500
+                focus:outline-none focus:shadow-outline"
+              >
+                {{ props.cancelBtnText }}
               </button>
 
               <button
-                    @click="acceptButtonRequest"
-                    class="button-vertical bg-red-300 ml-1 text-white border-red-300
-                  hover:bg-red-500 hover:border-red-500
-                  focus:outline-none focus:shadow-outline">
-                  {{ acceptBtnText }}
+                  @click="acceptButtonRequest"
+                  class="button-vertical bg-red-300 ml-1 text-white border-red-300
+                hover:bg-red-500 hover:border-red-500
+                focus:outline-none focus:shadow-outline"
+              >
+                {{ props.acceptBtnText }}
               </button>
             </div>
 

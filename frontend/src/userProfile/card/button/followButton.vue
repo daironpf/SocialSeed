@@ -1,6 +1,6 @@
 <script setup>
 import BaseTooltip from "@/components/BaseTooltip.vue";
-import FollowService from "@/core/services/follow-service.js";
+import FollowService from "@/core/a mover/follow-service.ts";
 
 // Props
 const props = defineProps({

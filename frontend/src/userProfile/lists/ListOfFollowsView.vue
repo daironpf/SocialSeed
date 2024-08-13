@@ -1,6 +1,6 @@
 <script setup>
 import ListOfSocialUserBy from "@/userProfile/lists/ListOfSocialUserBy.vue";
-import FollowService from "@/core/services/follow-service.js";
+import FollowService from "@/core/a mover/follow-service.ts";
 
 const { userId } = defineProps({
   userId: String,

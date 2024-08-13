@@ -1,15 +1,15 @@
-<script setup>
-import {onMounted, ref} from 'vue';
+<script setup lang="ts">
+import {onMounted, Ref, ref} from 'vue';
 
-const props = defineProps({
-  class: String,
+const props = defineProps<{
+  class?: String,
   hasMoreElements: Boolean,
-})
+}>();
 
 const LOAD_MORE_EVENT = 'LoadMoreElements';
-const emit = defineEmits([LOAD_MORE_EVENT])
+const emit = defineEmits<(e: typeof LOAD_MORE_EVENT) => void>();
 
-const targetElement = ref(null);
+const targetElement: Ref<HTMLDivElement | null> = ref(null);
 
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
@@ -20,7 +20,9 @@ onMounted(() => {
     });
   });
 
-  observer.observe(targetElement.value);
+  if (targetElement.value) {
+    observer.observe(targetElement.value);
+  }
 });
 </script>
 

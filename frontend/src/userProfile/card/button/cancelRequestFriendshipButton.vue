@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from "vue";
 import BaseTooltip from "@/components/BaseTooltip.vue";
-import FriendService from "@/core/services/friend-service.js";
+import FriendService from "@/core/a mover/friend-service.ts";
 
 // Props
 const props = defineProps({

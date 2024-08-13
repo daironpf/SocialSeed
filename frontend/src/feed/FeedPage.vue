@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import CreateNewPostView from "@/posts/CreateNewPostView.vue";
 import RightSideView from "@/feed/RightSide/RightSideView.vue";
 import LeftSideView from "@/feed/LeftSide/LeftSideView.vue";
