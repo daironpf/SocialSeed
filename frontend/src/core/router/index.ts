@@ -10,8 +10,8 @@ import NotFoundView from "@/components/NotFoundView.vue";
 //Lazy Load
 const feed = () => import(/* webpackChunkName: "FeedPage" */ "@/Feed/FeedPage.vue");
 const profile = () => import(/* webpackChunkName: "SocialUserProfileView" */ "@/features/UserProfile/views/UserProfilePage.vue");
-const listOfFriendsRecommendations = () => import(/* webpackChunkName: "ListOfFriendsRecommendations" */ "@/recommendations/ListOfFriendsRecommendations.vue")
-const listOfFollowRecommendations = () => import(/* webpackChunkName: "ListOfFollowRecommendations" */ "@/recommendations/ListOfFollowRecommendations.vue")
+const listOfFriendsRecommendations = () => import(/* webpackChunkName: "ListOfFriendsRecommendations" */ "@/Recommendations/ListOfFriendsRecommendations.vue")
+const listOfFollowRecommendations = () => import(/* webpackChunkName: "ListOfFollowRecommendations" */ "@/Recommendations/ListOfFollowRecommendations.vue")
 
 // Define the routes with appropriate types
 const routes: Array<RouteRecordRaw> = [
@@ -57,13 +57,13 @@ const routes: Array<RouteRecordRaw> = [
         component: PostDetailsView
     },
     {
-        path: "/list/friends-recommendations",
+        path: "/list/friends-Recommendations",
         name: "list-of-friends-recommendations",
         meta: { showHeader: true },
         component: listOfFriendsRecommendations
     },
     {
-        path: "/list/follow-recommendations",
+        path: "/list/follow-Recommendations",
         name: "list-of-follow-recommendations",
         meta: { showHeader: true },
         component: listOfFollowRecommendations
