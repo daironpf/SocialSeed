@@ -4,7 +4,7 @@ import { loadLocaleMessages, setI18nLanguage, i18n, DEFAULT_LOCALE } from "@/cor
 import { getCurrentUser } from "@/core/services/local-storage";
 
 //Active Load
-import LoginView from "@/auth/LoginView.vue";
+import LoginView from "@/Auth/LoginView.vue";
 import NotFoundView from "@/components/NotFoundView.vue";
 
 //Lazy Load
