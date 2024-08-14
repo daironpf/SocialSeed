@@ -34,7 +34,7 @@ const imgUrl = inject('imgUrl');
       </p>
     </div>
     <!-- Zona de la botonera del post -->
-    <!--      Botones para personalizar el posts-->
+    <!--      Botones para personalizar el Posts-->
     <div class="max-w-lg mx-auto mt-3">
       <div class="flex flex-row">
         <div class="basis-1/12"></div>

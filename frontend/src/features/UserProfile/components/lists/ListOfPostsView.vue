@@ -1,7 +1,7 @@
 <script setup>
 import axios from "axios";
 import {inject, onMounted, ref} from "vue";
-import PostView from "@/posts/PostViewInFeed/PostView.vue";
+import PostView from "@/features/Posts/PostViewInFeed/PostView.vue";
 
 const props = defineProps({
   userId: String,

@@ -82,7 +82,7 @@
       </div>
     </div>
 
-    <!-- Botones para personalizar el posts -->
+    <!-- Botones para personalizar el Posts -->
     <div class="max-w-lg mx-auto">
       <div class="flex justify-between">
         <div class="flex items-center mb-4">
@@ -153,7 +153,7 @@ function hideDialog() {
 
 async function publishPost() {
   try {
-    // Aquí supondré que tienes un endpoint /posts en tu API REST
+    // Aquí supondré que tienes un endpoint /Posts en tu API REST
     const response = await fetch(apiUrl+'post/createPost',
         {
               method: 'POST',

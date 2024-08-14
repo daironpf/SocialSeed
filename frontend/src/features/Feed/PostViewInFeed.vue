@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref, inject } from "vue";
-import PostView from "@/posts/PostViewInFeed/PostView.vue";
+import PostView from "@/features/Posts/PostViewInFeed/PostView.vue";
 
 const posts = ref([]);
 const currentPage = ref(0);

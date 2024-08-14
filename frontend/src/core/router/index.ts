@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import PostDetailsView from "@/posts/PostDetailsView.vue";
+import PostDetailsView from "@/Posts/PostDetailsView.vue";
 import { loadLocaleMessages, setI18nLanguage, i18n, DEFAULT_LOCALE } from "@/core/libs/app-i18n";
 import { getCurrentUser } from "@/core/services/local-storage";
 
