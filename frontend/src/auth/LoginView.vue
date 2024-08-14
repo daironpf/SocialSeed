@@ -19,7 +19,7 @@ const login = async (): Promise<void> => {
       localStorage.setItem('currentUser', JSON.stringify(userData.response)); // Almacena el usuario en localStorage
       currentUser.value = userData.response; // Actualiza la variable de usuario
 
-      router.push({ name: 'feed' });
+      router.push({ name: 'Feed' });
 
     } else {
       error.value = 'Invalid credentials, please try again.';

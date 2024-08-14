@@ -1,6 +1,6 @@
 <script setup>
-import FriendsRecommendationsLiteView from "@/feed/RightSide/FriendsRecommendationsLiteView.vue";
-import FollowsRecommendationsLiteView from "@/feed/RightSide/FollowsRecommendationsLiteView.vue";
+import FriendsRecommendationsLiteView from "@/features/Feed/RightSide/FriendsRecommendationsLiteView.vue";
+import FollowsRecommendationsLiteView from "@/features/Feed/RightSide/FollowsRecommendationsLiteView.vue";
 </script>
 
 <template>

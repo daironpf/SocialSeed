@@ -8,7 +8,7 @@ import LoginView from "@/auth/LoginView.vue";
 import NotFoundView from "@/components/NotFoundView.vue";
 
 //Lazy Load
-const feed = () => import(/* webpackChunkName: "FeedPage" */ "@/feed/FeedPage.vue");
+const feed = () => import(/* webpackChunkName: "FeedPage" */ "@/Feed/FeedPage.vue");
 const profile = () => import(/* webpackChunkName: "SocialUserProfileView" */ "@/features/UserProfile/views/UserProfilePage.vue");
 const listOfFriendsRecommendations = () => import(/* webpackChunkName: "ListOfFriendsRecommendations" */ "@/recommendations/ListOfFriendsRecommendations.vue")
 const listOfFollowRecommendations = () => import(/* webpackChunkName: "ListOfFollowRecommendations" */ "@/recommendations/ListOfFollowRecommendations.vue")

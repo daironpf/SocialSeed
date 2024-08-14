@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import CreateNewPostView from "@/posts/CreateNewPostView.vue";
-import RightSideView from "@/feed/RightSide/RightSideView.vue";
-import LeftSideView from "@/feed/LeftSide/LeftSideView.vue";
-import FeedItem from "@/feed/FeedItem.vue";
+import RightSideView from "@/features/Feed/RightSide/RightSideView.vue";
+import LeftSideView from "@/features/Feed/LeftSide/LeftSideView.vue";
+import FeedItem from "@/features/Feed/FeedItem.vue";
 </script>
 
 <template>

@@ -1,6 +1,6 @@
 <script setup>
 
-import PostViewInFeed from "@/feed/PostViewInFeed.vue";
+import PostViewInFeed from "@/features/Feed/PostViewInFeed.vue";
 </script>
 
 <template>

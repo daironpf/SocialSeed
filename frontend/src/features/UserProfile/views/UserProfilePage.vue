@@ -1,5 +1,5 @@
 <script setup>
-import RightSideView from "@/feed/RightSide/RightSideView.vue";
+import RightSideView from "@/features/Feed/RightSide/RightSideView.vue";
 import { useRoute } from 'vue-router'
 import LeftSideSocialUserProfile from "@/features/UserProfile/components/LeftSideSocialUserProfile.vue";
 import {inject, ref} from "vue";
