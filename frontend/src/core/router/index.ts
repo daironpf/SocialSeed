@@ -9,9 +9,17 @@ import NotFoundView from "@/components/NotFoundView.vue";
 
 //Lazy Load
 const feed = () => import(/* webpackChunkName: "FeedPage" */ "@/features/Feed/FeedPage.vue");
-const profile = () => import(/* webpackChunkName: "SocialUserProfileView" */ "@/features/UserProfile/views/UserProfilePage.vue");
+const SocialUserProfile = () => import(/* webpackChunkName: "SocialUserProfilePage" */ "@/features/UserProfile/views/UserProfilePage.vue");
+
+const SocialUserDetailsView = () => import(/* webpackChunkName: "SocialUserProfilePage" */ "@/features/UserProfile/views/UserProfilePage.vue");
+const SocialUserFriendsView = () => import(/* webpackChunkName: "SocialUserProfileFriends" */ "@/features/UserProfile/views/SocialUserProfileFriendsView.vue");
+const SocialUserFollowsView = () => import(/* webpackChunkName: "SocialUserProfileFollows" */ "@/features/UserProfile/views/UserProfilePage.vue");
+const SocialUserFollowersView = () => import(/* webpackChunkName: "SocialUserProfileFollowers" */ "@/features/UserProfile/views/UserProfilePage.vue");
+
+
 const listOfFriendsRecommendations = () => import(/* webpackChunkName: "ListOfFriendsRecommendations" */ "@/features/Recommendations/ListOfFriendsRecommendations.vue")
 const listOfFollowRecommendations = () => import(/* webpackChunkName: "ListOfFollowRecommendations" */ "@/features/Recommendations/ListOfFollowRecommendations.vue")
+
 
 // Define the routes with appropriate types
 const routes: Array<RouteRecordRaw> = [
@@ -29,9 +37,32 @@ const routes: Array<RouteRecordRaw> = [
     },
     {
         path: "/su-profile/:id",
-        name: "su-profile",
+        name: "SocialUserProfile",
+        props: true,
         meta: { showHeader: true },
-        component: profile
+        component: SocialUserProfile,
+        children: [
+            {
+                path: '',
+                name: 'SocialUserDetails',
+                component: SocialUserDetailsView
+            },
+            {
+                path: 'friends',
+                name: 'SocialUserFriends',
+                component: SocialUserFriendsView
+            },
+            {
+                path: 'follows',
+                name: 'SocialUserFollows',
+                component: SocialUserFollowsView
+            },
+            {
+                path: 'followers',
+                name: 'SocialUserFollowers',
+                component: SocialUserFollowersView
+            }
+        ]
     },
     // {
     //     path: '/Settings',
