@@ -66,7 +66,7 @@ features/
 
 import { defineStore } from 'pinia';
 
-export const useNotificationStore = defineStore('notifications', {
+export const useNotificationStore = defineStore('Notifications', {
   state: () => ({
     notifications: [
       // Ejemplo de estructura de notificación
