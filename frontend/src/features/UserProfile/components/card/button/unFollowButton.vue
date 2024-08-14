@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, defineProps, defineEmits } from "vue";
+import { ref } from "vue";
 import BaseTooltip from "@/components/BaseTooltip.vue";
 import FollowService from "@/core/a mover/follow-service.js";
 
