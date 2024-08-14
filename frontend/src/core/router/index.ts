@@ -1,17 +1,17 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import PostDetailsView from "@/Posts/PostDetailsView.vue";
+import PostDetailsView from "@/features/Posts/PostDetailsView.vue";
 import { loadLocaleMessages, setI18nLanguage, i18n, DEFAULT_LOCALE } from "@/core/libs/app-i18n";
 import { getCurrentUser } from "@/core/services/local-storage";
 
 //Active Load
-import LoginView from "@/Auth/LoginView.vue";
+import LoginView from "@/features/Auth/LoginView.vue";
 import NotFoundView from "@/components/NotFoundView.vue";
 
 //Lazy Load
-const feed = () => import(/* webpackChunkName: "FeedPage" */ "@/Feed/FeedPage.vue");
+const feed = () => import(/* webpackChunkName: "FeedPage" */ "@/features/Feed/FeedPage.vue");
 const profile = () => import(/* webpackChunkName: "SocialUserProfileView" */ "@/features/UserProfile/views/UserProfilePage.vue");
-const listOfFriendsRecommendations = () => import(/* webpackChunkName: "ListOfFriendsRecommendations" */ "@/Recommendations/ListOfFriendsRecommendations.vue")
-const listOfFollowRecommendations = () => import(/* webpackChunkName: "ListOfFollowRecommendations" */ "@/Recommendations/ListOfFollowRecommendations.vue")
+const listOfFriendsRecommendations = () => import(/* webpackChunkName: "ListOfFriendsRecommendations" */ "@/features/Recommendations/ListOfFriendsRecommendations.vue")
+const listOfFollowRecommendations = () => import(/* webpackChunkName: "ListOfFollowRecommendations" */ "@/features/Recommendations/ListOfFollowRecommendations.vue")
 
 // Define the routes with appropriate types
 const routes: Array<RouteRecordRaw> = [
