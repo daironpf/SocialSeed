@@ -9,12 +9,12 @@ import NotFoundView from "@/components/NotFoundView.vue";
 
 //Lazy Load
 const feed = () => import(/* webpackChunkName: "FeedPage" */ "@/features/Feed/FeedPage.vue");
-const SocialUserProfile = () => import(/* webpackChunkName: "SocialUserProfilePage" */ "@/features/UserProfile/views/UserProfilePage.vue");
+const SocialUserProfile = () => import(/* webpackChunkName: "SocialUserProfilePage" */ "@/features/UserProfile/views/SocialUserProfilePage.vue");
 
-const SocialUserDetailsView = () => import(/* webpackChunkName: "SocialUserProfilePage" */ "@/features/UserProfile/views/UserProfilePage.vue");
+const SocialUserDetailsView = () => import(/* webpackChunkName: "SocialUserProfilePage" */ "@/features/UserProfile/views/SocialUserProfileDetailsView.vue");
 const SocialUserFriendsView = () => import(/* webpackChunkName: "SocialUserProfileFriends" */ "@/features/UserProfile/views/SocialUserProfileFriendsView.vue");
-const SocialUserFollowsView = () => import(/* webpackChunkName: "SocialUserProfileFollows" */ "@/features/UserProfile/views/UserProfilePage.vue");
-const SocialUserFollowersView = () => import(/* webpackChunkName: "SocialUserProfileFollowers" */ "@/features/UserProfile/views/UserProfilePage.vue");
+const SocialUserFollowsView = () => import(/* webpackChunkName: "SocialUserProfileFollows" */ "@/features/UserProfile/views/SocialUserProfileFollowsView.vue");
+const SocialUserFollowersView = () => import(/* webpackChunkName: "SocialUserProfileFollowers" */ "@/features/UserProfile/views/SocialUserProfileFollowersView.vue");
 
 
 const listOfFriendsRecommendations = () => import(/* webpackChunkName: "ListOfFriendsRecommendations" */ "@/features/Recommendations/ListOfFriendsRecommendations.vue")
