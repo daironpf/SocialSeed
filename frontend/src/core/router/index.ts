@@ -34,7 +34,7 @@ const routes: Array<RouteRecordRaw> = [
         component: profile
     },
     // {
-    //     path: '/settings',
+    //     path: '/Settings',
     //     name: 'Settings',
     //     component: SettingsView,
     //     children: [
