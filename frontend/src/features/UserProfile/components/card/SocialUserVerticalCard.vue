@@ -1,11 +1,11 @@
 <script setup>
 import {inject, ref} from "vue";
-import FollowButton from "@/userProfile/card/button/followButton.vue";
-import unFollowButton from "@/userProfile/card/button/unFollowButton.vue";
-import sendRequestFriendshipButton from "@/userProfile/card/button/sendRequestFriendshipButton.vue";
-import cancelRequestFriendshipButton from "@/userProfile/card/button/cancelRequestFriendshipButton.vue";
-import cancelFriendshipButton from "@/userProfile/card/button/cancelFriendshipButton.vue";
-import RequestFriendshipReceived from "@/userProfile/card/button/requestFriendshipReceived.vue";
+import FollowButton from "@/features/UserProfile/components/card/button/followButton.vue";
+import unFollowButton from "@/features/UserProfile/components/card/button/unFollowButton.vue";
+import sendRequestFriendshipButton from "@/features/UserProfile/components/card/button/sendRequestFriendshipButton.vue";
+import cancelRequestFriendshipButton from "@/features/UserProfile/components/card/button/cancelRequestFriendshipButton.vue";
+import cancelFriendshipButton from "@/features/UserProfile/components/card/button/cancelFriendshipButton.vue";
+import RequestFriendshipReceived from "@/features/UserProfile/components/card/button/requestFriendshipReceived.vue";
 
 // Props
 const props = defineProps({

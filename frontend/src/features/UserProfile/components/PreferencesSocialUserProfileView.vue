@@ -2,7 +2,7 @@
 import {inject, onMounted, ref} from "vue";
 import axios from "axios";
 import PreferencesSocialUserProfileHashTagCard
-  from "@/userProfile/PreferencesSocialUserProfileHashTagCard.vue";
+  from "@/features/UserProfile/components/PreferencesSocialUserProfileHashTagCard.vue";
 
 
 const props = defineProps({

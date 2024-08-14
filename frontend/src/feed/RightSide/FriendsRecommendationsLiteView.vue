@@ -1,7 +1,7 @@
 <script setup>
 
 import { ref, inject, onMounted } from "vue";
-import SocialUserToFriendCard from "@/userProfile/card/SocialUserToFriendCard.vue";
+import SocialUserToFriendCard from "@/features/UserProfile/components/card/SocialUserToFriendCard.vue";
 import axios from "axios";
 
 const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));

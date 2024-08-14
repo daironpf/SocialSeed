@@ -1,6 +1,6 @@
 <script setup>
 import {inject, onMounted, ref} from "vue";
-import SocialUserToFollowCard from "@/userProfile/card/SocialUserToFollowCard.vue";
+import SocialUserToFollowCard from "@/features/UserProfile/components/card/SocialUserToFollowCard.vue";
 import axios from "axios";
 
 const currentUser = ref(JSON.parse(localStorage.getItem('currentUser')));

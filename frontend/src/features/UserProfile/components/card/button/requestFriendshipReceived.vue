@@ -1,7 +1,7 @@
 <script setup>
 import {ref} from "vue";
 import BaseTooltip from "@/components/BaseTooltip.vue";
-import FriendRequestDecisionModalView from "@/userProfile/card/button/modalDialogs/FriendRequestDecisionModalView.vue";
+import FriendRequestDecisionModalView from "@/features/UserProfile/components/card/button/modalDialogs/FriendRequestDecisionModalView.vue";
 
 // Props
 const props = defineProps({

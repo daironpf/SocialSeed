@@ -1,6 +1,6 @@
 <script setup>
 import FriendService from '@/core/a mover/friend-service.ts';
-import ListOfSocialUserBy from "@/userProfile/lists/ListOfSocialUserBy.vue";
+import ListOfSocialUserBy from "@/features/UserProfile/components/lists/ListOfSocialUserBy.vue";
 
 const { userId } = defineProps({
   userId: String,

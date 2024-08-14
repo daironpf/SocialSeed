@@ -1,6 +1,6 @@
 <script setup>
 import {ref} from "vue";
-import SocialUserVerticalCard from "@/userProfile/card/SocialUserVerticalCard.vue";
+import SocialUserVerticalCard from "@/features/UserProfile/components/card/SocialUserVerticalCard.vue";
 import InfinityScroll from '@/components/InfinityScroll.vue';
 import ListVerticalCardsSkeleton from "@/components/skeletons/ListSocialUserVerticalCardsSkeleton.vue";
 
