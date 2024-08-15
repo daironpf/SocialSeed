@@ -20,6 +20,8 @@ const SocialUserFollowersView = () => import(/* webpackChunkName: "SocialUserPro
 const listOfFriendsRecommendations = () => import(/* webpackChunkName: "ListOfFriendsRecommendations" */ "@/features/Recommendations/ListOfFriendsRecommendations.vue")
 const listOfFollowRecommendations = () => import(/* webpackChunkName: "ListOfFollowRecommendations" */ "@/features/Recommendations/ListOfFollowRecommendations.vue")
 
+// Testing modules
+const TestingSocialUserProfile = () => import("@/features/UserProfile/views/SocialUserLayout.vue");
 
 // Define the routes with appropriate types
 const routes: Array<RouteRecordRaw> = [
@@ -36,11 +38,11 @@ const routes: Array<RouteRecordRaw> = [
         component: feed
     },
     {
-        path: "/su-profile/:id",
+        path: "/social-user-profile/:socialUserId",
         name: "SocialUserProfile",
         props: true,
         meta: { showHeader: true },
-        component: SocialUserProfile,
+        component: TestingSocialUserProfile,
         children: [
             {
                 path: '',

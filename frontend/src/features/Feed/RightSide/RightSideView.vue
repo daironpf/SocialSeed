@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import FriendsRecommendationsLiteView from "@/features/Feed/RightSide/FriendsRecommendationsLiteView.vue";
 import FollowsRecommendationsLiteView from "@/features/Feed/RightSide/FollowsRecommendationsLiteView.vue";
 </script>

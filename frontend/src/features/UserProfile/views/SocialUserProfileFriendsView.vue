@@ -4,6 +4,6 @@
 </script>
 
 <template>
-    <H1> Social User Friends -- View </H1>
+  <h1> Social User <b>Friends</b> -- View </h1>
 
 </template>
