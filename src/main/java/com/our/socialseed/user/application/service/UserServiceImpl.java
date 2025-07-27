@@ -2,6 +2,7 @@ package com.our.socialseed.user.application.service;
 import com.our.socialseed.user.domain.model.User;
 import com.our.socialseed.user.domain.port.in.UserService;
 import com.our.socialseed.user.domain.port.out.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,16 +15,18 @@ El constructor recibe el UserRepository, que luego será implementado (con Neo4j
  */
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public User createUser(User user) {
-        if (user.getId() == null) {
-            user.setId(UUID.randomUUID());
-        }
+        // Hashear la contraseña antes de persistir
+        String hashedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashedPassword);
         return userRepository.save(user);
     }
 
