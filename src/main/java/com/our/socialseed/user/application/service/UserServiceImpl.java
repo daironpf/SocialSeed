@@ -40,4 +40,19 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+    @Override
+    public void updateUser(UUID id, User user) {
+        userRepository.findById(id).ifPresent(existing -> {
+            user.setId(id); // Asegurar que use el mismo ID
+            user.setPassword(existing.getPassword()); // Conservamos el password actual
+            userRepository.save(user);
+        });
+    }
+
+    @Override
+    public void deleteUser(UUID id) {
+        userRepository.deleteById(id);
+    }
+
+
 }

@@ -37,4 +37,9 @@ public class Neo4jUserRepository implements UserRepository {
                 .map(UserNeo4jMapper::toDomain)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void deleteById(UUID id) {
+        springDataUserRepository.deleteById(id);
+    }
 }

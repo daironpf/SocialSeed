@@ -59,4 +59,20 @@ public class UserController {
                 .map(UserDtoMapper::toResponse)
                 .collect(Collectors.toList());
     }
+
+    // UPDATE
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> updateUser(@PathVariable UUID id, @Valid @RequestBody UserRequest request) {
+        User user = UserDtoMapper.toDomain(request);
+        userService.updateUser(id, user);
+        return ResponseEntity.noContent().build();
+    }
+
+    // DELETE
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
+        userService.deleteUser(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
