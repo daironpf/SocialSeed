@@ -1,0 +1,12 @@
+user
+└── domain
+    └── port
+        ├── in      ← Casos de uso (llamados desde el exterior)
+        └── out     ← Interfaces para servicios externos (DB, email, etc.)
+
+📌 ¿Qué es un puerto en arquitectura hexagonal?
+Puerto de entrada (in): representa lo que tu dominio espera recibir.
+→ Ej: createUser, getUserById, listUsers.
+
+Puerto de salida (out): representa lo que tu dominio necesita hacer fuera de sí mismo.
+→ Ej: UserRepository para guardar/leer usuarios, EmailSender, etc.
