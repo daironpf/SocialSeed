@@ -25,6 +25,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(User user) {
         // Hashear la contraseña antes de persistir
+        if (user.getId() == null) {
+            user.setId(UUID.randomUUID());
+        }
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
         return userRepository.save(user);
