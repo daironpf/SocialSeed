@@ -1,0 +1,64 @@
+version: "3.8"
+services:  
+  # Noe4j database config
+  neo4j:
+    container_name: neo4j_social_seed_db 
+    image: neo4j:5.15.0-enterprise
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    restart: always
+    environment:
+      - NEO4J_AUTH=neo4j/neo4jSocial
+      - NEO4J_ACCEPT_LICENSE_AGREEMENT=yes
+      - NEO4J_server.memory.pagecache.size=1G
+      - NEO4J_server.directories.import=import
+    volumes:
+      - ./neo4j/data:/data
+      - ./neo4j/conf:/conf
+      - ./neo4j/logs:/logs
+      - ./neo4j/plugins:/plugins
+      - import_data:/import
+    networks:
+      - net
+  # Social Seed Api in Java config
+  social-seed-app:
+    container_name: app_social_seed
+    image: social-seed:0.0.1
+    build: 
+      context: ./backend
+    ports:
+      - "8081:8081"
+    environment:
+      - DATABASE_URI=bolt://neo4j:7687
+      - DATABASE_USERNAME=neo4j
+      - DATABASE_PASSWORD=neo4jSocial
+    depends_on:
+      - neo4j
+    networks:
+      - net
+  # Fake Graph config
+  fake-graph:
+    container_name: fake_graph_service
+    image: python:3.11.2-slim
+    build: 
+      context: ./fake_graph    
+    volumes:
+      - ./fake_graph:/app
+      - import_data:/app/temp
+    depends_on:
+      - neo4j
+      - social-seed-app
+    environment:
+      - GENERATE_FAKE_GRAPH
+      - DATABASE_URI=bolt://neo4j:7687
+    command: >
+      sh -c "if [ '$GENERATE_FAKE_GRAPH' = 'true' ]; then python /app/generate.py; else sleep infinity; fi"    
+    networks:
+      - net
+volumes:
+  import_data:
+    driver_opts:
+      o: bind
+networks:
+  net:
