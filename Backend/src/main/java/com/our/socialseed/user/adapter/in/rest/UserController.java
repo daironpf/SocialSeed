@@ -1,6 +1,7 @@
 package com.our.socialseed.user.adapter.in.rest;
 import com.our.socialseed.user.domain.model.User;
 import com.our.socialseed.user.domain.port.in.UserService;
+import com.our.socialseed.user.dto.PasswordChangeRequest;
 import com.our.socialseed.user.dto.UserDtoMapper;
 import com.our.socialseed.user.dto.UserRequest;
 import com.our.socialseed.user.dto.UserResponse;
@@ -74,5 +75,16 @@ public class UserController {
         userService.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
+
+    // CHANGE PASSWORD
+    @PutMapping("/{id}/password")
+    public ResponseEntity<Void> changePassword(
+            @PathVariable UUID id,
+            @Valid @RequestBody PasswordChangeRequest request
+    ) {
+        userService.changePassword(id, request.getCurrentPassword(), request.getNewPassword());
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

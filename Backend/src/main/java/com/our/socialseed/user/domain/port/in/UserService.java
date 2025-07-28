@@ -16,4 +16,6 @@ public interface UserService {
     List<User> getAllUsers();
     void updateUser(UUID id, User user);
     void deleteUser(UUID id);
+    void changePassword(UUID userId, String currentPassword, String newPassword);
+
 }
