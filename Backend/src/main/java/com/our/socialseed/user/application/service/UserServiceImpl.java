@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 /*
@@ -28,6 +29,7 @@ public class UserServiceImpl implements UserService {
         if (user.getId() == null) {
             user.setId(UUID.randomUUID());
         }
+        user.setRoles(Set.of("ROLE_USER"));
         String hashedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(hashedPassword);
         return userRepository.save(user);

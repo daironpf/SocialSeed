@@ -2,6 +2,8 @@ package com.our.socialseed.user.domain.model;
 
 import jakarta.validation.constraints.NotNull;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /*
@@ -19,6 +21,8 @@ public class User {
     private String password;
     @NotNull
     private String fullName;
+    private Set<String> roles = new HashSet<>();
+
 
     public User(UUID id, String username, String email, String password, String fullName) {
         this.id = id;
@@ -66,5 +70,13 @@ public class User {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 }
