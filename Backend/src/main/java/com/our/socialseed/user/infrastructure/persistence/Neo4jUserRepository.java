@@ -1,8 +1,8 @@
-package com.our.socialseed.user.adapter.out.neo4j;
+package com.our.socialseed.user.infrastructure.persistence;
 
-import com.our.socialseed.user.adapter.out.neo4j.mapper.UserNeo4jMapper;
+import com.our.socialseed.user.infrastructure.persistence.mapper.UserNeo4jMapper;
 import com.our.socialseed.user.domain.model.User;
-import com.our.socialseed.user.domain.port.out.UserRepository;
+import com.our.socialseed.user.domain.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

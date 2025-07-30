@@ -1,6 +1,8 @@
-package com.our.socialseed.user.dto;
+package com.our.socialseed.user.entry.rest.mapper;
 
 import com.our.socialseed.user.domain.model.User;
+import com.our.socialseed.user.entry.rest.dto.UserRequest;
+import com.our.socialseed.user.entry.rest.dto.UserResponse;
 
 public class UserDtoMapper {
     private UserDtoMapper() {}

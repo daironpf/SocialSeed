@@ -1,6 +1,6 @@
-package com.our.socialseed.user.adapter.out.neo4j.mapper;
+package com.our.socialseed.user.infrastructure.persistence.mapper;
 
-import com.our.socialseed.user.adapter.out.neo4j.UserNode;
+import com.our.socialseed.user.infrastructure.persistence.entity.UserNeo4jEntity;
 import com.our.socialseed.user.domain.model.User;
 
 public class UserNeo4jMapper {
@@ -8,8 +8,8 @@ public class UserNeo4jMapper {
         // Clase de utilidad, no instanciable
     }
 
-    public static UserNode toNode(User user) {
-        return new UserNode(
+    public static UserNeo4jEntity toNode(User user) {
+        return new UserNeo4jEntity(
                 user.getId(),
                 user.getUsername(),
                 user.getEmail(),
@@ -18,7 +18,7 @@ public class UserNeo4jMapper {
         );
     }
 
-    public static User toDomain(UserNode node) {
+    public static User toDomain(UserNeo4jEntity node) {
         return new User(
                 node.getId(),
                 node.getUsername(),

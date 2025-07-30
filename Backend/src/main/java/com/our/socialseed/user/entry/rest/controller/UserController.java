@@ -1,10 +1,10 @@
-package com.our.socialseed.user.adapter.in.rest;
+package com.our.socialseed.user.entry.rest.controller;
 import com.our.socialseed.user.domain.model.User;
-import com.our.socialseed.user.domain.port.in.UserService;
-import com.our.socialseed.user.dto.PasswordChangeRequest;
-import com.our.socialseed.user.dto.UserDtoMapper;
-import com.our.socialseed.user.dto.UserRequest;
-import com.our.socialseed.user.dto.UserResponse;
+import com.our.socialseed.user.domain.service.UserService;
+import com.our.socialseed.user.entry.rest.dto.PasswordChangeRequest;
+import com.our.socialseed.user.entry.rest.mapper.UserDtoMapper;
+import com.our.socialseed.user.entry.rest.dto.UserRequest;
+import com.our.socialseed.user.entry.rest.dto.UserResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

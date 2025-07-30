@@ -1,11 +1,11 @@
-package com.our.socialseed.user.adapter.out.neo4j;
+package com.our.socialseed.user.infrastructure.persistence.entity;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 
 import java.util.UUID;
 
 @Node("User")
-public class UserNode {
+public class UserNeo4jEntity {
     @Id
     private UUID id;
 
@@ -15,9 +15,9 @@ public class UserNode {
     private String fullName;
 
     // Constructor sin argumentos obligatorio para Neo4j
-    public UserNode() {}
+    public UserNeo4jEntity() {}
 
-    public UserNode(UUID id, String username, String email, String password, String fullName) {
+    public UserNeo4jEntity(UUID id, String username, String email, String password, String fullName) {
         this.id = id;
         this.username = username;
         this.email = email;

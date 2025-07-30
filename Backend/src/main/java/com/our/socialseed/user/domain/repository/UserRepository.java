@@ -1,4 +1,4 @@
-package com.our.socialseed.user.domain.port.out;
+package com.our.socialseed.user.domain.repository;
 
 import com.our.socialseed.user.domain.model.User;
 

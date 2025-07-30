@@ -1,4 +1,4 @@
-package com.our.socialseed.user.domain.port.in;
+package com.our.socialseed.user.domain.service;
 
 import com.our.socialseed.user.domain.model.User;
 

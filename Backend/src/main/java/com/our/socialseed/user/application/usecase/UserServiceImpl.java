@@ -1,7 +1,7 @@
-package com.our.socialseed.user.application.service;
+package com.our.socialseed.user.application.usecase;
 import com.our.socialseed.user.domain.model.User;
-import com.our.socialseed.user.domain.port.in.UserService;
-import com.our.socialseed.user.domain.port.out.UserRepository;
+import com.our.socialseed.user.domain.service.UserService;
+import com.our.socialseed.user.domain.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
