@@ -1,5 +1,6 @@
 package com.our.socialseed.user.config;
 
+import com.our.socialseed.auth.infrastructure.security.JWTProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,4 +13,7 @@ public class UserSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public JWTProvider jwtProvider() { return new JWTProvider(); }
 }

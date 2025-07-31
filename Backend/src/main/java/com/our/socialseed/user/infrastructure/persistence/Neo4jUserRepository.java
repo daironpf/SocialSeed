@@ -32,6 +32,12 @@ public class Neo4jUserRepository implements UserRepository {
     }
 
     @Override
+    public Optional<User> findByEmail(String email) {
+        return springDataUserRepository.findByEmail(email)
+                .map(UserNeo4jMapper::toDomain);
+    }
+
+    @Override
     public List<User> findAll() {
         return springDataUserRepository.findAll().stream()
                 .map(UserNeo4jMapper::toDomain)

@@ -13,6 +13,7 @@ public interface UserService {
 
     User createUser(User user);
     Optional<User> getUserById(UUID id);
+    Optional<User> getUserByEmail(String email);
     List<User> getAllUsers();
     void updateUser(UUID id, User user);
     void deleteUser(UUID id);
