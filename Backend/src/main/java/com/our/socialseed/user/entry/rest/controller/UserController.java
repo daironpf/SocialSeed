@@ -1,10 +1,10 @@
 package com.our.socialseed.user.entry.rest.controller;
+import com.our.socialseed.user.application.usecase.UserUseCases;
 import com.our.socialseed.user.domain.model.User;
-import com.our.socialseed.user.domain.service.UserService;
-import com.our.socialseed.user.entry.rest.dto.PasswordChangeRequest;
-import com.our.socialseed.user.entry.rest.mapper.UserDtoMapper;
-import com.our.socialseed.user.entry.rest.dto.UserRequest;
-import com.our.socialseed.user.entry.rest.dto.UserResponse;
+import com.our.socialseed.user.entry.rest.dto.UserUpdateRequestDTO;
+import com.our.socialseed.user.entry.rest.mapper.UserRestMapper;
+import com.our.socialseed.user.entry.rest.dto.UserCreateRequestDTO;
+import com.our.socialseed.user.entry.rest.dto.UserResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,78 +13,67 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-/*
-✅ Paso 5: Adaptador de entrada REST: UserController
-Este adaptador:
-Recibe las peticiones HTTP (@RestController)
-Usa el caso de uso (UserService) vía inyección
-Expone el API REST para crear y consultar usuarios
-
-💡 Posibles mejoras futuras
-Validar datos de entrada (con DTOs y @Valid)
-Mapear errores y excepciones
-Usar DTOs para separar el dominio del API
-Pero por ahora, para mantener el enfoque limpio y directo, trabajamos con la entidad User.
- */
-
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
-    private final UserService userService;
+    private final UserUseCases userUseCases;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserUseCases userUseCases) {
+        this.userUseCases = userUseCases;
     }
 
     // CREATE
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest request) {
-        var created = userService.createUser(UserDtoMapper.toDomain(request));
-        return ResponseEntity.ok(UserDtoMapper.toResponse(created));
+    public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserCreateRequestDTO dto) {
+        User user = UserRestMapper.toDomain(dto);
+        User saved = userUseCases.createUser().execute(user);
+        return ResponseEntity.ok(UserRestMapper.toResponse(saved));
     }
 
     // GET BY ID
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getUserById(@PathVariable UUID id) {
-        return userService.getUserById(id)
-                .map(UserDtoMapper::toResponse)
-                .map(ResponseEntity::ok)
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable UUID id) {
+        return userUseCases.getUserById().execute(id)
+                .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
     // LIST
     @GetMapping
-    public List<UserResponse> getAllUsers() {
-        return userService.getAllUsers()
-                .stream()
-                .map(UserDtoMapper::toResponse)
+    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
+        List<User> users = userUseCases.getAllUsers().execute();
+        if (users == null || users.isEmpty()) {
+            return ResponseEntity.noContent().build(); // 204 No Content
+        }
+
+        List<UserResponseDTO> dtos = users.stream()
+                .map(UserRestMapper::toResponse)
                 .collect(Collectors.toList());
+
+        return ResponseEntity.ok(dtos);
     }
 
     // UPDATE
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable UUID id, @Valid @RequestBody UserRequest request) {
-        User user = UserDtoMapper.toDomain(request);
-        userService.updateUser(id, user);
+    public ResponseEntity<Void> updateUser(@PathVariable UUID id, @RequestBody UserUpdateRequestDTO request) {
+        User updated = UserRestMapper.UpdatetoDomain(request);
+        userUseCases.updateUser().execute(id, updated);
         return ResponseEntity.noContent().build();
     }
 
     // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
-        userService.deleteUser(id);
+        userUseCases.deleteUser().execute(id);
         return ResponseEntity.noContent().build();
     }
 
     // CHANGE PASSWORD
-    @PutMapping("/{id}/password")
-    public ResponseEntity<Void> changePassword(
-            @PathVariable UUID id,
-            @Valid @RequestBody PasswordChangeRequest request
-    ) {
-        userService.changePassword(id, request.getCurrentPassword(), request.getNewPassword());
+    @PostMapping("/{id}/change-password")
+    public ResponseEntity<Void> changePassword(@PathVariable UUID id,
+                                               @RequestParam String currentPassword,
+                                               @RequestParam String newPassword) {
+        userUseCases.changeUserPassword().execute(id, currentPassword, newPassword);
         return ResponseEntity.noContent().build();
     }
-
-
 }
