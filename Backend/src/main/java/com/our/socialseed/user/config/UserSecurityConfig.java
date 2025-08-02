@@ -14,6 +14,4 @@ public class UserSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
-    public JWTProvider jwtProvider() { return new JWTProvider(); }
 }
