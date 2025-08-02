@@ -15,14 +15,14 @@ public class SecurityFilterConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http, JWTProvider jwtProvider) throws Exception {
         http
-                .securityMatcher("/**") // Aplica al resto (usa esto o .anyRequest())
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // Desactiva CSRF para APIs
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/auth/**").permitAll()    // Login, register, etc.
+                        .requestMatchers("/public/**").permitAll()  // Fotos públicas, recursos estáticos
+                        .requestMatchers("/auth/**", "/public/**", "/assets/**").permitAll()
+                        .anyRequest().authenticated()               // Todo lo demás requiere autenticación
                 )
                 .addFilterBefore(new JwtAuthFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 }
