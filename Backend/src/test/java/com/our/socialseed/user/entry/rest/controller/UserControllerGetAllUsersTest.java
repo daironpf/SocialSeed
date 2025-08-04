@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
@@ -29,35 +30,32 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class UserControllerGetAllUsersTest {
 
     @Autowired private MockMvc mockMvc;
-    @Autowired private UserUseCases userUseCases;
-    @Autowired private GetAllUsers getAllUsers;
-
-    @TestConfiguration
-    static class TestConfig {
-        @Bean
-        public UserUseCases userUseCases() {
-            return mock(UserUseCases.class);
-        }
-
-        @Bean
-        public GetAllUsers getAllUsers() {
-            return mock(GetAllUsers.class);
-        }
-    }
+    @MockBean private UserUseCases userUseCases;
+    @MockBean private GetAllUsers getAllUsers;
 
     @BeforeEach
     void setUp() {
+        // Devuelve el mock de GetAllUsers del TestConfiguration
         when(userUseCases.getAllUsers()).thenReturn(getAllUsers);
+        System.out.println("getAllUsers instance: " + getAllUsers.getClass());
     }
 
     @Test
     @WithMockUser
     void shouldReturnUserList_whenUsersExist() throws Exception {
         UUID userId = UUID.randomUUID();
-        User user = new User(userId, "testuser", "test@example.com", "Test User", "Test User");
+        User user = new User(
+                userId,
+                "testuser",
+                "test@example.com",
+                "encodedPassword",
+                "Test User"
+        );
+
         when(getAllUsers.execute()).thenReturn(List.of(user));
 
-        mockMvc.perform(get("/api/users"))
+        mockMvc.perform(get("/api/users")
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(userId.toString()))
                 .andExpect(jsonPath("$[0].username").value("testuser"))
