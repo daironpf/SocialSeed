@@ -55,7 +55,7 @@ public class UserController {
 
     // UPDATE
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(@PathVariable UUID id, @RequestBody UserUpdateRequestDTO request) {
+    public ResponseEntity<Void> updateUser(@PathVariable UUID id, @RequestBody @Valid UserUpdateRequestDTO request) {
         User updated = UserRestMapper.UpdatetoDomain(request);
         userUseCases.updateUser().execute(id, updated);
         return ResponseEntity.noContent().build();
