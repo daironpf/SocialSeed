@@ -2,7 +2,10 @@ package com.our.socialseed.auth.infrastructure.service;
 
 import com.our.socialseed.auth.domain.service.AuthService;
 import com.our.socialseed.auth.entry.rest.dto.RegisterRequestDTO;
-import com.our.socialseed.auth.infrastructure.security.JWTProvider;
+//import com.our.socialseed.auth.infrastructure.security.JWTProvider;
+import com.our.socialseed.shared.security.jwt.JWTProvider;
+import com.our.socialseed.shared.security.jwt.JwtAuthFilter;
+
 import com.our.socialseed.user.application.usecase.UserUseCases;
 import com.our.socialseed.user.domain.model.User;
 import com.our.socialseed.user.domain.repository.UserRepository;
@@ -31,7 +34,7 @@ public class AuthServiceImpl implements AuthService {
         if (optionalUser.isEmpty() || !passwordEncoder.matches(password, optionalUser.get().getPassword())) {
             throw new RuntimeException("Invalid credentials");
         }
-        return jwtProvider.generateToken(optionalUser.get());
+        return jwtProvider.generateToken(optionalUser.get().getUsername());
     }
 
     @Override
@@ -50,6 +53,6 @@ public class AuthServiceImpl implements AuthService {
 
         userRepository.save(newUser);
 
-        return jwtProvider.generateToken(newUser);
+        return jwtProvider.generateToken(newUser.getUsername());
     }
 }

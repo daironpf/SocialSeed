@@ -2,12 +2,14 @@ package com.our.socialseed.auth.config;
 
 import com.our.socialseed.auth.application.usecase.AuthUseCases;
 import com.our.socialseed.auth.domain.service.AuthService;
-import com.our.socialseed.auth.infrastructure.security.JWTProvider;
+import com.our.socialseed.shared.security.jwt.JWTProvider;
+import com.our.socialseed.shared.security.jwt.JwtAuthFilter;
 import com.our.socialseed.auth.infrastructure.service.AuthServiceImpl;
 import com.our.socialseed.user.domain.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 @Configuration
 public class AuthUseCasesConfig {

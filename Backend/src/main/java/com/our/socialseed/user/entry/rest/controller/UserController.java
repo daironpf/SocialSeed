@@ -5,6 +5,7 @@ import com.our.socialseed.user.entry.rest.dto.UserUpdateRequestDTO;
 import com.our.socialseed.user.entry.rest.mapper.UserRestMapper;
 import com.our.socialseed.user.entry.rest.dto.UserCreateRequestDTO;
 import com.our.socialseed.user.entry.rest.dto.UserResponseDTO;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@SecurityRequirement(name = "bearerAuth")
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
