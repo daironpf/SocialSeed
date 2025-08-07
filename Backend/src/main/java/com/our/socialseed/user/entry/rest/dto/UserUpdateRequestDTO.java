@@ -5,15 +5,15 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record UserUpdateRequestDTO(
-        @NotBlank(message = "El username es obligatorio")
+        @NotBlank(message = "{user.username.required}")
         @Size(max = 30)
         String username,
 
-        @NotBlank(message = "El email es obligatorio")
-        @Email(message = "Email con formato inválido")
+        @NotBlank(message = "{user.email.required}")
+        @Email(message = "{user.email.invalid}")
         String email,
 
-        @NotBlank(message = "El nombre completo es obligatorio")
+        @NotBlank(message = "{user.fullname.required}")
         @Size(max = 100)
         String fullName
 ) {
