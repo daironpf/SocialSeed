@@ -4,10 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 
 public class PasswordChangeRequest {
 
-    @NotBlank
+    @NotBlank(message = "{user.currentpassword.required}")
     private String currentPassword;
 
-    @NotBlank
+    @NotBlank(message = "{user.newpassword.required}")
     private String newPassword;
 
     // Getters y setters

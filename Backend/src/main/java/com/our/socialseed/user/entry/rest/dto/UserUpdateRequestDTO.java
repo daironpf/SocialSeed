@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 public record UserUpdateRequestDTO(
         @NotBlank(message = "{user.username.required}")
-        @Size(max = 30)
+        @Size(max = 30, message = "{user.username.size}")
         String username,
 
         @NotBlank(message = "{user.email.required}")
@@ -14,7 +14,7 @@ public record UserUpdateRequestDTO(
         String email,
 
         @NotBlank(message = "{user.fullname.required}")
-        @Size(max = 100)
+        @Size(max = 100, message = "{user.fullname.size}")
         String fullName
 ) {
 }
