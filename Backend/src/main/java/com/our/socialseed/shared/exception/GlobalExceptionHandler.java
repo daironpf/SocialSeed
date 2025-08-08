@@ -1,6 +1,8 @@
 package com.our.socialseed.shared.exception;
 
 import jakarta.validation.ConstraintViolationException;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -21,6 +23,12 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    private final MessageSource messageSource;
+
+    public GlobalExceptionHandler(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+
     /**
      * Maneja excepciones que ocurren cuando fallan las validaciones de argumentos anotados
      * con @Valid en controladores, típicamente con cuerpos JSON.
@@ -30,17 +38,17 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
-        // Extrae los errores de cada campo con su respectivo mensaje
+        Locale locale = LocaleContextHolder.getLocale();
+
         List<Map<String, String>> errors = ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(error -> Map.of(
                         "field", error.getField(),
-                        "message", error.getDefaultMessage()
+                        "message", messageSource.getMessage(error, locale)
                 ))
                 .collect(Collectors.toList());
 
-        // Cuerpo de respuesta estructurado con los errores
         Map<String, Object> responseBody = new HashMap<>();
         responseBody.put("errors", errors);
 
@@ -56,12 +64,13 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<Map<String, Object>> handleConstraintViolations(ConstraintViolationException ex) {
-        // Mapea cada violación a un objeto campo-mensaje
+        Locale locale = LocaleContextHolder.getLocale();
+
         List<Map<String, String>> errors = ex.getConstraintViolations()
                 .stream()
                 .map(violation -> Map.of(
                         "field", violation.getPropertyPath().toString(),
-                        "message", violation.getMessage()
+                        "message", messageSource.getMessage(violation.getMessage(), null, locale)
                 ))
                 .collect(Collectors.toList());
 
@@ -70,7 +79,6 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.badRequest().body(responseBody);
     }
-
     /**
      * Captura excepciones generales en tiempo de ejecución.
      * Este es un mecanismo de seguridad para evitar que errores no controlados expongan información sensible.
@@ -80,9 +88,10 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
-        // Podrías loggear 'ex' aquí si deseas más trazabilidad
+        System.out.println(messageSource.getMessage("error.unexpected", null, new Locale("es")));
+
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body("Unexpected error");
+                .body(messageSource.getMessage("error.unexpected", null, LocaleContextHolder.getLocale()));
     }
 
     /**
@@ -94,6 +103,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     public ResponseEntity<String> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid UUID format");
+        System.out.println(messageSource.getMessage("error.invalid.uuid", null, new Locale("es")));
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                .body(messageSource.getMessage("error.invalid.uuid", null, LocaleContextHolder.getLocale()));
     }
 }
