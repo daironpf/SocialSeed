@@ -20,8 +20,10 @@ public class CreateUser {
         if (user.getId() == null) {
             user.setId(UUID.randomUUID());
         }
-        user.setRoles(Set.of("ROLE_USER"));
+//        user.setRoles(Set.of("ROLE_USER"));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        System.out.println("Roles: "+user.getRoles());
+
         return userRepository.save(user);
     }
 }

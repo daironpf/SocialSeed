@@ -30,6 +30,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.fullName = fullName;
+        this.roles.add("ROLE_USER");
     }
 
     public UUID getId() {

@@ -22,6 +22,7 @@ public class Neo4jUserRepository implements UserRepository {
     @Override
     public User save(User user) {
         var node = UserNeo4jMapper.toNode(user);
+        System.out.println("RolesInNode: "+node.getRoles());
         return UserNeo4jMapper.toDomain(springDataUserRepository.save(node));
     }
 

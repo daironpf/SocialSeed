@@ -14,7 +14,8 @@ public class UserNeo4jMapper {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getFullName()
+                user.getFullName(),
+                user.getRoles()
         );
     }
 
