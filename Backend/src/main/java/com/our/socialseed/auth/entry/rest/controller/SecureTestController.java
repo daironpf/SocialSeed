@@ -5,13 +5,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
-@RequestMapping("/secure")
+@RequestMapping("/about")
 public class SecureTestController {
 
     @GetMapping
-    public ResponseEntity<String> securedEndpoint() {
-        return ResponseEntity.ok("✅ Access granted to secure endpoint.");
+    public ResponseEntity<Map<String, String>> about() {
+        Map<String, String> response = new HashMap<>();
+        response.put("name", "SocialSeed");
+        response.put("iconUrl", "https://example.com/icon.png");
+        return ResponseEntity.ok(response);
     }
 }
 
