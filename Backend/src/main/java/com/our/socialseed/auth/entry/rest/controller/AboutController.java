@@ -10,9 +10,9 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/about")
-public class SecureTestController {
+public class AboutController {
 
-    @GetMapping
+    @GetMapping("/oo")
     public ResponseEntity<Map<String, String>> about() {
         Map<String, String> response = new HashMap<>();
         response.put("name", "SocialSeed");
