@@ -1,5 +1,0 @@
-/* custom-styles.css */
-
-.button-vertical {
-    @apply rounded-lg w-28 h-10 p-2 text-sm font-bold border;
-}
