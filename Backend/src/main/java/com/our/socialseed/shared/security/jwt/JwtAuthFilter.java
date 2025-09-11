@@ -21,13 +21,13 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
     private final List<String> excludedPaths = List.of(
+            "/about/**",
             "/auth/**",
             "/public/**",
             "/assets/**",
             "/swagger-ui/**",
             "/v3/api-docs/**",
-            "/swagger-ui.html",
-            "/about/**"
+            "/swagger-ui.html"
     );
 
     public JwtAuthFilter(JWTProvider jwtProvider) {
