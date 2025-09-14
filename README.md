@@ -1,63 +1,97 @@
-# Social Seed - Build Your Own Social Network with Spring Boot, Neo4j, and Vue.js
+# Social Seed - Build Your Own Social Network with Spring Boot, Neo4j, and Hexagonal Architecture
 
-Welcome to Social Seed, a versatile social network seed project built with Spring Boot, Neo4j, and Vue.js. This project serves as a foundation that allows anyone to cultivate and customize their unique social network.
+Welcome to **Social Seed**, an open-source foundation for building customizable and scalable social networks.
 
-## Project Overview
+The backend is powered by **Spring Boot** in a **hexagonal architecture** and **Neo4j** as the graph database. On top of that, we are releasing a **Flutter mobile app on Google Play Store** that lets users connect to and switch between multiple Social Seed-based social networks — offering a new and flexible way to interact with online communities.
 
-Social Seed provides a solid starting point for creating a personalized social network using the powerful combination of Spring Boot for the backend, Neo4j as the graph database, and Vue.js for the frontend. Whether you're building a community for a specific interest, a niche group, or just your friends, this seed project empowers you to shape and expand your social platform.
+⚠️ **Note:** The Flutter app is available only as a published product on the Play Store. Its source code is not part of this repository.
 
-## Key Features
+---
 
-- **Flexible Architecture:** Built with Spring Boot, Neo4j, and Vue.js, the project offers a flexible and modern stack for customization.
-- **Community Building:** Create and nurture your community tailored to your specific interests or audience.
-- **Scalable:** Easily scale your social network as your community grows.
-- **Open-Source:** Being open-source, it encourages collaboration and contributions.
+## 🚀 Project Overview
 
-## DevBlog #1
-https://github.com/daironpf/SocialSeed/assets/45364687/fb688225-99f0-44b9-9fc3-7d604845385f
+Social Seed equips developers with the tools to create their own social network:
 
-## This is the Graph Data Model used for the project
+* **Backend:** Spring Boot + Hexagonal Architecture for clean and scalable design.
+* **Database:** Neo4j to power relationships and graph-based features.
+* **Mobile App (Play Store):** A native Flutter application (distributed via Google Play) to explore, join, and switch across networks built on Social Seed.
+
+Whether you want to build a **niche community**, a **private network**, or a **large-scale social hub**, Social Seed gives you the foundation to make it happen.
+
+---
+
+## ✨ Key Features
+
+* **Hexagonal Architecture:** Ensures separation of concerns and easy maintainability.
+* **Community Building:** Tailor your network to your audience and needs.
+* **Multi-Network Access via App:** The Play Store app allows users to seamlessly move between Social Seed-powered networks.
+* **Scalable & Flexible:** Designed to grow with your community.
+* **Open Source Backend:** Transparent and extendable backend for anyone to use.
+
+---
+
+## 📱 Mobile Experience
+
+Unlike traditional platforms that bind users to a single ecosystem, the **Social Seed app** (available on Google Play) acts as a **hub for multiple networks**, letting users:
+
+* Join different communities built with Social Seed.
+* Switch between them instantly.
+* Enjoy a modern, native mobile experience built with Flutter.
+
+---
+
+## 📊 Graph Data Model
+
+This is the Neo4j-based graph model powering Social Seed:
 ![This is the Graph Data Model used for the project](https://github.com/daironpf/SocialSeed/blob/main/Neo4j/Graph%20Data%20Model/SocialSeed%20(SS).png)
 
-<!--
-## Getting Started
+---
 
-1. Clone the repository: `git clone git@github.com:daironpf/SocialSeed.git`
-2. Set up your Neo4j database and update properties in `application.properties`.
-3. Navigate to the `frontend` directory and install Vue.js dependencies: `cd frontend && npm install`
-4. Run the Vue.js application: `npm run serve`
-5. Run the Spring Boot application: `./mvnw spring-boot:run`
--->
+## 🛠️ Customization
 
-## Customization
+Developers can:
 
-This project is designed to be easily customizable. Personalize it by adding features, modifying the user interface, or integrating additional technologies to meet your unique requirements.
-
-## Contributions
-
-Contributions are encouraged! Whether it's adding new features, fixing bugs, or enhancing documentation, your contributions help make Social Seed better for everyone.
-
-## Contact
-
-- **Developer:** Dairon Pérez Frías
-- **Email:** dairon.perezfrias@gmail.com
-
-Thanks for choosing Social Seed as the starting point for your social network journey! We look forward to seeing the incredible Social Network that you will build.
+* Extend backend functionality with new features.
+* Modify the graph model to adapt to specific use cases.
+* Integrate with additional services.
 
 ---
 
-**Note:** This README will be updated as the project progresses, currently everything I want to achieve is reflected here and where I am going can be seen in the code.
+## 📖 DevBlog
 
-
-Si quieres levantar el proyecto con los datos de prueba generados por el fake graph entonces ejecuta este comando:
-in linux o gitbash:
-GENERATE_FAKE_GRAPH=true docker-compose up --build fake-graph
-
-in windows terminal:
-$env:GENERATE_FAKE_GRAPH="true" ; docker-compose up --build fake-graph
+Follow the development journey:
+[https://github.com/daironpf/SocialSeed/assets/45364687/fb688225-99f0-44b9-9fc3-7d604845385f](https://github.com/daironpf/SocialSeed/assets/45364687/fb688225-99f0-44b9-9fc3-7d604845385f)
 
 ---
 
-I extend my sincere gratitude to JetBrains for generously providing me with their licenses for open source projects to work with their software, which has allowed for faster and more comfortable development.
+## 🤝 Contributions
+
+We welcome contributions to the **backend project**:
+
+* Feature development
+* Bug fixes
+* Documentation improvements
+
+Your input helps make Social Seed a stronger foundation for everyone.
+
+---
+
+## 📩 Contact
+
+* **Developer:** Dairon Pérez Frías
+* **Email:** [dairon.perezfrias@gmail.com](mailto:dairon.perezfrias@gmail.com)
+
+---
+
+## ⚡ Quick Start with docker
+
+```
+docker-compose up -build
+```
+
+
+## 💡 Acknowledgments
+
+Thanks to **JetBrains** for supporting open source development with their software licenses, enabling faster and more comfortable development.
 
 ![JetBrains logo support](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
