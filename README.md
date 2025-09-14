@@ -86,7 +86,7 @@ Your input helps make Social Seed a stronger foundation for everyone.
 ## ⚡ Quick Start with docker
 
 ```
-docker-compose up -build
+docker-compose up --build
 ```
 
 
