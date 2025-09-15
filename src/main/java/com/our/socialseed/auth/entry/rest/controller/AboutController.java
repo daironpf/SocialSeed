@@ -12,13 +12,11 @@ import java.util.Map;
 @RequestMapping("/about")
 public class AboutController {
 
-    @GetMapping("/me")
+    @GetMapping("")
     public ResponseEntity<Map<String, String>> about() {
-        System.out.println("Entrooo a /about/me");
         Map<String, String> response = new HashMap<>();
         response.put("name", "SocialSeed");
         response.put("iconUrl", "https://example.com/icon.png");
         return ResponseEntity.ok(response);
     }
 }
-

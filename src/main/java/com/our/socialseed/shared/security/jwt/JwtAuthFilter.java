@@ -21,9 +21,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
     private final List<String> excludedPaths = List.of(
-            "/about/**",
-            "/about/me",
-            "/auth/**",
+            "/about",
             "/public/**",
             "/assets/**",
             "/swagger-ui/**",
