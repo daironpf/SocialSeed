@@ -1,6 +1,8 @@
 package com.our.socialseed.about.entry.rest.controller;
 
+import com.our.socialseed.about.application.usecase.AboutUseCases;
 import com.our.socialseed.about.entry.rest.dto.AboutResponseDTO;
+import com.our.socialseed.about.entry.rest.mapper.AboutRestMapper;
 import com.our.socialseed.user.application.usecase.UserUseCases;
 import com.our.socialseed.user.entry.rest.dto.UserResponseDTO;
 import com.our.socialseed.user.entry.rest.mapper.UserRestMapper;
@@ -17,29 +19,17 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/about")
 public class AboutController {
-    private final AboutUseCases userUseCases;
+    private final AboutUseCases aboutUseCases;
 
-    public UserController(UserUseCases userUseCases) {
-        this.userUseCases = userUseCases;
+    public AboutController(AboutUseCases aboutUseCases) {
+        this.aboutUseCases = aboutUseCases;
     }
 
     // GET ABOUT
     @GetMapping("")
-    public ResponseEntity<AboutResponseDTO> getAbout() {
-        return
-
-
-        Map<String, String> response = new HashMap<>();
-        response.put("name", "SocialSeed");
-        response.put("iconUrl", "https://example.com/icon.png");
-        return ResponseEntity.ok(response);
-    }
-
-    // GET BY ID
-    @GetMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable UUID id) {
-        return userUseCases.getUserById().execute(id)
-                .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
+    public ResponseEntity<AboutResponseDTO> getAboutInfo() {
+        return aboutUseCases.getAbout().execute()
+                .map(about -> ResponseEntity.ok(AboutRestMapper.toResponse(about)))
                 .orElse(ResponseEntity.notFound().build());
     }
 }
