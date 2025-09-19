@@ -1,5 +1,7 @@
 package com.our.socialseed.shared.exception;
 
+import com.our.socialseed.auth.config.exception.EmailAlreadyExistsException;
+import com.our.socialseed.shared.response.ApiResponse;
 import jakarta.validation.ConstraintViolationException;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -7,7 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.util.*;
@@ -15,10 +18,7 @@ import java.util.stream.Collectors;
 
 /**
  * GlobalExceptionHandler centraliza el manejo de excepciones en toda la aplicación.
- * Esta clase intercepta y responde a errores comunes como validaciones fallidas,
- * tipos de datos incorrectos y errores de ejecución.
- *
- * Anotada con @RestControllerAdvice para aplicar a todos los controladores REST.
+ * Ahora utiliza ApiResponse e internacionalización.
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -29,15 +29,11 @@ public class GlobalExceptionHandler {
         this.messageSource = messageSource;
     }
 
-    /**
-     * Maneja excepciones que ocurren cuando fallan las validaciones de argumentos anotados
-     * con @Valid en controladores, típicamente con cuerpos JSON.
-     *
-     * @param ex excepción que contiene los errores de validación
-     * @return ResponseEntity con lista de errores por campo y status 400 (Bad Request)
-     */
+    // --------------------------------------------
+    // Validaciones de @Valid en @RequestBody
+    // --------------------------------------------
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleValidationErrors(MethodArgumentNotValidException ex) {
+    public ResponseEntity<ApiResponse<?>> handleValidationErrors(MethodArgumentNotValidException ex) {
         Locale locale = LocaleContextHolder.getLocale();
 
         List<Map<String, String>> errors = ex.getBindingResult()
@@ -49,21 +45,16 @@ public class GlobalExceptionHandler {
                 ))
                 .collect(Collectors.toList());
 
-        Map<String, Object> responseBody = new HashMap<>();
-        responseBody.put("errors", errors);
-
-        return ResponseEntity.badRequest().body(responseBody);
+        return ResponseEntity.badRequest()
+                .body(ApiResponse.error(HttpStatus.BAD_REQUEST.value(),
+                        messageSource.getMessage("error.validation", null, locale) + ": " + errors));
     }
 
-    /**
-     * Maneja validaciones fallidas que no están ligadas a un @RequestBody, como por ejemplo
-     * parámetros en la URL o en métodos de servicio validados manualmente.
-     *
-     * @param ex excepción que contiene las violaciones de restricciones
-     * @return ResponseEntity con detalles de los errores y status 400 (Bad Request)
-     */
+    // --------------------------------------------
+    // ConstraintViolationException (validaciones fuera de @RequestBody)
+    // --------------------------------------------
     @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<Map<String, Object>> handleConstraintViolations(ConstraintViolationException ex) {
+    public ResponseEntity<ApiResponse<?>> handleConstraintViolations(ConstraintViolationException ex) {
         Locale locale = LocaleContextHolder.getLocale();
 
         List<Map<String, String>> errors = ex.getConstraintViolations()
@@ -74,38 +65,41 @@ public class GlobalExceptionHandler {
                 ))
                 .collect(Collectors.toList());
 
-        Map<String, Object> responseBody = new HashMap<>();
-        responseBody.put("errors", errors);
-
-        return ResponseEntity.badRequest().body(responseBody);
-    }
-    /**
-     * Captura excepciones generales en tiempo de ejecución.
-     * Este es un mecanismo de seguridad para evitar que errores no controlados expongan información sensible.
-     *
-     * @param ex excepción de tipo RuntimeException
-     * @return ResponseEntity con mensaje genérico y status 500 (Internal Server Error)
-     */
-    @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleRuntimeException(RuntimeException ex) {
-        System.out.println(messageSource.getMessage("error.unexpected", null, new Locale("es")));
-
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(messageSource.getMessage("error.unexpected", null, LocaleContextHolder.getLocale()));
+        return ResponseEntity.badRequest()
+                .body(ApiResponse.error(HttpStatus.BAD_REQUEST.value(),
+                        messageSource.getMessage("error.validation", null, locale) + ": " + errors));
     }
 
-    /**
-     * Maneja errores cuando un parámetro no puede convertirse al tipo esperado,
-     * como al enviar un string en lugar de un UUID.
-     *
-     * @param ex excepción por tipo de argumento incorrecto
-     * @return ResponseEntity con mensaje y status 400 (Bad Request)
-     */
+    // --------------------------------------------
+    // Excepción específica: Email ya registrado
+    // --------------------------------------------
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<ApiResponse<?>> handleEmailAlreadyExists(EmailAlreadyExistsException ex) {
+        Locale locale = LocaleContextHolder.getLocale();
+        String message = messageSource.getMessage("auth.register.email.exists", null, locale);
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ApiResponse.conflict(message));
+    }
+
+    // --------------------------------------------
+    // Error de tipo de argumento (ej: UUID inválido)
+    // --------------------------------------------
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
-    public ResponseEntity<String> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
-        System.out.println(messageSource.getMessage("error.invalid.uuid", null, new Locale("es")));
-
+    public ResponseEntity<ApiResponse<?>> handleTypeMismatch(MethodArgumentTypeMismatchException ex) {
+        Locale locale = LocaleContextHolder.getLocale();
+        String message = messageSource.getMessage("error.invalid.uuid", null, locale);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(messageSource.getMessage("error.invalid.uuid", null, LocaleContextHolder.getLocale()));
+                .body(ApiResponse.error(HttpStatus.BAD_REQUEST.value(), message));
+    }
+
+    // --------------------------------------------
+    // Excepciones generales en tiempo de ejecución
+    // --------------------------------------------
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ApiResponse<?>> handleRuntimeException(RuntimeException ex) {
+        Locale locale = LocaleContextHolder.getLocale();
+        String message = messageSource.getMessage("error.unexpected", null, locale);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(ApiResponse.error(HttpStatus.INTERNAL_SERVER_ERROR.value(), message));
     }
 }

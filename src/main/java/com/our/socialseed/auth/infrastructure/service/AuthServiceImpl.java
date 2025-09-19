@@ -1,5 +1,6 @@
 package com.our.socialseed.auth.infrastructure.service;
 
+import com.our.socialseed.auth.config.exception.EmailAlreadyExistsException;
 import com.our.socialseed.auth.domain.service.AuthService;
 import com.our.socialseed.auth.entry.rest.dto.RegisterRequestDTO;
 //import com.our.socialseed.auth.infrastructure.security.JWTProvider;
@@ -38,7 +39,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String register(RegisterRequestDTO dto) {
         if (userRepository.findByEmail(dto.email).isPresent()) {
-            throw new RuntimeException("Email already in use");
+            throw new EmailAlreadyExistsException(); // ya no usamos RuntimeException genérico
         }
 
         User newUser = new User(

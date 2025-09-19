@@ -4,31 +4,47 @@ import com.our.socialseed.auth.application.usecase.AuthUseCases;
 import com.our.socialseed.auth.entry.rest.dto.AuthResponseDTO;
 import com.our.socialseed.auth.entry.rest.dto.LoginRequestDTO;
 import com.our.socialseed.auth.entry.rest.dto.RegisterRequestDTO;
+import com.our.socialseed.shared.response.ApiResponse;
+import org.springframework.context.MessageSource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Locale;
+
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
     private final AuthUseCases authUseCases;
+    private final MessageSource messageSource;
 
-    public AuthController(AuthUseCases authUseCases) {
+    public AuthController(AuthUseCases authUseCases, MessageSource messageSource) {
         this.authUseCases = authUseCases;
+        this.messageSource = messageSource;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponseDTO> login(@RequestBody LoginRequestDTO request) {
+    public ResponseEntity<ApiResponse<?>> login(@RequestBody LoginRequestDTO request, Locale locale) {
         String token = authUseCases.login(request.email, request.password);
-        return ResponseEntity.ok(new AuthResponseDTO(token));
+        return ResponseEntity.ok(
+                ApiResponse.success(
+                        new AuthResponseDTO(token),
+                        messageSource.getMessage("auth.login.success", null, locale)
+                )
+        );
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponseDTO> register(@RequestBody RegisterRequestDTO request) {
+    public ResponseEntity<ApiResponse<?>> register(@RequestBody RegisterRequestDTO request, Locale locale) {
         String token = authUseCases.register(request);
-        return ResponseEntity.ok(new AuthResponseDTO(token));
+        return ResponseEntity.ok(
+                ApiResponse.success(
+                        new AuthResponseDTO(token),
+                        messageSource.getMessage("auth.register.success", null, locale)
+                )
+        );
     }
 }
