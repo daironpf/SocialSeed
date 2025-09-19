@@ -19,17 +19,20 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/about")
 public class AboutController {
+
     private final AboutUseCases aboutUseCases;
 
+    // Inyección por constructor (Spring lo hace automáticamente)
     public AboutController(AboutUseCases aboutUseCases) {
         this.aboutUseCases = aboutUseCases;
     }
 
-    // GET ABOUT
-    @GetMapping("")
+    // GET /about
+    @GetMapping
     public ResponseEntity<AboutResponseDTO> getAboutInfo() {
         return aboutUseCases.getAbout().execute()
-                .map(about -> ResponseEntity.ok(AboutRestMapper.toResponse(about)))
-                .orElse(ResponseEntity.notFound().build());
+                .map(AboutRestMapper::toResponse) // método de mapeo directo
+                .map(ResponseEntity::ok)          // lo transforma en ResponseEntity.ok
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

@@ -1,13 +1,13 @@
 package com.our.socialseed.about.application.usecase;
 
+import org.springframework.stereotype.Service;
 
-import com.our.socialseed.user.application.usecase.GetUserById;
-
+@Service
 public class AboutUseCases {
     private final GetAbout getAbout;
 
-    public AboutUseCases() {
-        this.getAbout = new GetAbout();
+    public AboutUseCases(GetAbout getAbout) {
+        this.getAbout = getAbout;
     }
 
     public GetAbout getAbout() {
