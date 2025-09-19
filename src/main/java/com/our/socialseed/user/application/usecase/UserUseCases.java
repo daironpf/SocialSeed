@@ -2,7 +2,9 @@ package com.our.socialseed.user.application.usecase;
 
 import com.our.socialseed.user.domain.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserUseCases {
     private final CreateUser createUser;
     private final GetUserById getUserById;

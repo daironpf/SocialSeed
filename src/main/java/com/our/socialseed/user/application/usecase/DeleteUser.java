@@ -1,9 +1,11 @@
 package com.our.socialseed.user.application.usecase;
 
 import com.our.socialseed.user.domain.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class DeleteUser {
     private final UserRepository userRepository;
 

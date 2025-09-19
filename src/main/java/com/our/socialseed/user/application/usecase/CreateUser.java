@@ -3,9 +3,11 @@ package com.our.socialseed.user.application.usecase;
 import com.our.socialseed.user.domain.model.User;
 import com.our.socialseed.user.domain.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class CreateUser {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
