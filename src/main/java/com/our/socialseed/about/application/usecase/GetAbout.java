@@ -19,7 +19,8 @@ public class GetAbout {
                 appProperties.getVersion(),
                 "base_seed",
                 appProperties.getName(),
-                appProperties.getIcon()
+                appProperties.getIcon(),
+                "Red Social Base con Social Seed"
         ));
     }
 }

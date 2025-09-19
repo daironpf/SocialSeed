@@ -11,7 +11,8 @@ public class AboutRestMapper {
                 about.getVersion(),
                 about.getSeed(),
                 about.getName(),
-                about.getIcono_url()
+                about.getIcono_url(),
+                about.getDescription()
         );
     }
 }

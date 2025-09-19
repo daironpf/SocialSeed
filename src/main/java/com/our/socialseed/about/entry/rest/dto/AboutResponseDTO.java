@@ -4,6 +4,7 @@ public record AboutResponseDTO(
         String version,
         String seed,
         String name,
-        String icono_url
+        String icono_url,
+        String description
 ) {
 }
