@@ -1,27 +1,23 @@
 package com.our.socialseed.about.application.usecase;
 
 import com.our.socialseed.about.domain.model.About;
-import com.our.socialseed.config.AppProperties;
+import com.our.socialseed.config.AppInfo;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 public class GetAbout {
-    private final AppProperties appProperties;
 
-    public GetAbout(AppProperties appProperties) {
-        this.appProperties = appProperties;
-    }
+    public GetAbout() {}
 
     public Optional<About> execute() {
         return Optional.of(new About(
-                appProperties.getVersion(),
+                AppInfo.VERSION,
                 "base_seed",
-                appProperties.getName(),
-                appProperties.getIcon(),
+                "Test Social",
+                "https://www.iconos.com/socialseed.png",
                 "Red Social Base con Social Seed"
         ));
     }
 }
-
