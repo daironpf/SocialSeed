@@ -2,7 +2,10 @@ package com.our.socialseed.auth.application.usecase;
 
 import com.our.socialseed.auth.domain.service.AuthService;
 import com.our.socialseed.auth.entry.rest.dto.RegisterRequestDTO;
+import org.springframework.stereotype.Service;
 
+//Orquestador de casos de uso (AuthUseCases)
+@Service
 public class AuthUseCases {
     private final AuthenticateUser authenticateUser;
     private final RegisterUser registerUser;

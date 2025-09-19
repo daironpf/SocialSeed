@@ -8,10 +8,12 @@ import com.our.socialseed.shared.security.jwt.JWTProvider;
 import com.our.socialseed.user.domain.model.User;
 import com.our.socialseed.user.domain.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
 
+@Service
 public class AuthServiceImpl implements AuthService {
 
     private final UserRepository userRepository;
