@@ -28,10 +28,10 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<?>> login(@RequestBody LoginRequestDTO request, Locale locale) {
-        String token = authUseCases.login(request.email, request.password);
+        AuthResponseDTO response = authUseCases.login(request.email, request.password);
         return ResponseEntity.ok(
                 ApiResponse.success(
-                        new AuthResponseDTO(token),
+                        response,
                         messageSource.getMessage("auth.login.success", null, locale)
                 )
         );
@@ -39,10 +39,10 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<?>> register(@RequestBody RegisterRequestDTO request, Locale locale) {
-        String token = authUseCases.register(request);
+        AuthResponseDTO response = authUseCases.register(request);
         return ResponseEntity.ok(
                 ApiResponse.success(
-                        new AuthResponseDTO(token),
+                        response,
                         messageSource.getMessage("auth.register.success", null, locale)
                 )
         );

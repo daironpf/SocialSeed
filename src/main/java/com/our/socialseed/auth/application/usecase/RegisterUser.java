@@ -1,6 +1,7 @@
 package com.our.socialseed.auth.application.usecase;
 
 import com.our.socialseed.auth.domain.service.AuthService;
+import com.our.socialseed.auth.entry.rest.dto.AuthResponseDTO;
 import com.our.socialseed.auth.entry.rest.dto.RegisterRequestDTO;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ public class RegisterUser {
         this.authService = authService;
     }
 
-    public String execute(RegisterRequestDTO dto) {
+    public AuthResponseDTO execute(RegisterRequestDTO dto) {
         return authService.register(dto);
     }
 }
