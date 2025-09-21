@@ -8,11 +8,16 @@ services:
     depends_on:
       neo4j-db:
         condition: service_healthy
+      postgres:
+        condition: service_healthy
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - SPRING_NEO4J_URI=bolt://neo4j-db:7687
       - SPRING_NEO4J_AUTHENTICATION_USERNAME=neo4j
       - SPRING_NEO4J_AUTHENTICATION_PASSWORD=neo4jSocial
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/socialseed-auth
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=neo4jSocial
 
   neo4j-db:
     image: neo4j:5.26.12-community
@@ -30,4 +35,22 @@ services:
       test: [ "CMD-SHELL", "cypher-shell -u neo4j -p neo4jSocial 'RETURN 1' || exit 1" ]
       interval: 10s
       timeout: 10s
+      retries: 5
+
+  postgres:
+    image: postgres:16.10
+    container_name: postgres-db
+    restart: always
+#    ports:
+#      - "127.0.0.1:5555:5432"
+    environment:
+      POSTGRES_DB: socialseed-auth
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: neo4jSocial
+    volumes:
+      - ./postgres/data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres -d socialseed-auth" ]
+      interval: 10s
+      timeout: 5s
       retries: 5
