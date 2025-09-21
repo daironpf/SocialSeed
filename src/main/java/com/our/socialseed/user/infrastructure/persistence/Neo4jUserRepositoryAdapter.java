@@ -11,11 +11,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
-public class Neo4jUserRepository implements UserRepository {
+public class Neo4jUserRepositoryAdapter implements UserRepository {
 
     private final SpringDataUserRepository springDataUserRepository;
 
-    public Neo4jUserRepository(SpringDataUserRepository springDataUserRepository) {
+    public Neo4jUserRepositoryAdapter(SpringDataUserRepository springDataUserRepository) {
         this.springDataUserRepository = springDataUserRepository;
     }
 
