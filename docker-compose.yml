@@ -1,3 +1,4 @@
+version: '3.9'
 services:
   backend:
     build: .
@@ -8,23 +9,26 @@ services:
     depends_on:
       neo4j-db:
         condition: service_healthy
-      postgres:
+      postgres-db:
         condition: service_healthy
+#      keycloak:
+#        condition: service_healthy
     environment:
       - SPRING_PROFILES_ACTIVE=prod
       - SPRING_NEO4J_URI=bolt://neo4j-db:7687
       - SPRING_NEO4J_AUTHENTICATION_USERNAME=neo4j
       - SPRING_NEO4J_AUTHENTICATION_PASSWORD=neo4jSocial
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/socialseed-auth
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/socialseed-auth
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=neo4jSocial
+#      - SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI=http://keycloak:8080/realms/socialseed-realm
 
   neo4j-db:
     image: neo4j:5.26.12-community
     container_name: neo4j-db
     ports:
-      - "7474:7474"   # consola web
-      - "7687:7687"   # bolt
+      - "7474:7474"
+      - "7687:7687"
     environment:
       - NEO4J_AUTH=neo4j/neo4jSocial
     volumes:
@@ -32,17 +36,14 @@ services:
       - ./neo4j/logs:/logs
       - ./neo4j/plugins:/plugins
     healthcheck:
-      test: [ "CMD-SHELL", "cypher-shell -u neo4j -p neo4jSocial 'RETURN 1' || exit 1" ]
+      test: [ "CMD-SHELL", "cypher-shell -u neo4j -p neo4jSocial 'RETURN 1'" ]
       interval: 10s
       timeout: 10s
       retries: 5
 
-  postgres:
-    image: postgres:16.10
+  postgres-db:
+    image: postgres:16
     container_name: postgres-db
-    restart: always
-#    ports:
-#      - "127.0.0.1:5555:5432"
     environment:
       POSTGRES_DB: socialseed-auth
       POSTGRES_USER: postgres
@@ -50,7 +51,48 @@ services:
     volumes:
       - ./postgres/data:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres -d socialseed-auth" ]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d socialseed-auth"]
       interval: 10s
       timeout: 5s
       retries: 5
+
+#  keycloak-db:
+#    image: postgres:16
+#    container_name: keycloak-db
+#    environment:
+#      POSTGRES_DB: keycloak
+#      POSTGRES_USER: keycloak
+#      POSTGRES_PASSWORD: keycloakpass
+#    volumes:
+#      - ./keycloak/postgres-data:/var/lib/postgresql/data
+#    healthcheck:
+#      test: ["CMD-SHELL", "pg_isready -U keycloak -d keycloak"]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#
+#  keycloak:
+#    image: quay.io/keycloak/keycloak:26.3
+#    container_name: keycloak
+#    command:
+#      - start-dev
+#      - --import-realm
+#    environment:
+#      - KEYCLOAK_ADMIN=admin
+#      - KEYCLOAK_ADMIN_PASSWORD=admin
+#      - KC_DB=postgres
+#      - KC_DB_URL=jdbc:postgresql://keycloak-db:5432/keycloak
+#      - KC_DB_USERNAME=keycloak
+#      - KC_DB_PASSWORD=keycloakpass
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - ./keycloak/realms:/opt/keycloak/data/import
+#    depends_on:
+#      keycloak-db:
+#        condition: service_healthy
+#    healthcheck:
+#      test: ["CMD-SHELL", "curl -f http://localhost:8080/health/ready || exit 1"]
+#      interval: 15s
+#      timeout: 10s
+#      retries: 10
