@@ -5,7 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="create Api-Gateway">
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/AppInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/InternationalizationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/OpenAPIConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/WebConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/EmailAlreadyExistsException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/response/ApiResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/ChangeUserPassword.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/CreateUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/DeleteUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/GetAllUsers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/GetUserById.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UpdateUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UserUseCases.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/arquitectura.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/config/UserSecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/PasswordChangeRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserCreateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserResponseDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserUpdateRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/mapper/UserRestMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/Neo4jUserRepositoryAdapter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/SpringDataUserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/entity/UserNeo4jEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/mapper/UserNeo4jMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/SocialuserServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/SocialuserServiceApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,12 +65,12 @@
       </list>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/daironpf/SocialSeed.git",
-    "accountId": "2a1b5268-45f8-4fc0-a28e-f1e033b910c5"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/daironpf/SocialSeed.git&quot;,
+    &quot;accountId&quot;: &quot;2a1b5268-45f8-4fc0-a28e-f1e033b910c5&quot;
   }
-}]]></component>
+}</component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -55,6 +92,7 @@
     "Docker.socialgraph-db.executor": "Run",
     "Docker.socialuser-service.executor": "Run",
     "Docker.socialuser-service/Dockerfile.executor": "Run",
+    "Maven.api-gateway [clean,install].executor": "Run",
     "Maven.api-gateway [clean].executor": "Run",
     "Maven.api-gateway [install].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
@@ -63,6 +101,7 @@
     "RequestMappingsPanelWidth0": "75",
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.SocialuserServiceApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
@@ -86,10 +125,21 @@
       <recent name="D:\proyectos\SocialSeed\socialuser-service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\test\java\com\socialseed\socialuserservice" />
+      <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\java\com\socialseed\socialuserservice" />
+      <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\resources" />
       <recent name="D:\proyectos\SocialSeed" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.socialseed.socialuserservice.shared.exception" />
+    </key>
   </component>
-  <component name="RunManager" selected="Docker.api-gateway">
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean install" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Docker.socialuser-service">
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.socialseed.apigateway.ApiGatewayApplication" />
@@ -199,6 +249,7 @@
       <workItem from="1762027617009" duration="57000" />
       <workItem from="1762027680911" duration="5539000" />
       <workItem from="1762052948907" duration="3896000" />
+      <workItem from="1762058639274" duration="2727000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -233,7 +284,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="origin/arquitectura-exagonal" />
                       </list>
                     </value>
                   </entry>
