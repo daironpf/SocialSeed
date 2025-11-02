@@ -2,16 +2,31 @@ server:
   port: 8081
 
 spring:
+  application:
+    name: api-gateway
   cloud:
     gateway:
       server:
         webflux:
           routes:
-            - id: socialuser-service-route
-              uri: http://socialuser-dev:4000
+            - id: social-user-dev-route
+              uri: http://socialuser_dev:4000
               predicates:
-              - Path=/api/users/**
+                - Path=/api/users/**
               filters:
-              - StripPrefix=0
-              # REST CLIENT -> http://localhost:8081/api/users
-              # API GATEWAY -> http://socialuser-dev:4000
+                - StripPrefix=2
+
+#spring:
+#  cloud:
+#    gateway:
+#      server:
+#        webflux:
+#          routes:
+#            - id: socialuser-service-route
+#              uri: http://socialuser-dev:4000
+#              predicates:
+#              - Path=/api/users/**
+#              filters:
+#              - StripPrefix=0
+#              # REST CLIENT -> http://localhost:8081/api/users
+#              # API GATEWAY -> http://socialuser-dev:4000
