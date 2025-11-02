@@ -1,0 +1,15 @@
+server:
+  port: 8081
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: socialuser-service-route
+          uri: http://socialuser-service:4000
+          predicates:
+            - Path=/api/socialuser/**
+          filters:
+            - StripPrefix=1
+          # REST CLIENT -> http://localhost:4004/api/socialuser
+          # API GATEWAY -> http://socialuser-service:4000
