@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="create Dockerfile for socialuser-service">
-      <change afterPath="$PROJECT_DIR$/api-gateway/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="create Api-Gateway">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -55,6 +51,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Docker.api-gateway.executor": "Run",
     "Docker.socialgraph-db.executor": "Run",
     "Docker.socialuser-service.executor": "Run",
     "Docker.socialuser-service/Dockerfile.executor": "Run",
@@ -92,7 +89,7 @@
       <recent name="D:\proyectos\SocialSeed" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.socialuser-service">
+  <component name="RunManager" selected="Docker.api-gateway">
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.socialseed.apigateway.ApiGatewayApplication" />
@@ -201,7 +198,7 @@
       <updated>1762027615634</updated>
       <workItem from="1762027617009" duration="57000" />
       <workItem from="1762027680911" duration="5539000" />
-      <workItem from="1762052948907" duration="1456000" />
+      <workItem from="1762052948907" duration="3896000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -211,7 +208,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762032355824</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="create Api-Gateway">
+      <option name="closed" value="true" />
+      <created>1762054530870</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1762054530870</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -242,6 +247,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create Dockerfile for socialuser-service" />
-    <option name="LAST_COMMIT_MESSAGE" value="create Dockerfile for socialuser-service" />
+    <MESSAGE value="create Api-Gateway" />
+    <option name="LAST_COMMIT_MESSAGE" value="create Api-Gateway" />
   </component>
 </project>
