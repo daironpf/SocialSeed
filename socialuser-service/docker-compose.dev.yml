@@ -1,0 +1,23 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: socialuser_dev
+    ports:
+      - "4000:4000"
+    volumes:
+      - ./src:/app/src
+      - ./pom.xml:/app/pom.xml
+      - maven_repo:/root/.m2
+    environment:
+      SPRING_DEVTOOLS_RESTART_TRIGGER_FILE: ".reloadtrigger"
+    networks:
+      - socialseed
+
+volumes:
+  maven_repo:
+
+networks:
+  socialseed:
+    external: true

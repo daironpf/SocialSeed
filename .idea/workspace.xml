@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="create Api-Gateway">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="update api-gateway">
+      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/delete-patient.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/update-patient.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/Dockerfile.dev" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/docker-compose.dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,11 +35,14 @@
       </list>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/daironpf/SocialSeed.git&quot;,
-    &quot;accountId&quot;: &quot;2a1b5268-45f8-4fc0-a28e-f1e033b910c5&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/daironpf/SocialSeed.git",
+    "accountId": "6298ce06-7e8c-4be7-8979-e12291206761"
   }
+}]]></component>
+  <component name="HttpClientOnboardingState">{
+  &quot;isOnboardingCommentShown&quot;: true
 }</component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
@@ -50,41 +59,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.api-gateway.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.socialgraph-db.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.socialuser-service.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.socialuser-service/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-gateway [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-gateway [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-gateway [install].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Spring Boot.SocialuserServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/.dev/proyectos/SocialSeed/api-gateway&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.api-gateway.executor": "Run",
+    "Docker.socialgraph-db.executor": "Run",
+    "Docker.socialuser-service.executor": "Run",
+    "Docker.socialuser-service/Dockerfile.executor": "Run",
+    "Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment.executor": "Run",
+    "HTTP Request.create-socialuser | Create a new patient entity.executor": "Run",
+    "HTTP Request.get-patients | GET request to get all patients.executor": "Run",
+    "HTTP Request.get-patients | GET request to get all social user.executor": "Run",
+    "HTTP Request.get-socialusers | #2.executor": "Run",
+    "HTTP Request.get-socialusers | GET request to get all social user.executor": "Run",
+    "Maven.api-gateway [clean,install].executor": "Run",
+    "Maven.api-gateway [clean].executor": "Run",
+    "Maven.api-gateway [install].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.SocialuserServiceApplication.executor": "Run",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/proyectos/SocialSeed",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\proyectos\SocialSeed" />
       <recent name="D:\.dev\proyectos\SocialSeed\api-gateway" />
       <recent name="D:\proyectos\SocialSeed\socialuser-service" />
     </key>
@@ -103,7 +119,35 @@
       <command value="mvn clean install" />
     </option>
   </component>
-  <component name="RunManager" selected="Docker.socialuser-service">
+  <component name="RunDashboard">
+    <option name="configurationStatuses">
+      <map>
+        <entry key="HttpClient.HttpRequestRunConfigurationType">
+          <value>
+            <map>
+              <entry key="create-socialuser | Create a new patient entity" value="STOPPED" />
+              <entry key="get-patients | GET request to get all social user" value="STOPPED" />
+              <entry key="get-socialusers | #2" value="STOPPED" />
+              <entry key="get-socialusers | GET request to get all social user" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="RunManager" selected="Docker.api-gateway">
+    <configuration name="create-socialuser | Create a new patient entity" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" executionIdentifier="Create a new patient entity" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="get-patients | GET request to get all social user" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/get-patients.http" executionIdentifier="GET request to get all social user" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="get-socialusers | GET request to get all social user" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" executionIdentifier="GET request to get all social user" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="get-socialusers | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" executionIdentifier="#2" index="2" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.socialseed.apigateway.ApiGatewayApplication" />
@@ -118,6 +162,12 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
     </configuration>
     <configuration name="api-gateway" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
       <deployment type="dockerfile">
@@ -187,19 +237,41 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="socialuser-service/docker-compose.dev.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="socialuser-service/docker-compose.dev.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Docker.api-gateway" />
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
+      <item itemvalue="Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment" />
+      <item itemvalue="HTTP Request.get-socialusers | #2" />
+      <item itemvalue="HTTP Request.create-socialuser | Create a new patient entity" />
+      <item itemvalue="HTTP Request.get-patients | GET request to get all social user" />
+      <item itemvalue="HTTP Request.get-socialusers | GET request to get all social user" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.SocialuserServiceApplication" />
     </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="HTTP Request.get-socialusers | #2" />
+        <item itemvalue="HTTP Request.get-socialusers | GET request to get all social user" />
+        <item itemvalue="HTTP Request.create-socialuser | Create a new patient entity" />
+        <item itemvalue="Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment" />
+        <item itemvalue="HTTP Request.get-patients | GET request to get all social user" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
       </set>
     </attachedChunks>
   </component>
@@ -214,6 +286,7 @@
       <workItem from="1762027680911" duration="5539000" />
       <workItem from="1762052948907" duration="3896000" />
       <workItem from="1762058639274" duration="2727000" />
+      <workItem from="1762102358951" duration="4864000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -231,7 +304,23 @@
       <option name="project" value="LOCAL" />
       <updated>1762054530870</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="changes in idea">
+      <option name="closed" value="true" />
+      <created>1762098384474</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1762098384474</updated>
+    </task>
+    <task id="LOCAL-00004" summary="update api-gateway">
+      <option name="closed" value="true" />
+      <created>1762107603767</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1762107603768</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,6 +352,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="create Dockerfile for socialuser-service" />
     <MESSAGE value="create Api-Gateway" />
-    <option name="LAST_COMMIT_MESSAGE" value="create Api-Gateway" />
+    <MESSAGE value="changes in idea" />
+    <MESSAGE value="update api-gateway" />
+    <option name="LAST_COMMIT_MESSAGE" value="update api-gateway" />
   </component>
 </project>
