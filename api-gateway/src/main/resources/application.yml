@@ -8,7 +8,7 @@ spring:
         - id: socialuser-service-route
           uri: http://socialuser-service:4000
           predicates:
-            - Path=/api/socialuser/**
+            - Path=/api/users/**
           filters:
             - StripPrefix=1
           # REST CLIENT -> http://localhost:4004/api/socialuser
