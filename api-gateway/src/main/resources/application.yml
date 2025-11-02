@@ -4,12 +4,14 @@ server:
 spring:
   cloud:
     gateway:
-      routes:
-        - id: socialuser-service-route
-          uri: http://socialuser-service:4000
-          predicates:
-            - Path=/api/users/**
-          filters:
-            - StripPrefix=1
-          # REST CLIENT -> http://localhost:4004/api/socialuser
-          # API GATEWAY -> http://socialuser-service:4000
+      server:
+        webflux:
+          routes:
+            - id: socialuser-service-route
+              uri: http://socialuser-dev:4000
+              predicates:
+              - Path=/api/users/**
+              filters:
+              - StripPrefix=0
+              # REST CLIENT -> http://localhost:8081/api/users
+              # API GATEWAY -> http://socialuser-dev:4000
