@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/socialuser-service/Dockerfile" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="create Dockerfile for socialuser-service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,8 +172,17 @@
       <option name="presentableId" value="Default" />
       <updated>1762027615634</updated>
       <workItem from="1762027617009" duration="57000" />
-      <workItem from="1762027680911" duration="4573000" />
+      <workItem from="1762027680911" duration="5539000" />
     </task>
+    <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
+      <option name="closed" value="true" />
+      <created>1762032355824</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1762032355824</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -204,5 +210,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="create Dockerfile for socialuser-service" />
+    <option name="LAST_COMMIT_MESSAGE" value="create Dockerfile for socialuser-service" />
   </component>
 </project>
