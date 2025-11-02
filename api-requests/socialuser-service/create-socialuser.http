@@ -1,0 +1,11 @@
+### Create a new socialuser entity
+POST http://localhost:4000/api/users
+Content-Type: application/json
+
+{
+  "email": "dairon@gmail.com",
+  "password":"daironpassword",
+  "username": "dairon",
+  "fullName": "Dairon Pérez Frías"
+}
+###
