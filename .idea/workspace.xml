@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="update request mapping url">
-      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/delete-patient.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/update-patient.http" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="dev with socialuser-dev service">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/docker-compose.dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/CreateUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/CreateUser.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,10 +65,13 @@
     "HTTP Request.create-socialuser | Create a new patient entity.executor": "Run",
     "HTTP Request.create-socialuser | Create a new socialuser entity.executor": "Run",
     "HTTP Request.delete-patient | Delete an SocialUser.executor": "Run",
+    "HTTP Request.delete-socialuser | Delete an SocialUser.executor": "Run",
     "HTTP Request.get-patients | GET request to get all patients.executor": "Run",
     "HTTP Request.get-patients | GET request to get all social user.executor": "Run",
     "HTTP Request.get-socialusers | #2.executor": "Run",
     "HTTP Request.get-socialusers | GET request to get all social user.executor": "Run",
+    "HTTP Request.update-patient | Update SocialUser entity.executor": "Run",
+    "HTTP Request.update-socialuser | Update SocialUser entity.executor": "Run",
     "Maven.api-gateway [clean,install].executor": "Run",
     "Maven.api-gateway [clean].executor": "Run",
     "Maven.api-gateway [install].executor": "Run",
@@ -129,9 +128,9 @@
           <value>
             <map>
               <entry key="create-socialuser | Create a new socialuser entity" value="STOPPED" />
-              <entry key="delete-patient | Delete an SocialUser" value="STOPPED" />
-              <entry key="get-socialusers | #2" value="STOPPED" />
+              <entry key="delete-socialuser | Delete an SocialUser" value="STOPPED" />
               <entry key="get-socialusers | GET request to get all social user" value="STOPPED" />
+              <entry key="update-socialuser | Update SocialUser entity" value="STOPPED" />
             </map>
           </value>
         </entry>
@@ -262,8 +261,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.get-socialusers | GET request to get all social user" />
         <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
+        <item itemvalue="HTTP Request.get-socialusers | GET request to get all social user" />
         <item itemvalue="HTTP Request.delete-socialuser | Delete an SocialUser" />
         <item itemvalue="HTTP Request.update-socialuser | Update SocialUser entity" />
         <item itemvalue="Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment" />
@@ -292,7 +291,7 @@
       <workItem from="1762102358951" duration="4946000" />
       <workItem from="1762115626733" duration="36000" />
       <workItem from="1762116172384" duration="1703000" />
-      <workItem from="1762129626881" duration="2446000" />
+      <workItem from="1762129626881" duration="3522000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -358,7 +357,23 @@
       <option name="project" value="LOCAL" />
       <updated>1762130719280</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="update crud rest request">
+      <option name="closed" value="true" />
+      <created>1762132231979</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1762132231979</updated>
+    </task>
+    <task id="LOCAL-00010" summary="dev with socialuser-dev service">
+      <option name="closed" value="true" />
+      <created>1762132279267</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1762132279267</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -396,6 +411,8 @@
     <MESSAGE value="create socialuser-dev service" />
     <MESSAGE value="update api-gateway config" />
     <MESSAGE value="update request mapping url" />
-    <option name="LAST_COMMIT_MESSAGE" value="update request mapping url" />
+    <MESSAGE value="update crud rest request" />
+    <MESSAGE value="dev with socialuser-dev service" />
+    <option name="LAST_COMMIT_MESSAGE" value="dev with socialuser-dev service" />
   </component>
 </project>

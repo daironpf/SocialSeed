@@ -75,7 +75,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(EmailAlreadyExistsException.class)
     public ResponseEntity<ApiResponse<?>> handleEmailAlreadyExists(EmailAlreadyExistsException ex) {
         Locale locale = LocaleContextHolder.getLocale();
-        String message = messageSource.getMessage("auth.register.email.exists", null, locale);
+        String message = messageSource.getMessage("email.exists", null, locale);
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(ApiResponse.conflict(message));
     }
