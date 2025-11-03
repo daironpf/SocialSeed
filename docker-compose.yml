@@ -1,0 +1,50 @@
+services:
+  socialseed:
+    container_name: socialuser-service
+    build:
+      context: ./socialuser-service
+      dockerfile: Dockerfile.dev
+#    ports:
+#      - "4000:4000"
+    volumes:
+      - ./socialuser-service/src:/app/src
+      - ./socialuser-service/pom.xml:/app/pom.xml
+      - maven_repo:/root/.m2
+    environment:
+      SPRING_DEVTOOLS_RESTART_TRIGGER_FILE: ".reloadtrigger"
+    networks:
+      - net
+
+  #Api-Gateway
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8085:4004"
+    networks:
+      - net
+
+  # Noe4j database config
+  neo4j:
+    container_name: socialgraph-db
+    image: neo4j:5.26.15-community
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+#    restart: always
+    environment:
+      - NEO4J_AUTH=neo4j/neoSocial
+      - NEO4J_server.memory.pagecache.size=1G
+    volumes:
+      - D:\db_volumes\socialgraph-db:/var/lib/neo4j/data
+    networks:
+      - net
+
+volumes:
+  maven_repo:
+
+networks:
+  net:
+#    external: false

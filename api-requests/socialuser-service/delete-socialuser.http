@@ -1,4 +1,4 @@
 ### Delete an SocialUser
-DELETE http://localhost:4004/api/socialusers/12190cb1-b257-4d06-8432-36f21d315b8f
+DELETE http://localhost:8085/api/socialusers/c4143fcb-84f0-4b43-8d48-cfd537693973
 ###
 

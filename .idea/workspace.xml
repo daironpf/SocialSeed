@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="dev with socialuser-dev service">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="update api-gateway">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/CreateUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/CreateUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/delete-socialuser.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/delete-socialuser.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/update-socialuser.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/update-socialuser.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/docker-compose.dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +20,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -31,12 +35,12 @@
       </list>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/daironpf/SocialSeed.git&quot;,
-    &quot;accountId&quot;: &quot;6298ce06-7e8c-4be7-8979-e12291206761&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/daironpf/SocialSeed.git",
+    "accountId": "2a1b5268-45f8-4fc0-a28e-f1e033b910c5"
   }
-}</component>
+}]]></component>
   <component name="HttpClientOnboardingState">{
   &quot;isOnboardingCommentShown&quot;: true
 }</component>
@@ -58,6 +62,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Docker.api-gateway.executor": "Run",
+    "Docker.docker-compose.yml.api-gateway: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.neo4j: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.socialseed: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
     "Docker.socialgraph-db.executor": "Run",
     "Docker.socialuser-service.executor": "Run",
     "Docker.socialuser-service/Dockerfile.executor": "Run",
@@ -107,6 +115,7 @@
       <recent name="D:\proyectos\SocialSeed\socialuser-service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\.dev\proyectos\SocialSeed" />
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\test\java\com\socialseed\socialuserservice" />
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\java\com\socialseed\socialuserservice" />
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\resources" />
@@ -130,14 +139,13 @@
               <entry key="create-socialuser | Create a new socialuser entity" value="STOPPED" />
               <entry key="delete-socialuser | Delete an SocialUser" value="STOPPED" />
               <entry key="get-socialusers | GET request to get all social user" value="STOPPED" />
-              <entry key="update-socialuser | Update SocialUser entity" value="STOPPED" />
             </map>
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Docker.api-gateway">
+  <component name="RunManager" selected="HTTP Request.update-socialuser | Update SocialUser entity">
     <configuration name="create-socialuser | Create a new socialuser entity" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" executionIdentifier="Create a new socialuser entity" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -186,6 +194,19 @@
           </option>
           <option name="commandLineOptions" value="--network socialseed" />
           <option name="sourceFilePath" value="api-gateway/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.neo4j: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="neo4j" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
         </settings>
       </deployment>
       <method v="2" />
@@ -239,19 +260,11 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="socialuser-service/docker-compose.dev.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="sourceFilePath" value="socialuser-service/docker-compose.dev.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Docker.api-gateway" />
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
-      <item itemvalue="Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
       <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
       <item itemvalue="HTTP Request.delete-socialuser | Delete an SocialUser" />
       <item itemvalue="HTTP Request.update-socialuser | Update SocialUser entity" />
@@ -261,19 +274,19 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
-        <item itemvalue="HTTP Request.get-socialusers | GET request to get all social user" />
-        <item itemvalue="HTTP Request.delete-socialuser | Delete an SocialUser" />
         <item itemvalue="HTTP Request.update-socialuser | Update SocialUser entity" />
-        <item itemvalue="Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment" />
+        <item itemvalue="HTTP Request.delete-socialuser | Delete an SocialUser" />
+        <item itemvalue="HTTP Request.get-socialusers | GET request to get all social user" />
+        <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
+        <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
       </set>
     </attachedChunks>
   </component>
@@ -292,6 +305,7 @@
       <workItem from="1762115626733" duration="36000" />
       <workItem from="1762116172384" duration="1703000" />
       <workItem from="1762129626881" duration="3522000" />
+      <workItem from="1762202145188" duration="3512000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />

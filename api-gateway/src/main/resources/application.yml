@@ -10,7 +10,7 @@ spring:
         webflux:
           routes:
             - id: socialuser-route
-              uri: http://socialuser-dev:4000
+              uri: http://socialuser-service:4000
               predicates:
                 - Path=/api/socialusers/**
               filters:
