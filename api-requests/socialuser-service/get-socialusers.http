@@ -1,6 +1,4 @@
 ### GET request to get all social user
-GET http://localhost:8081/api/users
+GET http://localhost:4004/api/socialusers
 
 ###
-
-GET http://localhost:4000/

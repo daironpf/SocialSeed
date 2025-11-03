@@ -1,5 +1,5 @@
 ### Create a new socialuser entity
-POST http://localhost:4000/api/users
+POST http://localhost:4004/api/socialusers
 Content-Type: application/json
 
 {
