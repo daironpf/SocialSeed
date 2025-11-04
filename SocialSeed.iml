@@ -5,7 +5,6 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/.idea/httpRequests" />
       <excludeFolder url="file://$MODULE_DIR$/src" />
-      <excludeFolder url="file://$MODULE_DIR$/Backend" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "swagger-ui.enabled",
+      "type": "java.lang.String",
+      "description": "Description for swagger-ui.enabled."
+    },
+    {
+      "name": "api-docs.enabled",
+      "type": "java.lang.String",
+      "description": "Description for api-docs.enabled."
+    }
+  ] }

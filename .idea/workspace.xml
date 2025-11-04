@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="minor updates">
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="update the java use to 21">
       <change afterPath="$PROJECT_DIR$/Backend/.gitignore" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Backend/.mvn/wrapper/maven-wrapper.jar" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Backend/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
@@ -70,17 +70,6 @@
       <change afterPath="$PROJECT_DIR$/Backend/src/test/java/com/social/seed/validation/SocialUserInterestInHashTagServiceValidatorTest.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Backend/src/test/java/com/social/seed/validation/SocialUserServiceValidatorTest.java" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/Backend/src/test/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialSeed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SocialSeed.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/Dockerfile.dev" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/Dockerfile.dev" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -206,6 +195,7 @@
         <entry key="HttpClient.HttpRequestRunConfigurationType">
           <value>
             <map>
+              <entry key="create-socialuser | Create a new socialuser entity" value="STOPPED" />
               <entry key="get-socialusers | GET request to get all social user" value="STOPPED" />
             </map>
           </value>
@@ -392,7 +382,7 @@
       <workItem from="1762226819068" duration="4168000" />
       <workItem from="1762231069854" duration="1757000" />
       <workItem from="1762269203568" duration="1006000" />
-      <workItem from="1762271374094" duration="2081000" />
+      <workItem from="1762271374094" duration="2608000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -506,7 +496,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762228478413</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="update the java use to 21">
+      <option name="closed" value="true" />
+      <created>1762273608442</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1762273608442</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -549,6 +547,7 @@
     <MESSAGE value="create a docker-compose.yml to rise up all project" />
     <MESSAGE value="add new version of README.md&#10;add LICENSE" />
     <MESSAGE value="minor updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor updates" />
+    <MESSAGE value="update the java use to 21" />
+    <option name="LAST_COMMIT_MESSAGE" value="update the java use to 21" />
   </component>
 </project>
