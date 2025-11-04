@@ -1,6 +1,3 @@
-Perfecto ✅ — con esos cambios, el README debe reflejar claramente que **Social Seed es el backend en microservicios**, con **Spring Boot y Neo4j**, sin frontend web, y que se publicará una **app Android** para interactuar con la API.
-
-Aquí tienes una versión **profesional, limpia y actualizada del README**, con licencia **Apache 2.0** y sin mencionar Vue.js 👇
 
 ---
 
@@ -87,7 +84,7 @@ Social Seed is built on a **microservices-based backend**, where each component 
 3. **Access the backend APIs:**
 
    ```
-   http://localhost:8080
+   http://localhost:8085
    ```
 
 ---
