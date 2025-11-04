@@ -1,17 +1,23 @@
 services:
-  socialseed:
+  socialuser-service:
     container_name: socialuser-service
     build:
       context: ./socialuser-service
       dockerfile: Dockerfile.dev
-#    ports:
-#      - "4000:4000"
     volumes:
       - ./socialuser-service/src:/app/src
       - ./socialuser-service/pom.xml:/app/pom.xml
       - maven_repo:/root/.m2
     environment:
       SPRING_DEVTOOLS_RESTART_TRIGGER_FILE: ".reloadtrigger"
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:4000/actuator/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
     networks:
       - net
 
@@ -23,10 +29,19 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8085:4004"
+    depends_on:
+      socialuser-service:
+        condition: service_healthy
     networks:
       - net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:4004/actuator/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
 
-  # Noe4j database config
+
+  # Noe4j database
   neo4j:
     container_name: socialgraph-db
     image: neo4j:5.26.15-community
@@ -39,6 +54,12 @@ services:
       - NEO4J_server.memory.pagecache.size=1G
     volumes:
       - D:\db_volumes\socialgraph-db:/var/lib/neo4j/data
+    healthcheck:
+      # ping via cypher-shell
+      test: [ "CMD-SHELL", "echo 'RETURN 1' | cypher-shell -u neo4j -p neoSocial || exit 1" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
     networks:
       - net
 
@@ -47,4 +68,3 @@ volumes:
 
 networks:
   net:
-#    external: false

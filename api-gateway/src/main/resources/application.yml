@@ -17,3 +17,9 @@ spring:
                 - StripPrefix=1
               # REST CLIENT -> http://localhost:8081/api/socialusers
               # API GATEWAY -> http://socialuser-service:4000/socialusers
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include=health:
