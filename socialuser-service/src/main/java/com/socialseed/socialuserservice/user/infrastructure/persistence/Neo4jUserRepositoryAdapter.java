@@ -19,6 +19,8 @@ public class Neo4jUserRepositoryAdapter implements UserRepository {
         this.springDataUserRepository = springDataUserRepository;
     }
 
+
+
     @Override
     public User save(User user) {
         var node = UserNeo4jMapper.toNode(user);
@@ -49,4 +51,16 @@ public class Neo4jUserRepositoryAdapter implements UserRepository {
     public void deleteById(UUID id) {
         springDataUserRepository.deleteById(id);
     }
+
+    @Override
+    public boolean existByEmail(String email) {
+        return springDataUserRepository.existByEmail(email);
+    }
+
+    @Override
+    public boolean existByUsername(String username) {
+        return springDataUserRepository.existByUserName(username);
+    }
+
+
 }

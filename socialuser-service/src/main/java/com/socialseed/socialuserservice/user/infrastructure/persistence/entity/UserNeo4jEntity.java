@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-@Node("User")
+@Node("SocialUser")
 public class UserNeo4jEntity {
     @Id
     private UUID id;

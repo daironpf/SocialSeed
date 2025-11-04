@@ -1,4 +1,4 @@
-package com.social.seed.util;
+package com.socialseed.socialuserservice.shared.response;
 
 import org.springframework.http.HttpStatus;
 

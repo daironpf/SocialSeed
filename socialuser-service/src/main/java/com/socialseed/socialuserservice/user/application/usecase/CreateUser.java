@@ -1,6 +1,5 @@
 package com.socialseed.socialuserservice.user.application.usecase;
 
-import com.socialseed.socialuserservice.shared.exception.EmailAlreadyExistsException;
 import com.socialseed.socialuserservice.user.domain.model.User;
 import com.socialseed.socialuserservice.user.domain.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,12 +21,7 @@ public class CreateUser {
         if (user.getId() == null) {
             user.setId(UUID.randomUUID());
         }
-        if (userRepository.findByEmail(user.getEmail()).isPresent()){
-            throw new EmailAlreadyExistsException("A SocialUser with this email already exists: "+user.getEmail());
-        }
-//        user.setRoles(Set.of("ROLE_USER"));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-//        System.out.println("Roles: "+user.getRoles());
 
         return userRepository.save(user);
     }

@@ -1,4 +1,5 @@
-### GET request to get all social user
+### Docker
 GET http://localhost:8085/api/socialusers
 
-###
+### Local
+GET http://localhost:8090/socialusers

@@ -81,6 +81,18 @@ public class GlobalExceptionHandler {
     }
 
     // --------------------------------------------
+    // Excepción específica: UserName ya registrado
+    // --------------------------------------------
+    @ExceptionHandler(UserNameAlreadyExistsException.class)
+    public ResponseEntity<ApiResponse<?>> handleUserNameAlreadyExists(UserNameAlreadyExistsException ex) {
+        Locale locale = LocaleContextHolder.getLocale();
+        String message = messageSource.getMessage("username.exists", null, locale);
+        message = "username already exists";
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ApiResponse.conflict(message));
+    }
+
+    // --------------------------------------------
     // Error de tipo de argumento (ej: UUID inválido)
     // --------------------------------------------
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)

@@ -13,13 +13,20 @@ public class UserUseCases {
     private final DeleteUser deleteUser;
     private final ChangeUserPassword changeUserPassword;
 
-    public UserUseCases(UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        this.createUser = new CreateUser(userRepository, passwordEncoder);
-        this.getUserById = new GetUserById(userRepository);
-        this.getAllUsers = new GetAllUsers(userRepository);
-        this.updateUser = new UpdateUser(userRepository);
-        this.deleteUser = new DeleteUser(userRepository);
-        this.changeUserPassword = new ChangeUserPassword(userRepository, passwordEncoder);
+    public UserUseCases(
+            CreateUser createUser,
+            GetUserById getUserById,
+            GetAllUsers getAllUsers,
+            UpdateUser updateUser,
+            DeleteUser deleteUser,
+            ChangeUserPassword changeUserPassword
+    ) {
+        this.createUser = createUser;
+        this.getUserById = getUserById;
+        this.getAllUsers = getAllUsers;
+        this.updateUser = updateUser;
+        this.deleteUser = deleteUser;
+        this.changeUserPassword = changeUserPassword;
     }
 
     public CreateUser createUser() {
