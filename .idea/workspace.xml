@@ -4,21 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add validation by AOP to have a more clean code">
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/UserWithIdNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/DeleteUserValidator.java" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add validation and response with Exception to create and delete socialuser">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/delete-socialuser.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/delete-socialuser.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/SocialuserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/SocialuserServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/ValidationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/ValidationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/Neo4jUserRepositoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/Neo4jUserRepositoryAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/SpringDataUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/SpringDataUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,6 +67,7 @@
   "keyToString": {
     "Docker.api-gateway.executor": "Run",
     "Docker.docker-compose.yml.api-gateway: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.kafka-service: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.neo4j: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.socialseed: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.socialuser-service: Compose Deployment.executor": "Run",
@@ -157,31 +147,19 @@
         <entry key="HttpClient.HttpRequestRunConfigurationType">
           <value>
             <map>
-              <entry key="create-socialuser | Create a new socialuser entity" value="STOPPED" />
               <entry key="delete-socialuser | Delete an SocialUser" value="STOPPED" />
-              <entry key="get-socialusers | Docker" value="STOPPED" />
               <entry key="get-socialusers | Local" value="STOPPED" />
-              <entry key="update-socialuser | Update SocialUser entity" value="STOPPED" />
             </map>
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.SocialuserServiceApplication">
-    <configuration name="create-socialuser | Create a new socialuser entity" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" executionIdentifier="Create a new socialuser entity" runType="Run single request">
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
     <configuration name="delete-socialuser | Delete an SocialUser" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/delete-socialuser.http" executionIdentifier="Delete an SocialUser" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="get-socialusers | Docker" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" executionIdentifier="Docker" runType="Run single request">
-      <method v="2" />
-    </configuration>
     <configuration name="get-socialusers | Local" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" executionIdentifier="Local" index="2" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="update-socialuser | Update SocialUser entity" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/update-socialuser.http" executionIdentifier="Update SocialUser entity" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -220,6 +198,40 @@
           </option>
           <option name="commandLineOptions" value="--network socialseed" />
           <option name="sourceFilePath" value="api-gateway/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.kafka-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="kafka-service" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.socialuser-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="socialuser-service" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
         </settings>
       </deployment>
       <method v="2" />
@@ -277,21 +289,21 @@
       <item itemvalue="Docker.api-gateway" />
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
+      <item itemvalue="Docker.docker-compose.yml.kafka-service: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.socialuser-service: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       <item itemvalue="HTTP Request.delete-socialuser | Delete an SocialUser" />
       <item itemvalue="HTTP Request.get-socialusers | Local" />
-      <item itemvalue="HTTP Request.get-socialusers | Docker" />
-      <item itemvalue="HTTP Request.update-socialuser | Update SocialUser entity" />
-      <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.SocialuserServiceApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.socialuser-service: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.kafka-service: Compose Deployment" />
         <item itemvalue="HTTP Request.get-socialusers | Local" />
         <item itemvalue="HTTP Request.delete-socialuser | Delete an SocialUser" />
-        <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
-        <item itemvalue="HTTP Request.get-socialusers | Docker" />
-        <item itemvalue="HTTP Request.update-socialuser | Update SocialUser entity" />
       </list>
     </recent_temporary>
   </component>
@@ -327,7 +339,8 @@
       <workItem from="1762269203568" duration="1006000" />
       <workItem from="1762271374094" duration="2943000" />
       <workItem from="1762285427020" duration="6298000" />
-      <workItem from="1762308472322" duration="2845000" />
+      <workItem from="1762308472322" duration="3198000" />
+      <workItem from="1762373944663" duration="2729000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -465,7 +478,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762291635480</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="add validation and response with Exception to create and delete socialuser">
+      <option name="closed" value="true" />
+      <created>1762311443435</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1762311443435</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -511,6 +532,7 @@
     <MESSAGE value="update the java use to 21" />
     <MESSAGE value="add the old code to use the good code to improve the actually code" />
     <MESSAGE value="add validation by AOP to have a more clean code" />
-    <option name="LAST_COMMIT_MESSAGE" value="add validation by AOP to have a more clean code" />
+    <MESSAGE value="add validation and response with Exception to create and delete socialuser" />
+    <option name="LAST_COMMIT_MESSAGE" value="add validation and response with Exception to create and delete socialuser" />
   </component>
 </project>
