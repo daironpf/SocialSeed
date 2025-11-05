@@ -87,7 +87,17 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<?>> handleUserNameAlreadyExists(UserNameAlreadyExistsException ex) {
         Locale locale = LocaleContextHolder.getLocale();
         String message = messageSource.getMessage("username.exists", null, locale);
-        message = "username already exists";
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(ApiResponse.conflict(message));
+    }
+
+    // --------------------------------------------
+    // Excepción específica: User con ese Id no existe
+    // --------------------------------------------
+    @ExceptionHandler(UserWithIdNotFoundException.class)
+    public ResponseEntity<ApiResponse<?>> handleUserWithIdNotFound(UserWithIdNotFoundException ex) {
+        Locale locale = LocaleContextHolder.getLocale();
+        String message = messageSource.getMessage("user.id.notfound", null, locale);
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(ApiResponse.conflict(message));
     }

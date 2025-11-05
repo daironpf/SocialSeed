@@ -3,6 +3,8 @@ package com.socialseed.socialuserservice.user.application.usecase.validation;
 import com.socialseed.socialuserservice.user.domain.repository.UserRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 public class ValidationService {
     private final UserRepository userRepository;
@@ -12,9 +14,13 @@ public class ValidationService {
     }
 
     public boolean userExistByEmail(String email) {
-        return this.userRepository.existByEmail(email);
+        return userRepository.existByEmail(email);
     }
     public boolean userExistByUserName(String username) {
-        return this.userRepository.existByUsername(username);
+        return userRepository.existByUsername(username);
+    }
+
+    public boolean userExistByUserId(UUID id) {
+        return userRepository.existByUserId(id);
     }
 }

@@ -6,14 +6,12 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.info.License;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 
 @EnableAspectJAutoProxy(exposeProxy = true)
 @EnableNeo4jRepositories
 @SpringBootApplication
-@ComponentScan(basePackages = "com.socialseed.socialuserservice")
 @OpenAPIDefinition(
         info = @Info(
                 title = "Social Seed",

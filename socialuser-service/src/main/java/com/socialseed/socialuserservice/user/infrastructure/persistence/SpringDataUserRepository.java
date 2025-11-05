@@ -13,15 +13,24 @@ public interface SpringDataUserRepository extends Neo4jRepository<UserNeo4jEntit
 
     //region existBy
     @Query("""
-            OPTIONAL MATCH (u:SocialUser {email: $email})
-            RETURN CASE WHEN u IS NOT NULL THEN true ELSE false END AS existUser
+            MATCH (u:SocialUser)
+            WHERE u.email = $email
+            RETURN COUNT(u) > 0
             """)
     Boolean existByEmail(String email);
 
     @Query("""
-            OPTIONAL MATCH (u:SocialUser {username: $userName})
-            RETURN CASE WHEN u IS NOT NULL THEN true ELSE false END AS existUser
+            MATCH (u:SocialUser)
+            WHERE u.username = $userName
+            RETURN COUNT(u) > 0
             """)
     Boolean existByUserName(String userName);
+
+    @Query("""
+            MATCH (u:SocialUser)
+            WHERE u.id = $id
+            RETURN COUNT(u) > 0
+            """)
+    Boolean existByUserId(UUID id);
     //endregion
 }

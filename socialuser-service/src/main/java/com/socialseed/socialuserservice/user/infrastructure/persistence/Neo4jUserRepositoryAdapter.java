@@ -62,5 +62,8 @@ public class Neo4jUserRepositoryAdapter implements UserRepository {
         return springDataUserRepository.existByUserName(username);
     }
 
-
+    @Override
+    public boolean existByUserId(UUID id) {
+        return springDataUserRepository.existByUserId(id);
+    }
 }
