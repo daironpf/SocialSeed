@@ -24,7 +24,8 @@ public enum ErrorCode {
 
     // --- Example Domain Specific ---
     USER_EMAIL_EXISTS("error.user.email_exists", HttpStatus.CONFLICT),
-    USERNAME_EXISTS("error.user.username_exists", HttpStatus.CONFLICT);
+    USERNAME_EXISTS("error.user.username_exists", HttpStatus.CONFLICT),
+    PASSWORD_MISMATCH("error.user.password_mismatch", HttpStatus.BAD_REQUEST);
 
     private final String code;
     private final HttpStatus httpStatus;

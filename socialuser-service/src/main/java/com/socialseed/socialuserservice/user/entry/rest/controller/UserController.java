@@ -1,6 +1,7 @@
 package com.socialseed.socialuserservice.user.entry.rest.controller;
 import com.socialseed.socialuserservice.user.application.usecase.UserUseCases;
 import com.socialseed.socialuserservice.user.domain.model.User;
+import com.socialseed.socialuserservice.user.entry.rest.dto.request.PasswordChangeRequest;
 import com.socialseed.socialuserservice.user.entry.rest.dto.request.UserUpdateRequestDTO;
 import com.socialseed.socialuserservice.user.entry.rest.mapper.UserRestMapper;
 import com.socialseed.socialuserservice.user.entry.rest.dto.request.UserCreateRequestDTO;
@@ -71,11 +72,9 @@ public class UserController {
     }
 
     // CHANGE PASSWORD
-    @PostMapping("/{id}/change-password")
-    public ResponseEntity<Void> changePassword(@PathVariable UUID id,
-                                               @RequestParam String currentPassword,
-                                               @RequestParam String newPassword) {
-        userUseCases.changeUserPassword().execute(id, currentPassword, newPassword);
+    @PostMapping("/me/password/change")
+    public ResponseEntity<Void> changePassword(@RequestBody @Valid PasswordChangeRequest request) {
+        userUseCases.changeUserPassword().execute(UUID.fromString(request.id()), request.currentPassword(), request.newPassword());
         return ResponseEntity.noContent().build();
     }
 }

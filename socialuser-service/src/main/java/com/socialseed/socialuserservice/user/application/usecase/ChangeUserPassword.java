@@ -19,18 +19,7 @@ public class ChangeUserPassword {
     }
 
     public void execute(UUID userId, String currentPassword, String newPassword) {
-        Optional<User> userOpt = userRepository.findById(userId);
-
-        if (userOpt.isEmpty()) {
-            throw new RuntimeException("User not found");
-        }
-
-        User user = userOpt.get();
-
-        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
-            throw new RuntimeException("Current password is incorrect");
-        }
-
+        User user = userRepository.findById(userId).get();
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
     }
