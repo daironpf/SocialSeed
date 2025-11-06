@@ -1,5 +1,5 @@
 ### Update SocialUser entity
-PUT http://localhost:8085/api/socialusers/b62a4b76-a946-43f6-a392-3c289d869a4a
+PUT http://localhost:8090/api/socialusers/b62a4b76-a946-43f6-a392-3c289d869a4a
 Content-Type: application/json
 
 {

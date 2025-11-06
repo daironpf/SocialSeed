@@ -13,7 +13,7 @@ public class DeleteUser {
         this.userRepository = userRepository;
     }
 
-    public void execute(UUID id) {
-        userRepository.deleteById(id);
+    public void execute(UUID userId) {
+        userRepository.deleteById(userId);
     }
 }

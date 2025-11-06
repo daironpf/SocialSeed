@@ -4,34 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add kafka-service">
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/messaging/kafka/KafkaDomainEventPublisher.java" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="restructuring the project packages for a clearer and cleaner architecture">
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ApiErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/BusinessException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/GlobalErrorHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/AppInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/config/AppInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/InternationalizationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/config/InternationalizationConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/OpenAPIConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/config/OpenAPIConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/config/WebConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/EmailAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/EmailAlreadyExistsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/GlobalExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/UserNameAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/UserNameAlreadyExistsException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/UserWithIdNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/UserWithIdNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/response/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ApiResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/response/ResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/response/ResponseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/util/ResponseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/update-socialuser.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/update-socialuser.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/EmailAlreadyExistsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/GlobalExceptionHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/UserNameAlreadyExistsException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/UserWithIdNotFoundException.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/DeleteUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/DeleteUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/CreateUserValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/CreateUserValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/DeleteUserValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/DeleteUserValidator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/PasswordChangeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/request/PasswordChangeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserCreateRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/request/UserCreateRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/response/UserResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserUpdateRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/request/UserUpdateRequestDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/mapper/UserRestMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/mapper/UserRestMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/Neo4jUserRepositoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/Neo4jSocialUserRepositoryAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/SpringDataUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/SpringDataUserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/entity/UserNeo4jEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/entity/UserNeo4jEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/mapper/UserNeo4jMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/mapper/UserNeo4jMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +33,7 @@
       <list>
         <option value="Exception" />
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -172,19 +163,27 @@
         <entry key="HttpClient.HttpRequestRunConfigurationType">
           <value>
             <map>
+              <entry key="create-socialuser | Create a new socialuser entity" value="STOPPED" />
               <entry key="delete-socialuser | Delete an SocialUser" value="STOPPED" />
               <entry key="get-socialusers | Local" value="STOPPED" />
+              <entry key="update-socialuser | Update SocialUser entity" value="STOPPED" />
             </map>
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+  <component name="RunManager" selected="Spring Boot.SocialuserServiceApplication">
+    <configuration name="create-socialuser | Create a new socialuser entity" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" executionIdentifier="Create a new socialuser entity" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="delete-socialuser | Delete an SocialUser" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/delete-socialuser.http" executionIdentifier="Delete an SocialUser" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="get-socialusers | Local" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" executionIdentifier="Local" index="2" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="update-socialuser | Update SocialUser entity" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/update-socialuser.http" executionIdentifier="Update SocialUser entity" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -230,32 +229,6 @@
     <configuration name="docker-compose.yml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.kafka-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="kafka-service" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.socialuser-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="socialuser-service" />
-            </list>
-          </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
         </settings>
       </deployment>
@@ -314,9 +287,9 @@
       <item itemvalue="Docker.api-gateway" />
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
-      <item itemvalue="Docker.docker-compose.yml.kafka-service: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.socialuser-service: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
+      <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
+      <item itemvalue="HTTP Request.update-socialuser | Update SocialUser entity" />
       <item itemvalue="HTTP Request.delete-socialuser | Delete an SocialUser" />
       <item itemvalue="HTTP Request.get-socialusers | Local" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
@@ -324,11 +297,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.socialuser-service: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.kafka-service: Compose Deployment" />
+        <item itemvalue="HTTP Request.update-socialuser | Update SocialUser entity" />
         <item itemvalue="HTTP Request.get-socialusers | Local" />
         <item itemvalue="HTTP Request.delete-socialuser | Delete an SocialUser" />
+        <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
+        <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -366,7 +339,7 @@
       <workItem from="1762285427020" duration="6298000" />
       <workItem from="1762308472322" duration="3198000" />
       <workItem from="1762373944663" duration="5064000" />
-      <workItem from="1762439236354" duration="1343000" />
+      <workItem from="1762439236354" duration="6329000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -520,7 +493,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762377016181</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="restructuring the project packages for a clearer and cleaner architecture">
+      <option name="closed" value="true" />
+      <created>1762442619943</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1762442619943</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -568,6 +549,7 @@
     <MESSAGE value="add validation by AOP to have a more clean code" />
     <MESSAGE value="add validation and response with Exception to create and delete socialuser" />
     <MESSAGE value="add kafka-service" />
-    <option name="LAST_COMMIT_MESSAGE" value="add kafka-service" />
+    <MESSAGE value="restructuring the project packages for a clearer and cleaner architecture" />
+    <option name="LAST_COMMIT_MESSAGE" value="restructuring the project packages for a clearer and cleaner architecture" />
   </component>
 </project>

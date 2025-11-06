@@ -5,9 +5,9 @@ Content-Type: application/json
 Accept-Language: en
 
 {
-  "email": "jondoe@gmail.com",
+  "email": "jondoecx@gmail.com",
   "password":"jonpassword",
-  "username": "jonodoe",
+  "username": "jonodoec",
   "fullName": "Jhon Does"
 }
 ###
