@@ -1,7 +1,7 @@
 package com.socialseed.socialuserservice.user.application.usecase.validation;
 
-import com.socialseed.socialuserservice.shared.exception.EmailAlreadyExistsException;
-import com.socialseed.socialuserservice.shared.exception.UserNameAlreadyExistsException;
+import com.socialseed.socialuserservice.platform.error.EmailAlreadyExistsException;
+import com.socialseed.socialuserservice.platform.error.UserNameAlreadyExistsException;
 import com.socialseed.socialuserservice.user.domain.model.User;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

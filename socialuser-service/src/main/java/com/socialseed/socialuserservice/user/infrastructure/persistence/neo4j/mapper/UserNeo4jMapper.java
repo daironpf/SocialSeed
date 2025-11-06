@@ -1,6 +1,6 @@
-package com.socialseed.socialuserservice.user.infrastructure.persistence.mapper;
+package com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.mapper;
 
-import com.socialseed.socialuserservice.user.infrastructure.persistence.entity.UserNeo4jEntity;
+import com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.entity.UserNeo4jEntity;
 import com.socialseed.socialuserservice.user.domain.model.User;
 
 public class UserNeo4jMapper {

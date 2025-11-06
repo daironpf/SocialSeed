@@ -1,10 +1,10 @@
 package com.socialseed.socialuserservice.user.entry.rest.controller;
 import com.socialseed.socialuserservice.user.application.usecase.UserUseCases;
 import com.socialseed.socialuserservice.user.domain.model.User;
-import com.socialseed.socialuserservice.user.entry.rest.dto.UserUpdateRequestDTO;
+import com.socialseed.socialuserservice.user.entry.rest.dto.request.UserUpdateRequestDTO;
 import com.socialseed.socialuserservice.user.entry.rest.mapper.UserRestMapper;
-import com.socialseed.socialuserservice.user.entry.rest.dto.UserCreateRequestDTO;
-import com.socialseed.socialuserservice.user.entry.rest.dto.UserResponseDTO;
+import com.socialseed.socialuserservice.user.entry.rest.dto.request.UserCreateRequestDTO;
+import com.socialseed.socialuserservice.user.entry.rest.dto.response.UserResponseDTO;
 //import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;

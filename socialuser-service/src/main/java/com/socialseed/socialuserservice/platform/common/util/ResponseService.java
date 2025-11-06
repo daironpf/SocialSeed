@@ -1,5 +1,6 @@
-package com.socialseed.socialuserservice.shared.response;
+package com.socialseed.socialuserservice.platform.common.util;
 
+import com.socialseed.socialuserservice.platform.common.response.ResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

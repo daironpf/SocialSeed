@@ -1,6 +1,6 @@
 package com.socialseed.socialuserservice.user.infrastructure.persistence;
 
-import com.socialseed.socialuserservice.user.infrastructure.persistence.entity.UserNeo4jEntity;
+import com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.entity.UserNeo4jEntity;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 

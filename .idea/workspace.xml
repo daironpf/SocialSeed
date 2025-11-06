@@ -4,9 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add validation and response with Exception to create and delete socialuser">
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add kafka-service">
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/messaging/kafka/KafkaDomainEventPublisher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/AppInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/config/AppInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/InternationalizationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/config/InternationalizationConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/OpenAPIConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/config/OpenAPIConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/WebConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/config/WebConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/EmailAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/EmailAlreadyExistsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/UserNameAlreadyExistsException.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/UserNameAlreadyExistsException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/UserWithIdNotFoundException.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/UserWithIdNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/response/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ApiResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/response/ResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/response/ResponseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/util/ResponseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/CreateUserValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/CreateUserValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/DeleteUserValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/DeleteUserValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/PasswordChangeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/request/PasswordChangeRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserCreateRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/request/UserCreateRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/response/UserResponseDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserUpdateRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/request/UserUpdateRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/mapper/UserRestMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/mapper/UserRestMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/Neo4jUserRepositoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/Neo4jSocialUserRepositoryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/SpringDataUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/SpringDataUserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/entity/UserNeo4jEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/entity/UserNeo4jEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/mapper/UserNeo4jMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/mapper/UserNeo4jMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +41,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Exception" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -63,59 +87,60 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.api-gateway.executor": "Run",
-    "Docker.docker-compose.yml.api-gateway: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.kafka-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.neo4j: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.socialseed: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.socialuser-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
-    "Docker.socialgraph-db.executor": "Run",
-    "Docker.socialuser-service.executor": "Run",
-    "Docker.socialuser-service/Dockerfile.executor": "Run",
-    "Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment.executor": "Run",
-    "HTTP Request.create-socialuser | Create a new patient entity.executor": "Run",
-    "HTTP Request.create-socialuser | Create a new socialuser entity.executor": "Run",
-    "HTTP Request.delete-patient | Delete an SocialUser.executor": "Run",
-    "HTTP Request.delete-socialuser | Delete an SocialUser.executor": "Run",
-    "HTTP Request.get-patients | GET request to get all patients.executor": "Run",
-    "HTTP Request.get-patients | GET request to get all social user.executor": "Run",
-    "HTTP Request.get-socialusers | #2.executor": "Run",
-    "HTTP Request.get-socialusers | Docker.executor": "Run",
-    "HTTP Request.get-socialusers | GET request to get all social user.executor": "Run",
-    "HTTP Request.get-socialusers | Local.executor": "Run",
-    "HTTP Request.update-patient | Update SocialUser entity.executor": "Run",
-    "HTTP Request.update-socialuser | Update SocialUser entity.executor": "Run",
-    "Maven.api-gateway [clean,install].executor": "Run",
-    "Maven.api-gateway [clean].executor": "Run",
-    "Maven.api-gateway [install].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "Spring Boot.ApiGatewayApplication.executor": "Run",
-    "Spring Boot.SocialuserServiceApplication.executor": "Run",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/proyectos/SocialSeed",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.api-gateway.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.api-gateway: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.kafka-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.neo4j: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.socialseed: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.socialuser-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.socialgraph-db.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.socialuser-service.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.socialuser-service/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.create-socialuser | Create a new patient entity.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.create-socialuser | Create a new socialuser entity.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.delete-patient | Delete an SocialUser.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.delete-socialuser | Delete an SocialUser.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.get-patients | GET request to get all patients.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.get-patients | GET request to get all social user.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.get-socialusers | #2.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.get-socialusers | Docker.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.get-socialusers | GET request to get all social user.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.get-socialusers | Local.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.update-patient | Update SocialUser entity.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.update-socialuser | Update SocialUser entity.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.api-gateway [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.api-gateway [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.api-gateway [install].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.SocialuserServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/proyectos/SocialSeed&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -340,7 +365,8 @@
       <workItem from="1762271374094" duration="2943000" />
       <workItem from="1762285427020" duration="6298000" />
       <workItem from="1762308472322" duration="3198000" />
-      <workItem from="1762373944663" duration="2729000" />
+      <workItem from="1762373944663" duration="5064000" />
+      <workItem from="1762439236354" duration="1343000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -486,7 +512,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762311443435</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="add kafka-service">
+      <option name="closed" value="true" />
+      <created>1762377016181</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1762377016181</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -533,6 +567,7 @@
     <MESSAGE value="add the old code to use the good code to improve the actually code" />
     <MESSAGE value="add validation by AOP to have a more clean code" />
     <MESSAGE value="add validation and response with Exception to create and delete socialuser" />
-    <option name="LAST_COMMIT_MESSAGE" value="add validation and response with Exception to create and delete socialuser" />
+    <MESSAGE value="add kafka-service" />
+    <option name="LAST_COMMIT_MESSAGE" value="add kafka-service" />
   </component>
 </project>

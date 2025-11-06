@@ -1,4 +1,4 @@
-package com.socialseed.socialuserservice.user.entry.rest.dto;
+package com.socialseed.socialuserservice.user.entry.rest.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 

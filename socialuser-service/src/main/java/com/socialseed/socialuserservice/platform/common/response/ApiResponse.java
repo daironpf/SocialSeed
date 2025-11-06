@@ -1,6 +1,6 @@
-package com.socialseed.socialuserservice.shared.response;
+package com.socialseed.socialuserservice.platform.common.response;
 
-import com.socialseed.socialuserservice.config.AppInfo;
+import com.socialseed.socialuserservice.platform.config.AppInfo;
 
 import java.time.Instant;
 

@@ -1,4 +1,4 @@
-package com.socialseed.socialuserservice.user.infrastructure.persistence.entity;
+package com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.entity;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;

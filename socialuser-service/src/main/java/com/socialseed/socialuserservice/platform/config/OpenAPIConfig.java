@@ -1,4 +1,4 @@
-package com.socialseed.socialuserservice.config;
+package com.socialseed.socialuserservice.platform.config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

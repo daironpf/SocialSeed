@@ -1,6 +1,7 @@
-package com.socialseed.socialuserservice.user.infrastructure.persistence;
+package com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j;
 
-import com.socialseed.socialuserservice.user.infrastructure.persistence.mapper.UserNeo4jMapper;
+import com.socialseed.socialuserservice.user.infrastructure.persistence.SpringDataUserRepository;
+import com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.mapper.UserNeo4jMapper;
 import com.socialseed.socialuserservice.user.domain.model.User;
 import com.socialseed.socialuserservice.user.domain.repository.UserRepository;
 import org.springframework.stereotype.Component;
@@ -11,11 +12,11 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
-public class Neo4jUserRepositoryAdapter implements UserRepository {
+public class Neo4jSocialUserRepositoryAdapter implements UserRepository {
 
     private final SpringDataUserRepository springDataUserRepository;
 
-    public Neo4jUserRepositoryAdapter(SpringDataUserRepository springDataUserRepository) {
+    public Neo4jSocialUserRepositoryAdapter(SpringDataUserRepository springDataUserRepository) {
         this.springDataUserRepository = springDataUserRepository;
     }
 

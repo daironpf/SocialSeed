@@ -1,9 +1,9 @@
 package com.socialseed.socialuserservice.user.entry.rest.mapper;
 
 import com.socialseed.socialuserservice.user.domain.model.User;
-import com.socialseed.socialuserservice.user.entry.rest.dto.UserCreateRequestDTO;
-import com.socialseed.socialuserservice.user.entry.rest.dto.UserResponseDTO;
-import com.socialseed.socialuserservice.user.entry.rest.dto.UserUpdateRequestDTO;
+import com.socialseed.socialuserservice.user.entry.rest.dto.request.UserCreateRequestDTO;
+import com.socialseed.socialuserservice.user.entry.rest.dto.response.UserResponseDTO;
+import com.socialseed.socialuserservice.user.entry.rest.dto.request.UserUpdateRequestDTO;
 
 public class UserRestMapper {
     private UserRestMapper() {}

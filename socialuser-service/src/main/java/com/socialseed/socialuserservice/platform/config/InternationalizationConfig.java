@@ -1,4 +1,4 @@
-package com.socialseed.socialuserservice.config;
+package com.socialseed.socialuserservice.platform.config;
 
 
 import org.springframework.context.annotation.Configuration;
