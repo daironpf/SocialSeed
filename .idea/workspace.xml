@@ -4,18 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add documentation for social network">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/project.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/changepassword-socialuser.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/ChangeUserPasswordValidator.java" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="&gt; Working on password change validation for the user&#10;&gt; Ihis use case will be moved to the auth service where it belongs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/ChangeUserPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/ChangeUserPassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/ValidationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/ValidationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/request/PasswordChangeRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/request/PasswordChangeRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,6 +67,7 @@
   "keyToString": {
     "Docker.api-gateway.executor": "Run",
     "Docker.docker-compose.yml.api-gateway: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.auth-db: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.kafka-service: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.neo4j: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.socialseed: Compose Deployment.executor": "Run",
@@ -161,7 +153,6 @@
           <value>
             <map>
               <entry key="changepassword-socialuser | Change Password of SocialUser" value="STOPPED" />
-              <entry key="create-socialuser | Create a new socialuser entity" value="STOPPED" />
               <entry key="delete-socialuser | Delete an SocialUser" value="STOPPED" />
               <entry key="get-socialusers | Local" value="STOPPED" />
               <entry key="update-socialuser | Update SocialUser entity" value="STOPPED" />
@@ -171,11 +162,8 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.SocialuserServiceApplication">
+  <component name="RunManager" selected="Docker.docker-compose.yml.auth-db: Compose Deployment">
     <configuration name="changepassword-socialuser | Change Password of SocialUser" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/changepassword-socialuser.http" executionIdentifier="Change Password of SocialUser" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="create-socialuser | Create a new socialuser entity" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" executionIdentifier="Create a new socialuser entity" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="delete-socialuser | Delete an SocialUser" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/delete-socialuser.http" executionIdentifier="Delete an SocialUser" runType="Run single request">
@@ -223,6 +211,19 @@
           </option>
           <option name="commandLineOptions" value="--network socialseed" />
           <option name="sourceFilePath" value="api-gateway/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.auth-db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="auth-db" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
         </settings>
       </deployment>
       <method v="2" />
@@ -280,8 +281,8 @@
       <item itemvalue="Docker.api-gateway" />
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
+      <item itemvalue="Docker.docker-compose.yml.auth-db: Compose Deployment" />
       <item itemvalue="HTTP Request.changepassword-socialuser | Change Password of SocialUser" />
-      <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
       <item itemvalue="HTTP Request.update-socialuser | Update SocialUser entity" />
       <item itemvalue="HTTP Request.delete-socialuser | Delete an SocialUser" />
       <item itemvalue="HTTP Request.get-socialusers | Local" />
@@ -290,11 +291,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.auth-db: Compose Deployment" />
         <item itemvalue="HTTP Request.changepassword-socialuser | Change Password of SocialUser" />
         <item itemvalue="HTTP Request.get-socialusers | Local" />
         <item itemvalue="HTTP Request.update-socialuser | Update SocialUser entity" />
         <item itemvalue="HTTP Request.delete-socialuser | Delete an SocialUser" />
-        <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
       </list>
     </recent_temporary>
   </component>
@@ -332,7 +333,7 @@
       <workItem from="1762285427020" duration="6298000" />
       <workItem from="1762308472322" duration="3198000" />
       <workItem from="1762373944663" duration="5064000" />
-      <workItem from="1762439236354" duration="15695000" />
+      <workItem from="1762439236354" duration="17244000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -510,7 +511,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762452017744</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="&gt; Working on password change validation for the user&#10;&gt; Ihis use case will be moved to the auth service where it belongs">
+      <option name="closed" value="true" />
+      <created>1762460380592</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1762460380592</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -561,6 +570,7 @@
     <MESSAGE value="restructuring the project packages for a clearer and cleaner architecture" />
     <MESSAGE value="refactored the validation and error handling" />
     <MESSAGE value="add documentation for social network" />
-    <option name="LAST_COMMIT_MESSAGE" value="add documentation for social network" />
+    <MESSAGE value="&gt; Working on password change validation for the user&#10;&gt; Ihis use case will be moved to the auth service where it belongs" />
+    <option name="LAST_COMMIT_MESSAGE" value="&gt; Working on password change validation for the user&#10;&gt; Ihis use case will be moved to the auth service where it belongs" />
   </component>
 </project>

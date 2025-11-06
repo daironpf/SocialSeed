@@ -41,6 +41,26 @@ services:
       timeout: 3s
       retries: 20
 
+  # Auth database for auth-service
+  auth-db:
+    container_name: auth-db
+    image: postgres:17
+#    restart: always
+    environment:
+      POSTGRES_DB: authdb
+      POSTGRES_USER: authuser
+      POSTGRES_PASSWORD: authpass
+    ports:
+      - "5433:5432"
+    volumes:
+      - D:\db_volumes\auth-db:/var/lib/postgresql/data
+    networks:
+      - net
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U authuser -d authdb" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
 
   # Noe4j database
   neo4j:
