@@ -41,6 +41,28 @@ services:
       timeout: 3s
       retries: 20
 
+  auth-service:
+    container_name: auth-service
+    build:
+      context: ./auth-service
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./auth-service/src:/app/src
+      - ./auth-service/pom.xml:/app/pom.xml
+      - maven_repo:/root/.m2
+    environment:
+      SPRING_DEVTOOLS_RESTART_TRIGGER_FILE: ".reloadtrigger"
+    depends_on:
+      auth-db:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:4005/actuator/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks:
+      - net
+
   # Auth database for auth-service
   auth-db:
     container_name: auth-db

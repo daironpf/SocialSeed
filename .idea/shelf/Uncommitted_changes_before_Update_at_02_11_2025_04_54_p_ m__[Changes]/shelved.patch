@@ -1,0 +1,175 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ba230a01-5f3e-4eef-80c3-5eb32cc081f5\" name=\"Changes\" comment=\"create Api-Gateway\">\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/AppInfo.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/InternationalizationConfig.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/OpenAPIConfig.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/WebConfig.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/EmailAlreadyExistsException.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/GlobalExceptionHandler.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/response/ApiResponse.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/ChangeUserPassword.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/CreateUser.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/DeleteUser.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/GetAllUsers.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/GetUserById.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UpdateUser.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UserUseCases.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/arquitectura.md\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/config/UserSecurityConfig.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/model/User.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/repository/UserRepository.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/service/UserService.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/PasswordChangeRequest.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserCreateRequestDTO.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserResponseDTO.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserUpdateRequestDTO.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/mapper/UserRestMapper.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/Neo4jUserRepositoryAdapter.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/SpringDataUserRepository.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/entity/UserNeo4jEntity.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/mapper/UserNeo4jMapper.java\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages.properties\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/misc.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/modules.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/modules.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/api-gateway/src/main/resources/application.yml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/api-gateway/src/main/resources/application.yml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/socialuser-service/pom.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/socialuser-service/pom.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/SocialuserServiceApplicationTests.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/SocialuserServiceApplicationTests.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;daironpf&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubProjectSettings\">\r\n    <option name=\"branchProtectionPatterns\">\r\n      <list>\r\n        <option value=\"main\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/daironpf/SocialSeed.git&quot;,\r\n    &quot;accountId&quot;: &quot;2a1b5268-45f8-4fc0-a28e-f1e033b910c5&quot;\r\n  }\r\n}</component>\r\n  <component name=\"KubernetesApiPersistence\">{}</component>\r\n  <component name=\"KubernetesApiProvider\">{\r\n  &quot;isMigrated&quot;: true\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 5\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"34tKpz6nX3XUzfFlCpZjapjBiLX\" />\r\n  <component name=\"ProjectLevelVcsManager\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Docker.api-gateway.executor\": \"Run\",\r\n    \"Docker.socialgraph-db.executor\": \"Run\",\r\n    \"Docker.socialuser-service.executor\": \"Run\",\r\n    \"Docker.socialuser-service/Dockerfile.executor\": \"Run\",\r\n    \"Maven.api-gateway [clean,install].executor\": \"Run\",\r\n    \"Maven.api-gateway [clean].executor\": \"Run\",\r\n    \"Maven.api-gateway [install].executor\": \"Run\",\r\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\r\n    \"RequestMappingsPanelOrder0\": \"0\",\r\n    \"RequestMappingsPanelOrder1\": \"1\",\r\n    \"RequestMappingsPanelWidth0\": \"75\",\r\n    \"RequestMappingsPanelWidth1\": \"75\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252\": \"true\",\r\n    \"RunOnceActivity.git.unshallow\": \"true\",\r\n    \"Spring Boot.SocialuserServiceApplication.executor\": \"Run\",\r\n    \"com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1\": \"true\",\r\n    \"com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1\": \"true\",\r\n    \"git-widget-placeholder\": \"main\",\r\n    \"ignore.virus.scanning.warn.message\": \"true\",\r\n    \"junie.onboarding.icon.badge.shown\": \"true\",\r\n    \"kotlin-language-version-configured\": \"true\",\r\n    \"last_opened_file_path\": \"D:/.dev/proyectos/SocialSeed/api-gateway\",\r\n    \"node.js.detected.package.eslint\": \"true\",\r\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\r\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\r\n    \"nodejs_package_manager_path\": \"npm\",\r\n    \"to.speed.mode.migration.done\": \"true\",\r\n    \"vue.rearranger.settings.migration\": \"true\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\.dev\\proyectos\\SocialSeed\\api-gateway\" />\r\n      <recent name=\"D:\\proyectos\\SocialSeed\\socialuser-service\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"D:\\.dev\\proyectos\\SocialSeed\\socialuser-service\\src\\test\\java\\com\\socialseed\\socialuserservice\" />\r\n      <recent name=\"D:\\.dev\\proyectos\\SocialSeed\\socialuser-service\\src\\main\\java\\com\\socialseed\\socialuserservice\" />\r\n      <recent name=\"D:\\.dev\\proyectos\\SocialSeed\\socialuser-service\\src\\main\\resources\" />\r\n      <recent name=\"D:\\proyectos\\SocialSeed\" />\r\n    </key>\r\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\r\n      <recent name=\"com.socialseed.socialuserservice.shared.exception\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunAnythingCache\">\r\n    <option name=\"myCommands\">\r\n      <command value=\"mvn clean install\" />\r\n    </option>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"Docker.socialuser-service\">\r\n    <configuration name=\"ApiGatewayApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <module name=\"api-gateway\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.socialseed.apigateway.ApiGatewayApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"SocialuserServiceApplication\" type=\"SpringBootApplicationConfigurationType\" factoryName=\"Spring Boot\" nameIsGenerated=\"true\">\r\n      <option name=\"FRAME_DEACTIVATION_UPDATE_POLICY\" value=\"UpdateClassesAndResources\" />\r\n      <module name=\"socialuser-service\" />\r\n      <option name=\"SPRING_BOOT_MAIN_CLASS\" value=\"com.socialseed.socialuserservice.SocialuserServiceApplication\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"api-gateway\" type=\"docker-deploy\" factoryName=\"dockerfile\" server-name=\"Docker\">\r\n      <deployment type=\"dockerfile\">\r\n        <settings>\r\n          <option name=\"imageTag\" value=\"api-gateway:0.0.1\" />\r\n          <option name=\"containerName\" value=\"api-gateway\" />\r\n          <option name=\"portBindings\">\r\n            <list>\r\n              <DockerPortBindingImpl>\r\n                <option name=\"containerPort\" value=\"4004\" />\r\n                <option name=\"hostPort\" value=\"8081\" />\r\n              </DockerPortBindingImpl>\r\n            </list>\r\n          </option>\r\n          <option name=\"commandLineOptions\" value=\"--network internal\" />\r\n          <option name=\"sourceFilePath\" value=\"api-gateway/Dockerfile\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"socialgraph-db\" type=\"docker-deploy\" factoryName=\"docker-image\" server-name=\"Docker\">\r\n      <deployment type=\"docker-image\">\r\n        <settings>\r\n          <option name=\"imageTag\" value=\"neo4j:5.26.15-community\" />\r\n          <option name=\"containerName\" value=\"socialgraph-db\" />\r\n          <option name=\"envVars\">\r\n            <list>\r\n              <DockerEnvVarImpl>\r\n                <option name=\"name\" value=\"NEO4J_AUTH\" />\r\n                <option name=\"value\" value=\"neo4j/neoSocial\" />\r\n              </DockerEnvVarImpl>\r\n            </list>\r\n          </option>\r\n          <option name=\"portBindings\">\r\n            <list>\r\n              <DockerPortBindingImpl>\r\n                <option name=\"containerPort\" value=\"7474\" />\r\n                <option name=\"hostPort\" value=\"8088\" />\r\n              </DockerPortBindingImpl>\r\n              <DockerPortBindingImpl>\r\n                <option name=\"containerPort\" value=\"7687\" />\r\n                <option name=\"hostPort\" value=\"8089\" />\r\n              </DockerPortBindingImpl>\r\n            </list>\r\n          </option>\r\n          <option name=\"commandLineOptions\" value=\"--network internal\" />\r\n          <option name=\"volumeBindings\">\r\n            <list>\r\n              <DockerVolumeBindingImpl>\r\n                <option name=\"containerPath\" value=\"/var/lib/neo4j/data\" />\r\n                <option name=\"hostPath\" value=\"D:\\db_volumes\\socialgraph-db\" />\r\n              </DockerVolumeBindingImpl>\r\n            </list>\r\n          </option>\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"socialuser-service\" type=\"docker-deploy\" factoryName=\"dockerfile\" server-name=\"Docker\">\r\n      <deployment type=\"dockerfile\">\r\n        <settings>\r\n          <option name=\"imageTag\" value=\"socialuser-service:0.0.1\" />\r\n          <option name=\"containerName\" value=\"socialuser-service\" />\r\n          <option name=\"commandLineOptions\" value=\"--network internal\" />\r\n          <option name=\"sourceFilePath\" value=\"socialuser-service/Dockerfile\" />\r\n        </settings>\r\n      </deployment>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <list>\r\n      <item itemvalue=\"Docker.api-gateway\" />\r\n      <item itemvalue=\"Docker.socialgraph-db\" />\r\n      <item itemvalue=\"Docker.socialuser-service\" />\r\n      <item itemvalue=\"Spring Boot.ApiGatewayApplication\" />\r\n      <item itemvalue=\"Spring Boot.SocialuserServiceApplication\" />\r\n    </list>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84\" />\r\n        <option value=\"bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ba230a01-5f3e-4eef-80c3-5eb32cc081f5\" name=\"Changes\" comment=\"\" />\r\n      <created>1762027615634</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1762027615634</updated>\r\n      <workItem from=\"1762027617009\" duration=\"57000\" />\r\n      <workItem from=\"1762027680911\" duration=\"5539000\" />\r\n      <workItem from=\"1762052948907\" duration=\"3896000\" />\r\n      <workItem from=\"1762058639274\" duration=\"2727000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"create Dockerfile for socialuser-service\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1762032355824</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1762032355824</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"create Api-Gateway\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1762054530870</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1762054530870</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"origin/arquitectura-exagonal\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"create Dockerfile for socialuser-service\" />\r\n    <MESSAGE value=\"create Api-Gateway\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"create Api-Gateway\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision c1ab9dd7f4b2136fb65dadf6484c5ecb7bc409ed)
++++ b/.idea/workspace.xml	(date 1762114450536)
+@@ -4,45 +4,8 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="create Api-Gateway">
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/AppInfo.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/InternationalizationConfig.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/OpenAPIConfig.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/config/WebConfig.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/EmailAlreadyExistsException.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/exception/GlobalExceptionHandler.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/shared/response/ApiResponse.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/ChangeUserPassword.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/CreateUser.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/DeleteUser.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/GetAllUsers.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/GetUserById.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UpdateUser.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UserUseCases.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/arquitectura.md" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/config/UserSecurityConfig.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/model/User.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/repository/UserRepository.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/service/UserService.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/PasswordChangeRequest.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserCreateRequestDTO.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserResponseDTO.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/UserUpdateRequestDTO.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/mapper/UserRestMapper.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/Neo4jUserRepositoryAdapter.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/SpringDataUserRepository.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/entity/UserNeo4jEntity.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/mapper/UserNeo4jMapper.java" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages.properties" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
++    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="update the data of SocialUser">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.yml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/socialuser-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/pom.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/SocialuserServiceApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/SocialuserServiceApplicationTests.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -86,39 +49,39 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "Docker.api-gateway.executor": "Run",
+-    "Docker.socialgraph-db.executor": "Run",
+-    "Docker.socialuser-service.executor": "Run",
+-    "Docker.socialuser-service/Dockerfile.executor": "Run",
+-    "Maven.api-gateway [clean,install].executor": "Run",
+-    "Maven.api-gateway [clean].executor": "Run",
+-    "Maven.api-gateway [install].executor": "Run",
+-    "ModuleVcsDetector.initialDetectionPerformed": "true",
+-    "RequestMappingsPanelOrder0": "0",
+-    "RequestMappingsPanelOrder1": "1",
+-    "RequestMappingsPanelWidth0": "75",
+-    "RequestMappingsPanelWidth1": "75",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+-    "RunOnceActivity.git.unshallow": "true",
+-    "Spring Boot.SocialuserServiceApplication.executor": "Run",
+-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+-    "git-widget-placeholder": "main",
+-    "ignore.virus.scanning.warn.message": "true",
+-    "junie.onboarding.icon.badge.shown": "true",
+-    "kotlin-language-version-configured": "true",
+-    "last_opened_file_path": "D:/.dev/proyectos/SocialSeed/api-gateway",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "to.speed.mode.migration.done": "true",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;Docker.api-gateway.executor&quot;: &quot;Run&quot;,
++    &quot;Docker.socialgraph-db.executor&quot;: &quot;Run&quot;,
++    &quot;Docker.socialuser-service.executor&quot;: &quot;Run&quot;,
++    &quot;Docker.socialuser-service/Dockerfile.executor&quot;: &quot;Run&quot;,
++    &quot;Maven.api-gateway [clean,install].executor&quot;: &quot;Run&quot;,
++    &quot;Maven.api-gateway [clean].executor&quot;: &quot;Run&quot;,
++    &quot;Maven.api-gateway [install].executor&quot;: &quot;Run&quot;,
++    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
++    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
++    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
++    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
++    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
++    &quot;Spring Boot.SocialuserServiceApplication.executor&quot;: &quot;Run&quot;,
++    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
++    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
++    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
++    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
++    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;D:/.dev/proyectos/SocialSeed/api-gateway&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="D:\.dev\proyectos\SocialSeed\api-gateway" />
+@@ -249,7 +212,8 @@
+       <workItem from="1762027617009" duration="57000" />
+       <workItem from="1762027680911" duration="5539000" />
+       <workItem from="1762052948907" duration="3896000" />
+-      <workItem from="1762058639274" duration="2727000" />
++      <workItem from="1762058639274" duration="2926000" />
++      <workItem from="1762111022690" duration="1180000" />
+     </task>
+     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
+       <option name="closed" value="true" />
+@@ -267,7 +231,23 @@
+       <option name="project" value="LOCAL" />
+       <updated>1762054530870</updated>
+     </task>
+-    <option name="localTasksCounter" value="3" />
++    <task id="LOCAL-00003" summary="uodate the path in Api-Gateway">
++      <option name="closed" value="true" />
++      <created>1762061419845</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1762061419845</updated>
++    </task>
++    <task id="LOCAL-00004" summary="update the data of SocialUser">
++      <option name="closed" value="true" />
++      <created>1762061449664</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1762061449664</updated>
++    </task>
++    <option name="localTasksCounter" value="5" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -299,6 +279,8 @@
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="create Dockerfile for socialuser-service" />
+     <MESSAGE value="create Api-Gateway" />
+-    <option name="LAST_COMMIT_MESSAGE" value="create Api-Gateway" />
++    <MESSAGE value="uodate the path in Api-Gateway" />
++    <MESSAGE value="update the data of SocialUser" />
++    <option name="LAST_COMMIT_MESSAGE" value="update the data of SocialUser" />
+   </component>
+ </project>
+\ No newline at end of file

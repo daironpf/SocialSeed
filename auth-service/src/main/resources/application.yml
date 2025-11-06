@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:postgresql://auth-db:5432/authdb
+    username: authuser
+    password: authpass
