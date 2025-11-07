@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add auth-db to project">
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="minor changes in intelliJ">
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/proto/auth-service.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,6 +110,7 @@
     "Spring Boot.SocialuserServiceApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -376,7 +380,7 @@
       <workItem from="1762439236354" duration="19458000" />
       <workItem from="1762464144132" duration="234000" />
       <workItem from="1762464432459" duration="61000" />
-      <workItem from="1762492177135" duration="730000" />
+      <workItem from="1762492177135" duration="3476000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -570,7 +574,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762461904727</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="minor changes in intelliJ">
+      <option name="closed" value="true" />
+      <created>1762492979658</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1762492979658</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,6 +635,7 @@
     <MESSAGE value="add documentation for social network" />
     <MESSAGE value="&gt; Working on password change validation for the user&#10;&gt; Ihis use case will be moved to the auth service where it belongs" />
     <MESSAGE value="add auth-db to project" />
-    <option name="LAST_COMMIT_MESSAGE" value="add auth-db to project" />
+    <MESSAGE value="minor changes in intelliJ" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor changes in intelliJ" />
   </component>
 </project>

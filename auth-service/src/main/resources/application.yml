@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: auth-service
@@ -5,3 +8,16 @@ spring:
     url: jdbc:postgresql://auth-db:5432/authdb
     username: authuser
     password: authpass
+
+grpc:
+  server:
+    port: 9091
+
+auth:
+  jwt:
+    jwks-path: /.well-known/jwks.json
+    access-token-ttl: 900 # seconds
+    refresh-token-ttl: 2592000 # 30 days
+  keys:
+    location: file:/run/secrets/private_key.pem  # en prod usar vault
+    kid: key-id-v1
