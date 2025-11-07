@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add auth-db to project">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SocialSeed.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SocialSeed.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,66 +62,65 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Docker.api-gateway.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.api-gateway: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.auth-db: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.auth-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.kafka-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.neo4j: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.socialseed: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.socialuser-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.socialgraph-db.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.socialuser-service.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.socialuser-service/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.changepassword-socialuser | Change Password of SocialUser.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.create-socialuser | Create a new patient entity.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.create-socialuser | Create a new socialuser entity.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.delete-patient | Delete an SocialUser.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.delete-socialuser | Delete an SocialUser.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.get-patients | GET request to get all patients.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.get-patients | GET request to get all social user.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.get-socialusers | #2.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.get-socialusers | Docker.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.get-socialusers | GET request to get all social user.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.get-socialusers | Local.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.update-patient | Update SocialUser entity.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.update-socialuser | Update SocialUser entity.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-gateway [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-gateway [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-gateway [install].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.AuthServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.SocialuserServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/.dev/proyectos/SocialSeed/auth-service&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Docker.api-gateway.executor": "Run",
+    "Docker.docker-compose.yml.api-gateway: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.auth-db: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.auth-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.kafka-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.neo4j: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.socialseed: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.socialuser-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "Docker.socialgraph-db.executor": "Run",
+    "Docker.socialuser-service.executor": "Run",
+    "Docker.socialuser-service/Dockerfile.executor": "Run",
+    "Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment.executor": "Run",
+    "HTTP Request.changepassword-socialuser | Change Password of SocialUser.executor": "Run",
+    "HTTP Request.create-socialuser | Create a new patient entity.executor": "Run",
+    "HTTP Request.create-socialuser | Create a new socialuser entity.executor": "Run",
+    "HTTP Request.delete-patient | Delete an SocialUser.executor": "Run",
+    "HTTP Request.delete-socialuser | Delete an SocialUser.executor": "Run",
+    "HTTP Request.get-patients | GET request to get all patients.executor": "Run",
+    "HTTP Request.get-patients | GET request to get all social user.executor": "Run",
+    "HTTP Request.get-socialusers | #2.executor": "Run",
+    "HTTP Request.get-socialusers | Docker.executor": "Run",
+    "HTTP Request.get-socialusers | GET request to get all social user.executor": "Run",
+    "HTTP Request.get-socialusers | Local.executor": "Run",
+    "HTTP Request.update-patient | Update SocialUser entity.executor": "Run",
+    "HTTP Request.update-socialuser | Update SocialUser entity.executor": "Run",
+    "Maven.api-gateway [clean,install].executor": "Run",
+    "Maven.api-gateway [clean].executor": "Run",
+    "Maven.api-gateway [install].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ApiGatewayApplication.executor": "Run",
+    "Spring Boot.AuthServiceApplication.executor": "Run",
+    "Spring Boot.SocialuserServiceApplication.executor": "Run",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/.dev/proyectos/SocialSeed/auth-service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -184,7 +178,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.auth-service: Compose Deployment">
+  <component name="RunManager" selected="Spring Boot.SocialuserServiceApplication">
     <configuration name="changepassword-socialuser | Change Password of SocialUser" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/changepassword-socialuser.http" executionIdentifier="Change Password of SocialUser" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -347,6 +341,12 @@
       </set>
     </attachedChunks>
   </component>
+  <component name="ShelveChangesManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="module" />
+    </option>
+  </component>
   <component name="StructureViewState">
     <option name="selectedTab" value="Logical" />
   </component>
@@ -374,6 +374,9 @@
       <workItem from="1762308472322" duration="3198000" />
       <workItem from="1762373944663" duration="5064000" />
       <workItem from="1762439236354" duration="19458000" />
+      <workItem from="1762464144132" duration="234000" />
+      <workItem from="1762464432459" duration="61000" />
+      <workItem from="1762492177135" duration="730000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
