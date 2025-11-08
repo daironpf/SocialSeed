@@ -1,0 +1,38 @@
+server.port: 8090
+#server.port=4000
+
+logging.level.root: info
+
+# ======================
+# Neo4j
+# ======================
+spring:
+  application:
+    name: socialuser-service
+  neo4j:
+    uri: bolt://localhost:7687
+    # uri: bolt://socialgraph-db:7687
+    authentication:
+      username: neo4j
+      password: neoSocial
+
+# ======================
+# Language
+# ======================
+#spring.messages.basename=i18n/messages
+#spring.messages.encoding=UTF-8
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+# ======================
+# Grpc
+# ======================
+grpc:
+  server:
+    port: 9000
+    security:
+      enabled: false

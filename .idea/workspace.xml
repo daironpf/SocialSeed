@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="minor changes in intelliJ">
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/proto/auth-service.proto" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="working in auth-service">
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/proto/auth-service.proto" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/proto/socialuser.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +99,10 @@
     "Maven.api-gateway [clean,install].executor": "Run",
     "Maven.api-gateway [clean].executor": "Run",
     "Maven.api-gateway [install].executor": "Run",
+    "Maven.auth-service [package].executor": "Run",
+    "Maven.socialuser-service [clean].executor": "Run",
+    "Maven.socialuser-service [compile].executor": "Run",
+    "Maven.socialuser-service [package].executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
@@ -114,7 +121,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/.dev/proyectos/SocialSeed/auth-service",
+    "last_opened_file_path": "D:/.dev/proyectos/SocialSeed/socialuser-service/src/main",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -130,11 +137,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main" />
       <recent name="D:\.dev\proyectos\SocialSeed\auth-service" />
       <recent name="D:\.dev\proyectos\SocialSeed\api-requests\socialuser-service" />
       <recent name="D:\proyectos\SocialSeed" />
       <recent name="D:\.dev\proyectos\SocialSeed\api-gateway" />
-      <recent name="D:\proyectos\SocialSeed\socialuser-service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\java\com\socialseed\socialuserservice\shared\response" />
@@ -175,14 +182,14 @@
         <entry key="SpringBootApplicationConfigurationType">
           <value>
             <map>
-              <entry key="AuthServiceApplication" value="FAILED" />
+              <entry key="AuthServiceApplication" value="STOPPED" />
             </map>
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.SocialuserServiceApplication">
+  <component name="RunManager" selected="Spring Boot.AuthServiceApplication">
     <configuration name="changepassword-socialuser | Change Password of SocialUser" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/changepassword-socialuser.http" executionIdentifier="Change Password of SocialUser" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -380,7 +387,10 @@
       <workItem from="1762439236354" duration="19458000" />
       <workItem from="1762464144132" duration="234000" />
       <workItem from="1762464432459" duration="61000" />
-      <workItem from="1762492177135" duration="3476000" />
+      <workItem from="1762492177135" duration="3517000" />
+      <workItem from="1762533704107" duration="2038000" />
+      <workItem from="1762538970454" duration="91000" />
+      <workItem from="1762634266185" duration="3507000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -582,7 +592,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762492979658</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="working in auth-service">
+      <option name="closed" value="true" />
+      <created>1762495692895</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1762495692895</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -636,6 +654,7 @@
     <MESSAGE value="&gt; Working on password change validation for the user&#10;&gt; Ihis use case will be moved to the auth service where it belongs" />
     <MESSAGE value="add auth-db to project" />
     <MESSAGE value="minor changes in intelliJ" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor changes in intelliJ" />
+    <MESSAGE value="working in auth-service" />
+    <option name="LAST_COMMIT_MESSAGE" value="working in auth-service" />
   </component>
 </project>

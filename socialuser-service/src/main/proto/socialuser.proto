@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package socialuser;
+
+option java_package = "com.example.socialuser.grpc";
+option java_multiple_files = true;
+
+// Servicio gRPC que expone SocialUserService
+service SocialUserService {
+
+  // Crea un usuario con username y email
+  rpc CreateUser(CreateUserRequest) returns (CreateUserReply);
+}
+
+// Mensaje que recibe auth-service
+message CreateUserRequest {
+  string username = 1;
+  string email = 2;
+}
+
+// Mensaje que devuelve socialuser-service
+message CreateUserReply {
+  string userId = 1;       // UUID generado
+  string message = 2;      // Mensaje de confirmación
+}
