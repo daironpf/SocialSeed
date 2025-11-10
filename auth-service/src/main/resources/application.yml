@@ -4,19 +4,22 @@ server:
 spring:
   application:
     name: auth-service
-#  datasource:
-#    url: jdbc:postgresql://auth-db:5432/authdb
-#    username: authuser
-#    password: authpass
-
-grpc:
   grpc:
+    server:
+      enabled: false
     client:
       local-grpc-server:
         address: 'static://127.0.0.1:9000'
         enableKeepAlive: true
         keepAliveWithoutCalls: true
         negotiationType: plaintext
+      channels:
+        user:
+          address: 'static://localhost:9090'
+#  datasource:
+#    url: jdbc:postgresql://auth-db:5432/authdb
+#    username: authuser
+#    password: authpass
 
 #auth:
 #  jwt:
