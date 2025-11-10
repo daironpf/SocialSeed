@@ -21,7 +21,7 @@ public class CreateUser {
         if (user.getId() == null) {
             user.setId(UUID.randomUUID());
         }
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+//        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         return userRepository.save(user);
     }

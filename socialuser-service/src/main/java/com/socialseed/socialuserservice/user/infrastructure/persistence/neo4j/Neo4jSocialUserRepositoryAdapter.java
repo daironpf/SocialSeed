@@ -20,8 +20,6 @@ public class Neo4jSocialUserRepositoryAdapter implements UserRepository {
         this.springDataUserRepository = springDataUserRepository;
     }
 
-
-
     @Override
     public User save(User user) {
         var node = UserNeo4jMapper.toNode(user);

@@ -20,12 +20,12 @@ public class UserNeo4jMapper {
     }
 
     public static User toDomain(UserNeo4jEntity node) {
-        return new User(
-                node.getId(),
-                node.getUsername(),
-                node.getEmail(),
-                node.getPassword(),
-                node.getFullName()
-        );
+
+        return User.builder()
+                .id(node.getId())
+                .username(node.getUsername())
+                .email(node.getEmail())
+                .fullName(node.getFullName())
+                .build();
     }
 }

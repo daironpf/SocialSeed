@@ -9,23 +9,25 @@ public class UserRestMapper {
     private UserRestMapper() {}
 
     public static User UpdatetoDomain(UserUpdateRequestDTO req) {
-        return new User(
-                null,                           // id se asignará en el servicio
-                req.username(),
-                req.email(),
-                null,
-                req.fullName()
-        );
+
+        return User.builder()
+                .id(null)                 // id se asignará en el servicio
+                .username(req.username())
+                .email(req.email())
+                .password(null)
+                .fullName(req.fullName())
+                .build();
     }
 
     public static User toDomain(UserCreateRequestDTO req) {
-        return new User(
-                null,                           // id se asignará en el servicio
-                req.username(),
-                req.email(),
-                req.password(),                 // sin hash por ahora
-                req.fullName()
-        );
+
+        return User.builder()
+                .id(null)                 // id se asignará en el servicio
+                .username(req.username())
+                .email(req.email())
+                .password(req.password()) // sin hash por ahora
+                .fullName(req.fullName())
+                .build();
     }
 
     public static UserResponseDTO toResponse(User user) {
