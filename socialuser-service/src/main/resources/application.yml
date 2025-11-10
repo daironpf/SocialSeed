@@ -33,6 +33,7 @@ management:
 # ======================
 grpc:
   server:
-    port: 9000
+    port: 9090
+    reflection-service-enabled: true
     security:
       enabled: false

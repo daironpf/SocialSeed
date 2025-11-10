@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="working in grpc">
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/grpc/SocialUserGrpcServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_11_2025_04_27_p__m___Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_11_2025_04_27_p_ m__[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_11_2025_04_54_p__m___Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_11_2025_04_54_p_ m__[Changes]/shelved.patch" beforeDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="working with grpc">
+      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/grpc-server-test.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/socialuser-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/proto/auth-service.proto" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/proto/socialuser.proto" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/proto/socialuser.proto" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/grpc/SocialUserGrpcServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/grpc/service/SocialUserGrpcServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -85,11 +81,13 @@
     "Docker.socialuser-service.executor": "Run",
     "Docker.socialuser-service/Dockerfile.executor": "Run",
     "Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment.executor": "Run",
+    "HTTP Request.All in generated-requests.executor": "Run",
     "HTTP Request.changepassword-socialuser | Change Password of SocialUser.executor": "Run",
     "HTTP Request.create-socialuser | Create a new patient entity.executor": "Run",
     "HTTP Request.create-socialuser | Create a new socialuser entity.executor": "Run",
     "HTTP Request.delete-patient | Delete an SocialUser.executor": "Run",
     "HTTP Request.delete-socialuser | Delete an SocialUser.executor": "Run",
+    "HTTP Request.generated-requests | #1.executor": "Run",
     "HTTP Request.generated-requests | #3.executor": "Run",
     "HTTP Request.generated-requests | #4.executor": "Run",
     "HTTP Request.get-patients | GET request to get all patients.executor": "Run",
@@ -98,6 +96,7 @@
     "HTTP Request.get-socialusers | Docker.executor": "Run",
     "HTTP Request.get-socialusers | GET request to get all social user.executor": "Run",
     "HTTP Request.get-socialusers | Local.executor": "Run",
+    "HTTP Request.grpc-server-test | #1.executor": "Run",
     "HTTP Request.update-patient | Update SocialUser entity.executor": "Run",
     "HTTP Request.update-socialuser | Update SocialUser entity.executor": "Run",
     "Maven.api-gateway [clean,install].executor": "Run",
@@ -177,9 +176,11 @@
         <entry key="HttpClient.HttpRequestRunConfigurationType">
           <value>
             <map>
+              <entry key="All in generated-requests" value="STOPPED" />
+              <entry key="generated-requests | #1" value="STOPPED" />
               <entry key="generated-requests | #3" value="STOPPED" />
               <entry key="generated-requests | #4" value="STOPPED" />
-              <entry key="get-socialusers | Local" value="STOPPED" />
+              <entry key="grpc-server-test | #1" value="STOPPED" />
             </map>
           </value>
         </entry>
@@ -195,13 +196,19 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.SocialuserServiceApplication">
+    <configuration name="All in generated-requests" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#1" runType="Run single request">
+      <method v="2" />
+    </configuration>
     <configuration name="generated-requests | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#3" index="3" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="generated-requests | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#4" index="4" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="get-socialusers | Local" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" executionIdentifier="Local" index="2" runType="Run single request">
+    <configuration name="grpc-server-test | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/grpc-server-test.http" executionIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -247,32 +254,6 @@
           </option>
           <option name="commandLineOptions" value="--network socialseed" />
           <option name="sourceFilePath" value="api-gateway/Dockerfile" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.auth-db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="auth-db" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.auth-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="auth-service" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
         </settings>
       </deployment>
       <method v="2" />
@@ -330,22 +311,22 @@
       <item itemvalue="Docker.api-gateway" />
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
-      <item itemvalue="Docker.docker-compose.yml.auth-db: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.auth-service: Compose Deployment" />
+      <item itemvalue="HTTP Request.All in generated-requests" />
+      <item itemvalue="HTTP Request.generated-requests | #1" />
+      <item itemvalue="HTTP Request.grpc-server-test | #1" />
       <item itemvalue="HTTP Request.generated-requests | #3" />
       <item itemvalue="HTTP Request.generated-requests | #4" />
-      <item itemvalue="HTTP Request.get-socialusers | Local" />
       <item itemvalue="Spring Boot.AuthServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.SocialuserServiceApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.generated-requests | #1" />
+        <item itemvalue="HTTP Request.grpc-server-test | #1" />
+        <item itemvalue="HTTP Request.All in generated-requests" />
         <item itemvalue="HTTP Request.generated-requests | #4" />
         <item itemvalue="HTTP Request.generated-requests | #3" />
-        <item itemvalue="HTTP Request.get-socialusers | Local" />
-        <item itemvalue="Docker.docker-compose.yml.auth-service: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.auth-db: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -397,7 +378,8 @@
       <workItem from="1762538970454" duration="91000" />
       <workItem from="1762634266185" duration="3621000" />
       <workItem from="1762641832722" duration="50000" />
-      <workItem from="1762749746460" duration="4537000" />
+      <workItem from="1762749746460" duration="4632000" />
+      <workItem from="1762790627299" duration="7696000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -615,7 +597,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762637816520</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="working with grpc">
+      <option name="closed" value="true" />
+      <created>1762754347452</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1762754347452</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,7 +635,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create Api-Gateway" />
     <MESSAGE value="changes in idea" />
     <MESSAGE value="update api-gateway" />
     <MESSAGE value="create api-request" />
@@ -670,6 +659,7 @@
     <MESSAGE value="minor changes in intelliJ" />
     <MESSAGE value="working in auth-service" />
     <MESSAGE value="working in grpc" />
-    <option name="LAST_COMMIT_MESSAGE" value="working in grpc" />
+    <MESSAGE value="working with grpc" />
+    <option name="LAST_COMMIT_MESSAGE" value="working with grpc" />
   </component>
 </project>

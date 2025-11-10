@@ -1,17 +1,16 @@
-package com.socialseed.socialuserservice.user.entry.grpc;
+package com.socialseed.socialuserservice.user.entry.grpc.service;
 
 import com.socialseed.socialuserservice.proto.CreateUserReply;
 import com.socialseed.socialuserservice.proto.CreateUserRequest;
 import com.socialseed.socialuserservice.proto.SocialUserServiceGrpc;
-import com.socialseed.socialuserservice.user.domain.model.User;
 import io.grpc.stub.StreamObserver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.grpc.server.service.GrpcService;
 
 import java.util.Random;
 
-@Service
+@GrpcService
 public class SocialUserGrpcServiceImpl extends SocialUserServiceGrpc.SocialUserServiceImplBase {
     private Logger log = LoggerFactory.getLogger(SocialUserGrpcServiceImpl.class);
     private final Random rand =  new Random();
