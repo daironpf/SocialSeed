@@ -4,14 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="working in auth-service">
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/proto/auth-service.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/proto/socialuser.proto" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="working in grpc">
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/grpc/SocialUserGrpcServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_11_2025_04_27_p__m___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_11_2025_04_27_p_ m__[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_11_2025_04_54_p__m___Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_02_11_2025_04_54_p_ m__[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/socialuser-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/proto/auth-service.proto" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/proto/socialuser.proto" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/proto/socialuser.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +90,8 @@
     "HTTP Request.create-socialuser | Create a new socialuser entity.executor": "Run",
     "HTTP Request.delete-patient | Delete an SocialUser.executor": "Run",
     "HTTP Request.delete-socialuser | Delete an SocialUser.executor": "Run",
+    "HTTP Request.generated-requests | #3.executor": "Run",
+    "HTTP Request.generated-requests | #4.executor": "Run",
     "HTTP Request.get-patients | GET request to get all patients.executor": "Run",
     "HTTP Request.get-patients | GET request to get all social user.executor": "Run",
     "HTTP Request.get-socialusers | #2.executor": "Run",
@@ -173,9 +177,9 @@
         <entry key="HttpClient.HttpRequestRunConfigurationType">
           <value>
             <map>
-              <entry key="changepassword-socialuser | Change Password of SocialUser" value="STOPPED" />
+              <entry key="generated-requests | #3" value="STOPPED" />
+              <entry key="generated-requests | #4" value="STOPPED" />
               <entry key="get-socialusers | Local" value="STOPPED" />
-              <entry key="update-socialuser | Update SocialUser entity" value="STOPPED" />
             </map>
           </value>
         </entry>
@@ -183,20 +187,21 @@
           <value>
             <map>
               <entry key="AuthServiceApplication" value="STOPPED" />
+              <entry key="SocialuserServiceApplication" value="STOPPED" />
             </map>
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.AuthServiceApplication">
-    <configuration name="changepassword-socialuser | Change Password of SocialUser" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/changepassword-socialuser.http" executionIdentifier="Change Password of SocialUser" runType="Run single request">
+  <component name="RunManager" selected="Spring Boot.SocialuserServiceApplication">
+    <configuration name="generated-requests | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#3" index="3" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="generated-requests | #4" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#4" index="4" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="get-socialusers | Local" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" executionIdentifier="Local" index="2" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="update-socialuser | Update SocialUser entity" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/update-socialuser.http" executionIdentifier="Update SocialUser entity" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -327,8 +332,8 @@
       <item itemvalue="Docker.socialuser-service" />
       <item itemvalue="Docker.docker-compose.yml.auth-db: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.auth-service: Compose Deployment" />
-      <item itemvalue="HTTP Request.changepassword-socialuser | Change Password of SocialUser" />
-      <item itemvalue="HTTP Request.update-socialuser | Update SocialUser entity" />
+      <item itemvalue="HTTP Request.generated-requests | #3" />
+      <item itemvalue="HTTP Request.generated-requests | #4" />
       <item itemvalue="HTTP Request.get-socialusers | Local" />
       <item itemvalue="Spring Boot.AuthServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
@@ -336,11 +341,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.generated-requests | #4" />
+        <item itemvalue="HTTP Request.generated-requests | #3" />
+        <item itemvalue="HTTP Request.get-socialusers | Local" />
         <item itemvalue="Docker.docker-compose.yml.auth-service: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.auth-db: Compose Deployment" />
-        <item itemvalue="HTTP Request.changepassword-socialuser | Change Password of SocialUser" />
-        <item itemvalue="HTTP Request.get-socialusers | Local" />
-        <item itemvalue="HTTP Request.update-socialuser | Update SocialUser entity" />
       </list>
     </recent_temporary>
   </component>
@@ -390,7 +395,9 @@
       <workItem from="1762492177135" duration="3517000" />
       <workItem from="1762533704107" duration="2038000" />
       <workItem from="1762538970454" duration="91000" />
-      <workItem from="1762634266185" duration="3507000" />
+      <workItem from="1762634266185" duration="3621000" />
+      <workItem from="1762641832722" duration="50000" />
+      <workItem from="1762749746460" duration="4537000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -600,7 +607,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762495692895</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="working in grpc">
+      <option name="closed" value="true" />
+      <created>1762637816520</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1762637816520</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -630,7 +645,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create Dockerfile for socialuser-service" />
     <MESSAGE value="create Api-Gateway" />
     <MESSAGE value="changes in idea" />
     <MESSAGE value="update api-gateway" />
@@ -655,6 +669,7 @@
     <MESSAGE value="add auth-db to project" />
     <MESSAGE value="minor changes in intelliJ" />
     <MESSAGE value="working in auth-service" />
-    <option name="LAST_COMMIT_MESSAGE" value="working in auth-service" />
+    <MESSAGE value="working in grpc" />
+    <option name="LAST_COMMIT_MESSAGE" value="working in grpc" />
   </component>
 </project>

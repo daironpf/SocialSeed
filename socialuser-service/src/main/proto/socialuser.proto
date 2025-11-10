@@ -1,13 +1,11 @@
 syntax = "proto3";
 
-package socialuser;
-
-option java_package = "com.example.socialuser.grpc";
+option java_package = "com.socialseed.socialuserservice.proto";
 option java_multiple_files = true;
+option java_outer_classname= "SocialUserProto";
 
 // Servicio gRPC que expone SocialUserService
 service SocialUserService {
-
   // Crea un usuario con username y email
   rpc CreateUser(CreateUserRequest) returns (CreateUserReply);
 }

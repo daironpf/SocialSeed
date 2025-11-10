@@ -12,7 +12,7 @@
     <artifactId>socialuser-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>socialuser-service</name>
-    <description>socialuser-service</description>
+    <description>Social User - Service</description>
     <url/>
     <licenses>
         <license/>
@@ -26,11 +26,12 @@
         <tag/>
         <url/>
     </scm>
+
     <properties>
         <java.version>21</java.version>
-        <protobuf.version>4.31.1</protobuf.version>
-        <maven.compiler.release>24</maven.compiler.release>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <grpc.version>1.76.0</grpc.version>
+        <protobuf-java.version>4.32.1</protobuf-java.version>
+        <spring-grpc.version>0.12.0</spring-grpc.version>
     </properties>
 
     <dependencies>
@@ -85,29 +86,77 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>io.github.ascopes</groupId>-->
+<!--            <artifactId>protobuf-maven-plugin</artifactId>-->
+<!--            <version>4.0.2</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.google.protobuf</groupId>-->
+<!--            <artifactId>protobuf-java</artifactId>-->
+<!--            <version>${protobuf.version}</version>-->
+<!--        </dependency>-->
+
         <dependency>
-            <groupId>io.github.ascopes</groupId>
-            <artifactId>protobuf-maven-plugin</artifactId>
-            <version>4.0.2</version>
+            <groupId>org.springframework.grpc</groupId>
+            <artifactId>spring-grpc-test</artifactId>
+            <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.google.protobuf</groupId>
-            <artifactId>protobuf-java</artifactId>
-            <version>${protobuf.version}</version>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.grpc</groupId>
+            <artifactId>spring-grpc-spring-boot-starter</artifactId>
         </dependency>
 
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.grpc</groupId>
+                <artifactId>spring-grpc-dependencies</artifactId>
+                <version>${spring-grpc.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 
     <build>
         <plugins>
             <plugin>
                 <groupId>io.github.ascopes</groupId>
                 <artifactId>protobuf-maven-plugin</artifactId>
-                <version>4.0.2</version>
-
+                <version>3.8.0</version>
                 <configuration>
-                    <protoc>${protobuf.version}</protoc>
+                    <!-- Opcional: Especifica el directorio de salida para los archivos generados -->
+                    <outputDirectory>${project.basedir}/src/main/generated-sources</outputDirectory>
+                    <protocVersion>${protobuf-java.version}</protocVersion>
+                    <binaryMavenPlugins>
+                        <binaryMavenPlugin>
+                            <groupId>io.grpc</groupId>
+                            <artifactId>protoc-gen-grpc-java</artifactId>
+                            <version>${grpc.version}</version>
+                            <options>@generated=omit</options>
+                        </binaryMavenPlugin>
+                    </binaryMavenPlugins>
                 </configuration>
+                <executions>
+                    <execution>
+                        <id>generate</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
