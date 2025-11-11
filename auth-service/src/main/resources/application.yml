@@ -4,6 +4,17 @@ server:
 spring:
   application:
     name: auth-service
+  # PgSQL auth-db
+  datasource:
+    url: jdbc:postgresql://localhost:5433/authdb
+    username: authuser
+    password: authpass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  # Grpc Client
   grpc:
     server:
       enabled: false
@@ -16,10 +27,7 @@ spring:
       channels:
         user:
           address: 'static://localhost:9090'
-#  datasource:
-#    url: jdbc:postgresql://auth-db:5432/authdb
-#    username: authuser
-#    password: authpass
+
 
 #auth:
 #  jwt:
