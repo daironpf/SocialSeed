@@ -4,21 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add application usecases">
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/config/SecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/config/UserSecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/config/jwt/JWTProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/config/jwt/JwtAuthFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/AuthUserRepositoryAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/AuthUserPgsqlEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/mapper/AuthUserPgsqlMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/repository/AuthUserPgsqlRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/service/AuthServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="other changes">
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_en.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_es.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RegisterRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RegisterRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/service/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/service/AuthServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -137,7 +127,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/.dev/proyectos/SocialSeed/auth-service/src/main/java/com/socialseed/authservice",
+    "last_opened_file_path": "D:/.dev/proyectos/SocialSeed/auth-service/src/main/resources",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -153,11 +143,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\.dev\proyectos\SocialSeed\auth-service\src\main\resources" />
       <recent name="D:\.dev\proyectos\SocialSeed\auth-service\src\main\java\com\socialseed\authservice" />
       <recent name="D:\.dev\proyectos\SocialSeed\auth-service\src\main\proto" />
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main" />
       <recent name="D:\.dev\proyectos\SocialSeed\auth-service" />
-      <recent name="D:\.dev\proyectos\SocialSeed\api-requests\socialuser-service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\java\com\socialseed\socialuserservice\shared\response" />
@@ -403,7 +393,7 @@
       <workItem from="1762749746460" duration="4632000" />
       <workItem from="1762790627299" duration="7826000" />
       <workItem from="1762805223432" duration="4573000" />
-      <workItem from="1762842970180" duration="6207000" />
+      <workItem from="1762842970180" duration="7842000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -693,7 +683,31 @@
       <option name="project" value="LOCAL" />
       <updated>1762847934538</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="add persistence pgsql">
+      <option name="closed" value="true" />
+      <created>1762849274999</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1762849274999</updated>
+    </task>
+    <task id="LOCAL-00038" summary="add auth configs and dependencies">
+      <option name="closed" value="true" />
+      <created>1762849336338</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1762849336338</updated>
+    </task>
+    <task id="LOCAL-00039" summary="other changes">
+      <option name="closed" value="true" />
+      <created>1762849350246</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1762849350246</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -723,9 +737,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create a docker-compose.yml to rise up all project" />
-    <MESSAGE value="add new version of README.md&#10;add LICENSE" />
-    <MESSAGE value="minor updates" />
     <MESSAGE value="update the java use to 21" />
     <MESSAGE value="add the old code to use the good code to improve the actually code" />
     <MESSAGE value="add validation by AOP to have a more clean code" />
@@ -748,6 +759,9 @@
     <MESSAGE value="add rest dto" />
     <MESSAGE value="update minor details" />
     <MESSAGE value="add application usecases" />
-    <option name="LAST_COMMIT_MESSAGE" value="add application usecases" />
+    <MESSAGE value="add persistence pgsql" />
+    <MESSAGE value="add auth configs and dependencies" />
+    <MESSAGE value="other changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="other changes" />
   </component>
 </project>
