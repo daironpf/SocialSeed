@@ -29,11 +29,11 @@ spring:
           address: 'static://localhost:9090'
 
 
-#auth:
-#  jwt:
-#    jwks-path: /.well-known/jwks.json
-#    access-token-ttl: 900 # seconds
-#    refresh-token-ttl: 2592000 # 30 days
-#  keys:
-#    location: file:/run/secrets/private_key.pem  # en prod usar vault
-#    kid: key-id-v1
+auth:
+  jwt:
+    jwks-path: /.well-known/jwks.json
+    access-token-ttl: 900 # seconds
+    refresh-token-ttl: 2592000 # 30 days
+  keys:
+    location: file:/run/secrets/private_key.pem  # en prod usar vault
+    kid: key-id-v1
