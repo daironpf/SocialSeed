@@ -1,6 +1,6 @@
 package com.socialseed.authservice.platform.error;
 
-import com.socialseed.socialuserservice.platform.common.response.ApiResponse;
+import com.socialseed.authservice.platform.common.response.ApiResponse;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.ResponseEntity;

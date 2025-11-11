@@ -1,6 +1,6 @@
 package com.socialseed.authservice.platform.common.response;
 
-import com.socialseed.socialuserservice.platform.config.AppInfo;
+import com.socialseed.authservice.platform.config.AppInfo;
 
 import java.time.Instant;
 

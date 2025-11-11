@@ -1,6 +1,6 @@
 package com.socialseed.authservice.platform.common.util;
 
-import com.socialseed.socialuserservice.platform.common.response.ResponseDTO;
+import com.socialseed.authservice.platform.common.response.ResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
