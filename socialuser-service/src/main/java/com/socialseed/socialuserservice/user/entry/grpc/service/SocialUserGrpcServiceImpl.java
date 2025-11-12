@@ -35,8 +35,8 @@ public class SocialUserGrpcServiceImpl extends SocialUserServiceGrpc.SocialUserS
         log.info("usuario a crear Email: {}", request.getEmail());
         log.info("usuario a crear UserName: {}", request.getUsername());
         var response  = CreateUserReply.newBuilder()
-                .setUserId("id: "+saved.getId().toString())
-                .setMessage("Usuario creado")
+                .setUserId(saved.getId().toString())
+                .setMessage("200")
                 .build();
         log.info("Usuario Registrado: response: {}", response);
         responseObserver.onNext(response);

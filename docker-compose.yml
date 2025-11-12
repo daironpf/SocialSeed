@@ -74,8 +74,8 @@ services:
       POSTGRES_PASSWORD: authpass
     ports:
       - "5433:5432"
-    volumes:
-      - D:\db_volumes\auth-db:/var/lib/postgresql/data
+#    volumes:
+#      - D:\db_volumes\auth-db:/var/lib/postgresql/data
     networks:
       - net
     healthcheck:

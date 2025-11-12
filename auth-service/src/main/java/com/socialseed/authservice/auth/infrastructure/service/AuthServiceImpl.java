@@ -43,13 +43,13 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthResponseDTO register(RegisterRequestDTO dto) {
+    public AuthResponseDTO register(RegisterRequestDTO dto, UUID id) {
         if (authUserRepository.findByEmail(dto.email).isPresent()) {
             throw new BusinessException(ErrorCode.USER_EMAIL_EXISTS, dto.email);
         }
 
         AuthUser newAuthUser = new AuthUser(
-                UUID.randomUUID(),
+                id,
                 dto.username,
                 dto.email,
                 passwordEncoder.encode(dto.password)

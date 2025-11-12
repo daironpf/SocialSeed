@@ -9,7 +9,7 @@ import java.util.UUID;
 
 public interface AuthService {
     AuthResponseDTO login(String email, String password);
-    AuthResponseDTO register(RegisterRequestDTO dto);
+    AuthResponseDTO register(RegisterRequestDTO dto, UUID id);
 
     AuthUser createUser(AuthUser authUser);
     Optional<AuthUser> getUserById(UUID id);

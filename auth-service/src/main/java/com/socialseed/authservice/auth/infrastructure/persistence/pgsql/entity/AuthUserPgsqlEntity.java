@@ -27,6 +27,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AuthUserPgsqlEntity {
+    /**
+     * ID asignado manualmente.
+     * Este valor proviene del nodo creado en SocialUser-Service.
+     */
     @Id
     @Column(columnDefinition = "uuid", nullable = false, updatable = false)
     private UUID id;

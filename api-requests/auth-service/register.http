@@ -1,0 +1,125 @@
+### 🌐 Environment
+@baseUrl = http://localhost:8081
+@registerPath = /auth/register
+@lang = en
+@password = password123
+
+### Register - Albert Einstein
+POST {{baseUrl}}{{registerPath}}
+Content-Type: application/json
+Accept-Language: {{lang}}
+
+{
+  "email": "einstein@gmail.com",
+  "password": "{{password}}",
+  "username": "AlbertEinstein"
+}
+###
+
+### Register - Nikola Tesla
+POST {{baseUrl}}{{registerPath}}
+Content-Type: application/json
+Accept-Language: {{lang}}
+
+{
+  "email": "tesla@gmail.com",
+  "password": "{{password}}",
+  "username": "NikolaTesla"
+}
+###
+
+### Register - Sigmund Freud
+POST {{baseUrl}}{{registerPath}}
+Content-Type: application/json
+Accept-Language: {{lang}}
+
+{
+  "email": "freud@gmail.com",
+  "password": "{{password}}",
+  "username": "SigmundFreud"
+}
+###
+
+### Register - Marie Curie
+POST {{baseUrl}}{{registerPath}}
+Content-Type: application/json
+Accept-Language: {{lang}}
+
+{
+  "email": "curie@gmail.com",
+  "password": "{{password}}",
+  "username": "MarieCurie"
+}
+###
+
+### Register - Isaac Newton
+POST {{baseUrl}}{{registerPath}}
+Content-Type: application/json
+Accept-Language: {{lang}}
+
+{
+  "email": "newton@gmail.com",
+  "password": "{{password}}",
+  "username": "IsaacNewton"
+}
+###
+
+### Register - Charles Darwin
+POST {{baseUrl}}{{registerPath}}
+Content-Type: application/json
+Accept-Language: {{lang}}
+
+{
+  "email": "darwin@gmail.com",
+  "password": "{{password}}",
+  "username": "CharlesDarwin"
+}
+###
+
+### Register - Leonardo da Vinci
+POST {{baseUrl}}{{registerPath}}
+Content-Type: application/json
+Accept-Language: {{lang}}
+
+{
+  "email": "davinci@gmail.com",
+  "password": "{{password}}",
+  "username": "LeonardoDaVinci"
+}
+###
+
+### Register - Galileo Galilei
+POST {{baseUrl}}{{registerPath}}
+Content-Type: application/json
+Accept-Language: {{lang}}
+
+{
+  "email": "galileo@gmail.com",
+  "password": "{{password}}",
+  "username": "GalileoGalilei"
+}
+###
+
+### Register - Ada Lovelace
+POST {{baseUrl}}{{registerPath}}
+Content-Type: application/json
+Accept-Language: {{lang}}
+
+{
+  "email": "lovelace@gmail.com",
+  "password": "{{password}}",
+  "username": "AdaLovelace"
+}
+###
+
+### Register - Alan Turing
+POST {{baseUrl}}{{registerPath}}
+Content-Type: application/json
+Accept-Language: {{lang}}
+
+{
+  "email": "turing@gmail.com",
+  "password": "{{password}}",
+  "username": "AlanTuring"
+}
+###

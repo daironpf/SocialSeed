@@ -1,0 +1,10 @@
+### login
+POST http://localhost:8081/auth/login
+Content-Type: application/json
+Accept-Language: en
+
+{
+  "email": "einstein@gmail.com",
+  "password":"password123"
+}
+###

@@ -27,5 +27,4 @@ public class UserController {
         log.info("Create user response : {}", response);
         return response.toString();
     }
-
 }
