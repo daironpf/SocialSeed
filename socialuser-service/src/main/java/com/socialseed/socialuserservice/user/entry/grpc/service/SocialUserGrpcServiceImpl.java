@@ -10,8 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.grpc.server.service.GrpcService;
 
-import java.util.Random;
-
 @GrpcService
 public class SocialUserGrpcServiceImpl extends SocialUserServiceGrpc.SocialUserServiceImplBase {
     private Logger log = LoggerFactory.getLogger(SocialUserGrpcServiceImpl.class);
@@ -29,16 +27,15 @@ public class SocialUserGrpcServiceImpl extends SocialUserServiceGrpc.SocialUserS
                 .email(request.getEmail())
                 .build();
 
-        User saved = userUseCases.createUser().execute(newuser);
+        User saved = userUseCases.createUser(newuser);
         // crear nodo de usuario
 
-        log.info("usuario a crear Email: {}", request.getEmail());
-        log.info("usuario a crear UserName: {}", request.getUsername());
+        log.info("usuario a crear: {}", request.toString());
         var response  = CreateUserReply.newBuilder()
                 .setUserId(saved.getId().toString())
                 .setMessage("200")
                 .build();
-        log.info("Usuario Registrado: response: {}", response);
+        log.info("Usuario Registrado: response: {}", response.toString());
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }

@@ -1,4 +1,4 @@
-package com.socialseed.socialuserservice.user.infrastructure.persistence;
+package com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.repository;
 
 import com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.entity.UserNeo4jEntity;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
@@ -7,9 +7,10 @@ import org.springframework.data.neo4j.repository.query.Query;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface SpringDataUserRepository extends Neo4jRepository<UserNeo4jEntity, UUID> {
+public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEntity, UUID> {
+    // region findBy
     Optional<UserNeo4jEntity> findByEmail(String email);
-    // Puedes agregar métodos como findByEmail, etc. si quieres
+    //endregion
 
     //region existBy
     @Query("""

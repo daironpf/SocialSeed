@@ -1,8 +1,10 @@
 package com.socialseed.socialuserservice.user.application.usecase;
 
-import com.socialseed.socialuserservice.user.domain.repository.UserRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import com.socialseed.socialuserservice.user.domain.model.User;
 import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserUseCases {
@@ -11,45 +13,39 @@ public class UserUseCases {
     private final GetAllUsers getAllUsers;
     private final UpdateUser updateUser;
     private final DeleteUser deleteUser;
-    private final ChangeUserPassword changeUserPassword;
+
 
     public UserUseCases(
             CreateUser createUser,
             GetUserById getUserById,
             GetAllUsers getAllUsers,
             UpdateUser updateUser,
-            DeleteUser deleteUser,
-            ChangeUserPassword changeUserPassword
+            DeleteUser deleteUser
     ) {
         this.createUser = createUser;
         this.getUserById = getUserById;
         this.getAllUsers = getAllUsers;
         this.updateUser = updateUser;
         this.deleteUser = deleteUser;
-        this.changeUserPassword = changeUserPassword;
     }
 
-    public CreateUser createUser() {
-        return createUser;
+    public User createUser(User user) {
+        return createUser.execute(user);
     }
 
-    public GetUserById getUserById() {
-        return getUserById;
+    public Optional<User> getUserById(UUID id) {
+        return getUserById.execute(id);
     }
 
-    public GetAllUsers getAllUsers() {
-        return getAllUsers;
+    public List<User> getAllUsers() {
+        return getAllUsers.execute();
     }
 
-    public UpdateUser updateUser() {
-        return updateUser;
+    public void updateUser(UUID id,User request) {
+        updateUser.execute(id, request);
     }
 
-    public DeleteUser deleteUser() {
-        return deleteUser;
-    }
-
-    public ChangeUserPassword changeUserPassword() {
-        return changeUserPassword;
+    public void deleteUser(UUID id) {
+        deleteUser.execute(id);
     }
 }

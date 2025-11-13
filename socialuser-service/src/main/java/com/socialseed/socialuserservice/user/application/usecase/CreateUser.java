@@ -2,7 +2,6 @@ package com.socialseed.socialuserservice.user.application.usecase;
 
 import com.socialseed.socialuserservice.user.domain.model.User;
 import com.socialseed.socialuserservice.user.domain.repository.UserRepository;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -10,19 +9,15 @@ import java.util.UUID;
 @Service
 public class CreateUser {
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    public CreateUser(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public CreateUser(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     public User execute(User user) {
         if (user.getId() == null) {
             user.setId(UUID.randomUUID());
         }
-//        user.setPassword(passwordEncoder.encode(user.getPassword()));
-
         return userRepository.save(user);
     }
 }

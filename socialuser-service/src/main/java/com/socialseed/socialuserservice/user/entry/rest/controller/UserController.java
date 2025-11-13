@@ -1,7 +1,6 @@
 package com.socialseed.socialuserservice.user.entry.rest.controller;
 import com.socialseed.socialuserservice.user.application.usecase.UserUseCases;
 import com.socialseed.socialuserservice.user.domain.model.User;
-import com.socialseed.socialuserservice.user.entry.rest.dto.request.PasswordChangeRequest;
 import com.socialseed.socialuserservice.user.entry.rest.dto.request.UserUpdateRequestDTO;
 import com.socialseed.socialuserservice.user.entry.rest.mapper.UserRestMapper;
 import com.socialseed.socialuserservice.user.entry.rest.dto.request.UserCreateRequestDTO;
@@ -29,14 +28,14 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserCreateRequestDTO dto) {
         User user = UserRestMapper.toDomain(dto);
-        User saved = userUseCases.createUser().execute(user);
+        User saved = userUseCases.createUser(user);
         return ResponseEntity.ok(UserRestMapper.toResponse(saved));
     }
 
     // GET BY ID
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable UUID id) {
-        return userUseCases.getUserById().execute(id)
+        return userUseCases.getUserById(id)
                 .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -44,7 +43,7 @@ public class UserController {
     // LIST
     @GetMapping
     public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
-        List<User> users = userUseCases.getAllUsers().execute();
+        List<User> users = userUseCases.getAllUsers();
         if (users == null || users.isEmpty()) {
             return ResponseEntity.noContent().build(); // 204 No Content
         }
@@ -60,21 +59,14 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<Void> updateUser(@PathVariable UUID id, @RequestBody @Valid UserUpdateRequestDTO request) {
         User updated = UserRestMapper.UpdatetoDomain(request);
-        userUseCases.updateUser().execute(id, updated);
+        userUseCases.updateUser(id, updated);
         return ResponseEntity.noContent().build();
     }
 
     // DELETE
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
-        userUseCases.deleteUser().execute(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    // CHANGE PASSWORD
-    @PostMapping("/me/password/change")
-    public ResponseEntity<Void> changePassword(@RequestBody @Valid PasswordChangeRequest request) {
-        userUseCases.changeUserPassword().execute(UUID.fromString(request.id()), request.currentPassword(), request.newPassword());
+        userUseCases.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
 }

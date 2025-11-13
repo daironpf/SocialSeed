@@ -1,6 +1,6 @@
 package com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j;
 
-import com.socialseed.socialuserservice.user.infrastructure.persistence.SpringDataUserRepository;
+import com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.repository.SocialUserNeo4jRepository;
 import com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.mapper.UserNeo4jMapper;
 import com.socialseed.socialuserservice.user.domain.model.User;
 import com.socialseed.socialuserservice.user.domain.repository.UserRepository;
@@ -14,55 +14,54 @@ import java.util.stream.Collectors;
 @Component
 public class Neo4jSocialUserRepositoryAdapter implements UserRepository {
 
-    private final SpringDataUserRepository springDataUserRepository;
+    private final SocialUserNeo4jRepository socialUserNeo4jRepository;
 
-    public Neo4jSocialUserRepositoryAdapter(SpringDataUserRepository springDataUserRepository) {
-        this.springDataUserRepository = springDataUserRepository;
+    public Neo4jSocialUserRepositoryAdapter(SocialUserNeo4jRepository springDataUserRepository) {
+        this.socialUserNeo4jRepository = springDataUserRepository;
     }
 
     @Override
     public User save(User user) {
         var node = UserNeo4jMapper.toNode(user);
-        System.out.println("RolesInNode: "+node.getRoles());
-        return UserNeo4jMapper.toDomain(springDataUserRepository.save(node));
+        return UserNeo4jMapper.toDomain(socialUserNeo4jRepository.save(node));
     }
 
     @Override
     public Optional<User> findById(UUID id) {
-        return springDataUserRepository.findById(id)
+        return socialUserNeo4jRepository.findById(id)
                 .map(UserNeo4jMapper::toDomain);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return springDataUserRepository.findByEmail(email)
+        return socialUserNeo4jRepository.findByEmail(email)
                 .map(UserNeo4jMapper::toDomain);
     }
 
     @Override
     public List<User> findAll() {
-        return springDataUserRepository.findAll().stream()
+        return socialUserNeo4jRepository.findAll().stream()
                 .map(UserNeo4jMapper::toDomain)
                 .collect(Collectors.toList());
     }
 
     @Override
     public void deleteById(UUID id) {
-        springDataUserRepository.deleteById(id);
+        socialUserNeo4jRepository.deleteById(id);
     }
 
     @Override
     public boolean existByEmail(String email) {
-        return springDataUserRepository.existByEmail(email);
+        return socialUserNeo4jRepository.existByEmail(email);
     }
 
     @Override
     public boolean existByUsername(String username) {
-        return springDataUserRepository.existByUserName(username);
+        return socialUserNeo4jRepository.existByUserName(username);
     }
 
     @Override
     public boolean existByUserId(UUID id) {
-        return springDataUserRepository.existByUserId(id);
+        return socialUserNeo4jRepository.existByUserId(id);
     }
 }

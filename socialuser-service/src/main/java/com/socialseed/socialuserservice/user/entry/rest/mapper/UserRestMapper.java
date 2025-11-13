@@ -14,7 +14,6 @@ public class UserRestMapper {
                 .id(null)                 // id se asignará en el servicio
                 .username(req.username())
                 .email(req.email())
-                .password(null)
                 .fullName(req.fullName())
                 .build();
     }
@@ -25,7 +24,6 @@ public class UserRestMapper {
                 .id(null)                 // id se asignará en el servicio
                 .username(req.username())
                 .email(req.email())
-                .password(req.password()) // sin hash por ahora
                 .fullName(req.fullName())
                 .build();
     }
