@@ -70,16 +70,22 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Optional<AuthUser> getUserById(UUID id) {
-        return Optional.empty();
+        return authUserRepository.findById(id);
     }
 
     @Override
     public Optional<AuthUser> getUserByEmail(String email) {
-        return Optional.empty();
+        return authUserRepository.findByEmail(email);
+    }
+
+    @Override
+    public boolean existByUserId(UUID id) {
+        return authUserRepository.existByUserId(id);
     }
 
     @Override
     public void changePassword(UUID userId, String currentPassword, String newPassword) {
+
 
     }
 }

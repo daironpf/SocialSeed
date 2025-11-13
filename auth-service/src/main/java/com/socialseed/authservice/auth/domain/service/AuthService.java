@@ -15,4 +15,5 @@ public interface AuthService {
     Optional<AuthUser> getUserById(UUID id);
     Optional<AuthUser> getUserByEmail(String email);
     void changePassword(UUID userId, String currentPassword, String newPassword);
+    boolean existByUserId(UUID id);
 }
