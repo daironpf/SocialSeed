@@ -1,7 +1,6 @@
-package com.socialseed.socialuserservice.user.entry.rest.dto.request;
+package com.socialseed.authservice.auth.entry.rest.dto;
 
 import jakarta.validation.constraints.NotBlank;
-
 
 /**
  * DTO para el cambio de contraseña.
@@ -15,4 +14,3 @@ public record PasswordChangeRequest(
         String id
 ) {
 }
-

@@ -43,22 +43,19 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthResponseDTO register(RegisterRequestDTO dto, UUID id) {
-        if (authUserRepository.findByEmail(dto.email).isPresent()) {
-            throw new BusinessException(ErrorCode.USER_EMAIL_EXISTS, dto.email);
+    public AuthResponseDTO register(AuthUser authUser, UUID id) {
+        if (authUserRepository.findByEmail(authUser.getEmail()).isPresent()) {
+            throw new BusinessException(ErrorCode.USER_EMAIL_EXISTS, authUser.getEmail());
         }
 
         AuthUser newAuthUser = new AuthUser(
                 id,
-                dto.username,
-                dto.email,
-                passwordEncoder.encode(dto.password)
+                authUser.getUsername(),
+                authUser.getEmail(),
+                passwordEncoder.encode(authUser.getPassword())
         );
 
         authUserRepository.save(newAuthUser);
-
-        // si se registró de forma satisfactoria entonces se crea el nodo del SocialUser en Neo4j
-        // esto luego pasaría a cuando se verifica el usuario y se activa la cuenta entonces se crearia el nodo en Neo4j
 
         String token = jwtProvider.generateToken(newAuthUser.getUsername());
         Set<String> roles = newAuthUser.getRoles(); // asumiendo que tu entidad User tiene un campo roles

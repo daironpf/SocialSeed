@@ -79,6 +79,5 @@ public class AuthUser {
         // 2FA
         this.twoFactorEnabled = false;
         this.twoFactorSecret = "secret";
-
     }
 }

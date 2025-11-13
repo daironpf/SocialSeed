@@ -1,7 +1,7 @@
-package com.socialseed.socialuserservice.user.application.usecase.validation;
+package com.socialseed.authservice.auth.application.usecase.validation;
 
-import com.socialseed.socialuserservice.platform.error.BusinessException;
-import com.socialseed.socialuserservice.platform.error.ErrorCode;
+import com.socialseed.authservice.platform.error.BusinessException;
+import com.socialseed.authservice.platform.error.ErrorCode;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,7 +19,7 @@ public class ChangeUserPasswordValidator {
         this.validationService = validationService;
     }
 
-    @Around(value = "execution(* com.socialseed.socialuserservice.user.application.usecase.ChangeUserPassword.execute(..)) " +
+    @Around(value = "execution(* com.socialseed.authservice.auth.application.usecase.ChangeUserPassword.execute(..)) " +
             "&& args(userId, currentPassword)", argNames = "joinPoint,userId,currentPassword")
     public Object aroundChangeUserPassword(ProceedingJoinPoint joinPoint, UUID userId, String currentPassword) throws Throwable{
         if (!validationService.userExistByUserId(userId)) {

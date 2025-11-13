@@ -10,4 +10,10 @@ public interface AuthUserRepository {
 
     Optional<AuthUser> findById(UUID id);
     Optional<AuthUser> findByEmail(String email);
+
+    boolean existByUserId(UUID id);
+
+    boolean existByUsername(String username);
+
+    boolean existByEmail(String email);
 }

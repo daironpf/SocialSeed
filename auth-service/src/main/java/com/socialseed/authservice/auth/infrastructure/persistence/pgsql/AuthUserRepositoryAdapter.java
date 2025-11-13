@@ -22,13 +22,9 @@ public class AuthUserRepositoryAdapter implements AuthUserRepository {
         this.jpaRepository = jpaRepository;
     }
 
-    // --------------------------
-    // Métodos del puerto
-    // --------------------------
     @Override
     @Transactional
     public AuthUser save(AuthUser authUser) {
-        validateUser(authUser);              // <- valida y completa campos obligatorios
         AuthUserPgsqlEntity entity = AuthUserPgsqlMapper.toEntity(authUser);
         AuthUserPgsqlEntity saved = jpaRepository.save(entity);
         return AuthUserPgsqlMapper.toDomain(saved);
@@ -46,34 +42,18 @@ public class AuthUserRepositoryAdapter implements AuthUserRepository {
                 .map(AuthUserPgsqlMapper::toDomain);
     }
 
-    private void validateUser(AuthUser authUser) {
-        if (authUser.getUsername() == null || authUser.getUsername().trim().isEmpty()) {
-            throw new IllegalArgumentException("Username no puede ser nulo o vacío");
-        }
-        if (authUser.getEmail() == null || authUser.getEmail().trim().isEmpty()) {
-            throw new IllegalArgumentException("Email no puede ser nulo o vacío");
-        }
-        if (authUser.getPassword() == null || authUser.getPassword().trim().isEmpty()) {
-            throw new IllegalArgumentException("Password no puede ser nulo o vacío");
-        }
-        if (authUser.getRoles() == null) {
-            authUser.setRoles(new HashSet<>());
-        }
-        if (authUser.getCreatedAt() == null) {
-            authUser.setCreatedAt(Instant.now());
-        }
-        if (!authUser.isEnabled()) {
-            authUser.setEnabled(true);
-        }
-        if (!authUser.isAccountNonExpired()) {
-            authUser.setAccountNonExpired(true);
-        }
-        if (!authUser.isAccountNonLocked()) {
-            authUser.setAccountNonLocked(true);
-        }
-        if (!authUser.isCredentialsNonExpired()) {
-            authUser.setCredentialsNonExpired(true);
-        }
+    @Override
+    public boolean existByUserId(UUID id) {
+        return jpaRepository.existsById(id);
     }
 
+    @Override
+    public boolean existByUsername(String username) {
+        return jpaRepository.existsByUsername(username);
+    }
+
+    @Override
+    public boolean existByEmail(String email) {
+        return jpaRepository.existsByEmail(email);
+    }
 }
