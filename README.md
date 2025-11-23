@@ -42,8 +42,8 @@ The project uses a graph-oriented data structure to represent relationships betw
 
 Social Seed is built on a **microservices-based backend**, where each component operates independently and communicates via REST or messaging events:
 
-* **Auth Service** — Authentication & authorization using JWT.
-* **User Service** — User registration, profiles, and account data.
+* **Auth Service** — User registration, Authentication & authorization using JWT.
+* **User Service** — User profiles, and account data.
 * **Post Service** — Post creation and retrieval.
 * **Comment Service** — Comments associated with posts.
 * **Reaction Service** — Likes and reactions to posts.
