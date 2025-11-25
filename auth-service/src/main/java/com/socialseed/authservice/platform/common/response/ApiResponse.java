@@ -22,6 +22,10 @@ public record ApiResponse<T>(
         return new ApiResponse<>(200, data, message);
     }
 
+    public static <T> ApiResponse<T> created(T data, String message) {
+        return new ApiResponse<>(201, data, message);
+    }
+
     public static <T> ApiResponse<T> notFound(String message) {
         return new ApiResponse<>(404, null, message);
     }

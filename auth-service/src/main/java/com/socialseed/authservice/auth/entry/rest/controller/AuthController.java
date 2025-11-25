@@ -10,6 +10,7 @@ import com.socialseed.authservice.auth.entry.rest.mapper.AuthRestMapper;
 import com.socialseed.authservice.platform.common.response.ApiResponse;
 import jakarta.validation.Valid;
 import org.springframework.context.MessageSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -46,8 +47,10 @@ public class AuthController {
     public ResponseEntity<ApiResponse<?>> register(@Valid @RequestBody RegisterRequestDTO request, Locale locale) {
         AuthUser authUser = AuthRestMapper.toDomain(request);
         AuthResponseDTO response = authUseCases.register(authUser);
-        return ResponseEntity.ok(
-                ApiResponse.success(
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(
+                    ApiResponse.created(
                         response,
                         messageSource.getMessage("auth.register.success", null, locale)
                 )
