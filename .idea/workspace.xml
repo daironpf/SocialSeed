@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add change password usecases to auth-service and some clean code changes">
-      <change afterPath="$PROJECT_DIR$/api-requests/auth-service/changepassword.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-requests/auth-service/login.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/auth-service/login.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/ChangeUserPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/ChangeUserPassword.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/domain/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/domain/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/service/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/service/AuthServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserReply.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserReply.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserReplyOrBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserReplyOrBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserRequestOrBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserRequestOrBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/SocialUserProto.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/SocialUserProto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/SocialUserServiceGrpc.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/SocialUserServiceGrpc.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +38,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="54-implement-user-registration-use-case" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
@@ -54,7 +62,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/daironpf/SocialSeed.git&quot;,
-    &quot;accountId&quot;: &quot;2a1b5268-45f8-4fc0-a28e-f1e033b910c5&quot;
+    &quot;accountId&quot;: &quot;6298ce06-7e8c-4be7-8979-e12291206761&quot;
   }
 }</component>
   <component name="HttpClientOnboardingState">{
@@ -75,83 +83,83 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Docker.api-gateway.executor": "Run",
-    "Docker.docker-compose.yml.api-gateway: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.auth-db: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.auth-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.kafka-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.neo4j: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.socialseed: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml.socialuser-service: Compose Deployment.executor": "Run",
-    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
-    "Docker.socialgraph-db.executor": "Run",
-    "Docker.socialuser-service.executor": "Run",
-    "Docker.socialuser-service/Dockerfile.executor": "Run",
-    "Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment.executor": "Run",
-    "HTTP Request.All in generated-requests.executor": "Run",
-    "HTTP Request.All in register.executor": "Run",
-    "HTTP Request.AuthServiceApplication | #1.executor": "Run",
-    "HTTP Request.changepassword | Change Password.executor": "Run",
-    "HTTP Request.changepassword-socialuser | Change Password of SocialUser.executor": "Run",
-    "HTTP Request.create-socialuser | Create a new patient entity.executor": "Run",
-    "HTTP Request.create-socialuser | Create a new socialuser entity.executor": "Run",
-    "HTTP Request.delete-patient | Delete an SocialUser.executor": "Run",
-    "HTTP Request.delete-socialuser | Delete an SocialUser.executor": "Run",
-    "HTTP Request.generated-requests | #1.executor": "Run",
-    "HTTP Request.generated-requests | #2.executor": "Run",
-    "HTTP Request.generated-requests | #3.executor": "Run",
-    "HTTP Request.generated-requests | #4.executor": "Run",
-    "HTTP Request.get-patients | GET request to get all patients.executor": "Run",
-    "HTTP Request.get-patients | GET request to get all social user.executor": "Run",
-    "HTTP Request.get-socialusers | #2.executor": "Run",
-    "HTTP Request.get-socialusers | Docker.executor": "Run",
-    "HTTP Request.get-socialusers | GET request to get all social user.executor": "Run",
-    "HTTP Request.get-socialusers | Local.executor": "Run",
-    "HTTP Request.grpc-server-test | #1.executor": "Run",
-    "HTTP Request.login | login.executor": "Run",
-    "HTTP Request.register | Register - Albert Einstein.executor": "Run",
-    "HTTP Request.register | Register.executor": "Run",
-    "HTTP Request.update-patient | Update SocialUser entity.executor": "Run",
-    "HTTP Request.update-socialuser | Update SocialUser entity.executor": "Run",
-    "Maven.api-gateway [clean,install].executor": "Run",
-    "Maven.api-gateway [clean].executor": "Run",
-    "Maven.api-gateway [install].executor": "Run",
-    "Maven.auth-service [clean].executor": "Run",
-    "Maven.auth-service [package].executor": "Run",
-    "Maven.socialuser-service [clean].executor": "Run",
-    "Maven.socialuser-service [compile].executor": "Run",
-    "Maven.socialuser-service [package].executor": "Run",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.ApiGatewayApplication.executor": "Run",
-    "Spring Boot.AuthServiceApplication.executor": "Run",
-    "Spring Boot.SocialuserServiceApplication.executor": "Run",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "junie.onboarding.icon.badge.shown": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/.dev/proyectos/SocialSeed/auth-service/src/main/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "run.configurations.included.in.services": "true",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.api-gateway.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.api-gateway: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.auth-db: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.auth-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.kafka-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.neo4j: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.socialseed: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.socialuser-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.socialgraph-db.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.socialuser-service.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.socialuser-service/Dockerfile.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.All in generated-requests.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.All in register.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.AuthServiceApplication | #1.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.changepassword | Change Password.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.changepassword-socialuser | Change Password of SocialUser.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.create-socialuser | Create a new patient entity.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.create-socialuser | Create a new socialuser entity.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.delete-patient | Delete an SocialUser.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.delete-socialuser | Delete an SocialUser.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #1.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #2.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #3.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.generated-requests | #4.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.get-patients | GET request to get all patients.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.get-patients | GET request to get all social user.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.get-socialusers | #2.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.get-socialusers | Docker.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.get-socialusers | GET request to get all social user.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.get-socialusers | Local.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.grpc-server-test | #1.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.login | login.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.register | Register - Albert Einstein.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.register | Register.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.update-patient | Update SocialUser entity.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.update-socialuser | Update SocialUser entity.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.api-gateway [clean,install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.api-gateway [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.api-gateway [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.auth-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.auth-service [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.socialuser-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.socialuser-service [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.socialuser-service [package].executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.AuthServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.SocialuserServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;112-migrate-legacy-socialuser-module-to-new-socialuser-service-microservice&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/.dev/proyectos/SocialSeed/auth-service/src/main/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -214,7 +222,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.AuthServiceApplication">
+  <component name="RunManager" selected="Spring Boot.SocialuserServiceApplication">
     <configuration name="changepassword | Change Password" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/auth-service/changepassword.http" executionIdentifier="Change Password" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -229,6 +237,12 @@
     </configuration>
     <configuration name="login | login" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/auth-service/login.http" executionIdentifier="login" runType="Run single request">
       <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="api-gateway" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
@@ -352,8 +366,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.26830.84" />
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.26830.84" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
       </set>
     </attachedChunks>
   </component>
@@ -405,6 +419,13 @@
       <workItem from="1763014999054" duration="12617000" />
       <workItem from="1763028647039" duration="139000" />
       <workItem from="1763053481910" duration="1826000" />
+      <workItem from="1764205524553" duration="83000" />
+      <workItem from="1764346296392" duration="442000" />
+      <workItem from="1764346763273" duration="12000" />
+      <workItem from="1764520741587" duration="2348000" />
+      <workItem from="1764601651594" duration="34000" />
+      <workItem from="1764601717618" duration="1287000" />
+      <workItem from="1764603116134" duration="1150000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -767,7 +788,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="HEAD" />
+                        <option value="112-migrate-legacy-socialuser-module-to-new-socialuser-service-microservice" />
                       </list>
                     </value>
                   </entry>
