@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add change password usecases to auth-service and some clean code changes">
-      <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserReply.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserReply.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserReplyOrBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserReplyOrBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserRequestOrBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/CreateUserRequestOrBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/SocialUserProto.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/SocialUserProto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/SocialUserServiceGrpc.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/generated-sources/com/socialseed/socialuserservice/proto/SocialUserServiceGrpc.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +35,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="54-implement-user-registration-use-case" />
+        <entry key="$PROJECT_DIR$" value="112-migrate-legacy-socialuser-module-to-new-socialuser-service-microservice" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -204,10 +199,6 @@
           <value>
             <map>
               <entry key="changepassword | Change Password" value="STOPPED" />
-              <entry key="generated-requests | #2" value="STOPPED" />
-              <entry key="generated-requests | #3" value="STOPPED" />
-              <entry key="get-socialusers | Local" value="STOPPED" />
-              <entry key="login | login" value="STOPPED" />
             </map>
           </value>
         </entry>
@@ -222,20 +213,8 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.SocialuserServiceApplication">
+  <component name="RunManager" selected="Docker.docker-compose.yml.auth-service: Compose Deployment">
     <configuration name="changepassword | Change Password" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/auth-service/changepassword.http" executionIdentifier="Change Password" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="generated-requests | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#2" index="2" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="generated-requests | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#3" index="3" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="get-socialusers | Local" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" executionIdentifier="Local" index="2" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="login | login" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/auth-service/login.http" executionIdentifier="login" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
@@ -287,6 +266,58 @@
           </option>
           <option name="commandLineOptions" value="--network socialseed" />
           <option name="sourceFilePath" value="api-gateway/Dockerfile" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.api-gateway: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="api-gateway" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.auth-db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="auth-db" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.auth-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="auth-service" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.neo4j: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="neo4j" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
         </settings>
       </deployment>
       <method v="2" />
@@ -344,22 +375,22 @@
       <item itemvalue="Docker.api-gateway" />
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
+      <item itemvalue="Docker.docker-compose.yml.api-gateway: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.auth-db: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.auth-service: Compose Deployment" />
+      <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
       <item itemvalue="HTTP Request.changepassword | Change Password" />
-      <item itemvalue="HTTP Request.generated-requests | #3" />
-      <item itemvalue="HTTP Request.generated-requests | #2" />
-      <item itemvalue="HTTP Request.get-socialusers | Local" />
-      <item itemvalue="HTTP Request.login | login" />
       <item itemvalue="Spring Boot.AuthServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.SocialuserServiceApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.auth-service: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.api-gateway: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.auth-db: Compose Deployment" />
         <item itemvalue="HTTP Request.changepassword | Change Password" />
-        <item itemvalue="HTTP Request.login | login" />
-        <item itemvalue="HTTP Request.get-socialusers | Local" />
-        <item itemvalue="HTTP Request.generated-requests | #3" />
-        <item itemvalue="HTTP Request.generated-requests | #2" />
       </list>
     </recent_temporary>
   </component>
