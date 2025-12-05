@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add change password usecases to auth-service and some clean code changes">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add volume for neo4j db">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old code but is good code/src/main/java/com/social/seed/controller/SocialUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/old code but is good code/src/main/java/com/social/seed/controller/SocialUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,7 +200,8 @@
         <entry key="HttpClient.HttpRequestRunConfigurationType">
           <value>
             <map>
-              <entry key="changepassword | Change Password" value="STOPPED" />
+              <entry key="create-socialuser | Create a new socialuser entity" value="STOPPED" />
+              <entry key="get-socialusers | Local" value="STOPPED" />
             </map>
           </value>
         </entry>
@@ -213,8 +216,11 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.auth-service: Compose Deployment">
-    <configuration name="changepassword | Change Password" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/auth-service/changepassword.http" executionIdentifier="Change Password" runType="Run single request">
+  <component name="RunManager" selected="Spring Boot.SocialuserServiceApplication">
+    <configuration name="create-socialuser | Create a new socialuser entity" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" executionIdentifier="Create a new socialuser entity" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="get-socialusers | Local" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" executionIdentifier="Local" index="2" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration default="true" type="JetRunConfigurationType">
@@ -283,19 +289,6 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.auth-db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="auth-db" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration name="docker-compose.yml.auth-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -309,12 +302,12 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.neo4j: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration name="docker-compose.yml.kafka-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
           <option name="services">
             <list>
-              <option value="neo4j" />
+              <option value="kafka-service" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
@@ -376,29 +369,29 @@
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
       <item itemvalue="Docker.docker-compose.yml.api-gateway: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.auth-db: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.auth-service: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
-      <item itemvalue="HTTP Request.changepassword | Change Password" />
+      <item itemvalue="Docker.docker-compose.yml.kafka-service: Compose Deployment" />
+      <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
+      <item itemvalue="HTTP Request.get-socialusers | Local" />
       <item itemvalue="Spring Boot.AuthServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.SocialuserServiceApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.get-socialusers | Local" />
+        <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
+        <item itemvalue="Docker.docker-compose.yml.kafka-service: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.auth-service: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.api-gateway: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.auth-db: Compose Deployment" />
-        <item itemvalue="HTTP Request.changepassword | Change Password" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.27397.103" />
-        <option value="bundled-js-predefined-d6986cc7102b-3aa1da707db6-JavaScript-IU-252.27397.103" />
+        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.28238.7" />
+        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-IU-252.28238.7" />
       </set>
     </attachedChunks>
   </component>
@@ -457,6 +450,9 @@
       <workItem from="1764601651594" duration="34000" />
       <workItem from="1764601717618" duration="1287000" />
       <workItem from="1764603116134" duration="1150000" />
+      <workItem from="1764831184876" duration="2578000" />
+      <workItem from="1764863142474" duration="2961000" />
+      <workItem from="1764902040049" duration="1174000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -802,7 +798,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763028610817</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="add volume for neo4j db">
+      <option name="closed" value="true" />
+      <created>1764697369896</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1764697369896</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -832,7 +836,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add kafka-service" />
     <MESSAGE value="restructuring the project packages for a clearer and cleaner architecture" />
     <MESSAGE value="refactored the validation and error handling" />
     <MESSAGE value="add documentation for social network" />
@@ -857,6 +860,7 @@
     <MESSAGE value="working in grpc connection between auth and socialuser services" />
     <MESSAGE value="remove password from socialuser and clean some code" />
     <MESSAGE value="add change password usecases to auth-service and some clean code changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="add change password usecases to auth-service and some clean code changes" />
+    <MESSAGE value="add volume for neo4j db" />
+    <option name="LAST_COMMIT_MESSAGE" value="add volume for neo4j db" />
   </component>
 </project>
