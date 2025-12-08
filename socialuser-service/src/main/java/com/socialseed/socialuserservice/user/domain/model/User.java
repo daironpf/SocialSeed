@@ -80,8 +80,12 @@ public class User {
         this.status = UserStatus.ACTIVE;
     }
 
-    public void deactivate() {
+    public void goDeactivate() {
         this.status = UserStatus.INACTIVE;
+    }
+
+    public void reActive(){
+        this.status = UserStatus.ACTIVE;
     }
 
     public void delete() {
@@ -98,7 +102,6 @@ public class User {
         }
         this.birthDate = newBirthDate;
     }
-
 
     // Getters
     public UUID getId() { return this.id; }
