@@ -22,6 +22,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="post-service" target="21" />
       <module name="SocialSeed" target="1.5" />
     </bytecodeTargetLevel>
   </component>

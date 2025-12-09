@@ -77,13 +77,13 @@ public class SocialUserController {
      * @param id The ID of the Social User to retrieve.
      * @return ResponseEntity with a ResponseDTO.
      */
-    @GetMapping("/getSocialUserById/{id}")
-    public ResponseEntity<ResponseDTO> getSocialUserById(@PathVariable String id) {
-        ResponseEntity<Object> response = socialUserService.getSocialUserById(id);
-        return ResponseEntity
-                .status(response.getStatusCode())
-                .body((ResponseDTO) response.getBody());
-    }
+//    @GetMapping("/getSocialUserById/{id}")
+//    public ResponseEntity<ResponseDTO> getSocialUserById(@PathVariable String id) {
+//        ResponseEntity<Object> response = socialUserService.getSocialUserById(id);
+//        return ResponseEntity
+//                .status(response.getStatusCode())
+//                .body((ResponseDTO) response.getBody());
+//    }
 
     /**
      * Create a new Social User.
@@ -106,15 +106,15 @@ public class SocialUserController {
      * @param socialUser The updated Social User object.
      * @return ResponseEntity with a ResponseDTO.
      */
-    @PutMapping("/updateSocialUser")
-    public ResponseEntity<ResponseDTO> updateSocialUser(
-            @RequestHeader("userId") String userId,
-            @RequestBody SocialUser socialUser) {
-        ResponseEntity<Object> response = socialUserService.updateSocialUser(userId, socialUser);
-        return ResponseEntity
-                .status(response.getStatusCode())
-                .body((ResponseDTO) response.getBody());
-    }
+//    @PutMapping("/updateSocialUser")
+//    public ResponseEntity<ResponseDTO> updateSocialUser(
+//            @RequestHeader("userId") String userId,
+//            @RequestBody SocialUser socialUser) {
+//        ResponseEntity<Object> response = socialUserService.updateSocialUser(userId, socialUser);
+//        return ResponseEntity
+//                .status(response.getStatusCode())
+//                .body((ResponseDTO) response.getBody());
+//    }
 
     /**
      * Delete a Social User by ID.

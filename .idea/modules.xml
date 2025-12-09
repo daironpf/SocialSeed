@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/auth-service/auth-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/socialuser-service/socialuser-service.iml" filepath="$PROJECT_DIR$/socialuser-service/socialuser-service.iml" />
     </modules>
   </component>
