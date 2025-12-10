@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="add change password usecases to auth-service and some clean code changes">
-      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/kafka/kafka-start.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/kafka/kraft/server.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/kafka/start-kafka.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/infrastructure/kafka/topics-init.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="Add Kafka Server with script for create topics-init.sh">
+      <change beforePath="$PROJECT_DIR$/.idea/data_source_mapping.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/infrastructure/kafka/kraft/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/infrastructure/kafka/kraft/server.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,6 +79,7 @@
     "Docker.docker-compose.yml.auth-db: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.auth-service: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.kafka-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.kafka: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.neo4j: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.socialseed: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.socialuser-service: Compose Deployment.executor": "Run",
@@ -198,7 +194,6 @@
           <value>
             <map>
               <entry key="changepassword | Change Password" value="STOPPED" />
-              <entry key="generated-requests | #2" value="STOPPED" />
               <entry key="generated-requests | #3" value="STOPPED" />
               <entry key="get-socialusers | Local" value="STOPPED" />
               <entry key="login | login" value="STOPPED" />
@@ -762,7 +757,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763028610817</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Add Kafka Server with script for create topics-init.sh">
+      <option name="closed" value="true" />
+      <created>1765347235232</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1765347235232</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -792,7 +795,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add kafka-service" />
     <MESSAGE value="restructuring the project packages for a clearer and cleaner architecture" />
     <MESSAGE value="refactored the validation and error handling" />
     <MESSAGE value="add documentation for social network" />
@@ -817,6 +819,7 @@
     <MESSAGE value="working in grpc connection between auth and socialuser services" />
     <MESSAGE value="remove password from socialuser and clean some code" />
     <MESSAGE value="add change password usecases to auth-service and some clean code changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="add change password usecases to auth-service and some clean code changes" />
+    <MESSAGE value="Add Kafka Server with script for create topics-init.sh" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Kafka Server with script for create topics-init.sh" />
   </component>
 </project>
