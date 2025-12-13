@@ -91,12 +91,12 @@ services:
     ports:
       - "7474:7474"
       - "7687:7687"
-#    restart: always
+    #    restart: always
     environment:
       - NEO4J_AUTH=neo4j/neoSocial
       - NEO4J_server.memory.pagecache.size=1G
     volumes:
-      - D:\db_volumes\socialgraph-db:/var/lib/neo4j/data
+      - socialgraph_data:/var/lib/neo4j/data
     healthcheck:
       # ping via cypher-shell
       test: [ "CMD-SHELL", "echo 'RETURN 1' | cypher-shell -u neo4j -p neoSocial || exit 1" ]
@@ -141,6 +141,8 @@ services:
 volumes:
   maven_repo:
   kafka_data:
+  socialgraph_data:
+    driver: local
 
 networks:
   net:
