@@ -10,22 +10,18 @@ public class UserRestMapper {
 
     public static User UpdatetoDomain(UserUpdateRequestDTO req) {
 
-        return User.builder()
-                .id(null)                 // id se asignará en el servicio
-                .username(req.username())
-                .email(req.email())
-                .fullName(req.fullName())
-                .build();
+        return User.create(
+                        req.username(),
+                        req.email()
+        );
     }
 
     public static User toDomain(UserCreateRequestDTO req) {
 
-        return User.builder()
-                .id(null)                 // id se asignará en el servicio
-                .username(req.username())
-                .email(req.email())
-                .fullName(req.fullName())
-                .build();
+        return User.create(
+                req.username(),
+                req.email()
+        );
     }
 
     public static UserResponseDTO toResponse(User user) {

@@ -139,6 +139,8 @@ services:
       start_period: 20s
 
 volumes:
+  socialgraph_data:
+    driver: local
   maven_repo:
   kafka_data:
   socialgraph_data:
