@@ -143,8 +143,6 @@ volumes:
     driver: local
   maven_repo:
   kafka_data:
-  socialgraph_data:
-    driver: local
 
 networks:
   net:
