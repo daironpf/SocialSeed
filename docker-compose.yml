@@ -91,7 +91,7 @@ services:
     ports:
       - "7474:7474"
       - "7687:7687"
-#    restart: always
+    #    restart: always
     environment:
       - NEO4J_AUTH=neo4j/neoSocial
       - NEO4J_server.memory.pagecache.size=1G
@@ -107,30 +107,32 @@ services:
       - net
 
   # Kafka Server-Service
-  kafka-service:
-    image: apache/kafka:4.0.1
-    container_name: kafka-service
+  kafka:
+    image: apache/kafka:4.1.1
+    container_name: kafka
+    hostname: kafka
     networks:
       - net
     ports:
       - "9092:9092"
     environment:
-      # KRaft mode (no Zookeeper)
-      KAFKA_NODE_ID: 0
+      KAFKA_NODE_ID: 1
       KAFKA_PROCESS_ROLES: broker,controller
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT
       KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka-service:9092
-      KAFKA_CONTROLLER_QUORUM_VOTERS: 0@kafka-service:9093
-      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LOG_DIRS: /var/lib/kafka/data
       KAFKA_HEAP_OPTS: -Xmx512M -Xms512M
-      KAFKA_LOG_DIRS: /tmp/kafka-combined.logs
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+    volumes:
+      - kafka_data:/var/lib/kafka/data
+      - ./infrastructure/kafka/kraft/server.properties:/opt/kafka/config/kraft/server.properties
+      - ./infrastructure/kafka/topics-init.sh:/scripts/topics-init.sh
+      - ./infrastructure/kafka/start-kafka.sh:/scripts/start-kafka.sh
+    entrypoint: ["/scripts/start-kafka.sh"]
     healthcheck:
-      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka-service:9092 --list >/dev/null 2>&1"]
+      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --list >/dev/null 2>&1"]
       interval: 10s
       timeout: 5s
       retries: 20
@@ -140,6 +142,9 @@ volumes:
   socialgraph_data:
     driver: local
   maven_repo:
+  kafka_data:
+  socialgraph_data:
+    driver: local
 
 networks:
   net:

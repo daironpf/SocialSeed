@@ -1,7 +1,6 @@
 package com.socialseed.authservice.auth.application.usecase.validation;
 
 import com.socialseed.authservice.auth.domain.model.AuthUser;
-import com.socialseed.authservice.auth.entry.rest.dto.AuthResponseDTO;
 import com.socialseed.authservice.platform.error.BusinessException;
 import com.socialseed.authservice.platform.error.ErrorCode;
 import org.aspectj.lang.ProceedingJoinPoint;

@@ -1,0 +1,12 @@
+syntax = "proto3";
+package com.socialseed.auth;
+
+option java_multiple_files = true;
+
+// Mensaje enviado al topic: auth.user.registered
+message AuthUserRegistered {
+  string userId = 1;
+  string email = 2;
+  string username = 3;
+  int64 createdAt = 4;   // Timestamp en epoch millis
+}

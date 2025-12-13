@@ -4,11 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="move the oldcode of socialuser">
-      <change afterPath="$PROJECT_DIR$/post-service/pom.xml" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="update volume for neo4j db service in docker-compose.yml">
+      <change afterPath="$PROJECT_DIR$/.idea/data_source_mapping.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/domain/event/UserRegisteredEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/domain/repository/UserRegisteredEventPublisher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/config/KafkaProducerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaUserRegisteredProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/proto/AuthUserRegistered.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/service/AuthServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/service/AuthServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,19 +35,14 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Exception" />
-        <option value="Record" />
-        <option value="Interface" />
         <option value="HTTP Request" />
         <option value="Class" />
+        <option value="Record" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="112-migrate-legacy-socialuser-module-to-new-socialuser-service-microservice" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
   </component>
@@ -85,6 +90,7 @@
     &quot;Docker.docker-compose.yml.auth-db: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.auth-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.kafka-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;Docker.docker-compose.yml.kafka: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.neo4j: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.socialseed: Compose Deployment.executor&quot;: &quot;Run&quot;,
     &quot;Docker.docker-compose.yml.socialuser-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
@@ -122,7 +128,13 @@
     &quot;Maven.api-gateway [clean].executor&quot;: &quot;Run&quot;,
     &quot;Maven.api-gateway [install].executor&quot;: &quot;Run&quot;,
     &quot;Maven.auth-service [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.auth-service [compile].executor&quot;: &quot;Run&quot;,
     &quot;Maven.auth-service [package].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.kafka-proto-emitter [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.kafka-proto-emitter [compile].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.probrando-kafkaemiter [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.probrando-kafkaemiter [install].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.probrando-kafkaemiter [package].executor&quot;: &quot;Run&quot;,
     &quot;Maven.socialuser-service [clean].executor&quot;: &quot;Run&quot;,
     &quot;Maven.socialuser-service [compile].executor&quot;: &quot;Run&quot;,
     &quot;Maven.socialuser-service [package].executor&quot;: &quot;Run&quot;,
@@ -137,14 +149,15 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.AuthServiceApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Spring Boot.ProbrandoKafkaemiterApplication.executor&quot;: &quot;Run&quot;,
     &quot;Spring Boot.SocialuserServiceApplication.executor&quot;: &quot;Run&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;112-migrate-legacy-socialuser-module-to-new-socialuser-service-microservice&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;54-implement-user-registration-use-case&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/.dev/proyectos/SocialSeed/auth-service/src/main/resources&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/dairon/proyectos/SocialSeed/auth-service/src/main/proto&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -160,20 +173,22 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/auth-service/src/main/proto" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="D:\.dev\proyectos\SocialSeed\auth-service\src\main\resources" />
       <recent name="D:\.dev\proyectos\SocialSeed\auth-service\src\main\java\com\socialseed\authservice" />
       <recent name="D:\.dev\proyectos\SocialSeed\auth-service\src\main\proto" />
-      <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main" />
-      <recent name="D:\.dev\proyectos\SocialSeed\auth-service" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/socialuser-service/src/main/old_code" />
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\java\com\socialseed\socialuserservice\shared\response" />
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\java\com\socialseed\socialuserservice\shared" />
       <recent name="D:\.dev\proyectos\SocialSeed" />
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\test\java\com\socialseed\socialuserservice" />
+      <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\java\com\socialseed\socialuserservice" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.socialseed.authservice.auth.infrastructure.kafka.producer" />
+      <recent name="com.socialseed.authservice.auth.infrastructure.kafka.config" />
       <recent name="com.socialseed.authservice.auth.application.usecase.validation" />
       <recent name="com.socialseed.authservice.auth.entry.rest.mapper" />
       <recent name="com.socialseed.socialuserservice.shared.exception" />
@@ -195,14 +210,6 @@
     </option>
     <option name="configurationStatuses">
       <map>
-        <entry key="HttpClient.HttpRequestRunConfigurationType">
-          <value>
-            <map>
-              <entry key="create-socialuser | Create a new socialuser entity" value="STOPPED" />
-              <entry key="get-socialusers | Local" value="STOPPED" />
-            </map>
-          </value>
-        </entry>
         <entry key="SpringBootApplicationConfigurationType">
           <value>
             <map>
@@ -214,18 +221,18 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.SocialuserServiceApplication">
-    <configuration name="create-socialuser | Create a new socialuser entity" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/create-socialuser.http" executionIdentifier="Create a new socialuser entity" runType="Run single request">
+  <component name="RunManager" selected="Spring Boot.AuthServiceApplication">
+    <configuration name="generated-requests | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" executionIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="get-socialusers | Local" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" executionIdentifier="Local" index="2" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="api-gateway" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
+    <configuration name="register | Register - Albert Einstein" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/auth-service/register.http" executionIdentifier="Register - Albert Einstein" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="register | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/auth-service/register.http" executionIdentifier="#2" index="2" runType="Run single request">
+      <method v="2" />
     </configuration>
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
@@ -237,6 +244,13 @@
     <configuration name="AuthServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="auth-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.socialseed.authservice.AuthServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ProbrandoKafkaemiterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="probrando-kafkaemiter" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.socialseed.probrandokafkaemiter.ProbrandoKafkaemiterApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -274,38 +288,12 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.api-gateway: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+    <configuration name="docker-compose.yml.neo4j: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
           <option name="services">
             <list>
-              <option value="api-gateway" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.auth-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="auth-service" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.kafka-service: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="kafka-service" />
+              <option value="neo4j" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
@@ -366,22 +354,23 @@
       <item itemvalue="Docker.api-gateway" />
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
-      <item itemvalue="Docker.docker-compose.yml.api-gateway: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.auth-service: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.kafka-service: Compose Deployment" />
-      <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
+      <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
+      <item itemvalue="HTTP Request.register | #2" />
+      <item itemvalue="HTTP Request.register | Register - Albert Einstein" />
+      <item itemvalue="HTTP Request.generated-requests | #1" />
       <item itemvalue="HTTP Request.get-socialusers | Local" />
+      <item itemvalue="Spring Boot.ProbrandoKafkaemiterApplication" />
       <item itemvalue="Spring Boot.AuthServiceApplication" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.SocialuserServiceApplication" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.register | #2" />
+        <item itemvalue="HTTP Request.register | Register - Albert Einstein" />
         <item itemvalue="HTTP Request.get-socialusers | Local" />
-        <item itemvalue="HTTP Request.create-socialuser | Create a new socialuser entity" />
-        <item itemvalue="Docker.docker-compose.yml.kafka-service: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.auth-service: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.api-gateway: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
+        <item itemvalue="HTTP Request.generated-requests | #1" />
       </list>
     </recent_temporary>
   </component>
@@ -441,19 +430,10 @@
       <workItem from="1763014999054" duration="12617000" />
       <workItem from="1763028647039" duration="139000" />
       <workItem from="1763053481910" duration="1826000" />
-      <workItem from="1764205524553" duration="83000" />
-      <workItem from="1764346296392" duration="442000" />
-      <workItem from="1764346763273" duration="12000" />
-      <workItem from="1764520741587" duration="2348000" />
-      <workItem from="1764601651594" duration="34000" />
-      <workItem from="1764601717618" duration="1287000" />
-      <workItem from="1764603116134" duration="1150000" />
-      <workItem from="1764831184876" duration="2578000" />
-      <workItem from="1764863142474" duration="2961000" />
-      <workItem from="1764902040049" duration="1244000" />
-      <workItem from="1765147292832" duration="737000" />
-      <workItem from="1765219949867" duration="9125000" />
-      <workItem from="1765308646138" duration="123000" />
+      <workItem from="1765509880000" duration="6130000" />
+      <workItem from="1765521380351" duration="3574000" />
+      <workItem from="1765591291631" duration="5958000" />
+      <workItem from="1765597486831" duration="1228000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -799,47 +779,31 @@
       <option name="project" value="LOCAL" />
       <updated>1763028610817</updated>
     </task>
-    <task id="LOCAL-00044" summary="add volume for neo4j db">
+    <task id="LOCAL-00044" summary="Add Kafka Server with script for create topics-init.sh">
       <option name="closed" value="true" />
-      <created>1764697369896</created>
+      <created>1765347235232</created>
       <option name="number" value="00044" />
       <option name="presentableId" value="LOCAL-00044" />
       <option name="project" value="LOCAL" />
-      <updated>1764697369896</updated>
+      <updated>1765347235232</updated>
     </task>
-    <task id="LOCAL-00045" summary="working in model">
+    <task id="LOCAL-00045" summary="change the kafka listener to connect intellij and vscode plugins">
       <option name="closed" value="true" />
-      <created>1764903249912</created>
+      <created>1765347784491</created>
       <option name="number" value="00045" />
       <option name="presentableId" value="LOCAL-00045" />
       <option name="project" value="LOCAL" />
-      <updated>1764903249912</updated>
+      <updated>1765347784491</updated>
     </task>
-    <task id="LOCAL-00046" summary="Implemented SocialUser domain aggregate model. Closes #113">
+    <task id="LOCAL-00046" summary="update volume for neo4j db service in docker-compose.yml">
       <option name="closed" value="true" />
-      <created>1765225864834</created>
+      <created>1765592344017</created>
       <option name="number" value="00046" />
       <option name="presentableId" value="LOCAL-00046" />
       <option name="project" value="LOCAL" />
-      <updated>1765225864834</updated>
+      <updated>1765592344017</updated>
     </task>
-    <task id="LOCAL-00047" summary="feat(domain): implement SocialUser aggregate logic&#10;&#10;- Add UserStatus enum&#10;- Add invariants and validation&#10;- Add factory create() method&#10;- Add state transitions (active, vacation, deleted)&#10;&#10;Closes #113">
-      <option name="closed" value="true" />
-      <created>1765226340009</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1765226340009</updated>
-    </task>
-    <task id="LOCAL-00048" summary="move the oldcode of socialuser">
-      <option name="closed" value="true" />
-      <created>1765228224118</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1765228224118</updated>
-    </task>
-    <option name="localTasksCounter" value="49" />
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -856,7 +820,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="112-migrate-legacy-socialuser-module-to-new-socialuser-service-microservice" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -869,6 +833,8 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="add documentation for social network" />
+    <MESSAGE value="&gt; Working on password change validation for the user&#10;&gt; Ihis use case will be moved to the auth service where it belongs" />
     <MESSAGE value="add auth-db to project" />
     <MESSAGE value="minor changes in intelliJ" />
     <MESSAGE value="working in auth-service" />
@@ -889,11 +855,9 @@
     <MESSAGE value="working in grpc connection between auth and socialuser services" />
     <MESSAGE value="remove password from socialuser and clean some code" />
     <MESSAGE value="add change password usecases to auth-service and some clean code changes" />
-    <MESSAGE value="add volume for neo4j db" />
-    <MESSAGE value="working in model" />
-    <MESSAGE value="Implemented SocialUser domain aggregate model. Closes #113" />
-    <MESSAGE value="feat(domain): implement SocialUser aggregate logic&#10;&#10;- Add UserStatus enum&#10;- Add invariants and validation&#10;- Add factory create() method&#10;- Add state transitions (active, vacation, deleted)&#10;&#10;Closes #113" />
-    <MESSAGE value="move the oldcode of socialuser" />
-    <option name="LAST_COMMIT_MESSAGE" value="move the oldcode of socialuser" />
+    <MESSAGE value="Add Kafka Server with script for create topics-init.sh" />
+    <MESSAGE value="change the kafka listener to connect intellij and vscode plugins" />
+    <MESSAGE value="update volume for neo4j db service in docker-compose.yml" />
+    <option name="LAST_COMMIT_MESSAGE" value="update volume for neo4j db service in docker-compose.yml" />
   </component>
 </project>
