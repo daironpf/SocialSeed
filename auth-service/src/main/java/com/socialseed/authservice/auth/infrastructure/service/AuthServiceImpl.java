@@ -1,13 +1,16 @@
 package com.socialseed.authservice.auth.infrastructure.service;
 
 import com.socialseed.authservice.auth.config.jwt.JWTProvider;
+import com.socialseed.authservice.auth.domain.event.UserRegisteredEvent;
 import com.socialseed.authservice.auth.domain.model.AuthUser;
 import com.socialseed.authservice.auth.domain.repository.AuthUserRepository;
+import com.socialseed.authservice.auth.domain.repository.UserRegisteredEventPublisher;
 import com.socialseed.authservice.auth.domain.service.AuthService;
 import com.socialseed.authservice.auth.entry.rest.dto.AuthResponseDTO;
 import com.socialseed.authservice.auth.entry.rest.dto.RegisterRequestDTO;
 import com.socialseed.authservice.platform.error.BusinessException;
 import com.socialseed.authservice.platform.error.ErrorCode;
+import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +23,13 @@ public class AuthServiceImpl implements AuthService {
     private final AuthUserRepository authUserRepository;
     private final PasswordEncoder passwordEncoder;
     private final JWTProvider jwtProvider;
+    private final UserRegisteredEventPublisher eventPublisher;
 
-    public AuthServiceImpl(AuthUserRepository authUserRepository, PasswordEncoder passwordEncoder, JWTProvider jwtProvider) {
+    public AuthServiceImpl(AuthUserRepository authUserRepository, PasswordEncoder passwordEncoder, JWTProvider jwtProvider, UserRegisteredEventPublisher eventPublisher) {
         this.authUserRepository = authUserRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
+        this.eventPublisher = eventPublisher;
     }
 
     @Override
@@ -42,11 +47,9 @@ public class AuthServiceImpl implements AuthService {
         return new AuthResponseDTO(token, roles);
     }
 
+    @Transactional
     @Override
     public AuthResponseDTO register(AuthUser authUser, UUID id) {
-        if (authUserRepository.findByEmail(authUser.getEmail()).isPresent()) {
-            throw new BusinessException(ErrorCode.USER_EMAIL_EXISTS, authUser.getEmail());
-        }
 
         AuthUser newAuthUser = new AuthUser(
                 id,
@@ -57,6 +60,16 @@ public class AuthServiceImpl implements AuthService {
 
         authUserRepository.save(newAuthUser);
 
+        // Emit to Kafka Server
+        UserRegisteredEvent event = new UserRegisteredEvent(
+                id,
+                authUser.getEmail(),
+                authUser.getEmail(),
+                System.currentTimeMillis()
+        );
+        eventPublisher.publish(event);
+
+        // Generate Token
         String token = jwtProvider.generateToken(newAuthUser.getUsername());
         Set<String> roles = newAuthUser.getRoles(); // asumiendo que tu entidad User tiene un campo roles
 

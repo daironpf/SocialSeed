@@ -27,6 +27,18 @@ spring:
       channels:
         user:
           address: 'static://localhost:9090'
+  # Kafka emiter
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
+    properties:
+      spring.json.add.type.headers: false
+
+kafka:
+  topic:
+    auth-user-registered: auth.user.registered
 
 jwt:
   secret: "mi-super-clave-ultra-segura-de-64-caracteres-2025-1234567890"
