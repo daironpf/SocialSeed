@@ -15,33 +15,37 @@ import java.util.stream.Collectors;
 public class Neo4jSocialUserRepositoryAdapter implements UserRepository {
 
     private final SocialUserNeo4jRepository socialUserNeo4jRepository;
+    private final UserNeo4jMapper userNeo4jMapper;
 
-    public Neo4jSocialUserRepositoryAdapter(SocialUserNeo4jRepository springDataUserRepository) {
-        this.socialUserNeo4jRepository = springDataUserRepository;
+    public Neo4jSocialUserRepositoryAdapter(SocialUserNeo4jRepository socialUserNeo4jRepository,
+                                            UserNeo4jMapper userNeo4jMapper) {
+        this.socialUserNeo4jRepository = socialUserNeo4jRepository;
+        this.userNeo4jMapper = userNeo4jMapper;
     }
 
     @Override
     public User save(User user) {
-        var node = UserNeo4jMapper.toNode(user);
-        return UserNeo4jMapper.toDomain(socialUserNeo4jRepository.save(node));
+        var entity = userNeo4jMapper.toEntity(user);
+        var savedEntity = socialUserNeo4jRepository.save(entity);
+        return userNeo4jMapper.toDomain(savedEntity);
     }
 
     @Override
     public Optional<User> findById(UUID id) {
         return socialUserNeo4jRepository.findById(id)
-                .map(UserNeo4jMapper::toDomain);
+                .map(userNeo4jMapper::toDomain);
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
         return socialUserNeo4jRepository.findByEmail(email)
-                .map(UserNeo4jMapper::toDomain);
+                .map(userNeo4jMapper::toDomain);
     }
 
     @Override
     public List<User> findAll() {
         return socialUserNeo4jRepository.findAll().stream()
-                .map(UserNeo4jMapper::toDomain)
+                .map(userNeo4jMapper::toDomain)
                 .collect(Collectors.toList());
     }
 
