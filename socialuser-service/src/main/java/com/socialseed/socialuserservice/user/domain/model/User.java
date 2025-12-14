@@ -11,7 +11,7 @@ public class User {
     private String email;
     private String fullName;
     private LocalDate birthDate;
-    private String language;
+    private UserLanguage language;
     private String profileImage;
     private String bio;
 
@@ -22,7 +22,7 @@ public class User {
                  String email,
                  String fullName,
                  LocalDate birthDate,
-                 String language,
+                 UserLanguage language,
                  String profileImage,
                  String bio,
                  UserStatus status) {
@@ -32,7 +32,7 @@ public class User {
         this.email = validateRequired(email, "email");
         this.fullName = fullName;
         this.birthDate = birthDate;
-        this.language = language;
+        this.language = Objects.requireNonNull(language, "language is required");
         this.profileImage = profileImage;
         this.bio = bio;
         this.status = status == null ? UserStatus.ACTIVE : status;
@@ -44,7 +44,7 @@ public class User {
                 username, email,
                 null,
                 null,
-                null,
+                UserLanguage.EN,
                 null,
                 null,
                 UserStatus.ACTIVE
@@ -103,6 +103,10 @@ public class User {
         this.birthDate = newBirthDate;
     }
 
+    public void changeLanguage(UserLanguage newLanguage) {
+        this.language = Objects.requireNonNull(newLanguage, "language is required");
+    }
+
     // Getters
     public UUID getId() { return this.id; }
     public String getUsername() { return this.username; }
@@ -111,4 +115,6 @@ public class User {
     public String getBio() { return this.bio; }
     public UserStatus getStatus() { return this.status; }
     public String getEmail() { return this.email; }
+    public UserLanguage getLanguage() { return this.language; }
+    public String getProfileImage() { return this.profileImage; }
 }

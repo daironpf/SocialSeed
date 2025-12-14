@@ -21,11 +21,10 @@ public class SocialUserGrpcServiceImpl extends SocialUserServiceGrpc.SocialUserS
 
     @Override
     public void createUser(CreateUserRequest request, StreamObserver<CreateUserReply> responseObserver) {
-        User newuser = User.builder()
-                .id(null)
-                .username(request.getUsername())
-                .email(request.getEmail())
-                .build();
+        User newuser = User.create(                
+                request.getUsername(),
+                request.getEmail()
+            );
 
         User saved = userUseCases.createUser(newuser);
         // crear nodo de usuario
