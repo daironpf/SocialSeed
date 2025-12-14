@@ -1,28 +1,11 @@
 package com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.mapper;
 
-import com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.entity.UserNeo4jEntity;
 import com.socialseed.socialuserservice.user.domain.model.User;
+import com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.entity.UserNeo4jEntity;
 
-public class UserNeo4jMapper {
-    private UserNeo4jMapper() {
-        // Clase de utilidad, no instanciable
-    }
+public interface UserNeo4jMapper {
 
-    public static UserNeo4jEntity toNode(User user) {
-        return UserNeo4jEntity.builder()
-                .id(user.getId())
-                .username(user.getUsername())
-                .email(user.getEmail())
-                .fullName(user.getFullName())
-                .build();
-    }
+    UserNeo4jEntity toEntity(User domain);
 
-    public static User toDomain(UserNeo4jEntity node) {
-        return User.builder()
-                .id(node.getId())
-                .username(node.getUsername())
-                .email(node.getEmail())
-                .fullName(node.getFullName())
-                .build();
-    }
+    User toDomain(UserNeo4jEntity entity);
 }

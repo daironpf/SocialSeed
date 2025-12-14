@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.google.errorprone.annotations.Keep;
+
 public class User {
 
     private final UUID id;
@@ -50,6 +52,42 @@ public class User {
                 UserStatus.ACTIVE
         );
     }
+
+    /* The goal is to reconstruct a domain entity from persisted data without triggering creation rules or validation logic that are only meant for new users.
+
+        Example scenario:
+        You have a UserNeo4jEntity loaded from Neo4j.
+        You need a User instance for your domain logic or use cases.
+        You cannot use User.create(...) because that generates a new ID and applies business rules for a new user.
+        rehydrate allows you to:
+        Pass the existing ID, status, language, etc.
+        Restore the entity exactly as it exists in the database.
+        Keep your domain pure and consistent.
+    */
+    public static User rehydrate(
+            UUID id,
+            String username,
+            String email,
+            String fullName,
+            LocalDate birthDate,
+            UserLanguage language,
+            String profileImage,
+            String bio,
+            UserStatus status
+        ) {
+        return new User(
+            id,
+            username,
+            email,
+            fullName,
+            birthDate,
+            language,
+            profileImage,
+            bio,
+            status
+        );
+    }
+
 
     private static String validateRequired(String value, String field) {
         if (value == null || value.isBlank()) {
