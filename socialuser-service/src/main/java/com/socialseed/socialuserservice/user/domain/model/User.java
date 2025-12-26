@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.google.errorprone.annotations.Keep;
+
 public class User {
 
     private final UUID id;
@@ -11,7 +13,7 @@ public class User {
     private String email;
     private String fullName;
     private LocalDate birthDate;
-    private String language;
+    private UserLanguage language;
     private String profileImage;
     private String bio;
 
@@ -22,7 +24,7 @@ public class User {
                  String email,
                  String fullName,
                  LocalDate birthDate,
-                 String language,
+                 UserLanguage language,
                  String profileImage,
                  String bio,
                  UserStatus status) {
@@ -32,7 +34,7 @@ public class User {
         this.email = validateRequired(email, "email");
         this.fullName = fullName;
         this.birthDate = birthDate;
-        this.language = language;
+        this.language = Objects.requireNonNull(language, "language is required");
         this.profileImage = profileImage;
         this.bio = bio;
         this.status = status == null ? UserStatus.ACTIVE : status;
@@ -44,12 +46,48 @@ public class User {
                 username, email,
                 null,
                 null,
-                null,
+                UserLanguage.EN,
                 null,
                 null,
                 UserStatus.ACTIVE
         );
     }
+
+    /* The goal is to reconstruct a domain entity from persisted data without triggering creation rules or validation logic that are only meant for new users.
+
+        Example scenario:
+        You have a UserNeo4jEntity loaded from Neo4j.
+        You need a User instance for your domain logic or use cases.
+        You cannot use User.create(...) because that generates a new ID and applies business rules for a new user.
+        rehydrate allows you to:
+        Pass the existing ID, status, language, etc.
+        Restore the entity exactly as it exists in the database.
+        Keep your domain pure and consistent.
+    */
+    public static User rehydrate(
+            UUID id,
+            String username,
+            String email,
+            String fullName,
+            LocalDate birthDate,
+            UserLanguage language,
+            String profileImage,
+            String bio,
+            UserStatus status
+        ) {
+        return new User(
+            id,
+            username,
+            email,
+            fullName,
+            birthDate,
+            language,
+            profileImage,
+            bio,
+            status
+        );
+    }
+
 
     private static String validateRequired(String value, String field) {
         if (value == null || value.isBlank()) {
@@ -103,6 +141,10 @@ public class User {
         this.birthDate = newBirthDate;
     }
 
+    public void changeLanguage(UserLanguage newLanguage) {
+        this.language = Objects.requireNonNull(newLanguage, "language is required");
+    }
+
     // Getters
     public UUID getId() { return this.id; }
     public String getUsername() { return this.username; }
@@ -111,4 +153,6 @@ public class User {
     public String getBio() { return this.bio; }
     public UserStatus getStatus() { return this.status; }
     public String getEmail() { return this.email; }
+    public UserLanguage getLanguage() { return this.language; }
+    public String getProfileImage() { return this.profileImage; }
 }

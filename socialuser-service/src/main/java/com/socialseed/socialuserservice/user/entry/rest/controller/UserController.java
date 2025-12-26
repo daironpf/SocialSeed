@@ -72,13 +72,13 @@ public class UserController {
     //endregion
 
     //region CRUD
-    // CREATE
-    @PostMapping
-    public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserCreateRequestDTO dto) {
-        User user = UserRestMapper.toDomain(dto);
-        User saved = userUseCases.createUser(user);
-        return ResponseEntity.ok(UserRestMapper.toResponse(saved));
-    }
+    // CREATE this only take action in admin mode, then now will be commented out
+    // @PostMapping
+    // public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserCreateRequestDTO dto) {
+    //     User user = UserRestMapper.toDomain(dto);
+    //     User saved = userUseCases.createUser(user);
+    //     return ResponseEntity.ok(UserRestMapper.toResponse(saved));
+    // }
 
     // GET BY ID
     /**

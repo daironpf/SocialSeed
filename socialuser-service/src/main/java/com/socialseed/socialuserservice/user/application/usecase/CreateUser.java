@@ -15,9 +15,6 @@ public class CreateUser {
     }
 
     public User execute(User user) {
-        if (user.getId() == null) {
-            user.setId(UUID.randomUUID());
-        }
         return userRepository.save(user);
     }
 }
