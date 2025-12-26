@@ -15,9 +15,9 @@ public class UpdateUser {
     }
 
     public void execute(UUID id, User updatedUser) {
-        userRepository.findById(id).ifPresent(existing -> {
-            updatedUser.setId(id);
-            userRepository.save(updatedUser);
-        });
+//        userRepository.findById(id).ifPresent(existing -> {
+//            updatedUser.setId(id);
+//            userRepository.save(updatedUser);
+//        });
     }
 }
