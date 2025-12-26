@@ -9,6 +9,7 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/auth-service/pom.xml" />
         <option value="$PROJECT_DIR$/probrando-kafkaemiter/pom.xml" />
+        <option value="$PROJECT_DIR$/governance-service/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
