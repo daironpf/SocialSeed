@@ -1,0 +1,4 @@
+### getSocialUserByUserName
+GET http://localhost:8090/socialusers/getSocialUserByUserName/SigmundFreud
+
+###

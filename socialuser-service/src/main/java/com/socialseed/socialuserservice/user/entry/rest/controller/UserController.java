@@ -42,29 +42,29 @@ public class UserController {
 
         return ResponseEntity.ok(dtos);
     }
-    /**
-     * Retrieve a Social User by UserName.
-     *
-     * @param userName The userName of the Social User to retrieve.
-     * @return ResponseEntity with a ResponseDTO.
-     */
-    @GetMapping("/getByUserName/{userName}")
-    public ResponseEntity<UserResponseDTO> getSocialUserByUserName(@PathVariable String userName) {
-        return userUseCases.getUserByName(userName)
-                .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
-                .orElse(ResponseEntity.notFound().build());
-    }
 
-    // GET BY ID
     /**
      * Retrieve a Social User by ID.
      *
      * @param id The ID of the Social User to retrieve.
      * @return ResponseEntity with a ResponseDTO.
      */
-    @GetMapping("/{id}")
+    @GetMapping("/getSocialUserById/{id}")
     public ResponseEntity<UserResponseDTO> getUserById(@PathVariable UUID id) {
         return userUseCases.getUserById(id)
+                .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    /**
+     * Retrieve a Social User by UserName.
+     *
+     * @param userName The userName of the Social User to retrieve.
+     * @return ResponseEntity with a ResponseDTO.
+     */
+    @GetMapping("/getSocialUserByUserName/{userName}")
+    public ResponseEntity<UserResponseDTO> getSocialUserByUserName(@PathVariable String userName) {
+        return userUseCases.getUserByName(userName)
                 .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -75,13 +75,12 @@ public class UserController {
      * @param email The Email of the Social User to retrieve.
      * @return ResponseEntity with a ResponseDTO.
      */
-//    @GetMapping("/getSocialUserByEmail/{email}")
-//    public ResponseEntity<ResponseDTO> getSocialUserByEmail(@PathVariable String email) {
-//        ResponseEntity<Object> response = socialUserService.getSocialUserByEmail(email);
-//        return ResponseEntity
-//                .status(response.getStatusCode())
-//                .body((ResponseDTO) response.getBody());
-//    }
+    @GetMapping("/getSocialUserByEmail/{email}")
+    public ResponseEntity<UserResponseDTO> getSocialUserByEmail(@PathVariable String email) {
+        return userUseCases.getUserByEmail(email)
+                .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
+                .orElse(ResponseEntity.notFound().build());
+    }
     //endregion
 
     //region CRUD

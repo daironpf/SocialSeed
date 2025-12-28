@@ -1,0 +1,4 @@
+### getSocialUserByEmail
+GET http://localhost:8090/socialusers/getSocialUserByEmail/turing@gmail.com
+
+###
