@@ -48,13 +48,26 @@ public class UserController {
      * @param userName The userName of the Social User to retrieve.
      * @return ResponseEntity with a ResponseDTO.
      */
-//    @GetMapping("/getSocialUserByUserName/{userName}")
-//    public ResponseEntity<ResponseDTO> getSocialUserByUserName(@PathVariable String userName) {
-//        ResponseEntity<Object> response = socialUserService.getSocialUserByUserName(userName);
-//        return ResponseEntity
-//                .status(response.getStatusCode())
-//                .body((ResponseDTO) response.getBody());
-//    }
+    @GetMapping("/getByUserName/{userName}")
+    public ResponseEntity<UserResponseDTO> getSocialUserByUserName(@PathVariable String userName) {
+        return userUseCases.getUserByName(userName)
+                .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // GET BY ID
+    /**
+     * Retrieve a Social User by ID.
+     *
+     * @param id The ID of the Social User to retrieve.
+     * @return ResponseEntity with a ResponseDTO.
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable UUID id) {
+        return userUseCases.getUserById(id)
+                .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
+                .orElse(ResponseEntity.notFound().build());
+    }
 
     /**
      * Retrieve a Social User by Email.
@@ -80,19 +93,7 @@ public class UserController {
     //     return ResponseEntity.ok(UserRestMapper.toResponse(saved));
     // }
 
-    // GET BY ID
-    /**
-     * Retrieve a Social User by ID.
-     *
-     * @param id The ID of the Social User to retrieve.
-     * @return ResponseEntity with a ResponseDTO.
-     */
-    @GetMapping("/{id}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable UUID id) {
-        return userUseCases.getUserById(id)
-                .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
-                .orElse(ResponseEntity.notFound().build());
-    }
+
 
     // UPDATE
     /**

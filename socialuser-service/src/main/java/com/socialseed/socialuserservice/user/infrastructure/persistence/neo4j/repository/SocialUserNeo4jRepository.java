@@ -1,5 +1,6 @@
 package com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.repository;
 
+import com.socialseed.socialuserservice.user.domain.model.User;
 import com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.entity.UserNeo4jEntity;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
@@ -33,5 +34,7 @@ public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEnti
             RETURN COUNT(u) > 0
             """)
     Boolean existByUserId(UUID id);
+
+    Optional<UserNeo4jEntity> findByUsername(String username);
     //endregion
 }

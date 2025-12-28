@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/SocialSeed.iml" filepath="$PROJECT_DIR$/.idea/SocialSeed.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/auth-service/auth-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/governance-service/governance-service.iml" filepath="$PROJECT_DIR$/governance-service/governance-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/socialuser-service/socialuser-service.iml" filepath="$PROJECT_DIR$/socialuser-service/socialuser-service.iml" />
     </modules>
   </component>

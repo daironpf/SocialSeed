@@ -37,6 +37,12 @@ public class Neo4jSocialUserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    public Optional<User> findByUserName(String userName) {
+        return socialUserNeo4jRepository.findByUsername(userName)
+                .map(userNeo4jMapper::toDomain);
+    }
+
+    @Override
     public Optional<User> findByEmail(String email) {
         return socialUserNeo4jRepository.findByEmail(email)
                 .map(userNeo4jMapper::toDomain);

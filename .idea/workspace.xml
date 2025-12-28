@@ -4,8 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="minor fixes">
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="create governance-service">
+      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/getUserById.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/getUserByUserName.http" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/GetUserByName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UserUseCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UserUseCases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/Neo4jSocialUserRepositoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/Neo4jSocialUserRepositoryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/repository/SocialUserNeo4jRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/repository/SocialUserNeo4jRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,10 +31,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Exception" />
-        <option value="HTTP Request" />
-        <option value="Class" />
         <option value="Record" />
         <option value="Interface" />
+        <option value="Class" />
+        <option value="HTTP Request" />
       </list>
     </option>
   </component>
@@ -77,6 +86,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.AuthServiceApplication.executor": "Run",
+    "Application.GovernanceServiceApplication.executor": "Run",
+    "Application.SocialuserServiceApplication.executor": "Run",
     "Docker.api-gateway.executor": "Run",
     "Docker.docker-compose.yml.api-gateway: Compose Deployment.executor": "Run",
     "Docker.docker-compose.yml.auth-db: Compose Deployment.executor": "Run",
@@ -110,6 +122,8 @@
     "HTTP Request.get-socialusers | Docker.executor": "Run",
     "HTTP Request.get-socialusers | GET request to get all social user.executor": "Run",
     "HTTP Request.get-socialusers | Local.executor": "Run",
+    "HTTP Request.getUserById | Local.executor": "Run",
+    "HTTP Request.getUserByUserName | Local.executor": "Run",
     "HTTP Request.grpc-server-test | #1.executor": "Run",
     "HTTP Request.login | login.executor": "Run",
     "HTTP Request.register | Register - Albert Einstein.executor": "Run",
@@ -141,6 +155,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Spring Boot.ApiGatewayApplication.executor": "Run",
     "Spring Boot.AuthServiceApplication.executor": "Run",
+    "Spring Boot.GovernanceServiceApplication.executor": "Run",
     "Spring Boot.ProbrandoKafkaemiterApplication.executor": "Run",
     "Spring Boot.SocialuserServiceApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
@@ -149,7 +164,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/reactions-service",
+    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/governance-service",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -160,6 +175,7 @@
     "run.configurations.included.in.services": "true",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "to.speed.mode.migration.done": "true",
+    "two.files.diff.last.used.folder": "/home/dairon/proyectos/SocialSeed/governance-service",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -205,21 +221,52 @@
     </option>
     <option name="configurationStatuses">
       <map>
-        <entry key="SpringBootApplicationConfigurationType">
+        <entry key="HttpClient.HttpRequestRunConfigurationType">
           <value>
             <map>
-              <entry key="SocialuserServiceApplication" value="STOPPED" />
+              <entry key="get-socialusers | Local" value="STOPPED" />
+              <entry key="getUserById | Local" value="STOPPED" />
+              <entry key="getUserByUserName | Local" value="STOPPED" />
             </map>
           </value>
         </entry>
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.GovernanceServiceApplication">
-    <configuration name="register | Register - Albert Einstein" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/auth-service/register.http" executionIdentifier="Register - Albert Einstein" runType="Run single request">
+  <component name="RunManager" selected="HTTP Request.getUserByUserName | Local">
+    <configuration name="AuthServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.socialseed.authservice.AuthServiceApplication" />
+      <module name="auth-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.socialseed.authservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SocialuserServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.socialseed.socialuserservice.SocialuserServiceApplication" />
+      <module name="socialuser-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.socialseed.socialuserservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="get-socialusers | Local" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" executionIdentifier="Local" index="2" runType="Run single request">
       <method v="2" />
     </configuration>
-    <configuration name="register | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/auth-service/register.http" executionIdentifier="#2" index="2" runType="Run single request">
+    <configuration name="getUserById | Local" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/getUserById.http" executionIdentifier="Local" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="getUserByUserName | Local" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/getUserByUserName.http" executionIdentifier="Local" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -277,45 +324,6 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.auth-db: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="auth-db" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.kafka: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="kafka" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.neo4j: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="neo4j" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration name="socialgraph-db" type="docker-deploy" factoryName="docker-image" server-name="Docker">
       <deployment type="docker-image">
         <settings>
@@ -366,26 +374,26 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.AuthServiceApplication" />
+      <item itemvalue="Application.SocialuserServiceApplication" />
       <item itemvalue="Docker.api-gateway" />
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
-      <item itemvalue="Docker.docker-compose.yml.auth-db: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.kafka: Compose Deployment" />
-      <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
-      <item itemvalue="HTTP Request.register | Register - Albert Einstein" />
-      <item itemvalue="HTTP Request.register | #2" />
-      <item itemvalue="Spring Boot.GovernanceServiceApplication" />
-      <item itemvalue="Spring Boot.AuthServiceApplication" />
+      <item itemvalue="HTTP Request.get-socialusers | Local" />
+      <item itemvalue="HTTP Request.getUserById | Local" />
+      <item itemvalue="HTTP Request.getUserByUserName | Local" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
+      <item itemvalue="Spring Boot.AuthServiceApplication" />
+      <item itemvalue="Spring Boot.GovernanceServiceApplication" />
       <item itemvalue="Spring Boot.SocialuserServiceApplication" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.register | Register - Albert Einstein" />
-        <item itemvalue="HTTP Request.register | #2" />
-        <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.kafka: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.auth-db: Compose Deployment" />
+        <item itemvalue="HTTP Request.getUserByUserName | Local" />
+        <item itemvalue="Application.SocialuserServiceApplication" />
+        <item itemvalue="HTTP Request.getUserById | Local" />
+        <item itemvalue="HTTP Request.get-socialusers | Local" />
+        <item itemvalue="Application.AuthServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -454,7 +462,9 @@
       <workItem from="1765849896527" duration="51000" />
       <workItem from="1766539606476" duration="460000" />
       <workItem from="1766608475415" duration="826000" />
-      <workItem from="1766716505665" duration="1107000" />
+      <workItem from="1766716505665" duration="2315000" />
+      <workItem from="1766800498946" duration="16000" />
+      <workItem from="1766880119367" duration="2105000" />
     </task>
     <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
       <option name="closed" value="true" />
@@ -840,11 +850,38 @@
       <option name="project" value="LOCAL" />
       <updated>1766716774375</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="create governance-service">
+      <option name="closed" value="true" />
+      <created>1766717875901</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1766717875901</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="java:org.springframework.security:spring-security-core" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-core" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.validation:jakarta.validation-api" />
+    <option featureType="dependencySupport" implementationName="java:io.projectreactor:reactor-core" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.data:spring-data-commons" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.cloud:spring-cloud-context" />
+    <option featureType="dependencySupport" implementationName="java:org.hibernate.validator:hibernate-validator" />
+    <option featureType="com.intellij.configurationType" implementationName="SpringBootApplicationConfigurationType" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-webmvc" />
+    <option featureType="dependencySupport" implementationName="java:org.projectlombok:lombok" />
+    <option featureType="dependencySupport" implementationName="java:junit:junit" />
+    <option featureType="dependencySupport" implementationName="executable:docker" />
+    <option featureType="dependencySupport" implementationName="java:jakarta.persistence:jakarta.persistence-api" />
+    <option featureType="com.intellij.configurationType" implementationName="HttpClient.HttpRequestRunConfigurationType" />
+    <option featureType="dependencySupport" implementationName="java:io.grpc:grpc-api" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework:spring-messaging" />
+    <option featureType="dependencySupport" implementationName="java:org.springframework.boot:spring-boot" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -870,7 +907,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="&gt; Working on password change validation for the user&#10;&gt; Ihis use case will be moved to the auth service where it belongs" />
     <MESSAGE value="add auth-db to project" />
     <MESSAGE value="minor changes in intelliJ" />
     <MESSAGE value="working in auth-service" />
@@ -895,6 +931,7 @@
     <MESSAGE value="change the kafka listener to connect intellij and vscode plugins" />
     <MESSAGE value="update volume for neo4j db service in docker-compose.yml" />
     <MESSAGE value="minor fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor fixes" />
+    <MESSAGE value="create governance-service" />
+    <option name="LAST_COMMIT_MESSAGE" value="create governance-service" />
   </component>
 </project>
