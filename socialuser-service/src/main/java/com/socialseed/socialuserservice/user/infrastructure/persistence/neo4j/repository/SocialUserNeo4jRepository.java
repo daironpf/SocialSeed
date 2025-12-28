@@ -11,6 +11,7 @@ import java.util.UUID;
 public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEntity, UUID> {
     // region findBy
     Optional<UserNeo4jEntity> findByEmail(String email);
+    Optional<UserNeo4jEntity> findByUsername(String username);
     //endregion
 
     //region existBy
@@ -35,6 +36,6 @@ public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEnti
             """)
     Boolean existByUserId(UUID id);
 
-    Optional<UserNeo4jEntity> findByUsername(String username);
+
     //endregion
 }

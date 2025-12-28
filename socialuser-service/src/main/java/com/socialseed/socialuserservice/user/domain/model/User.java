@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
-import com.google.errorprone.annotations.Keep;
-
 public class User {
 
     private final UUID id;

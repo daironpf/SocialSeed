@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="create governance-service">
-      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/getUserById.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/getUserByUserName.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/GetUserByName.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="fixed getUserById &#10;add getUserByName">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UserUseCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UserUseCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/Neo4jSocialUserRepositoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/Neo4jSocialUserRepositoryAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/get-socialusers.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/get-socialusers.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/getUserById.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getUserById.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/getUserByUserName.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getUserByUserName.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/repository/SocialUserNeo4jRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/repository/SocialUserNeo4jRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -191,11 +187,11 @@
       <recent name="D:\.dev\proyectos\SocialSeed\auth-service\src\main\proto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/api-requests/socialuser-service/gets" />
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\java\com\socialseed\socialuserservice\shared\response" />
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\java\com\socialseed\socialuserservice\shared" />
       <recent name="D:\.dev\proyectos\SocialSeed" />
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\test\java\com\socialseed\socialuserservice" />
-      <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\java\com\socialseed\socialuserservice" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.socialseed.authservice.auth.infrastructure.kafka.producer" />
@@ -233,7 +229,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="HTTP Request.getUserByUserName | Local">
+  <component name="RunManager" selected="Application.SocialuserServiceApplication">
     <configuration name="AuthServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.socialseed.authservice.AuthServiceApplication" />
       <module name="auth-service" />
@@ -464,15 +460,7 @@
       <workItem from="1766608475415" duration="826000" />
       <workItem from="1766716505665" duration="2315000" />
       <workItem from="1766800498946" duration="16000" />
-      <workItem from="1766880119367" duration="2105000" />
-    </task>
-    <task id="LOCAL-00001" summary="create Dockerfile for socialuser-service">
-      <option name="closed" value="true" />
-      <created>1762032355824</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1762032355824</updated>
+      <workItem from="1766880119367" duration="2762000" />
     </task>
     <task id="LOCAL-00002" summary="create Api-Gateway">
       <option name="closed" value="true" />
@@ -858,7 +846,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766717875901</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="fixed getUserById &#10;add getUserByName">
+      <option name="closed" value="true" />
+      <created>1766882372551</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1766882372551</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -907,7 +903,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add auth-db to project" />
     <MESSAGE value="minor changes in intelliJ" />
     <MESSAGE value="working in auth-service" />
     <MESSAGE value="working in grpc" />
@@ -932,6 +927,7 @@
     <MESSAGE value="update volume for neo4j db service in docker-compose.yml" />
     <MESSAGE value="minor fixes" />
     <MESSAGE value="create governance-service" />
-    <option name="LAST_COMMIT_MESSAGE" value="create governance-service" />
+    <MESSAGE value="fixed getUserById &#10;add getUserByName" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed getUserById &#10;add getUserByName" />
   </component>
 </project>
