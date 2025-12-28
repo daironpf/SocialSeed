@@ -1,11 +1,13 @@
 package com.socialseed.socialuserservice.platform.error;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 /**
  * Enumeración central de códigos de error y sus estados HTTP asociados.
  * Compatible con internacionalización usando MessageSource.
  */
+@Getter
 public enum ErrorCode {
 
     // --- HTTP Standard Errors ---
@@ -22,10 +24,11 @@ public enum ErrorCode {
     RESOURCE_ALREADY_EXISTS("error.resource_already_exists", HttpStatus.CONFLICT),
     RESOURCE_NOT_FOUND("error.resource_not_found", HttpStatus.NOT_FOUND),
 
-    // --- Example Domain Specific ---
+    // --- Domain Specific Errors ---
     USER_EMAIL_EXISTS("error.user.email_exists", HttpStatus.CONFLICT),
     USERNAME_EXISTS("error.user.username_exists", HttpStatus.CONFLICT),
-    PASSWORD_MISMATCH("error.user.password_mismatch", HttpStatus.BAD_REQUEST);
+    PASSWORD_MISMATCH("error.user.password_mismatch", HttpStatus.BAD_REQUEST),
+    USER_CREATION_FAILED("error.user.creation_failed", HttpStatus.INTERNAL_SERVER_ERROR);
 
     private final String code;
     private final HttpStatus httpStatus;

@@ -1,4 +1,5 @@
 package com.socialseed.socialuserservice.user.entry.rest.controller;
+import com.socialseed.socialuserservice.platform.common.response.ApiResponse;
 import com.socialseed.socialuserservice.platform.common.response.ResponseDTO;
 import com.socialseed.socialuserservice.user.application.usecase.UserUseCases;
 import com.socialseed.socialuserservice.user.domain.model.User;
@@ -8,10 +9,14 @@ import com.socialseed.socialuserservice.user.entry.rest.dto.request.UserCreateRe
 import com.socialseed.socialuserservice.user.entry.rest.dto.response.UserResponseDTO;
 //import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
+import org.springframework.context.MessageSource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Locale;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -21,26 +26,33 @@ import java.util.stream.Collectors;
 public class UserController {
     //region Dependencies
     private final UserUseCases userUseCases;
+    private final MessageSource messageSource;
 
-    public UserController(UserUseCases userUseCases) {
+    public UserController(UserUseCases userUseCases, MessageSource messageSource) {
         this.userUseCases = userUseCases;
+        this.messageSource = messageSource;
     }
     //endregion
 
     // region Gets
     // LIST
     @GetMapping
-    public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
+    public ResponseEntity<ApiResponse<?>> getAllUsers(Locale locale) {
         List<User> users = userUseCases.getAllUsers();
         if (users == null || users.isEmpty()) {
             return ResponseEntity.noContent().build(); // 204 No Content
         }
 
-        List<UserResponseDTO> dtos = users.stream()
+        List<UserResponseDTO> response = users.stream()
                 .map(UserRestMapper::toResponse)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(dtos);
+        return ResponseEntity.ok(
+                ApiResponse.success(
+                        response,
+                        messageSource.getMessage("about.success", null, locale)
+                )
+        );
     }
 
     /**
@@ -50,10 +62,22 @@ public class UserController {
      * @return ResponseEntity with a ResponseDTO.
      */
     @GetMapping("/getSocialUserById/{id}")
-    public ResponseEntity<UserResponseDTO> getUserById(@PathVariable UUID id) {
-        return userUseCases.getUserById(id)
-                .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ApiResponse<?>> getUserById(@PathVariable UUID id) {
+        Optional<User> user = userUseCases.getUserById(id);
+        if (user.isPresent()){
+            UserResponseDTO response =  UserRestMapper.toResponse(user.get());
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            response,
+                            "SocialUser By Id"
+                    )
+            );
+        }
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(
+                        ApiResponse.notFound("user by id not found")
+                );
     }
 
     /**
@@ -63,10 +87,22 @@ public class UserController {
      * @return ResponseEntity with a ResponseDTO.
      */
     @GetMapping("/getSocialUserByUserName/{userName}")
-    public ResponseEntity<UserResponseDTO> getSocialUserByUserName(@PathVariable String userName) {
-        return userUseCases.getUserByName(userName)
-                .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ApiResponse<?>> getSocialUserByUserName(@PathVariable String userName) {
+        Optional<User> user = userUseCases.getUserByName(userName);
+        if (user.isPresent()){
+            UserResponseDTO response =  UserRestMapper.toResponse(user.get());
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            response,
+                            "SocialUser By UserName"
+                    )
+            );
+        }
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(
+                        ApiResponse.notFound("user by UserName not found")
+                );
     }
 
     /**
@@ -76,21 +112,33 @@ public class UserController {
      * @return ResponseEntity with a ResponseDTO.
      */
     @GetMapping("/getSocialUserByEmail/{email}")
-    public ResponseEntity<UserResponseDTO> getSocialUserByEmail(@PathVariable String email) {
-        return userUseCases.getUserByEmail(email)
-                .map(user -> ResponseEntity.ok(UserRestMapper.toResponse(user)))
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<ApiResponse<?>> getSocialUserByEmail(@PathVariable String email) {
+        Optional<User> user = userUseCases.getUserByEmail(email);
+        if (user.isPresent()){
+            UserResponseDTO response =  UserRestMapper.toResponse(user.get());
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            response,
+                            "SocialUser By Email"
+                    )
+            );
+        }
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(
+                        ApiResponse.notFound("user by Email not found")
+                );
     }
     //endregion
 
     //region CRUD
     // CREATE this only take action in admin mode, then now will be commented out
-    // @PostMapping
-    // public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserCreateRequestDTO dto) {
-    //     User user = UserRestMapper.toDomain(dto);
-    //     User saved = userUseCases.createUser(user);
-    //     return ResponseEntity.ok(UserRestMapper.toResponse(saved));
-    // }
+//     @PostMapping
+//     public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserCreateRequestDTO dto) {
+//         User user = UserRestMapper.toDomain(dto);
+//         User saved = userUseCases.createUser(user);
+//         return ResponseEntity.ok(UserRestMapper.toResponse(saved));
+//     }
 
 
 
@@ -123,69 +171,5 @@ public class UserController {
         userUseCases.deleteUser(id);
         return ResponseEntity.noContent().build();
     }
-    //endregion
-
-    //region VacationMode
-    /**
-     * Activate vacation mode for a Social User.
-     *
-     * @param idUserRequest The ID of the user making the request.
-     * @return ResponseEntity with a ResponseDTO.
-     */
-//    @PostMapping("/activateVacationMode")
-//    public ResponseEntity<ResponseDTO> activateVacationMode(
-//            @RequestHeader("userId") String idUserRequest) {
-//        ResponseEntity<Object> response = socialUserService.activateVacationMode(idUserRequest);
-//        return ResponseEntity
-//                .status(response.getStatusCode())
-//                .body((ResponseDTO) response.getBody());
-//    }
-
-    /**
-     * Deactivate vacation mode for a Social User.
-     *
-     * @param idUserRequest The ID of the user making the request.
-     * @return ResponseEntity with a ResponseDTO.
-     */
-//    @PostMapping("/deactivateVacationMode")
-//    public ResponseEntity<ResponseDTO> deactivateVacationMode(
-//            @RequestHeader("userId") String idUserRequest) {
-//        ResponseEntity<Object> response = socialUserService.deactivateVacationMode(idUserRequest);
-//        return ResponseEntity
-//                .status(response.getStatusCode())
-//                .body((ResponseDTO) response.getBody());
-//    }
-    //endregion
-
-    //region Activate
-    /**
-     * Activate a Social User.
-     *
-     * @param idUserRequest The ID of the user making the request.
-     * @return ResponseEntity with a ResponseDTO.
-     */
-//    @PostMapping("/activateSocialUser")
-//    public ResponseEntity<ResponseDTO> activateSocialUser(
-//            @RequestHeader("userId") String idUserRequest) {
-//        ResponseEntity<Object> response = socialUserService.activateSocialUser(idUserRequest);
-//        return ResponseEntity
-//                .status(response.getStatusCode())
-//                .body((ResponseDTO) response.getBody());
-//    }
-
-    /**
-     * Deactivate a Social User.
-     *
-     * @param idUserRequest The ID of the user making the request.
-     * @return ResponseEntity with a ResponseDTO.
-     */
-//    @PostMapping("/deactivateSocialUser")
-//    public ResponseEntity<ResponseDTO> deactivateSocialUser(
-//            @RequestHeader("userId") String idUserRequest) {
-//        ResponseEntity<Object> response = socialUserService.deactivateSocialUser(idUserRequest);
-//        return ResponseEntity
-//                .status(response.getStatusCode())
-//                .body((ResponseDTO) response.getBody());
-//    }
     //endregion
 }

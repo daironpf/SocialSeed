@@ -4,17 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="reorganice some code">
-      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserById.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserByUserName.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getUserByEmail.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/GetUserByEmail.java" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="sync with i18n of auth-service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getUserById.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getUserByUserName.http" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UserUseCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UserUseCases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/gets/get-socialusers.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/get-socialusers.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserById.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserById.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserByUserName.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserByUserName.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getUserByEmail.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getUserByEmail.http" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ApiResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/repository/SocialUserNeo4jRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/repository/SocialUserNeo4jRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/old_code/SocialUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/old_code/SocialUserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,7 +167,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/governance-service",
+    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/socialuser-service/src/main/resources/i18n",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -179,7 +178,7 @@
     "run.configurations.included.in.services": "true",
     "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "to.speed.mode.migration.done": "true",
-    "two.files.diff.last.used.folder": "/home/dairon/proyectos/SocialSeed/governance-service",
+    "two.files.diff.last.used.folder": "/home/dairon/proyectos/SocialSeed/socialuser-service/src/main/resources/i18n",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -242,7 +241,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="HTTP Request.getUserByEmail | getSocialUserByEmail">
+  <component name="RunManager" selected="HTTP Request.getSocialUserById | GetSocialUserById">
     <configuration name="get-socialusers | Local" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/gets/get-socialusers.http" executionIdentifier="Local" index="2" runType="Run single request">
       <method v="2" />
     </configuration>
@@ -253,9 +252,6 @@
       <method v="2" />
     </configuration>
     <configuration name="getUserByEmail | getSocialUserByEmail" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/gets/getUserByEmail.http" executionIdentifier="getSocialUserByEmail" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="getUserById | GetSocialUserById" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/gets/getUserById.http" executionIdentifier="GetSocialUserById" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
@@ -370,7 +366,6 @@
       <item itemvalue="HTTP Request.getSocialUserById | GetSocialUserById" />
       <item itemvalue="HTTP Request.getSocialUserByUserName | getSocialUserByUserName" />
       <item itemvalue="HTTP Request.getUserByEmail | getSocialUserByEmail" />
-      <item itemvalue="HTTP Request.getUserById | GetSocialUserById" />
       <item itemvalue="Spring Boot.ApiGatewayApplication" />
       <item itemvalue="Spring Boot.AuthServiceApplication" />
       <item itemvalue="Spring Boot.GovernanceServiceApplication" />
@@ -379,10 +374,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="HTTP Request.getUserByEmail | getSocialUserByEmail" />
-        <item itemvalue="HTTP Request.get-socialusers | Local" />
         <item itemvalue="HTTP Request.getSocialUserByUserName | getSocialUserByUserName" />
         <item itemvalue="HTTP Request.getSocialUserById | GetSocialUserById" />
-        <item itemvalue="HTTP Request.getUserById | GetSocialUserById" />
+        <item itemvalue="HTTP Request.get-socialusers | Local" />
       </list>
     </recent_temporary>
   </component>
@@ -453,23 +447,7 @@
       <workItem from="1766608475415" duration="826000" />
       <workItem from="1766716505665" duration="2315000" />
       <workItem from="1766800498946" duration="16000" />
-      <workItem from="1766880119367" duration="4295000" />
-    </task>
-    <task id="LOCAL-00003" summary="changes in idea">
-      <option name="closed" value="true" />
-      <created>1762098384474</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1762098384474</updated>
-    </task>
-    <task id="LOCAL-00004" summary="update api-gateway">
-      <option name="closed" value="true" />
-      <created>1762107603767</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1762107603768</updated>
+      <workItem from="1766880119367" duration="6995000" />
     </task>
     <task id="LOCAL-00005" summary="create api-request">
       <option name="closed" value="true" />
@@ -847,7 +825,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766882946433</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="reorganice some code&#10;add getSocialUserByEmail">
+      <option name="closed" value="true" />
+      <created>1766884424157</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1766884424157</updated>
+    </task>
+    <task id="LOCAL-00053" summary="sync with i18n of auth-service">
+      <option name="closed" value="true" />
+      <created>1766886150817</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1766886150817</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -896,8 +890,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="working in auth-service" />
-    <MESSAGE value="working in grpc" />
     <MESSAGE value="working with grpc" />
     <MESSAGE value="done the grpc server" />
     <MESSAGE value="create socialuser by grpc ✅" />
@@ -921,7 +913,9 @@
     <MESSAGE value="create governance-service" />
     <MESSAGE value="fixed getUserById &#10;add getUserByName" />
     <MESSAGE value="reorganice some code" />
-    <option name="LAST_COMMIT_MESSAGE" value="reorganice some code" />
+    <MESSAGE value="reorganice some code&#10;add getSocialUserByEmail" />
+    <MESSAGE value="sync with i18n of auth-service" />
+    <option name="LAST_COMMIT_MESSAGE" value="sync with i18n of auth-service" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

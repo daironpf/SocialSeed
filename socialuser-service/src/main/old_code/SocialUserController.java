@@ -47,13 +47,13 @@ public class SocialUserController {
      * @param userName The userName of the Social User to retrieve.
      * @return ResponseEntity with a ResponseDTO.
      */
-    @GetMapping("/getSocialUserByUserName/{userName}")
-    public ResponseEntity<ResponseDTO> getSocialUserByUserName(@PathVariable String userName) {
-        ResponseEntity<Object> response = socialUserService.getSocialUserByUserName(userName);
-        return ResponseEntity
-                .status(response.getStatusCode())
-                .body((ResponseDTO) response.getBody());
-    }
+//    @GetMapping("/getSocialUserByUserName/{userName}")
+//    public ResponseEntity<ResponseDTO> getSocialUserByUserName(@PathVariable String userName) {
+//        ResponseEntity<Object> response = socialUserService.getSocialUserByUserName(userName);
+//        return ResponseEntity
+//                .status(response.getStatusCode())
+//                .body((ResponseDTO) response.getBody());
+//    }
 
     /**
      * Retrieve a Social User by Email.
@@ -61,13 +61,13 @@ public class SocialUserController {
      * @param email The Email of the Social User to retrieve.
      * @return ResponseEntity with a ResponseDTO.
      */
-    @GetMapping("/getSocialUserByEmail/{email}")
-    public ResponseEntity<ResponseDTO> getSocialUserByEmail(@PathVariable String email) {
-        ResponseEntity<Object> response = socialUserService.getSocialUserByEmail(email);
-        return ResponseEntity
-                .status(response.getStatusCode())
-                .body((ResponseDTO) response.getBody());
-    }
+//    @GetMapping("/getSocialUserByEmail/{email}")
+//    public ResponseEntity<ResponseDTO> getSocialUserByEmail(@PathVariable String email) {
+//        ResponseEntity<Object> response = socialUserService.getSocialUserByEmail(email);
+//        return ResponseEntity
+//                .status(response.getStatusCode())
+//                .body((ResponseDTO) response.getBody());
+//    }
     //endregion
 
     //region CRUD
@@ -91,13 +91,13 @@ public class SocialUserController {
      * @param socialUser The Social User object to create.
      * @return ResponseEntity with a ResponseDTO.
      */
-    @PostMapping("/createSocialUser")
-    public ResponseEntity<ResponseDTO> createSocialUser(@RequestBody SocialUser socialUser) {
-        ResponseEntity<Object> response = socialUserService.createNewSocialUser(socialUser);
-        return ResponseEntity
-                .status(response.getStatusCode())
-                .body((ResponseDTO) response.getBody());
-    }
+//    @PostMapping("/createSocialUser")
+//    public ResponseEntity<ResponseDTO> createSocialUser(@RequestBody SocialUser socialUser) {
+//        ResponseEntity<Object> response = socialUserService.createNewSocialUser(socialUser);
+//        return ResponseEntity
+//                .status(response.getStatusCode())
+//                .body((ResponseDTO) response.getBody());
+//    }
 
     /**
      * Update an existing Social User.
