@@ -120,6 +120,8 @@ Please follow conventional commit and PR naming practices.
 
 ---
 
+<!--
+
 ## 🙏 Acknowledgments
 
 Special thanks to **JetBrains** for supporting open-source development with free licenses, which make this project’s development faster and smoother.
@@ -127,6 +129,7 @@ Special thanks to **JetBrains** for supporting open-source development with free
 ![JetBrains logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
 
 ---
+-->
 
 ## 📜 License
 
