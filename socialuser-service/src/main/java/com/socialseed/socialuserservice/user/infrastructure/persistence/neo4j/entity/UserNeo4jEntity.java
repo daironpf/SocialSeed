@@ -16,6 +16,7 @@ import java.util.UUID;
 public class UserNeo4jEntity {
 
     @Id
+//    @Property("socialuser_id")
     private UUID id;
 
     @Property("username")
