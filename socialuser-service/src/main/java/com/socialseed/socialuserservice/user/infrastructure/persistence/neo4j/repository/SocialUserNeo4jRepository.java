@@ -11,6 +11,14 @@ public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEnti
     // region findBy
     Optional<UserNeo4jEntity> findByEmail(String email);
     Optional<UserNeo4jEntity> findByUsername(String username);
+
+
+    @Override
+    @Query("""
+            OPTIONAL MATCH (u:SocialUser {id: $id})
+            RETURN u
+            """)
+    Optional<UserNeo4jEntity> findById(UUID id);
     //endregion
 
     //region existBy

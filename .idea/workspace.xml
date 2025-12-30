@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="Implemented a global exception handler in the SocialUserService to standardize API responses for invalid request parameters. &#10;&#10;- Added MethodArgumentTypeMismatchException handler to return 400 Bad Request for malformed UUIDs, integers, booleans, enums, and other types.&#10;- Integrated multi-language support through MessageSource.&#10;- Maintains consistent ApiResponse structure across all endpoints.&#10;- Ensures clear distinction between parameter format errors (400) and resource not found errors (404).">
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="Update the platform code in auth-service">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/GlobalErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/GlobalErrorHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/entity/UserNeo4jEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/entity/UserNeo4jEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/repository/SocialUserNeo4jRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/repository/SocialUserNeo4jRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,12 +53,22 @@
       </list>
     </option>
   </component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/daironpf/SocialSeed.git&quot;,
-    &quot;accountId&quot;: &quot;6298ce06-7e8c-4be7-8979-e12291206761&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/daironpf/SocialSeed.git",
+    "accountId": "6298ce06-7e8c-4be7-8979-e12291206761"
+  },
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
+    },
+    "owner": "daironpf",
+    "repository": "SocialSeed"
   }
-}</component>
+}]]></component>
   <component name="HttpClientOnboardingState">{
   &quot;isOnboardingCommentShown&quot;: true
 }</component>
@@ -158,7 +167,7 @@
     "Spring Boot.SocialuserServiceApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "116-implement-use-case-get-socialuser-by-id",
+    "git-widget-placeholder": "123-implement-neo4j-repository-for-socialuser",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -435,14 +444,6 @@
       <workItem from="1766716505665" duration="2315000" />
       <workItem from="1766800498946" duration="16000" />
       <workItem from="1766880119367" duration="8285000" />
-    </task>
-    <task id="LOCAL-00007" summary="update api-gateway config">
-      <option name="closed" value="true" />
-      <created>1762117207908</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1762117207908</updated>
     </task>
     <task id="LOCAL-00008" summary="update request mapping url">
       <option name="closed" value="true" />
@@ -828,7 +829,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767070916355</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="Update the platform code in auth-service">
+      <option name="closed" value="true" />
+      <created>1767071175322</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1767071175322</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -864,7 +873,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="116-implement-use-case-get-socialuser-by-id" />
+                        <option value="123-implement-neo4j-repository-for-socialuser" />
                       </list>
                     </value>
                   </entry>
@@ -877,7 +886,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create socialuser by grpc ✅" />
     <MESSAGE value="pass test to create socialUser by auth-service rest controller ✅" />
     <MESSAGE value="copy plataform folder and connect to auth-db pgsql database for auth data" />
     <MESSAGE value="add domain auth" />
@@ -902,7 +910,8 @@
     <MESSAGE value="sync with i18n of auth-service" />
     <MESSAGE value="update the response format to use platform ApiResponse" />
     <MESSAGE value="Implemented a global exception handler in the SocialUserService to standardize API responses for invalid request parameters. &#10;&#10;- Added MethodArgumentTypeMismatchException handler to return 400 Bad Request for malformed UUIDs, integers, booleans, enums, and other types.&#10;- Integrated multi-language support through MessageSource.&#10;- Maintains consistent ApiResponse structure across all endpoints.&#10;- Ensures clear distinction between parameter format errors (400) and resource not found errors (404)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Implemented a global exception handler in the SocialUserService to standardize API responses for invalid request parameters. &#10;&#10;- Added MethodArgumentTypeMismatchException handler to return 400 Bad Request for malformed UUIDs, integers, booleans, enums, and other types.&#10;- Integrated multi-language support through MessageSource.&#10;- Maintains consistent ApiResponse structure across all endpoints.&#10;- Ensures clear distinction between parameter format errors (400) and resource not found errors (404)." />
+    <MESSAGE value="Update the platform code in auth-service" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update the platform code in auth-service" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
