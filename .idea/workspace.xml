@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="Update the platform code in auth-service">
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="fixed the optimus code to retrieve a node info from socialgraph">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/entity/UserNeo4jEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/entity/UserNeo4jEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/repository/SocialUserNeo4jRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/repository/SocialUserNeo4jRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -445,14 +444,6 @@
       <workItem from="1766800498946" duration="16000" />
       <workItem from="1766880119367" duration="8285000" />
     </task>
-    <task id="LOCAL-00008" summary="update request mapping url">
-      <option name="closed" value="true" />
-      <created>1762130719280</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1762130719280</updated>
-    </task>
     <task id="LOCAL-00009" summary="update crud rest request">
       <option name="closed" value="true" />
       <created>1762132231979</created>
@@ -837,7 +828,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767071175322</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="fixed the optimus code to retrieve a node info from socialgraph">
+      <option name="closed" value="true" />
+      <created>1767072242200</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1767072242200</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -886,7 +885,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="pass test to create socialUser by auth-service rest controller ✅" />
     <MESSAGE value="copy plataform folder and connect to auth-db pgsql database for auth data" />
     <MESSAGE value="add domain auth" />
     <MESSAGE value="add rest dto" />
@@ -911,7 +909,8 @@
     <MESSAGE value="update the response format to use platform ApiResponse" />
     <MESSAGE value="Implemented a global exception handler in the SocialUserService to standardize API responses for invalid request parameters. &#10;&#10;- Added MethodArgumentTypeMismatchException handler to return 400 Bad Request for malformed UUIDs, integers, booleans, enums, and other types.&#10;- Integrated multi-language support through MessageSource.&#10;- Maintains consistent ApiResponse structure across all endpoints.&#10;- Ensures clear distinction between parameter format errors (400) and resource not found errors (404)." />
     <MESSAGE value="Update the platform code in auth-service" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update the platform code in auth-service" />
+    <MESSAGE value="fixed the optimus code to retrieve a node info from socialgraph" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed the optimus code to retrieve a node info from socialgraph" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

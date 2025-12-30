@@ -9,23 +9,34 @@ import java.util.UUID;
 
 public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEntity, UUID> {
     // region findBy
+    @Query("""
+            MATCH (u:SocialUser {email: $email})
+            RETURN u
+            LIMIT 1
+        """)
     Optional<UserNeo4jEntity> findByEmail(String email);
-    Optional<UserNeo4jEntity> findByUsername(String username);
 
+    @Query("""
+            MATCH (u:SocialUser {username: $username})
+            RETURN u
+            LIMIT 1
+        """)
+    Optional<UserNeo4jEntity> findByUsername(String username);
 
     @Override
     @Query("""
-            OPTIONAL MATCH (u:SocialUser {id: $id})
+            MATCH (u:SocialUser {id: $id})
             RETURN u
-            """)
+            LIMIT 1
+        """)
     Optional<UserNeo4jEntity> findById(UUID id);
     //endregion
 
     //region existBy
     @Query("""
-            MATCH (u:SocialUser)
-            WHERE u.email = $email
-            RETURN COUNT(u) > 0
+            MATCH (u:SocialUser {email: $email})
+            RETURN true
+            LIMIT 1
             """)
     Boolean existByEmail(String email);
 
@@ -42,7 +53,5 @@ public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEnti
             RETURN COUNT(u) > 0
             """)
     Boolean existByUserId(UUID id);
-
-
     //endregion
 }
