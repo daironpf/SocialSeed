@@ -4,16 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="sync with i18n of auth-service">
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="Implemented a global exception handler in the SocialUserService to standardize API responses for invalid request parameters. &#10;&#10;- Added MethodArgumentTypeMismatchException handler to return 400 Bad Request for malformed UUIDs, integers, booleans, enums, and other types.&#10;- Integrated multi-language support through MessageSource.&#10;- Maintains consistent ApiResponse structure across all endpoints.&#10;- Ensures clear distinction between parameter format errors (400) and resource not found errors (404).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/gets/get-socialusers.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/get-socialusers.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserById.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserById.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserByUserName.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserByUserName.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getUserByEmail.http" beforeDir="false" afterPath="$PROJECT_DIR$/api-requests/socialuser-service/gets/getUserByEmail.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ApiResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/old_code/SocialUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/old_code/SocialUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/ErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/GlobalErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/GlobalErrorHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,15 +27,15 @@
         <option value="Exception" />
         <option value="Record" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="HTTP Request" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="135-correct-the-current-social-user-code" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -163,11 +158,11 @@
     "Spring Boot.SocialuserServiceApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "116-implement-use-case-get-socialuser-by-id",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/socialuser-service/src/main/resources/i18n",
+    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/auth-service/src/main/resources/i18n",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -178,7 +173,7 @@
     "run.configurations.included.in.services": "true",
     "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "to.speed.mode.migration.done": "true",
-    "two.files.diff.last.used.folder": "/home/dairon/proyectos/SocialSeed/socialuser-service/src/main/resources/i18n",
+    "two.files.diff.last.used.folder": "/home/dairon/proyectos/SocialSeed/auth-service/src/main/resources/i18n",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -225,25 +220,20 @@
         <option value="SpringBootApplicationConfigurationType" />
       </set>
     </option>
-    <option name="configurationStatuses">
-      <map>
-        <entry key="HttpClient.HttpRequestRunConfigurationType">
-          <value>
-            <map>
-              <entry key="get-socialusers | Local" value="STOPPED" />
-              <entry key="getSocialUserById | GetSocialUserById" value="STOPPED" />
-              <entry key="getSocialUserByUserName | getSocialUserByUserName" value="STOPPED" />
-              <entry key="getUserByEmail | getSocialUserByEmail" value="STOPPED" />
-              <entry key="getUserById | GetSocialUserById" value="STOPPED" />
-            </map>
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
-  <component name="RunManager" selected="HTTP Request.getSocialUserById | GetSocialUserById">
-    <configuration name="get-socialusers | Local" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/gets/get-socialusers.http" executionIdentifier="Local" index="2" runType="Run single request">
-      <method v="2" />
+  <component name="RunManager" selected="Application.SocialuserServiceApplication">
+    <configuration name="SocialuserServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.socialseed.socialuserservice.SocialuserServiceApplication" />
+      <module name="socialuser-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.socialseed.socialuserservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="getSocialUserById | GetSocialUserById" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserById.http" executionIdentifier="GetSocialUserById" runType="Run single request">
       <method v="2" />
@@ -309,6 +299,19 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.neo4j: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="neo4j" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration name="socialgraph-db" type="docker-deploy" factoryName="docker-image" server-name="Docker">
       <deployment type="docker-image">
         <settings>
@@ -359,34 +362,18 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.SocialuserServiceApplication" />
       <item itemvalue="Docker.api-gateway" />
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
-      <item itemvalue="HTTP Request.get-socialusers | Local" />
-      <item itemvalue="HTTP Request.getSocialUserById | GetSocialUserById" />
-      <item itemvalue="HTTP Request.getSocialUserByUserName | getSocialUserByUserName" />
-      <item itemvalue="HTTP Request.getUserByEmail | getSocialUserByEmail" />
-      <item itemvalue="Spring Boot.ApiGatewayApplication" />
-      <item itemvalue="Spring Boot.AuthServiceApplication" />
-      <item itemvalue="Spring Boot.GovernanceServiceApplication" />
-      <item itemvalue="Spring Boot.SocialuserServiceApplication" />
+      <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="HTTP Request.getUserByEmail | getSocialUserByEmail" />
-        <item itemvalue="HTTP Request.getSocialUserByUserName | getSocialUserByUserName" />
-        <item itemvalue="HTTP Request.getSocialUserById | GetSocialUserById" />
-        <item itemvalue="HTTP Request.get-socialusers | Local" />
+        <item itemvalue="Application.SocialuserServiceApplication" />
+        <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-bf35d07a577b-intellij.indexing.shared.core-IU-252.28238.7" />
-        <option value="bundled-js-predefined-d6986cc7102b-a71380e98a7c-JavaScript-IU-252.28238.7" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="ShelveChangesManager">
     <option name="groupingKeys">
@@ -447,23 +434,7 @@
       <workItem from="1766608475415" duration="826000" />
       <workItem from="1766716505665" duration="2315000" />
       <workItem from="1766800498946" duration="16000" />
-      <workItem from="1766880119367" duration="6995000" />
-    </task>
-    <task id="LOCAL-00005" summary="create api-request">
-      <option name="closed" value="true" />
-      <created>1762107662019</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1762107662019</updated>
-    </task>
-    <task id="LOCAL-00006" summary="create socialuser-dev service">
-      <option name="closed" value="true" />
-      <created>1762107710226</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1762107710226</updated>
+      <workItem from="1766880119367" duration="8285000" />
     </task>
     <task id="LOCAL-00007" summary="update api-gateway config">
       <option name="closed" value="true" />
@@ -841,7 +812,23 @@
       <option name="project" value="LOCAL" />
       <updated>1766886150817</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL-00054" summary="update the response format to use platform ApiResponse">
+      <option name="closed" value="true" />
+      <created>1766887274526</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1766887274526</updated>
+    </task>
+    <task id="LOCAL-00055" summary="Implemented a global exception handler in the SocialUserService to standardize API responses for invalid request parameters. &#10;&#10;- Added MethodArgumentTypeMismatchException handler to return 400 Bad Request for malformed UUIDs, integers, booleans, enums, and other types.&#10;- Integrated multi-language support through MessageSource.&#10;- Maintains consistent ApiResponse structure across all endpoints.&#10;- Ensures clear distinction between parameter format errors (400) and resource not found errors (404).">
+      <option name="closed" value="true" />
+      <created>1767070916354</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1767070916355</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -877,7 +864,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="116-implement-use-case-get-socialuser-by-id" />
                       </list>
                     </value>
                   </entry>
@@ -890,8 +877,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="working with grpc" />
-    <MESSAGE value="done the grpc server" />
     <MESSAGE value="create socialuser by grpc ✅" />
     <MESSAGE value="pass test to create socialUser by auth-service rest controller ✅" />
     <MESSAGE value="copy plataform folder and connect to auth-db pgsql database for auth data" />
@@ -915,7 +900,9 @@
     <MESSAGE value="reorganice some code" />
     <MESSAGE value="reorganice some code&#10;add getSocialUserByEmail" />
     <MESSAGE value="sync with i18n of auth-service" />
-    <option name="LAST_COMMIT_MESSAGE" value="sync with i18n of auth-service" />
+    <MESSAGE value="update the response format to use platform ApiResponse" />
+    <MESSAGE value="Implemented a global exception handler in the SocialUserService to standardize API responses for invalid request parameters. &#10;&#10;- Added MethodArgumentTypeMismatchException handler to return 400 Bad Request for malformed UUIDs, integers, booleans, enums, and other types.&#10;- Integrated multi-language support through MessageSource.&#10;- Maintains consistent ApiResponse structure across all endpoints.&#10;- Ensures clear distinction between parameter format errors (400) and resource not found errors (404)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented a global exception handler in the SocialUserService to standardize API responses for invalid request parameters. &#10;&#10;- Added MethodArgumentTypeMismatchException handler to return 400 Bad Request for malformed UUIDs, integers, booleans, enums, and other types.&#10;- Integrated multi-language support through MessageSource.&#10;- Maintains consistent ApiResponse structure across all endpoints.&#10;- Ensures clear distinction between parameter format errors (400) and resource not found errors (404)." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
