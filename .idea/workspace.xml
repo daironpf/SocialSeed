@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="update the response format to use platform ApiResponse">
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="Implemented a global exception handler in the SocialUserService to standardize API responses for invalid request parameters. &#10;&#10;- Added MethodArgumentTypeMismatchException handler to return 400 Bad Request for malformed UUIDs, integers, booleans, enums, and other types.&#10;- Integrated multi-language support through MessageSource.&#10;- Maintains consistent ApiResponse structure across all endpoints.&#10;- Ensures clear distinction between parameter format errors (400) and resource not found errors (404).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/GlobalErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/GlobalErrorHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/GetUserById.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/GetUserById.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/ValidationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/validation/ValidationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_en.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/ErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/GlobalErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/GlobalErrorHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_en.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -166,7 +162,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/socialuser-service/src/main/resources/i18n",
+    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/auth-service/src/main/resources/i18n",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -177,7 +173,7 @@
     "run.configurations.included.in.services": "true",
     "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "to.speed.mode.migration.done": "true",
-    "two.files.diff.last.used.folder": "/home/dairon/proyectos/SocialSeed/socialuser-service/src/main/resources/i18n",
+    "two.files.diff.last.used.folder": "/home/dairon/proyectos/SocialSeed/auth-service/src/main/resources/i18n",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -439,14 +435,6 @@
       <workItem from="1766716505665" duration="2315000" />
       <workItem from="1766800498946" duration="16000" />
       <workItem from="1766880119367" duration="8285000" />
-    </task>
-    <task id="LOCAL-00006" summary="create socialuser-dev service">
-      <option name="closed" value="true" />
-      <created>1762107710226</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1762107710226</updated>
     </task>
     <task id="LOCAL-00007" summary="update api-gateway config">
       <option name="closed" value="true" />
@@ -832,7 +820,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766887274526</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Implemented a global exception handler in the SocialUserService to standardize API responses for invalid request parameters. &#10;&#10;- Added MethodArgumentTypeMismatchException handler to return 400 Bad Request for malformed UUIDs, integers, booleans, enums, and other types.&#10;- Integrated multi-language support through MessageSource.&#10;- Maintains consistent ApiResponse structure across all endpoints.&#10;- Ensures clear distinction between parameter format errors (400) and resource not found errors (404).">
+      <option name="closed" value="true" />
+      <created>1767070916354</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1767070916355</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -881,7 +877,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="done the grpc server" />
     <MESSAGE value="create socialuser by grpc ✅" />
     <MESSAGE value="pass test to create socialUser by auth-service rest controller ✅" />
     <MESSAGE value="copy plataform folder and connect to auth-db pgsql database for auth data" />
@@ -906,7 +901,8 @@
     <MESSAGE value="reorganice some code&#10;add getSocialUserByEmail" />
     <MESSAGE value="sync with i18n of auth-service" />
     <MESSAGE value="update the response format to use platform ApiResponse" />
-    <option name="LAST_COMMIT_MESSAGE" value="update the response format to use platform ApiResponse" />
+    <MESSAGE value="Implemented a global exception handler in the SocialUserService to standardize API responses for invalid request parameters. &#10;&#10;- Added MethodArgumentTypeMismatchException handler to return 400 Bad Request for malformed UUIDs, integers, booleans, enums, and other types.&#10;- Integrated multi-language support through MessageSource.&#10;- Maintains consistent ApiResponse structure across all endpoints.&#10;- Ensures clear distinction between parameter format errors (400) and resource not found errors (404)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Implemented a global exception handler in the SocialUserService to standardize API responses for invalid request parameters. &#10;&#10;- Added MethodArgumentTypeMismatchException handler to return 400 Bad Request for malformed UUIDs, integers, booleans, enums, and other types.&#10;- Integrated multi-language support through MessageSource.&#10;- Maintains consistent ApiResponse structure across all endpoints.&#10;- Ensures clear distinction between parameter format errors (400) and resource not found errors (404)." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

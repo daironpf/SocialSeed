@@ -26,6 +26,7 @@ public enum ErrorCode {
 
     // --- Domain Specific Errors ---
     USER_EMAIL_EXISTS("error.user.email_exists", HttpStatus.CONFLICT),
+    USER_NOT_FOUND("error.user.not_found", HttpStatus.NOT_FOUND),
     USERNAME_EXISTS("error.user.username_exists", HttpStatus.CONFLICT),
     PASSWORD_MISMATCH("error.user.password_mismatch", HttpStatus.BAD_REQUEST),
     USER_CREATION_FAILED("error.user.creation_failed", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -38,4 +39,11 @@ public enum ErrorCode {
         this.httpStatus = httpStatus;
     }
 
+    public String getCode() {
+        return code;
+    }
+
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
+    }
 }
