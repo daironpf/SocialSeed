@@ -97,6 +97,7 @@ An official **Android application** will be published on the **Google Play Store
 
 The app will serve as the **default client** for this backend, but the API is fully open for custom frontends.
 
+<!--
 ---
 
 ## 🤝 Contributing
@@ -110,7 +111,7 @@ If you’d like to contribute to Social Seed:
 4. Open a Pull Request
 
 Please follow conventional commit and PR naming practices.
-
+-->
 ---
 
 ## 📬 Contact
