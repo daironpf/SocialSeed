@@ -1,11 +1,9 @@
 package com.socialseed.socialuserservice.user.entry.rest.controller;
 import com.socialseed.socialuserservice.platform.common.response.ApiResponse;
-import com.socialseed.socialuserservice.platform.common.response.ResponseDTO;
 import com.socialseed.socialuserservice.user.application.usecase.UserUseCases;
 import com.socialseed.socialuserservice.user.domain.model.User;
-import com.socialseed.socialuserservice.user.entry.rest.dto.request.UserUpdateRequestDTO;
+import com.socialseed.socialuserservice.user.entry.rest.dto.request.UpdateUserProfileDTO;
 import com.socialseed.socialuserservice.user.entry.rest.mapper.UserRestMapper;
-import com.socialseed.socialuserservice.user.entry.rest.dto.request.UserCreateRequestDTO;
 import com.socialseed.socialuserservice.user.entry.rest.dto.response.UserResponseDTO;
 //import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
@@ -75,9 +73,8 @@ public class UserController {
         }
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(
-                        ApiResponse.notFound("user by id not found")
-                );
+                .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by ID not found"));
+
     }
 
     /**
@@ -100,9 +97,8 @@ public class UserController {
         }
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(
-                        ApiResponse.notFound("user by UserName not found")
-                );
+                .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by Username not found"));
+
     }
 
     /**
@@ -125,9 +121,8 @@ public class UserController {
         }
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
-                .body(
-                        ApiResponse.notFound("user by Email not found")
-                );
+                .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by Email not found"));
+
     }
     //endregion
 
@@ -143,20 +138,17 @@ public class UserController {
 
 
     // UPDATE
-    /**
-     * Update an existing Social User.
-     *
-     * @param id     The ID of the user making the request.
-     * @param request The updated Social User object.
-     * @return ResponseEntity with a ResponseDTO.
-     */
-    @PutMapping("/{id}")
-    public ResponseEntity<Void> updateUser(
-            @PathVariable UUID id,
-            @RequestBody @Valid UserUpdateRequestDTO request) {
-        User updated = UserRestMapper.UpdatetoDomain(request);
-        userUseCases.updateUser(id, updated);
-        return ResponseEntity.noContent().build();
+    @PutMapping("/profile")
+    public ResponseEntity<ApiResponse<?>> updateProfile(
+            @Valid @RequestBody UpdateUserProfileDTO request
+    ) {
+
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(
+                        ApiResponse.message(HttpStatus.OK.value(), "User profile updated successfully")
+                );
     }
 
     // DELETE
