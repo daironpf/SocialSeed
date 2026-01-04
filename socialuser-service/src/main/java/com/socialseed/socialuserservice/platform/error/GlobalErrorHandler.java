@@ -47,7 +47,6 @@ public class GlobalErrorHandler {
                 .body(response);
     }
 
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiResponse<?>> handleValidationErrors(MethodArgumentNotValidException ex) {
 
@@ -77,7 +76,6 @@ public class GlobalErrorHandler {
                 .body(response);
     }
 
-
     /**
      * Maneja cualquier parámetro mal formado (UUID, Integer, Long, Enum, Boolean, etc.)
      */
@@ -105,7 +103,6 @@ public class GlobalErrorHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(response);
     }
-
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<?>> handleGeneric(Exception ex) {

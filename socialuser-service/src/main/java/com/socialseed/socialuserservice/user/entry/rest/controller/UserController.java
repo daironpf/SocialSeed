@@ -135,19 +135,20 @@ public class UserController {
 //         return ResponseEntity.ok(UserRestMapper.toResponse(saved));
 //     }
 
-
-
     // UPDATE
     @PutMapping("/profile")
     public ResponseEntity<ApiResponse<?>> updateProfile(
             @Valid @RequestBody UpdateUserProfileDTO request
     ) {
-
+        userUseCases.updateUserProfile(request);
 
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(
-                        ApiResponse.message(HttpStatus.OK.value(), "User profile updated successfully")
+                        ApiResponse.success(
+                                HttpStatus.OK.value(),
+                                "User profile updated successfully"
+                        )
                 );
     }
 

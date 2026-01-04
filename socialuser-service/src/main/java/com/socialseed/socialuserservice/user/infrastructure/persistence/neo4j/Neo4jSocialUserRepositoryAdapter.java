@@ -31,6 +31,18 @@ public class Neo4jSocialUserRepositoryAdapter implements UserRepository {
     }
 
     @Override
+    public void updateProfile(User user) {
+        socialUserNeo4jRepository.updateProfile(
+                user.getId(),
+                user.getFullName(),
+                user.getBio(),
+                user.getProfileImage(),
+                user.getBirthDate(),
+                user.getLanguage().name()
+        );
+    }
+
+    @Override
     public Optional<User> findById(UUID id) {
         return socialUserNeo4jRepository.findById(id)
                 .map(userNeo4jMapper::toDomain);

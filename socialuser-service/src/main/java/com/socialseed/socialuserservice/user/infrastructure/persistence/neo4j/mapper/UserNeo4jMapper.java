@@ -8,4 +8,6 @@ public interface UserNeo4jMapper {
     UserNeo4jEntity toEntity(User domain);
 
     User toDomain(UserNeo4jEntity entity);
+
+
 }

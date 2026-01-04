@@ -20,7 +20,6 @@ public record ApiResponse<T>(
     }
 
     /* ===== Factories neutrales ===== */
-
     public static <T> ApiResponse<T> of(int status, T data, String message) {
         return new ApiResponse<>(status, data, message);
     }
@@ -33,5 +32,3 @@ public record ApiResponse<T>(
         return new ApiResponse<>(status, null, message);
     }
 }
-
-
