@@ -4,21 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="refactor the code of ApiResponse">
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UpdateUserProfile.java" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="feat(socialUser): close issue #117 – update user profile&#10;&#10;Implements full update user profile use case using domain model,&#10;validated DTOs, optimized Neo4j persistence, and standardized API responses.">
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/domain/UserTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/infrastructure/persistence/neo4j/Neo4jUserRepositoryIntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/testconfig/Neo4jIntegrationTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/usecases/UpdateUserProfileUseCaseTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ApiResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/GlobalErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/GlobalErrorHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UpdateUser.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UserUseCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/application/usecase/UserUseCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/domain/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/response/UserResponseDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/dto/response/UserResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/mapper/UserRestMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/mapper/UserRestMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/Neo4jSocialUserRepositoryAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/Neo4jSocialUserRepositoryAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/mapper/UserNeo4jMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/mapper/UserNeo4jMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/repository/SocialUserNeo4jRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/infrastructure/persistence/neo4j/repository/SocialUserNeo4jRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,6 +140,10 @@
     "HTTP Request.register | Register.executor": "Run",
     "HTTP Request.update-patient | Update SocialUser entity.executor": "Run",
     "HTTP Request.update-socialuser | Update SocialUser entity.executor": "Run",
+    "JUnit.UpdateUserProfileUseCaseTest.executor": "Run",
+    "JUnit.UpdateUserProfileUseCaseTest.should_throw_exception_when_user_not_found.executor": "Run",
+    "JUnit.UserTest.executor": "Run",
+    "JUnit.java in socialuser-service.executor": "Run",
     "Maven.api-gateway [clean,install].executor": "Run",
     "Maven.api-gateway [clean].executor": "Run",
     "Maven.api-gateway [install].executor": "Run",
@@ -255,14 +251,58 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="getSocialUserById | GetSocialUserById" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserById.http" executionIdentifier="GetSocialUserById" runType="Run single request">
-      <method v="2" />
+    <configuration name="Neo4jUserRepositoryIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="socialuser-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.socialseed.socialuserservice.infrastructure.persistence.neo4j.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.socialseed.socialuserservice.infrastructure.persistence.neo4j" />
+      <option name="MAIN_CLASS_NAME" value="com.socialseed.socialuserservice.infrastructure.persistence.neo4j.Neo4jUserRepositoryIntegrationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="getSocialUserByUserName | getSocialUserByUserName" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/gets/getSocialUserByUserName.http" executionIdentifier="getSocialUserByUserName" runType="Run single request">
-      <method v="2" />
+    <configuration name="UpdateUserProfileUseCaseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="socialuser-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.socialseed.socialuserservice.usecases.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.socialseed.socialuserservice.usecases" />
+      <option name="MAIN_CLASS_NAME" value="com.socialseed.socialuserservice.usecases.UpdateUserProfileUseCaseTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
-    <configuration name="getUserByEmail | getSocialUserByEmail" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/api-requests/socialuser-service/gets/getUserByEmail.http" executionIdentifier="getSocialUserByEmail" runType="Run single request">
-      <method v="2" />
+    <configuration name="UserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="socialuser-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.socialseed.socialuserservice.domain.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.socialseed.socialuserservice.domain" />
+      <option name="MAIN_CLASS_NAME" value="com.socialseed.socialuserservice.domain.UserTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="java in socialuser-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="socialuser-service" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/socialuser-service/src/test/java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration name="ApiGatewayApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="api-gateway" />
@@ -315,19 +355,6 @@
           </option>
           <option name="commandLineOptions" value="--network socialseed" />
           <option name="sourceFilePath" value="api-gateway/Dockerfile" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
-    <configuration name="docker-compose.yml.neo4j: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="neo4j" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
         </settings>
       </deployment>
       <method v="2" />
@@ -386,12 +413,18 @@
       <item itemvalue="Docker.api-gateway" />
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
-      <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
+      <item itemvalue="JUnit.Neo4jUserRepositoryIntegrationTest" />
+      <item itemvalue="JUnit.UpdateUserProfileUseCaseTest" />
+      <item itemvalue="JUnit.UserTest" />
+      <item itemvalue="JUnit.java in socialuser-service" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.SocialuserServiceApplication" />
-        <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
+        <item itemvalue="JUnit.Neo4jUserRepositoryIntegrationTest" />
+        <item itemvalue="JUnit.UpdateUserProfileUseCaseTest" />
+        <item itemvalue="JUnit.java in socialuser-service" />
+        <item itemvalue="JUnit.UserTest" />
       </list>
     </recent_temporary>
   </component>
@@ -455,14 +488,6 @@
       <workItem from="1766716505665" duration="2315000" />
       <workItem from="1766800498946" duration="16000" />
       <workItem from="1766880119367" duration="8285000" />
-    </task>
-    <task id="LOCAL-00012" summary="add new version of README.md&#10;add LICENSE">
-      <option name="closed" value="true" />
-      <created>1762228098406</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1762228098406</updated>
     </task>
     <task id="LOCAL-00013" summary="minor updates">
       <option name="closed" value="true" />
@@ -848,7 +873,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767474574472</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="feat(socialUser): close issue #117 – update user profile&#10;&#10;Implements full update user profile use case using domain model,&#10;validated DTOs, optimized Neo4j persistence, and standardized API responses.">
+      <option name="closed" value="true" />
+      <created>1767494527729</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1767494527730</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -897,7 +930,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="update minor details" />
     <MESSAGE value="add application usecases" />
     <MESSAGE value="add persistence pgsql" />
     <MESSAGE value="add auth configs and dependencies" />
@@ -922,7 +954,8 @@
     <MESSAGE value="Refactored Neo4j Cypher queries used to retrieve SocialUser entities.&#10;&#10;- Replaced OPTIONAL MATCH with direct MATCH and LIMIT 1 for better performance.&#10;- Optimized findById query to leverage indexed property lookups.&#10;- Added optimized queries to retrieve SocialUser by email and username.&#10;- Improved query clarity and ensured early-stop behavior.&#10;- Prepared queries to work efficiently with UNIQUE constraints." />
     <MESSAGE value="create new format for dto to update socialuser profile" />
     <MESSAGE value="refactor the code of ApiResponse" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor the code of ApiResponse" />
+    <MESSAGE value="feat(socialUser): close issue #117 – update user profile&#10;&#10;Implements full update user profile use case using domain model,&#10;validated DTOs, optimized Neo4j persistence, and standardized API responses." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(socialUser): close issue #117 – update user profile&#10;&#10;Implements full update user profile use case using domain model,&#10;validated DTOs, optimized Neo4j persistence, and standardized API responses." />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
