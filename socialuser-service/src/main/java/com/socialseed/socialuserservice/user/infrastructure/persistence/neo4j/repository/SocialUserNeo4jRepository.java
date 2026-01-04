@@ -4,10 +4,29 @@ import com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.en
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 
+import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
 
 public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEntity, UUID> {
+    @Query("""
+        MATCH (u:SocialUser {id: $id})
+        SET
+            u.full_name = $fullName,
+            u.bio = $bio,
+            u.profile_image = $profileImage,
+            u.birth_date = $birthDate,
+            u.language = $language
+        """)
+    void updateProfile(
+            UUID id,
+            String fullName,
+            String bio,
+            String profileImage,
+            LocalDate birthDate,
+            String language
+    );
+
     // region findBy
     @Query("""
             MATCH (u:SocialUser {email: $email})

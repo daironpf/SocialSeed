@@ -51,6 +51,30 @@ public class User {
         );
     }
 
+    public void updateProfile(
+            String fullName,
+            String bio,
+            String profileImage,
+            LocalDate birthDate,
+            UserLanguage language
+    ) {
+
+        if (this.status == UserStatus.DELETED) {
+            throw new IllegalStateException("Deleted users cannot be updated");
+        }
+
+        this.fullName = fullName;
+        this.bio = bio;
+        this.profileImage = profileImage;
+
+        if (birthDate != null && birthDate.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("birthDate cannot be in the future");
+        }
+        this.birthDate = birthDate;
+
+        this.language = Objects.requireNonNull(language, "language is required");
+    }
+
     /* The goal is to reconstruct a domain entity from persisted data without triggering creation rules or validation logic that are only meant for new users.
 
         Example scenario:
@@ -85,7 +109,6 @@ public class User {
             status
         );
     }
-
 
     private static String validateRequired(String value, String field) {
         if (value == null || value.isBlank()) {
