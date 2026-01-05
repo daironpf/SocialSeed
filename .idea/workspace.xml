@@ -4,13 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="feat(socialUser): close issue #117 – update user profile&#10;&#10;Implements full update user profile use case using domain model,&#10;validated DTOs, optimized Neo4j persistence, and standardized API responses.">
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/domain/UserTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/infrastructure/persistence/neo4j/Neo4jUserRepositoryIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/testconfig/Neo4jIntegrationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/socialuser-service/src/test/java/com/socialseed/socialuserservice/usecases/UpdateUserProfileUseCaseTest.java" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="drop setter and getter from lombok">
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/GetUserById.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AuthUserResponseDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/AuthUseCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/AuthUseCases.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/mapper/AuthRestMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/mapper/AuthRestMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,8 +30,8 @@
         <option value="Exception" />
         <option value="Interface" />
         <option value="HTTP Request" />
-        <option value="Record" />
         <option value="Class" />
+        <option value="Record" />
       </list>
     </option>
   </component>
@@ -140,6 +141,7 @@
     "HTTP Request.register | Register.executor": "Run",
     "HTTP Request.update-patient | Update SocialUser entity.executor": "Run",
     "HTTP Request.update-socialuser | Update SocialUser entity.executor": "Run",
+    "JUnit.Neo4jUserRepositoryIntegrationTest.executor": "Run",
     "JUnit.UpdateUserProfileUseCaseTest.executor": "Run",
     "JUnit.UpdateUserProfileUseCaseTest.should_throw_exception_when_user_not_found.executor": "Run",
     "JUnit.UserTest.executor": "Run",
@@ -174,11 +176,11 @@
     "Spring Boot.SocialuserServiceApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "117-implement-use-case-update-user-profile-information",
+    "git-widget-placeholder": "55-implement-get-authuser-by-id",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/auth-service/src/main/resources/i18n",
+    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/auth-service/src/main/java/com/socialseed/authservice/platform",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -189,7 +191,7 @@
     "run.configurations.included.in.services": "true",
     "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "to.speed.mode.migration.done": "true",
-    "two.files.diff.last.used.folder": "/home/dairon/proyectos/SocialSeed/auth-service/src/main/resources/i18n",
+    "two.files.diff.last.used.folder": "/home/dairon/proyectos/SocialSeed/auth-service/src/main/java/com/socialseed/authservice/platform",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -215,11 +217,11 @@
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\test\java\com\socialseed\socialuserservice" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.socialseed.authservice.auth.application.usecase" />
       <recent name="com.socialseed.authservice.auth.infrastructure.kafka.producer" />
       <recent name="com.socialseed.authservice.auth.infrastructure.kafka.config" />
       <recent name="com.socialseed.authservice.auth.application.usecase.validation" />
       <recent name="com.socialseed.authservice.auth.entry.rest.mapper" />
-      <recent name="com.socialseed.socialuserservice.shared.exception" />
     </key>
   </component>
   <component name="RunAnythingCache">
@@ -237,7 +239,20 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Application.SocialuserServiceApplication">
+  <component name="RunManager" selected="Application.AuthServiceApplication">
+    <configuration name="AuthServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.socialseed.authservice.AuthServiceApplication" />
+      <module name="auth-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.socialseed.authservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SocialuserServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.socialseed.socialuserservice.SocialuserServiceApplication" />
       <module name="socialuser-service" />
@@ -247,59 +262,6 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Neo4jUserRepositoryIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="socialuser-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.socialseed.socialuserservice.infrastructure.persistence.neo4j.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.socialseed.socialuserservice.infrastructure.persistence.neo4j" />
-      <option name="MAIN_CLASS_NAME" value="com.socialseed.socialuserservice.infrastructure.persistence.neo4j.Neo4jUserRepositoryIntegrationTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UpdateUserProfileUseCaseTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="socialuser-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.socialseed.socialuserservice.usecases.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.socialseed.socialuserservice.usecases" />
-      <option name="MAIN_CLASS_NAME" value="com.socialseed.socialuserservice.usecases.UpdateUserProfileUseCaseTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="socialuser-service" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.socialseed.socialuserservice.domain.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.socialseed.socialuserservice.domain" />
-      <option name="MAIN_CLASS_NAME" value="com.socialseed.socialuserservice.domain.UserTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="java in socialuser-service" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="socialuser-service" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/socialuser-service/src/test/java" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -359,6 +321,19 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.neo4j: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="neo4j" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration name="socialgraph-db" type="docker-deploy" factoryName="docker-image" server-name="Docker">
       <deployment type="docker-image">
         <settings>
@@ -409,22 +384,18 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.AuthServiceApplication" />
       <item itemvalue="Application.SocialuserServiceApplication" />
       <item itemvalue="Docker.api-gateway" />
       <item itemvalue="Docker.socialgraph-db" />
       <item itemvalue="Docker.socialuser-service" />
-      <item itemvalue="JUnit.Neo4jUserRepositoryIntegrationTest" />
-      <item itemvalue="JUnit.UpdateUserProfileUseCaseTest" />
-      <item itemvalue="JUnit.UserTest" />
-      <item itemvalue="JUnit.java in socialuser-service" />
+      <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AuthServiceApplication" />
+        <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
         <item itemvalue="Application.SocialuserServiceApplication" />
-        <item itemvalue="JUnit.Neo4jUserRepositoryIntegrationTest" />
-        <item itemvalue="JUnit.UpdateUserProfileUseCaseTest" />
-        <item itemvalue="JUnit.java in socialuser-service" />
-        <item itemvalue="JUnit.UserTest" />
       </list>
     </recent_temporary>
   </component>
@@ -488,30 +459,6 @@
       <workItem from="1766716505665" duration="2315000" />
       <workItem from="1766800498946" duration="16000" />
       <workItem from="1766880119367" duration="8285000" />
-    </task>
-    <task id="LOCAL-00013" summary="minor updates">
-      <option name="closed" value="true" />
-      <created>1762228389508</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1762228389508</updated>
-    </task>
-    <task id="LOCAL-00014" summary="minor updates">
-      <option name="closed" value="true" />
-      <created>1762228478413</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1762228478413</updated>
-    </task>
-    <task id="LOCAL-00015" summary="update the java use to 21">
-      <option name="closed" value="true" />
-      <created>1762273608442</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1762273608442</updated>
     </task>
     <task id="LOCAL-00016" summary="add the old code to use the good code to improve the actually code">
       <option name="closed" value="true" />
@@ -881,7 +828,31 @@
       <option name="project" value="LOCAL" />
       <updated>1767494527730</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="add Test component">
+      <option name="closed" value="true" />
+      <created>1767496318124</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1767496318124</updated>
+    </task>
+    <task id="LOCAL-00063" summary="update Platform code from socialuser-service">
+      <option name="closed" value="true" />
+      <created>1767587568808</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1767587568811</updated>
+    </task>
+    <task id="LOCAL-00064" summary="drop setter and getter from lombok">
+      <option name="closed" value="true" />
+      <created>1767588204547</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1767588204547</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -917,7 +888,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="117-implement-use-case-update-user-profile-information" />
+                        <option value="55-implement-get-authuser-by-id" />
                       </list>
                     </value>
                   </entry>
@@ -930,9 +901,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add application usecases" />
-    <MESSAGE value="add persistence pgsql" />
-    <MESSAGE value="add auth configs and dependencies" />
     <MESSAGE value="other changes" />
     <MESSAGE value="register user to pgsql done" />
     <MESSAGE value="working in grpc connection between auth and socialuser services" />
@@ -955,7 +923,10 @@
     <MESSAGE value="create new format for dto to update socialuser profile" />
     <MESSAGE value="refactor the code of ApiResponse" />
     <MESSAGE value="feat(socialUser): close issue #117 – update user profile&#10;&#10;Implements full update user profile use case using domain model,&#10;validated DTOs, optimized Neo4j persistence, and standardized API responses." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(socialUser): close issue #117 – update user profile&#10;&#10;Implements full update user profile use case using domain model,&#10;validated DTOs, optimized Neo4j persistence, and standardized API responses." />
+    <MESSAGE value="add Test component" />
+    <MESSAGE value="update Platform code from socialuser-service" />
+    <MESSAGE value="drop setter and getter from lombok" />
+    <option name="LAST_COMMIT_MESSAGE" value="drop setter and getter from lombok" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

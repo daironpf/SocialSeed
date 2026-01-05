@@ -1,6 +1,7 @@
 package com.socialseed.authservice.auth.entry.rest.mapper;
 
 import com.socialseed.authservice.auth.domain.model.AuthUser;
+import com.socialseed.authservice.auth.entry.rest.dto.AuthUserResponseDTO;
 import com.socialseed.authservice.auth.entry.rest.dto.RegisterRequestDTO;
 
 public class AuthRestMapper {
@@ -15,12 +16,24 @@ public class AuthRestMapper {
         );
     }
 
-//    public static UserResponseDTO toResponse(AuthUser user) {
-//        return new UserResponseDTO(
-//                user.getId(),
-//                user.getUsername(),
-//                user.getEmail(),
-//                user.getFullName()
-//        );
-//    }
+    /* Domain → Response */
+    public static AuthUserResponseDTO toResponse(AuthUser user) {
+        return new AuthUserResponseDTO(
+                user.getId(),
+                user.getUsername(),
+                user.getEmail(),
+                user.getRoles(),
+
+                user.isEnabled(),
+                user.isAccountNonExpired(),
+                user.isAccountNonLocked(),
+                user.isCredentialsNonExpired(),
+                user.isEmailVerified(),
+                user.isTwoFactorEnabled(),
+
+                user.getCreatedAt(),
+                user.getUpdatedAt(),
+                user.getLastLoginAt()
+        );
+    }
 }
