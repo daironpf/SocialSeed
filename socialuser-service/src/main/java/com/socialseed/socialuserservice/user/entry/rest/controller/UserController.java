@@ -60,7 +60,7 @@ public class UserController {
      * @return ResponseEntity with a ResponseDTO.
      */
     @GetMapping("/getSocialUserById/{id}")
-    public ResponseEntity<ApiResponse<?>> getUserById(@PathVariable UUID id) {
+    public ResponseEntity<ApiResponse<?>> getUserById(@Valid @PathVariable UUID id) {
         Optional<User> user = userUseCases.getUserById(id);
         if (user.isPresent()){
             UserResponseDTO response =  UserRestMapper.toResponse(user.get());
