@@ -1,21 +1,45 @@
 # 🌱 Social Seed — Build Your Own Social Network with Spring Boot, Neo4j & Microservices
 
-[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen)
-![Neo4j](https://img.shields.io/badge/Neo4j-GraphDB-blue)
-![Microservices](https://img.shields.io/badge/Architecture-Microservices-orange)
-
-> **Social Seed** is a modular and scalable social network backend built with **Spring Boot**, **Neo4j**, and **microservices architecture**.
-> It serves as a foundation for developers to create and extend social platforms with modern, flexible backend components.
-
----
-
 ## 🚀 Overview
 
 **Social Seed** provides a complete backend ecosystem for building a social network powered by microservices and graph relationships.
 It is designed to be **extendable**, **distributed**, and **ready for integration** with mobile or web clients.
 
 A dedicated **Android application** will be published on the **Google Play Store** to interact directly with this backend, allowing users to experience the platform in real-time.
+
+---
+
+## 📊 Project Status
+
+![GitHub closed issues](https://img.shields.io/github/issues-closed/daironpf/SocialSeed?include_prs=false)
+![Open Issues](https://img.shields.io/github/issues/daironpf/SocialSeed?include_prs=false)
+![Last Commit](https://img.shields.io/github/last-commit/daironpf/SocialSeed)
+![Repo Size](https://img.shields.io/github/repo-size/daironpf/SocialSeed)
+
+## ⚙️ Technologies
+
+![Java](https://img.shields.io/badge/Java-17+-red)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen)
+![API](https://img.shields.io/badge/API-REST-orange)  <!-- Public API -->
+
+![Neo4j](https://img.shields.io/badge/Database-Neo4j-blue)
+![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue)
+
+![Architecture](https://img.shields.io/badge/Architecture-Microservices-orange)
+![Kafka](https://img.shields.io/badge/Messaging-Apache%20Kafka-black)
+![gRPC](https://img.shields.io/badge/Communication-gRPC-brightgreen)  <!-- Internal microservice communication -->
+
+![Docker](https://img.shields.io/badge/Container-Docker-blue)
+![Docker](https://img.shields.io/badge/Deployment-Docker%20Compose-blue)
+
+
+
+## 📄 License
+
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
+> **Social Seed** is a modular and scalable social network backend built with **Spring Boot**, **Neo4j**, and **microservices architecture**.
+> It serves as a foundation for developers to create and extend social platforms with modern, flexible backend components.
 
 ---
 
