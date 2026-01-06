@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/GetAuthUserByEmail.java" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="Done: Implement Get AuthUser by Email&#10;Closed #56">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/UserController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/AuthUseCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/AuthUseCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/GlobalErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/GlobalErrorHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_en.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_es.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_en.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/resources/i18n/messages_es.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,110 +89,110 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.AuthServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GovernanceServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SocialuserServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.api-gateway.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.api-gateway: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.auth-db: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.auth-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.kafka-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.kafka: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.neo4j: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.socialseed: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml.socialuser-service: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.docker-compose.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.socialgraph-db.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.socialuser-service.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.socialuser-service/Dockerfile.executor&quot;: &quot;Run&quot;,
-    &quot;Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.All in generated-requests.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.All in register.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.AuthServiceApplication | #1.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.changepassword | Change Password.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.changepassword-socialuser | Change Password of SocialUser.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.create-socialuser | Create a new patient entity.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.create-socialuser | Create a new socialuser entity.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.delete-patient | Delete an SocialUser.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.delete-socialuser | Delete an SocialUser.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #1.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #2.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #3.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.generated-requests | #4.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.get-patients | GET request to get all patients.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.get-patients | GET request to get all social user.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.get-socialusers | #2.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.get-socialusers | Docker.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.get-socialusers | GET request to get all social user.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.get-socialusers | Local.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.getSocialUserById | GetSocialUserById.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.getSocialUserByUserName | getSocialUserByUserName.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.getUserByEmail | getSocialUserByEmail.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.getUserById | GetSocialUserById.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.getUserById | Local.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.getUserByUserName | Local.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.grpc-server-test | #1.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.login | login.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.register | Register - Albert Einstein.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.register | Register.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.update-patient | Update SocialUser entity.executor&quot;: &quot;Run&quot;,
-    &quot;HTTP Request.update-socialuser | Update SocialUser entity.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.Neo4jUserRepositoryIntegrationTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UpdateUserProfileUseCaseTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UpdateUserProfileUseCaseTest.should_throw_exception_when_user_not_found.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.UserTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.java in socialuser-service.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-gateway [clean,install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-gateway [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.api-gateway [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.auth-service [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.auth-service [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.auth-service [package].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.kafka-proto-emitter [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.kafka-proto-emitter [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.probrando-kafkaemiter [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.probrando-kafkaemiter [install].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.probrando-kafkaemiter [package].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.socialuser-service [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.socialuser-service [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.socialuser-service [package].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.ApiGatewayApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.AuthServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.GovernanceServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.ProbrandoKafkaemiterApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.SocialuserServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;56-implement-get-authuser-by-email&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/dairon/proyectos/SocialSeed/auth-service/src/main/java/com/socialseed/authservice/platform&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;run.configurations.included.in.services&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;two.files.diff.last.used.folder&quot;: &quot;/home/dairon/proyectos/SocialSeed/auth-service/src/main/java/com/socialseed/authservice/platform&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.AuthServiceApplication.executor": "Run",
+    "Application.GovernanceServiceApplication.executor": "Run",
+    "Application.SocialuserServiceApplication.executor": "Run",
+    "Docker.api-gateway.executor": "Run",
+    "Docker.docker-compose.yml.api-gateway: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.auth-db: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.auth-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.kafka-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.kafka: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.neo4j: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.socialseed: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml.socialuser-service: Compose Deployment.executor": "Run",
+    "Docker.docker-compose.yml: Compose Deployment.executor": "Run",
+    "Docker.socialgraph-db.executor": "Run",
+    "Docker.socialuser-service.executor": "Run",
+    "Docker.socialuser-service/Dockerfile.executor": "Run",
+    "Docker.socialuser-service/docker-compose.dev.yml: Compose Deployment.executor": "Run",
+    "HTTP Request.All in generated-requests.executor": "Run",
+    "HTTP Request.All in register.executor": "Run",
+    "HTTP Request.AuthServiceApplication | #1.executor": "Run",
+    "HTTP Request.changepassword | Change Password.executor": "Run",
+    "HTTP Request.changepassword-socialuser | Change Password of SocialUser.executor": "Run",
+    "HTTP Request.create-socialuser | Create a new patient entity.executor": "Run",
+    "HTTP Request.create-socialuser | Create a new socialuser entity.executor": "Run",
+    "HTTP Request.delete-patient | Delete an SocialUser.executor": "Run",
+    "HTTP Request.delete-socialuser | Delete an SocialUser.executor": "Run",
+    "HTTP Request.generated-requests | #1.executor": "Run",
+    "HTTP Request.generated-requests | #2.executor": "Run",
+    "HTTP Request.generated-requests | #3.executor": "Run",
+    "HTTP Request.generated-requests | #4.executor": "Run",
+    "HTTP Request.get-patients | GET request to get all patients.executor": "Run",
+    "HTTP Request.get-patients | GET request to get all social user.executor": "Run",
+    "HTTP Request.get-socialusers | #2.executor": "Run",
+    "HTTP Request.get-socialusers | Docker.executor": "Run",
+    "HTTP Request.get-socialusers | GET request to get all social user.executor": "Run",
+    "HTTP Request.get-socialusers | Local.executor": "Run",
+    "HTTP Request.getSocialUserById | GetSocialUserById.executor": "Run",
+    "HTTP Request.getSocialUserByUserName | getSocialUserByUserName.executor": "Run",
+    "HTTP Request.getUserByEmail | getSocialUserByEmail.executor": "Run",
+    "HTTP Request.getUserById | GetSocialUserById.executor": "Run",
+    "HTTP Request.getUserById | Local.executor": "Run",
+    "HTTP Request.getUserByUserName | Local.executor": "Run",
+    "HTTP Request.grpc-server-test | #1.executor": "Run",
+    "HTTP Request.login | login.executor": "Run",
+    "HTTP Request.register | Register - Albert Einstein.executor": "Run",
+    "HTTP Request.register | Register.executor": "Run",
+    "HTTP Request.update-patient | Update SocialUser entity.executor": "Run",
+    "HTTP Request.update-socialuser | Update SocialUser entity.executor": "Run",
+    "JUnit.Neo4jUserRepositoryIntegrationTest.executor": "Run",
+    "JUnit.UpdateUserProfileUseCaseTest.executor": "Run",
+    "JUnit.UpdateUserProfileUseCaseTest.should_throw_exception_when_user_not_found.executor": "Run",
+    "JUnit.UserTest.executor": "Run",
+    "JUnit.java in socialuser-service.executor": "Run",
+    "Maven.api-gateway [clean,install].executor": "Run",
+    "Maven.api-gateway [clean].executor": "Run",
+    "Maven.api-gateway [install].executor": "Run",
+    "Maven.auth-service [clean].executor": "Run",
+    "Maven.auth-service [compile].executor": "Run",
+    "Maven.auth-service [package].executor": "Run",
+    "Maven.kafka-proto-emitter [clean].executor": "Run",
+    "Maven.kafka-proto-emitter [compile].executor": "Run",
+    "Maven.probrando-kafkaemiter [clean].executor": "Run",
+    "Maven.probrando-kafkaemiter [install].executor": "Run",
+    "Maven.probrando-kafkaemiter [package].executor": "Run",
+    "Maven.socialuser-service [clean].executor": "Run",
+    "Maven.socialuser-service [compile].executor": "Run",
+    "Maven.socialuser-service [package].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.ApiGatewayApplication.executor": "Run",
+    "Spring Boot.AuthServiceApplication.executor": "Run",
+    "Spring Boot.GovernanceServiceApplication.executor": "Run",
+    "Spring Boot.ProbrandoKafkaemiterApplication.executor": "Run",
+    "Spring Boot.SocialuserServiceApplication.executor": "Run",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "56-implement-get-authuser-by-email",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/socialuser-service/src/main/resources",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "editor.preferences.fonts.default",
+    "to.speed.mode.migration.done": "true",
+    "two.files.diff.last.used.folder": "/home/dairon/proyectos/SocialSeed/socialuser-service/src/main/resources",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -463,14 +459,6 @@
       <workItem from="1766716505665" duration="2315000" />
       <workItem from="1766800498946" duration="16000" />
       <workItem from="1766880119367" duration="8285000" />
-    </task>
-    <task id="LOCAL-00018" summary="add validation and response with Exception to create and delete socialuser">
-      <option name="closed" value="true" />
-      <created>1762311443435</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1762311443435</updated>
     </task>
     <task id="LOCAL-00019" summary="add kafka-service">
       <option name="closed" value="true" />
@@ -856,7 +844,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767592137057</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="Done: Implement Get AuthUser by Email&#10;Closed #56">
+      <option name="closed" value="true" />
+      <created>1767679457824</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1767679457824</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -905,7 +901,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="working in grpc connection between auth and socialuser services" />
     <MESSAGE value="remove password from socialuser and clean some code" />
     <MESSAGE value="add change password usecases to auth-service and some clean code changes" />
     <MESSAGE value="Add Kafka Server with script for create topics-init.sh" />
@@ -930,7 +925,8 @@
     <MESSAGE value="drop setter and getter from lombok" />
     <MESSAGE value="add @valid to pathvariable" />
     <MESSAGE value="feat(auth): add GetAuthUserById, AuthUserResponseDTO and domain-to-rest mapper&#10;&#10;- Introduced AuthUserResponseDTO for safe REST responses&#10;- Added mapping from AuthUser domain model to response DTO&#10;- Kept sensitive fields (passwords, tokens, secrets) out of REST layer" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(auth): add GetAuthUserById, AuthUserResponseDTO and domain-to-rest mapper&#10;&#10;- Introduced AuthUserResponseDTO for safe REST responses&#10;- Added mapping from AuthUser domain model to response DTO&#10;- Kept sensitive fields (passwords, tokens, secrets) out of REST layer" />
+    <MESSAGE value="Done: Implement Get AuthUser by Email&#10;Closed #56" />
+    <option name="LAST_COMMIT_MESSAGE" value="Done: Implement Get AuthUser by Email&#10;Closed #56" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
