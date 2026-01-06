@@ -45,12 +45,29 @@ A dedicated **Android application** will be published on the **Google Play Store
 
 ## 🧩 Key Features
 
-* **🧠 Modular Microservices Architecture** — Each service handles a specific domain for clean scalability.
-* **🔗 Graph Database** — Built on **Neo4j**, enabling advanced relationship modeling (friends, followers, likes).
-* **💬 Core Social Interactions** — User profiles, follow system, posts, comments, likes, and private messaging.
-* **⚙️ API-First Approach** — Fully REST-based backend designed for mobile and web clients.
-* **📈 Scalable & Extensible** — Easily deployable via Docker and adaptable to new use cases.
-* **🆓 Open Source** — Licensed under **Apache 2.0**, allowing free use, modification, and distribution.
+* **🧠 Modular Microservices Architecture** — Each service handles a specific domain, enabling clean scalability and clear separation of concerns.
+* **🔗 Graph Database** — Built on **Neo4j**, enabling advanced relationship modeling (friends, followers, interactions, and social graphs).
+* **💬 Core Social Interactions** — User profiles, follow system, posts, comments, reactions, and private messaging.
+* **🏛️ Governance-Ready Core** — Designed with governance in mind, providing a solid foundation for moderation, policy enforcement, compliance, and platform rules without coupling them to the social core.
+* **⚙️ API-First Approach** — Fully REST-based backend designed for mobile and web clients, facilitating integration and experimentation.
+* **📈 Scalable & Extensible** — Easily deployable via Docker and adaptable to academic, enterprise, or experimental use cases.
+* **🆓 Open Source Core** — Licensed under **Apache 2.0**, offering a production-grade social network core that can be freely studied, extended, and integrated, while allowing advanced governance features to evolve independently.
+
+---
+## 🏛️ Why Governance Matters
+
+Modern social platforms require more than just user interactions; they need clear governance foundations to ensure trust, safety, and long-term sustainability.
+
+Social Seed is designed with governance as a first-class concern, allowing institutions, companies, and researchers to understand and experiment with how moderation, platform rules, and accountability can coexist with a scalable social architecture. By keeping governance conceptually separated from the social core, the project enables:
+
+* A clear distinction between social features and platform control mechanisms.
+* Safer experimentation in academic and educational environments.
+* Easier adaptation to organizational, legal, or ethical requirements.
+* A realistic foundation for real-world social platforms without overloading the open-source core.
+
+> ⚠️ **Key Insight**  
+> This approach makes Social Seed especially valuable as a learning platform and as a starting point for professional systems where governance is not optional, but essential.
+
 
 ---
 
@@ -64,9 +81,9 @@ The project uses a graph-oriented data structure to represent relationships betw
 
 ## 🏗️ Architecture Overview
 
-Social Seed is built on a **microservices-based backend**, where each component operates independently and communicates via REST or messaging events:
+Social Seed is built on a **microservices-based backend**, where each component operates independently and communicates via REST, GRPC or messaging events:
 
-* **Auth Service** — User registration, Authentication & authorization using JWT.
+* **Auth Service** — User registration, authentication & authorization using JWT.
 * **SocialUser Service** — User profiles, and account data.
 * **Post Service** — Post creation and retrieval.
 * **Comment Service** — Comments associated with posts.
@@ -75,17 +92,11 @@ Social Seed is built on a **microservices-based backend**, where each component 
 * **Messaging Service** — Private messaging between users.
 * **Notification Service** — Real-time and event-based notifications.
 * **Media Service** — Image and file upload management.
+* **Governance Service** — Platform governance and moderation rules, including content policies, reporting workflows, sanctions, and enforcement mechanisms across services.
 
 ---
 
 ## 🛠️ Getting Started
-
-### Prerequisites
-
-* **Java 17+**
-* **Docker & Docker Compose**
-* **Neo4j Database**
-* **Maven 3.8+**
 
 ### Installation
 
