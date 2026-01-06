@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="drop setter and getter from lombok">
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/GetUserById.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AuthUserResponseDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/AuthUseCases.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/AuthUseCases.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/mapper/AuthRestMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/mapper/AuthRestMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/user/entry/rest/controller/UserController.java" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="Update Resources files">
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/common/response/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/common/response/ApiResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/ErrorResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ApiResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/GlobalErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/GlobalErrorHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +28,8 @@
         <option value="Exception" />
         <option value="Interface" />
         <option value="HTTP Request" />
-        <option value="Class" />
         <option value="Record" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -176,11 +174,11 @@
     "Spring Boot.SocialuserServiceApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "55-implement-get-authuser-by-id",
+    "git-widget-placeholder": "56-implement-get-authuser-by-email",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/auth-service/src/main/java/com/socialseed/authservice/platform",
+    "last_opened_file_path": "/home/dairon/proyectos/SocialSeed/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -191,7 +189,7 @@
     "run.configurations.included.in.services": "true",
     "settings.editor.selected.configurable": "editor.preferences.fonts.default",
     "to.speed.mode.migration.done": "true",
-    "two.files.diff.last.used.folder": "/home/dairon/proyectos/SocialSeed/auth-service/src/main/java/com/socialseed/authservice/platform",
+    "two.files.diff.last.used.folder": "/home/dairon/proyectos/SocialSeed/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -396,6 +394,8 @@
         <item itemvalue="Application.AuthServiceApplication" />
         <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
         <item itemvalue="Application.SocialuserServiceApplication" />
+        <item itemvalue="Application.AuthServiceApplication" />
+        <item itemvalue="Application.SocialuserServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -459,38 +459,6 @@
       <workItem from="1766716505665" duration="2315000" />
       <workItem from="1766800498946" duration="16000" />
       <workItem from="1766880119367" duration="8285000" />
-    </task>
-    <task id="LOCAL-00016" summary="add the old code to use the good code to improve the actually code">
-      <option name="closed" value="true" />
-      <created>1762274142974</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1762274142974</updated>
-    </task>
-    <task id="LOCAL-00017" summary="add validation by AOP to have a more clean code">
-      <option name="closed" value="true" />
-      <created>1762291635480</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1762291635480</updated>
-    </task>
-    <task id="LOCAL-00018" summary="add validation and response with Exception to create and delete socialuser">
-      <option name="closed" value="true" />
-      <created>1762311443435</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1762311443435</updated>
-    </task>
-    <task id="LOCAL-00019" summary="add kafka-service">
-      <option name="closed" value="true" />
-      <created>1762377016181</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1762377016181</updated>
     </task>
     <task id="LOCAL-00020" summary="restructuring the project packages for a clearer and cleaner architecture">
       <option name="closed" value="true" />
@@ -852,7 +820,39 @@
       <option name="project" value="LOCAL" />
       <updated>1767588204547</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="add @valid to pathvariable">
+      <option name="closed" value="true" />
+      <created>1767592012552</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1767592012558</updated>
+    </task>
+    <task id="LOCAL-00066" summary="feat(auth): add GetAuthUserById, AuthUserResponseDTO and domain-to-rest mapper&#10;&#10;- Introduced AuthUserResponseDTO for safe REST responses&#10;- Added mapping from AuthUser domain model to response DTO&#10;- Kept sensitive fields (passwords, tokens, secrets) out of REST layer">
+      <option name="closed" value="true" />
+      <created>1767592137057</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1767592137057</updated>
+    </task>
+    <task id="LOCAL-00067" summary="Done: Implement Get AuthUser by Email&#10;Closed #56">
+      <option name="closed" value="true" />
+      <created>1767679457824</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1767679457824</updated>
+    </task>
+    <task id="LOCAL-00068" summary="Update Resources files">
+      <option name="closed" value="true" />
+      <created>1767679744108</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1767679744108</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -888,7 +888,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="55-implement-get-authuser-by-id" />
+                        <option value="56-implement-get-authuser-by-email" />
                       </list>
                     </value>
                   </entry>
@@ -901,10 +901,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="other changes" />
-    <MESSAGE value="register user to pgsql done" />
-    <MESSAGE value="working in grpc connection between auth and socialuser services" />
-    <MESSAGE value="remove password from socialuser and clean some code" />
     <MESSAGE value="add change password usecases to auth-service and some clean code changes" />
     <MESSAGE value="Add Kafka Server with script for create topics-init.sh" />
     <MESSAGE value="change the kafka listener to connect intellij and vscode plugins" />
@@ -926,7 +922,11 @@
     <MESSAGE value="add Test component" />
     <MESSAGE value="update Platform code from socialuser-service" />
     <MESSAGE value="drop setter and getter from lombok" />
-    <option name="LAST_COMMIT_MESSAGE" value="drop setter and getter from lombok" />
+    <MESSAGE value="add @valid to pathvariable" />
+    <MESSAGE value="feat(auth): add GetAuthUserById, AuthUserResponseDTO and domain-to-rest mapper&#10;&#10;- Introduced AuthUserResponseDTO for safe REST responses&#10;- Added mapping from AuthUser domain model to response DTO&#10;- Kept sensitive fields (passwords, tokens, secrets) out of REST layer" />
+    <MESSAGE value="Done: Implement Get AuthUser by Email&#10;Closed #56" />
+    <MESSAGE value="Update Resources files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update Resources files" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
