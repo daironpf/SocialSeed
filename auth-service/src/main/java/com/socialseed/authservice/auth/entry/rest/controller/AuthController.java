@@ -6,9 +6,11 @@ import com.socialseed.authservice.auth.entry.rest.dto.*;
 import com.socialseed.authservice.auth.entry.rest.mapper.AuthRestMapper;
 import com.socialseed.authservice.platform.common.response.ApiResponse;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Locale;
@@ -17,10 +19,12 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("auth")
+@Validated
 public class AuthController {
     //region Dependencies
     private final AuthUseCases authUseCases;
     private final MessageSource messageSource;
+    //endregion
 
     public AuthController(AuthUseCases authUseCases, MessageSource messageSource) {
         this.authUseCases = authUseCases;
@@ -38,6 +42,7 @@ public class AuthController {
         );
     }
 
+    //region Gets
     @GetMapping("/getUserById/{id}")
     public ResponseEntity<ApiResponse<?>> getAuthUserById(@Valid @PathVariable UUID id){
         Optional<AuthUser> authUser = authUseCases.getAuthUserById(id);
@@ -55,6 +60,25 @@ public class AuthController {
                 .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by ID not found"));
     }
 
+    @GetMapping("/getUserByEmail/{email}")
+    public ResponseEntity<ApiResponse<?>> getAuthUserByEmail(
+            @PathVariable @Email(message = "{email.invalid}") String email){
+        Optional<AuthUser> authUser = authUseCases.getAuthUserByEmail(email);
+        if (authUser.isPresent()){
+            AuthUserResponseDTO response = AuthRestMapper.toResponse(authUser.get());
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            response,
+                            "AuthUser By Email"
+                    )
+            );
+        }
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by Email not found"));
+    }
+    //endregion
+
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<?>> register(@Valid @RequestBody RegisterRequestDTO request, Locale locale) {
         AuthUser authUser = AuthRestMapper.toDomain(request);
@@ -68,7 +92,7 @@ public class AuthController {
                 )
         );
     }
-    // CHANGE PASSWORD
+    // region Change
     @PostMapping("/changepassword")
     public ResponseEntity<ApiResponse<?>> changePassword(@Valid @RequestBody PasswordChangeRequest request, Locale locale) {
         AuthResponseDTO response = authUseCases.changeUserPassword(
@@ -83,4 +107,5 @@ public class AuthController {
                 )
         );
     }
+    //endregion
 }
