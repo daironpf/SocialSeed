@@ -14,6 +14,7 @@ public record ApiResponse<T>(
         String version,   // API version
         Instant timestamp // Response time
 ) {
+
     public ApiResponse(int status, T data, String message) {
         this(status, data, message, AppInfo.VERSION, Instant.now());
     }

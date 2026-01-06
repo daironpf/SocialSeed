@@ -8,11 +8,11 @@ import java.time.Instant;
  * Standardized API response for REST controllers.
  */
 public record ApiResponse<T>(
-        int status,
-        T data,
-        String message,
-        String version,
-        Instant timestamp
+        int status,       // HTTP status code
+        T data,           // Actual payload (can be null on error)
+        String message,   // Human-readable message
+        String version,   // API version
+        Instant timestamp // Response time
 ) {
 
     public ApiResponse(int status, T data, String message) {

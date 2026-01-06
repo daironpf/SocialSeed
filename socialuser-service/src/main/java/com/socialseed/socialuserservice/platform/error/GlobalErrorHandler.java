@@ -1,6 +1,7 @@
 package com.socialseed.socialuserservice.platform.error;
 
 import com.socialseed.socialuserservice.platform.common.response.ApiResponse;
+import jakarta.validation.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
+import java.util.stream.Collectors;
 
 /**
  * Manejo global de excepciones para todos los microservicios.
@@ -23,6 +26,29 @@ public class GlobalErrorHandler {
 
     public GlobalErrorHandler(MessageSource messageSource) {
         this.messageSource = messageSource;
+    }
+
+    /* ===== 400 – Validation errors ===== */
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ApiResponse<?>> handleConstraintViolation(ConstraintViolationException ex) {
+        // Obtenemos todos los mensajes de validación y los traducimos
+        String message = ex.getConstraintViolations()
+                .stream()
+                .map(violation -> {
+                    String template = violation.getMessage(); // Ej: "{email.invalid}"
+                    // Localizamos el mensaje usando MessageSource y Locale
+                    return messageSource.getMessage(template.replaceAll("[{}]", ""), null, template, LocaleContextHolder.getLocale());
+                })
+                .collect(Collectors.joining("; "));
+
+        ApiResponse<?> response = ApiResponse.message(
+                HttpStatus.BAD_REQUEST.value(),
+                message
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(response);
     }
 
     /* ===== 409 – Business conflict ===== */
