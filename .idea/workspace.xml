@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="closed issue #141 Implement Get AuthUserByUserName">
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="minos changes">
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/validation/annotation/ValidUsername.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/validation/constraint/UsernameConstraint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/validation/rules/UsernameRules.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RegisterRequestDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RegisterRequestDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_en.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_en.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_es.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -171,7 +177,7 @@
     "Spring Boot.SocialuserServiceApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "141-implement-get-authuserbyusername",
+    "git-widget-placeholder": "144-design-and-introduce-a-centralized-platform-level-validation-mechanism",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -456,14 +462,6 @@
       <workItem from="1766716505665" duration="2315000" />
       <workItem from="1766800498946" duration="16000" />
       <workItem from="1766880119367" duration="8285000" />
-    </task>
-    <task id="LOCAL-00022" summary="add documentation for social network">
-      <option name="closed" value="true" />
-      <created>1762452017743</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1762452017744</updated>
     </task>
     <task id="LOCAL-00023" summary="&gt; Working on password change validation for the user&#10;&gt; Ihis use case will be moved to the auth service where it belongs">
       <option name="closed" value="true" />
@@ -849,7 +847,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767804994494</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="minos changes">
+      <option name="closed" value="true" />
+      <created>1767818350466</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1767818350466</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -885,7 +891,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="141-implement-get-authuserbyusername" />
+                        <option value="144-design-and-introduce-a-centralized-platform-level-validation-mechanism" />
                       </list>
                     </value>
                   </entry>
@@ -898,7 +904,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="change the kafka listener to connect intellij and vscode plugins" />
     <MESSAGE value="update volume for neo4j db service in docker-compose.yml" />
     <MESSAGE value="minor fixes" />
     <MESSAGE value="create governance-service" />
@@ -923,7 +928,8 @@
     <MESSAGE value="Update Resources files" />
     <MESSAGE value="Update platform code" />
     <MESSAGE value="closed issue #141 Implement Get AuthUserByUserName" />
-    <option name="LAST_COMMIT_MESSAGE" value="closed issue #141 Implement Get AuthUserByUserName" />
+    <MESSAGE value="minos changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="minos changes" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
