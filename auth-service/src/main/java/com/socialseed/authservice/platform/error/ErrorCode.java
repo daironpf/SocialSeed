@@ -30,7 +30,8 @@ public enum ErrorCode {
     USER_EMAIL_NOT_FOUND("error.user.email_not_found", HttpStatus.NOT_FOUND),
     USERNAME_EXISTS("error.user.username_exists", HttpStatus.CONFLICT),
     PASSWORD_MISMATCH("error.user.password_mismatch", HttpStatus.BAD_REQUEST),
-    USER_CREATION_FAILED("error.user.creation_failed", HttpStatus.INTERNAL_SERVER_ERROR);
+    USER_CREATION_FAILED("error.user.creation_failed", HttpStatus.INTERNAL_SERVER_ERROR),
+    USER_BY_USER_NAME_NOT_FOUND("error.user.by.username_not_found", HttpStatus.NOT_FOUND);
 
     private final String code;
     private final HttpStatus httpStatus;

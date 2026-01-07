@@ -8,8 +8,6 @@ import com.socialseed.authservice.auth.infrastructure.persistence.pgsql.reposito
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Component;
 
-import java.time.Instant;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -39,6 +37,12 @@ public class AuthUserRepositoryAdapter implements AuthUserRepository {
     @Override
     public Optional<AuthUser> findByEmail(String email) {
         return jpaRepository.findByEmail(email)
+                .map(AuthUserPgsqlMapper::toDomain);
+    }
+
+    @Override
+    public Optional<AuthUser> findByUserName(String username) {
+        return jpaRepository.findByUsername(username)
                 .map(AuthUserPgsqlMapper::toDomain);
     }
 

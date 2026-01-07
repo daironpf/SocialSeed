@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="Update Resources files">
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/common/response/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/common/response/ApiResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth-service/src/main/java/com/socialseed/authservice/platform/error/ErrorResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ApiResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/common/response/ApiResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/GlobalErrorHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/socialuser-service/src/main/java/com/socialseed/socialuserservice/platform/error/GlobalErrorHandler.java" afterDir="false" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="closed issue #141 Implement Get AuthUserByUserName">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_es.properties" beforeDir="false" afterPath="$PROJECT_DIR$/auth-service/src/main/resources/i18n/messages_es.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -174,7 +171,7 @@
     "Spring Boot.SocialuserServiceApplication.executor": "Run",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "56-implement-get-authuser-by-email",
+    "git-widget-placeholder": "141-implement-get-authuserbyusername",
     "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
@@ -395,7 +392,7 @@
         <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
         <item itemvalue="Application.SocialuserServiceApplication" />
         <item itemvalue="Application.AuthServiceApplication" />
-        <item itemvalue="Application.SocialuserServiceApplication" />
+        <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -459,22 +456,6 @@
       <workItem from="1766716505665" duration="2315000" />
       <workItem from="1766800498946" duration="16000" />
       <workItem from="1766880119367" duration="8285000" />
-    </task>
-    <task id="LOCAL-00020" summary="restructuring the project packages for a clearer and cleaner architecture">
-      <option name="closed" value="true" />
-      <created>1762442619943</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1762442619943</updated>
-    </task>
-    <task id="LOCAL-00021" summary="refactored the validation and error handling">
-      <option name="closed" value="true" />
-      <created>1762447467938</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1762447467938</updated>
     </task>
     <task id="LOCAL-00022" summary="add documentation for social network">
       <option name="closed" value="true" />
@@ -852,7 +833,23 @@
       <option name="project" value="LOCAL" />
       <updated>1767679744108</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Update platform code">
+      <option name="closed" value="true" />
+      <created>1767679998332</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1767679998332</updated>
+    </task>
+    <task id="LOCAL-00070" summary="closed issue #141 Implement Get AuthUserByUserName">
+      <option name="closed" value="true" />
+      <created>1767804994493</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1767804994494</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -888,7 +885,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="56-implement-get-authuser-by-email" />
+                        <option value="141-implement-get-authuserbyusername" />
                       </list>
                     </value>
                   </entry>
@@ -901,8 +898,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="add change password usecases to auth-service and some clean code changes" />
-    <MESSAGE value="Add Kafka Server with script for create topics-init.sh" />
     <MESSAGE value="change the kafka listener to connect intellij and vscode plugins" />
     <MESSAGE value="update volume for neo4j db service in docker-compose.yml" />
     <MESSAGE value="minor fixes" />
@@ -926,7 +921,9 @@
     <MESSAGE value="feat(auth): add GetAuthUserById, AuthUserResponseDTO and domain-to-rest mapper&#10;&#10;- Introduced AuthUserResponseDTO for safe REST responses&#10;- Added mapping from AuthUser domain model to response DTO&#10;- Kept sensitive fields (passwords, tokens, secrets) out of REST layer" />
     <MESSAGE value="Done: Implement Get AuthUser by Email&#10;Closed #56" />
     <MESSAGE value="Update Resources files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Resources files" />
+    <MESSAGE value="Update platform code" />
+    <MESSAGE value="closed issue #141 Implement Get AuthUserByUserName" />
+    <option name="LAST_COMMIT_MESSAGE" value="closed issue #141 Implement Get AuthUserByUserName" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -7,6 +7,8 @@ import com.socialseed.authservice.auth.entry.rest.mapper.AuthRestMapper;
 import com.socialseed.authservice.platform.common.response.ApiResponse;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -77,6 +79,39 @@ public class AuthController {
                 .status(HttpStatus.NOT_FOUND)
                 .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by Email not found"));
     }
+
+    @GetMapping("/getUserByUserName/{username}")
+    public ResponseEntity<ApiResponse<?>> getUserByUserName(
+            @PathVariable
+            @Size(min = 3, max = 20, message = "{username.size.invalid}")
+            @Pattern(
+                    regexp = "^[a-zA-Z0-9._-]+$",
+                    message = "{username.format.invalid}"
+            )
+            String username
+    ) {
+        Optional<AuthUser> authUser = authUseCases.getUserByUserName(username);
+
+        if (authUser.isPresent()) {
+            AuthUserResponseDTO response = AuthRestMapper.toResponse(authUser.get());
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            response,
+                            "AuthUser By UserName"
+                    )
+            );
+        }
+
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(
+                        ApiResponse.message(
+                                HttpStatus.NOT_FOUND.value(),
+                                "User by UserName not found"
+                        )
+                );
+    }
+
     //endregion
 
     @PostMapping("/register")

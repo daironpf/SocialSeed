@@ -7,9 +7,6 @@ import com.socialseed.authservice.auth.domain.repository.AuthUserRepository;
 import com.socialseed.authservice.auth.domain.repository.UserRegisteredEventPublisher;
 import com.socialseed.authservice.auth.domain.service.AuthService;
 import com.socialseed.authservice.auth.entry.rest.dto.AuthResponseDTO;
-import com.socialseed.authservice.auth.entry.rest.dto.RegisterRequestDTO;
-import com.socialseed.authservice.platform.error.BusinessException;
-import com.socialseed.authservice.platform.error.ErrorCode;
 import jakarta.transaction.Transactional;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -81,6 +78,7 @@ public class AuthServiceImpl implements AuthService {
         return null;
     }
 
+    //region Gets
     @Override
     public Optional<AuthUser> getUserById(UUID id) {
         return authUserRepository.findById(id);
@@ -92,9 +90,17 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
+    public Optional<AuthUser> getUserByUserName(String username) {
+        return authUserRepository.findByUserName(username);
+    }
+    //endregion
+
+    //region Exists
+    @Override
     public boolean existByUserId(UUID id) {
         return authUserRepository.existByUserId(id);
     }
+    //endregion
 
     @Override
     public void changePassword(UUID userId, String currentPassword, String newPassword) {
