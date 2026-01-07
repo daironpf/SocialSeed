@@ -13,10 +13,7 @@ import java.util.UUID;
 @Repository
 public interface AuthUserPgsqlRepository extends JpaRepository<AuthUserPgsqlEntity, UUID> {
 
-    // Buscar por username
     Optional<AuthUserPgsqlEntity> findByUsername(String username);
-
-    // Buscar por email
     Optional<AuthUserPgsqlEntity> findByEmail(String email);
 
     // Verificar existencia
