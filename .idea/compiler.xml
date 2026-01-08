@@ -7,32 +7,27 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="api-gateway" />
-        <module name="socialuser-service" />
       </profile>
-      <profile name="Annotation profile for auth-service" enabled="true">
+      <profile name="Annotation profile for SocialSeed" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/springframework/boot/spring-boot-configuration-processor/3.5.7/spring-boot-configuration-processor-3.5.7.jar" />
         </processorPath>
+        <module name="socialseed-validation-starter" />
         <module name="auth-service" />
-      </profile>
-      <profile name="Annotation profile for governance-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.42/lombok-1.18.42.jar" />
-        </processorPath>
-        <module name="governance-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="api-gateway" target="21" />
+      <module name="governance-service" target="21" />
+      <module name="post-service" target="1.5" />
       <module name="probrando-kafkaemiter" target="21" />
-      <module name="SocialSeed" target="1.5" />
+      <module name="reactions-service" target="1.5" />
+      <module name="relationship-service" target="1.5" />
+      <module name="socialseed-platform" target="1.5" />
+      <module name="socialuser-service" target="21" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

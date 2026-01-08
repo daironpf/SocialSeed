@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.socialseed</groupId>
+        <artifactId>socialseed</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>socialseed-platform</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>SocialSeed Platform BOM</name>
+
+    <modules>
+        <module>socialseed-validation-starter</module>
+<!--        <module>../socialseed-security-starter</module>-->
+<!--        <module>../socialseed-observability-starter</module>-->
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.socialseed</groupId>
+                <artifactId>socialseed-validation-starter</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>com.socialseed</groupId>-->
+<!--                <artifactId>socialseed-security-starter</artifactId>-->
+<!--                <version>0.1.0-SNAPSHOT</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.socialseed</groupId>-->
+<!--                <artifactId>socialseed-observability-starter</artifactId>-->
+<!--                <version>0.1.0-SNAPSHOT</version>-->
+<!--            </dependency>-->
+        </dependencies>
+    </dependencyManagement>
+</project>
