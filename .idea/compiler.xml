@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="api-gateway" />
         <module name="socialuser-service" />
+        <module name="SocialSeed" />
       </profile>
       <profile name="Annotation profile for auth-service" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
@@ -32,7 +33,6 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="probrando-kafkaemiter" target="21" />
-      <module name="SocialSeed" target="1.5" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

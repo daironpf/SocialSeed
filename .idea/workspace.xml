@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="determined use socialseed-platform as Git Subtree" />
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="determined use socialseed-platform as Git Subtree">
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -299,7 +303,7 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="api-gateway" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+    <configuration name="api-gateway/Dockerfile: Compose Deployment" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
           <option name="imageTag" value="api-gateway:0.0.1" />
@@ -313,7 +317,7 @@
             </list>
           </option>
           <option name="commandLineOptions" value="--network socialseed" />
-          <option name="sourceFilePath" value="api-gateway/Dockerfile" />
+          <option name="sourceFilePath" value="services/api-gateway/Dockerfile" />
         </settings>
       </deployment>
       <method v="2" />
@@ -369,13 +373,13 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="socialuser-service" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
+    <configuration name="socialuser-service/Dockerfile: Compose Deployment" type="docker-deploy" factoryName="dockerfile" server-name="Docker">
       <deployment type="dockerfile">
         <settings>
           <option name="imageTag" value="socialuser-service:0.0.1" />
           <option name="containerName" value="socialuser-service" />
           <option name="commandLineOptions" value="--network socialseed" />
-          <option name="sourceFilePath" value="socialuser-service/Dockerfile" />
+          <option name="sourceFilePath" value="services/socialuser-service/Dockerfile" />
         </settings>
       </deployment>
       <method v="2" />
@@ -383,9 +387,9 @@
     <list>
       <item itemvalue="Application.AuthServiceApplication" />
       <item itemvalue="Application.SocialuserServiceApplication" />
-      <item itemvalue="Docker.api-gateway" />
+      <item itemvalue="Docker.api-gateway/Dockerfile: Compose Deployment" />
       <item itemvalue="Docker.socialgraph-db" />
-      <item itemvalue="Docker.socialuser-service" />
+      <item itemvalue="Docker.socialuser-service/Dockerfile: Compose Deployment" />
       <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
     </list>
     <recent_temporary>
