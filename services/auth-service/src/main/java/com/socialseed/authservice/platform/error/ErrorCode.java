@@ -1,13 +1,11 @@
 package com.socialseed.authservice.platform.error;
 
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
 /**
  * Enumeración central de códigos de error y sus estados HTTP asociados.
  * Compatible con internacionalización usando MessageSource.
  */
-@Getter
 public enum ErrorCode {
 
     // --- HTTP Standard Errors ---

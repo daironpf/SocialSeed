@@ -3,17 +3,19 @@ package com.socialseed.authservice.auth.infrastructure.kafka.producer;
 import com.socialseed.auth.AuthUserRegistered;
 import com.socialseed.authservice.auth.domain.event.UserRegisteredEvent;
 import com.socialseed.authservice.auth.domain.repository.UserRegisteredEventPublisher;
-import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor
 public class KafkaUserRegisteredProducer implements UserRegisteredEventPublisher {
 
     private static final String TOPIC = "auth.user.registered";
 
     private final KafkaTemplate<String, byte[]> kafkaTemplate;
+
+    public KafkaUserRegisteredProducer(KafkaTemplate<String, byte[]> kafkaTemplate) {
+        this.kafkaTemplate = kafkaTemplate;
+    }
 
     @Override
     public void publish(UserRegisteredEvent event) {
@@ -28,4 +30,3 @@ public class KafkaUserRegisteredProducer implements UserRegisteredEventPublisher
         kafkaTemplate.send(TOPIC, proto.toByteArray());
     }
 }
-
