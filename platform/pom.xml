@@ -1,81 +1,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="
-           http://maven.apache.org/POM/4.0.0
-           http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.socialseed</groupId>
-    <artifactId>socialseed-platform</artifactId>
-    <version>0.1.0</version>
-    <packaging>pom</packaging>
+    <parent>
+        <groupId>com.socialseed</groupId>
+        <artifactId>socialseed</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+    </parent>
 
+    <artifactId>socialseed-platform</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>SocialSeed Platform BOM</name>
-    <description>Bill of Materials for SocialSeed platform starters</description>
 
     <modules>
         <module>socialseed-validation-starter</module>
+<!--        <module>../socialseed-security-starter</module>-->
+<!--        <module>../socialseed-observability-starter</module>-->
     </modules>
 
-    <properties>
-        <java.version>21</java.version>
-        <spring.boot.version>3.5.7</spring.boot.version>
-        <jakarta.validation.version>3.1.1</jakarta.validation.version>
-    </properties>
-
-    <!-- Dependency management -->
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
                 <groupId>com.socialseed</groupId>
                 <artifactId>socialseed-validation-starter</artifactId>
-                <version>0.1.0</version>
+                <version>0.1.0-SNAPSHOT</version>
             </dependency>
-
+<!--            <dependency>-->
+<!--                <groupId>com.socialseed</groupId>-->
+<!--                <artifactId>socialseed-security-starter</artifactId>-->
+<!--                <version>0.1.0-SNAPSHOT</version>-->
+<!--            </dependency>-->
+<!--            <dependency>-->
+<!--                <groupId>com.socialseed</groupId>-->
+<!--                <artifactId>socialseed-observability-starter</artifactId>-->
+<!--                <version>0.1.0-SNAPSHOT</version>-->
+<!--            </dependency>-->
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-gpg-plugin</artifactId>
-                    <version>3.1.1</version>
-                    <executions>
-                        <execution>
-                            <id>sign-artifacts</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>sign</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.0</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
-    </build>
-
-
-    <distributionManagement>
-        <repository>
-            <id>github</id>
-            <name>GitHub Packages</name>
-            <url>https://maven.pkg.github.com/daironpf/socialseed-platform</url>
-        </repository>
-    </distributionManagement>
 </project>

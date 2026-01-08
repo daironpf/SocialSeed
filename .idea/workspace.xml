@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="determined use socialseed-platform as Git Subtree">
+    <list default="true" id="ba230a01-5f3e-4eef-80c3-5eb32cc081f5" name="Changes" comment="move all services to the folder services">
       <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platform/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platform/socialseed-validation-starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/platform/socialseed-validation-starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaUserRegisteredProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaUserRegisteredProducer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/AuthUserPgsqlEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/AuthUserPgsqlEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/services/auth-service/src/main/java/com/socialseed/authservice/platform/error/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/services/auth-service/src/main/java/com/socialseed/authservice/platform/error/ErrorCode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,20 +151,33 @@
     "JUnit.UpdateUserProfileUseCaseTest.should_throw_exception_when_user_not_found.executor": "Run",
     "JUnit.UserTest.executor": "Run",
     "JUnit.java in socialuser-service.executor": "Run",
+    "Maven. [clean,install].executor": "Run",
     "Maven.api-gateway [clean,install].executor": "Run",
     "Maven.api-gateway [clean].executor": "Run",
     "Maven.api-gateway [install].executor": "Run",
+    "Maven.auth-service [clean,install,-DskipTests].executor": "Run",
     "Maven.auth-service [clean,install,-U].executor": "Run",
     "Maven.auth-service [clean,install].executor": "Run",
     "Maven.auth-service [clean].executor": "Run",
     "Maven.auth-service [compile].executor": "Run",
     "Maven.auth-service [install].executor": "Run",
     "Maven.auth-service [package].executor": "Run",
+    "Maven.auth-service [validate].executor": "Run",
+    "Maven.governance-service [clean,install].executor": "Run",
     "Maven.kafka-proto-emitter [clean].executor": "Run",
     "Maven.kafka-proto-emitter [compile].executor": "Run",
     "Maven.probrando-kafkaemiter [clean].executor": "Run",
     "Maven.probrando-kafkaemiter [install].executor": "Run",
     "Maven.probrando-kafkaemiter [package].executor": "Run",
+    "Maven.socialseed [clean,install,-DskipTests].executor": "Run",
+    "Maven.socialseed [clean,install].executor": "Run",
+    "Maven.socialseed-platform [clean,install...].executor": "Run",
+    "Maven.socialseed-platform [clean].executor": "Run",
+    "Maven.socialseed-platform [install].executor": "Run",
+    "Maven.socialseed-platform [package].executor": "Run",
+    "Maven.socialseed-validation-starter [clean...].executor": "Run",
+    "Maven.socialseed-validation-starter [install].executor": "Run",
+    "Maven.socialseed-validation-starter [package].executor": "Run",
     "Maven.socialuser-service [clean].executor": "Run",
     "Maven.socialuser-service [compile].executor": "Run",
     "Maven.socialuser-service [package].executor": "Run",
@@ -209,11 +231,11 @@
       <recent name="D:\.dev\proyectos\SocialSeed\auth-service\src\main\proto" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/platform" />
+      <recent name="$PROJECT_DIR$/services" />
       <recent name="$PROJECT_DIR$/api-requests/socialuser-service/gets" />
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\java\com\socialseed\socialuserservice\shared\response" />
       <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\main\java\com\socialseed\socialuserservice\shared" />
-      <recent name="D:\.dev\proyectos\SocialSeed" />
-      <recent name="D:\.dev\proyectos\SocialSeed\socialuser-service\src\test\java\com\socialseed\socialuserservice" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.socialseed.authservice.auth.application.usecase" />
@@ -224,10 +246,22 @@
     </key>
   </component>
   <component name="RunAnythingCache">
+    <myKeys>
+      <visibility group="Gradle Tasks" flag="true" />
+      <visibility group="Maven Goals" flag="true" />
+      <visibility group="Recent projects" flag="true" />
+      <visibility group="Run configurations" flag="true" />
+      <visibility group="com.intellij.ide.actions.runAnything.RunAnythingRunConfigurationProvider" flag="true" />
+      <visibility group="com.intellij.ide.actions.runAnything.activity.RunAnythingRecentProjectProvider" flag="true" />
+      <visibility group="org.jetbrains.idea.maven.execution.MavenRunAnythingProvider" flag="true" />
+      <visibility group="org.jetbrains.plugins.gradle.execution.GradleRunAnythingProvider" flag="true" />
+    </myKeys>
     <option name="myCommands">
       <command value="mvn clean install -U" />
       <command value="mvn clean" />
+      <command value="mvn package" />
       <command value="mvn clean install" />
+      <command value="mvn clean install -DskipTests" />
     </option>
   </component>
   <component name="RunDashboard">
@@ -394,9 +428,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AuthServiceApplication" />
         <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
         <item itemvalue="Application.SocialuserServiceApplication" />
-        <item itemvalue="Application.AuthServiceApplication" />
         <item itemvalue="Application.AuthServiceApplication" />
         <item itemvalue="Docker.docker-compose.yml.neo4j: Compose Deployment" />
       </list>
@@ -462,14 +496,6 @@
       <workItem from="1766716505665" duration="2315000" />
       <workItem from="1766800498946" duration="16000" />
       <workItem from="1766880119367" duration="8285000" />
-    </task>
-    <task id="LOCAL-00025" summary="minor changes in intelliJ">
-      <option name="closed" value="true" />
-      <created>1762492979658</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1762492979658</updated>
     </task>
     <task id="LOCAL-00026" summary="working in auth-service">
       <option name="closed" value="true" />
@@ -855,7 +881,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767891807250</updated>
     </task>
-    <option name="localTasksCounter" value="74" />
+    <task id="LOCAL-00074" summary="move all services to the folder services">
+      <option name="closed" value="true" />
+      <created>1767893120316</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1767893120316</updated>
+    </task>
+    <option name="localTasksCounter" value="75" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -904,7 +938,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="create governance-service" />
     <MESSAGE value="fixed getUserById &#10;add getUserByName" />
     <MESSAGE value="reorganice some code" />
     <MESSAGE value="reorganice some code&#10;add getSocialUserByEmail" />
@@ -929,7 +962,8 @@
     <MESSAGE value="minos changes" />
     <MESSAGE value="feat(platform-validation): add internationalized username validator&#10;&#10;Introduced a centralized platform-level username validation mechanism using a custom&#10;Bean Validation constraint.&#10;&#10;- Added @ValidUsername annotation&#10;- Implemented UsernameConstraint with size and format validation&#10;- Centralized username rules (min/max length and allowed characters)&#10;- Enabled internationalized validation messages with dynamic parameters&#10;- Designed for reuse across all microservices&#10;&#10;This establishes a consistent and extensible foundation for shared platform validations." />
     <MESSAGE value="determined use socialseed-platform as Git Subtree" />
-    <option name="LAST_COMMIT_MESSAGE" value="determined use socialseed-platform as Git Subtree" />
+    <MESSAGE value="move all services to the folder services" />
+    <option name="LAST_COMMIT_MESSAGE" value="move all services to the folder services" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

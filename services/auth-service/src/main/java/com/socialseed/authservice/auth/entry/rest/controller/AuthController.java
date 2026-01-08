@@ -5,7 +5,8 @@ import com.socialseed.authservice.auth.domain.model.AuthUser;
 import com.socialseed.authservice.auth.entry.rest.dto.*;
 import com.socialseed.authservice.auth.entry.rest.mapper.AuthRestMapper;
 import com.socialseed.authservice.platform.common.response.ApiResponse;
-import com.socialseed.authservice.platform.validation.annotation.ValidUsername;
+
+import com.socialseed.validation.annotation.ValidUsername;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import org.springframework.context.MessageSource;
@@ -81,7 +82,7 @@ public class AuthController {
 
     @GetMapping("/getUserByUserName/{username}")
     public ResponseEntity<ApiResponse<?>> getUserByUserName(
-            @PathVariable @ValidUsername String username
+            @PathVariable("username") @ValidUsername String username
     ) {
         Optional<AuthUser> authUser = authUseCases.getUserByUserName(username);
 
