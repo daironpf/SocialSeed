@@ -31,3 +31,7 @@ replay_pid*
 
 /platform/socialseed-validation-starter/target
 /.idea/
+
+.idea/
+.vscode/
+
