@@ -1,90 +1,26 @@
 services:
-  #SocialUser-Service
-  socialuser-service:
-    container_name: socialuser-service
-    build:
-      context: ./socialuser-service
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./socialuser-service/src:/app/src
-      - ./socialuser-service/pom.xml:/app/pom.xml
-      - maven_repo:/root/.m2
-    environment:
-      SPRING_DEVTOOLS_RESTART_TRIGGER_FILE: ".reloadtrigger"
-    depends_on:
-      neo4j:
-        condition: service_healthy
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:4000/actuator/health" ]
-      interval: 5s
-      timeout: 3s
-      retries: 20
-    networks:
-      - net
-
-  #Api-Gateway
-  api-gateway:
-    container_name: api-gateway
-    build:
-      context: ./api-gateway
-      dockerfile: Dockerfile
-    ports:
-      - "8085:4004"
-    depends_on:
-      socialuser-service:
-        condition: service_healthy
-    networks:
-      - net
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:4004/actuator/health" ]
-      interval: 5s
-      timeout: 3s
-      retries: 20
-
   auth-service:
     container_name: auth-service
     build:
-      context: ./auth-service
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./auth-service/src:/app/src
-      - ./auth-service/pom.xml:/app/pom.xml
-      - maven_repo:/root/.m2
-    environment:
-      SPRING_DEVTOOLS_RESTART_TRIGGER_FILE: ".reloadtrigger"
+      context: .
+      dockerfile: services/auth-service/Dockerfile
     depends_on:
       auth-db:
         condition: service_healthy
+    ports:
+      - "8085:8085"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    networks:
+      - net
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:4005/actuator/health" ]
       interval: 5s
       timeout: 3s
       retries: 20
-    networks:
-      - net
 
-  # Auth database for auth-service
-  auth-db:
-    container_name: auth-db
-    image: postgres:17
-#    restart: always
-    environment:
-      POSTGRES_DB: authdb
-      POSTGRES_USER: authuser
-      POSTGRES_PASSWORD: authpass
-    ports:
-      - "5433:5432"
-#    volumes:
-#      - D:\db_volumes\auth-db:/var/lib/postgresql/data
-    networks:
-      - net
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U authuser -d authdb" ]
-      interval: 5s
-      timeout: 5s
-      retries: 20
-
-  # Noe4j database
+  ## ==> DATABASES
+  # Social Graph in Neo4j
   neo4j:
     container_name: socialgraph-db
     image: neo4j:5.26.15-community
@@ -106,7 +42,27 @@ services:
     networks:
       - net
 
-  # Kafka Server-Service
+  # Auth database for auth-service
+  auth-db:
+    container_name: auth-db
+    image: postgres:17
+    environment:
+      POSTGRES_DB: authdb
+      POSTGRES_USER: authuser
+      POSTGRES_PASSWORD: authpass
+    ports:
+      - "5432:5432"
+    networks:
+      - net
+    volumes:
+      - /home/dairon/db_volumes/postgres_data/:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U authuser -d authdb" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  ## Kafka Server-Service
   kafka:
     image: apache/kafka:4.1.1
     container_name: kafka
@@ -130,9 +86,9 @@ services:
       - ./infrastructure/kafka/kraft/server.properties:/opt/kafka/config/kraft/server.properties
       - ./infrastructure/kafka/topics-init.sh:/scripts/topics-init.sh
       - ./infrastructure/kafka/start-kafka.sh:/scripts/start-kafka.sh
-    entrypoint: ["/scripts/start-kafka.sh"]
+    entrypoint: [ "/scripts/start-kafka.sh" ]
     healthcheck:
-      test: ["CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --list >/dev/null 2>&1"]
+      test: [ "CMD-SHELL", "/opt/kafka/bin/kafka-topics.sh --bootstrap-server kafka:9092 --list >/dev/null 2>&1" ]
       interval: 10s
       timeout: 5s
       retries: 20
@@ -141,7 +97,6 @@ services:
 volumes:
   socialgraph_data:
     driver: local
-  maven_repo:
   kafka_data:
 
 networks:
