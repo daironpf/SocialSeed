@@ -19,6 +19,29 @@ services:
       timeout: 3s
       retries: 20
 
+  ## ==> DATABASES
+  # Social Graph in Neo4j
+  neo4j:
+    container_name: socialgraph-db
+    image: neo4j:5.26.15-community
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    #    restart: always
+    environment:
+      - NEO4J_AUTH=neo4j/neoSocial
+      - NEO4J_server.memory.pagecache.size=1G
+    volumes:
+      - socialgraph_data:/var/lib/neo4j/data
+    healthcheck:
+      # ping via cypher-shell
+      test: [ "CMD-SHELL", "echo 'RETURN 1' | cypher-shell -u neo4j -p neoSocial || exit 1" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks:
+      - net
+
   # Auth database for auth-service
   auth-db:
     container_name: auth-db
@@ -38,6 +61,11 @@ services:
       interval: 5s
       timeout: 5s
       retries: 20
+
+volumes:
+  socialgraph_data:
+    driver: local
+  kafka_data:
 
 networks:
   net:
