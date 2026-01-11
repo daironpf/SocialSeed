@@ -1,12 +1,12 @@
 package com.socialseed.socialuserservice.user.entry.rest.dto.request;
 
+import com.socialseed.validation.annotation.ValidUsername;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 public record UserCreateRequestDTO(
-        @NotBlank(message = "{user.username.required}")
-        @Size(max = 30, message = "{user.username.size}")
+        @ValidUsername
         String username,
 
         @NotBlank(message = "{user.email.required}")

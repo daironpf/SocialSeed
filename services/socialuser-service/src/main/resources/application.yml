@@ -10,8 +10,8 @@ spring:
   application:
     name: socialuser-service
   neo4j:
-    uri: bolt://localhost:7687
-    # uri: bolt://socialgraph-db:7687
+#    uri: bolt://localhost:7687
+    uri: bolt://socialgraph-db:7687
     authentication:
       username: neo4j
       password: neoSocial
