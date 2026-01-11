@@ -1,4 +1,45 @@
 services:
+  #Api-Gateway
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8084:4004"
+    depends_on:
+      socialuser-service:
+        condition: service_healthy
+    networks:
+      - net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:4004/actuator/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  #SocialUser - Service
+  socialuser-service:
+    container_name: socialuser-service
+    build:
+      context: .
+      dockerfile: services/socialuser-service/Dockerfile
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    depends_on:
+      neo4j:
+        condition: service_healthy
+    ports:
+      - "8090:8090"
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:4000/actuator/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    networks:
+      - net
+
+  #Auth - Service
   auth-service:
     container_name: auth-service
     build:
