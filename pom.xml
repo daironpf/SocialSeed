@@ -19,7 +19,8 @@
         <module>platform</module>
 <!--        <module>services/api-gateway</module>-->
         <module>services/auth-service</module>
-<!--        <module>services/socialuser-service</module>-->
+        <module>platform/socialseed-api-response-starter</module>
+        <!--        <module>services/socialuser-service</module>-->
 <!--        <module>services/governance-service</module>-->
 <!--        <module>services/post-service</module>-->
 <!--        <module>services/reactions-service</module>-->
