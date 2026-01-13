@@ -1,16 +1,4 @@
-package com.socialseed.authservice.platform.config;
-
-
-import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.LocaleResolver; // ✅ CORRECTO
-import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
-
-import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.support.ResourceBundleMessageSource;
-
-
-import java.util.Locale;
+package com.socialseed.apiresponse.config;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -18,11 +6,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver;
-
 import java.util.Locale;
+
 @Configuration
 public class InternationalizationConfig {
-
     @Bean
     public MessageSource messageSource() {
         ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
@@ -37,7 +24,7 @@ public class InternationalizationConfig {
     @Bean
     public LocaleResolver localeResolver() {
         AcceptHeaderLocaleResolver resolver = new AcceptHeaderLocaleResolver();
-        resolver.setDefaultLocale(new Locale("es")); // por defecto a español
+        resolver.setDefaultLocale(new Locale("en")); // por defecto a español
         return resolver;
     }
 }
