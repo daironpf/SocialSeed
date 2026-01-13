@@ -126,6 +126,10 @@
             <groupId>com.socialseed</groupId>
             <artifactId>socialseed-validation-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.socialseed</groupId>
+            <artifactId>socialseed-api-response-starter</artifactId>
+        </dependency>
         <!-- End of: SocialSeed platform starters -->
 
         <!-- Annotation processor de Spring Boot -->
@@ -139,6 +143,10 @@
             <artifactId>testng</artifactId>
             <version>RELEASE</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
         </dependency>
 
     </dependencies>

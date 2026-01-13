@@ -1,5 +1,6 @@
 package com.socialseed.socialuserservice.user.entry.rest.controller;
-import com.socialseed.socialuserservice.platform.common.response.ApiResponse;
+
+import com.socialseed.apiresponse.model.ApiResponse;
 import com.socialseed.socialuserservice.user.application.usecase.UserUseCases;
 import com.socialseed.socialuserservice.user.domain.model.User;
 import com.socialseed.socialuserservice.user.entry.rest.dto.request.UpdateUserProfileDTO;
