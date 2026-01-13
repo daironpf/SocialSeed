@@ -18,9 +18,8 @@
     <modules>
         <module>platform</module>
 <!--        <module>services/api-gateway</module>-->
-        <module>services/auth-service</module>
-        <module>platform/socialseed-api-response-starter</module>
-        <!--        <module>services/socialuser-service</module>-->
+<!--        <module>services/auth-service</module>-->
+<!--        <module>services/socialuser-service</module>-->
 <!--        <module>services/governance-service</module>-->
 <!--        <module>services/post-service</module>-->
 <!--        <module>services/reactions-service</module>-->
@@ -33,6 +32,8 @@
         <java.version>21</java.version>
         <spring.boot.version>3.5.7</spring.boot.version>
         <maven.compiler.release>${java.version}</maven.compiler.release>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <!-- Gestión de dependencias base -->
