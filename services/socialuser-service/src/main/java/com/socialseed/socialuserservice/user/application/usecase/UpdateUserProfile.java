@@ -1,7 +1,7 @@
 package com.socialseed.socialuserservice.user.application.usecase;
 
-import com.socialseed.socialuserservice.platform.error.BusinessException;
-import com.socialseed.socialuserservice.platform.error.ErrorCode;
+import com.socialseed.errorhandling.exception.BusinessException;
+import com.socialseed.errorhandling.exception.ErrorCode;
 import com.socialseed.socialuserservice.user.domain.model.User;
 import com.socialseed.socialuserservice.user.domain.repository.UserRepository;
 import com.socialseed.socialuserservice.user.entry.rest.dto.request.UpdateUserProfileDTO;

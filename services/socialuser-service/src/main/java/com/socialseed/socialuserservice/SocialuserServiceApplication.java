@@ -11,7 +11,7 @@ import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 
 @EnableAspectJAutoProxy(exposeProxy = true)
 @EnableNeo4jRepositories
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.socialseed"})
 @OpenAPIDefinition(
         info = @Info(
                 title = "Social Seed",

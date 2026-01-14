@@ -121,7 +121,6 @@
             <artifactId>spring-grpc-spring-boot-starter</artifactId>
         </dependency>
 
-        <!-- Begin of: SocialSeed platform starters -->
         <dependency>
             <groupId>com.socialseed</groupId>
             <artifactId>socialseed-validation-starter</artifactId>
@@ -129,6 +128,10 @@
         <dependency>
             <groupId>com.socialseed</groupId>
             <artifactId>socialseed-api-response-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialseed</groupId>
+            <artifactId>socialseed-error-handling-starter</artifactId>
         </dependency>
         <!-- End of: SocialSeed platform starters -->
 

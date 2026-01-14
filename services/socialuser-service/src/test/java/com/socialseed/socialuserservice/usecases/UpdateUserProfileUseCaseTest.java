@@ -1,6 +1,6 @@
 package com.socialseed.socialuserservice.usecases;
 
-import com.socialseed.socialuserservice.platform.error.BusinessException;
+import com.socialseed.errorhandling.exception.BusinessException;
 import com.socialseed.socialuserservice.user.application.usecase.UpdateUserProfile;
 import com.socialseed.socialuserservice.user.domain.model.User;
 import com.socialseed.socialuserservice.user.domain.model.UserLanguage;

@@ -3,6 +3,13 @@ server.port: 8090
 
 logging.level.root: info
 
+logging:
+  level:
+    org:
+      springframework:
+        context:
+          support=DEBUG:
+
 # ======================
 # Neo4j
 # ======================
