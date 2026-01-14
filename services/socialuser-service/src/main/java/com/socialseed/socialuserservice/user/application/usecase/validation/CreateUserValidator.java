@@ -1,7 +1,7 @@
 package com.socialseed.socialuserservice.user.application.usecase.validation;
 
-import com.socialseed.socialuserservice.platform.error.BusinessException;
-import com.socialseed.socialuserservice.platform.error.ErrorCode;
+import com.socialseed.errorhandling.exception.BusinessException;
+import com.socialseed.errorhandling.exception.ErrorCode;
 import com.socialseed.socialuserservice.user.domain.model.User;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;

@@ -17,8 +17,8 @@
 
     <modules>
         <module>socialseed-validation-starter</module>
-<!--        <module>../socialseed-security-starter</module>-->
-<!--        <module>../socialseed-observability-starter</module>-->
+        <module>socialseed-error-handling-starter</module>
+        <module>socialseed-api-response-starter</module>
     </modules>
 
     <dependencyManagement>
@@ -28,16 +28,16 @@
                 <artifactId>socialseed-validation-starter</artifactId>
                 <version>0.1.0-SNAPSHOT</version>
             </dependency>
-<!--            <dependency>-->
-<!--                <groupId>com.socialseed</groupId>-->
-<!--                <artifactId>socialseed-security-starter</artifactId>-->
-<!--                <version>0.1.0-SNAPSHOT</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>com.socialseed</groupId>-->
-<!--                <artifactId>socialseed-observability-starter</artifactId>-->
-<!--                <version>0.1.0-SNAPSHOT</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>com.socialseed</groupId>
+                <artifactId>socialseed-error-handling-starter</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialseed</groupId>
+                <artifactId>socialseed-api-response-starter</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 </project>

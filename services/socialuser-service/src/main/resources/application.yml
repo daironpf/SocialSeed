@@ -3,24 +3,28 @@ server.port: 8090
 
 logging.level.root: info
 
+logging:
+  level:
+    org:
+      springframework:
+        context:
+          support=DEBUG:
+
 # ======================
 # Neo4j
 # ======================
 spring:
+  messages:
+    basename: messages
+    encoding: UTF-8
   application:
     name: socialuser-service
   neo4j:
-#    uri: bolt://localhost:7687
-    uri: bolt://socialgraph-db:7687
+    uri: bolt://localhost:7687
+#    uri: bolt://socialgraph-db:7687
     authentication:
       username: neo4j
       password: neoSocial
-
-# ======================
-# Language
-# ======================
-#spring.messages.basename=i18n/messages
-#spring.messages.encoding=UTF-8
 
 management:
   endpoints:
@@ -37,3 +41,4 @@ grpc:
     reflection-service-enabled: true
     security:
       enabled: false
+

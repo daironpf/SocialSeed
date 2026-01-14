@@ -1,18 +1,16 @@
 package com.socialseed.socialuserservice.user.entry.rest.controller;
-import com.socialseed.socialuserservice.platform.common.response.ApiResponse;
+
+import com.socialseed.apiresponse.model.ApiResponse;
 import com.socialseed.socialuserservice.user.application.usecase.UserUseCases;
 import com.socialseed.socialuserservice.user.domain.model.User;
 import com.socialseed.socialuserservice.user.entry.rest.dto.request.UpdateUserProfileDTO;
 import com.socialseed.socialuserservice.user.entry.rest.mapper.UserRestMapper;
 import com.socialseed.socialuserservice.user.entry.rest.dto.response.UserResponseDTO;
-//import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
-import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Locale;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -24,18 +22,16 @@ import java.util.stream.Collectors;
 public class UserController {
     //region Dependencies
     private final UserUseCases userUseCases;
-    private final MessageSource messageSource;
 
-    public UserController(UserUseCases userUseCases, MessageSource messageSource) {
+    public UserController(UserUseCases userUseCases) {
         this.userUseCases = userUseCases;
-        this.messageSource = messageSource;
     }
     //endregion
 
     // region Gets
     // LIST
     @GetMapping
-    public ResponseEntity<ApiResponse<?>> getAllUsers(Locale locale) {
+    public ResponseEntity<ApiResponse<?>> getAllUsers() {
         List<User> users = userUseCases.getAllUsers();
         if (users == null || users.isEmpty()) {
             return ResponseEntity.noContent().build(); // 204 No Content
@@ -45,12 +41,7 @@ public class UserController {
                 .map(UserRestMapper::toResponse)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok(
-                ApiResponse.success(
-                        response,
-                        messageSource.getMessage("about.success", null, locale)
-                )
-        );
+        return ResponseEntity.ok(ApiResponse.success(response));
     }
 
     /**
@@ -60,22 +51,17 @@ public class UserController {
      * @return ResponseEntity with a ResponseDTO.
      */
     @GetMapping("/getSocialUserById/{id}")
-    public ResponseEntity<ApiResponse<?>> getUserById(@Valid @PathVariable UUID id) {
-        Optional<User> user = userUseCases.getUserById(id);
-        if (user.isPresent()){
-            UserResponseDTO response =  UserRestMapper.toResponse(user.get());
-            return ResponseEntity.ok(
-                    ApiResponse.success(
-                            response,
-                            "SocialUser By Id"
-                    )
-            );
-        }
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by ID not found"));
+    public ResponseEntity<ApiResponse<UserResponseDTO>> getUserById(
+            @Valid @PathVariable UUID id
+    ) {
+        User user = userUseCases.getUserById(id).get();
+                //.orElseThrow(() -> new ResourceNotFoundException(ErrorCode.USER_NOT_FOUND));
 
+        return ResponseEntity.ok(
+                ApiResponse.success(UserRestMapper.toResponse(user))
+        );
     }
+
 
     /**
      * Retrieve a Social User by UserName.
@@ -88,16 +74,13 @@ public class UserController {
         Optional<User> user = userUseCases.getUserByName(userName);
         if (user.isPresent()){
             UserResponseDTO response =  UserRestMapper.toResponse(user.get());
-            return ResponseEntity.ok(
-                    ApiResponse.success(
-                            response,
-                            "SocialUser By UserName"
-                    )
-            );
+            return ResponseEntity.ok(ApiResponse.success(response));
         }
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by Username not found"));
+        return ResponseEntity.ok(ApiResponse.success(null));
+//
+//        return ResponseEntity
+//                .status(HttpStatus.NOT_FOUND)
+//                .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by Username not found"));
 
     }
 
@@ -112,16 +95,12 @@ public class UserController {
         Optional<User> user = userUseCases.getUserByEmail(email);
         if (user.isPresent()){
             UserResponseDTO response =  UserRestMapper.toResponse(user.get());
-            return ResponseEntity.ok(
-                    ApiResponse.success(
-                            response,
-                            "SocialUser By Email"
-                    )
-            );
+            return ResponseEntity.ok(ApiResponse.success(response));
         }
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by Email not found"));
+        return ResponseEntity.ok(ApiResponse.success(null));
+//        return ResponseEntity
+//                .status(HttpStatus.NOT_FOUND)
+//                .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by Email not found"));
 
     }
     //endregion
@@ -142,14 +121,7 @@ public class UserController {
     ) {
         userUseCases.updateUserProfile(request);
 
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(
-                        ApiResponse.success(
-                                HttpStatus.OK.value(),
-                                "User profile updated successfully"
-                        )
-                );
+        return ResponseEntity.ok(ApiResponse.success("User Profile updated successful"));
     }
 
     // DELETE
