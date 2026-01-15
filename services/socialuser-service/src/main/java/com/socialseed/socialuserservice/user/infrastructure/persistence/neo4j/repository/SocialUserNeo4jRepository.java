@@ -54,8 +54,7 @@ public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEnti
     //region existBy
     @Query("""
             MATCH (u:SocialUser {email: $email})
-            RETURN true
-            LIMIT 1
+            RETURN COUNT(u) > 0
             """)
     Boolean existByEmail(String email);
 

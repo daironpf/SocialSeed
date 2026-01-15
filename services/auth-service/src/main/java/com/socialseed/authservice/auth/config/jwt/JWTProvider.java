@@ -1,6 +1,5 @@
 package com.socialseed.authservice.auth.config.jwt;
 
-
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -8,6 +7,7 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.UUID;
 
 @Component
 public class JWTProvider {
@@ -16,7 +16,7 @@ public class JWTProvider {
     private final long expirationMillis;
 
     public JWTProvider(@Value("${jwt.secret}") String secret,
-                       @Value("${jwt.expiration}") long expirationMillis) {
+            @Value("${jwt.expiration}") long expirationMillis) {
         this.secretKey = Keys.hmacShaKeyFor(secret.getBytes());
         this.expirationMillis = expirationMillis;
     }
@@ -26,6 +26,7 @@ public class JWTProvider {
         Date expiryDate = new Date(now.getTime() + expirationMillis);
 
         return Jwts.builder()
+                .setId(UUID.randomUUID().toString())
                 .setSubject(username)
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
@@ -44,6 +45,14 @@ public class JWTProvider {
 
     public String getUsernameFromToken(String token) {
         return getClaims(token).getSubject();
+    }
+
+    public String getJtiFromToken(String token) {
+        return getClaims(token).getId();
+    }
+
+    public Date getExpirationDateFromToken(String token) {
+        return getClaims(token).getExpiration();
     }
 
     private Claims getClaims(String token) {

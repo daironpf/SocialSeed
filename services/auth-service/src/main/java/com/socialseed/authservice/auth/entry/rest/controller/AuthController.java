@@ -33,15 +33,6 @@ public class AuthController {
                 this.messageSource = messageSource;
         }
 
-        @PostMapping("/login")
-        public ResponseEntity<ApiResponse<?>> login(@Valid @RequestBody LoginRequestDTO request, Locale locale) {
-                AuthResponseDTO response = authUseCases.login(request.email(), request.password());
-                return ResponseEntity.ok(
-                                ApiResponse.success(
-                                                response,
-                                                messageSource.getMessage("auth.login.success", null, locale)));
-        }
-
         // region Gets
         @GetMapping("/getUserById/{id}")
         public ResponseEntity<ApiResponse<?>> getAuthUserById(@Valid @PathVariable UUID id) {
@@ -94,7 +85,6 @@ public class AuthController {
                                                                 HttpStatus.NOT_FOUND.value(),
                                                                 "User by UserName not found"));
         }
-
         // endregion
 
         @PostMapping("/register")
@@ -123,6 +113,28 @@ public class AuthController {
                                                 response,
                                                 messageSource.getMessage("auth.change.password.success", null,
                                                                 locale)));
+        }
+        // endregion
+
+        // region Log IN/OUT
+        @PostMapping("/login")
+        public ResponseEntity<ApiResponse<?>> login(@Valid @RequestBody LoginRequestDTO request, Locale locale) {
+            AuthResponseDTO response = authUseCases.login(request.email(), request.password());
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            response,
+                            messageSource.getMessage("auth.login.success", null, locale)));
+        }
+
+        @PostMapping("/logout")
+        public ResponseEntity<ApiResponse<?>> logout(
+                        @RequestHeader(value = "Authorization", required = false) String accessToken,
+                        @Valid @RequestBody LogoutRequestDTO request,
+                        Locale locale) {
+                authUseCases.logout(accessToken, request.refreshToken());
+                return ResponseEntity
+                                .status(HttpStatus.NO_CONTENT)
+                                .build();
         }
         // endregion
 }

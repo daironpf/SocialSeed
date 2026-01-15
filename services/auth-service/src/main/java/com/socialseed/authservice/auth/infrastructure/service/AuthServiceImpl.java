@@ -4,13 +4,19 @@ import com.socialseed.authservice.auth.config.jwt.JWTProvider;
 import com.socialseed.authservice.auth.domain.event.UserRegisteredEvent;
 import com.socialseed.authservice.auth.domain.model.AuthUser;
 import com.socialseed.authservice.auth.domain.repository.AuthUserRepository;
+import com.socialseed.authservice.auth.domain.repository.RefreshTokenRepository;
 import com.socialseed.authservice.auth.domain.repository.UserRegisteredEventPublisher;
 import com.socialseed.authservice.auth.domain.service.AuthService;
+import com.socialseed.authservice.auth.domain.service.TokenBlacklistService;
+import com.socialseed.authservice.auth.domain.model.RefreshToken;
 import com.socialseed.authservice.auth.entry.rest.dto.AuthResponseDTO;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.util.Date;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -21,12 +27,24 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder passwordEncoder;
     private final JWTProvider jwtProvider;
     private final UserRegisteredEventPublisher eventPublisher;
+    private final RefreshTokenRepository refreshTokenRepository;
+    private final TokenBlacklistService tokenBlacklistService;
 
-    public AuthServiceImpl(AuthUserRepository authUserRepository, PasswordEncoder passwordEncoder, JWTProvider jwtProvider, UserRegisteredEventPublisher eventPublisher) {
+    @Value("${jwt.refresh.expiration}")
+    private long refreshTokenDurationSeconds;
+
+    public AuthServiceImpl(AuthUserRepository authUserRepository,
+            PasswordEncoder passwordEncoder,
+            JWTProvider jwtProvider,
+            UserRegisteredEventPublisher eventPublisher,
+            RefreshTokenRepository refreshTokenRepository,
+            TokenBlacklistService tokenBlacklistService) {
         this.authUserRepository = authUserRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
         this.eventPublisher = eventPublisher;
+        this.refreshTokenRepository = refreshTokenRepository;
+        this.tokenBlacklistService = tokenBlacklistService;
     }
 
     @Override
@@ -39,9 +57,12 @@ public class AuthServiceImpl implements AuthService {
         }
 
         String token = jwtProvider.generateToken(authUser.getUsername());
-        Set<String> roles = authUser.getRoles(); // asumiendo que tu entidad User tiene un campo roles
+        RefreshToken refreshToken = RefreshToken.create(authUser.getId(), refreshTokenDurationSeconds);
+        refreshTokenRepository.save(refreshToken);
 
-        return new AuthResponseDTO(token, roles);
+        Set<String> roles = authUser.getRoles();
+
+        return new AuthResponseDTO(token, refreshToken.getToken(), roles);
     }
 
     @Transactional
@@ -52,8 +73,7 @@ public class AuthServiceImpl implements AuthService {
                 id,
                 authUser.getUsername(),
                 authUser.getEmail(),
-                passwordEncoder.encode(authUser.getPassword())
-        );
+                passwordEncoder.encode(authUser.getPassword()));
 
         authUserRepository.save(newAuthUser);
 
@@ -62,15 +82,18 @@ public class AuthServiceImpl implements AuthService {
                 id,
                 authUser.getEmail(),
                 authUser.getEmail(),
-                System.currentTimeMillis()
-        );
-        eventPublisher.publish(event);
+                System.currentTimeMillis());
+        // eventPublisher.publish(event); // Kafka desactivado para pruebas locales sin
+        // broker
 
-        // Generate Token
+        // Generate Tokens
         String token = jwtProvider.generateToken(newAuthUser.getUsername());
-        Set<String> roles = newAuthUser.getRoles(); // asumiendo que tu entidad User tiene un campo roles
+        RefreshToken refreshToken = RefreshToken.create(id, refreshTokenDurationSeconds);
+        refreshTokenRepository.save(refreshToken);
 
-        return new AuthResponseDTO(token, roles);
+        Set<String> roles = newAuthUser.getRoles();
+
+        return new AuthResponseDTO(token, refreshToken.getToken(), roles);
     }
 
     @Override
@@ -78,7 +101,7 @@ public class AuthServiceImpl implements AuthService {
         return null;
     }
 
-    //region Gets
+    // region Gets
     @Override
     public Optional<AuthUser> getUserById(UUID id) {
         return authUserRepository.findById(id);
@@ -93,18 +116,41 @@ public class AuthServiceImpl implements AuthService {
     public Optional<AuthUser> getUserByUserName(String username) {
         return authUserRepository.findByUserName(username);
     }
-    //endregion
+    // endregion
 
-    //region Exists
+    // region Exists
     @Override
     public boolean existByUserId(UUID id) {
         return authUserRepository.existByUserId(id);
     }
-    //endregion
+    // endregion
 
     @Override
     public void changePassword(UUID userId, String currentPassword, String newPassword) {
 
+    }
 
+    @Override
+    @Transactional
+    public void logout(String accessToken, String refreshToken) {
+        // 1. Invalidate Refresh Token
+        if (refreshToken != null) {
+            refreshTokenRepository.findByToken(refreshToken).ifPresent(token -> {
+                token.revoke();
+                refreshTokenRepository.save(token);
+            });
+        }
+
+        // 2. Blacklist Access Token
+        if (accessToken != null && accessToken.startsWith("Bearer ")) {
+            String token = accessToken.substring(7);
+            String jti = jwtProvider.getJtiFromToken(token);
+            Date expiry = jwtProvider.getExpirationDateFromToken(token);
+
+            long ttlSeconds = (expiry.getTime() - System.currentTimeMillis()) / 1000;
+            if (ttlSeconds > 0) {
+                tokenBlacklistService.blacklistToken(jti, Duration.ofSeconds(ttlSeconds));
+            }
+        }
     }
 }

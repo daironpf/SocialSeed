@@ -5,35 +5,33 @@ import com.socialseed.authservice.auth.config.jwt.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity; // Buena práctica añadirla
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
+@EnableWebSecurity
 public class SecurityConfig {
 
     private final JWTProvider jwtProvider;
+    private final com.socialseed.authservice.auth.domain.service.TokenBlacklistService tokenBlacklistService;
 
-    public SecurityConfig(JWTProvider jwtProvider) {
+    public SecurityConfig(JWTProvider jwtProvider,
+                          com.socialseed.authservice.auth.domain.service.TokenBlacklistService tokenBlacklistService) {
         this.jwtProvider = jwtProvider;
+        this.tokenBlacklistService = tokenBlacklistService;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // desactiva CSRF si usas API REST
+                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/about",    // informacion sobre la red social
-                                "/auth/**",              // login, register
-                                "/public/**",            // recursos estáticos, imágenes públicas
-                                "/assets/**",            // estáticos (si aplica)
-                                "/swagger-ui/**",        // Swagger UI assets
-                                "/v3/api-docs/**",       // documentación OpenAPI
-                                "/swagger-ui.html"       // antigua URL
-                        ).permitAll() // ✅ acceso público
-                        .anyRequest().authenticated() // 🔒 resto protegido
-                )
-                .addFilterBefore(new JwtAuthFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class);
+                        // Ya no necesitas 'new AntPathRequestMatcher(...)', usa solo el String
+                        .requestMatchers("/auth/**", "/public/**", "/actuator/**").permitAll()
+                        .anyRequest().authenticated())
+                .addFilterBefore(new JwtAuthFilter(jwtProvider, tokenBlacklistService),
+                        UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
