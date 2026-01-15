@@ -52,6 +52,8 @@ services:
       - "8085:8085"
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     networks:
       - net
     healthcheck:
@@ -103,6 +105,21 @@ services:
       timeout: 5s
       retries: 20
 
+  # Token blacklist and cache in Redis
+  redis:
+    container_name: redis
+    image: redis:7.4-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --maxmemory 128mb --maxmemory-policy allkeys-lru
+    networks:
+      - net
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
   ## Kafka Server-Service
   kafka:
     image: apache/kafka:4.1.1
@@ -139,6 +156,7 @@ volumes:
   socialgraph_data:
     driver: local
   kafka_data:
+
 
 networks:
   net:

@@ -1,6 +1,6 @@
 package com.socialseed.authservice.auth.config.jwt;
 
-
+import com.socialseed.authservice.auth.domain.service.TokenBlacklistService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,19 +19,21 @@ import java.util.List;
 public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JWTProvider jwtProvider;
+    private final TokenBlacklistService tokenBlacklistService;
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
     private final List<String> excludedPaths = List.of(
             "/about",
+            "/auth/**",
             "/public/**",
             "/assets/**",
             "/swagger-ui/**",
             "/v3/api-docs/**",
-            "/swagger-ui.html"
-    );
+            "/swagger-ui.html");
 
-    public JwtAuthFilter(JWTProvider jwtProvider) {
+    public JwtAuthFilter(JWTProvider jwtProvider, TokenBlacklistService tokenBlacklistService) {
         this.jwtProvider = jwtProvider;
+        this.tokenBlacklistService = tokenBlacklistService;
     }
 
     @Override
@@ -42,8 +44,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
-                                    HttpServletResponse response,
-                                    FilterChain filterChain)
+            HttpServletResponse response,
+            FilterChain filterChain)
             throws ServletException, IOException {
 
         String header = request.getHeader("Authorization");
@@ -52,12 +54,17 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             String token = header.substring(7);
 
             if (jwtProvider.validateToken(token)) {
+                String jti = jwtProvider.getJtiFromToken(token);
+                if (tokenBlacklistService.isBlacklisted(jti)) {
+                    filterChain.doFilter(request, response);
+                    return;
+                }
+
                 String username = jwtProvider.getUsernameFromToken(token);
 
-                UsernamePasswordAuthenticationToken authentication =
-                        new UsernamePasswordAuthenticationToken(
-                                new User(username, "", Collections.emptyList()), null,
-                                Collections.emptyList());
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        new User(username, "", Collections.emptyList()), null,
+                        Collections.emptyList());
 
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

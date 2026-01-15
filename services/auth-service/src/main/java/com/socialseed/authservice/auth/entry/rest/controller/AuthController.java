@@ -125,4 +125,15 @@ public class AuthController {
                                                                 locale)));
         }
         // endregion
+
+        @PostMapping("/logout")
+        public ResponseEntity<ApiResponse<?>> logout(
+                        @RequestHeader(value = "Authorization", required = false) String accessToken,
+                        @Valid @RequestBody LogoutRequestDTO request,
+                        Locale locale) {
+                authUseCases.logout(accessToken, request.refreshToken());
+                return ResponseEntity
+                                .status(HttpStatus.NO_CONTENT)
+                                .build();
+        }
 }

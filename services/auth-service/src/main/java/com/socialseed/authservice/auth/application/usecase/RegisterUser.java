@@ -20,11 +20,13 @@ public class RegisterUser {
     private final Logger log = LoggerFactory.getLogger(this.getClass());
     private final SocialUserServiceGrpc.SocialUserServiceBlockingStub socialUserClient;
 
-    public RegisterUser(AuthService authService,
-                        SocialUserServiceGrpc.SocialUserServiceBlockingStub socialUserClient
-                        ) {
+    public RegisterUser(AuthService authService) {
         this.authService = authService;
-        this.socialUserClient = socialUserClient;
+        // Manual gRPC channel creation to ensure connectivity
+        io.grpc.ManagedChannel channel = io.grpc.ManagedChannelBuilder.forAddress("127.0.0.1", 9090)
+                .usePlaintext()
+                .build();
+        this.socialUserClient = SocialUserServiceGrpc.newBlockingStub(channel);
     }
 
     public AuthResponseDTO execute(AuthUser authUser) {
