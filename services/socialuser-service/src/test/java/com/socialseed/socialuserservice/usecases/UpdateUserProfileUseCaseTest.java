@@ -44,7 +44,8 @@ class UpdateUserProfileUseCaseTest {
                 UserLanguage.EN,
                 null,
                 null,
-                UserStatus.ACTIVE
+                UserStatus.ACTIVE,
+                null
         );
 
         UpdateUserProfileDTO dto = new UpdateUserProfileDTO(
@@ -105,7 +106,8 @@ class UpdateUserProfileUseCaseTest {
                 UserLanguage.EN,
                 null,
                 null,
-                UserStatus.DELETED
+                UserStatus.DELETED,
+                null
         );
 
         assertThrows(

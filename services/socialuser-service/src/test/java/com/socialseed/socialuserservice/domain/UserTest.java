@@ -23,7 +23,8 @@ class UserTest {
                 UserLanguage.EN,
                 null,
                 null,
-                UserStatus.ACTIVE
+                UserStatus.ACTIVE,
+                null
         );
 
         user.updateProfile(

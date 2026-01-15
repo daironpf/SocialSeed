@@ -45,6 +45,15 @@ public class UserNeo4jEntity {
     @Property("status")
     private String status;
 
+    @Property("vacation_start_date")
+    private LocalDate vacationStartDate;
+
+    @Property("vacation_end_date")
+    private LocalDate vacationEndDate;
+
+    @Property("vacation_note")
+    private String vacationNote;
+
     // === Constructors ===
 
     public UserNeo4jEntity() {
@@ -59,7 +68,10 @@ public class UserNeo4jEntity {
             String language,
             String profileImage,
             String bio,
-            String status
+            String status,
+            LocalDate vacationStartDate,
+            LocalDate vacationEndDate,
+            String vacationNote
     ) {
         this.id = id;
         this.username = username;
@@ -70,6 +82,9 @@ public class UserNeo4jEntity {
         this.profileImage = profileImage;
         this.bio = bio;
         this.status = status;
+        this.vacationStartDate = vacationStartDate;
+        this.vacationEndDate = vacationEndDate;
+        this.vacationNote = vacationNote;
     }
 
     // === Getters & Setters ===
@@ -146,6 +161,30 @@ public class UserNeo4jEntity {
         this.status = status;
     }
 
+    public LocalDate getVacationStartDate() {
+        return vacationStartDate;
+    }
+
+    public void setVacationStartDate(LocalDate vacationStartDate) {
+        this.vacationStartDate = vacationStartDate;
+    }
+
+    public LocalDate getVacationEndDate() {
+        return vacationEndDate;
+    }
+
+    public void setVacationEndDate(LocalDate vacationEndDate) {
+        this.vacationEndDate = vacationEndDate;
+    }
+
+    public String getVacationNote() {
+        return vacationNote;
+    }
+
+    public void setVacationNote(String vacationNote) {
+        this.vacationNote = vacationNote;
+    }
+
     // === Builder ===
 
     public static Builder builder() {
@@ -163,6 +202,9 @@ public class UserNeo4jEntity {
         private String profileImage;
         private String bio;
         private String status;
+        private LocalDate vacationStartDate;
+        private LocalDate vacationEndDate;
+        private String vacationNote;
 
         private Builder() {
         }
@@ -212,6 +254,21 @@ public class UserNeo4jEntity {
             return this;
         }
 
+        public Builder vacationStartDate(LocalDate vacationStartDate) {
+            this.vacationStartDate = vacationStartDate;
+            return this;
+        }
+
+        public Builder vacationEndDate(LocalDate vacationEndDate) {
+            this.vacationEndDate = vacationEndDate;
+            return this;
+        }
+
+        public Builder vacationNote(String vacationNote) {
+            this.vacationNote = vacationNote;
+            return this;
+        }
+
         public UserNeo4jEntity build() {
             return new UserNeo4jEntity(
                     id,
@@ -222,7 +279,10 @@ public class UserNeo4jEntity {
                     language,
                     profileImage,
                     bio,
-                    status
+                    status,
+                    vacationStartDate,
+                    vacationEndDate,
+                    vacationNote
             );
         }
     }

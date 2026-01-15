@@ -37,7 +37,8 @@ class Neo4jUserRepositoryIntegrationTest extends Neo4jIntegrationTest {
                 UserLanguage.EN,
                 null,
                 null,
-                UserStatus.ACTIVE
+                UserStatus.ACTIVE,
+                null
         );
 
         userRepository.save(user);

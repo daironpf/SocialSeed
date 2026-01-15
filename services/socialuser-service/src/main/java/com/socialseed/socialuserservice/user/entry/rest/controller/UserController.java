@@ -3,6 +3,7 @@ package com.socialseed.socialuserservice.user.entry.rest.controller;
 import com.socialseed.apiresponse.model.ApiResponse;
 import com.socialseed.socialuserservice.user.application.usecase.UserUseCases;
 import com.socialseed.socialuserservice.user.domain.model.User;
+import com.socialseed.socialuserservice.user.entry.rest.dto.request.StartVacationRequestDTO;
 import com.socialseed.socialuserservice.user.entry.rest.dto.request.UpdateUserProfileDTO;
 import com.socialseed.socialuserservice.user.entry.rest.mapper.UserRestMapper;
 import com.socialseed.socialuserservice.user.entry.rest.dto.response.UserResponseDTO;
@@ -135,6 +136,23 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
         userUseCases.deleteUser(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // VACATIONS
+    @PostMapping("/vacation/start")
+    public ResponseEntity<ApiResponse<?>> startVacation(
+            @Valid @RequestBody StartVacationRequestDTO request
+    ) {
+        userUseCases.startVacation(request);
+        return ResponseEntity.ok(ApiResponse.success("User is now on vacation"));
+    }
+
+    @PostMapping("/vacation/end/{id}")
+    public ResponseEntity<ApiResponse<?>> endVacation(
+            @PathVariable UUID id
+    ) {
+        userUseCases.endVacation(id);
+        return ResponseEntity.ok(ApiResponse.success("User has returned from vacation"));
     }
     //endregion
 }

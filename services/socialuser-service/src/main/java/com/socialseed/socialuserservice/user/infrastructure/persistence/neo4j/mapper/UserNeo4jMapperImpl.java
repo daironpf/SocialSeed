@@ -25,6 +25,9 @@ public class UserNeo4jMapperImpl implements UserNeo4jMapper {
                 .profileImage(domain.getProfileImage())
                 .bio(domain.getBio())
                 .status(domain.getStatus().name())
+                .vacationStartDate(domain.getVacationPeriod() != null ? domain.getVacationPeriod().startDate() : null)
+                .vacationEndDate(domain.getVacationPeriod() != null ? domain.getVacationPeriod().endDate() : null)
+                .vacationNote(domain.getVacationPeriod() != null ? domain.getVacationPeriod().note() : null)
                 .build();
     }
 
@@ -41,7 +44,19 @@ public class UserNeo4jMapperImpl implements UserNeo4jMapper {
                 parseLanguage(entity.getLanguage()),
                 entity.getProfileImage(),
                 entity.getBio(),
-                parseStatus(entity.getStatus())
+                parseStatus(entity.getStatus()),
+                mapVacationPeriod(entity)
+        );
+    }
+
+    private com.socialseed.socialuserservice.user.domain.model.valueobject.VacationPeriod mapVacationPeriod(UserNeo4jEntity entity) {
+        if (entity.getVacationStartDate() == null || entity.getVacationEndDate() == null) {
+            return null;
+        }
+        return new com.socialseed.socialuserservice.user.domain.model.valueobject.VacationPeriod(
+                entity.getVacationStartDate(),
+                entity.getVacationEndDate(),
+                entity.getVacationNote()
         );
     }
 

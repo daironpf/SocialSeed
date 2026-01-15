@@ -7,10 +7,7 @@ import io.swagger.v3.oas.annotations.info.License;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
-
 @EnableAspectJAutoProxy(exposeProxy = true)
-@EnableNeo4jRepositories
 @SpringBootApplication(scanBasePackages = {"com.socialseed"})
 @OpenAPIDefinition(
         info = @Info(

@@ -1,6 +1,7 @@
 package com.socialseed.socialuserservice.user.application.usecase;
 
 import com.socialseed.socialuserservice.user.domain.model.User;
+import com.socialseed.socialuserservice.user.entry.rest.dto.request.StartVacationRequestDTO;
 import com.socialseed.socialuserservice.user.entry.rest.dto.request.UpdateUserProfileDTO;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -16,6 +17,8 @@ public class UserUseCases {
     private final GetAllUsers getAllUsers;
     private final UpdateUserProfile updateUserProfile;
     private final DeleteUser deleteUser;
+    private final StartVacation startVacation;
+    private final EndVacation endVacation;
 
     public UserUseCases(
             CreateUser createUser,
@@ -24,7 +27,9 @@ public class UserUseCases {
             GetUserByEmail getUserByEmail,
             GetAllUsers getAllUsers,
             UpdateUserProfile updateUserProfile,
-            DeleteUser deleteUser
+            DeleteUser deleteUser,
+            StartVacation startVacation,
+            EndVacation endVacation
     ) {
         this.createUser = createUser;
         this.getUserById = getUserById;
@@ -33,6 +38,8 @@ public class UserUseCases {
         this.getAllUsers = getAllUsers;
         this.updateUserProfile = updateUserProfile;
         this.deleteUser = deleteUser;
+        this.startVacation = startVacation;
+        this.endVacation = endVacation;
     }
 
     public Optional<User> getUserById(UUID id) {
@@ -52,5 +59,13 @@ public class UserUseCases {
     }
     public void deleteUser(UUID id) {
         deleteUser.execute(id);
+    }
+
+    public void startVacation(StartVacationRequestDTO request) {
+        startVacation.execute(request);
+    }
+
+    public void endVacation(UUID userId) {
+        endVacation.execute(userId);
     }
 }

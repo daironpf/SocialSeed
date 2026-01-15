@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.socialseed.socialuserservice.user.domain.model.valueobject.VacationPeriod;
+
 public class User {
 
     private final UUID id;
@@ -16,6 +18,7 @@ public class User {
     private String bio;
 
     private UserStatus status;
+    private VacationPeriod vacationPeriod;
 
     private User(UUID id,
                  String username,
@@ -25,7 +28,8 @@ public class User {
                  UserLanguage language,
                  String profileImage,
                  String bio,
-                 UserStatus status) {
+                 UserStatus status,
+                 VacationPeriod vacationPeriod) {
 
         this.id = Objects.requireNonNull(id, "id is required");
         this.username = validateRequired(username, "username");
@@ -36,6 +40,7 @@ public class User {
         this.profileImage = profileImage;
         this.bio = bio;
         this.status = status == null ? UserStatus.ACTIVE : status;
+        this.vacationPeriod = vacationPeriod;
     }
 
     public static User create(String username, String email) {
@@ -47,7 +52,8 @@ public class User {
                 UserLanguage.EN,
                 null,
                 null,
-                UserStatus.ACTIVE
+                UserStatus.ACTIVE,
+                null
         );
     }
 
@@ -95,7 +101,8 @@ public class User {
             UserLanguage language,
             String profileImage,
             String bio,
-            UserStatus status
+            UserStatus status,
+            VacationPeriod vacationPeriod
         ) {
         return new User(
             id,
@@ -106,7 +113,8 @@ public class User {
             language,
             profileImage,
             bio,
-            status
+            status,
+            vacationPeriod
         );
     }
 
@@ -125,10 +133,11 @@ public class User {
         this.fullName = fullName;
     }
 
-    public void goOnVacation() {
+    public void goOnVacation(VacationPeriod period) {
         if (status != UserStatus.ACTIVE) {
             throw new IllegalStateException("User must be ACTIVE to go on vacation.");
         }
+        this.vacationPeriod = Objects.requireNonNull(period, "vacationPeriod is required");
         this.status = UserStatus.ON_VACATION;
     }
 
@@ -137,6 +146,7 @@ public class User {
             throw new IllegalStateException("User is not on vacation.");
         }
         this.status = UserStatus.ACTIVE;
+        this.vacationPeriod = null;
     }
 
     public void goDeactivate() {
@@ -176,4 +186,5 @@ public class User {
     public String getEmail() { return this.email; }
     public UserLanguage getLanguage() { return this.language; }
     public String getProfileImage() { return this.profileImage; }
+    public VacationPeriod getVacationPeriod() { return this.vacationPeriod; }
 }
