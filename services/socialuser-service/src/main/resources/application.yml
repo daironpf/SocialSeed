@@ -1,17 +1,15 @@
-server.port: 8090
-#server.port=4000
-
-logging.level.root: info
+server:
+  port: 8090
+  #port: 4005
 
 logging:
   level:
-    org:
-      springframework:
-        context:
-          support=DEBUG:
+    root: info
+    org.springframework.context.support: DEBUG
+
 
 # ======================
-# Neo4j
+# Neo4j Configuration (Aura Cloud)
 # ======================
 spring:
   messages:
@@ -20,11 +18,16 @@ spring:
   application:
     name: socialuser-service
   neo4j:
-    uri: bolt://localhost:7687
+    # Cambiamos bolt://localhost por la URI de Aura
+    # Es vital usar neo4j+s:// para conexiones seguras con Aura
+    uri: neo4j+s://89861427.databases.neo4j.io
+        # uri: bolt://localhost:7687
 #    uri: bolt://socialgraph-db:7687
     authentication:
       username: neo4j
-      password: neoSocial
+      password: 4J49pcAZnhOZOkzlPbkg3JmySg3jQus7OP-phX5vFPk
+      # username: neo4j
+      # password: neoSocial
 
 management:
   endpoints:

@@ -132,11 +132,3 @@ Content-Type: application/json
 ```
 HTTP/1.1 204 No Content
 ```
-
-## Next Steps
-- Consider implementing a cleanup job for expired refresh tokens in PostgreSQL.
-- Add metrics/monitoring for logout operations.
-- Implement "logout from all devices" functionality using `deleteByUserId()`.
-
-## Issue Status
-Issue #59 is now complete and ready for testing with Redis and PostgreSQL running.
