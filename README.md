@@ -2,10 +2,9 @@
 
 ## 🚀 Overview
 
-**Social Seed** provides a complete backend ecosystem for building a social network powered by microservices and graph relationships.
-It is designed to be **extendable**, **distributed**, and **ready for integration** with mobile or web clients.
+**Social Seed** is a professional-grade backend ecosystem designed to build scalable, decentralized, and ethical social networks. Powered by a **microservices architecture** and **graph-based relationships**, it provides a robust foundation for modern social platforms.
 
-A dedicated **Android application** will be published on the **Google Play Store** to interact directly with this backend, allowing users to experience the platform in real-time.
+A dedicated **Android application** is part of the ecosystem, ensuring a seamless, real-time experience for end-users, while the backend remains fully extensible for web and third-party clients.
 
 ---
 
@@ -20,60 +19,39 @@ A dedicated **Android application** will be published on the **Google Play Store
 
 ![Java](https://img.shields.io/badge/Java-17+-red)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen)
-![API](https://img.shields.io/badge/API-REST-orange)  <!-- Public API -->
-
 ![Neo4j](https://img.shields.io/badge/Database-Neo4j-blue)
 ![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue)
-
-![Architecture](https://img.shields.io/badge/Architecture-Microservices-orange)
 ![Kafka](https://img.shields.io/badge/Messaging-Apache%20Kafka-black)
-![gRPC](https://img.shields.io/badge/Communication-gRPC-brightgreen)  <!-- Internal microservice communication -->
-
+![gRPC](https://img.shields.io/badge/Communication-gRPC-brightgreen)
 ![Docker](https://img.shields.io/badge/Container-Docker-blue)
-![Docker](https://img.shields.io/badge/Deployment-Docker%20Compose-blue)
-
-
-
-## 📄 License
-
-[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-
-> **Social Seed** is a modular and scalable social network backend built with **Spring Boot**, **Neo4j**, and **microservices architecture**.
-> It serves as a foundation for developers to create and extend social platforms with modern, flexible backend components.
 
 ---
 
 ## 🧩 Key Features
 
-* **🧠 Modular Microservices Architecture** — Each service handles a specific domain, enabling clean scalability and clear separation of concerns.
-* **🔗 Graph Database** — Built on **Neo4j**, enabling advanced relationship modeling (friends, followers, interactions, and social graphs).
-* **💬 Core Social Interactions** — User profiles, follow system, posts, comments, reactions, and private messaging.
-* **🏛️ Governance-Ready Core** — Designed with governance in mind, providing a solid foundation for moderation, policy enforcement, compliance, and platform rules without coupling them to the social core.
-* **⚙️ API-First Approach** — Fully REST-based backend designed for mobile and web clients, facilitating integration and experimentation.
-* **📈 Scalable & Extensible** — Easily deployable via Docker and adaptable to academic, enterprise, or experimental use cases.
-* **🆓 Open Source Core** — Licensed under **Apache 2.0**, offering a production-grade social network core that can be freely studied, extended, and integrated, while allowing advanced governance features to evolve independently.
+* **🧠 Modular Microservices Architecture** — High-performance services handling specific domains for maximum scalability.
+* **🔗 Advanced Graph Data Model** — Built on **Neo4j**, enabling complex relationship modeling (friends, followers, and social interaction graphs).
+* **🏛️ Intelligent Governance Core** — A first-class service designed for policy enforcement, moderation, and accountability.
+* **🤖 AI-Assisted Mentorship** — Integrated with **LLMs (Google Gemini)** to detect bullying and toxic behavior, acting as a digital mentor to foster respectful interactions.
+* **⚖️ Human-in-the-Loop (HITL)** — AI-driven insights supervised by human moderators to ensure contextual and ethical decision-making.
+* **📈 Scalable & Extensible** — Ready for deployment via Docker and adaptable for academic, enterprise, or community use cases.
 
 ---
-## 🏛️ Why Governance Matters
 
-Modern social platforms require more than just user interactions; they need clear governance foundations to ensure trust, safety, and long-term sustainability.
+## 🏛️ Why Intelligent Governance Matters
 
-Social Seed is designed with governance as a first-class concern, allowing institutions, companies, and researchers to understand and experiment with how moderation, platform rules, and accountability can coexist with a scalable social architecture. By keeping governance conceptually separated from the social core, the project enables:
+Social Seed is built on the principle that modern platforms require more than just connectivity; they require **Trust and Safety**. 
 
-* A clear distinction between social features and platform control mechanisms.
-* Safer experimentation in academic and educational environments.
-* Easier adaptation to organizational, legal, or ethical requirements.
-* A realistic foundation for real-world social platforms without overloading the open-source core.
-
-> ⚠️ **Key Insight**  
-> This approach makes Social Seed especially valuable as a learning platform and as a starting point for professional systems where governance is not optional, but essential.
-
+Our **Governance Service** separates platform rules from social features, allowing for:
+* **Educational Moderation:** Instead of simple bans, the system uses AI to educate users on community values and moral integrity.
+* **Behavioral Analysis:** Using **Neo4j Graph Data Science**, we identify negative interaction clusters and promote "Community Builders" who foster positive leadership.
+* **Strategic Compliance:** Easily adaptable to organizational, legal, or ethical requirements without modifying the core social logic.
 
 ---
 
 ## 🧠 Graph Data Model
 
-The project uses a graph-oriented data structure to represent relationships between users, posts, and interactions:
+The project leverages a graph-oriented structure to represent the complexity of human connections:
 
 ![Graph Data Model](https://github.com/daironpf/SocialSeed/blob/main/Neo4j/Graph%20Data%20Model/SocialSeed%20\(SS\).png)
 
@@ -81,95 +59,63 @@ The project uses a graph-oriented data structure to represent relationships betw
 
 ## 🏗️ Architecture Overview
 
-Social Seed is built on a **microservices-based backend**, where each component operates independently and communicates via REST, GRPC or messaging events:
+Social Seed is a distributed system where services communicate via REST, gRPC, or event-driven messaging (Kafka):
 
-* **Auth Service** — User registration, authentication & authorization using JWT.
-* **SocialUser Service** — User profiles, and account data.
-* **Post Service** — Post creation and retrieval.
-* **Comment Service** — Comments associated with posts.
-* **Reaction Service** — Likes and reactions to posts.
-* **Relationship Service** — Following and friendships between users.
-* **Messaging Service** — Private messaging between users.
-* **Notification Service** — Real-time and event-based notifications.
-* **Media Service** — Image and file upload management.
-* **Governance Service** — Platform governance and moderation rules, including content policies, reporting workflows, sanctions, and enforcement mechanisms across services.
+* **Auth Service** — Secure identity management and JWT authorization.
+* **SocialUser Service** — Profile and account metadata management.
+* **Post/Comment/Reaction Services** — Core interaction layers.
+* **Relationship Service (Neo4j)** — High-speed social graph management.
+* **Governance Service (AI-Core)** — Real-time moderation, sentiment analysis, and interaction oversight.
+* **Messaging & Notification Services** — Real-time communication and event-driven alerts.
+
+---
+
+## 🗺️ Roadmap & Strategic Collaboration
+
+Social Seed is evolving to set a new standard in ethical social networking. We are currently focusing on:
+
+* **Cognitive Governance (LLM Integration):** Architecting seamless integration with **Google Gemini** for deep semantic understanding and real-time user assistance.
+* **Graph Data Science (GDS):** Implementing **Neo4j GDS** algorithms to detect complex social patterns, prevent harassment, and measure community health.
+* **Enterprise & Educational Pilots:** Optimizing the core for deployment in schools and corporate intranets where safe, supervised social interaction is critical.
 
 ---
 
 ## 🛠️ Getting Started
 
-### Installation
-
 1. **Clone the repository:**
+```bash
+git clone git@github.com:daironpf/SocialSeed.git
+cd SocialSeed
 
-   ```bash
-   git clone git@github.com:daironpf/SocialSeed.git
-   cd SocialSeed
-   ```
+```
 
-2. **Start all services using Docker Compose:**
+2. **Start the ecosystem using Docker Compose:**
+```bash
+docker-compose up --build
 
-   ```bash
-   docker-compose up --build
-   ```
+```
 
-3. **Access the backend APIs:**
+3. **API Access:**
+```
+http://localhost:8085
 
-   ```
-   http://localhost:8085
-   ```
+```
+
 
 ---
 
 ## 🎨 Android App Integration
 
-An official **Android application** will be published on the **Google Play Store**, providing a seamless interface to interact with the Social Seed backend — allowing users to:
-
-* Create and manage profiles
-* Follow and interact with friends
-* Share posts and comments
-* Send messages in real time
-
-The app will serve as the **default client** for this backend, but the API is fully open for custom frontends.
-
-<!--
----
-
-## 🤝 Contributing
-
-Contributions are welcome!
-If you’d like to contribute to Social Seed:
-
-1. Fork the repository
-2. Create a feature branch (`feature/new-feature`)
-3. Commit your changes
-4. Open a Pull Request
-
-Please follow conventional commit and PR naming practices.
--->
----
-
-## 📬 Contact
-
-**Developer:** Dairon Pérez Frías
-📧 **Email:** [dairon.perezfrias@gmail.com](mailto:dairon.perezfrias@gmail.com)
+An official **Android application** will be published on the **Google Play Store**, serving as the flagship client for the Social Seed backend. It provides a seamless interface for profile management, real-time messaging, and social interaction.
 
 ---
-
-<!--
-
-## 🙏 Acknowledgments
-
-Special thanks to **JetBrains** for supporting open-source development with free licenses, which make this project’s development faster and smoother.
-
-![JetBrains logo](https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.svg)
-
----
--->
 
 ## 📜 License
 
-This project is licensed under the **Apache License 2.0**.
-See the [LICENSE](LICENSE) file for full details.
+This project is licensed under the **Apache License 2.0**. See the [LICENSE](https://www.google.com/search?q=LICENSE) file for full details.
 
 ---
+
+**Developer:** Dairon Pérez Frías
+
+📧 **Email:** [dairon.perezfrias@gmail.com](mailto:dairon.perezfrias@gmail.com)
