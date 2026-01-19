@@ -20,7 +20,6 @@
         <module>socialseed-error-handling-starter</module>
         <module>socialseed-api-response-starter</module>
         <module>socialseed-contracts</module>
-        <module>socialseed-contracts</module>
     </modules>
 
     <dependencyManagement>

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+// Package lógico para evitar colisiones
+package com.socialseed.contracts.auth.events;
+
+// CONFIGURACIÓN PARA JAVA
+option java_multiple_files = true;
+option java_package = "com.socialseed.contracts.auth.events";
+option java_outer_classname = "AuthEventsProto";
+
+import "google/protobuf/timestamp.proto";
+
+/**
+ * Evento enviado al topic: auth.user.registered
+ * Representa la creación de un nuevo usuario en el sistema de autenticación.
+ */
+message AuthUserRegistered {
+    string user_id = 1;      // Protobuf usa snake_case por convención
+    string email = 2;
+    string username = 3;
+    google.protobuf.Timestamp created_at = 4;
+}
