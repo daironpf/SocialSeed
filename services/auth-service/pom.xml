@@ -42,6 +42,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.junit.vintage</groupId>
+                    <artifactId>junit-vintage-engine</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -151,6 +157,10 @@
             <groupId>com.socialseed</groupId>
             <artifactId>socialseed-validation-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.socialseed</groupId>
+            <artifactId>socialseed-contracts</artifactId>
+        </dependency>
         <!-- End of: SocialSeed platform starters -->
 
         <!-- Annotation processor de Spring Boot -->
@@ -158,6 +168,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java-util</artifactId>
         </dependency>
     </dependencies>
 
@@ -173,7 +187,7 @@
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring.boot.version}</version>
+                <version>3.5.7</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -189,35 +203,6 @@
 
     <build>
         <plugins>
-
-            <!-- Protobuf / gRPC -->
-            <plugin>
-                <groupId>io.github.ascopes</groupId>
-                <artifactId>protobuf-maven-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <outputDirectory>
-                        ${project.basedir}/src/main/generated-sources
-                    </outputDirectory>
-                    <protocVersion>${protobuf-java.version}</protocVersion>
-                    <binaryMavenPlugins>
-                        <binaryMavenPlugin>
-                            <groupId>io.grpc</groupId>
-                            <artifactId>protoc-gen-grpc-java</artifactId>
-                            <version>${grpc.version}</version>
-                            <options>@generated=omit</options>
-                        </binaryMavenPlugin>
-                    </binaryMavenPlugins>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>generate</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
 
             <!-- Java compiler -->
             <plugin>

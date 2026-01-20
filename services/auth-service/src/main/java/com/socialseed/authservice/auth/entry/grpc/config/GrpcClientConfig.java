@@ -1,11 +1,11 @@
 package com.socialseed.authservice.auth.entry.grpc.config;
 
-import com.socialseed.socialuserservice.proto.SocialUserServiceGrpc;
+import com.socialseed.contracts.socialuser.SocialUserServiceGrpc;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.grpc.client.GrpcChannelFactory;
 
-import static com.socialseed.socialuserservice.proto.SocialUserServiceGrpc.newBlockingStub;
+import static com.socialseed.contracts.socialuser.SocialUserServiceGrpc.newBlockingStub;
 
 @Configuration
 public class GrpcClientConfig {

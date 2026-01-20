@@ -1,8 +1,9 @@
 package com.socialseed.authservice.auth.infrastructure.kafka.producer;
 
-import com.socialseed.auth.AuthUserRegistered;
+import com.socialseed.contracts.auth.events.AuthUserRegistered;
 import com.socialseed.authservice.auth.domain.event.UserRegisteredEvent;
 import com.socialseed.authservice.auth.domain.repository.UserRegisteredEventPublisher;
+import com.google.protobuf.util.Timestamps;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -24,7 +25,8 @@ public class KafkaUserRegisteredProducer implements UserRegisteredEventPublisher
                 .setUserId(String.valueOf(event.userId()))
                 .setEmail(event.email())
                 .setUsername(event.username())
-                .setCreatedAt(event.occurredAt())
+                // Convertimos el long (milis) al formato que espera Proto
+                .setCreatedAt(Timestamps.fromMillis(event.occurredAt()))
                 .build();
 
         kafkaTemplate.send(TOPIC, proto.toByteArray());

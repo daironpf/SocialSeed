@@ -5,7 +5,7 @@ import com.socialseed.authservice.auth.domain.service.AuthService;
 import com.socialseed.authservice.auth.entry.rest.dto.AuthResponseDTO;
 import com.socialseed.authservice.platform.error.BusinessException;
 import com.socialseed.authservice.platform.error.ErrorCode;
-import com.socialseed.socialuserservice.proto.SocialUserServiceGrpc;
+import com.socialseed.contracts.socialuser.SocialUserServiceGrpc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -32,8 +32,8 @@ public class RegisterUser {
     public AuthResponseDTO execute(AuthUser authUser) {
         log.info("Starting user registration for email: {}", authUser.getEmail());
 
-        // 1️⃣ Crear el usuario social vía gRPC
-        var request = com.socialseed.socialuserservice.proto.CreateUserRequest.newBuilder()
+        // 1️Crar el usuario social vía gRPC
+        var request = com.socialseed.contracts.socialuser.CreateUserRequest.newBuilder()
                 .setUsername(authUser.getUsername())
                 .setEmail(authUser.getEmail())
                 .build();
