@@ -36,3 +36,6 @@ replay_pid*
 
 /target/
 **/target/
+
+# Configuración del Agente AI (Antigravity)
+.agent/
