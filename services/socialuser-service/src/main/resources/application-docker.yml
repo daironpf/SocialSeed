@@ -1,0 +1,6 @@
+spring:
+  neo4j:
+    uri: bolt://socialgraph-db:7687
+    authentication:
+      username: neo4j
+      password: neoSocial

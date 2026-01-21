@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Configuración secreta de desarrollo (AuraDB)
+src/main/resources/application-dev.yml
