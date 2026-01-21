@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+// Definimos el package lógico de protobuf
+package com.socialseed.contracts.socialuser;
+
+// CONFIGURACIÓN PARA JAVA
+option java_multiple_files = true;
+// Cambiamos el paquete para que apunte a tu librería de contratos centralizada
+option java_package = "com.socialseed.contracts.socialuser";
+option java_outer_classname = "SocialUserProto";
+
+/**
+ * Servicio gRPC que expone las operaciones del SocialUserService
+ */
+service SocialUserService {
+    // Crea un usuario con username y email
+    rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+}
+
+/**
+ * Mensaje para la creación de usuario
+ */
+message CreateUserRequest {
+    string username = 1;
+    string email = 2;
+}
+
+/**
+ * Respuesta del servicio de usuario
+ * Cambiamos 'Reply' por 'Response' para mantener consistencia con Auth
+ */
+message CreateUserResponse {
+    string user_id = 1;       // UUID generado (convención snake_case)
+    string message = 2;      // Mensaje de confirmación
+}

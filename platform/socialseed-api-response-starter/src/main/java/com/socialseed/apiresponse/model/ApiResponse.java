@@ -74,6 +74,24 @@ public record ApiResponse<T>(
                 Instant.now());
     }
 
+    public static <T> ApiResponse<T> success(T data, String message) {
+        return new ApiResponse<>(
+                200,
+                data,
+                message,
+                AppInfo.VERSION,
+                Instant.now());
+    }
+
+    public static ApiResponse<Void> message(int status, String message) {
+        return new ApiResponse<>(
+                status,
+                null,
+                message,
+                AppInfo.VERSION,
+                Instant.now());
+    }
+
     public static <T> ApiResponse<T> error(int status, T data, String message) {
         return new ApiResponse<>(
                 status,

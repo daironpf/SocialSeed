@@ -2,8 +2,8 @@ package com.socialseed.authservice.auth.application.usecase;
 
 import com.socialseed.authservice.auth.domain.model.AuthUser;
 import com.socialseed.authservice.auth.domain.service.AuthService;
-import com.socialseed.authservice.platform.error.BusinessException;
-import com.socialseed.authservice.platform.error.ErrorCode;
+import com.socialseed.errorhandling.exception.BusinessException;
+import com.socialseed.errorhandling.exception.ErrorCode;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 

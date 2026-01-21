@@ -19,6 +19,7 @@
         <module>socialseed-validation-starter</module>
         <module>socialseed-error-handling-starter</module>
         <module>socialseed-api-response-starter</module>
+        <module>socialseed-contracts</module>
     </modules>
 
     <dependencyManagement>
@@ -36,6 +37,11 @@
             <dependency>
                 <groupId>com.socialseed</groupId>
                 <artifactId>socialseed-api-response-starter</artifactId>
+                <version>0.1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>com.socialseed</groupId>
+                <artifactId>socialseed-contracts</artifactId>
                 <version>0.1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
