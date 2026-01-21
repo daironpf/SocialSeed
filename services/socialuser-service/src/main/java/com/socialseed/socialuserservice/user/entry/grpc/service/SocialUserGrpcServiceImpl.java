@@ -1,8 +1,8 @@
 package com.socialseed.socialuserservice.user.entry.grpc.service;
 
-import com.socialseed.socialuserservice.proto.CreateUserReply;
-import com.socialseed.socialuserservice.proto.CreateUserRequest;
-import com.socialseed.socialuserservice.proto.SocialUserServiceGrpc;
+import com.socialseed.contracts.socialuser.CreateUserRequest;
+import com.socialseed.contracts.socialuser.CreateUserResponse;
+import com.socialseed.contracts.socialuser.SocialUserServiceGrpc;
 import com.socialseed.socialuserservice.user.application.usecase.UserUseCases;
 import com.socialseed.socialuserservice.user.domain.model.User;
 import io.grpc.stub.StreamObserver;
@@ -20,17 +20,16 @@ public class SocialUserGrpcServiceImpl extends SocialUserServiceGrpc.SocialUserS
     }
 
     @Override
-    public void createUser(CreateUserRequest request, StreamObserver<CreateUserReply> responseObserver) {
-        User newuser = User.create(                
+    public void createUser(CreateUserRequest request, StreamObserver<CreateUserResponse> responseObserver) {
+        User newuser = User.create(
                 request.getUsername(),
-                request.getEmail()
-            );
+                request.getEmail());
 
         User saved = userUseCases.createUser(newuser);
         // crear nodo de usuario
 
         log.info("usuario a crear: {}", request.toString());
-        var response  = CreateUserReply.newBuilder()
+        var response = CreateUserResponse.newBuilder()
                 .setUserId(saved.getId().toString())
                 .setMessage("200")
                 .build();

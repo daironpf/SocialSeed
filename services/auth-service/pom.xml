@@ -161,6 +161,14 @@
             <groupId>com.socialseed</groupId>
             <artifactId>socialseed-contracts</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.socialseed</groupId>
+            <artifactId>socialseed-api-response-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.socialseed</groupId>
+            <artifactId>socialseed-error-handling-starter</artifactId>
+        </dependency>
         <!-- End of: SocialSeed platform starters -->
 
         <!-- Annotation processor de Spring Boot -->

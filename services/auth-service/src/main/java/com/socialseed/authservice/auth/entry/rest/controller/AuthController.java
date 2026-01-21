@@ -4,7 +4,7 @@ import com.socialseed.authservice.auth.application.usecase.AuthUseCases;
 import com.socialseed.authservice.auth.domain.model.AuthUser;
 import com.socialseed.authservice.auth.entry.rest.dto.*;
 import com.socialseed.authservice.auth.entry.rest.mapper.AuthRestMapper;
-import com.socialseed.authservice.platform.common.response.ApiResponse;
+import com.socialseed.apiresponse.model.ApiResponse;
 
 import com.socialseed.validation.annotation.ValidUsername;
 import jakarta.validation.Valid;
@@ -119,11 +119,11 @@ public class AuthController {
         // region Log IN/OUT
         @PostMapping("/login")
         public ResponseEntity<ApiResponse<?>> login(@Valid @RequestBody LoginRequestDTO request, Locale locale) {
-            AuthResponseDTO response = authUseCases.login(request.email(), request.password());
-            return ResponseEntity.ok(
-                    ApiResponse.success(
-                            response,
-                            messageSource.getMessage("auth.login.success", null, locale)));
+                AuthResponseDTO response = authUseCases.login(request.email(), request.password());
+                return ResponseEntity.ok(
+                                ApiResponse.success(
+                                                response,
+                                                messageSource.getMessage("auth.login.success", null, locale)));
         }
 
         @PostMapping("/logout")

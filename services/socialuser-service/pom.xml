@@ -138,6 +138,10 @@
             <groupId>com.socialseed</groupId>
             <artifactId>socialseed-error-handling-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.socialseed</groupId>
+            <artifactId>socialseed-contracts</artifactId>
+        </dependency>
         <!-- End of: SocialSeed platform starters -->
 
         <!-- Annotation processor de Spring Boot -->
@@ -187,33 +191,7 @@
 
     <build>
         <plugins>
-            <!-- Protobuf / gRPC -->
-            <plugin>
-                <groupId>io.github.ascopes</groupId>
-                <artifactId>protobuf-maven-plugin</artifactId>
-                <version>3.8.0</version>
-                <configuration>
-                    <!-- Opcional: Especifica el directorio de salida para los archivos generados -->
-                    <outputDirectory>${project.basedir}/src/main/generated-sources</outputDirectory>
-                    <protocVersion>${protobuf-java.version}</protocVersion>
-                    <binaryMavenPlugins>
-                        <binaryMavenPlugin>
-                            <groupId>io.grpc</groupId>
-                            <artifactId>protoc-gen-grpc-java</artifactId>
-                            <version>${grpc.version}</version>
-                            <options>@generated=omit</options>
-                        </binaryMavenPlugin>
-                    </binaryMavenPlugins>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>generate</id>
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
             <!-- Java compiler -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
