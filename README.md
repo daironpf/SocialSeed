@@ -17,7 +17,7 @@ A dedicated **Android application** is part of the ecosystem, ensuring a seamles
 
 ## ⚙️ Technologies
 
-![Java](https://img.shields.io/badge/Java-17+-red)
+![Java](https://img.shields.io/badge/Java-21-red)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-brightgreen)
 ![Neo4j](https://img.shields.io/badge/Database-Neo4j-blue)
 ![PostgreSQL](https://img.shields.io/badge/Database-PostgreSQL-blue)
@@ -27,25 +27,11 @@ A dedicated **Android application** is part of the ecosystem, ensuring a seamles
 
 ---
 
-## 🧩 Key Features
+### 🏛️ The Governance Handshake: Brain & Arm
+The most innovative part of the architecture is the decoupling of decision and execution:
+* **Governance Service (The Brain):** An AI-sentinel using **Neo4j Graph Data Science** and **LLMs (Gemini)** to analyze relationships and intent (Bullying detection, toxicity, data theft ...).
+* **Nexus Service (The Arm):** A dedicated orchestrator that executes administrative commands (Force Logouts, Bans, Role updates ...) across the mesh via **gRPC**, ensuring a 100% auditable and transparent system.
 
-* **🧠 Modular Microservices Architecture** — High-performance services handling specific domains for maximum scalability.
-* **🔗 Advanced Graph Data Model** — Built on **Neo4j**, enabling complex relationship modeling (friends, followers, and social interaction graphs).
-* **🏛️ Intelligent Governance Core** — A first-class service designed for policy enforcement, moderation, and accountability.
-* **🤖 AI-Assisted Mentorship** — Integrated with **LLMs (Google Gemini)** to detect bullying and toxic behavior, acting as a digital mentor to foster respectful interactions.
-* **⚖️ Human-in-the-Loop (HITL)** — AI-driven insights supervised by human moderators to ensure contextual and ethical decision-making.
-* **📈 Scalable & Extensible** — Ready for deployment via Docker and adaptable for academic, enterprise, or community use cases.
-
----
-
-## 🏛️ Why Intelligent Governance Matters
-
-Social Seed is built on the principle that modern platforms require more than just connectivity; they require **Trust and Safety**. 
-
-Our **Governance Service** separates platform rules from social features, allowing for:
-* **Educational Moderation:** Instead of simple bans, the system uses AI to educate users on community values and moral integrity.
-* **Behavioral Analysis:** Using **Neo4j Graph Data Science**, we identify negative interaction clusters and promote "Community Builders" who foster positive leadership.
-* **Strategic Compliance:** Easily adaptable to organizational, legal, or ethical requirements without modifying the core social logic.
 
 ---
 
@@ -56,6 +42,22 @@ The project leverages a graph-oriented structure to represent the complexity of 
 ![Graph Data Model](https://github.com/daironpf/SocialSeed/blob/main/Neo4j/Graph%20Data%20Model/SocialSeed%20\(SS\).png)
 
 ---
+## 🏗️ Technical Architecture: The Platform Core
+
+Social Seed is built on a custom **Platform Layer** that ensures consistency across the entire mesh:
+
+### 🧩 SocialSeed Platform Starters
+To maintain a "Don't Repeat Yourself" (DRY) philosophy, we developed custom Spring Boot Starters located in `/platform`:
+
+- **`socialseed-api-response-starter`**: Standardizes the REST API response structure across all microservices, providing a unified wrapper for all payloads.
+- **`socialseed-contracts`**: Centralized repository for Protobuf definitions and generated classes used in gRPC and Kafka communication.
+- **`socialseed-error-handling-starter`**: Implements a global exception handling strategy to transform exceptions into standardized, secure error responses.
+- **`socialseed-validation-starter`**: Provides custom Jakarta Bean Validation annotations and reusable logic to enforce data integrity consistently.
+
+
+
+
+
 
 ## 🏗️ Architecture Overview
 
@@ -66,6 +68,7 @@ Social Seed is a distributed system where services communicate via REST, gRPC, o
 * **Post/Comment/Reaction Services** — Core interaction layers.
 * **Relationship Service (Neo4j)** — High-speed social graph management.
 * **Governance Service (AI-Core)** — Real-time moderation, sentiment analysis, and interaction oversight.
+* **Nexus Service (The Arm)** — A dedicated orchestrator that executes administrative commands.
 * **Messaging & Notification Services** — Real-time communication and event-driven alerts.
 
 ---
@@ -77,8 +80,33 @@ Social Seed is evolving to set a new standard in ethical social networking. We a
 * **Cognitive Governance (LLM Integration):** Architecting seamless integration with **Google Gemini** for deep semantic understanding and real-time user assistance.
 * **Graph Data Science (GDS):** Implementing **Neo4j GDS** algorithms to detect complex social patterns, prevent harassment, and measure community health.
 * **Enterprise & Educational Pilots:** Optimizing the core for deployment in schools and corporate intranets where safe, supervised social interaction is critical.
+* **Total Sovereignty:** Providing a "Network-in-a-box" solution deployable via Docker for private institutions.
 
 ---
+
+## 🧠 Key Features
+
+* **🔗 Graph-First Social Logic** — **Neo4j** powers friends, followers, and complex behavioral clusters.
+* **🛡️ Hybrid Governance** — AI suggests, Humans decide. A "Human-in-the-Loop" system for ethical moderation.
+* **⚡ Ultra-fast Execution** — Internal communication via **gRPC** and real-time event propagation via **Apache Kafka**.
+* **🏢 Multi-Sector Adaptability** — Tailored configurations for schools (bullying prevention) or enterprises (IP protection) and more.
+
+---
+
+## 🧩 Microservices Roadmap
+
+| Service | Status | Tech Stack | Responsibility |
+| :--- | :--- | :--- | :--- |
+| **Auth** | ✅ Active | PostgreSQL / Redis | Identity, JWT, RBAC |
+| **Nexus** | 🚧 Beta | gRPC / Kafka | Admin Orchestration & Enforcement |
+| **Governance**| 🧠 Designing| Neo4j / Gemini | AI Behavior Analysis & Mentorship |
+| **SocialUser**| ✅ Active | Neo4j | Profile & Metadata Management |
+| **Api-Gateway**| 🛰️ Active | Spring Cloud | Entry point & Route Security |
+
+
+
+---
+
 
 ## 🛠️ Getting Started
 
