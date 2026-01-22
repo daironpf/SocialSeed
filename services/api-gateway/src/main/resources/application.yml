@@ -17,6 +17,12 @@ spring:
                 - StripPrefix=1
               # REST CLIENT -> http://localhost:8081/api/socialusers
               # API GATEWAY -> http://socialuser-service:4000/socialusers
+            - id: nexus-route
+              uri: http://nexus-service:8086
+              predicates:
+                - Path=/api/nexus/**
+              filters:
+                - StripPrefix=1
 
 management:
   endpoints:
