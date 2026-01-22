@@ -9,6 +9,7 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
+    <groupId>com.socialseed</groupId>
     <artifactId>nexus-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>nexus-service</name>
