@@ -4,6 +4,7 @@ import com.socialseed.authservice.auth.config.jwt.JWTProvider;
 import com.socialseed.authservice.auth.domain.model.RefreshToken;
 import com.socialseed.authservice.auth.domain.repository.AuthUserRepository;
 import com.socialseed.authservice.auth.domain.repository.RefreshTokenRepository;
+import com.socialseed.authservice.auth.domain.repository.PasswordChangedEventPublisher;
 import com.socialseed.authservice.auth.domain.repository.UserRegisteredEventPublisher;
 import com.socialseed.authservice.auth.domain.service.TokenBlacklistService;
 import com.socialseed.authservice.auth.infrastructure.service.AuthServiceImpl;
@@ -39,6 +40,8 @@ class AuthServiceImplLogoutTest {
     private RefreshTokenRepository refreshTokenRepository;
     @Mock
     private TokenBlacklistService tokenBlacklistService;
+    @Mock
+    private PasswordChangedEventPublisher passwordChangedEventPublisher;
 
     private AuthServiceImpl authService;
 
@@ -50,7 +53,8 @@ class AuthServiceImplLogoutTest {
                 jwtProvider,
                 eventPublisher,
                 refreshTokenRepository,
-                tokenBlacklistService);
+                tokenBlacklistService,
+                passwordChangedEventPublisher);
         ReflectionTestUtils.setField(authService, "refreshTokenDurationSeconds", 3600L);
     }
 

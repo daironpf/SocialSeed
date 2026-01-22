@@ -11,4 +11,6 @@ public interface RefreshTokenPgsqlRepository extends JpaRepository<RefreshTokenP
     void deleteByToken(String token);
 
     void deleteByUserId(UUID userId);
+
+    java.util.List<RefreshTokenPgsqlEntity> findByUserId(UUID userId);
 }

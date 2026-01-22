@@ -36,4 +36,11 @@ public class RefreshTokenRepositoryAdapter implements RefreshTokenRepository {
     public void deleteByUserId(UUID userId) {
         repository.deleteByUserId(userId);
     }
+
+    @Override
+    public java.util.List<RefreshToken> findByUserId(UUID userId) {
+        return repository.findByUserId(userId).stream()
+                .map(RefreshTokenMapper::toDomain)
+                .toList();
+    }
 }
