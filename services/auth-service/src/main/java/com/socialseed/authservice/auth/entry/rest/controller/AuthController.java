@@ -101,16 +101,18 @@ public class AuthController {
         }
 
         // region Change
-        @PostMapping("/changepassword")
-        public ResponseEntity<ApiResponse<?>> changePassword(@Valid @RequestBody PasswordChangeRequest request,
+        @PostMapping("/{id}/change-password")
+        public ResponseEntity<ApiResponse<?>> changePassword(
+                        @PathVariable UUID id,
+                        @Valid @RequestBody ChangePasswordRequestDTO request,
                         Locale locale) {
-                AuthResponseDTO response = authUseCases.changeUserPassword(
-                                UUID.fromString(request.id()),
+                authUseCases.changeUserPassword(
+                                id,
                                 request.currentPassword(),
                                 request.newPassword());
                 return ResponseEntity.ok(
                                 ApiResponse.success(
-                                                response,
+                                                null,
                                                 messageSource.getMessage("auth.change.password.success", null,
                                                                 locale)));
         }

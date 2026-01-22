@@ -11,6 +11,8 @@ public interface RefreshTokenRepository {
     Optional<RefreshToken> findByToken(String token);
 
     void deleteByToken(String token);
-
+    
     void deleteByUserId(UUID userId);
+
+    java.util.List<RefreshToken> findByUserId(UUID userId);
 }

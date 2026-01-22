@@ -1,7 +1,9 @@
 package com.socialseed.authservice.auth.infrastructure.service;
 
 import com.socialseed.authservice.auth.config.jwt.JWTProvider;
+import com.socialseed.authservice.auth.domain.event.PasswordChangedEvent;
 import com.socialseed.authservice.auth.domain.event.UserRegisteredEvent;
+import com.socialseed.authservice.auth.domain.repository.PasswordChangedEventPublisher;
 import com.socialseed.authservice.auth.domain.model.AuthUser;
 import com.socialseed.authservice.auth.domain.repository.AuthUserRepository;
 import com.socialseed.authservice.auth.domain.repository.RefreshTokenRepository;
@@ -31,6 +33,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserRegisteredEventPublisher eventPublisher;
     private final RefreshTokenRepository refreshTokenRepository;
     private final TokenBlacklistService tokenBlacklistService;
+    private final PasswordChangedEventPublisher passwordChangedEventPublisher;
 
     @Value("${jwt.refresh.expiration}")
     private long refreshTokenDurationSeconds;
@@ -40,13 +43,15 @@ public class AuthServiceImpl implements AuthService {
             JWTProvider jwtProvider,
             UserRegisteredEventPublisher eventPublisher,
             RefreshTokenRepository refreshTokenRepository,
-            TokenBlacklistService tokenBlacklistService) {
+            TokenBlacklistService tokenBlacklistService,
+            PasswordChangedEventPublisher passwordChangedEventPublisher) {
         this.authUserRepository = authUserRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
         this.eventPublisher = eventPublisher;
         this.refreshTokenRepository = refreshTokenRepository;
         this.tokenBlacklistService = tokenBlacklistService;
+        this.passwordChangedEventPublisher = passwordChangedEventPublisher;
     }
 
     @Override
@@ -128,8 +133,29 @@ public class AuthServiceImpl implements AuthService {
     // endregion
 
     @Override
+    @Transactional
     public void changePassword(UUID userId, String currentPassword, String newPassword) {
+        AuthUser authUser = authUserRepository.findById(userId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
 
+        if (!passwordEncoder.matches(currentPassword, authUser.getPassword())) {
+            throw new BusinessException(ErrorCode.UNAUTHORIZED);
+        }
+
+        // Update password
+        authUser.setPassword(passwordEncoder.encode(newPassword));
+        authUserRepository.save(authUser);
+
+        // Invalidate all refresh tokens for the user
+        refreshTokenRepository.deleteByUserId(userId);
+
+        // Emit PasswordChangedEvent
+        PasswordChangedEvent event = new PasswordChangedEvent(
+                userId,
+                authUser.getEmail(),
+                System.currentTimeMillis()
+        );
+        passwordChangedEventPublisher.publish(event);
     }
 
     @Override

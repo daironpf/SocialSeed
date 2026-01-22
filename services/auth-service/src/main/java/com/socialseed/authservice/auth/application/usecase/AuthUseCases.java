@@ -58,8 +58,8 @@ public class AuthUseCases {
         return registerUser.execute(authUser);
     }
 
-    public AuthResponseDTO changeUserPassword(UUID userId, String currentPassword, String newPassword) {
-        return changeUserPassword.execute(userId, currentPassword, newPassword);
+    public void changeUserPassword(UUID userId, String currentPassword, String newPassword) {
+        changeUserPassword.execute(userId, currentPassword, newPassword);
     }
 
     public void logout(String accessToken, String refreshToken) {
