@@ -62,6 +62,29 @@ services:
       timeout: 3s
       retries: 20
 
+  #Nexus - Service
+  nexus-service:
+    container_name: nexus-service
+    build:
+      context: .
+      dockerfile: services/nexus-service/Dockerfile
+    depends_on:
+      kafka:
+        condition: service_healthy
+    ports:
+      - "8086:8086"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      KAFKA_HOST: kafka
+      KAFKA_PORT: 9092
+    networks:
+      - net
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8086/actuator/health" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
   ## ==> DATABASES
   # Social Graph in Neo4j
   neo4j:
