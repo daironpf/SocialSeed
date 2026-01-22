@@ -25,15 +25,20 @@ public class RefreshTokenPgsqlEntity {
     @Column(nullable = false)
     private boolean revoked;
 
+    @Column(nullable = false)
+    private boolean rotated;
+
     public RefreshTokenPgsqlEntity() {
     }
 
-    public RefreshTokenPgsqlEntity(UUID id, String token, UUID userId, Instant expiryDate, boolean revoked) {
+    public RefreshTokenPgsqlEntity(UUID id, String token, UUID userId, Instant expiryDate, boolean revoked,
+            boolean rotated) {
         this.id = id;
         this.token = token;
         this.userId = userId;
         this.expiryDate = expiryDate;
         this.revoked = revoked;
+        this.rotated = rotated;
     }
 
     // Getters and Setters
@@ -75,5 +80,13 @@ public class RefreshTokenPgsqlEntity {
 
     public void setRevoked(boolean revoked) {
         this.revoked = revoked;
+    }
+
+    public boolean isRotated() {
+        return rotated;
+    }
+
+    public void setRotated(boolean rotated) {
+        this.rotated = rotated;
     }
 }

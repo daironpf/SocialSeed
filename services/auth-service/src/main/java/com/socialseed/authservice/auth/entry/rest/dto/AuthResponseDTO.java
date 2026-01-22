@@ -5,5 +5,6 @@ import java.util.Set;
 public record AuthResponseDTO(
         String token,
         String refreshToken,
-        Set<String> roles) {
+        Set<String> roles
+    ) {
 }

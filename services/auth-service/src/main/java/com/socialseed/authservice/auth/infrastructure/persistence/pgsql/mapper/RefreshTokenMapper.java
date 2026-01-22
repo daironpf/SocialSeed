@@ -12,7 +12,8 @@ public class RefreshTokenMapper {
                 entity.getToken(),
                 entity.getUserId(),
                 entity.getExpiryDate(),
-                entity.isRevoked());
+                entity.isRevoked(),
+                entity.isRotated());
     }
 
     public static RefreshTokenPgsqlEntity toEntity(RefreshToken domain) {
@@ -23,6 +24,7 @@ public class RefreshTokenMapper {
                 domain.getToken(),
                 domain.getUserId(),
                 domain.getExpiryDate(),
-                domain.isRevoked());
+                domain.isRevoked(),
+                domain.isRotated());
     }
 }

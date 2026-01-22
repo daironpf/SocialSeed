@@ -136,5 +136,15 @@ public class AuthController {
                                 .status(HttpStatus.NO_CONTENT)
                                 .build();
         }
+
+        @PostMapping("/token/refresh")
+        public ResponseEntity<ApiResponse<?>> refreshToken(@Valid @RequestBody RefreshTokenRequestDTO request,
+                        Locale locale) {
+                AuthResponseDTO response = authUseCases.refreshToken(request.refreshToken());
+                return ResponseEntity.ok(
+                                ApiResponse.success(
+                                                response,
+                                                messageSource.getMessage("auth.token.refresh.success", null, locale)));
+        }
         // endregion
 }
