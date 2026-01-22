@@ -9,13 +9,15 @@ public class RefreshToken {
     private final UUID userId;
     private final Instant expiryDate;
     private boolean revoked;
+    private boolean rotated;
 
-    public RefreshToken(UUID id, String token, UUID userId, Instant expiryDate, boolean revoked) {
+    public RefreshToken(UUID id, String token, UUID userId, Instant expiryDate, boolean revoked, boolean rotated) {
         this.id = id;
         this.token = token;
         this.userId = userId;
         this.expiryDate = expiryDate;
         this.revoked = revoked;
+        this.rotated = rotated;
     }
 
     public static RefreshToken create(UUID userId, long durationSeconds) {
@@ -24,6 +26,7 @@ public class RefreshToken {
                 UUID.randomUUID().toString(),
                 userId,
                 Instant.now().plusSeconds(durationSeconds),
+                false,
                 false);
     }
 
@@ -31,12 +34,16 @@ public class RefreshToken {
         this.revoked = true;
     }
 
+    public void rotate() {
+        this.rotated = true;
+    }
+
     public boolean isExpired() {
         return Instant.now().isAfter(expiryDate);
     }
 
     public boolean isValid() {
-        return !revoked && !isExpired();
+        return !revoked && !rotated && !isExpired();
     }
 
     // Getters
@@ -58,5 +65,9 @@ public class RefreshToken {
 
     public boolean isRevoked() {
         return revoked;
+    }
+
+    public boolean isRotated() {
+        return rotated;
     }
 }

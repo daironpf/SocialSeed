@@ -1,11 +1,19 @@
 package com.socialseed.authservice.auth.entry.rest.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.socialseed.validation.annotation.ValidPassword;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 public record LoginRequestDTO(
-        @NotBlank(message = "{user.email.required}") @Email(message = "{user.email.invalid}") String email,
-
-        @NotBlank(message = "{user.password.required}") @Size(min = 6, max = 60, message = "{user.password.size}") String password) {
+                @JsonProperty("email")
+                @NotBlank(message = "{user.email.required}") 
+                @Email(message = "{user.email.invalid}") 
+                String email,
+                
+                @JsonProperty("password")
+                @NotBlank(message = "{user.password.required}") 
+                @ValidPassword String password
+        ) {
 }

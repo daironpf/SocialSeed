@@ -17,6 +17,7 @@ public class AuthUseCases {
     private final GetAuthUserByEmail getAuthUserByEmail;
     private final GetAuthUserByUserName getAuthUserByUserName;
     private final Logout logout;
+    private final RefreshToken refreshToken;
 
     public AuthUseCases(
             AuthenticateUser authenticateUser,
@@ -25,7 +26,8 @@ public class AuthUseCases {
             GetUserById getUserById,
             GetAuthUserByEmail getAuthUserByEmail,
             GetAuthUserByUserName getAuthUserByUserName,
-            Logout logout) {
+            Logout logout,
+            RefreshToken refreshToken) {
         this.authenticateUser = authenticateUser;
         this.registerUser = registerUser;
         this.changeUserPassword = changeUserPassword;
@@ -33,6 +35,7 @@ public class AuthUseCases {
         this.getAuthUserByEmail = getAuthUserByEmail;
         this.getAuthUserByUserName = getAuthUserByUserName;
         this.logout = logout;
+        this.refreshToken = refreshToken;
     }
 
     public Optional<AuthUser> getAuthUserById(UUID userId) {
@@ -61,5 +64,9 @@ public class AuthUseCases {
 
     public void logout(String accessToken, String refreshToken) {
         logout.execute(accessToken, refreshToken);
+    }
+
+    public AuthResponseDTO refreshToken(String token) {
+        return refreshToken.execute(token);
     }
 }

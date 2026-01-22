@@ -10,6 +10,8 @@ import com.socialseed.authservice.auth.domain.service.AuthService;
 import com.socialseed.authservice.auth.domain.service.TokenBlacklistService;
 import com.socialseed.authservice.auth.domain.model.RefreshToken;
 import com.socialseed.authservice.auth.entry.rest.dto.AuthResponseDTO;
+import com.socialseed.errorhandling.exception.BusinessException;
+import com.socialseed.errorhandling.exception.ErrorCode;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -50,10 +52,10 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public AuthResponseDTO login(String email, String password) {
         AuthUser authUser = authUserRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Invalid credentials"));
+                .orElseThrow(() -> new BusinessException(ErrorCode.UNAUTHORIZED));
 
         if (!passwordEncoder.matches(password, authUser.getPassword())) {
-            throw new RuntimeException("Invalid credentials");
+            throw new BusinessException(ErrorCode.UNAUTHORIZED);
         }
 
         String token = jwtProvider.generateToken(authUser.getUsername());
@@ -152,5 +154,38 @@ public class AuthServiceImpl implements AuthService {
                 tokenBlacklistService.blacklistToken(jti, Duration.ofSeconds(ttlSeconds));
             }
         }
+    }
+
+    @Override
+    @Transactional
+    public AuthResponseDTO refreshToken(String token) {
+        RefreshToken refreshToken = refreshTokenRepository.findByToken(token)
+                .orElseThrow(() -> new BusinessException(ErrorCode.REFRESH_TOKEN_NOT_FOUND));
+
+        if (refreshToken.isRotated()) {
+            // REUSE DETECTION: If a rotated token is used again, it's a security breach.
+            // Revoke all tokens for this user.
+            refreshTokenRepository.deleteByUserId(refreshToken.getUserId());
+            throw new BusinessException(ErrorCode.AUTH_REUSE_DETECTION);
+        }
+
+        if (!refreshToken.isValid()) {
+            throw new BusinessException(ErrorCode.REFRESH_TOKEN_INVALID_EXPIRED);
+        }
+
+        // 1. Mark old token as rotated
+        refreshToken.rotate();
+        refreshTokenRepository.save(refreshToken);
+
+        // 2. Get User
+        AuthUser authUser = authUserRepository.findById(refreshToken.getUserId())
+                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
+
+        // 3. Generate new tokens
+        String newAccessToken = jwtProvider.generateToken(authUser.getUsername());
+        RefreshToken newRefreshToken = RefreshToken.create(authUser.getId(), refreshTokenDurationSeconds);
+        refreshTokenRepository.save(newRefreshToken);
+
+        return new AuthResponseDTO(newAccessToken, newRefreshToken.getToken(), authUser.getRoles());
     }
 }

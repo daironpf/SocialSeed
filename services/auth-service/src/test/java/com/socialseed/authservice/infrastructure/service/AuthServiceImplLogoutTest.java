@@ -59,7 +59,7 @@ class AuthServiceImplLogoutTest {
         String refreshTokenStr = "valid-refresh-token";
         UUID userId = UUID.randomUUID();
         RefreshToken refreshToken = new RefreshToken(UUID.randomUUID(), refreshTokenStr, userId,
-                new Date().toInstant().plusSeconds(3600), false);
+                new Date().toInstant().plusSeconds(3600), false, false);
 
         when(refreshTokenRepository.findByToken(refreshTokenStr)).thenReturn(Optional.of(refreshToken));
 
