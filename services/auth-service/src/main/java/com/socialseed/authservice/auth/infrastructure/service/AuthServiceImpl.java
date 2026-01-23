@@ -34,6 +34,7 @@ public class AuthServiceImpl implements AuthService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final TokenBlacklistService tokenBlacklistService;
     private final PasswordChangedEventPublisher passwordChangedEventPublisher;
+    private final com.socialseed.authservice.auth.domain.service.LoginAttemptService loginAttemptService;
 
     @Value("${jwt.refresh.expiration}")
     private long refreshTokenDurationSeconds;
@@ -44,7 +45,8 @@ public class AuthServiceImpl implements AuthService {
             UserRegisteredEventPublisher eventPublisher,
             RefreshTokenRepository refreshTokenRepository,
             TokenBlacklistService tokenBlacklistService,
-            PasswordChangedEventPublisher passwordChangedEventPublisher) {
+            PasswordChangedEventPublisher passwordChangedEventPublisher,
+            com.socialseed.authservice.auth.domain.service.LoginAttemptService loginAttemptService) {
         this.authUserRepository = authUserRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
@@ -52,16 +54,27 @@ public class AuthServiceImpl implements AuthService {
         this.refreshTokenRepository = refreshTokenRepository;
         this.tokenBlacklistService = tokenBlacklistService;
         this.passwordChangedEventPublisher = passwordChangedEventPublisher;
+        this.loginAttemptService = loginAttemptService;
     }
 
     @Override
     public AuthResponseDTO login(String email, String password) {
         AuthUser authUser = authUserRepository.findByEmail(email)
-                .orElseThrow(() -> new BusinessException(ErrorCode.UNAUTHORIZED));
+                .orElseThrow(() -> new BusinessException(ErrorCode.INVALID_CREDENTIALS));
+
+        // Check if account is locked
+        if (!authUser.isAccountNonLocked()) {
+            throw new BusinessException(ErrorCode.ACCOUNT_LOCKED);
+        }
 
         if (!passwordEncoder.matches(password, authUser.getPassword())) {
-            throw new BusinessException(ErrorCode.UNAUTHORIZED);
+            // Record failed login in separate transaction
+            loginAttemptService.recordFailedLogin(authUser.getId());
+            throw new BusinessException(ErrorCode.INVALID_CREDENTIALS);
         }
+
+        // Record successful login
+        loginAttemptService.recordSuccessfulLogin(authUser.getId());
 
         String token = jwtProvider.generateToken(authUser.getUsername());
         RefreshToken refreshToken = RefreshToken.create(authUser.getId(), refreshTokenDurationSeconds);
