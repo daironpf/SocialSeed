@@ -31,6 +31,23 @@ class AuthControllerTest {
 
     @Test
     @WithMockUser
+    void shouldLoginSuccessfully() throws Exception {
+        com.socialseed.authservice.auth.entry.rest.dto.LoginRequestDTO loginRequest = 
+            new com.socialseed.authservice.auth.entry.rest.dto.LoginRequestDTO("test@example.com", "Password123!");
+        
+        mockMvc.perform(post("/auth/login")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(loginRequest)))
+                .andExpect(status().isOk());
+
+        verify(authUseCases).login(org.mockito.ArgumentMatchers.eq("test@example.com"), 
+                                    org.mockito.ArgumentMatchers.eq("Password123!"), 
+                                    org.mockito.ArgumentMatchers.anyString());
+    }
+
+    @Test
+    @WithMockUser
     void shouldLogoutSuccessfully() throws Exception {
         LogoutRequestDTO logoutRequest = new LogoutRequestDTO("valid-refresh-token");
         String accessToken = "Bearer valid-access-token";

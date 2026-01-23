@@ -61,7 +61,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthResponseDTO login(String email, String password) {
+    public AuthResponseDTO login(String email, String password, String ip) {
         AuthUser authUser = authUserRepository.findByEmail(email)
                 .orElseThrow(() -> new BusinessException(ErrorCode.INVALID_CREDENTIALS));
 
@@ -72,12 +72,12 @@ public class AuthServiceImpl implements AuthService {
 
         if (!passwordEncoder.matches(password, authUser.getPassword())) {
             // Record failed login in separate transaction
-            loginAttemptService.recordFailedLogin(authUser.getId());
+            loginAttemptService.recordFailedLogin(authUser.getId(), ip);
             throw new BusinessException(ErrorCode.INVALID_CREDENTIALS);
         }
 
         // Record successful login
-        loginAttemptService.recordSuccessfulLogin(authUser.getId());
+        loginAttemptService.recordSuccessfulLogin(authUser.getId(), ip);
 
         String token = jwtProvider.generateToken(authUser.getUsername());
         RefreshToken refreshToken = RefreshToken.create(authUser.getId(), refreshTokenDurationSeconds);

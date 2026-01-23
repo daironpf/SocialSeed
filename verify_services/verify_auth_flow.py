@@ -193,6 +193,30 @@ def run_verification():
     else:
         print(f"  ERROR: Unexpected status for invalid token: {resp.status_code}")
 
+    # 11. Brute Force Mitigation Flow
+    print("\n11. Brute Force Mitigation Flow")
+    unique_suffix = int(time.time())
+    BRUTE_EMAIL = f"brute_{unique_suffix}@test.com"
+    BRUTE_ID = str(java.util.UUID.randomUUID()) if 'java' in globals() else f"11111111-2222-3333-4444-{unique_suffix % 1000000000000:012d}"
+    register(BRUTE_ID, f"bruteuser_{unique_suffix}", BRUTE_EMAIL, "Password123!")
+    
+    print("  Attempting 5 failed logins to lock the account...")
+    for i in range(5):
+        resp = login(BRUTE_EMAIL, "WrongPass1!")
+        if resp.status_code == 401:
+            print(f"    Attempt {i+1}: Rejected as expected (401).")
+        else:
+            print(f"    ERROR: Attempt {i+1} got unexpected status {resp.status_code}")
+            sys.exit(1)
+            
+    print("  Attempting login with correct password (should be locked)...")
+    resp = login(BRUTE_EMAIL, "Password123!")
+    if resp.status_code == 403:
+        print("    Account successfully locked (403 Forbidden).")
+    else:
+        print(f"    ERROR: Account not locked! Status: {resp.status_code}, Body: {resp.text}")
+        sys.exit(1)
+
     print("\n--- ALL TESTS COMPLETED SUCCESSFULLY ---")
 
 if __name__ == "__main__":

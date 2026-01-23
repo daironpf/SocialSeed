@@ -21,11 +21,12 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
 
     @Override
     @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void recordFailedLogin(UUID userId) {
+    public void recordFailedLogin(UUID userId, String ip) {
         AuthUser authUser = authUserRepository.findById(userId).orElseThrow();
         
         authUser.setFailedLoginAttempts(authUser.getFailedLoginAttempts() + 1);
         authUser.setLastFailedLoginAt(Instant.now());
+        authUser.setLastFailedLoginIp(ip);
         
         // Lock account after 5 failed attempts
         if (authUser.getFailedLoginAttempts() >= 5) {
@@ -37,10 +38,11 @@ public class LoginAttemptServiceImpl implements LoginAttemptService {
 
     @Override
     @Transactional
-    public void recordSuccessfulLogin(UUID userId) {
+    public void recordSuccessfulLogin(UUID userId, String ip) {
         AuthUser authUser = authUserRepository.findById(userId).orElseThrow();
         
         authUser.setLastLoginAt(Instant.now());
+        authUser.setLastLoginIp(ip);
         authUser.setFailedLoginAttempts(0);
         authUser.setLastFailedLoginAt(null);
         

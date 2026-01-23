@@ -12,7 +12,7 @@ public class AuthenticateUser {
         this.authService = authService;
     }
 
-    public AuthResponseDTO execute(String email, String password) {
-        return authService.login(email, password);
+    public AuthResponseDTO execute(String email, String password, String ip) {
+        return authService.login(email, password, ip);
     }
 }
