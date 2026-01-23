@@ -32,7 +32,9 @@ public enum ErrorCode {
     USER_BY_USER_NAME_NOT_FOUND("error.user.by.username_not_found", HttpStatus.NOT_FOUND),
     AUTH_REUSE_DETECTION("auth.error.security_breach", HttpStatus.FORBIDDEN),
     REFRESH_TOKEN_NOT_FOUND("auth.error.refresh_token_not_found", HttpStatus.NOT_FOUND),
-    REFRESH_TOKEN_INVALID_EXPIRED("auth.error.refresh_token_invalid_expired", HttpStatus.UNAUTHORIZED);
+    REFRESH_TOKEN_INVALID_EXPIRED("auth.error.refresh_token_invalid_expired", HttpStatus.UNAUTHORIZED),
+    RESET_TOKEN_INVALID("auth.error.reset_token_invalid", HttpStatus.BAD_REQUEST),
+    RESET_TOKEN_EXPIRED("auth.error.reset_token_expired", HttpStatus.BAD_REQUEST);
 
     private final String code;
     private final HttpStatus httpStatus;

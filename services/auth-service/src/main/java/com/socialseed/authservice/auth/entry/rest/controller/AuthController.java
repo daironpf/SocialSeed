@@ -139,7 +139,7 @@ public class AuthController {
                                 .build();
         }
 
-        @PostMapping("/token/refresh")
+    @PostMapping("/token/refresh")
         public ResponseEntity<ApiResponse<?>> refreshToken(@Valid @RequestBody RefreshTokenRequestDTO request,
                         Locale locale) {
                 AuthResponseDTO response = authUseCases.refreshToken(request.refreshToken());
@@ -147,6 +147,26 @@ public class AuthController {
                                 ApiResponse.success(
                                                 response,
                                                 messageSource.getMessage("auth.token.refresh.success", null, locale)));
+        }
+
+        @PostMapping("/forgot-password")
+        public ResponseEntity<ApiResponse<?>> forgotPassword(@Valid @RequestBody ForgotPasswordRequestDTO request,
+                                                             Locale locale) {
+            authUseCases.forgotPassword(request.email());
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            null,
+                            messageSource.getMessage("auth.forgot.password.success", null, locale)));
+        }
+
+        @PostMapping("/reset-password")
+        public ResponseEntity<ApiResponse<?>> resetPassword(@Valid @RequestBody ResetPasswordRequestDTO request,
+                                                            Locale locale) {
+            authUseCases.resetPassword(request.token(), request.newPassword());
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            null,
+                            messageSource.getMessage("auth.reset.password.success", null, locale)));
         }
         // endregion
 }
