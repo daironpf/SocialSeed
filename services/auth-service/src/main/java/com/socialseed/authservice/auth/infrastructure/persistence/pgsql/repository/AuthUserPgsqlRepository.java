@@ -21,4 +21,12 @@ public interface AuthUserPgsqlRepository extends JpaRepository<AuthUserPgsqlEnti
     // Verificar existencia
     boolean existsByUsername(String username);
     boolean existsByEmail(String email);
+
+    @org.springframework.data.jpa.repository.Modifying
+    @org.springframework.data.jpa.repository.Query("UPDATE AuthUserPgsqlEntity u SET u.resetPasswordToken = NULL, u.resetPasswordTokenExpiry = NULL WHERE u.resetPasswordTokenExpiry < :now")
+    void clearExpiredResetPasswordTokens(@org.springframework.data.repository.query.Param("now") java.time.Instant now);
+
+    @org.springframework.data.jpa.repository.Modifying
+    @org.springframework.data.jpa.repository.Query("UPDATE AuthUserPgsqlEntity u SET u.verificationToken = NULL, u.verificationTokenExpiry = NULL WHERE u.verificationTokenExpiry < :now AND u.emailVerified = false")
+    void clearExpiredVerificationTokens(@org.springframework.data.repository.query.Param("now") java.time.Instant now);
 }

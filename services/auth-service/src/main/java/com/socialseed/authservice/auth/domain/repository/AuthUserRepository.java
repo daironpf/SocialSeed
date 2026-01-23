@@ -19,4 +19,6 @@ public interface AuthUserRepository {
     Optional<AuthUser> findByResetPasswordToken(String token);
     Optional<AuthUser> findByVerificationToken(String token);
 
+    void clearExpiredResetPasswordTokens(java.time.Instant now);
+    void clearExpiredEmailVerificationTokens(java.time.Instant now);
 }
