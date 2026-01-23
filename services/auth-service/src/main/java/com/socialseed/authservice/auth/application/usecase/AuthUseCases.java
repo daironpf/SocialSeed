@@ -62,8 +62,8 @@ public class AuthUseCases {
         return getAuthUserByUserName.execute(username);
     }
 
-    public AuthResponseDTO login(String email, String password) {
-        return authenticateUser.execute(email, password);
+    public AuthResponseDTO login(String email, String password, String ip) {
+        return authenticateUser.execute(email, password, ip);
     }
 
     public AuthResponseDTO register(AuthUser authUser) {

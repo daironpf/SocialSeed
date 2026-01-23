@@ -120,8 +120,12 @@ public class AuthController {
 
         // region Log IN/OUT
         @PostMapping("/login")
-        public ResponseEntity<ApiResponse<?>> login(@Valid @RequestBody LoginRequestDTO request, Locale locale) {
-                AuthResponseDTO response = authUseCases.login(request.email(), request.password());
+        public ResponseEntity<ApiResponse<?>> login(
+                        @Valid @RequestBody LoginRequestDTO request,
+                        jakarta.servlet.http.HttpServletRequest httpRequest,
+                        Locale locale) {
+                String ip = httpRequest.getRemoteAddr();
+                AuthResponseDTO response = authUseCases.login(request.email(), request.password(), ip);
                 return ResponseEntity.ok(
                                 ApiResponse.success(
                                                 response,

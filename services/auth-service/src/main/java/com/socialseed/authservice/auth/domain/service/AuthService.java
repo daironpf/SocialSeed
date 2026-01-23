@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface AuthService {
-    AuthResponseDTO login(String email, String password);
+    AuthResponseDTO login(String email, String password, String ip);
 
     AuthResponseDTO register(AuthUser auth, UUID id);
 
