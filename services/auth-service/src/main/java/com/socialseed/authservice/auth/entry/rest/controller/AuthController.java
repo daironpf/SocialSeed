@@ -169,4 +169,24 @@ public class AuthController {
                             messageSource.getMessage("auth.reset.password.success", null, locale)));
         }
         // endregion
+
+        @PostMapping("/verify-email")
+        public ResponseEntity<ApiResponse<?>> verifyEmail(@Valid @RequestBody VerifyEmailRequestDTO request,
+                                                           Locale locale) {
+            authUseCases.verifyEmail(request.token());
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            null,
+                            messageSource.getMessage("auth.verify.email.success", null, locale)));
+        }
+
+        @PostMapping("/resend-verification")
+        public ResponseEntity<ApiResponse<?>> resendVerificationEmail(@Valid @RequestBody ResendVerificationEmailRequestDTO request,
+                                                                       Locale locale) {
+            authUseCases.resendVerificationEmail(request.email());
+            return ResponseEntity.ok(
+                    ApiResponse.success(
+                            null,
+                            messageSource.getMessage("auth.resend.verification.success", null, locale)));
+        }
 }

@@ -20,6 +20,8 @@ public class AuthUseCases {
     private final RefreshToken refreshToken;
     public final ForgotPassword forgotPassword;
     public final ResetPassword resetPassword;
+    private final VerifyEmail verifyEmail;
+    private final ResendVerificationEmail resendVerificationEmail;
 
     public AuthUseCases(
             AuthenticateUser authenticateUser,
@@ -31,7 +33,9 @@ public class AuthUseCases {
             Logout logout,
             RefreshToken refreshToken,
             ForgotPassword forgotPassword,
-            ResetPassword resetPassword) {
+            ResetPassword resetPassword,
+            VerifyEmail verifyEmail,
+            ResendVerificationEmail resendVerificationEmail) {
         this.authenticateUser = authenticateUser;
         this.registerUser = registerUser;
         this.changeUserPassword = changeUserPassword;
@@ -42,6 +46,8 @@ public class AuthUseCases {
         this.refreshToken = refreshToken;
         this.forgotPassword = forgotPassword;
         this.resetPassword = resetPassword;
+        this.verifyEmail = verifyEmail;
+        this.resendVerificationEmail = resendVerificationEmail;
     }
 
     public Optional<AuthUser> getAuthUserById(UUID userId) {
@@ -82,5 +88,13 @@ public class AuthUseCases {
 
     public void resetPassword(String token, String newPassword) {
         resetPassword.execute(token, newPassword);
+    }
+
+    public void verifyEmail(String token) {
+        verifyEmail.execute(token);
+    }
+
+    public void resendVerificationEmail(String email) {
+        resendVerificationEmail.execute(email);
     }
 }

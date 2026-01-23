@@ -10,7 +10,7 @@ USER_ID = "123e4567-e89b-12d3-a456-426614178888"
 EMAIL = "user@strong.com"
 INITIAL_PASSWORD = "StrongPass1!"
 NEW_PASSWORD = "NewSecretPassword123!"
-
+USERNAME = "stronguser"
 def wait_for_service():
     print("Waiting for auth-service to be up...")
     for _ in range(60):
@@ -29,8 +29,34 @@ def login(email, password):
     print(f"  Attempting login with {email}...")
     return requests.post(f"{BASE_URL}/login", json={"email": email, "password": password})
 
+def register(id, username, email, password):
+    print(f"  Registering user {username} ({email})...")
+    payload = {
+        "id": id,
+        "username": username,
+        "email": email,
+        "password": password
+    }
+    return requests.post(f"{BASE_URL}/register", json=payload)
+
+def resend_verification(email):
+    print(f"  Resending verification email to {email}...")
+    return requests.post(f"{BASE_URL}/resend-verification", json={"email": email})
+
+def verify_email(token):
+    print(f"  Verifying email with token {token}...")
+    return requests.post(f"{BASE_URL}/verify-email", json={"token": token})
+
 def run_verification():
     print("--- STARTING E2E AUTH FLOW VERIFICATION ---")
+
+    # 0. Registration (Ensure user exists)
+    print("\n0. Registration Flow")
+    resp = register(USER_ID, USERNAME, EMAIL, INITIAL_PASSWORD)
+    if resp.status_code == 201 or resp.status_code == 200:
+        print("  Registration successful.")
+    else:
+        print(f"  Registration skipped or failed (might already exist). Status: {resp.status_code}")
 
     # 1. Login (Dynamic Password Handling)
     print("\n1. Login Flow")
@@ -149,7 +175,24 @@ def run_verification():
     else:
         print(f"  ERROR: Unexpected status for invalid token: {resp.status_code}")
         # Not exiting fatal here, just logging error
-    
+
+    # 9. Resend Verification Email
+    print("\n9. Resend Verification Flow")
+    resp = resend_verification(EMAIL)
+    if resp.status_code == 200:
+        print("  Resend verification request successful.")
+    else:
+        print(f"  FATAL: Resend verification failed. Status: {resp.status_code}, Body: {resp.text}")
+        sys.exit(1)
+
+    # 10. Verify Email (Negative Test)
+    print("\n10. Verify Email Flow (Invalid Token)")
+    resp = verify_email("invalid_token_simulation")
+    if resp.status_code == 400:
+        print("  Verify email with invalid token rejected (400 Bad Request) as expected.")
+    else:
+        print(f"  ERROR: Unexpected status for invalid token: {resp.status_code}")
+
     print("\n--- ALL TESTS COMPLETED SUCCESSFULLY ---")
 
 if __name__ == "__main__":

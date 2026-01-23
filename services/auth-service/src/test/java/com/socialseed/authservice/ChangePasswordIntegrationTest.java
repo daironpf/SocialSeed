@@ -49,8 +49,8 @@ class ChangePasswordIntegrationTest {
     private ObjectMapper objectMapper;
 
     private UUID userId;
-    private final String oldPassword = "currentPassword123";
-    private final String newPassword = "newSecurePassword456";
+    private final String oldPassword = "currentPassword123!";
+    private final String newPassword = "newSecurePassword456$";
 
     @BeforeEach
     void setUp() {
@@ -84,7 +84,7 @@ class ChangePasswordIntegrationTest {
     @Test
     @WithMockUser
     void shouldFailWithIncorrectCurrentPassword() throws Exception {
-        ChangePasswordRequestDTO request = new ChangePasswordRequestDTO("wrongPassword", newPassword);
+        ChangePasswordRequestDTO request = new ChangePasswordRequestDTO("wrongPassword1!", newPassword);
 
         mockMvc.perform(post("/auth/" + userId + "/change-password")
                         .with(csrf())

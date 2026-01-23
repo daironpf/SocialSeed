@@ -3,21 +3,19 @@ package com.socialseed.errorhandling.handler;
 import com.socialseed.apiresponse.model.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.sql.SQLException;
+
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.dao.DataIntegrityViolationException;
 
 /**
  * Especialista en capturar y procesar errores de persistencia en PostgreSQL.
  */
-@RestControllerAdvice
-@Order(Ordered.HIGHEST_PRECEDENCE)
+@ConditionalOnClass(DataIntegrityViolationException.class)
 public class PGSQLExceptionHandler {
 
     private static final Logger log = LoggerFactory.getLogger(PGSQLExceptionHandler.class);

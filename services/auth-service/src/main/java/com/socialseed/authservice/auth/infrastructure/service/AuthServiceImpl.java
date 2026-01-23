@@ -35,6 +35,7 @@ public class AuthServiceImpl implements AuthService {
     private final TokenBlacklistService tokenBlacklistService;
     private final PasswordChangedEventPublisher passwordChangedEventPublisher;
     private final com.socialseed.authservice.auth.domain.service.LoginAttemptService loginAttemptService;
+    private final com.socialseed.authservice.auth.domain.service.EmailService emailService;
 
     @Value("${jwt.refresh.expiration}")
     private long refreshTokenDurationSeconds;
@@ -46,7 +47,8 @@ public class AuthServiceImpl implements AuthService {
             RefreshTokenRepository refreshTokenRepository,
             TokenBlacklistService tokenBlacklistService,
             PasswordChangedEventPublisher passwordChangedEventPublisher,
-            com.socialseed.authservice.auth.domain.service.LoginAttemptService loginAttemptService) {
+            com.socialseed.authservice.auth.domain.service.LoginAttemptService loginAttemptService,
+            com.socialseed.authservice.auth.domain.service.EmailService emailService) {
         this.authUserRepository = authUserRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
@@ -55,6 +57,7 @@ public class AuthServiceImpl implements AuthService {
         this.tokenBlacklistService = tokenBlacklistService;
         this.passwordChangedEventPublisher = passwordChangedEventPublisher;
         this.loginAttemptService = loginAttemptService;
+        this.emailService = emailService;
     }
 
     @Override
@@ -95,7 +98,17 @@ public class AuthServiceImpl implements AuthService {
                 authUser.getEmail(),
                 passwordEncoder.encode(authUser.getPassword()));
 
+        // Generate verification token (24 hours expiry)
+        String verificationToken = java.util.UUID.randomUUID().toString();
+        java.time.Instant expiry = java.time.Instant.now().plusSeconds(86400);
+        newAuthUser.setVerificationToken(verificationToken);
+        newAuthUser.setVerificationTokenExpiry(expiry);
+        newAuthUser.setEmailVerified(false);
+
         authUserRepository.save(newAuthUser);
+
+        // Send verification email
+        emailService.sendVerificationEmail(authUser.getEmail(), verificationToken);
 
         // Emit to Kafka Server
         UserRegisteredEvent event = new UserRegisteredEvent(
@@ -225,6 +238,53 @@ public class AuthServiceImpl implements AuthService {
         RefreshToken newRefreshToken = RefreshToken.create(authUser.getId(), refreshTokenDurationSeconds);
         refreshTokenRepository.save(newRefreshToken);
 
+
         return new AuthResponseDTO(newAccessToken, newRefreshToken.getToken(), authUser.getRoles());
+    }
+
+    @Override
+    @Transactional
+    public void verifyEmail(String token) {
+        AuthUser authUser = authUserRepository.findByVerificationToken(token)
+                .orElseThrow(() -> new BusinessException(ErrorCode.VERIFICATION_TOKEN_INVALID));
+
+        // Check if already verified
+        if (authUser.isEmailVerified()) {
+            throw new BusinessException(ErrorCode.EMAIL_ALREADY_VERIFIED);
+        }
+
+        // Check if token is expired
+        if (authUser.getVerificationTokenExpiry() == null ||
+                java.time.Instant.now().isAfter(authUser.getVerificationTokenExpiry())) {
+            throw new BusinessException(ErrorCode.VERIFICATION_TOKEN_EXPIRED);
+        }
+
+        // Mark email as verified and clear token (single-use)
+        authUser.setEmailVerified(true);
+        authUser.setVerificationToken(null);
+        authUser.setVerificationTokenExpiry(null);
+        authUserRepository.save(authUser);
+    }
+
+    @Override
+    @Transactional
+    public void resendVerificationEmail(String email) {
+        AuthUser authUser = authUserRepository.findByEmail(email)
+                .orElseThrow(() -> new BusinessException(ErrorCode.USER_EMAIL_NOT_FOUND));
+
+        // Check if already verified
+        if (authUser.isEmailVerified()) {
+            throw new BusinessException(ErrorCode.EMAIL_ALREADY_VERIFIED);
+        }
+
+        // Generate new verification token (24 hours expiry)
+        String verificationToken = UUID.randomUUID().toString();
+        java.time.Instant expiry = java.time.Instant.now().plusSeconds(86400);
+        authUser.setVerificationToken(verificationToken);
+        authUser.setVerificationTokenExpiry(expiry);
+        authUserRepository.save(authUser);
+
+        // Send verification email
+        emailService.sendVerificationEmail(email, verificationToken);
     }
 }

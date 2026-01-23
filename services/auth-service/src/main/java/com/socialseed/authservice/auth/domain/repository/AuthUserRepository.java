@@ -17,5 +17,6 @@ public interface AuthUserRepository {
     boolean existByEmail(String email);
 
     Optional<AuthUser> findByResetPasswordToken(String token);
+    Optional<AuthUser> findByVerificationToken(String token);
 
 }

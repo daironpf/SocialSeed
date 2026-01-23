@@ -48,6 +48,8 @@ class RefreshTokenServiceTest {
     private PasswordChangedEventPublisher passwordChangedEventPublisher;
     @Mock
     private com.socialseed.authservice.auth.domain.service.LoginAttemptService loginAttemptService;
+    @Mock
+    private com.socialseed.authservice.auth.domain.service.EmailService emailService;
 
     private AuthServiceImpl authService;
 
@@ -65,7 +67,8 @@ class RefreshTokenServiceTest {
                 refreshTokenRepository,
                 tokenBlacklistService,
                 passwordChangedEventPublisher,
-                loginAttemptService);
+                loginAttemptService,
+                emailService);
         ReflectionTestUtils.setField(authService, "refreshTokenDurationSeconds", duration);
     }
 
