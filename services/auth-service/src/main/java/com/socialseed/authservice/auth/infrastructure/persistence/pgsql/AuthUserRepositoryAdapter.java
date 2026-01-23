@@ -72,4 +72,16 @@ public class AuthUserRepositoryAdapter implements AuthUserRepository {
         return jpaRepository.findByVerificationToken(token)
                 .map(AuthUserPgsqlMapper::toDomain);
     }
+
+    @Override
+    @Transactional
+    public void clearExpiredResetPasswordTokens(java.time.Instant now) {
+        jpaRepository.clearExpiredResetPasswordTokens(now);
+    }
+
+    @Override
+    @Transactional
+    public void clearExpiredEmailVerificationTokens(java.time.Instant now) {
+        jpaRepository.clearExpiredVerificationTokens(now);
+    }
 }
