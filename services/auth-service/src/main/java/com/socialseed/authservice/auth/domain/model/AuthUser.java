@@ -1,7 +1,5 @@
 package com.socialseed.authservice.auth.domain.model;
 
-import jakarta.validation.constraints.NotNull;
-
 import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,13 +8,10 @@ import java.util.UUID;
 public class AuthUser {
     private UUID id;
 
-    @NotNull
     private String username;
 
-    @NotNull
     private String email;
 
-    @NotNull
     private String password;
 
     private Set<String> roles = new HashSet<>();

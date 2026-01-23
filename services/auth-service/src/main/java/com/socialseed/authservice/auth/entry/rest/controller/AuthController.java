@@ -90,7 +90,7 @@ public class AuthController {
         @PostMapping("/register")
         public ResponseEntity<ApiResponse<?>> register(@Valid @RequestBody RegisterRequestDTO request, Locale locale) {
                 AuthUser authUser = AuthRestMapper.toDomain(request);
-                AuthResponseDTO response = authUseCases.register(authUser);
+                AuthResponseDTO response = AuthRestMapper.toResponse(authUseCases.register(authUser));
                 return ResponseEntity
                                 .status(HttpStatus.CREATED)
                                 .body(
@@ -125,7 +125,7 @@ public class AuthController {
                         jakarta.servlet.http.HttpServletRequest httpRequest,
                         Locale locale) {
                 String ip = httpRequest.getRemoteAddr();
-                AuthResponseDTO response = authUseCases.login(request.email(), request.password(), ip);
+                AuthResponseDTO response = AuthRestMapper.toResponse(authUseCases.login(request.email(), request.password(), ip));
                 return ResponseEntity.ok(
                                 ApiResponse.success(
                                                 response,
@@ -146,7 +146,7 @@ public class AuthController {
     @PostMapping("/token/refresh")
         public ResponseEntity<ApiResponse<?>> refreshToken(@Valid @RequestBody RefreshTokenRequestDTO request,
                         Locale locale) {
-                AuthResponseDTO response = authUseCases.refreshToken(request.refreshToken());
+                AuthResponseDTO response = AuthRestMapper.toResponse(authUseCases.refreshToken(request.refreshToken()));
                 return ResponseEntity.ok(
                                 ApiResponse.success(
                                                 response,

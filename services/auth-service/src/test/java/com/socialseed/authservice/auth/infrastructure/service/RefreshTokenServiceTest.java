@@ -1,6 +1,7 @@
 package com.socialseed.authservice.auth.infrastructure.service;
 
 import com.socialseed.authservice.auth.config.jwt.JWTProvider;
+import com.socialseed.authservice.auth.domain.model.AuthResult;
 import com.socialseed.authservice.auth.domain.model.AuthUser;
 import com.socialseed.authservice.auth.domain.model.RefreshToken;
 import com.socialseed.authservice.auth.domain.repository.AuthUserRepository;
@@ -8,7 +9,13 @@ import com.socialseed.authservice.auth.domain.repository.RefreshTokenRepository;
 import com.socialseed.authservice.auth.domain.repository.PasswordChangedEventPublisher;
 import com.socialseed.authservice.auth.domain.repository.UserRegisteredEventPublisher;
 import com.socialseed.authservice.auth.domain.service.TokenBlacklistService;
-import com.socialseed.authservice.auth.entry.rest.dto.AuthResponseDTO;
+import com.socialseed.authservice.auth.infrastructure.service.AuthServiceImpl;
+import com.socialseed.authservice.auth.domain.repository.AuthUserRepository;
+import com.socialseed.authservice.auth.domain.repository.RefreshTokenRepository;
+import com.socialseed.authservice.auth.domain.repository.PasswordChangedEventPublisher;
+import com.socialseed.authservice.auth.domain.repository.UserRegisteredEventPublisher;
+import com.socialseed.authservice.auth.domain.service.TokenBlacklistService;
+import com.socialseed.authservice.auth.infrastructure.service.AuthServiceImpl;
 import com.socialseed.errorhandling.exception.BusinessException;
 import com.socialseed.errorhandling.exception.ErrorCode;
 import org.junit.jupiter.api.BeforeEach;
@@ -84,7 +91,7 @@ class RefreshTokenServiceTest {
         when(jwtProvider.generateToken(any())).thenReturn("new-access-token");
 
         // Act
-        AuthResponseDTO response = authService.refreshToken(oldTokenStr);
+        AuthResult response = authService.refreshToken(oldTokenStr);
 
         // Assert
         assertNotNull(response);

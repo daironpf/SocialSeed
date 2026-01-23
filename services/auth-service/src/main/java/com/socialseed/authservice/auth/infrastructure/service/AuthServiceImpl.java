@@ -4,6 +4,7 @@ import com.socialseed.authservice.auth.config.jwt.JWTProvider;
 import com.socialseed.authservice.auth.domain.event.PasswordChangedEvent;
 import com.socialseed.authservice.auth.domain.event.UserRegisteredEvent;
 import com.socialseed.authservice.auth.domain.repository.PasswordChangedEventPublisher;
+import com.socialseed.authservice.auth.domain.model.AuthResult;
 import com.socialseed.authservice.auth.domain.model.AuthUser;
 import com.socialseed.authservice.auth.domain.repository.AuthUserRepository;
 import com.socialseed.authservice.auth.domain.repository.RefreshTokenRepository;
@@ -11,7 +12,6 @@ import com.socialseed.authservice.auth.domain.repository.UserRegisteredEventPubl
 import com.socialseed.authservice.auth.domain.service.AuthService;
 import com.socialseed.authservice.auth.domain.service.TokenBlacklistService;
 import com.socialseed.authservice.auth.domain.model.RefreshToken;
-import com.socialseed.authservice.auth.entry.rest.dto.AuthResponseDTO;
 import com.socialseed.errorhandling.exception.BusinessException;
 import com.socialseed.errorhandling.exception.ErrorCode;
 import jakarta.transaction.Transactional;
@@ -61,7 +61,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public AuthResponseDTO login(String email, String password, String ip) {
+    public AuthResult login(String email, String password, String ip) {
         AuthUser authUser = authUserRepository.findByEmail(email)
                 .orElseThrow(() -> new BusinessException(ErrorCode.INVALID_CREDENTIALS));
 
@@ -85,12 +85,12 @@ public class AuthServiceImpl implements AuthService {
 
         Set<String> roles = authUser.getRoles();
 
-        return new AuthResponseDTO(token, refreshToken.getToken(), roles);
+        return new AuthResult(token, refreshToken.getToken(), roles);
     }
 
     @Transactional
     @Override
-    public AuthResponseDTO register(AuthUser authUser, UUID id) {
+    public AuthResult register(AuthUser authUser, UUID id) {
 
         AuthUser newAuthUser = new AuthUser(
                 id,
@@ -126,7 +126,7 @@ public class AuthServiceImpl implements AuthService {
 
         Set<String> roles = newAuthUser.getRoles();
 
-        return new AuthResponseDTO(token, refreshToken.getToken(), roles);
+        return new AuthResult(token, refreshToken.getToken(), roles);
     }
 
     @Override
@@ -210,7 +210,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @Transactional
-    public AuthResponseDTO refreshToken(String token) {
+    public AuthResult refreshToken(String token) {
         RefreshToken refreshToken = refreshTokenRepository.findByToken(token)
                 .orElseThrow(() -> new BusinessException(ErrorCode.REFRESH_TOKEN_NOT_FOUND));
 
@@ -239,7 +239,7 @@ public class AuthServiceImpl implements AuthService {
         refreshTokenRepository.save(newRefreshToken);
 
 
-        return new AuthResponseDTO(newAccessToken, newRefreshToken.getToken(), authUser.getRoles());
+        return new AuthResult(newAccessToken, newRefreshToken.getToken(), authUser.getRoles());
     }
 
     @Override
