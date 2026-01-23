@@ -1,7 +1,7 @@
 package com.socialseed.authservice.auth.application.usecase;
 
+import com.socialseed.authservice.auth.domain.model.AuthResult;
 import com.socialseed.authservice.auth.domain.model.AuthUser;
-import com.socialseed.authservice.auth.entry.rest.dto.AuthResponseDTO;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
@@ -62,11 +62,11 @@ public class AuthUseCases {
         return getAuthUserByUserName.execute(username);
     }
 
-    public AuthResponseDTO login(String email, String password, String ip) {
+    public AuthResult login(String email, String password, String ip) {
         return authenticateUser.execute(email, password, ip);
     }
 
-    public AuthResponseDTO register(AuthUser authUser) {
+    public AuthResult register(AuthUser authUser) {
         return registerUser.execute(authUser);
     }
 
@@ -78,7 +78,7 @@ public class AuthUseCases {
         logout.execute(accessToken, refreshToken);
     }
 
-    public AuthResponseDTO refreshToken(String token) {
+    public AuthResult refreshToken(String token) {
         return refreshToken.execute(token);
     }
 

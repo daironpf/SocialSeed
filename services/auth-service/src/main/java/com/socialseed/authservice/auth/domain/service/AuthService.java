@@ -1,15 +1,15 @@
 package com.socialseed.authservice.auth.domain.service;
 
+import com.socialseed.authservice.auth.domain.model.AuthResult;
 import com.socialseed.authservice.auth.domain.model.AuthUser;
-import com.socialseed.authservice.auth.entry.rest.dto.AuthResponseDTO;
 
 import java.util.Optional;
 import java.util.UUID;
 
 public interface AuthService {
-    AuthResponseDTO login(String email, String password, String ip);
+    AuthResult login(String email, String password, String ip);
 
-    AuthResponseDTO register(AuthUser auth, UUID id);
+    AuthResult register(AuthUser auth, UUID id);
 
     Optional<AuthUser> getUserById(UUID id);
 
@@ -25,7 +25,7 @@ public interface AuthService {
 
     void logout(String accessToken, String refreshToken);
 
-    AuthResponseDTO refreshToken(String refreshToken);
+    AuthResult refreshToken(String refreshToken);
 
     void verifyEmail(String token);
 

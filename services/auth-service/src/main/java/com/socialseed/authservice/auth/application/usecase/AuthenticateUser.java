@@ -1,7 +1,7 @@
 package com.socialseed.authservice.auth.application.usecase;
 
+import com.socialseed.authservice.auth.domain.model.AuthResult;
 import com.socialseed.authservice.auth.domain.service.AuthService;
-import com.socialseed.authservice.auth.entry.rest.dto.AuthResponseDTO;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,7 +12,7 @@ public class AuthenticateUser {
         this.authService = authService;
     }
 
-    public AuthResponseDTO execute(String email, String password, String ip) {
+    public AuthResult execute(String email, String password, String ip) {
         return authService.login(email, password, ip);
     }
 }

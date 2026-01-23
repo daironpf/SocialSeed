@@ -1,6 +1,7 @@
 package com.socialseed.authservice.auth.entry.rest.controller;
 
 import com.socialseed.authservice.auth.application.usecase.AuthUseCases;
+import com.socialseed.authservice.auth.domain.model.AuthResult;
 import com.socialseed.authservice.auth.entry.rest.dto.LogoutRequestDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -34,6 +35,11 @@ class AuthControllerTest {
     void shouldLoginSuccessfully() throws Exception {
         com.socialseed.authservice.auth.entry.rest.dto.LoginRequestDTO loginRequest = 
             new com.socialseed.authservice.auth.entry.rest.dto.LoginRequestDTO("test@example.com", "Password123!");
+        
+        org.mockito.BDDMockito.given(authUseCases.login(org.mockito.ArgumentMatchers.anyString(), 
+                org.mockito.ArgumentMatchers.anyString(), 
+                org.mockito.ArgumentMatchers.anyString()))
+            .willReturn(new AuthResult("token", "refresh", java.util.Set.of("ROLE_USER")));
         
         mockMvc.perform(post("/auth/login")
                         .with(csrf())
