@@ -19,4 +19,14 @@ public class StubEmailService implements EmailService {
         logger.info("Link: https://socialseed.com/reset-password?token={}", token);
         logger.info("==================================================");
     }
+
+    @Override
+    public void sendVerificationEmail(String to, String token) {
+        logger.info("==================================================");
+        logger.info("STUB EMAIL SERVICE - SENDING VERIFICATION EMAIL");
+        logger.info("To: {}", to);
+        logger.info("Token: {}", token);
+        logger.info("Link: https://socialseed.com/verify-email?token={}", token);
+        logger.info("==================================================");
+    }
 }

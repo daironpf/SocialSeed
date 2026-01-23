@@ -16,6 +16,7 @@ public interface AuthUserPgsqlRepository extends JpaRepository<AuthUserPgsqlEnti
     Optional<AuthUserPgsqlEntity> findByUsername(String username);
     Optional<AuthUserPgsqlEntity> findByEmail(String email);
     Optional<AuthUserPgsqlEntity> findByResetPasswordToken(String resetPasswordToken);
+    Optional<AuthUserPgsqlEntity> findByVerificationToken(String verificationToken);
 
     // Verificar existencia
     boolean existsByUsername(String username);

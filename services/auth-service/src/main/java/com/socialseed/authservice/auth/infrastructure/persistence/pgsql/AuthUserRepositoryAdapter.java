@@ -66,4 +66,10 @@ public class AuthUserRepositoryAdapter implements AuthUserRepository {
         return jpaRepository.findByResetPasswordToken(token)
                 .map(AuthUserPgsqlMapper::toDomain);
     }
+
+    @Override
+    public Optional<AuthUser> findByVerificationToken(String token) {
+        return jpaRepository.findByVerificationToken(token)
+                .map(AuthUserPgsqlMapper::toDomain);
+    }
 }

@@ -26,4 +26,8 @@ public interface AuthService {
     void logout(String accessToken, String refreshToken);
 
     AuthResponseDTO refreshToken(String refreshToken);
+
+    void verifyEmail(String token);
+
+    void resendVerificationEmail(String email);
 }
