@@ -60,4 +60,10 @@ public class AuthUserRepositoryAdapter implements AuthUserRepository {
     public boolean existByEmail(String email) {
         return jpaRepository.existsByEmail(email);
     }
+
+    @Override
+    public Optional<AuthUser> findByResetPasswordToken(String token) {
+        return jpaRepository.findByResetPasswordToken(token)
+                .map(AuthUserPgsqlMapper::toDomain);
+    }
 }
