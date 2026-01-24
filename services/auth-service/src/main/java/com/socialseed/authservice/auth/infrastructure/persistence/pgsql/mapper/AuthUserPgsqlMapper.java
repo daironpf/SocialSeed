@@ -4,13 +4,15 @@ import com.socialseed.authservice.auth.domain.model.AuthUser;
 import com.socialseed.authservice.auth.infrastructure.persistence.pgsql.entity.AuthUserPgsqlEntity;
 
 public final class AuthUserPgsqlMapper {
-    private AuthUserPgsqlMapper(){} // clase no instanciable, solo utilidad
+    private AuthUserPgsqlMapper() {
+    } // clase no instanciable, solo utilidad
 
     // -------------------------
     // Mapper: Domain → Entity
     // -------------------------
     public static AuthUserPgsqlEntity toEntity(AuthUser authUser) {
-        if (authUser == null) return null;
+        if (authUser == null)
+            return null;
 
         return AuthUserPgsqlEntity.builder()
                 .id(authUser.getId())
@@ -37,6 +39,9 @@ public final class AuthUserPgsqlMapper {
                 .twoFactorEnabled(authUser.isTwoFactorEnabled())
                 .twoFactorSecret(authUser.getTwoFactorSecret())
                 .lastPasswordChangedAt(authUser.getLastPasswordChangedAt())
+                .pendingEmail(authUser.getPendingEmail())
+                .emailChangeToken(authUser.getEmailChangeToken())
+                .emailChangeTokenExpiry(authUser.getEmailChangeTokenExpiry())
                 .build();
     }
 
@@ -44,15 +49,15 @@ public final class AuthUserPgsqlMapper {
     // Mapper: Entity → Domain
     // -------------------------
     public static AuthUser toDomain(AuthUserPgsqlEntity entity) {
-        if (entity == null) return null;
+        if (entity == null)
+            return null;
 
         // Usa el constructor principal (id, username, email, password)
         AuthUser authUser = new AuthUser(
                 entity.getId(),
                 entity.getUsername(),
                 entity.getEmail(),
-                entity.getPassword()
-        );
+                entity.getPassword());
         // El resto se asigna con setters
         authUser.setRoles(entity.getRoles());
         authUser.setEnabled(entity.isEnabled());
@@ -74,6 +79,9 @@ public final class AuthUserPgsqlMapper {
         authUser.setTwoFactorEnabled(entity.isTwoFactorEnabled());
         authUser.setTwoFactorSecret(entity.getTwoFactorSecret());
         authUser.setLastPasswordChangedAt(entity.getLastPasswordChangedAt());
+        authUser.setPendingEmail(entity.getPendingEmail());
+        authUser.setEmailChangeToken(entity.getEmailChangeToken());
+        authUser.setEmailChangeTokenExpiry(entity.getEmailChangeTokenExpiry());
 
         return authUser;
     }

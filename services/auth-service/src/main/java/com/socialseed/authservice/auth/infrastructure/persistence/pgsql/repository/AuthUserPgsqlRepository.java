@@ -14,12 +14,18 @@ import java.util.UUID;
 public interface AuthUserPgsqlRepository extends JpaRepository<AuthUserPgsqlEntity, UUID> {
 
     Optional<AuthUserPgsqlEntity> findByUsername(String username);
+
     Optional<AuthUserPgsqlEntity> findByEmail(String email);
+
     Optional<AuthUserPgsqlEntity> findByResetPasswordToken(String resetPasswordToken);
+
     Optional<AuthUserPgsqlEntity> findByVerificationToken(String verificationToken);
+
+    Optional<AuthUserPgsqlEntity> findByEmailChangeToken(String emailChangeToken);
 
     // Verificar existencia
     boolean existsByUsername(String username);
+
     boolean existsByEmail(String email);
 
     @org.springframework.data.jpa.repository.Modifying
