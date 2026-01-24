@@ -14,13 +14,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 Incluye autenticación, seguridad y metadatos de auditoría.
 */
 @Entity
-@Table(
-        name = "auth_users",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "uk_auth_user_username", columnNames = "username"),
-                @UniqueConstraint(name = "uk_auth_user_email", columnNames = "email")
-        }
-)
+@Table(name = "auth_users", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_auth_user_username", columnNames = "username"),
+        @UniqueConstraint(name = "uk_auth_user_email", columnNames = "email")
+})
 public class AuthUserPgsqlEntity {
 
     /**
@@ -44,10 +41,7 @@ public class AuthUserPgsqlEntity {
     private String password;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(
-            name = "auth_user_roles",
-            joinColumns = @JoinColumn(name = "user_id")
-    )
+    @CollectionTable(name = "auth_user_roles", joinColumns = @JoinColumn(name = "user_id"))
     @Column(name = "role")
     private Set<String> roles = new HashSet<>();
 
@@ -100,9 +94,16 @@ public class AuthUserPgsqlEntity {
     private boolean twoFactorEnabled = false;
     private String twoFactorSecret;
 
-    /* ==========================================================
-       ================ Constructors =============================
-       ========================================================== */
+    /* ===== Email Change ===== */
+    private String pendingEmail;
+    private String emailChangeToken;
+    private Instant emailChangeTokenExpiry;
+
+    /*
+     * ==========================================================
+     * ================ Constructors =============================
+     * ==========================================================
+     */
 
     /**
      * Constructor requerido por JPA
@@ -138,8 +139,10 @@ public class AuthUserPgsqlEntity {
             Instant verificationTokenExpiry,
             boolean twoFactorEnabled,
             String twoFactorSecret,
-            Instant lastPasswordChangedAt
-    ) {
+            Instant lastPasswordChangedAt,
+            String pendingEmail,
+            String emailChangeToken,
+            Instant emailChangeTokenExpiry) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -164,11 +167,16 @@ public class AuthUserPgsqlEntity {
         this.twoFactorEnabled = twoFactorEnabled;
         this.twoFactorSecret = twoFactorSecret;
         this.lastPasswordChangedAt = lastPasswordChangedAt;
+        this.pendingEmail = pendingEmail;
+        this.emailChangeToken = emailChangeToken;
+        this.emailChangeTokenExpiry = emailChangeTokenExpiry;
     }
 
-    /* ==========================================================
-       ================= Getters & Setters =======================
-       ========================================================== */
+    /*
+     * ==========================================================
+     * ================= Getters & Setters =======================
+     * ==========================================================
+     */
 
     public UUID getId() {
         return id;
@@ -354,10 +362,33 @@ public class AuthUserPgsqlEntity {
         this.lastPasswordChangedAt = lastPasswordChangedAt;
     }
 
+    public String getPendingEmail() {
+        return pendingEmail;
+    }
+
+    public void setPendingEmail(String pendingEmail) {
+        this.pendingEmail = pendingEmail;
+    }
+
+    public String getEmailChangeToken() {
+        return emailChangeToken;
+    }
+
+    public void setEmailChangeToken(String emailChangeToken) {
+        this.emailChangeToken = emailChangeToken;
+    }
+
+    public Instant getEmailChangeTokenExpiry() {
+        return emailChangeTokenExpiry;
+    }
+
+    public void setEmailChangeTokenExpiry(Instant emailChangeTokenExpiry) {
+        this.emailChangeTokenExpiry = emailChangeTokenExpiry;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
-
 
     public static class Builder {
 
@@ -391,6 +422,9 @@ public class AuthUserPgsqlEntity {
         private boolean twoFactorEnabled = false;
         private String twoFactorSecret;
         private Instant lastPasswordChangedAt;
+        private String pendingEmail;
+        private String emailChangeToken;
+        private Instant emailChangeTokenExpiry;
 
         /* ===== Fluent setters ===== */
 
@@ -514,6 +548,21 @@ public class AuthUserPgsqlEntity {
             return this;
         }
 
+        public Builder pendingEmail(String pendingEmail) {
+            this.pendingEmail = pendingEmail;
+            return this;
+        }
+
+        public Builder emailChangeToken(String emailChangeToken) {
+            this.emailChangeToken = emailChangeToken;
+            return this;
+        }
+
+        public Builder emailChangeTokenExpiry(Instant emailChangeTokenExpiry) {
+            this.emailChangeTokenExpiry = emailChangeTokenExpiry;
+            return this;
+        }
+
         /* ===== Build ===== */
 
         public AuthUserPgsqlEntity build() {
@@ -541,8 +590,10 @@ public class AuthUserPgsqlEntity {
                     verificationTokenExpiry,
                     twoFactorEnabled,
                     twoFactorSecret,
-                    lastPasswordChangedAt
-            );
+                    lastPasswordChangedAt,
+                    pendingEmail,
+                    emailChangeToken,
+                    emailChangeTokenExpiry);
         }
     }
 

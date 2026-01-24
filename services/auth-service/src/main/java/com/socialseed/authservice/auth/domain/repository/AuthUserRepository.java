@@ -9,16 +9,24 @@ public interface AuthUserRepository {
     AuthUser save(AuthUser authUser);
 
     Optional<AuthUser> findById(UUID id);
+
     Optional<AuthUser> findByEmail(String email);
+
     Optional<AuthUser> findByUserName(String username);
 
     boolean existByUserId(UUID id);
+
     boolean existByUsername(String username);
+
     boolean existByEmail(String email);
 
     Optional<AuthUser> findByResetPasswordToken(String token);
+
     Optional<AuthUser> findByVerificationToken(String token);
 
+    Optional<AuthUser> findByEmailChangeToken(String token);
+
     void clearExpiredResetPasswordTokens(java.time.Instant now);
+
     void clearExpiredEmailVerificationTokens(java.time.Instant now);
 }

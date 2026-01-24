@@ -43,6 +43,11 @@ public class AuthUser {
     private boolean twoFactorEnabled = false;
     private String twoFactorSecret;
 
+    // Email Change
+    private String pendingEmail;
+    private String emailChangeToken;
+    private Instant emailChangeTokenExpiry;
+
     public AuthUser(UUID id, String username, String email, String password) {
         this.id = id;
         this.username = username;
@@ -63,10 +68,10 @@ public class AuthUser {
 
         // Tokens (reset y verificación)
         this.resetPasswordToken = "no";
-        this.resetPasswordTokenExpiry = Instant.now() ;
+        this.resetPasswordTokenExpiry = Instant.now();
         this.emailVerified = true;
         this.verificationToken = "no";
-        this.verificationTokenExpiry = Instant.now() ;
+        this.verificationTokenExpiry = Instant.now();
 
         // 2FA
         this.twoFactorEnabled = false;
@@ -261,5 +266,29 @@ public class AuthUser {
 
     public void setLastPasswordChangedAt(Instant lastPasswordChangedAt) {
         this.lastPasswordChangedAt = lastPasswordChangedAt;
+    }
+
+    public String getPendingEmail() {
+        return pendingEmail;
+    }
+
+    public void setPendingEmail(String pendingEmail) {
+        this.pendingEmail = pendingEmail;
+    }
+
+    public String getEmailChangeToken() {
+        return emailChangeToken;
+    }
+
+    public void setEmailChangeToken(String emailChangeToken) {
+        this.emailChangeToken = emailChangeToken;
+    }
+
+    public Instant getEmailChangeTokenExpiry() {
+        return emailChangeTokenExpiry;
+    }
+
+    public void setEmailChangeTokenExpiry(Instant emailChangeTokenExpiry) {
+        this.emailChangeTokenExpiry = emailChangeTokenExpiry;
     }
 }

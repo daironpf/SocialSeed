@@ -40,6 +40,7 @@ public enum ErrorCode {
     VERIFICATION_TOKEN_INVALID("auth.error.verification_token_invalid", HttpStatus.BAD_REQUEST),
     VERIFICATION_TOKEN_EXPIRED("auth.error.verification_token_expired", HttpStatus.BAD_REQUEST),
     EMAIL_ALREADY_VERIFIED("auth.error.email_already_verified", HttpStatus.BAD_REQUEST),
+    EMAIL_ALREADY_EXISTS("auth.error.email.taken", HttpStatus.CONFLICT),
     PASSWORD_EXPIRED("auth.error.password_expired", HttpStatus.UNAUTHORIZED);
 
     private final String code;
