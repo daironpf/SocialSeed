@@ -70,6 +70,11 @@ public class AuthServiceImpl implements AuthService {
             throw new BusinessException(ErrorCode.ACCOUNT_LOCKED);
         }
 
+        // Check if credentials (password) are expired
+        if (!authUser.isCredentialsNonExpired()) {
+            throw new BusinessException(ErrorCode.PASSWORD_EXPIRED);
+        }
+
         if (!passwordEncoder.matches(password, authUser.getPassword())) {
             // Record failed login in separate transaction
             loginAttemptService.recordFailedLogin(authUser.getId(), ip);
@@ -104,6 +109,7 @@ public class AuthServiceImpl implements AuthService {
         newAuthUser.setVerificationToken(verificationToken);
         newAuthUser.setVerificationTokenExpiry(expiry);
         newAuthUser.setEmailVerified(false);
+        newAuthUser.setLastPasswordChangedAt(java.time.Instant.now());
 
         authUserRepository.save(newAuthUser);
 
@@ -170,6 +176,8 @@ public class AuthServiceImpl implements AuthService {
 
         // Update password
         authUser.setPassword(passwordEncoder.encode(newPassword));
+        authUser.setLastPasswordChangedAt(java.time.Instant.now());
+        authUser.setCredentialsNonExpired(true);
         authUserRepository.save(authUser);
 
         // Invalidate all refresh tokens for the user

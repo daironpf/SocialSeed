@@ -24,6 +24,7 @@ public class AuthUser {
     private int failedLoginAttempts = 0;
     private Instant lastFailedLoginAt;
     private String lastFailedLoginIp;
+    private Instant lastPasswordChangedAt;
 
     // Metadatos
     private Instant createdAt = Instant.now();
@@ -70,6 +71,8 @@ public class AuthUser {
         // 2FA
         this.twoFactorEnabled = false;
         this.twoFactorSecret = "secret";
+
+        this.lastPasswordChangedAt = Instant.now();
     }
 
     public UUID getId() {
@@ -250,5 +253,13 @@ public class AuthUser {
 
     public void setTwoFactorSecret(String twoFactorSecret) {
         this.twoFactorSecret = twoFactorSecret;
+    }
+
+    public Instant getLastPasswordChangedAt() {
+        return lastPasswordChangedAt;
+    }
+
+    public void setLastPasswordChangedAt(Instant lastPasswordChangedAt) {
+        this.lastPasswordChangedAt = lastPasswordChangedAt;
     }
 }

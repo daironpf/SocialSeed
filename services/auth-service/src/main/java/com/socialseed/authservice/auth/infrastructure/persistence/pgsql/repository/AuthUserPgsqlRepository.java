@@ -29,4 +29,8 @@ public interface AuthUserPgsqlRepository extends JpaRepository<AuthUserPgsqlEnti
     @org.springframework.data.jpa.repository.Modifying
     @org.springframework.data.jpa.repository.Query("UPDATE AuthUserPgsqlEntity u SET u.verificationToken = NULL, u.verificationTokenExpiry = NULL WHERE u.verificationTokenExpiry < :now AND u.emailVerified = false")
     void clearExpiredVerificationTokens(@org.springframework.data.repository.query.Param("now") java.time.Instant now);
+
+    @org.springframework.data.jpa.repository.Modifying
+    @org.springframework.data.jpa.repository.Query("UPDATE AuthUserPgsqlEntity u SET u.credentialsNonExpired = false WHERE u.lastPasswordChangedAt < :threshold AND u.credentialsNonExpired = true")
+    int expirePasswords(@org.springframework.data.repository.query.Param("threshold") java.time.Instant threshold);
 }
