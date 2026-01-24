@@ -36,6 +36,7 @@ public final class AuthUserPgsqlMapper {
                 .verificationTokenExpiry(authUser.getVerificationTokenExpiry())
                 .twoFactorEnabled(authUser.isTwoFactorEnabled())
                 .twoFactorSecret(authUser.getTwoFactorSecret())
+                .lastPasswordChangedAt(authUser.getLastPasswordChangedAt())
                 .build();
     }
 
@@ -72,6 +73,7 @@ public final class AuthUserPgsqlMapper {
         authUser.setVerificationTokenExpiry(entity.getVerificationTokenExpiry());
         authUser.setTwoFactorEnabled(entity.isTwoFactorEnabled());
         authUser.setTwoFactorSecret(entity.getTwoFactorSecret());
+        authUser.setLastPasswordChangedAt(entity.getLastPasswordChangedAt());
 
         return authUser;
     }

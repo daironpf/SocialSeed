@@ -39,7 +39,8 @@ public enum ErrorCode {
     INVALID_CREDENTIALS("auth.error.invalid_credentials", HttpStatus.UNAUTHORIZED),
     VERIFICATION_TOKEN_INVALID("auth.error.verification_token_invalid", HttpStatus.BAD_REQUEST),
     VERIFICATION_TOKEN_EXPIRED("auth.error.verification_token_expired", HttpStatus.BAD_REQUEST),
-    EMAIL_ALREADY_VERIFIED("auth.error.email_already_verified", HttpStatus.BAD_REQUEST);
+    EMAIL_ALREADY_VERIFIED("auth.error.email_already_verified", HttpStatus.BAD_REQUEST),
+    PASSWORD_EXPIRED("auth.error.password_expired", HttpStatus.UNAUTHORIZED);
 
     private final String code;
     private final HttpStatus httpStatus;

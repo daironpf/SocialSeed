@@ -70,6 +70,7 @@ public class AuthUserPgsqlEntity {
 
     private Instant lastFailedLoginAt;
     private String lastFailedLoginIp;
+    private Instant lastPasswordChangedAt;
 
     /* ===== Auditoría ===== */
 
@@ -136,7 +137,8 @@ public class AuthUserPgsqlEntity {
             String verificationToken,
             Instant verificationTokenExpiry,
             boolean twoFactorEnabled,
-            String twoFactorSecret
+            String twoFactorSecret,
+            Instant lastPasswordChangedAt
     ) {
         this.id = id;
         this.username = username;
@@ -161,6 +163,7 @@ public class AuthUserPgsqlEntity {
         this.verificationTokenExpiry = verificationTokenExpiry;
         this.twoFactorEnabled = twoFactorEnabled;
         this.twoFactorSecret = twoFactorSecret;
+        this.lastPasswordChangedAt = lastPasswordChangedAt;
     }
 
     /* ==========================================================
@@ -343,6 +346,14 @@ public class AuthUserPgsqlEntity {
         this.twoFactorSecret = twoFactorSecret;
     }
 
+    public Instant getLastPasswordChangedAt() {
+        return lastPasswordChangedAt;
+    }
+
+    public void setLastPasswordChangedAt(Instant lastPasswordChangedAt) {
+        this.lastPasswordChangedAt = lastPasswordChangedAt;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -379,6 +390,7 @@ public class AuthUserPgsqlEntity {
 
         private boolean twoFactorEnabled = false;
         private String twoFactorSecret;
+        private Instant lastPasswordChangedAt;
 
         /* ===== Fluent setters ===== */
 
@@ -497,6 +509,11 @@ public class AuthUserPgsqlEntity {
             return this;
         }
 
+        public Builder lastPasswordChangedAt(Instant lastPasswordChangedAt) {
+            this.lastPasswordChangedAt = lastPasswordChangedAt;
+            return this;
+        }
+
         /* ===== Build ===== */
 
         public AuthUserPgsqlEntity build() {
@@ -523,7 +540,8 @@ public class AuthUserPgsqlEntity {
                     verificationToken,
                     verificationTokenExpiry,
                     twoFactorEnabled,
-                    twoFactorSecret
+                    twoFactorSecret,
+                    lastPasswordChangedAt
             );
         }
     }
