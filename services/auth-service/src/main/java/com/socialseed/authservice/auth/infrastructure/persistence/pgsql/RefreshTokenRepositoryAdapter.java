@@ -43,4 +43,9 @@ public class RefreshTokenRepositoryAdapter implements RefreshTokenRepository {
                 .map(RefreshTokenMapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public void deleteByExpiryDateBefore(java.time.Instant now) {
+        repository.deleteByExpiryDateBefore(now);
+    }
 }
