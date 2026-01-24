@@ -22,6 +22,7 @@ public class AuthUseCases {
     public final ResetPassword resetPassword;
     private final VerifyEmail verifyEmail;
     private final ResendVerificationEmail resendVerificationEmail;
+    public final GetUserRoles getUserRoles;
 
     public AuthUseCases(
             AuthenticateUser authenticateUser,
@@ -35,7 +36,8 @@ public class AuthUseCases {
             ForgotPassword forgotPassword,
             ResetPassword resetPassword,
             VerifyEmail verifyEmail,
-            ResendVerificationEmail resendVerificationEmail) {
+            ResendVerificationEmail resendVerificationEmail,
+            GetUserRoles getUserRoles) {
         this.authenticateUser = authenticateUser;
         this.registerUser = registerUser;
         this.changeUserPassword = changeUserPassword;
@@ -48,6 +50,7 @@ public class AuthUseCases {
         this.resetPassword = resetPassword;
         this.verifyEmail = verifyEmail;
         this.resendVerificationEmail = resendVerificationEmail;
+        this.getUserRoles = getUserRoles;
     }
 
     public Optional<AuthUser> getAuthUserById(UUID userId) {
@@ -96,5 +99,9 @@ public class AuthUseCases {
 
     public void resendVerificationEmail(String email) {
         resendVerificationEmail.execute(email);
+    }
+
+    public java.util.Set<String> getUserRoles(java.util.UUID userId) {
+        return getUserRoles.execute(userId);
     }
 }

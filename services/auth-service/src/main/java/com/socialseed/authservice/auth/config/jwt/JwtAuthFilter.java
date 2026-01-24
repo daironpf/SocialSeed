@@ -24,7 +24,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final List<String> excludedPaths = List.of(
             "/about",
-            "/auth/**",
+//            "/auth/**", // Allow filter to run for auth endpoints (e.g., /auth/{id}/roles)
             "/public/**",
             "/assets/**",
             "/swagger-ui/**",
