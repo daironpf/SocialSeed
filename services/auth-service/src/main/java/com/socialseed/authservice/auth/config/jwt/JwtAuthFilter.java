@@ -24,12 +24,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final List<String> excludedPaths = List.of(
             "/about",
-//            "/auth/**", // Allow filter to run for auth endpoints (e.g., /auth/{id}/roles)
+            // "/auth/**", // Allow filter to run for auth endpoints (e.g.,
+            // /auth/{id}/roles)
             "/public/**",
             "/assets/**",
             "/swagger-ui/**",
             "/v3/api-docs/**",
-            "/swagger-ui.html");
+            "/swagger-ui.html",
+            "/actuator/**");
 
     public JwtAuthFilter(JWTProvider jwtProvider, TokenBlacklistService tokenBlacklistService) {
         this.jwtProvider = jwtProvider;

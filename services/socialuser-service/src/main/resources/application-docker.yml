@@ -4,3 +4,10 @@ spring:
     authentication:
       username: neo4j
       password: neoSocial
+  kafka:
+    bootstrap-servers: kafka:9092
+    consumer:
+      group-id: socialuser-service-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      auto-offset-reset: earliest

@@ -4,16 +4,18 @@ FROM maven:3.9.9-eclipse-temurin-21 AS build
 WORKDIR /build
 
 # Copiar POMs y código
-COPY ../../pom.xml ./pom.xml
-COPY ../../platform ./platform
-COPY ../../platform/socialseed-validation-starter ./platform/socialseed-validation-starter
-COPY ../../services/auth-service ./services/auth-service
+COPY pom.xml ./pom.xml
+COPY platform ./platform
 
-# ===== 3 Instalar platform + starters en .m2 =====
-RUN mvn clean install -DskipTests -pl platform,platform/socialseed-validation-starter -am
+# 1. Instalar el POM raíz (necesario para los sub-módulos)
+RUN mvn install -N
 
-# Luego compilar auth-service
-RUN mvn clean package -DskipTests -pl services/auth-service
+# 2. Instalar todo el módulo platform y sus starters
+RUN mvn -f platform/pom.xml install -DskipTests
+
+# 3. Copiar y compilar el servicio
+COPY services/auth-service ./services/auth-service
+RUN mvn -f services/auth-service/pom.xml package -DskipTests
 
 # Imagen final
 FROM eclipse-temurin:21-jdk AS runner

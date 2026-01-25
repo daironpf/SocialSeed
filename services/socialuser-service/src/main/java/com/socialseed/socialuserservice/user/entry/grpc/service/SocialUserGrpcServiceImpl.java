@@ -37,4 +37,28 @@ public class SocialUserGrpcServiceImpl extends SocialUserServiceGrpc.SocialUserS
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void updateUsername(com.socialseed.contracts.socialuser.UpdateUsernameRequest request,
+            StreamObserver<com.socialseed.contracts.socialuser.UpdateUsernameResponse> responseObserver) {
+        log.info("gRPC updateUsername request received for user: {}", request.getUserId());
+        try {
+            userUseCases.changeUsername(java.util.UUID.fromString(request.getUserId()), request.getNewUsername());
+
+            var response = com.socialseed.contracts.socialuser.UpdateUsernameResponse.newBuilder()
+                    .setSuccess(true)
+                    .setMessage("Username updated successfully")
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            log.error("Error updating username via gRPC", e);
+            var response = com.socialseed.contracts.socialuser.UpdateUsernameResponse.newBuilder()
+                    .setSuccess(false)
+                    .setMessage(e.getMessage())
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        }
+    }
 }

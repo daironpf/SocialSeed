@@ -18,10 +18,17 @@ spring:
   application:
     name: socialuser-service
   neo4j:
-    uri: bolt://socialgraph-db:7687
+    uri: bolt://localhost:7687
     authentication:
       username: neo4j
       password: neoSocial
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: socialuser-service-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      auto-offset-reset: earliest
 
 management:
   endpoints:

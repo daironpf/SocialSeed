@@ -20,3 +20,14 @@ message AuthUserRegistered {
     string username = 3;
     google.protobuf.Timestamp created_at = 4;
 }
+
+/**
+ * Evento enviado al topic: auth.user.username.changed
+ * Representa el cambio de username de un usuario.
+ */
+message AuthUserUsernameChanged {
+    string user_id = 1;
+    string old_username = 2;
+    string new_username = 3;
+    google.protobuf.Timestamp updated_at = 4;
+}

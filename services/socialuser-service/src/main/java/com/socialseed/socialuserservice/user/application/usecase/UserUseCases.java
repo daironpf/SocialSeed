@@ -19,6 +19,7 @@ public class UserUseCases {
     private final DeleteUser deleteUser;
     private final StartVacation startVacation;
     private final EndVacation endVacation;
+    private final ChangeUsername changeUsername;
 
     public UserUseCases(
             CreateUser createUser,
@@ -29,8 +30,8 @@ public class UserUseCases {
             UpdateUserProfile updateUserProfile,
             DeleteUser deleteUser,
             StartVacation startVacation,
-            EndVacation endVacation
-    ) {
+            EndVacation endVacation,
+            ChangeUsername changeUsername) {
         this.createUser = createUser;
         this.getUserById = getUserById;
         this.getUserByName = getUserByName;
@@ -40,13 +41,21 @@ public class UserUseCases {
         this.deleteUser = deleteUser;
         this.startVacation = startVacation;
         this.endVacation = endVacation;
+        this.changeUsername = changeUsername;
     }
 
     public Optional<User> getUserById(UUID id) {
         return getUserById.execute(id);
     }
-    public Optional<User> getUserByName(String userName) { return getUserByName.execute(userName); }
-    public Optional<User> getUserByEmail(String email) { return getUserByEmail.execute(email); }
+
+    public Optional<User> getUserByName(String userName) {
+        return getUserByName.execute(userName);
+    }
+
+    public Optional<User> getUserByEmail(String email) {
+        return getUserByEmail.execute(email);
+    }
+
     public List<User> getAllUsers() {
         return getAllUsers.execute();
     }
@@ -54,9 +63,11 @@ public class UserUseCases {
     public User createUser(User user) {
         return createUser.execute(user);
     }
+
     public void updateUserProfile(UpdateUserProfileDTO request) {
         updateUserProfile.execute(request);
     }
+
     public void deleteUser(UUID id) {
         deleteUser.execute(id);
     }
@@ -67,5 +78,9 @@ public class UserUseCases {
 
     public void endVacation(UUID userId) {
         endVacation.execute(userId);
+    }
+
+    public void changeUsername(UUID userId, String newUsername) {
+        changeUsername.execute(userId, newUsername);
     }
 }

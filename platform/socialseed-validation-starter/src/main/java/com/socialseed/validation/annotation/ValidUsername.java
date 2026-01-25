@@ -1,23 +1,20 @@
 package com.socialseed.validation.annotation;
 
-import com.socialseed.validation.constraint.UsernameConstraint;
+import com.socialseed.validation.validator.UsernameValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
-import com.socialseed.validation.rules.UsernameRules;
 
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = UsernameConstraint.class)
-@Target({ ElementType.FIELD, ElementType.PARAMETER })
+@Constraint(validatedBy = UsernameValidator.class)
+@Target({ ElementType.METHOD, ElementType.FIELD, ElementType.ANNOTATION_TYPE, ElementType.CONSTRUCTOR,
+        ElementType.PARAMETER, ElementType.TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidUsername {
-
-    String message() default "{username.invalid}";
-
-    int min() default UsernameRules.MIN_LENGTH;
-    int max() default UsernameRules.MAX_LENGTH;
+    String message() default "Formato de nombre de usuario inválido (3-20 caracteres, alfanumérico y _)";
 
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 }
