@@ -20,6 +20,7 @@ public class UserUseCases {
     private final StartVacation startVacation;
     private final EndVacation endVacation;
     private final ChangeUsername changeUsername;
+    private final ChangeEmail changeEmail;
 
     public UserUseCases(
             CreateUser createUser,
@@ -31,7 +32,8 @@ public class UserUseCases {
             DeleteUser deleteUser,
             StartVacation startVacation,
             EndVacation endVacation,
-            ChangeUsername changeUsername) {
+            ChangeUsername changeUsername,
+            ChangeEmail changeEmail) {
         this.createUser = createUser;
         this.getUserById = getUserById;
         this.getUserByName = getUserByName;
@@ -42,6 +44,7 @@ public class UserUseCases {
         this.startVacation = startVacation;
         this.endVacation = endVacation;
         this.changeUsername = changeUsername;
+        this.changeEmail = changeEmail;
     }
 
     public Optional<User> getUserById(UUID id) {
@@ -82,5 +85,9 @@ public class UserUseCases {
 
     public void changeUsername(UUID userId, String newUsername) {
         changeUsername.execute(userId, newUsername);
+    }
+
+    public void changeEmail(UUID userId, String newEmail) {
+        changeEmail.execute(userId, newEmail);
     }
 }

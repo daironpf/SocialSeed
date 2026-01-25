@@ -61,4 +61,28 @@ public class SocialUserGrpcServiceImpl extends SocialUserServiceGrpc.SocialUserS
             responseObserver.onCompleted();
         }
     }
+
+    @Override
+    public void updateEmail(com.socialseed.contracts.socialuser.UpdateEmailRequest request,
+            StreamObserver<com.socialseed.contracts.socialuser.UpdateEmailResponse> responseObserver) {
+        log.info("gRPC updateEmail request received for user: {}", request.getUserId());
+        try {
+            userUseCases.changeEmail(java.util.UUID.fromString(request.getUserId()), request.getNewEmail());
+
+            var response = com.socialseed.contracts.socialuser.UpdateEmailResponse.newBuilder()
+                    .setSuccess(true)
+                    .setMessage("Email updated successfully")
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            log.error("Error updating email via gRPC", e);
+            var response = com.socialseed.contracts.socialuser.UpdateEmailResponse.newBuilder()
+                    .setSuccess(false)
+                    .setMessage(e.getMessage())
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        }
+    }
 }
