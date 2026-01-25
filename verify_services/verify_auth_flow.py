@@ -402,7 +402,83 @@ def run_verification():
         print(f"  FATAL: Could not query SocialUser service. Status: {resp.status_code}")
         sys.exit(1)
 
+    # 14. Verify Email Workflow (Issue #66)
+    print("\n14. Verify Email Workflow (Issue #66)")
+    
+    # Create a new user specifically for this test
+    VERIFY_EMAIL = f"verify_{int(time.time())}@test.com"
+    VERIFY_USER = f"verifyuser_{int(time.time()) % 10000}"
+    print(f"  Registering user {VERIFY_USER} ({VERIFY_EMAIL})...")
+    resp = requests.post(f"{BASE_URL}/register", json={
+        "username": VERIFY_USER,
+        "email": VERIFY_EMAIL,
+        "password": INITIAL_PASSWORD
+    })
+    if resp.status_code not in [200, 201]:
+        print(f"  FATAL: Registration failed. Status: {resp.status_code}, Body: {resp.text}")
+        sys.exit(1)
+    print("  Registration successful.")
+
+    # Fetch verification token from DB
+    print("  Fetching verification token from DB via SQL...")
+    get_token_sql = f"SELECT verification_token FROM auth_users WHERE email = '{VERIFY_EMAIL}';"
+    try:
+        token_out = subprocess.run(["psql", "-U", "authuser", "-d", "authdb", "-h", "localhost", "-t", "-c", get_token_sql], 
+                       env={"PGPASSWORD": "authpass"}, check=True, capture_output=True, text=True)
+        verify_token = token_out.stdout.strip()
+        if not verify_token or verify_token == "no":
+            print("  FATAL: Could not find verification token in DB.")
+            sys.exit(1)
+        print(f"  Found token: {verify_token[:5]}...")
+    except Exception as e:
+        print(f"  FATAL: SQL error fetching token: {e}")
+        sys.exit(1)
+
+    # Test GET /auth/verify?token=... (Issue #66 requirement)
+    print("  Testing GET /auth/verify?token=... endpoint...")
+    resp = requests.get(f"{BASE_URL}/verify", params={"token": verify_token})
+    if resp.status_code == 200:
+        print("  Email verification via GET successful.")
+    else:
+        print(f"  FATAL: GET verify failed. Status: {resp.status_code}, Body: {resp.text}")
+        sys.exit(1)
+
+    # Verify user is now marked as verified in DB
+    print("  Verifying emailVerified flag in DB...")
+    check_sql = f"SELECT email_verified FROM auth_users WHERE email = '{VERIFY_EMAIL}';"
+    try:
+        check_out = subprocess.run(["psql", "-U", "authuser", "-d", "authdb", "-h", "localhost", "-t", "-c", check_sql], 
+                       env={"PGPASSWORD": "authpass"}, check=True, capture_output=True, text=True)
+        is_verified = check_out.stdout.strip()
+        if is_verified == "t":
+            print("  SUCCESS: emailVerified = true in database.")
+        else:
+            print(f"  FATAL: emailVerified is not true. Value: {is_verified}")
+            sys.exit(1)
+    except Exception as e:
+        print(f"  FATAL: SQL error checking emailVerified: {e}")
+        sys.exit(1)
+
+    # Test invalid token (should return 400)
+    print("  Testing invalid token (should return 400)...")
+    resp = requests.get(f"{BASE_URL}/verify", params={"token": "invalid-fake-token"})
+    if resp.status_code == 400:
+        print("  SUCCESS: Invalid token correctly rejected with 400.")
+    else:
+        print(f"  ERROR: Expected 400 for invalid token, got {resp.status_code}")
+        sys.exit(1)
+
+    # Test already verified (should return 400)
+    print("  Testing already verified user (should return 400)...")
+    resp = requests.get(f"{BASE_URL}/verify", params={"token": verify_token})
+    if resp.status_code == 400:
+        print("  SUCCESS: Already verified user correctly rejected with 400.")
+    else:
+        print(f"  ERROR: Expected 400 for already verified, got {resp.status_code}")
+        sys.exit(1)
+
     print("\n--- ALL TESTS COMPLETED SUCCESSFULLY ---")
+
 
 if __name__ == "__main__":
     if wait_for_service():

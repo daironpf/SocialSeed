@@ -42,3 +42,13 @@ message AuthUserEmailChanged {
     string new_email = 3;
     google.protobuf.Timestamp updated_at = 4;
 }
+
+/**
+ * Evento enviado al topic: auth.user.email.verified
+ * Representa que un usuario ha verificado exitosamente su email.
+ */
+message AuthUserEmailVerified {
+    string user_id = 1;
+    string email = 2;
+    google.protobuf.Timestamp verified_at = 3;
+}

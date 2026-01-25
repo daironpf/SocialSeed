@@ -17,6 +17,7 @@ import java.time.Instant;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -25,107 +26,141 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 class VerifyEmailIntegrationTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+        @Autowired
+        private MockMvc mockMvc;
 
-    @Autowired
-    private AuthUserPgsqlRepository authUserRepository;
+        @Autowired
+        private AuthUserPgsqlRepository authUserRepository;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+        @Autowired
+        private ObjectMapper objectMapper;
 
-    private static final String TEST_EMAIL = "verifytest@example.com";
-    private static final String TEST_TOKEN = "valid-verification-token";
+        private static final String TEST_EMAIL = "verifytest@example.com";
+        private static final String TEST_TOKEN = "valid-verification-token";
 
-    @BeforeEach
-    void setUp() {
-        authUserRepository.deleteAll();
-    }
+        @BeforeEach
+        void setUp() {
+                authUserRepository.deleteAll();
+        }
 
-    @Test
-    void shouldVerifyEmailSuccessfully() throws Exception {
-        // Arrange
-        AuthUserPgsqlEntity user = AuthUserPgsqlEntity.builder()
-                .id(UUID.randomUUID())
-                .username("verifyuser")
-                .email(TEST_EMAIL)
-                .password("password")
-                .emailVerified(false)
-                .verificationToken(TEST_TOKEN)
-                .verificationTokenExpiry(Instant.now().plusSeconds(3600))
-                .build();
-        authUserRepository.save(user);
+        @Test
+        void shouldVerifyEmailSuccessfully() throws Exception {
+                // Arrange
+                AuthUserPgsqlEntity user = AuthUserPgsqlEntity.builder()
+                                .id(UUID.randomUUID())
+                                .username("verifyuser")
+                                .email(TEST_EMAIL)
+                                .password("password")
+                                .emailVerified(false)
+                                .verificationToken(TEST_TOKEN)
+                                .verificationTokenExpiry(Instant.now().plusSeconds(3600))
+                                .build();
+                authUserRepository.save(user);
 
-        VerifyEmailRequestDTO request = new VerifyEmailRequestDTO(TEST_TOKEN);
+                VerifyEmailRequestDTO request = new VerifyEmailRequestDTO(TEST_TOKEN);
 
-        // Act
-        mockMvc.perform(post("/auth/verify-email")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isOk());
+                // Act
+                mockMvc.perform(post("/auth/verify-email")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(request)))
+                                .andExpect(status().isOk());
 
-        // Assert
-        AuthUserPgsqlEntity updatedUser = authUserRepository.findByEmail(TEST_EMAIL).orElseThrow();
-        assertTrue(updatedUser.isEmailVerified());
-        assertNull(updatedUser.getVerificationToken());
-        assertNull(updatedUser.getVerificationTokenExpiry());
-    }
+                // Assert
+                AuthUserPgsqlEntity updatedUser = authUserRepository.findByEmail(TEST_EMAIL).orElseThrow();
+                assertTrue(updatedUser.isEmailVerified());
+                assertNull(updatedUser.getVerificationToken());
+                assertNull(updatedUser.getVerificationTokenExpiry());
+        }
 
-    @Test
-    void shouldFailWithInvalidToken() throws Exception {
-        // Arrange
-        VerifyEmailRequestDTO request = new VerifyEmailRequestDTO("invalid-token");
+        @Test
+        void shouldVerifyEmailViaGetEndpoint() throws Exception {
+                // Arrange
+                String getToken = "get-verification-token";
+                AuthUserPgsqlEntity user = AuthUserPgsqlEntity.builder()
+                                .id(UUID.randomUUID())
+                                .username("getverifyuser")
+                                .email("getverify@example.com")
+                                .password("password")
+                                .emailVerified(false)
+                                .verificationToken(getToken)
+                                .verificationTokenExpiry(Instant.now().plusSeconds(3600))
+                                .build();
+                authUserRepository.save(user);
 
-        // Act & Assert
-        mockMvc.perform(post("/auth/verify-email")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
-    }
+                // Act - Using GET /auth/verify?token=...
+                mockMvc.perform(get("/auth/verify")
+                                .param("token", getToken))
+                                .andExpect(status().isOk());
 
-    @Test
-    void shouldFailWithExpiredToken() throws Exception {
-        // Arrange
-        AuthUserPgsqlEntity user = AuthUserPgsqlEntity.builder()
-                .id(UUID.randomUUID())
-                .username("verifyuser")
-                .email(TEST_EMAIL)
-                .password("password")
-                .emailVerified(false)
-                .verificationToken(TEST_TOKEN)
-                .verificationTokenExpiry(Instant.now().minusSeconds(3600)) // Expired
-                .build();
-        authUserRepository.save(user);
+                // Assert
+                AuthUserPgsqlEntity updatedUser = authUserRepository.findByEmail("getverify@example.com").orElseThrow();
+                assertTrue(updatedUser.isEmailVerified());
+                assertNull(updatedUser.getVerificationToken());
+        }
 
-        VerifyEmailRequestDTO request = new VerifyEmailRequestDTO(TEST_TOKEN);
+        @Test
+        void shouldFailWithInvalidToken() throws Exception {
+                // Arrange
+                VerifyEmailRequestDTO request = new VerifyEmailRequestDTO("invalid-token");
 
-        // Act & Assert
-        mockMvc.perform(post("/auth/verify-email")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
-    }
+                // Act & Assert
+                mockMvc.perform(post("/auth/verify-email")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(request)))
+                                .andExpect(status().isBadRequest());
+        }
 
-    @Test
-    void shouldFailIfAlreadyVerified() throws Exception {
-        // Arrange
-        AuthUserPgsqlEntity user = AuthUserPgsqlEntity.builder()
-                .id(UUID.randomUUID())
-                .username("verifyuser")
-                .email(TEST_EMAIL)
-                .password("password")
-                .emailVerified(true) // Already verified
-                .verificationToken(TEST_TOKEN)
-                .verificationTokenExpiry(Instant.now().plusSeconds(3600))
-                .build();
-        authUserRepository.save(user);
+        @Test
+        void shouldFailWithInvalidTokenViaGet() throws Exception {
+                // Act & Assert - GET endpoint with invalid token
+                mockMvc.perform(get("/auth/verify")
+                                .param("token", "invalid-get-token"))
+                                .andExpect(status().isBadRequest());
+        }
 
-        VerifyEmailRequestDTO request = new VerifyEmailRequestDTO(TEST_TOKEN);
+        @Test
+        void shouldFailWithExpiredToken() throws Exception {
+                // Arrange
+                AuthUserPgsqlEntity user = AuthUserPgsqlEntity.builder()
+                                .id(UUID.randomUUID())
+                                .username("verifyuser")
+                                .email(TEST_EMAIL)
+                                .password("password")
+                                .emailVerified(false)
+                                .verificationToken(TEST_TOKEN)
+                                .verificationTokenExpiry(Instant.now().minusSeconds(3600)) // Expired
+                                .build();
+                authUserRepository.save(user);
 
-        // Act & Assert
-        mockMvc.perform(post("/auth/verify-email")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(request)))
-                .andExpect(status().isBadRequest());
-    }
+                VerifyEmailRequestDTO request = new VerifyEmailRequestDTO(TEST_TOKEN);
+
+                // Act & Assert
+                mockMvc.perform(post("/auth/verify-email")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(request)))
+                                .andExpect(status().isBadRequest());
+        }
+
+        @Test
+        void shouldFailIfAlreadyVerified() throws Exception {
+                // Arrange
+                AuthUserPgsqlEntity user = AuthUserPgsqlEntity.builder()
+                                .id(UUID.randomUUID())
+                                .username("verifyuser")
+                                .email(TEST_EMAIL)
+                                .password("password")
+                                .emailVerified(true) // Already verified
+                                .verificationToken(TEST_TOKEN)
+                                .verificationTokenExpiry(Instant.now().plusSeconds(3600))
+                                .build();
+                authUserRepository.save(user);
+
+                VerifyEmailRequestDTO request = new VerifyEmailRequestDTO(TEST_TOKEN);
+
+                // Act & Assert
+                mockMvc.perform(post("/auth/verify-email")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(request)))
+                                .andExpect(status().isBadRequest());
+        }
 }

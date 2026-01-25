@@ -238,6 +238,15 @@ public class AuthController {
                                                 messageSource.getMessage("auth.verify.email.success", null, locale)));
         }
 
+        @GetMapping("/verify")
+        public ResponseEntity<ApiResponse<?>> verifyEmailViaGet(@RequestParam String token, Locale locale) {
+                authUseCases.verifyEmail(token);
+                return ResponseEntity.ok(
+                                ApiResponse.success(
+                                                null,
+                                                messageSource.getMessage("auth.verify.email.success", null, locale)));
+        }
+
         @PostMapping("/resend-verification")
         public ResponseEntity<ApiResponse<?>> resendVerificationEmail(
                         @Valid @RequestBody ResendVerificationEmailRequestDTO request,
