@@ -32,4 +32,18 @@ public class AuthEventsConsumer {
       log.error("Error processing AuthUserUsernameChanged event", e);
     }
   }
+
+  @KafkaListener(topics = "auth.user.email.changed", groupId = "socialuser-service-group")
+  public void consumeEmailChanged(byte[] message) {
+    try {
+      var event = com.socialseed.contracts.auth.events.AuthUserEmailChanged.parseFrom(message);
+      log.info("Received AuthUserEmailChanged event for user {}", event.getUserId());
+
+      // Call use case (idempotent because Neo4j SET is idempotent)
+      userUseCases.changeEmail(UUID.fromString(event.getUserId()), event.getNewEmail());
+
+    } catch (Exception e) {
+      log.error("Error processing AuthUserEmailChanged event", e);
+    }
+  }
 }

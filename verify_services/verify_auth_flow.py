@@ -6,11 +6,14 @@ BASE_URL = "http://localhost:8085/auth"
 ACTUATOR_URL = "http://localhost:8085/actuator/health"
 
 # Test Data
-USER_ID = "123e4567-e89b-12d3-a456-426614178888"
-EMAIL = "user@strong.com"
+unique_flow_suffix = int(time.time()) % 10000
+EMAIL = f"user_{unique_flow_suffix}@strong.com"
 INITIAL_PASSWORD = "StrongPass1!"
 NEW_PASSWORD = "NewSecretPassword123!"
-USERNAME = "stronguser"
+USERNAME = f"stronguser_{unique_flow_suffix}"
+
+# Will be fetched dynamically
+USER_ID = None
 
 def wait_for_service():
     print("Waiting for auth-service to be up...")
@@ -50,6 +53,7 @@ def verify_email(token):
 
 def run_verification():
     print("--- STARTING E2E AUTH FLOW VERIFICATION ---")
+    global USER_ID
 
     # 0. Registration (Ensure user exists)
     print("\n0. Registration Flow")
@@ -73,6 +77,15 @@ def run_verification():
             sys.exit(1)
             
     print("  Login successful.")
+    # Fetch real ID assigned by system
+    resp_user = requests.get(f"{BASE_URL}/getUserByEmail/{EMAIL}")
+    if resp_user.status_code == 200:
+        USER_ID = resp_user.json()['data']['id']
+        print(f"  System assigned USER_ID: {USER_ID}")
+    else:
+        print(f"  FATAL: Could not fetch user data. Status: {resp_user.status_code}")
+        sys.exit(1)
+
     tokens = resp.json()['data']
     access_token = tokens['token']
     refresh_token = tokens['refreshToken']
@@ -321,6 +334,73 @@ def run_verification():
     
     print("  Note: In the current implementation, users MUST use forgot-password to recover if blocked.")
     # Or we could have implemented a special flow. For now, let's verify the blocking works.
+
+    # 13. Sync Email Change Flow (#57)
+    print("\n13. Sync Email Change Flow")
+    # Using the primary test user
+    resp = login(EMAIL, current_password)
+    if resp.status_code != 200:
+        print(f"  FATAL: Login failed for email sync test. Status: {resp.status_code}")
+        sys.exit(1)
+    
+    access_token = resp.json()['data']['token']
+    NEW_EMAIL = f"new_email_{int(time.time())}@seed.com"
+    print(f"  Initiating email change to {NEW_EMAIL}...")
+    headers = {"Authorization": f"Bearer {access_token}"}
+    resp = requests.post(f"{BASE_URL}/change-email", json={"newEmail": NEW_EMAIL}, headers=headers)
+    
+    if resp.status_code == 200:
+        print("  Email change initiated.")
+    else:
+        print(f"  FATAL: Error initiating email change. Status {resp.status_code}, Body: {resp.text}")
+        sys.exit(1)
+
+    # Need the token from DB
+    print("  Fetching email change token from DB via SQL...")
+    get_token_sql = f"SELECT email_change_token FROM auth_users WHERE email = '{EMAIL}';"
+    try:
+        token_out = subprocess.run(["psql", "-U", "authuser", "-d", "authdb", "-h", "localhost", "-t", "-c", get_token_sql], 
+                       env={"PGPASSWORD": "authpass"}, check=True, capture_output=True, text=True)
+        email_token = token_out.stdout.strip()
+        if not email_token:
+             print("  FATAL: Could not find token in DB.")
+             sys.exit(1)
+        print(f"  Found token: {email_token[:5]}...")
+    except Exception as e:
+        print(f"  FATAL: SQL error fetching token: {e}")
+        sys.exit(1)
+
+    print(f"  Verifying email change with token...")
+    resp = requests.post(f"{BASE_URL}/verify-email-change", json={"token": email_token})
+    if resp.status_code == 200:
+        print("  Email verification successful.")
+    else:
+        print(f"  FATAL: Verification failed. Status: {resp.status_code}, Body: {resp.text}")
+        sys.exit(1)
+
+    # 1. Verify in Auth (Login with new email)
+    print("  Verifying login with NEW email in Auth Service...")
+    resp = login(NEW_EMAIL, current_password)
+    if resp.status_code == 200:
+        print("  Login with new email successful.")
+    else:
+        print(f"  FATAL: Could not login with new email. Sync in Auth might have failed. Status: {resp.status_code}")
+        sys.exit(1)
+
+    # 2. Verify in SocialUser (API)
+    print("  Verifying sync in SocialUser Service (Neo4j)...")
+    social_url = "http://localhost:8090/socialusers/getSocialUserByEmail"
+    resp = requests.get(f"{social_url}/{NEW_EMAIL}")
+    if resp.status_code == 200:
+        data = resp.json()
+        if data['data'] and data['data']['email'] == NEW_EMAIL:
+            print(f"  SUCCESS: Email {NEW_EMAIL} correctly synced to SocialUser node.")
+        else:
+            print(f"  FATAL: SocialUser sync failed or data incorrect. Body: {resp.text}")
+            sys.exit(1)
+    else:
+        print(f"  FATAL: Could not query SocialUser service. Status: {resp.status_code}")
+        sys.exit(1)
 
     print("\n--- ALL TESTS COMPLETED SUCCESSFULLY ---")
 

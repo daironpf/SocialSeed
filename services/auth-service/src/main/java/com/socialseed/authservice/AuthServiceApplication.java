@@ -5,7 +5,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
-@SpringBootApplication(scanBasePackages = {"com.socialseed"})
+@org.springframework.retry.annotation.EnableRetry
+@SpringBootApplication(scanBasePackages = { "com.socialseed" })
 public class AuthServiceApplication {
 
     public static void main(String[] args) {

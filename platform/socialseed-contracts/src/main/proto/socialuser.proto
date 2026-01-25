@@ -18,6 +18,9 @@ service SocialUserService {
 
     // Actualiza el username de un usuario existente
     rpc UpdateUsername(UpdateUsernameRequest) returns (UpdateUsernameResponse);
+
+    // Actualiza el email de un usuario existente
+    rpc UpdateEmail(UpdateEmailRequest) returns (UpdateEmailResponse);
 }
 
 /**
@@ -49,6 +52,22 @@ message UpdateUsernameRequest {
  * Respuesta para actualizar el username
  */
 message UpdateUsernameResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+/**
+ * Mensaje para actualizar el email
+ */
+message UpdateEmailRequest {
+    string user_id = 1;
+    string new_email = 2;
+}
+
+/**
+ * Respuesta para actualizar el email
+ */
+message UpdateEmailResponse {
     bool success = 1;
     string message = 2;
 }

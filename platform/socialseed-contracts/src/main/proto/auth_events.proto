@@ -31,3 +31,14 @@ message AuthUserUsernameChanged {
     string new_username = 3;
     google.protobuf.Timestamp updated_at = 4;
 }
+
+/**
+ * Evento enviado al topic: auth.user.email.changed
+ * Representa el cambio de email de un usuario.
+ */
+message AuthUserEmailChanged {
+    string user_id = 1;
+    string old_email = 2;
+    string new_email = 3;
+    google.protobuf.Timestamp updated_at = 4;
+}

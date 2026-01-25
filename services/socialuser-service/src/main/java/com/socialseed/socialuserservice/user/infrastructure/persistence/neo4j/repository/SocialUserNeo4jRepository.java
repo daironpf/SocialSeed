@@ -9,72 +9,78 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEntity, UUID> {
-    @Query("""
-            MATCH (u:SocialUser {id: $id})
-            SET
-                u.full_name = $fullName,
-                u.bio = $bio,
-                u.profile_image = $profileImage,
-                u.birth_date = $birthDate,
-                u.language = $language
-            """)
-    void updateProfile(
-            UUID id,
-            String fullName,
-            String bio,
-            String profileImage,
-            LocalDate birthDate,
-            String language);
+        @Query("""
+                        MATCH (u:SocialUser {id: $id})
+                        SET
+                            u.full_name = $fullName,
+                            u.bio = $bio,
+                            u.profile_image = $profileImage,
+                            u.birth_date = $birthDate,
+                            u.language = $language
+                        """)
+        void updateProfile(
+                        UUID id,
+                        String fullName,
+                        String bio,
+                        String profileImage,
+                        LocalDate birthDate,
+                        String language);
 
-    @Query("""
-            MATCH (u:SocialUser {id: $id})
-            SET u.username = $newUsername
-            """)
-    void updateUsername(UUID id, String newUsername);
+        @Query("""
+                        MATCH (u:SocialUser {id: $id})
+                        SET u.username = $newUsername
+                        """)
+        void updateUsername(UUID id, String newUsername);
 
-    // region findBy
-    @Query("""
-                MATCH (u:SocialUser {email: $email})
-                RETURN u
-                LIMIT 1
-            """)
-    Optional<UserNeo4jEntity> findByEmail(String email);
+        @Query("""
+                        MATCH (u:SocialUser {id: $id})
+                        SET u.email = $newEmail
+                        """)
+        void updateEmail(UUID id, String newEmail);
 
-    @Query("""
-                MATCH (u:SocialUser {username: $username})
-                RETURN u
-                LIMIT 1
-            """)
-    Optional<UserNeo4jEntity> findByUsername(String username);
+        // region findBy
+        @Query("""
+                            MATCH (u:SocialUser {email: $email})
+                            RETURN u
+                            LIMIT 1
+                        """)
+        Optional<UserNeo4jEntity> findByEmail(String email);
 
-    @Override
-    @Query("""
-                MATCH (u:SocialUser {id: $id})
-                RETURN u
-                LIMIT 1
-            """)
-    Optional<UserNeo4jEntity> findById(UUID id);
-    // endregion
+        @Query("""
+                            MATCH (u:SocialUser {username: $username})
+                            RETURN u
+                            LIMIT 1
+                        """)
+        Optional<UserNeo4jEntity> findByUsername(String username);
 
-    // region existBy
-    @Query("""
-            MATCH (u:SocialUser {email: $email})
-            RETURN COUNT(u) > 0
-            """)
-    Boolean existByEmail(String email);
+        @Override
+        @Query("""
+                            MATCH (u:SocialUser {id: $id})
+                            RETURN u
+                            LIMIT 1
+                        """)
+        Optional<UserNeo4jEntity> findById(UUID id);
+        // endregion
 
-    @Query("""
-            MATCH (u:SocialUser)
-            WHERE u.username = $userName
-            RETURN COUNT(u) > 0
-            """)
-    Boolean existByUserName(String userName);
+        // region existBy
+        @Query("""
+                        MATCH (u:SocialUser {email: $email})
+                        RETURN COUNT(u) > 0
+                        """)
+        Boolean existByEmail(String email);
 
-    @Query("""
-            MATCH (u:SocialUser)
-            WHERE u.id = $id
-            RETURN COUNT(u) > 0
-            """)
-    Boolean existByUserId(UUID id);
-    // endregion
+        @Query("""
+                        MATCH (u:SocialUser)
+                        WHERE u.username = $userName
+                        RETURN COUNT(u) > 0
+                        """)
+        Boolean existByUserName(String userName);
+
+        @Query("""
+                        MATCH (u:SocialUser)
+                        WHERE u.id = $id
+                        RETURN COUNT(u) > 0
+                        """)
+        Boolean existByUserId(UUID id);
+        // endregion
 }
