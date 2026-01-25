@@ -15,6 +15,9 @@ option java_outer_classname = "SocialUserProto";
 service SocialUserService {
     // Crea un usuario con username y email
     rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
+
+    // Actualiza el username de un usuario existente
+    rpc UpdateUsername(UpdateUsernameRequest) returns (UpdateUsernameResponse);
 }
 
 /**
@@ -32,4 +35,20 @@ message CreateUserRequest {
 message CreateUserResponse {
     string user_id = 1;       // UUID generado (convención snake_case)
     string message = 2;      // Mensaje de confirmación
+}
+
+/**
+ * Mensaje para actualizar el username
+ */
+message UpdateUsernameRequest {
+    string user_id = 1;
+    string new_username = 2;
+}
+
+/**
+ * Respuesta para actualizar el username
+ */
+message UpdateUsernameResponse {
+    bool success = 1;
+    string message = 2;
 }

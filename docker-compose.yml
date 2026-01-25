@@ -3,7 +3,7 @@ services:
   api-gateway:
     container_name: api-gateway
     build:
-      context: ./api-gateway
+      context: services/api-gateway
       dockerfile: Dockerfile
     ports:
       - "8084:4004"
@@ -26,13 +26,14 @@ services:
       dockerfile: services/socialuser-service/Dockerfile
     environment:
       SPRING_PROFILES_ACTIVE: docker
+      SERVER_PORT: 8090
     depends_on:
       neo4j:
         condition: service_healthy
     ports:
       - "8090:8090"
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:4000/actuator/health" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:8090/actuator/health" ]
       interval: 5s
       timeout: 3s
       retries: 20
@@ -54,10 +55,11 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       REDIS_HOST: redis
       REDIS_PORT: 6379
+      SERVER_PORT: 8085
     networks:
       - net
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:4005/actuator/health" ]
+      test: [ "CMD", "curl", "-f", "http://localhost:8085/actuator/health" ]
       interval: 5s
       timeout: 3s
       retries: 20
@@ -102,9 +104,9 @@ services:
     healthcheck:
       # ping via cypher-shell
       test: [ "CMD-SHELL", "echo 'RETURN 1' | cypher-shell -u neo4j -p neoSocial || exit 1" ]
-      interval: 5s
-      timeout: 3s
-      retries: 20
+      interval: 10s
+      timeout: 10s
+      retries: 30
     networks:
       - net
 

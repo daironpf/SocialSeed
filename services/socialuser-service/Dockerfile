@@ -4,16 +4,18 @@ FROM maven:3.9.9-eclipse-temurin-21 AS builder
 WORKDIR /build
 
 # Copiar POMs y código
-COPY ../../pom.xml ./pom.xml
-COPY ../../platform ./platform
-COPY ../../platform/socialseed-validation-starter ./platform/socialseed-validation-starter
-COPY ../../services/socialuser-service ./services/socialuser-service
+COPY pom.xml ./pom.xml
+COPY platform ./platform
 
-# ===== 3 Instalar platform + starters en .m2 =====
-RUN mvn clean install -DskipTests -pl platform,platform/socialseed-validation-starter -am
+# 1. Instalar el POM raíz
+RUN mvn install -N
 
-# Luego compilar socialuser-service
-RUN mvn clean package -DskipTests -pl services/socialuser-service
+# 2. Instalar todo el módulo platform y sus starters
+RUN mvn -f platform/pom.xml install -DskipTests
+
+# 3. Copiar y compilar el servicio
+COPY services/socialuser-service ./services/socialuser-service
+RUN mvn -f services/socialuser-service/pom.xml package -DskipTests
 
 # Imagen final
 FROM eclipse-temurin:21-jdk AS runner

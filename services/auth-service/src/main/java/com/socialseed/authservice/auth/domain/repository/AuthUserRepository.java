@@ -29,4 +29,6 @@ public interface AuthUserRepository {
     void clearExpiredResetPasswordTokens(java.time.Instant now);
 
     void clearExpiredEmailVerificationTokens(java.time.Instant now);
+
+    void updateUsername(UUID userId, String newUsername);
 }

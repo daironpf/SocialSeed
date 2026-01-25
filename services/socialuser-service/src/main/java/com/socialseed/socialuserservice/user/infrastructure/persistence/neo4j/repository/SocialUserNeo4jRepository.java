@@ -10,48 +10,53 @@ import java.util.UUID;
 
 public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEntity, UUID> {
     @Query("""
-        MATCH (u:SocialUser {id: $id})
-        SET
-            u.full_name = $fullName,
-            u.bio = $bio,
-            u.profile_image = $profileImage,
-            u.birth_date = $birthDate,
-            u.language = $language
-        """)
+            MATCH (u:SocialUser {id: $id})
+            SET
+                u.full_name = $fullName,
+                u.bio = $bio,
+                u.profile_image = $profileImage,
+                u.birth_date = $birthDate,
+                u.language = $language
+            """)
     void updateProfile(
             UUID id,
             String fullName,
             String bio,
             String profileImage,
             LocalDate birthDate,
-            String language
-    );
+            String language);
+
+    @Query("""
+            MATCH (u:SocialUser {id: $id})
+            SET u.username = $newUsername
+            """)
+    void updateUsername(UUID id, String newUsername);
 
     // region findBy
     @Query("""
-            MATCH (u:SocialUser {email: $email})
-            RETURN u
-            LIMIT 1
-        """)
+                MATCH (u:SocialUser {email: $email})
+                RETURN u
+                LIMIT 1
+            """)
     Optional<UserNeo4jEntity> findByEmail(String email);
 
     @Query("""
-            MATCH (u:SocialUser {username: $username})
-            RETURN u
-            LIMIT 1
-        """)
+                MATCH (u:SocialUser {username: $username})
+                RETURN u
+                LIMIT 1
+            """)
     Optional<UserNeo4jEntity> findByUsername(String username);
 
     @Override
     @Query("""
-            MATCH (u:SocialUser {id: $id})
-            RETURN u
-            LIMIT 1
-        """)
+                MATCH (u:SocialUser {id: $id})
+                RETURN u
+                LIMIT 1
+            """)
     Optional<UserNeo4jEntity> findById(UUID id);
-    //endregion
+    // endregion
 
-    //region existBy
+    // region existBy
     @Query("""
             MATCH (u:SocialUser {email: $email})
             RETURN COUNT(u) > 0
@@ -71,5 +76,5 @@ public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEnti
             RETURN COUNT(u) > 0
             """)
     Boolean existByUserId(UUID id);
-    //endregion
+    // endregion
 }
