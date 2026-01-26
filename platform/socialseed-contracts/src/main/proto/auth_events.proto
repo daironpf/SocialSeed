@@ -52,3 +52,16 @@ message AuthUserEmailVerified {
     string email = 2;
     google.protobuf.Timestamp verified_at = 3;
 }
+
+/**
+ * Evento enviado al topic: auth.user.role.assigned
+ * Representa la asignación de un rol a un usuario.
+ */
+message AuthUserRoleAssigned {
+    string user_id = 1;
+    string email = 2;
+    string username = 3;
+    string role = 4;
+    string assigned_by = 5;  // ID del admin que asignó el rol
+    google.protobuf.Timestamp assigned_at = 6;
+}
