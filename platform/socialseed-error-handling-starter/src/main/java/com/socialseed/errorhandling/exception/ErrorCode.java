@@ -41,7 +41,11 @@ public enum ErrorCode {
     VERIFICATION_TOKEN_EXPIRED("auth.error.verification_token_expired", HttpStatus.BAD_REQUEST),
     EMAIL_ALREADY_VERIFIED("auth.error.email_already_verified", HttpStatus.BAD_REQUEST),
     EMAIL_ALREADY_EXISTS("auth.error.email.taken", HttpStatus.CONFLICT),
-    PASSWORD_EXPIRED("auth.error.password_expired", HttpStatus.UNAUTHORIZED);
+    PASSWORD_EXPIRED("auth.error.password_expired", HttpStatus.UNAUTHORIZED),
+    ROLE_ALREADY_ASSIGNED("auth.error.role.already_assigned", HttpStatus.CONFLICT),
+    ROLE_ASSIGNMENT_FAILED("auth.error.role_assignment_failed", HttpStatus.INTERNAL_SERVER_ERROR),
+    INVALID_ROLE("auth.error.invalid_role", HttpStatus.BAD_REQUEST),
+    INSUFFICIENT_PERMISSIONS("auth.error.forbidden.insufficient_permissions", HttpStatus.FORBIDDEN);
 
     private final String code;
     private final HttpStatus httpStatus;

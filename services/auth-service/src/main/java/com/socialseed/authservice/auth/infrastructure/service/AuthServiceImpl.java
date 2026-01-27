@@ -146,6 +146,8 @@ public class AuthServiceImpl implements AuthService {
         return authUserRepository.findById(id);
     }
 
+
+
     @Override
     public Optional<AuthUser> getUserByEmail(String email) {
         return authUserRepository.findByEmail(email);
@@ -295,4 +297,12 @@ public class AuthServiceImpl implements AuthService {
         // Send verification email
         emailService.sendVerificationEmail(email, verificationToken);
     }
+
+    @Override
+    @Transactional
+    public void saveUser(AuthUser user) {
+        authUserRepository.save(user);
+    }
+
+
 }

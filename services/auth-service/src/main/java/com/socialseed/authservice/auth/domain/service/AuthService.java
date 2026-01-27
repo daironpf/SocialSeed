@@ -30,4 +30,6 @@ public interface AuthService {
     void verifyEmail(String token);
 
     void resendVerificationEmail(String email);
+
+    void saveUser(AuthUser user);
 }
