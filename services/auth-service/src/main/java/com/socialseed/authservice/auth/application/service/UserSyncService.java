@@ -22,12 +22,12 @@ public class UserSyncService {
 
   private static final Logger logger = LoggerFactory.getLogger(UserSyncService.class);
 
-  private final KafkaTemplate<String, byte[]> kafkaTemplate;
+  private final KafkaTemplate<String, byte[]> kafkaTemplateBytes;
   private final SocialUserServiceGrpc.SocialUserServiceBlockingStub socialUserServiceStub;
 
-  public UserSyncService(KafkaTemplate<String, byte[]> kafkaTemplate,
+  public UserSyncService(KafkaTemplate<String, byte[]> kafkaTemplateBytes,
       SocialUserServiceGrpc.SocialUserServiceBlockingStub socialUserServiceStub) {
-    this.kafkaTemplate = kafkaTemplate;
+    this.kafkaTemplateBytes = kafkaTemplateBytes;
     this.socialUserServiceStub = socialUserServiceStub;
   }
 
@@ -55,7 +55,7 @@ public class UserSyncService {
         .setUpdatedAt(com.google.protobuf.Timestamp.newBuilder().setSeconds(Instant.now().getEpochSecond()).build())
         .build();
 
-    kafkaTemplate.send("auth.user.username.changed", userId.toString(), event.toByteArray());
+    kafkaTemplateBytes.send("auth.user.username.changed", userId.toString(), event.toByteArray());
   }
 
   @Retryable(retryFor = { StatusRuntimeException.class,
@@ -82,7 +82,7 @@ public class UserSyncService {
         .setUpdatedAt(com.google.protobuf.Timestamp.newBuilder().setSeconds(Instant.now().getEpochSecond()).build())
         .build();
 
-    kafkaTemplate.send("auth.user.email.changed", userId.toString(), event.toByteArray());
+    kafkaTemplateBytes.send("auth.user.email.changed", userId.toString(), event.toByteArray());
   }
 
   @Recover
@@ -91,6 +91,6 @@ public class UserSyncService {
     // Push to a "manual inspection" topic as per requirement
     String errorMessage = String.format("FAILED_SYNC|USER:%s|OLD:%s|NEW:%s|ERROR:%s", userId, oldVal, newVal,
         e.getMessage());
-    kafkaTemplate.send("auth.user.sync.failures", userId.toString(), errorMessage.getBytes());
+    kafkaTemplateBytes.send("auth.user.sync.failures", userId.toString(), errorMessage.getBytes());
   }
 }
