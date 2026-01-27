@@ -87,56 +87,6 @@ public class AuthController {
                                                                 HttpStatus.NOT_FOUND.value(),
                                                                 "User by UserName not found"));
         }
-
-        @GetMapping("/{id}/roles")
-        public ResponseEntity<ApiResponse<?>> getUserRoles(
-                        @PathVariable UUID id,
-                        Locale locale,
-                        org.springframework.security.core.Authentication authentication) {
-
-                if (authentication == null || !authentication.isAuthenticated()
-                                || "anonymousUser".equals(authentication.getPrincipal())) {
-                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-                }
-
-                // Security Check
-                // 1. Is Admin?
-                boolean isAdmin = authentication.getAuthorities().stream()
-                                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-
-                // 2. Is Self?
-                // Assuming the principal username matches the username in DB, we need to map
-                // username to ID or AuthUser.
-                // Wait, JwtAuthFilter sets UserDetails.
-                // Let's assume username is available.
-                // It is better to rely on `authentication.getName()` which should return
-                // username.
-                // We need to fetch the user by username to compare ID, OR fetch user by
-                // requested ID and compare username.
-                // Since fetching user happens in use case, maybe we can do a quick check here
-                // if we have the info.
-
-                // Better approach: Let AuthUseCases handle the logic? No, Security is usually
-                // Controller or Filter.
-
-                // Let's fetch the requested user to check ownership
-                // Optimize: check ownership only if not admin.
-                if (!isAdmin) {
-                        AuthUser reqUser = authUseCases.getAuthUserById(id)
-                                        .orElseThrow(() -> new com.socialseed.errorhandling.exception.BusinessException(
-                                                        com.socialseed.errorhandling.exception.ErrorCode.USER_NOT_FOUND));
-
-                        if (!reqUser.getUsername().equals(authentication.getName())) {
-                                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-                        }
-                }
-
-                Set<String> roles = authUseCases.getUserRoles(id);
-                return ResponseEntity.ok(
-                                ApiResponse.success(
-                                                roles,
-                                                messageSource.getMessage("auth.roles.list.success", null, locale)));
-        }
         // endregion
 
         @PostMapping("/register")

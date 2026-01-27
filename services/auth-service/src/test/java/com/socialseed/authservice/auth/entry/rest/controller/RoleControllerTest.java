@@ -2,13 +2,17 @@ package com.socialseed.authservice.auth.entry.rest.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.socialseed.authservice.auth.application.usecase.AssignRoleToUser;
+import com.socialseed.authservice.auth.application.usecase.AuthUseCases;
 import com.socialseed.authservice.auth.entry.rest.dto.AssignRoleRequestDTO;
+import com.socialseed.apiresponse.i18n.MessageResolver;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.MessageSource;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.web.servlet.MockHttpServletRequestDsl;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.HashSet;
@@ -21,8 +25,8 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(RoleAssignmentController.class)
-class RoleAssignmentControllerTest {
+@WebMvcTest(RoleController.class)
+class RoleControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -30,11 +34,20 @@ class RoleAssignmentControllerTest {
     @MockBean
     private AssignRoleToUser assignRoleToUser;
 
+    @MockBean
+    private AuthUseCases authUseCases;
+
+    @MockBean
+    private MessageSource messageSource;
+
+    @MockBean
+    private MessageResolver messageResolver;
+
     @Autowired
     private ObjectMapper objectMapper;
 
     @Test
-    @WithMockUser(roles = {"ADMIN"})
+    @WithMockUser(username = "00000000-0000-0000-0000-000000000001", roles = {"ADMIN"})
     void assignRole_ShouldReturnSuccess_WhenAdminAssignsRole() throws Exception {
         // Given
         UUID userId = UUID.randomUUID();
@@ -49,7 +62,7 @@ class RoleAssignmentControllerTest {
                 .thenReturn(expectedRoles);
 
         // When & Then
-        mockMvc.perform(post("/api/v1/admin/roles/assign")
+        mockMvc.perform(post("/auth/roles/assign")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))
@@ -60,7 +73,7 @@ class RoleAssignmentControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = {"USER"})
+    @WithMockUser(username = "00000000-0000-0000-0000-000000000002", roles = {"USER"})
     void assignRole_ShouldReturnForbidden_WhenNonAdminTriesToAssignRole() throws Exception {
         // Given
         UUID userId = UUID.randomUUID();
@@ -68,7 +81,7 @@ class RoleAssignmentControllerTest {
         AssignRoleRequestDTO request = new AssignRoleRequestDTO(userId.toString(), role);
 
         // When & Then
-        mockMvc.perform(post("/api/v1/admin/roles/assign")
+        mockMvc.perform(post("/auth/roles/assign")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))
@@ -83,7 +96,7 @@ class RoleAssignmentControllerTest {
         AssignRoleRequestDTO request = new AssignRoleRequestDTO(userId.toString(), role);
 
         // When & Then
-        mockMvc.perform(post("/api/v1/admin/roles/assign")
+        mockMvc.perform(post("/auth/roles/assign")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))
@@ -91,7 +104,7 @@ class RoleAssignmentControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = {"ADMIN"})
+    @WithMockUser(username = "00000000-0000-0000-0000-000000000001", roles = {"ADMIN"})
     void assignRole_ShouldReturnBadRequest_WhenInvalidUUID() throws Exception {
         // Given
         String invalidUserId = "invalid-uuid";
@@ -99,7 +112,7 @@ class RoleAssignmentControllerTest {
         AssignRoleRequestDTO request = new AssignRoleRequestDTO(invalidUserId, role);
 
         // When & Then
-        mockMvc.perform(post("/api/v1/admin/roles/assign")
+        mockMvc.perform(post("/auth/roles/assign")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))
@@ -107,7 +120,7 @@ class RoleAssignmentControllerTest {
     }
 
     @Test
-    @WithMockUser(roles = {"ADMIN"})
+    @WithMockUser(username = "00000000-0000-0000-0000-000000000001", roles = {"ADMIN"})
     void assignRole_ShouldReturnBadRequest_WhenInvalidRole() throws Exception {
         // Given
         UUID userId = UUID.randomUUID();
@@ -115,7 +128,7 @@ class RoleAssignmentControllerTest {
         AssignRoleRequestDTO request = new AssignRoleRequestDTO(userId.toString(), invalidRole);
 
         // When & Then
-        mockMvc.perform(post("/api/v1/admin/roles/assign")
+        mockMvc.perform(post("/auth/roles/assign")
                 .with(csrf())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request)))

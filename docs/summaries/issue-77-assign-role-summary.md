@@ -46,10 +46,23 @@ Implemented a complete role assignment system for administrators to assign roles
 #### 3. Infrastructure Layer
 - **KafkaRoleAssignedProducer.java** - Kafka event producer
 - **AssignRoleRequestDTO.java** - Request DTO with validation
-- **RoleAssignmentController.java** - REST endpoint with @PreAuthorize
+- **RoleAssignmentController.java** - REST endpoint with @PreAuthorize (DEPRECATED - see below)
 
-#### 4. Endpoint
-- **URL:** `POST /api/v1/admin/roles/assign`
+#### 4. Kafka Configuration Fix
+- **KafkaProducerConfig.java** - Fixed KafkaTemplate bean configuration conflicts
+  - Added `KafkaTemplate<String, Object>` for RoleAssignedProducer
+  - Added `KafkaTemplate<String, byte[]>` for UserSyncService
+  - Used `@Primary` annotation to resolve ambiguity
+
+#### 5. Controller Refactoring
+- **RoleAssignmentController** → **RoleController** - Complete refactoring
+  - Consolidated all role-related endpoints
+  - Updated endpoint structure to `/auth/roles/*`
+  - Fixed authentication and authorization patterns
+  - Comprehensive end-to-end testing completed
+
+#### 6. Endpoint (Updated)
+- **URL:** `POST /auth/roles/assign` (refactored from `/api/v1/admin/roles/assign`)
 - **Protection:** Only users with ROLE_ADMIN can access
 - **Request Body:** `{ "userId": "uuid", "role": "ROLE_ADMIN" }`
 - **Response:** Updated user roles list
@@ -61,11 +74,12 @@ Implemented a complete role assignment system for administrators to assign roles
   - Duplicate role assignment prevention
   - Correct event data validation
 
-- **RoleAssignmentControllerTest.java** - Integration tests covering:
+- **RoleControllerTest.java** - Integration tests covering:
   - Admin can assign roles
   - Non-admin gets forbidden
   - Unauthenticated gets unauthorized
   - Invalid UUID/role validation
+  - Complete end-to-end testing with real users
 
 ## Security Features
 
@@ -101,8 +115,8 @@ Content-Type: application/json
   "status": 200,
   "data": ["ROLE_USER", "ROLE_ADMIN"],
   "message": "auth.role.assign.success",
-  "version": "0.1.0-SNAPSHOT",
-  "timestamp": "2026-01-26T16:40:00.000Z"
+  "version": "v0.0.1",
+  "timestamp": "2026-01-27T05:09:44.182205249Z"
 }
 ```
 
@@ -134,6 +148,33 @@ Content-Type: application/json
 }
 
 # Expected: 400 Bad Request
+```
+
+## Recent Updates (January 27, 2026)
+
+### 🔄 Controller Refactoring
+- **RoleAssignmentController → RoleController**: Complete refactoring to consolidate all role management
+- **New endpoint structure**: `/auth/roles/*` instead of `/api/v1/admin/roles/*`
+- **Enhanced security**: Improved authentication and authorization patterns
+- **End-to-end testing**: Real user scenarios validated successfully
+
+### 🐛 Kafka Configuration Fixes
+- **Resolved KafkaTemplate bean conflicts**: Created separate beans for different type requirements
+- **Fixed UUID parsing**: Improved admin ID extraction from authentication
+- **Test improvements**: Updated mocks and validation patterns
+
+### ✅ End-to-End Test Results
+- **GET `/auth/roles/user/{id}`**: ✅ Working perfectly
+- **POST `/auth/roles/assign`**: ✅ Working perfectly  
+- **Authentication**: ✅ JWT token validation working
+- **Authorization**: ✅ Admin-only access working
+- **Validation**: ✅ Role and UUID validation working
+
+### Real Test Data Used
+- Admin user: `testNewUser` (id: `bd6f4cfa-0139-42ae-b94d-d559e4d91220`)
+- Regular user: `testNNNewUser` (id: `d21b84b5-07bb-4d07-87ac-c8b425caf507`)
+- Successfully assigned ROLE_ADMIN to regular user
+- All role retrievals working correctly
 ```
 
 ## Acceptance Criteria Met
