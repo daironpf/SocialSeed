@@ -32,4 +32,8 @@ public interface AuthService {
     void resendVerificationEmail(String email);
 
     void saveUser(AuthUser user);
+    
+    void revokeAllTokensForUser(UUID userId);
+
+    long countUsersWithRole(String role);
 }

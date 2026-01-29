@@ -96,4 +96,9 @@ public class AuthUserRepositoryAdapter implements AuthUserRepository {
     public void updateUsername(UUID userId, String newUsername) {
         jpaRepository.updateUsername(userId, newUsername);
     }
+
+    @Override
+    public long countUsersWithRole(String role) {
+        return jpaRepository.countByRolesContaining(role);
+    }
 }

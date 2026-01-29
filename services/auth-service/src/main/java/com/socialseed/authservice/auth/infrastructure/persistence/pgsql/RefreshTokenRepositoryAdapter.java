@@ -6,6 +6,7 @@ import com.socialseed.authservice.auth.infrastructure.persistence.pgsql.mapper.R
 import com.socialseed.authservice.auth.infrastructure.persistence.pgsql.repository.RefreshTokenPgsqlRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -20,6 +21,13 @@ public class RefreshTokenRepositoryAdapter implements RefreshTokenRepository {
     @Override
     public void save(RefreshToken refreshToken) {
         repository.save(RefreshTokenMapper.toEntity(refreshToken));
+    }
+
+    @Override
+    public List<RefreshToken> findAllByUserId(UUID userId) {
+        return repository.findAllByUserId(userId).stream()
+                .map(RefreshTokenMapper::toDomain)
+                .toList();
     }
 
     @Override
