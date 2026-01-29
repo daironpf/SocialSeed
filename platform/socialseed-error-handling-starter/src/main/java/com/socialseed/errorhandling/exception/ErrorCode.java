@@ -44,7 +44,11 @@ public enum ErrorCode {
     PASSWORD_EXPIRED("auth.error.password_expired", HttpStatus.UNAUTHORIZED),
     ROLE_ALREADY_ASSIGNED("auth.error.role.already_assigned", HttpStatus.CONFLICT),
     ROLE_ASSIGNMENT_FAILED("auth.error.role_assignment_failed", HttpStatus.INTERNAL_SERVER_ERROR),
+    ROLE_NOT_FOUND("auth.error.role.not_found", HttpStatus.NOT_FOUND),
+    ROLE_REMOVAL_FAILED("auth.error.role_removal_failed", HttpStatus.INTERNAL_SERVER_ERROR),
     INVALID_ROLE("auth.error.invalid_role", HttpStatus.BAD_REQUEST),
+    CANNOT_REMOVE_OWN_USER_ROLE("auth.error.cannot_remove_own_user_role", HttpStatus.FORBIDDEN),
+    CANNOT_REMOVE_LAST_ADMIN("auth.error.cannot_remove_last_admin", HttpStatus.FORBIDDEN),
     INSUFFICIENT_PERMISSIONS("auth.error.forbidden.insufficient_permissions", HttpStatus.FORBIDDEN);
 
     private final String code;
