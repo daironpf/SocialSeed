@@ -304,5 +304,16 @@ public class AuthServiceImpl implements AuthService {
         authUserRepository.save(user);
     }
 
+    @Override
+    public void revokeAllTokensForUser(UUID userId) {
+        for (RefreshToken token : refreshTokenRepository.findByUserId(userId)) {
+            token.revoke();
+            refreshTokenRepository.save(token);
+        }
+    }
 
+    @Override
+    public long countUsersWithRole(String role) {
+        return authUserRepository.countUsersWithRole(role);
+    }
 }

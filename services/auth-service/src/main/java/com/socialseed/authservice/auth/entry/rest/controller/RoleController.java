@@ -3,7 +3,9 @@ package com.socialseed.authservice.auth.entry.rest.controller;
 import com.socialseed.apiresponse.model.ApiResponse;
 import com.socialseed.authservice.auth.application.usecase.AuthUseCases; // Asegúrate de importar el UseCase correcto
 import com.socialseed.authservice.auth.application.usecase.AssignRoleToUser;
+import com.socialseed.authservice.auth.application.usecase.RemoveRoleFromUser;
 import com.socialseed.authservice.auth.entry.rest.dto.AssignRoleRequestDTO;
+import com.socialseed.authservice.auth.entry.rest.dto.RemoveRoleRequestDTO;
 import jakarta.validation.Valid;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
@@ -20,13 +22,17 @@ import java.util.UUID;
 public class RoleController {
 
     private final AssignRoleToUser assignRoleToUser;
+    private final RemoveRoleFromUser removeRoleFromUser;
+
     private final AuthUseCases authUseCases;
     private final MessageSource messageSource;
 
     public RoleController(AssignRoleToUser assignRoleToUser,
+            RemoveRoleFromUser removeRoleFromUser,
             AuthUseCases authUseCases,
             MessageSource messageSource) {
         this.assignRoleToUser = assignRoleToUser;
+        this.removeRoleFromUser = removeRoleFromUser;
         this.authUseCases = authUseCases;
         this.messageSource = messageSource;
     }
@@ -55,7 +61,8 @@ public class RoleController {
             @org.springframework.security.core.annotation.AuthenticationPrincipal org.springframework.security.core.userdetails.UserDetails adminUser) {
 
         UUID userId = UUID.fromString(request.userId());
-        // Extraer el adminId del UserDetails - asumimos que el username contiene el UUID
+        // Extraer el adminId del UserDetails - asumimos que el username contiene el
+        // UUID
         UUID adminId;
         try {
             adminId = UUID.fromString(adminUser.getUsername());
@@ -68,5 +75,29 @@ public class RoleController {
         Set<String> updatedRoles = assignRoleToUser.execute(userId, request.role(), adminId);
 
         return ResponseEntity.ok(ApiResponse.success(updatedRoles, "auth.role.assign.success"));
+    }
+
+    @DeleteMapping("/remove")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<ApiResponse<Set<String>>> removeRole(
+            @Valid @RequestBody RemoveRoleRequestDTO request,
+            @org.springframework.security.core.annotation.AuthenticationPrincipal org.springframework.security.core.userdetails.UserDetails adminUser) {
+
+        UUID userId = UUID.fromString(request.userId());
+        // Extraer el adminId del UserDetails - asumimos que el username contiene el
+        // UUID
+        UUID adminId;
+        try {
+            adminId = UUID.fromString(adminUser.getUsername());
+        } catch (IllegalArgumentException e) {
+            // Si el username no es un UUID, necesitamos obtener el ID de otra forma
+            // Por ahora, usamos un UUID por defecto para pruebas
+            adminId = UUID.fromString("00000000-0000-0000-0000-000000000001");
+        }
+
+        Set<String> updatedRoles = removeRoleFromUser.execute(userId, request.role(), adminId);
+
+        return ResponseEntity.ok(ApiResponse.success(updatedRoles, "auth.role.remove.success"));
+
     }
 }

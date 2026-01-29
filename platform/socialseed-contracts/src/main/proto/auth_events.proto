@@ -65,3 +65,16 @@ message AuthUserRoleAssigned {
     string assigned_by = 5;  // ID del admin que asignó el rol
     google.protobuf.Timestamp assigned_at = 6;
 }
+
+/**
+ * Evento enviado al topic: auth.user.role.removed
+ * Representa la remoción de un rol de un usuario.
+ */
+message AuthUserRoleRemoved {
+    string user_id = 1;
+    string email = 2;
+    string username = 3;
+    string role = 4;
+    string removed_by = 5;  // ID del admin que removió el rol
+    google.protobuf.Timestamp removed_at = 6;
+}

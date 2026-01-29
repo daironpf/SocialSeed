@@ -31,4 +31,6 @@ public interface AuthUserRepository {
     void clearExpiredEmailVerificationTokens(java.time.Instant now);
 
     void updateUsername(UUID userId, String newUsername);
+    
+    long countUsersWithRole(String role);
 }
