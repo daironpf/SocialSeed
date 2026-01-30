@@ -39,3 +39,9 @@ replay_pid*
 
 # Configuración del Agente AI (Antigravity)
 .agent/
+AGENTS.md
+.claude/
+
+# Python
+.venv/
+venv/*.pyc\n__pycache__/
