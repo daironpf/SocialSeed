@@ -8,10 +8,11 @@ import org.springframework.grpc.client.GrpcChannelFactory;
 import static com.socialseed.contracts.socialuser.SocialUserServiceGrpc.newBlockingStub;
 
 @Configuration
-public class GrpcClientConfig {
+public class AuthGrpcClientConfig {
 
     /**
-     * Bean que expone el stub gRPC para comunicarse con el microservicio SocialUserService.
+     * Bean que expone el stub gRPC para comunicarse con el microservicio
+     * SocialUserService.
      * Se puede inyectar en cualquier servicio Spring.
      */
     @Bean

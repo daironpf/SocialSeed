@@ -18,12 +18,12 @@ spring:
   application:
     name: socialuser-service
   neo4j:
-    uri: bolt://localhost:7687
+    uri: ${SPRING_NEO4J_URI:bolt://localhost:7687}
     authentication:
       username: neo4j
       password: neoSocial
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
     consumer:
       group-id: socialuser-service-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer

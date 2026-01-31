@@ -1,0 +1,26 @@
+server:
+  port: 8085
+
+spring:
+  datasource:
+    url: jdbc:postgresql://auth-db:5432/authdb
+    username: authuser
+    password: authpass
+  data:
+    redis:
+      host: redis
+      port: 6379
+  grpc:
+    client:
+      user:
+        address: 'socialuser-service:9090'
+        negotiationType: plaintext
+      channels:
+        user:
+          address: 'socialuser-service:9090'
+          negotiationType: plaintext
+        socialuser-service:
+          address: 'socialuser-service:9090'
+          negotiationType: plaintext
+  kafka:
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka:9092}

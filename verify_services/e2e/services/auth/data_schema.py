@@ -62,8 +62,7 @@ class ResendVerificationRequest(BaseModel):
     email: str
 
 
-# Constants
-AUTH_BASE_URL = "http://localhost:8085/auth"
+# Endpoints (relative to base_url)
 LOGIN_ENDPOINT = "/login"
 REGISTER_ENDPOINT = "/register"
 LOGOUT_ENDPOINT = "/logout"

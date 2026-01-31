@@ -1,5 +1,6 @@
 from verify_services.e2e.core.base_page import BasePage
-from verify_services.e2e.services.auth.data_schema import UserDTO, AuthResult, AUTH_BASE_URL
+from verify_services.e2e.services.auth.data_schema import UserDTO, AuthResult
+from verify_services.e2e.services.auth.config import get_auth_config
 from playwright.sync_api import APIResponse
 from typing import Optional, TYPE_CHECKING
 
@@ -16,8 +17,11 @@ class AuthPage(BasePage):
     def get_response_text(response: APIResponse) -> str:
         """Get response text from Playwright APIResponse."""
         return BasePage.get_response_text(response)
-    def __init__(self, playwright: Optional['Playwright'] = None) -> None:
-        super().__init__(AUTH_BASE_URL, playwright)
+        
+    def __init__(self, playwright: Optional['Playwright'] = None, base_url: Optional[str] = None) -> None:
+        config = get_auth_config()
+        url = base_url or config.base_url
+        super().__init__(url, playwright, default_headers=config.default_headers)
         self.current_user: Optional[UserDTO] = None
         self.auth_result: Optional[AuthResult] = None
         self.is_logged_in: bool = False
