@@ -44,4 +44,4 @@ AGENTS.md
 
 # Python
 .venv/
-venv/*.pyc\n__pycache__/
+venv/

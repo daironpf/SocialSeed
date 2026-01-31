@@ -20,6 +20,6 @@ RUN mvn -f services/socialuser-service/pom.xml package -DskipTests
 # Imagen final
 FROM eclipse-temurin:21-jdk AS runner
 WORKDIR /app
-COPY --from=builder /build/services/socialuser-service/target/socialuser-service-0.0.1-SNAPSHOT.jar ./app.jar
+COPY --from=builder /build/services/socialuser-service/target/socialuser-service-0.1.0-SNAPSHOT.jar ./app.jar
 EXPOSE 8090
 ENTRYPOINT ["java","-jar","app.jar"]

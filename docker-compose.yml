@@ -25,11 +25,12 @@ services:
       context: .
       dockerfile: services/socialuser-service/Dockerfile
     environment:
-      SPRING_PROFILES_ACTIVE: docker
+      SPRING_PROFILES_ACTIVE: dev
       SERVER_PORT: 8090
-    depends_on:
-      neo4j:
-        condition: service_healthy
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    # depends_on:
+    #   neo4j:
+    #     condition: service_healthy
     ports:
       - "8090:8090"
     healthcheck:
@@ -39,6 +40,10 @@ services:
       retries: 20
     networks:
       - net
+    volumes:
+      - ./services/socialuser-service/src/main/resources/application.yml:/app/config/application.yml:ro
+      - ./services/socialuser-service/src/main/resources/application-dev.yml:/app/config/application-dev.yml:ro
+      - ./services/socialuser-service/src/main/resources/application-docker.yml:/app/config/application-docker.yml:ro
 
   #Auth - Service
   auth-service:
@@ -52,12 +57,20 @@ services:
     ports:
       - "8085:8085"
     environment:
-      SPRING_PROFILES_ACTIVE: docker
+      SPRING_PROFILES_ACTIVE: dev
       REDIS_HOST: redis
       REDIS_PORT: 6379
       SERVER_PORT: 8085
+      SPRING_GRPC_CLIENT_USER_ADDRESS: socialuser-service:9090
+      SPRING_GRPC_CLIENT_CHANNELS_USER_ADDRESS: socialuser-service:9090
+      SPRING_DATASOURCE_URL: jdbc:postgresql://auth-db:5432/authdb
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     networks:
       - net
+    volumes:
+      - ./services/auth-service/src/main/resources/application.yml:/app/config/application.yml:ro
+      - ./services/auth-service/src/main/resources/application-dev.yml:/app/config/application-dev.yml:ro
+      - ./services/auth-service/src/main/resources/application-docker.yml:/app/config/application-docker.yml:ro
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8085/actuator/health" ]
       interval: 5s
@@ -76,7 +89,7 @@ services:
     ports:
       - "8086:8086"
     environment:
-      SPRING_PROFILES_ACTIVE: docker
+      SPRING_PROFILES_ACTIVE: test
       KAFKA_HOST: kafka
       KAFKA_PORT: 9092
     networks:

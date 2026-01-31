@@ -22,17 +22,17 @@ spring:
     server:
       enabled: false
     client:
-      user:
-        address: 'static://localhost:9090'
-        enableKeepAlive: true
-        keepAliveWithoutCalls: true
-        negotiationType: plaintext
       channels:
+        user:
+          address: ${SPRING_GRPC_CLIENT_CHANNELS_USER_ADDRESS:static://socialuser-service:9090}
+          enableKeepAlive: true
+          keepAliveWithoutCalls: true
+          negotiationType: plaintext
         socialuser-service:
-          address: '0.0.0.0:9090'
+          address: ${SPRING_GRPC_CLIENT_CHANNELS_SOCIALUSER_ADDRESS:static://socialuser-service:9090}
   # Kafka emiter
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer

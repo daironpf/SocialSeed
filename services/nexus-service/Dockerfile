@@ -17,6 +17,6 @@ RUN mvn -f services/nexus-service/pom.xml package -DskipTests
 
 FROM eclipse-temurin:21-jdk AS runner
 WORKDIR /app
-COPY --from=build /build/services/nexus-service/target/nexus-service-0.0.1-SNAPSHOT.jar ./app.jar
+COPY --from=build /build/services/nexus-service/target/nexus-service-0.1.0-SNAPSHOT.jar ./app.jar
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app.jar"]
