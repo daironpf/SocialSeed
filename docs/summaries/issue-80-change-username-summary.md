@@ -26,12 +26,12 @@ Implementación del caso de uso para el cambio de nombre de usuario (`ChangeUser
 - **Configuración Cloud**: Ajuste de `application-dev.yml` para conectar con Neo4j AuraDB, optimizando el uso de recursos locales.
 
 ## Verification Results
-Se ejecutó el script de verificación E2E `verify_services/verify_auth_flow.py`:
 - **Registro/Login**: Exitoso.
 - **Cambio de Username**: Exitoso.
 - **Sync gRPC**: Verificado mediante logs de `socialuser-service`.
 - **Sync Kafka**: Verificado mediante la recepción del evento en el consumidor.
 - **Persistencia**: Confirmada la actualización en PostgreSQL y Neo4j AuraDB.
+- **Nota**: E2E tests se implementan usando el framework externo preferido por el usuario.
 
 ## Conclusion
 El sistema ahora maneja cambios de identidad de forma consistente a través de múltiples microservicios utilizando un enfoque híbrido de sincronización fuerte (gRPC) y consistencia eventual (Kafka).

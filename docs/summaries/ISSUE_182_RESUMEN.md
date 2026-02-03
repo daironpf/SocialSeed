@@ -1,12 +1,15 @@
 # Issue #182 - Resumen de Implementación
 
+> ⚠️ **NOTA**: El sistema `verify_services` descrito en este documento fue eliminado del proyecto SocialSeed. El usuario ha decidido usar un framework E2E externo desacoplado. Este documento se mantiene como referencia histórica de la implementación original.
+
 ## 📋 Información General
 
 - **Issue**: #182 - Architect Core Decoupling & AI Governance Layer
 - **Rama**: `182-architect-core-decoupling-for-ai-agent-to-work-in-e2e-api-framework`
 - **Commit**: `d7088e9`
-- **Estado**: ✅ COMPLETADO
+- **Estado**: ✅ COMPLETADO (Framework reemplazado por solución externa)
 - **Fecha**: 2026-01-30
+- **Actualización**: 2026-02-02 - Sistema verify_services removido
 
 ---
 

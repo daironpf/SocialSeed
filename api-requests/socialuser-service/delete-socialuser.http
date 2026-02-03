@@ -1,5 +1,0 @@
-### Delete an SocialUser
-DELETE http://localhost:8090/socialusers/c4143fcb-84f0-4b43-8d48-cfd537693973
-Accept-Language: en
-###
-

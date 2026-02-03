@@ -32,7 +32,7 @@ The implementation strictly followed SocialSeed's centralized platform standards
 
 ### Automated Testing
 - **Integration Tests**: Created `VerifyEmailIntegrationTest` and `ResendVerificationEmailIntegrationTest` covering success, invalid tokens, expired tokens, and duplicate verification.
-- **E2E Flow**: Updated `verify_services/verify_auth_flow.py` to include regression testing for the new endpoints.
+- **E2E Flow**: E2E tests should be implemented using your preferred testing framework.
 
 ### Manual Testing Guide
 
