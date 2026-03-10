@@ -136,7 +136,7 @@ services:
     networks:
       - net
     volumes:
-      - D:\db_volumes\auth-db\:/var/lib/postgresql/data
+      - /home/dairon/db_volumes/postgres_data/:/var/lib/postgresql/data
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U authuser -d authdb" ]
       interval: 5s
@@ -178,7 +178,7 @@ services:
       KAFKA_LOG_DIRS: /var/lib/kafka/data
       KAFKA_HEAP_OPTS: -Xmx512M -Xms512M
     volumes:
-      - D:\db_volumes\kafka_data:/var/lib/kafka/data
+      - kafka_data:/var/lib/kafka/data
       - ./infrastructure/kafka/kraft/server.properties:/opt/kafka/config/kraft/server.properties
       - ./infrastructure/kafka/topics-init.sh:/scripts/topics-init.sh
       - ./infrastructure/kafka/start-kafka.sh:/scripts/start-kafka.sh
@@ -193,6 +193,8 @@ services:
 volumes:
   socialgraph_data:
     driver: local
+  kafka_data:
+
 
 networks:
   net:
