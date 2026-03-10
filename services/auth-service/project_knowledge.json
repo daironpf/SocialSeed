@@ -1,0 +1,3806 @@
+{
+  "version": "2.0",
+  "project_name": "auth-service",
+  "project_root": "/home/dairon/proyectos/SocialSeed/services/auth-service",
+  "generated_at": "2026-02-18T01:36:34.393488",
+  "last_updated": "2026-02-18T01:36:34.393492",
+  "services": [
+    {
+      "name": "main",
+      "language": "java",
+      "framework": "spring",
+      "root_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src",
+      "endpoints": [
+        {
+          "name": "unknown",
+          "method": "PATCH",
+          "path": "/username",
+          "full_path": "auth/username",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/ChangeUsernameController.java",
+          "line_number": 27,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "GET",
+          "path": "/getUserById/{id}",
+          "full_path": "auth/getUserById/{id}",
+          "parameters": [
+            {
+              "name": "id",
+              "param_type": "string",
+              "location": "path",
+              "required": true
+            }
+          ],
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 39,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "GET",
+          "path": "/getUserByEmail/{email}",
+          "full_path": "auth/getUserByEmail/{email}",
+          "parameters": [
+            {
+              "name": "email",
+              "param_type": "string",
+              "location": "path",
+              "required": true
+            }
+          ],
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 54,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "GET",
+          "path": "/getUserByUserName/{username}",
+          "full_path": "auth/getUserByUserName/{username}",
+          "parameters": [
+            {
+              "name": "username",
+              "param_type": "string",
+              "location": "path",
+              "required": true
+            }
+          ],
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 70,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "GET",
+          "path": "/verify",
+          "full_path": "auth/verify",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 191,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "POST",
+          "path": "/register",
+          "full_path": "auth/register",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 92,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "POST",
+          "path": "/{id}/change-password",
+          "full_path": "auth/{id}/change-password",
+          "parameters": [
+            {
+              "name": "id",
+              "param_type": "string",
+              "location": "path",
+              "required": true
+            }
+          ],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 106,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "POST",
+          "path": "/login",
+          "full_path": "auth/login",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 124,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "POST",
+          "path": "/logout",
+          "full_path": "auth/logout",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 138,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "POST",
+          "path": "/token/refresh",
+          "full_path": "auth/token/refresh",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 149,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "POST",
+          "path": "/forgot-password",
+          "full_path": "auth/forgot-password",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 159,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "POST",
+          "path": "/reset-password",
+          "full_path": "auth/reset-password",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 170,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "POST",
+          "path": "/verify-email",
+          "full_path": "auth/verify-email",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 181,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "POST",
+          "path": "/resend-verification",
+          "full_path": "auth/resend-verification",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 200,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "POST",
+          "path": "/change-email",
+          "full_path": "auth/change-email",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 212,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "POST",
+          "path": "/verify-email-change",
+          "full_path": "auth/verify-email-change",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": false,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 228,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "GET",
+          "path": "/user/{id}",
+          "full_path": "auth/roles/user/{id}",
+          "parameters": [
+            {
+              "name": "id",
+              "param_type": "string",
+              "location": "path",
+              "required": true
+            }
+          ],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": true,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/RoleController.java",
+          "line_number": 45,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "POST",
+          "path": "/assign",
+          "full_path": "auth/roles/assign",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": true,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/RoleController.java",
+          "line_number": 57,
+          "tags": []
+        },
+        {
+          "name": "unknown",
+          "method": "DELETE",
+          "path": "/remove",
+          "full_path": "auth/roles/remove",
+          "parameters": [],
+          "request_dto": "request",
+          "response_dto": "ApiResponse",
+          "requires_auth": true,
+          "auth_roles": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/RoleController.java",
+          "line_number": 80,
+          "tags": []
+        }
+      ],
+      "dto_schemas": [
+        {
+          "name": "SecurityConfig",
+          "fields": [
+            {
+              "name": "jwtProvider",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "tokenBlacklistService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/config/SecurityConfig.java",
+          "line_number": 14,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "RefreshToken",
+          "fields": [
+            {
+              "name": "id",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "token",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "userId",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "expiryDate",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "revoked",
+              "type": "bool",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "rotated",
+              "type": "bool",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "id",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "token",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "userId",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "expiryDate",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "revoked",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "rotated",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/domain/model/RefreshToken.java",
+          "line_number": 6,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "AuthResult",
+          "fields": [
+            {
+              "name": "token",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "refreshToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "roles",
+              "type": "Set[str]",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/domain/model/AuthResult.java",
+          "line_number": 5,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "AuthUser",
+          "fields": [
+            {
+              "name": "id",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "username",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "email",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "password",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastFailedLoginAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastFailedLoginIp",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastPasswordChangedAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "updatedAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastLoginAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastLoginIp",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "resetPasswordToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "resetPasswordTokenExpiry",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "verificationToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "verificationTokenExpiry",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "twoFactorSecret",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "pendingEmail",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailChangeToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailChangeTokenExpiry",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "id",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "username",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "email",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "password",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "roles",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "enabled",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "accountNonExpired",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "accountNonLocked",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "credentialsNonExpired",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "failedLoginAttempts",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastFailedLoginAt",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastFailedLoginIp",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "createdAt",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "updatedAt",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastLoginAt",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastLoginIp",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "resetPasswordToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "resetPasswordTokenExpiry",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailVerified",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "verificationToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "verificationTokenExpiry",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "twoFactorEnabled",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "twoFactorSecret",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastPasswordChangedAt",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "pendingEmail",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailChangeToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailChangeTokenExpiry",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/domain/model/AuthUser.java",
+          "line_number": 8,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "UserRegisteredEvent",
+          "fields": [
+            {
+              "name": "userId",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "email",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "username",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "occurredAt",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/domain/event/UserRegisteredEvent.java",
+          "line_number": 3,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "RoleAssignedEvent",
+          "fields": [
+            {
+              "name": "userId",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "email",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "username",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "role",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "assignedBy",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "assignedAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/domain/event/RoleAssignedEvent.java",
+          "line_number": 6,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "PasswordChangedEvent",
+          "fields": [
+            {
+              "name": "userId",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "email",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "occurredAt",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/domain/event/PasswordChangedEvent.java",
+          "line_number": 5,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "PasswordResetCompletedEvent",
+          "fields": [
+            {
+              "name": "userId",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "timestamp",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/domain/event/PasswordResetCompletedEvent.java",
+          "line_number": 6,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "RoleRemovedEvent",
+          "fields": [
+            {
+              "name": "userId",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "email",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "username",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "role",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "removedBy",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "removedAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/domain/event/RoleRemovedEvent.java",
+          "line_number": 6,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "PasswordResetRequestedEvent",
+          "fields": [
+            {
+              "name": "email",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "timestamp",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/domain/event/PasswordResetRequestedEvent.java",
+          "line_number": 5,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "UserSyncService",
+          "fields": [
+            {
+              "name": "kafkaTemplateBytes",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "socialUserServiceStub",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/service/UserSyncService.java",
+          "line_number": 21,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "AuthUseCases",
+          "fields": [
+            {
+              "name": "authenticateUser",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "registerUser",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "changeUserPassword",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "getUserById",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "getAuthUserByEmail",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "getAuthUserByUserName",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "logout",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "refreshToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "forgotPassword",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "resetPassword",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "verifyEmail",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "resendVerificationEmail",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "getUserRoles",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "initiateEmailChange",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "verifyEmailChange",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/AuthUseCases.java",
+          "line_number": 12,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "AuthenticateUser",
+          "fields": [
+            {
+              "name": "authService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/AuthenticateUser.java",
+          "line_number": 8,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "ResetPassword",
+          "fields": [
+            {
+              "name": "userRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "passwordEncoder",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "eventPublisher",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/ResetPassword.java",
+          "line_number": 17,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "AssignRoleToUser",
+          "fields": [
+            {
+              "name": "authService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "eventPublisher",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/AssignRoleToUser.java",
+          "line_number": 17,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "ResendVerificationEmail",
+          "fields": [
+            {
+              "name": "authUserRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/ResendVerificationEmail.java",
+          "line_number": 14,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "CleanupExpiredTokens",
+          "fields": [
+            {
+              "name": "refreshTokenRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/CleanupExpiredTokens.java",
+          "line_number": 12,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "GetUserRoles",
+          "fields": [
+            {
+              "name": "authService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/GetUserRoles.java",
+          "line_number": 13,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "GetAuthUserByEmail",
+          "fields": [
+            {
+              "name": "authService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/GetAuthUserByEmail.java",
+          "line_number": 13,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "VerifyEmailChange",
+          "fields": [
+            {
+              "name": "authUserRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "userSyncService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/VerifyEmailChange.java",
+          "line_number": 14,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "ChangeUserPassword",
+          "fields": [
+            {
+              "name": "authService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/ChangeUserPassword.java",
+          "line_number": 9,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "RefreshToken",
+          "fields": [
+            {
+              "name": "authService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/RefreshToken.java",
+          "line_number": 8,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "RegisterUser",
+          "fields": [
+            {
+              "name": "authService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "socialUserClient",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/RegisterUser.java",
+          "line_number": 17,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "VerifyEmail",
+          "fields": [
+            {
+              "name": "authUserRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "kafkaTemplate",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/VerifyEmail.java",
+          "line_number": 16,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "InitiateEmailChange",
+          "fields": [
+            {
+              "name": "authUserRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/InitiateEmailChange.java",
+          "line_number": 15,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "GetUserById",
+          "fields": [
+            {
+              "name": "authService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/GetUserById.java",
+          "line_number": 13,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "ChangeUsernameUseCase",
+          "fields": [
+            {
+              "name": "authUserRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "userSyncService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/ChangeUsernameUseCase.java",
+          "line_number": 13,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "GetAuthUserByUserName",
+          "fields": [
+            {
+              "name": "authService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/GetAuthUserByUserName.java",
+          "line_number": 12,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "Logout",
+          "fields": [
+            {
+              "name": "authService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/Logout.java",
+          "line_number": 7,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "ForgotPassword",
+          "fields": [
+            {
+              "name": "userRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "eventPublisher",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/ForgotPassword.java",
+          "line_number": 16,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "RemoveRoleFromUser",
+          "fields": [
+            {
+              "name": "authService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "eventPublisher",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/RemoveRoleFromUser.java",
+          "line_number": 17,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "ValidationService",
+          "fields": [
+            {
+              "name": "passwordEncoder",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "authUserRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/validation/ValidationService.java",
+          "line_number": 11,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "ChangeUserPasswordValidator",
+          "fields": [
+            {
+              "name": "validationService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/validation/ChangeUserPasswordValidator.java",
+          "line_number": 14,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "RegisterUserValidator",
+          "fields": [
+            {
+              "name": "validationService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/application/usecase/validation/RegisterUserValidator.java",
+          "line_number": 13,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "RefreshTokenRequestDTO",
+          "fields": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RefreshTokenRequestDTO.java",
+          "line_number": 7,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "VerifyEmailChangeRequestDTO",
+          "fields": [
+            {
+              "name": "token",
+              "type": "str",
+              "required": false,
+              "validations": [
+                {
+                  "rule_type": "required",
+                  "value": true
+                }
+              ]
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/VerifyEmailChangeRequestDTO.java",
+          "line_number": 5,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "AuthResponseDTO",
+          "fields": [
+            {
+              "name": "token",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "refreshToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "roles",
+              "type": "Set[str]",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AuthResponseDTO.java",
+          "line_number": 5,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "LoginRequestDTO",
+          "fields": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/LoginRequestDTO.java",
+          "line_number": 9,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "ChangePasswordRequestDTO",
+          "fields": [
+            {
+              "name": "password",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "required",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangePasswordRequestDTO.java",
+          "line_number": 7,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "AssignRoleRequestDTO",
+          "fields": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AssignRoleRequestDTO.java",
+          "line_number": 7,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "ChangeEmailRequestDTO",
+          "fields": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangeEmailRequestDTO.java",
+          "line_number": 6,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "VerifyEmailRequestDTO",
+          "fields": [
+            {
+              "name": "is",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/VerifyEmailRequestDTO.java",
+          "line_number": 5,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "AuthUserResponseDTO",
+          "fields": [
+            {
+              "name": "id",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "username",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "email",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "roles",
+              "type": "Set[str]",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "enabled",
+              "type": "bool",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "accountNonExpired",
+              "type": "bool",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "accountNonLocked",
+              "type": "bool",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "credentialsNonExpired",
+              "type": "bool",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailVerified",
+              "type": "bool",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "twoFactorEnabled",
+              "type": "bool",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "createdAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "updatedAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastLoginAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AuthUserResponseDTO.java",
+          "line_number": 7,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "LogoutRequestDTO",
+          "fields": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/LogoutRequestDTO.java",
+          "line_number": 6,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "ForgotPasswordRequestDTO",
+          "fields": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ForgotPasswordRequestDTO.java",
+          "line_number": 6,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "RemoveRoleRequestDTO",
+          "fields": [
+            {
+              "name": "ID",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "required",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RemoveRoleRequestDTO.java",
+          "line_number": 5,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "ResetPasswordRequestDTO",
+          "fields": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ResetPasswordRequestDTO.java",
+          "line_number": 6,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "PasswordChangeRequest",
+          "fields": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/PasswordChangeRequest.java",
+          "line_number": 10,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "RegisterRequestDTO",
+          "fields": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RegisterRequestDTO.java",
+          "line_number": 9,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "ChangeUsernameRequestDTO",
+          "fields": [],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangeUsernameRequestDTO.java",
+          "line_number": 6,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "ResendVerificationEmailRequestDTO",
+          "fields": [
+            {
+              "name": "is",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ResendVerificationEmailRequestDTO.java",
+          "line_number": 6,
+          "base_classes": [
+            "java.lang.Record"
+          ]
+        },
+        {
+          "name": "ChangeUsernameController",
+          "fields": [
+            {
+              "name": "changeUsernameUseCase",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "authService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/ChangeUsernameController.java",
+          "line_number": 17,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "AuthController",
+          "fields": [
+            {
+              "name": "authUseCases",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "messageSource",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+          "line_number": 27,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "RoleController",
+          "fields": [
+            {
+              "name": "assignRoleToUser",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "removeRoleFromUser",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "authUseCases",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "messageSource",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "adminId",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "adminId",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/entry/rest/controller/RoleController.java",
+          "line_number": 22,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "JWTProvider",
+          "fields": [
+            {
+              "name": "secretKey",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "expirationMillis",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "true",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "false",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/config/jwt/JWTProvider.java",
+          "line_number": 13,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "JwtAuthFilter",
+          "fields": [
+            {
+              "name": "jwtProvider",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "tokenBlacklistService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/config/jwt/JwtAuthFilter.java",
+          "line_number": 19,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "RedisTokenBlacklistService",
+          "fields": [
+            {
+              "name": "redisTemplate",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/service/RedisTokenBlacklistService.java",
+          "line_number": 10,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "AuthServiceImpl",
+          "fields": [
+            {
+              "name": "authUserRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "passwordEncoder",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "jwtProvider",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "eventPublisher",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "refreshTokenRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "tokenBlacklistService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "passwordChangedEventPublisher",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "loginAttemptService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailService",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "refreshTokenDurationSeconds",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "null",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/service/AuthServiceImpl.java",
+          "line_number": 29,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "LoginAttemptServiceImpl",
+          "fields": [
+            {
+              "name": "authUserRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/service/LoginAttemptServiceImpl.java",
+          "line_number": 14,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "TokenCleanupScheduler",
+          "fields": [
+            {
+              "name": "userRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/scheduler/TokenCleanupScheduler.java",
+          "line_number": 15,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "PasswordExpirationScheduler",
+          "fields": [
+            {
+              "name": "authUserRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "expirationDays",
+              "type": "int",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/scheduler/PasswordExpirationScheduler.java",
+          "line_number": 15,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "TokenCleanupJob",
+          "fields": [
+            {
+              "name": "cleanupExpiredTokens",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/job/TokenCleanupJob.java",
+          "line_number": 10,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "KafkaRoleAssignedProducer",
+          "fields": [
+            {
+              "name": "kafkaTemplate",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "roleAssignedTopic",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaRoleAssignedProducer.java",
+          "line_number": 15,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "KafkaPasswordChangedProducer",
+          "fields": [
+            {
+              "name": "kafkaTemplate",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaPasswordChangedProducer.java",
+          "line_number": 11,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "KafkaUserRegisteredProducer",
+          "fields": [
+            {
+              "name": "kafkaTemplate",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaUserRegisteredProducer.java",
+          "line_number": 11,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "KafkaRoleRemovedProducer",
+          "fields": [
+            {
+              "name": "kafkaTemplate",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "roleRemovedTopic",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaRoleRemovedProducer.java",
+          "line_number": 13,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "KafkaProducerConfig",
+          "fields": [
+            {
+              "name": "bootstrapServers",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/config/KafkaProducerConfig.java",
+          "line_number": 19,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "AuthUserRepositoryAdapter",
+          "fields": [
+            {
+              "name": "jpaRepository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/AuthUserRepositoryAdapter.java",
+          "line_number": 15,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "RefreshTokenRepositoryAdapter",
+          "fields": [
+            {
+              "name": "repository",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/RefreshTokenRepositoryAdapter.java",
+          "line_number": 14,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "RefreshTokenMapper",
+          "fields": [
+            {
+              "name": "null",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "null",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/mapper/RefreshTokenMapper.java",
+          "line_number": 6,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "AuthUserPgsqlMapper",
+          "fields": [
+            {
+              "name": "null",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "null",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "authUser",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/mapper/AuthUserPgsqlMapper.java",
+          "line_number": 6,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "RefreshTokenPgsqlEntity",
+          "fields": [
+            {
+              "name": "id",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "token",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "userId",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "expiryDate",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "revoked",
+              "type": "bool",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "rotated",
+              "type": "bool",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "id",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "token",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "userId",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "expiryDate",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "revoked",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "rotated",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/RefreshTokenPgsqlEntity.java",
+          "line_number": 12,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        },
+        {
+          "name": "AuthUserPgsqlEntity",
+          "fields": [
+            {
+              "name": "id",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "username",
+              "type": "str",
+              "required": true,
+              "validations": [
+                {
+                  "rule_type": "required",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "name": "email",
+              "type": "str",
+              "required": true,
+              "validations": [
+                {
+                  "rule_type": "required",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "name": "password",
+              "type": "str",
+              "required": true,
+              "validations": [
+                {
+                  "rule_type": "required",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "name": "lastFailedLoginAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastFailedLoginIp",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastPasswordChangedAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "createdAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "updatedAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastLoginAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastLoginIp",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "resetPasswordToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "resetPasswordTokenExpiry",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "verificationToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "verificationTokenExpiry",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "twoFactorSecret",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "pendingEmail",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailChangeToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailChangeTokenExpiry",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "id",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "username",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "email",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "password",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "roles",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "enabled",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "accountNonExpired",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "accountNonLocked",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "credentialsNonExpired",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "failedLoginAttempts",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastFailedLoginAt",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastFailedLoginIp",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "createdAt",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "updatedAt",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastLoginAt",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastLoginIp",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "resetPasswordToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "resetPasswordTokenExpiry",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailVerified",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "verificationToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "verificationTokenExpiry",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "twoFactorEnabled",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "twoFactorSecret",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastPasswordChangedAt",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "pendingEmail",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailChangeToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailChangeTokenExpiry",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "id",
+              "type": "UUID",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "username",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "email",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "password",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastFailedLoginAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastFailedLoginIp",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "createdAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "updatedAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastLoginAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastLoginIp",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "resetPasswordToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "resetPasswordTokenExpiry",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "verificationToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "verificationTokenExpiry",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "twoFactorSecret",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "lastPasswordChangedAt",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "pendingEmail",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailChangeToken",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "emailChangeTokenExpiry",
+              "type": "datetime",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            },
+            {
+              "name": "this",
+              "type": "str",
+              "required": false,
+              "validations": []
+            }
+          ],
+          "file_path": "/home/dairon/proyectos/SocialSeed/services/auth-service/src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/AuthUserPgsqlEntity.java",
+          "line_number": 21,
+          "base_classes": [
+            "java.lang.Object"
+          ]
+        }
+      ],
+      "ports": [],
+      "environment_vars": [
+        {
+          "name": "jwt.secret",
+          "required": true
+        },
+        {
+          "name": "jwt.expiration",
+          "required": true
+        },
+        {
+          "name": "jwt.refresh.expiration",
+          "required": true
+        },
+        {
+          "name": "auth.password.expiration-days",
+          "default_value": "90",
+          "required": false
+        },
+        {
+          "name": "app.kafka.topics.role-assigned",
+          "default_value": "auth.user.role.assigned",
+          "required": false
+        },
+        {
+          "name": "app.kafka.topics.role-removed",
+          "default_value": "auth.user.role.removed",
+          "required": false
+        },
+        {
+          "name": "spring.kafka.bootstrap-servers",
+          "default_value": "localhost:9092",
+          "required": false
+        }
+      ],
+      "dependencies": [],
+      "file_paths": [
+        "src/main/java/com/socialseed/authservice/AuthServiceApplication.java",
+        "src/main/java/com/socialseed/authservice/auth/config/SecurityConfig.java",
+        "src/main/java/com/socialseed/authservice/auth/config/UserSecurityConfig.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/service/AuthService.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/service/LoginAttemptService.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/service/TokenBlacklistService.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/service/EmailService.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/service/PasswordService.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/repository/RoleRemovedEventPublisher.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/repository/AuthUserRepository.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/repository/RoleAssignedEventPublisher.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/repository/RefreshTokenRepository.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/repository/PasswordChangedEventPublisher.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/repository/UserRegisteredEventPublisher.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/model/RefreshToken.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/model/AuthResult.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/model/AuthUser.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/event/UserRegisteredEvent.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/event/RoleAssignedEvent.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/event/PasswordChangedEvent.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/event/PasswordResetCompletedEvent.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/event/RoleRemovedEvent.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/event/DomainEvent.java",
+        "src/main/java/com/socialseed/authservice/auth/domain/event/PasswordResetRequestedEvent.java",
+        "src/main/java/com/socialseed/authservice/auth/application/service/UserSyncService.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/AuthUseCases.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/AuthenticateUser.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/ResetPassword.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/AssignRoleToUser.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/ResendVerificationEmail.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/CleanupExpiredTokens.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/GetUserRoles.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/GetAuthUserByEmail.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/VerifyEmailChange.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/ChangeUserPassword.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/RefreshToken.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/RegisterUser.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/VerifyEmail.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/InitiateEmailChange.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/GetUserById.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/ChangeUsernameUseCase.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/GetAuthUserByUserName.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/Logout.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/ForgotPassword.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/RemoveRoleFromUser.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/validation/ValidationService.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/validation/ChangeUserPasswordValidator.java",
+        "src/main/java/com/socialseed/authservice/auth/application/usecase/validation/RegisterUserValidator.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RefreshTokenRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/VerifyEmailChangeRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AuthResponseDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/LoginRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangePasswordRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AssignRoleRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangeEmailRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/VerifyEmailRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AuthUserResponseDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/LogoutRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ForgotPasswordRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RemoveRoleRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ResetPasswordRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/PasswordChangeRequest.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RegisterRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangeUsernameRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ResendVerificationEmailRequestDTO.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/controller/ChangeUsernameController.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/controller/RoleController.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/rest/mapper/AuthRestMapper.java",
+        "src/main/java/com/socialseed/authservice/auth/entry/grpc/config/AuthGrpcClientConfig.java",
+        "src/main/java/com/socialseed/authservice/auth/config/jwt/JWTProvider.java",
+        "src/main/java/com/socialseed/authservice/auth/config/jwt/JwtAuthFilter.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/service/RedisTokenBlacklistService.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/service/AuthServiceImpl.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/service/LoginAttemptServiceImpl.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/scheduler/TokenCleanupScheduler.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/scheduler/PasswordExpirationScheduler.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/job/TokenCleanupJob.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/email/StubEmailService.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/security/BCryptPasswordService.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaRoleAssignedProducer.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaPasswordChangedProducer.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaUserRegisteredProducer.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaRoleRemovedProducer.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/config/KafkaProducerConfig.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/AuthUserRepositoryAdapter.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/RefreshTokenRepositoryAdapter.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/mapper/RefreshTokenMapper.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/mapper/AuthUserPgsqlMapper.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/RefreshTokenPgsqlEntity.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/AuthUserPgsqlEntity.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/repository/AuthUserPgsqlRepository.java",
+        "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/repository/RefreshTokenPgsqlRepository.java"
+      ],
+      "config_files": []
+    }
+  ],
+  "file_metadata": {
+    "src/main/java/com/socialseed/authservice/AuthServiceApplication.java": {
+      "path": "src/main/java/com/socialseed/authservice/AuthServiceApplication.java",
+      "checksum": "171427bb86b062b93037e691564ed212",
+      "last_modified": "2026-02-02T23:01:29.351114",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.246431"
+    },
+    "src/main/java/com/socialseed/authservice/auth/config/SecurityConfig.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/config/SecurityConfig.java",
+      "checksum": "ffc7431466a4ef50cbb85f6bf3c8e7ad",
+      "last_modified": "2026-01-28T00:09:41.977003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.249721"
+    },
+    "src/main/java/com/socialseed/authservice/auth/config/UserSecurityConfig.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/config/UserSecurityConfig.java",
+      "checksum": "de4ac1dd7cc2209b951149e878efdf1f",
+      "last_modified": "2026-01-28T00:09:41.977003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.251169"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/service/AuthService.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/service/AuthService.java",
+      "checksum": "47e87b08935f58d6457ec4b180d7b3aa",
+      "last_modified": "2026-02-02T23:01:29.358116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.251716"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/service/LoginAttemptService.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/service/LoginAttemptService.java",
+      "checksum": "9444f55aa5029694d2e2403551c535c8",
+      "last_modified": "2026-02-02T23:01:29.358116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.252270"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/service/TokenBlacklistService.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/service/TokenBlacklistService.java",
+      "checksum": "5b2610f2081943f216e86ec8af67c097",
+      "last_modified": "2026-01-28T00:09:41.984003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.252691"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/service/EmailService.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/service/EmailService.java",
+      "checksum": "8c1548d78c561ba59d80da27c15b5d9a",
+      "last_modified": "2026-02-02T23:01:29.358116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.253121"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/service/PasswordService.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/service/PasswordService.java",
+      "checksum": "b8c229fc84c3ff7398be96ac496be62a",
+      "last_modified": "2026-01-28T00:09:41.983003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.253532"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/repository/RoleRemovedEventPublisher.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/repository/RoleRemovedEventPublisher.java",
+      "checksum": "60da23de97ba7f9b54708ae0da0bf651",
+      "last_modified": "2026-02-02T23:01:29.358116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.253923"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/repository/AuthUserRepository.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/repository/AuthUserRepository.java",
+      "checksum": "07714b54c01793b5275e2012e4d0a18e",
+      "last_modified": "2026-02-02T23:01:29.357116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.254335"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/repository/RoleAssignedEventPublisher.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/repository/RoleAssignedEventPublisher.java",
+      "checksum": "ef51f1108db25b76aaf3180e78b7e839",
+      "last_modified": "2026-02-02T23:01:29.358116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.254831"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/repository/RefreshTokenRepository.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/repository/RefreshTokenRepository.java",
+      "checksum": "3b3ee3bb53b4fd7b7336bba6ea7022c7",
+      "last_modified": "2026-02-02T23:01:29.358116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.255223"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/repository/PasswordChangedEventPublisher.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/repository/PasswordChangedEventPublisher.java",
+      "checksum": "9afb166b57cc4a58e8e742030be24653",
+      "last_modified": "2026-02-02T23:01:29.357116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.255679"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/repository/UserRegisteredEventPublisher.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/repository/UserRegisteredEventPublisher.java",
+      "checksum": "52bd1e93daddf1ada2e6659c453874fe",
+      "last_modified": "2026-01-28T00:09:41.983003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.256069"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/model/RefreshToken.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/model/RefreshToken.java",
+      "checksum": "26b2945be34ecb3e3231445e7a007bf3",
+      "last_modified": "2026-01-28T00:09:41.980003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.256472"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/model/AuthResult.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/model/AuthResult.java",
+      "checksum": "bcd3be471f767b1a21a4a562a6edf475",
+      "last_modified": "2026-02-02T23:01:29.356116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.257966"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/model/AuthUser.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/model/AuthUser.java",
+      "checksum": "db338c3b26a0fab5174acb2fd7e448e4",
+      "last_modified": "2026-02-02T23:01:29.357116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.258702"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/event/UserRegisteredEvent.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/event/UserRegisteredEvent.java",
+      "checksum": "5db92439dceffc9e3593a38a6997d6e5",
+      "last_modified": "2026-01-28T00:09:41.979003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.264905"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/event/RoleAssignedEvent.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/event/RoleAssignedEvent.java",
+      "checksum": "1d527db6314d253baec098c77dd95b64",
+      "last_modified": "2026-02-02T23:01:29.356116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.265374"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/event/PasswordChangedEvent.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/event/PasswordChangedEvent.java",
+      "checksum": "37892150e885b816ca160b32aafa0514",
+      "last_modified": "2026-02-02T23:01:29.355115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.265934"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/event/PasswordResetCompletedEvent.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/event/PasswordResetCompletedEvent.java",
+      "checksum": "a05458b282ce0e24390e1e38635f1010",
+      "last_modified": "2026-02-02T23:01:29.356116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.266379"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/event/RoleRemovedEvent.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/event/RoleRemovedEvent.java",
+      "checksum": "882ae647a302609aa846c3d4479e340b",
+      "last_modified": "2026-02-02T23:01:29.356116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.266843"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/event/DomainEvent.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/event/DomainEvent.java",
+      "checksum": "5b20d9455c5de7b611221ce59f4e445c",
+      "last_modified": "2026-02-02T23:01:29.355115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.267311"
+    },
+    "src/main/java/com/socialseed/authservice/auth/domain/event/PasswordResetRequestedEvent.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/domain/event/PasswordResetRequestedEvent.java",
+      "checksum": "6a8ac7961a482fe529b90774c3db198f",
+      "last_modified": "2026-02-02T23:01:29.356116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.267730"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/service/UserSyncService.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/service/UserSyncService.java",
+      "checksum": "26261d105dded55e1d0b258c2c2f1ca9",
+      "last_modified": "2026-02-02T23:01:29.351114",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.268198"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/AuthUseCases.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/AuthUseCases.java",
+      "checksum": "7739927c4fda5322f0c075e056a399ed",
+      "last_modified": "2026-02-02T23:01:29.352115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.271270"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/AuthenticateUser.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/AuthenticateUser.java",
+      "checksum": "79d060bc0ec2ff726f0bbe4d33f03886",
+      "last_modified": "2026-02-02T23:01:29.352115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.274803"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/ResetPassword.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/ResetPassword.java",
+      "checksum": "ac9d5fc885d1e76edc8a2b93132fd0a1",
+      "last_modified": "2026-02-02T23:01:29.355115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.275457"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/AssignRoleToUser.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/AssignRoleToUser.java",
+      "checksum": "24f406ed04e2a2c1d6cf40c0c1cde9c3",
+      "last_modified": "2026-02-02T23:01:29.352115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.276963"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/ResendVerificationEmail.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/ResendVerificationEmail.java",
+      "checksum": "ac224a0fd1d7d0fc8c4a2fd578e181a4",
+      "last_modified": "2026-02-02T23:01:29.355115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.278319"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/CleanupExpiredTokens.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/CleanupExpiredTokens.java",
+      "checksum": "9881c653619f262b75e99a160b1d271b",
+      "last_modified": "2026-02-02T23:01:29.353115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.279627"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/GetUserRoles.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/GetUserRoles.java",
+      "checksum": "9788d2c8742af86c3977c0b14d1c86b5",
+      "last_modified": "2026-02-02T23:01:29.353115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.280615"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/GetAuthUserByEmail.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/GetAuthUserByEmail.java",
+      "checksum": "1777867b0fe6c9975e604766807b25a5",
+      "last_modified": "2026-01-28T00:09:41.962003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.281340"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/VerifyEmailChange.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/VerifyEmailChange.java",
+      "checksum": "82a414431a876622eb59d8c2bc6ec327",
+      "last_modified": "2026-02-02T23:01:29.355115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.282114"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/ChangeUserPassword.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/ChangeUserPassword.java",
+      "checksum": "bfaa6e20e074ef3e36d458d1c5727961",
+      "last_modified": "2026-02-02T23:01:29.353115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.283495"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/RefreshToken.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/RefreshToken.java",
+      "checksum": "541524108d1457e7f5ea51525debd55e",
+      "last_modified": "2026-02-02T23:01:29.354115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.284172"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/RegisterUser.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/RegisterUser.java",
+      "checksum": "f34e16e1ab6bc54be306719b895f4fec",
+      "last_modified": "2026-02-02T23:01:29.354115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.284842"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/VerifyEmail.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/VerifyEmail.java",
+      "checksum": "b0fd52c088e42874bb6687712ca39a9a",
+      "last_modified": "2026-02-02T23:01:29.355115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.286426"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/InitiateEmailChange.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/InitiateEmailChange.java",
+      "checksum": "0298a37c79b7526d0985f3052f9a7a33",
+      "last_modified": "2026-02-02T23:01:29.354115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.288740"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/GetUserById.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/GetUserById.java",
+      "checksum": "ee94f33c1e2653b69a2fc97032bc0a70",
+      "last_modified": "2026-01-28T00:09:41.963003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.290010"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/ChangeUsernameUseCase.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/ChangeUsernameUseCase.java",
+      "checksum": "4ac17d09a3bef6b9d3e03b4c0d6d7eb0",
+      "last_modified": "2026-02-02T23:01:29.353115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.290769"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/GetAuthUserByUserName.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/GetAuthUserByUserName.java",
+      "checksum": "405a016885986c15a866a97f4b352365",
+      "last_modified": "2026-01-28T00:09:41.962003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.292245"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/Logout.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/Logout.java",
+      "checksum": "5811495856273179c1b26d7d4d0c4f08",
+      "last_modified": "2026-01-28T00:09:41.976003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.293045"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/ForgotPassword.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/ForgotPassword.java",
+      "checksum": "f23606e32b2286155c0ed699e83d61a2",
+      "last_modified": "2026-02-02T23:01:29.353115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.293667"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/RemoveRoleFromUser.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/RemoveRoleFromUser.java",
+      "checksum": "fd11a4427eb14383a54d5a8d50cbc967",
+      "last_modified": "2026-02-02T23:01:29.354115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.295343"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/validation/ValidationService.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/validation/ValidationService.java",
+      "checksum": "bfaed5a6261f9d363b48b47fe64240d5",
+      "last_modified": "2026-01-28T00:09:41.977003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.297212"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/validation/ChangeUserPasswordValidator.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/validation/ChangeUserPasswordValidator.java",
+      "checksum": "16bf7b0ebf088ab5e8c8e35e4d0f86af",
+      "last_modified": "2026-01-28T00:09:41.977003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.298461"
+    },
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/validation/RegisterUserValidator.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/application/usecase/validation/RegisterUserValidator.java",
+      "checksum": "91856bd6436a95526d756289ac67aece",
+      "last_modified": "2026-01-28T00:09:41.977003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.299650"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RefreshTokenRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RefreshTokenRequestDTO.java",
+      "checksum": "fe1ed1e8a1750b9db6071ad2e67965dd",
+      "last_modified": "2026-01-28T00:09:41.987003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.300815"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/VerifyEmailChangeRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/VerifyEmailChangeRequestDTO.java",
+      "checksum": "f66ebfb7bebb8f0a2ccb698ee3ed95f8",
+      "last_modified": "2026-02-02T23:01:29.361117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.301289"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AuthResponseDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AuthResponseDTO.java",
+      "checksum": "fbe7cd3ff6ac601a2ae2255421623570",
+      "last_modified": "2026-01-28T00:09:41.984003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.301797"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/LoginRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/LoginRequestDTO.java",
+      "checksum": "2aeaa1f5fc2e49514d01fcb861753f21",
+      "last_modified": "2026-01-28T00:09:41.986003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.302247"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangePasswordRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangePasswordRequestDTO.java",
+      "checksum": "6ec74d7a3e5a1c0108c86dc758650073",
+      "last_modified": "2026-02-02T23:01:29.360116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.302763"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AssignRoleRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AssignRoleRequestDTO.java",
+      "checksum": "69300ea3b468252b238bf00359d3aabf",
+      "last_modified": "2026-02-02T23:01:29.360116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.303246"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangeEmailRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangeEmailRequestDTO.java",
+      "checksum": "dd80511ce704c840bb27ff4cb90d0ade",
+      "last_modified": "2026-02-02T23:01:29.360116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.303736"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/VerifyEmailRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/VerifyEmailRequestDTO.java",
+      "checksum": "8a1519af9dfd6c50d59c13f482ae26f2",
+      "last_modified": "2026-02-02T23:01:29.361117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.304185"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AuthUserResponseDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AuthUserResponseDTO.java",
+      "checksum": "b83483e3509177145230a059f8219c46",
+      "last_modified": "2026-01-28T00:09:41.985003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.304635"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/LogoutRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/LogoutRequestDTO.java",
+      "checksum": "4b971826242062577650f5dd226df171",
+      "last_modified": "2026-01-28T00:09:41.986003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.305215"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ForgotPasswordRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ForgotPasswordRequestDTO.java",
+      "checksum": "66531e09e5fbdabd7eec3327ae693880",
+      "last_modified": "2026-02-02T23:01:29.360116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.305670"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RemoveRoleRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RemoveRoleRequestDTO.java",
+      "checksum": "1b80b6c8cbab414e2328bdf0fef8816e",
+      "last_modified": "2026-02-02T23:01:29.360116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.306108"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ResetPasswordRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ResetPasswordRequestDTO.java",
+      "checksum": "2c8140167834081794e968409a105f1b",
+      "last_modified": "2026-02-02T23:01:29.360116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.306574"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/PasswordChangeRequest.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/PasswordChangeRequest.java",
+      "checksum": "d2a5f37e9f9ae3ebe67484c534450cfc",
+      "last_modified": "2026-01-28T00:09:41.986003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.307020"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RegisterRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RegisterRequestDTO.java",
+      "checksum": "9ad1b907025cb0edeef78a558a33837e",
+      "last_modified": "2026-01-28T00:09:41.987003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.307539"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangeUsernameRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangeUsernameRequestDTO.java",
+      "checksum": "344abe3661e3d6dee140e597e93b7470",
+      "last_modified": "2026-02-02T23:01:29.360116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.308054"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ResendVerificationEmailRequestDTO.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ResendVerificationEmailRequestDTO.java",
+      "checksum": "0f47404a5bbf4781e3446aa412967bcd",
+      "last_modified": "2026-02-02T23:01:29.360116",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.308496"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/controller/ChangeUsernameController.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/controller/ChangeUsernameController.java",
+      "checksum": "7561e7d9df129fcd624afa58c1cf9839",
+      "last_modified": "2026-02-02T23:01:29.359995",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.308962"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java",
+      "checksum": "1ca14bfe3bceb9cf77a399be17cf1d4d",
+      "last_modified": "2026-02-02T23:01:29.359995",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.311098"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/controller/RoleController.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/controller/RoleController.java",
+      "checksum": "d2de9e94b7284180df13d06decfeddbf",
+      "last_modified": "2026-02-02T23:01:29.359995",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.321590"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/mapper/AuthRestMapper.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/rest/mapper/AuthRestMapper.java",
+      "checksum": "2feac61f9c82e9e63814b9d721ad6294",
+      "last_modified": "2026-02-02T23:01:29.361117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.325371"
+    },
+    "src/main/java/com/socialseed/authservice/auth/entry/grpc/config/AuthGrpcClientConfig.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/entry/grpc/config/AuthGrpcClientConfig.java",
+      "checksum": "bb063b62491123ff5df212ff54cee801",
+      "last_modified": "2026-02-02T23:01:29.359995",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.326642"
+    },
+    "src/main/java/com/socialseed/authservice/auth/config/jwt/JWTProvider.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/config/jwt/JWTProvider.java",
+      "checksum": "7e386b9f3c47a5dc293a22f5b0a1aff4",
+      "last_modified": "2026-01-28T00:09:41.978003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.327631"
+    },
+    "src/main/java/com/socialseed/authservice/auth/config/jwt/JwtAuthFilter.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/config/jwt/JwtAuthFilter.java",
+      "checksum": "c858d312cb15b40e3adbfb3df7a40dd7",
+      "last_modified": "2026-02-02T23:01:29.355115",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.329379"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/service/RedisTokenBlacklistService.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/service/RedisTokenBlacklistService.java",
+      "checksum": "55c61154805612503b76d70120fdf5c7",
+      "last_modified": "2026-01-28T00:09:41.990003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.331584"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/service/AuthServiceImpl.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/service/AuthServiceImpl.java",
+      "checksum": "89695e3d991d197df692ee4d761fb7a3",
+      "last_modified": "2026-02-02T23:01:29.365876",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.332542"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/service/LoginAttemptServiceImpl.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/service/LoginAttemptServiceImpl.java",
+      "checksum": "654d3e3e0ee6af7d7a14eb5ab9ef2e24",
+      "last_modified": "2026-02-02T23:01:29.365876",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.342029"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/scheduler/TokenCleanupScheduler.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/scheduler/TokenCleanupScheduler.java",
+      "checksum": "8229aab35e945b8d6e2dc7f41ec57847",
+      "last_modified": "2026-02-02T23:01:29.365876",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.343589"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/scheduler/PasswordExpirationScheduler.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/scheduler/PasswordExpirationScheduler.java",
+      "checksum": "d4484b6fadc0e3ed618c42672129f399",
+      "last_modified": "2026-02-02T23:01:29.364117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.344849"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/job/TokenCleanupJob.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/job/TokenCleanupJob.java",
+      "checksum": "b4860ef89e12effa6690d18401445bbb",
+      "last_modified": "2026-02-02T23:01:29.361117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.346145"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/email/StubEmailService.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/email/StubEmailService.java",
+      "checksum": "3ee67e3cfb96256cbaeac297606303f7",
+      "last_modified": "2026-02-02T23:01:29.361117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.347160"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/security/BCryptPasswordService.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/security/BCryptPasswordService.java",
+      "checksum": "1ec320159a6169e4eb00c300ff00494d",
+      "last_modified": "2026-01-28T00:09:41.989003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.348224"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaRoleAssignedProducer.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaRoleAssignedProducer.java",
+      "checksum": "464509496f0a8d640e5c6fc13fb62542",
+      "last_modified": "2026-02-02T23:01:29.362117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.348968"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaPasswordChangedProducer.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaPasswordChangedProducer.java",
+      "checksum": "d4e32340358c82de0fc3f90b071aa2c3",
+      "last_modified": "2026-02-02T23:01:29.362117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.350498"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaUserRegisteredProducer.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaUserRegisteredProducer.java",
+      "checksum": "4877a92065ccb1aa8057ca3843b40434",
+      "last_modified": "2026-01-28T00:09:41.988003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.352398"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaRoleRemovedProducer.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaRoleRemovedProducer.java",
+      "checksum": "aa309c29edb067620c6affa56a53af32",
+      "last_modified": "2026-02-02T23:01:29.362117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.353506"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/config/KafkaProducerConfig.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/config/KafkaProducerConfig.java",
+      "checksum": "627c1bf7121072357e10cc2c68d09308",
+      "last_modified": "2026-02-04T21:14:29.481616",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.354966"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/AuthUserRepositoryAdapter.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/AuthUserRepositoryAdapter.java",
+      "checksum": "d12f18153db1a95aa0c16158bff4af43",
+      "last_modified": "2026-02-02T23:01:29.363117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.356655"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/RefreshTokenRepositoryAdapter.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/RefreshTokenRepositoryAdapter.java",
+      "checksum": "363bcb3e1f38560c7a0c1fd45dd2adf8",
+      "last_modified": "2026-02-02T23:01:29.363117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.359418"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/mapper/RefreshTokenMapper.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/mapper/RefreshTokenMapper.java",
+      "checksum": "40510ca6ca06c2d2dabe10f19ece7d1e",
+      "last_modified": "2026-01-28T00:09:41.989003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.360968"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/mapper/AuthUserPgsqlMapper.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/mapper/AuthUserPgsqlMapper.java",
+      "checksum": "7284e9601ddc0348e80bfb4fb4652d6b",
+      "last_modified": "2026-02-02T23:01:29.364117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.361968"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/RefreshTokenPgsqlEntity.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/RefreshTokenPgsqlEntity.java",
+      "checksum": "26f143ed85ee2c096ebc29116ed7599f",
+      "last_modified": "2026-01-28T00:09:41.989003",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.365891"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/AuthUserPgsqlEntity.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/AuthUserPgsqlEntity.java",
+      "checksum": "3af303793e1b37dc168a017004ea2368",
+      "last_modified": "2026-02-02T23:01:29.363117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.367535"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/repository/AuthUserPgsqlRepository.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/repository/AuthUserPgsqlRepository.java",
+      "checksum": "36c9bdfdbb15f49fd369f87f4871aa7a",
+      "last_modified": "2026-02-02T23:01:29.364117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.380709"
+    },
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/repository/RefreshTokenPgsqlRepository.java": {
+      "path": "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/repository/RefreshTokenPgsqlRepository.java",
+      "checksum": "c9cf6a05d3d5d4339941d6d32fab3f64",
+      "last_modified": "2026-02-02T23:01:29.364117",
+      "language": "java",
+      "scanned_at": "2026-02-18T01:36:34.381553"
+    }
+  },
+  "source_hashes": {
+    "src/main/java/com/socialseed/authservice/AuthServiceApplication.java": "sha256:d4d853d7f4025261920bfb8cdde18791f59dcc1e7f0548301f428d2eaf3affb3",
+    "src/main/java/com/socialseed/authservice/auth/config/SecurityConfig.java": "sha256:c706129f5b2751e20771ef1af9e914050047fec8addc3952e30c257f91b5d09a",
+    "src/main/java/com/socialseed/authservice/auth/config/UserSecurityConfig.java": "sha256:4b94b9e2aff78ab9fc3193b5e3b574362f7649a66657746b290e994de1ec1600",
+    "src/main/java/com/socialseed/authservice/auth/domain/service/AuthService.java": "sha256:12faf8404764ca6de2eb7acc538004e4c82e7870059e0de545738ac6ee94ccb9",
+    "src/main/java/com/socialseed/authservice/auth/domain/service/LoginAttemptService.java": "sha256:ead39efdf215d92e8ecef28d547458396f222787699ba2cb0c9f334f12bcaa31",
+    "src/main/java/com/socialseed/authservice/auth/domain/service/TokenBlacklistService.java": "sha256:be238c9ea941011a651eba5804d8474223cdf64ad9f65aa71af5fe392d863c1d",
+    "src/main/java/com/socialseed/authservice/auth/domain/service/EmailService.java": "sha256:13942e5e21d51826c444530ba3c0627828432a49e9529924d4d32fb30ac73641",
+    "src/main/java/com/socialseed/authservice/auth/domain/service/PasswordService.java": "sha256:fbaa55126d91a7c03524e83a408122a301d84d037cf6f8f425be48af71de6372",
+    "src/main/java/com/socialseed/authservice/auth/domain/repository/RoleRemovedEventPublisher.java": "sha256:7a28f539d7210a924fab375aed5275b76ba7a0b13eb4de3b5f9eb9ae49298af5",
+    "src/main/java/com/socialseed/authservice/auth/domain/repository/AuthUserRepository.java": "sha256:07e84fe08cf9dfe2cd882a300b4f62a9676e9c0274f4591b5a8641a19e854104",
+    "src/main/java/com/socialseed/authservice/auth/domain/repository/RoleAssignedEventPublisher.java": "sha256:4b8328422d00f5f9bdb744fd4ea566456e92587c62eba8fc5d8d7049ce2bc140",
+    "src/main/java/com/socialseed/authservice/auth/domain/repository/RefreshTokenRepository.java": "sha256:7e1e9d33fbf6724736f551791b5d3bc5e1e6067fde6e52541f589bd32de391bc",
+    "src/main/java/com/socialseed/authservice/auth/domain/repository/PasswordChangedEventPublisher.java": "sha256:147e7e55dbfd415f7b3c7d346ae7bfa4a67c207bb06b11ad90641ade8cbbc0ca",
+    "src/main/java/com/socialseed/authservice/auth/domain/repository/UserRegisteredEventPublisher.java": "sha256:931f7edb1173563b32255477374b54e286452abba6068336de9057d2c143e33c",
+    "src/main/java/com/socialseed/authservice/auth/domain/model/RefreshToken.java": "sha256:d5fb60a0eec64dcdcadbd3b09440f7a889b98516401688a82d9f58cb030e976e",
+    "src/main/java/com/socialseed/authservice/auth/domain/model/AuthResult.java": "sha256:528f1ac4bf7b514bf0d3959a2324256d459455063f12fee21bc1bfbb50484dfb",
+    "src/main/java/com/socialseed/authservice/auth/domain/model/AuthUser.java": "sha256:da7af3749bb6962ace0d7980e1e22853347a7cb261abff1985d03ed73126831f",
+    "src/main/java/com/socialseed/authservice/auth/domain/event/UserRegisteredEvent.java": "sha256:ca502d7985245127d830a45ceb08a200eedf012d0fa07976990811bdc13d7268",
+    "src/main/java/com/socialseed/authservice/auth/domain/event/RoleAssignedEvent.java": "sha256:b13463fc7dd5ddada9f1819da260e23dcc450237aab8bc38bcbaf2a158605092",
+    "src/main/java/com/socialseed/authservice/auth/domain/event/PasswordChangedEvent.java": "sha256:403637e99dc3ceace95629d4478a7905be0e92aca944471671e4847a7dc29eda",
+    "src/main/java/com/socialseed/authservice/auth/domain/event/PasswordResetCompletedEvent.java": "sha256:f435f44392a999345435378a2008c08efa00a2b587a94a3ff292559758481e3c",
+    "src/main/java/com/socialseed/authservice/auth/domain/event/RoleRemovedEvent.java": "sha256:eb78fb0fc408b481c577246d6440766dcd671af967c6c8cfda24a03e5b1e7185",
+    "src/main/java/com/socialseed/authservice/auth/domain/event/DomainEvent.java": "sha256:cffd8e2bacd80acaed416f05295e4b9ee499d0eda769274646f309fdc1520462",
+    "src/main/java/com/socialseed/authservice/auth/domain/event/PasswordResetRequestedEvent.java": "sha256:d906464439c795d264636fd88e3355307f0c5304b58759cd68e9dd4610e5c3df",
+    "src/main/java/com/socialseed/authservice/auth/application/service/UserSyncService.java": "sha256:29851b131d02308efa1deb740a7269fa078a0dcae550a7bc6f70cd8ef6bdcea6",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/AuthUseCases.java": "sha256:83337460aa13300cd25a5dba3210e9f3816444141e4b3b8ca0b2c2cb896abc37",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/AuthenticateUser.java": "sha256:3804d52b36c6de5a30b01e0ac224c8a7d3e7152c5b88b811063867c16eb2396f",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/ResetPassword.java": "sha256:4497ad444c744f6ff6b83f9c67cf3e626302c23cb1848fcfe7a48e13478c4715",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/AssignRoleToUser.java": "sha256:5e3656d79bf84c50d320890163c95b12b4052f66bf87514fe9f1ed2e6e9536c6",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/ResendVerificationEmail.java": "sha256:090b6fccf637cf36d76b86de26140d4e91871c58d941dd16c08802cc93238920",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/CleanupExpiredTokens.java": "sha256:adeac3455468fb1c63ad51cb991c248b9b0845ada0cca0d03bc07a2648cdbd7d",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/GetUserRoles.java": "sha256:b3d2e7e402820c7477e5be71af3ba16e5364983973a6af79824259e4a8c8056d",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/GetAuthUserByEmail.java": "sha256:4062b849a610e86f2778c8e50dfa50ae9c2f13ca65b8e55caeb09f162b728127",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/VerifyEmailChange.java": "sha256:e05ad0b3a1cdff93bd96d6cadbf4452c28cad49d70531b68a0988c1560cba629",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/ChangeUserPassword.java": "sha256:096b40da21820395f0898fa04817bd861a39dc889decbc12fb201462d918ff00",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/RefreshToken.java": "sha256:09c154e22c6b65933c5883d674ab66b3d3ff0b9d5a15fc9fdfff865f17bacd41",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/RegisterUser.java": "sha256:c1e7d5077977fa23721ab32a8b7a3b275a46ecffdc78161ca6b4c278ca48c2bf",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/VerifyEmail.java": "sha256:b913b5970f16be976df2fccedc715babb6a7f3b468a63977e3634690b0ca5d97",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/InitiateEmailChange.java": "sha256:19d09c22318744347bc89872e94719ffdf6e15df7f4a5c563bcb8c1c8db5cbe6",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/GetUserById.java": "sha256:0adaef0c4e51b309e60ee48da37827653e67e00ee44e62729354dcf2a055aefd",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/ChangeUsernameUseCase.java": "sha256:b5be4df62b542e63d979edaaae7249761ef7cf3f600c39e3916fcc1d8184867a",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/GetAuthUserByUserName.java": "sha256:956757d732017db320ca6a4010645d600f418f67dd37fa49c1a8b11daf2ce2ee",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/Logout.java": "sha256:801bc3e118e42bb19a1b94aee6b1f8f010316233a4ef13bf5ebd1cf7e98291f9",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/ForgotPassword.java": "sha256:573c0d473b0ae234dab1ec68176c59311a747287f12a1bb6579adfc77def698a",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/RemoveRoleFromUser.java": "sha256:1e53b46a61175abfa7a7bd9433d52559ddb24be093a57dc777f586d767a62847",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/validation/ValidationService.java": "sha256:bd3a13470fd17dac746ca182bccf01921da96db1dca50cca608ddde3003e32d1",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/validation/ChangeUserPasswordValidator.java": "sha256:11504c412d586079220266eace2bfbac58e42ce55e72b1f9f6d4ab7ec68c81be",
+    "src/main/java/com/socialseed/authservice/auth/application/usecase/validation/RegisterUserValidator.java": "sha256:61e3cc8d56e1c625fad116c4173eaa885c7d20ff6c3b0b3dd96cfa1f613ab406",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RefreshTokenRequestDTO.java": "sha256:a3636c2ee8dcae505fe223c7cac9af76bd8ceff95709f0975a508b1d891cca89",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/VerifyEmailChangeRequestDTO.java": "sha256:ec18a4845a7ebedd52682f07ebfe7444e29442646f37648b1ec0a5797fe5efcd",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AuthResponseDTO.java": "sha256:86e9ed5d6b092e4a4818986a793310c288f146ce216e0ed7d50eaf172db50e20",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/LoginRequestDTO.java": "sha256:6c552a2e33dd16c29ae8b0bd02886ac45509ec7f0a7e1ad0d9faf16920052054",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangePasswordRequestDTO.java": "sha256:5a846f1ddb44d3395ee31ba109355bbf522fec2ac744a75a47a568b980ee93ad",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AssignRoleRequestDTO.java": "sha256:e13de763f2d943190fef948265deb580aa395a982aeecae9746395c9f27f51a2",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangeEmailRequestDTO.java": "sha256:a7ed80aa3ca15e0730eb27532879ffa1fc23f7c1c5a3f51e65ab88c84d89a610",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/VerifyEmailRequestDTO.java": "sha256:90be563d82003523e3eac9a19646c939f87f6d5e530296941734fe5887455da0",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/AuthUserResponseDTO.java": "sha256:79a40c460ee74e230d868acb27f5a2ff990d6e4ac4c57fc1af6ca3957b94abc0",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/LogoutRequestDTO.java": "sha256:bb8cd4c9fc20eb8064e8377e1b171f38f27555aef3b7edee48c9be31c6368bdd",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ForgotPasswordRequestDTO.java": "sha256:fdcc20b9eeb314aebf2bcc96e80cc08140ddb3f2ad87ced81597dec0711c1cce",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RemoveRoleRequestDTO.java": "sha256:07add380bbb579f2d8b6bee5d21f9e6b3bf5f6e219c32ec4545ad67edf4ce18b",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ResetPasswordRequestDTO.java": "sha256:897223b30fd56890f193215a96bc325160eef1e80e63fd9a2048d3c125efd7f6",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/PasswordChangeRequest.java": "sha256:d9bfcf876673a641f077d7f3b374ea0c1ac2c64181a28bf426c300832e385589",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/RegisterRequestDTO.java": "sha256:7f0ef32e76ff97bbe2eadccfbf291578604608facf29f1ec395d06b7d5a472e9",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ChangeUsernameRequestDTO.java": "sha256:c4a9005fd8365156b3361383d755041d26ad535164d89bf41ca202242370129e",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/dto/ResendVerificationEmailRequestDTO.java": "sha256:5929d68786a8c50cfd7fa918bb72577ee003907ca8e97d913314428cfc5f62e4",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/controller/ChangeUsernameController.java": "sha256:1a980c95f552ad32f541b3b2a01db247e38c36d95edd93b0a1688e3c22727b4e",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/controller/AuthController.java": "sha256:08f8261ef1fa1e60e5c7a35c83e970e01351d469632035154dea8b38dd99ff43",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/controller/RoleController.java": "sha256:13be2d6a61e16792ccb82b93d4003543eb0618c3c4f7e7a019b10494ef213c02",
+    "src/main/java/com/socialseed/authservice/auth/entry/rest/mapper/AuthRestMapper.java": "sha256:823ec2664c7670a468ea5daf2d468cb4398b9ca6e57ba884cf41850c01cbd4c3",
+    "src/main/java/com/socialseed/authservice/auth/entry/grpc/config/AuthGrpcClientConfig.java": "sha256:2ee44d9f28164331c30c17673517e5b32018e93b98f42edc439bc382a4ca6c9b",
+    "src/main/java/com/socialseed/authservice/auth/config/jwt/JWTProvider.java": "sha256:c2393c238ab66a18b739750af8298e4cbe33df9b6e0648af0bb12c68f3736f5b",
+    "src/main/java/com/socialseed/authservice/auth/config/jwt/JwtAuthFilter.java": "sha256:d05cd62d5efc1b4332615ab7114c920342cd4576927a2179389e84bf67d64a44",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/service/RedisTokenBlacklistService.java": "sha256:a7cfa71f5d6c9d3f4e152b33d2a07a76d4dd8fdf84e52425727f22e9a7168af5",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/service/AuthServiceImpl.java": "sha256:4f47c5a7afae443d531276bbbe60551aa125284ccea12c134d0806798737f747",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/service/LoginAttemptServiceImpl.java": "sha256:ee03c8ee0ff0ec9cb1156b233c245e0b30bcc7d14f6c822a4e19b3a9379aa394",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/scheduler/TokenCleanupScheduler.java": "sha256:49cbad9068a29e9b900b8e3487e6dec4ad68ef45bab4f5dc6422405d92c3ac35",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/scheduler/PasswordExpirationScheduler.java": "sha256:5a54ad164f6a87f379bda0dc9d32993f125ca7c698153fbff4974eb395f9b3ef",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/job/TokenCleanupJob.java": "sha256:e483e3018e70700f4f028e577185f3cbdd6c928a2a9b8eb76011517f3f27fd01",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/email/StubEmailService.java": "sha256:f17ab710c3f592d11c7920878fb4f0c8b1699af545a40e516146736641bbbc08",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/security/BCryptPasswordService.java": "sha256:dbff4151c2ad0b4d1249af832f5d06946aec6e5034c442018daa37ba0be382b6",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaRoleAssignedProducer.java": "sha256:101aad678b07b1dd00761ee6d0b53d51d28d803b24adc880a2094033c5400a49",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaPasswordChangedProducer.java": "sha256:8841ac3183a0d56e626947e9b8fdfddde67059c4c8582a4fb6baa4bd49674e05",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaUserRegisteredProducer.java": "sha256:fea0554d51801956352f22e467f74924bc7d12b77b1f7d051e83c8906dc015d8",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/producer/KafkaRoleRemovedProducer.java": "sha256:477e1c3f413b145d7ca2c2b3fbd4f272fb5ad514e2179d1dd03397aa36c2ded7",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/kafka/config/KafkaProducerConfig.java": "sha256:b8f86e2d321f76f89366eb9befa14b474ca31a56c04b5829eccf7d5f79aba881",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/AuthUserRepositoryAdapter.java": "sha256:664209298e54583eef4aaeb07d2770cb2cb9577ac47a80488cfabaaddc8179a2",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/RefreshTokenRepositoryAdapter.java": "sha256:383608866250f26ba2f8ddf557e68fe58f2d84ea44887901127f2732b87e181a",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/mapper/RefreshTokenMapper.java": "sha256:bec9fcad63946e0a41de289eda9f691dcb3a8fccc2db357b1660823ec559d462",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/mapper/AuthUserPgsqlMapper.java": "sha256:6fe0c159099e23433b7d303d5c516c4f54d5f07be91568a2bba2744655d569ca",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/RefreshTokenPgsqlEntity.java": "sha256:13bdb2fdb3f9954852981eaf71293bdbe4cd035614b1efaf479e93c41069f563",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/entity/AuthUserPgsqlEntity.java": "sha256:41236c4e6bc5c63508f15093af6e4d2acb9aac9076fa21d23bc4b0bfcd34cee3",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/repository/AuthUserPgsqlRepository.java": "sha256:5d62604bb1fc2661d5deedfc441674f90b93a7af8383300944222a96dae1f9c7",
+    "src/main/java/com/socialseed/authservice/auth/infrastructure/persistence/pgsql/repository/RefreshTokenPgsqlRepository.java": "sha256:89630901ec44b95050a7b5ec48ecd9be631582a82cc3a4d7cd70302bb551a791"
+  },
+  "manifest_freshness": "fresh",
+  "global_env_vars": [],
+  "metadata": {}
+}
