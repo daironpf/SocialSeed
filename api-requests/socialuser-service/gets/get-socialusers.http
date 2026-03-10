@@ -1,7 +1,0 @@
-### Docker
-GET http://localhost:8085/api/socialusers
-
-### Local
-GET http://localhost:8090/socialusers
-Content-Type: application/json
-Accept-Language: en

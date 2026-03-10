@@ -67,3 +67,5 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+
+probando e2e/

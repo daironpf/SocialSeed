@@ -1,6 +1,0 @@
-### getSocialUserByUserName
-GET http://localhost:8090/socialusers/getSocialUserByUserName/SigmundFreud
-Content-Type: application/json
-Accept-Language: en
-
-###
