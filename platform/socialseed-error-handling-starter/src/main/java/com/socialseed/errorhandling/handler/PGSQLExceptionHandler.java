@@ -11,10 +11,12 @@ import java.sql.SQLException;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * Especialista en capturar y procesar errores de persistencia en PostgreSQL.
  */
+@RestControllerAdvice
 @ConditionalOnClass(DataIntegrityViolationException.class)
 public class PGSQLExceptionHandler {
 
