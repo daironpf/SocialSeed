@@ -14,7 +14,7 @@ import java.util.UUID;
 @Aspect
 @Component
 public class DeleteUserValidator {
-    private static final Logger log = LoggerFactory.getLogger(CreateUserValidator.class);
+    private static final Logger log = LoggerFactory.getLogger(DeleteUserValidator.class);
     private final ValidationService validationService;
 
     public DeleteUserValidator(ValidationService validationService) {

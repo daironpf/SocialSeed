@@ -19,7 +19,7 @@ public class AuthEventsConsumer {
     this.userUseCases = userUseCases;
   }
 
-  @KafkaListener(topics = "auth.user.username.changed", groupId = "socialuser-service-group")
+  @KafkaListener(topics = "${kafka.topic.auth-user-username-changed:auth.user.username.changed.v1}", groupId = "socialuser-service-group")
   public void consumeUsernameChanged(byte[] message) {
     try {
       var event = AuthUserUsernameChanged.parseFrom(message);
@@ -33,7 +33,7 @@ public class AuthEventsConsumer {
     }
   }
 
-  @KafkaListener(topics = "auth.user.email.changed", groupId = "socialuser-service-group")
+  @KafkaListener(topics = "${kafka.topic.auth-user-email-changed:auth.user.email.changed.v1}", groupId = "socialuser-service-group")
   public void consumeEmailChanged(byte[] message) {
     try {
       var event = com.socialseed.contracts.auth.events.AuthUserEmailChanged.parseFrom(message);

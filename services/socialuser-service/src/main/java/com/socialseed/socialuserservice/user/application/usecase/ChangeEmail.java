@@ -1,6 +1,11 @@
 package com.socialseed.socialuserservice.user.application.usecase;
 
-import com.socialseed.socialuserservice.user.infrastructure.persistence.neo4j.repository.SocialUserNeo4jRepository;
+import com.socialseed.errorhandling.exception.BusinessException;
+import com.socialseed.errorhandling.exception.ErrorCode;
+import com.socialseed.socialuserservice.user.domain.model.User;
+import com.socialseed.socialuserservice.user.domain.repository.UserRepository;
+import com.socialseed.socialuserservice.user.infrastructure.messaging.kafka.KafkaDomainEventPublisher;
+import com.socialseed.socialuserservice.user.domain.event.SocialUserProfileUpdatedEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -8,18 +13,22 @@ import java.util.UUID;
 
 @Service
 public class ChangeEmail {
-  private final SocialUserNeo4jRepository repository;
+  private final UserRepository userRepository;
+  private final KafkaDomainEventPublisher eventPublisher;
 
-  public ChangeEmail(SocialUserNeo4jRepository repository) {
-    this.repository = repository;
+  public ChangeEmail(UserRepository userRepository, KafkaDomainEventPublisher eventPublisher) {
+    this.userRepository = userRepository;
+    this.eventPublisher = eventPublisher;
   }
 
   @Transactional
   public void execute(UUID userId, String newEmail) {
-    if (!repository.existsById(userId)) {
-      throw new IllegalArgumentException("User not found: " + userId);
-    }
+    User user = userRepository.findById(userId)
+            .orElseThrow(() -> new BusinessException(ErrorCode.INVALID_ID, userId));
 
-    repository.updateEmail(userId, newEmail);
+    user.changeEmail(newEmail);
+    userRepository.updateProfile(user);
+
+    eventPublisher.publish(new SocialUserProfileUpdatedEvent(userId));
   }
 }

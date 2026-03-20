@@ -165,6 +165,10 @@ public class User {
         this.username = validateRequired(newUsername, "username");
     }
 
+    public void changeEmail(String newEmail) {
+        this.email = validateRequired(newEmail, "email");
+    }
+
     public void updateBirthDate(LocalDate newBirthDate) {
         if (newBirthDate != null && newBirthDate.isAfter(LocalDate.now())) {
             throw new IllegalArgumentException("birthDate cannot be in the future");

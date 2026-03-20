@@ -34,6 +34,8 @@ public class Neo4jSocialUserRepositoryAdapter implements UserRepository {
     public void updateProfile(User user) {
         socialUserNeo4jRepository.updateProfile(
                 user.getId(),
+                user.getUsername(),
+                user.getEmail(),
                 user.getFullName(),
                 user.getBio(),
                 user.getProfileImage(),

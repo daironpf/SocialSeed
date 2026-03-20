@@ -55,12 +55,11 @@ public class UserController {
     public ResponseEntity<ApiResponse<UserResponseDTO>> getUserById(
             @Valid @PathVariable UUID id
     ) {
-        User user = userUseCases.getUserById(id).get();
-                //.orElseThrow(() -> new ResourceNotFoundException(ErrorCode.USER_NOT_FOUND));
-
-        return ResponseEntity.ok(
-                ApiResponse.success(UserRestMapper.toResponse(user))
-        );
+        return userUseCases.getUserById(id)
+                .<ResponseEntity<ApiResponse<UserResponseDTO>>>map(user ->
+                        ResponseEntity.ok(ApiResponse.success(UserRestMapper.toResponse(user))))
+                .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(ApiResponse.error(HttpStatus.NOT_FOUND.value(), null, ApiResponse.msg("error.user.not_found", id))));
     }
 
 
@@ -77,12 +76,9 @@ public class UserController {
             UserResponseDTO response =  UserRestMapper.toResponse(user.get());
             return ResponseEntity.ok(ApiResponse.success(response));
         }
-        return ResponseEntity.ok(ApiResponse.success(null));
-//
-//        return ResponseEntity
-//                .status(HttpStatus.NOT_FOUND)
-//                .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by Username not found"));
-
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error(HttpStatus.NOT_FOUND.value(), null, ApiResponse.msg("error.user.by.username_not_found", userName)));
     }
 
     /**
@@ -98,23 +94,13 @@ public class UserController {
             UserResponseDTO response =  UserRestMapper.toResponse(user.get());
             return ResponseEntity.ok(ApiResponse.success(response));
         }
-        return ResponseEntity.ok(ApiResponse.success(null));
-//        return ResponseEntity
-//                .status(HttpStatus.NOT_FOUND)
-//                .body(ApiResponse.message(HttpStatus.NOT_FOUND.value(), "User by Email not found"));
-
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error(HttpStatus.NOT_FOUND.value(), null, ApiResponse.msg("error.user.email_not_found", email)));
     }
     //endregion
 
     //region CRUD
-    // CREATE this only take action in admin mode, then now will be commented out
-//     @PostMapping
-//     public ResponseEntity<UserResponseDTO> createUser(@Valid @RequestBody UserCreateRequestDTO dto) {
-//         User user = UserRestMapper.toDomain(dto);
-//         User saved = userUseCases.createUser(user);
-//         return ResponseEntity.ok(UserRestMapper.toResponse(saved));
-//     }
-
     // UPDATE
     @PutMapping("/profile")
     public ResponseEntity<ApiResponse<?>> updateProfile(

@@ -21,21 +21,29 @@ public class SocialUserGrpcServiceImpl extends SocialUserServiceGrpc.SocialUserS
 
     @Override
     public void createUser(CreateUserRequest request, StreamObserver<CreateUserResponse> responseObserver) {
-        User newuser = User.create(
-                request.getUsername(),
-                request.getEmail());
+        try {
+            log.info("gRPC createUser request received for: {}", request.getUsername());
+            User newuser = User.create(
+                    request.getUsername(),
+                    request.getEmail());
 
-        User saved = userUseCases.createUser(newuser);
-        // crear nodo de usuario
-
-        log.info("usuario a crear: {}", request.toString());
-        var response = CreateUserResponse.newBuilder()
-                .setUserId(saved.getId().toString())
-                .setMessage("200")
-                .build();
-        log.info("Usuario Registrado: response: {}", response.toString());
-        responseObserver.onNext(response);
-        responseObserver.onCompleted();
+            User saved = userUseCases.createUser(newuser);
+            var response = CreateUserResponse.newBuilder()
+                    .setUserId(saved.getId().toString())
+                    .setMessage("200")
+                    .build();
+            log.info("Usuario Registrado: response: {}", response.toString());
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        } catch (Exception e) {
+            log.error("Error creating user via gRPC: {}", e.getMessage(), e);
+            var response = CreateUserResponse.newBuilder()
+                    .setUserId("")
+                    .setMessage("500: " + e.getMessage())
+                    .build();
+            responseObserver.onNext(response);
+            responseObserver.onCompleted();
+        }
     }
 
     @Override

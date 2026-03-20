@@ -2,9 +2,8 @@ package com.socialseed.socialuserservice.user.application.usecase;
 
 import com.socialseed.socialuserservice.user.domain.model.User;
 import com.socialseed.socialuserservice.user.domain.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 public class CreateUser {
@@ -14,6 +13,7 @@ public class CreateUser {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public User execute(User user) {
         return userRepository.save(user);
     }

@@ -12,6 +12,8 @@ public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEnti
         @Query("""
                         MATCH (u:SocialUser {id: $id})
                         SET
+                            u.username = $username,
+                            u.email = $email,
                             u.full_name = $fullName,
                             u.bio = $bio,
                             u.profile_image = $profileImage,
@@ -20,6 +22,8 @@ public interface SocialUserNeo4jRepository extends Neo4jRepository<UserNeo4jEnti
                         """)
         void updateProfile(
                         UUID id,
+                        String username,
+                        String email,
                         String fullName,
                         String bio,
                         String profileImage,
