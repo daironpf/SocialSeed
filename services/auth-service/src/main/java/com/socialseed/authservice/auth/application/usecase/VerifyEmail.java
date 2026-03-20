@@ -7,6 +7,7 @@ import com.socialseed.errorhandling.exception.BusinessException;
 import com.socialseed.errorhandling.exception.ErrorCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -19,10 +20,15 @@ public class VerifyEmail {
 
     private final AuthUserRepository authUserRepository;
     private final KafkaTemplate<String, byte[]> kafkaTemplate;
+    private final String emailVerifiedTopic;
 
-    public VerifyEmail(AuthUserRepository authUserRepository, KafkaTemplate<String, byte[]> kafkaTemplate) {
+    public VerifyEmail(
+            AuthUserRepository authUserRepository,
+            KafkaTemplate<String, byte[]> kafkaTemplate,
+            @Value("${kafka.topic.auth-user-email-verified:auth.user.email.verified.v1}") String emailVerifiedTopic) {
         this.authUserRepository = authUserRepository;
         this.kafkaTemplate = kafkaTemplate;
+        this.emailVerifiedTopic = emailVerifiedTopic;
     }
 
     public void execute(String token) {
@@ -65,7 +71,7 @@ public class VerifyEmail {
                         com.google.protobuf.Timestamp.newBuilder().setSeconds(Instant.now().getEpochSecond()).build())
                 .build();
 
-        kafkaTemplate.send("auth.user.email.verified", authUser.getId().toString(), event.toByteArray());
+        kafkaTemplate.send(emailVerifiedTopic, authUser.getId().toString(), event.toByteArray());
         logger.info("EmailVerified event emitted for user {}", authUser.getId());
     }
 }

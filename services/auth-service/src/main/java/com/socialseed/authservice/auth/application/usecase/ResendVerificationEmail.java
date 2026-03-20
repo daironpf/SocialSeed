@@ -3,12 +3,12 @@ package com.socialseed.authservice.auth.application.usecase;
 import com.socialseed.authservice.auth.domain.model.AuthUser;
 import com.socialseed.authservice.auth.domain.repository.AuthUserRepository;
 import com.socialseed.authservice.auth.domain.service.EmailService;
+import com.socialseed.authservice.auth.domain.util.SecureTokenGenerator;
 import com.socialseed.errorhandling.exception.BusinessException;
 import com.socialseed.errorhandling.exception.ErrorCode;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.util.UUID;
 
 @Component
 public class ResendVerificationEmail {
@@ -31,7 +31,7 @@ public class ResendVerificationEmail {
         }
 
         // Generate new token and expiry (24 hours)
-        String token = UUID.randomUUID().toString();
+        String token = SecureTokenGenerator.generate();
         Instant expiry = Instant.now().plusSeconds(86400); // 24 hours
 
         authUser.setVerificationToken(token);

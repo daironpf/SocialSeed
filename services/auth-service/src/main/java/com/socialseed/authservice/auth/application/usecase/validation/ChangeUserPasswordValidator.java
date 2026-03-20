@@ -25,7 +25,7 @@ public class ChangeUserPasswordValidator {
         if (!validationService.userExistByUserId(userId)) {
             throw new BusinessException(ErrorCode.INVALID_ID, userId);
         }
-        if (validationService.isCurrentPasswordValid(userId, currentPassword)){
+        if (!validationService.isCurrentPasswordValid(userId, currentPassword)){
             throw new BusinessException(ErrorCode.PASSWORD_MISMATCH);
         }
         return joinPoint.proceed();

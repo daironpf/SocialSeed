@@ -12,6 +12,7 @@ import com.socialseed.authservice.auth.domain.repository.UserRegisteredEventPubl
 import com.socialseed.authservice.auth.domain.service.AuthService;
 import com.socialseed.authservice.auth.domain.service.TokenBlacklistService;
 import com.socialseed.authservice.auth.domain.model.RefreshToken;
+import com.socialseed.authservice.auth.domain.util.SecureTokenGenerator;
 import com.socialseed.errorhandling.exception.BusinessException;
 import com.socialseed.errorhandling.exception.ErrorCode;
 import jakarta.transaction.Transactional;
@@ -104,7 +105,7 @@ public class AuthServiceImpl implements AuthService {
                 passwordEncoder.encode(authUser.getPassword()));
 
         // Generate verification token (24 hours expiry)
-        String verificationToken = java.util.UUID.randomUUID().toString();
+        String verificationToken = SecureTokenGenerator.generate();
         java.time.Instant expiry = java.time.Instant.now().plusSeconds(86400);
         newAuthUser.setVerificationToken(verificationToken);
         newAuthUser.setVerificationTokenExpiry(expiry);
@@ -288,7 +289,7 @@ public class AuthServiceImpl implements AuthService {
         }
 
         // Generate new verification token (24 hours expiry)
-        String verificationToken = UUID.randomUUID().toString();
+        String verificationToken = SecureTokenGenerator.generate();
         java.time.Instant expiry = java.time.Instant.now().plusSeconds(86400);
         authUser.setVerificationToken(verificationToken);
         authUser.setVerificationTokenExpiry(expiry);

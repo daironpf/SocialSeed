@@ -38,6 +38,9 @@ public class AssignRoleToUser {
         user.getRoles().add(role);
         authService.saveUser(user);
 
+        // Invalidate all existing refresh tokens to enforce new role permissions
+        authService.revokeAllTokensForUser(userId);
+
         // Emit RoleAssigned event
         RoleAssignedEvent event = new RoleAssignedEvent(
                 userId,

@@ -8,9 +8,9 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.socialseed.authservice.auth.domain.util.SecureTokenGenerator;
 import java.time.Instant;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class ForgotPassword {
@@ -33,7 +33,7 @@ public class ForgotPassword {
 
         if (userOptional.isPresent()) {
             AuthUser user = userOptional.get();
-            String token = UUID.randomUUID().toString();
+            String token = SecureTokenGenerator.generate();
             
             user.setResetPasswordToken(token);
             user.setResetPasswordTokenExpiry(Instant.now().plusSeconds(EXPIRATION_MINUTES * 60));

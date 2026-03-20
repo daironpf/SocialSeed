@@ -18,10 +18,6 @@ public class GetUserById {
     }
 
     public Optional<AuthUser> execute(UUID userId) {
-        return Optional.ofNullable(authService.getUserById(userId)
-                .orElseThrow(() -> new BusinessException(
-                        ErrorCode.USER_NOT_FOUND,
-                        userId
-                )));
+        return authService.getUserById(userId);
     }
 }
