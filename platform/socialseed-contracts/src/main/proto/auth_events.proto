@@ -1,30 +1,20 @@
 syntax = "proto3";
 
-// Package lógico para evitar colisiones
 package com.socialseed.contracts.auth.events;
 
-// CONFIGURACIÓN PARA JAVA
 option java_multiple_files = true;
 option java_package = "com.socialseed.contracts.auth.events";
 option java_outer_classname = "AuthEventsProto";
 
 import "google/protobuf/timestamp.proto";
 
-/**
- * Evento enviado al topic: auth.user.registered
- * Representa la creación de un nuevo usuario en el sistema de autenticación.
- */
 message AuthUserRegistered {
-    string user_id = 1;      // Protobuf usa snake_case por convención
+    string user_id = 1;
     string email = 2;
     string username = 3;
     google.protobuf.Timestamp created_at = 4;
 }
 
-/**
- * Evento enviado al topic: auth.user.username.changed
- * Representa el cambio de username de un usuario.
- */
 message AuthUserUsernameChanged {
     string user_id = 1;
     string old_username = 2;
@@ -32,10 +22,6 @@ message AuthUserUsernameChanged {
     google.protobuf.Timestamp updated_at = 4;
 }
 
-/**
- * Evento enviado al topic: auth.user.email.changed
- * Representa el cambio de email de un usuario.
- */
 message AuthUserEmailChanged {
     string user_id = 1;
     string old_email = 2;
@@ -43,38 +29,75 @@ message AuthUserEmailChanged {
     google.protobuf.Timestamp updated_at = 4;
 }
 
-/**
- * Evento enviado al topic: auth.user.email.verified
- * Representa que un usuario ha verificado exitosamente su email.
- */
 message AuthUserEmailVerified {
     string user_id = 1;
     string email = 2;
     google.protobuf.Timestamp verified_at = 3;
 }
 
-/**
- * Evento enviado al topic: auth.user.role.assigned
- * Representa la asignación de un rol a un usuario.
- */
 message AuthUserRoleAssigned {
     string user_id = 1;
     string email = 2;
     string username = 3;
     string role = 4;
-    string assigned_by = 5;  // ID del admin que asignó el rol
+    string assigned_by = 5;
     google.protobuf.Timestamp assigned_at = 6;
 }
 
-/**
- * Evento enviado al topic: auth.user.role.removed
- * Representa la remoción de un rol de un usuario.
- */
 message AuthUserRoleRemoved {
     string user_id = 1;
     string email = 2;
     string username = 3;
     string role = 4;
-    string removed_by = 5;  // ID del admin que removió el rol
+    string removed_by = 5;
     google.protobuf.Timestamp removed_at = 6;
+}
+
+message AuthPasswordChanged {
+    string user_id = 1;
+    string email = 2;
+    google.protobuf.Timestamp changed_at = 3;
+}
+
+message AuthPasswordReset {
+    string user_id = 1;
+    string email = 2;
+    google.protobuf.Timestamp requested_at = 3;
+}
+
+message AuthAccountLocked {
+    string user_id = 1;
+    string email = 2;
+    google.protobuf.Timestamp locked_at = 3;
+}
+
+message AuthAccountUnlocked {
+    string user_id = 1;
+    string email = 2;
+    google.protobuf.Timestamp unlocked_at = 3;
+}
+
+message AuthUserLoggedIn {
+    string user_id = 1;
+    string email = 2;
+    string username = 3;
+    google.protobuf.Timestamp logged_in_at = 4;
+}
+
+message AuthUserLoggedOut {
+    string user_id = 1;
+    string email = 2;
+    google.protobuf.Timestamp logged_out_at = 3;
+}
+
+message AuthRefreshTokenRevoked {
+    string user_id = 1;
+    string email = 2;
+    google.protobuf.Timestamp revoked_at = 3;
+}
+
+message AuthAllSessionsRevoked {
+    string user_id = 1;
+    string email = 2;
+    google.protobuf.Timestamp revoked_at = 3;
 }
