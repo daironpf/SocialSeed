@@ -49,7 +49,7 @@ public class UserSyncServiceRetryTest {
     userSyncService.syncUsernameChange(userId, oldVal, newVal);
 
     verify(socialUserServiceStub, times(3)).updateUsername(any(UpdateUsernameRequest.class));
-    verify(kafkaTemplate, times(1)).send(eq("auth.user.username.changed"), eq(userId.toString()), any(byte[].class));
+    verify(kafkaTemplate, times(1)).send(eq("auth.user.username.changed.v1"), eq(userId.toString()), any(byte[].class));
   }
 
   @Test
@@ -71,6 +71,6 @@ public class UserSyncServiceRetryTest {
     verify(kafkaTemplate, times(1)).send(eq("auth.user.sync.failures"), eq(userId.toString()), any(byte[].class));
 
     // Ensure NO success message sent to production topic
-    verify(kafkaTemplate, never()).send(eq("auth.user.email.changed"), anyString(), any(byte[].class));
+    verify(kafkaTemplate, never()).send(eq("auth.user.email.changed.v1"), anyString(), any(byte[].class));
   }
 }
