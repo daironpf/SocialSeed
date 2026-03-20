@@ -5,7 +5,9 @@ import org.springframework.http.HttpStatus;
 
 /**
  * Represents a response from the REST API.
+ * @deprecated Use {@link com.socialseed.apiresponse.model.ApiResponse} instead.
  */
+@Deprecated
 public record ResponseDTO(
         HttpStatus status,
         Object response,

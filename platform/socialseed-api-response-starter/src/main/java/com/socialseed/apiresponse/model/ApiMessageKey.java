@@ -7,7 +7,15 @@ public enum ApiMessageKey {
 
     SUCCESS_DEFAULT("api.success.default"),
     NO_CONTENT("api.success.no_content"),
-    CREATED("api.success.created");
+    CREATED("api.success.created"),
+    UPDATED("api.success.updated"),
+    DELETED("api.success.deleted"),
+    BAD_REQUEST("error.bad_request"),
+    UNAUTHORIZED("error.unauthorized"),
+    FORBIDDEN("error.forbidden"),
+    NOT_FOUND("error.notfound"),
+    CONFLICT("error.conflict"),
+    INTERNAL_ERROR("error.internal");
 
     private final String key;
 

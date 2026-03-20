@@ -47,7 +47,7 @@ public record ApiResponse<T>(
                 Instant.now());
     }
 
-    public static ApiResponse<Void> message(ApiMessageKey key) {
+    public static ApiResponse<Void> success(ApiMessageKey key) {
         return new ApiResponse<>(
                 200,
                 null,
