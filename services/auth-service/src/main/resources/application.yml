@@ -1,6 +1,19 @@
 server:
   port: 8085
 
+logging:
+  level:
+    org.springframework.security: DEBUG
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
 spring:
   application:
     name: auth-service
@@ -9,13 +22,13 @@ spring:
     # Docker
 #    url: jdbc:postgresql://auth-db:5432/authdb
     # Local
-    url: jdbc:postgresql://localhost:5432/authdb
-    username: authuser
-    password: authpass
+    url: jdbc:postgresql://localhost:5433/authdb
+    username: ${POSTGRES_USER:-authuser}
+    password: ${POSTGRES_PASSWORD:-authpass}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: true
   # Grpc Client
   grpc:
@@ -24,15 +37,15 @@ spring:
     client:
       channels:
         user:
-          address: ${SPRING_GRPC_CLIENT_CHANNELS_USER_ADDRESS:static://socialuser-service:9090}
+          address: ${SPRING_GRPC_CLIENT_CHANNELS_USER_ADDRESS:static://localhost:9090}
           enableKeepAlive: true
           keepAliveWithoutCalls: true
           negotiationType: plaintext
         socialuser-service:
-          address: ${SPRING_GRPC_CLIENT_CHANNELS_SOCIALUSER_ADDRESS:static://socialuser-service:9090}
+          address: ${SPRING_GRPC_CLIENT_CHANNELS_SOCIALUSER_ADDRESS:static://localhost:9090}
   # Kafka emiter
   kafka:
-    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:kafka:9092}
+    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.ByteArraySerializer
@@ -41,14 +54,18 @@ spring:
   data:
     redis:
       host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:6379}
+      port: ${REDIS_PORT:7000}
 
 kafka:
   topic:
     auth-user-registered: auth.user.registered
 
+security:
+  admin:
+    default-id: ${ADMIN_DEFAULT_ID:00000000-0000-0000-0000-000000000001}
+
 jwt:
-  secret: "mi-super-clave-ultra-segura-de-64-caracteres-2025-1234567890"
+  secret: ${JWT_SECRET}
   expiration: 3600000 
   jwks-path: /.well-known/jwks.json
   access-token-ttl: 900 # seconds

@@ -1,25 +1,38 @@
 server:
   port: 8085
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+  health:
+    defaults:
+      enabled: true
+
 spring:
   datasource:
     url: jdbc:postgresql://auth-db:5432/authdb
-    username: authuser
-    password: authpass
+    username: ${POSTGRES_USER:-authuser}
+    password: ${POSTGRES_PASSWORD:-authpass}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: validate
     show-sql: true
   data:
     redis:
       host: ${REDIS_HOST:redis}
       port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:-}
   grpc:
     client:
       channels:
         user:
-          address: ${SPRING_GRPC_CLIENT_CHANNELS_USER_ADDRESS:static://socialuser-service:9090}
+          address: ${SPRING_GRPC_CLIENT_CHANNELS_USER_ADDRESS:socialuser-service:9090}
         socialuser-service:
-          address: ${SPRING_GRPC_CLIENT_CHANNELS_SOCIALUSER_ADDRESS:static://socialuser-service:9090}
+          address: ${SPRING_GRPC_CLIENT_CHANNELS_SOCIALUSER_ADDRESS:socialuser-service:9090}
   kafka:
     bootstrap-servers: kafka:9092
