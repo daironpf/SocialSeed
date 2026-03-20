@@ -1,26 +1,24 @@
 #FROM maven:3.9.9-eclipse-temurin-24 AS builder
 FROM maven:3.9.9-eclipse-temurin-21 AS builder
 
-WORKDIR /app
+WORKDIR /build
 
-COPY pom.xml .
+COPY pom.xml ./pom.xml
+COPY platform ./platform
 
-#instala las dependencias y si no hay cambio no vuelve a descargarla y podemos hacer stop/start sin volver a descargar dependencias
-RUN mvn dependency:go-offline -B
+RUN mvn install -N
 
-COPY src ./src
+RUN mvn -f platform/pom.xml install -DskipTests
 
-RUN mvn clean package -DskipTests
-
+COPY services/api-gateway ./services/api-gateway
+RUN mvn -f services/api-gateway/pom.xml package -DskipTests
 
 #FROM openjdk:24-jdk AS runner
 FROM eclipse-temurin:21-jdk AS runner
 
-
-
 WORKDIR /app
 
-COPY --from=builder ./app/target/api-gateway-0.0.1-SNAPSHOT.jar ./app.jar
+COPY --from=builder /build/services/api-gateway/target/api-gateway-0.0.1-SNAPSHOT.jar ./app.jar
 
 EXPOSE 4004
 
