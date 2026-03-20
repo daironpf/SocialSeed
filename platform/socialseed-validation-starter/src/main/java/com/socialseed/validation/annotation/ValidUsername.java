@@ -12,7 +12,7 @@ import java.lang.annotation.*;
         ElementType.PARAMETER, ElementType.TYPE_USE })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidUsername {
-    String message() default "Formato de nombre de usuario inválido (3-20 caracteres, alfanumérico y _)";
+    String message() default "{username.format.invalid}";
 
     Class<?>[] groups() default {};
 

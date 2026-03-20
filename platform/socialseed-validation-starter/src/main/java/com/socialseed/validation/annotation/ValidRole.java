@@ -11,7 +11,7 @@ import java.lang.annotation.*;
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ValidRole {
-    String message() default "auth.error.invalid_role";
+    String message() default "{auth.error.invalid_role}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }
