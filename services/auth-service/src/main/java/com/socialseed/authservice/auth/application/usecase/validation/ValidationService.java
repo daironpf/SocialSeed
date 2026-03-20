@@ -2,6 +2,8 @@ package com.socialseed.authservice.auth.application.usecase.validation;
 
 import com.socialseed.authservice.auth.domain.model.AuthUser;
 import com.socialseed.authservice.auth.domain.repository.AuthUserRepository;
+import com.socialseed.errorhandling.exception.BusinessException;
+import com.socialseed.errorhandling.exception.ErrorCode;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +31,8 @@ public class ValidationService {
     }
 
     public boolean isCurrentPasswordValid(UUID userId, String currentPassword) {
-        AuthUser user = authUserRepository.findById(userId).get();
+        AuthUser user = authUserRepository.findById(userId)
+                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND, userId));
         return passwordEncoder.matches(currentPassword, user.getPassword());
     }
 }

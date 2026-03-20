@@ -6,6 +6,7 @@ import com.socialseed.contracts.socialuser.SocialUserServiceGrpc;
 import com.socialseed.contracts.socialuser.UpdateEmailRequest;
 import com.socialseed.contracts.socialuser.UpdateUsernameRequest;
 import io.grpc.StatusRuntimeException;
+import org.springframework.beans.factory.annotation.Value;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -24,11 +25,21 @@ public class UserSyncService {
 
   private final KafkaTemplate<String, byte[]> kafkaTemplateBytes;
   private final SocialUserServiceGrpc.SocialUserServiceBlockingStub socialUserServiceStub;
+  private final String usernameChangedTopic;
+  private final String emailChangedTopic;
+  private final String syncFailuresTopic;
 
-  public UserSyncService(KafkaTemplate<String, byte[]> kafkaTemplateBytes,
-      SocialUserServiceGrpc.SocialUserServiceBlockingStub socialUserServiceStub) {
+  public UserSyncService(
+          KafkaTemplate<String, byte[]> kafkaTemplateBytes,
+          SocialUserServiceGrpc.SocialUserServiceBlockingStub socialUserServiceStub,
+          @Value("${kafka.topic.auth-user-username-changed:auth.user.username.changed.v1}") String usernameChangedTopic,
+          @Value("${kafka.topic.auth-user-email-changed:auth.user.email.changed.v1}") String emailChangedTopic,
+          @Value("${kafka.topic.auth-user-sync-failures:auth.user.sync.failures}") String syncFailuresTopic) {
     this.kafkaTemplateBytes = kafkaTemplateBytes;
     this.socialUserServiceStub = socialUserServiceStub;
+    this.usernameChangedTopic = usernameChangedTopic;
+    this.emailChangedTopic = emailChangedTopic;
+    this.syncFailuresTopic = syncFailuresTopic;
   }
 
   @Retryable(retryFor = { StatusRuntimeException.class,
@@ -36,7 +47,6 @@ public class UserSyncService {
   public void syncUsernameChange(UUID userId, String oldUsername, String newUsername) {
     logger.info("Syncing username change for user {}: {} -> {}", userId, oldUsername, newUsername);
 
-    // 1. gRPC Sync
     UpdateUsernameRequest request = UpdateUsernameRequest.newBuilder()
         .setUserId(userId.toString())
         .setNewUsername(newUsername)
@@ -47,7 +57,6 @@ public class UserSyncService {
       throw new RuntimeException("SocialUser service failed to update username: " + response.getMessage());
     }
 
-    // 2. Kafka Event
     AuthUserUsernameChanged event = AuthUserUsernameChanged.newBuilder()
         .setUserId(userId.toString())
         .setOldUsername(oldUsername)
@@ -55,7 +64,7 @@ public class UserSyncService {
         .setUpdatedAt(com.google.protobuf.Timestamp.newBuilder().setSeconds(Instant.now().getEpochSecond()).build())
         .build();
 
-    kafkaTemplateBytes.send("auth.user.username.changed", userId.toString(), event.toByteArray());
+    kafkaTemplateBytes.send(usernameChangedTopic, userId.toString(), event.toByteArray());
   }
 
   @Retryable(retryFor = { StatusRuntimeException.class,
@@ -63,7 +72,6 @@ public class UserSyncService {
   public void syncEmailChange(UUID userId, String oldEmail, String newEmail) {
     logger.info("Syncing email change for user {}: {} -> {}", userId, oldEmail, newEmail);
 
-    // 1. gRPC Sync
     UpdateEmailRequest request = UpdateEmailRequest.newBuilder()
         .setUserId(userId.toString())
         .setNewEmail(newEmail)
@@ -74,7 +82,6 @@ public class UserSyncService {
       throw new RuntimeException("SocialUser service failed to update email: " + response.getMessage());
     }
 
-    // 2. Kafka Event
     AuthUserEmailChanged event = AuthUserEmailChanged.newBuilder()
         .setUserId(userId.toString())
         .setOldEmail(oldEmail)
@@ -82,15 +89,22 @@ public class UserSyncService {
         .setUpdatedAt(com.google.protobuf.Timestamp.newBuilder().setSeconds(Instant.now().getEpochSecond()).build())
         .build();
 
-    kafkaTemplateBytes.send("auth.user.email.changed", userId.toString(), event.toByteArray());
+    kafkaTemplateBytes.send(emailChangedTopic, userId.toString(), event.toByteArray());
   }
 
   @Recover
-  public void recover(Exception e, UUID userId, String oldVal, String newVal) {
-    logger.error("Failed to sync user data for user {} after retries. Error: {}", userId, e.getMessage());
-    // Push to a "manual inspection" topic as per requirement
-    String errorMessage = String.format("FAILED_SYNC|USER:%s|OLD:%s|NEW:%s|ERROR:%s", userId, oldVal, newVal,
+  public void recoverSyncUsernameChange(Exception e, UUID userId, String oldUsername, String newUsername) {
+    logger.error("Failed to sync username change for user {} after retries. Error: {}", userId, e.getMessage());
+    String errorMessage = String.format("FAILED_SYNC|USER:%s|OLD:%s|NEW:%s|ERROR:%s", userId, oldUsername, newUsername,
         e.getMessage());
-    kafkaTemplateBytes.send("auth.user.sync.failures", userId.toString(), errorMessage.getBytes());
+    kafkaTemplateBytes.send(syncFailuresTopic, userId.toString(), errorMessage.getBytes());
+  }
+
+  @Recover
+  public void recoverSyncEmailChange(Exception e, UUID userId, String oldEmail, String newEmail) {
+    logger.error("Failed to sync email change for user {} after retries. Error: {}", userId, e.getMessage());
+    String errorMessage = String.format("FAILED_SYNC|USER:%s|OLD:%s|NEW:%s|ERROR:%s", userId, oldEmail, newEmail,
+        e.getMessage());
+    kafkaTemplateBytes.send(syncFailuresTopic, userId.toString(), errorMessage.getBytes());
   }
 }

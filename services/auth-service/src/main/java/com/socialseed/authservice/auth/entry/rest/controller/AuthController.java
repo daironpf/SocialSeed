@@ -136,14 +136,15 @@ public class AuthController {
         }
 
         @PostMapping("/logout")
-        public ResponseEntity<ApiResponse<?>> logout(
+        public ResponseEntity<ApiResponse<Void>> logout(
                         @RequestHeader(value = "Authorization", required = false) String accessToken,
                         @Valid @RequestBody LogoutRequestDTO request,
                         Locale locale) {
                 authUseCases.logout(accessToken, request.refreshToken());
-                return ResponseEntity
-                                .status(HttpStatus.NO_CONTENT)
-                                .build();
+                return ResponseEntity.ok(
+                                ApiResponse.success(
+                                                null,
+                                                messageSource.getMessage("auth.logout.success", null, locale)));
         }
 
         @PostMapping("/token/refresh")

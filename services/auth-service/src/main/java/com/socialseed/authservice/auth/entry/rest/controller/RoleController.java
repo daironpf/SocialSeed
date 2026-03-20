@@ -7,6 +7,7 @@ import com.socialseed.authservice.auth.application.usecase.RemoveRoleFromUser;
 import com.socialseed.authservice.auth.entry.rest.dto.AssignRoleRequestDTO;
 import com.socialseed.authservice.auth.entry.rest.dto.RemoveRoleRequestDTO;
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,15 +27,18 @@ public class RoleController {
 
     private final AuthUseCases authUseCases;
     private final MessageSource messageSource;
+    private final UUID defaultAdminId;
 
     public RoleController(AssignRoleToUser assignRoleToUser,
             RemoveRoleFromUser removeRoleFromUser,
             AuthUseCases authUseCases,
-            MessageSource messageSource) {
+            MessageSource messageSource,
+            @Value("${security.admin.default-id:00000000-0000-0000-0000-000000000001}") UUID defaultAdminId) {
         this.assignRoleToUser = assignRoleToUser;
         this.removeRoleFromUser = removeRoleFromUser;
         this.authUseCases = authUseCases;
         this.messageSource = messageSource;
+        this.defaultAdminId = defaultAdminId;
     }
 
     /**
@@ -67,9 +71,7 @@ public class RoleController {
         try {
             adminId = UUID.fromString(adminUser.getUsername());
         } catch (IllegalArgumentException e) {
-            // Si el username no es un UUID, necesitamos obtener el ID de otra forma
-            // Por ahora, usamos un UUID por defecto para pruebas
-            adminId = UUID.fromString("00000000-0000-0000-0000-000000000001");
+            adminId = defaultAdminId;
         }
 
         Set<String> updatedRoles = assignRoleToUser.execute(userId, request.role(), adminId);
@@ -84,15 +86,11 @@ public class RoleController {
             @org.springframework.security.core.annotation.AuthenticationPrincipal org.springframework.security.core.userdetails.UserDetails adminUser) {
 
         UUID userId = UUID.fromString(request.userId());
-        // Extraer el adminId del UserDetails - asumimos que el username contiene el
-        // UUID
         UUID adminId;
         try {
             adminId = UUID.fromString(adminUser.getUsername());
         } catch (IllegalArgumentException e) {
-            // Si el username no es un UUID, necesitamos obtener el ID de otra forma
-            // Por ahora, usamos un UUID por defecto para pruebas
-            adminId = UUID.fromString("00000000-0000-0000-0000-000000000001");
+            adminId = defaultAdminId;
         }
 
         Set<String> updatedRoles = removeRoleFromUser.execute(userId, request.role(), adminId);

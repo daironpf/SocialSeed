@@ -9,7 +9,6 @@ import com.socialseed.contracts.socialuser.SocialUserServiceGrpc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.grpc.client.*;
 
 import java.util.UUID;
 
@@ -28,22 +27,39 @@ public class RegisterUser {
     public AuthResult execute(AuthUser authUser) {
         log.info("Starting user registration for email: {}", authUser.getEmail());
 
-        // 1️Crar el usuario social vía gRPC
-        var request = com.socialseed.contracts.socialuser.CreateUserRequest.newBuilder()
-                .setUsername(authUser.getUsername())
-                .setEmail(authUser.getEmail())
-                .build();
+        UUID socialUserId = UUID.randomUUID();
+        log.info("Created temporary socialUserId for testing: {}", socialUserId);
 
-        var response = socialUserClient.createUser(request);
+        try {
+            var request = com.socialseed.contracts.socialuser.CreateUserRequest.newBuilder()
+                    .setUsername(authUser.getUsername())
+                    .setEmail(authUser.getEmail())
+                    .build();
 
-        if (!"200".equals(response.getMessage())) {
-            log.error("Failed to create user in SocialUserService: {}", response.getMessage());
+            log.info("Calling socialuser-service gRPC...");
+            var response = socialUserClient.createUser(request);
+            log.info("SocialUserService response received: message={}, userId={}", response.getMessage(), response.getUserId());
+
+            if (response.getUserId() == null || response.getUserId().isBlank()) {
+                log.error("SocialUserService returned empty userId. Message: {}", response.getMessage());
+                throw new BusinessException(ErrorCode.USER_CREATION_FAILED, authUser.getEmail());
+            }
+
+            socialUserId = UUID.fromString(response.getUserId());
+            log.info("Social user created with ID: {}", socialUserId);
+
+        } catch (BusinessException e) {
+            log.error("Business exception during registration: {}", e.getMessage());
+            throw e;
+        } catch (Exception e) {
+            log.error("gRPC call to SocialUserService failed: {} - {}. Registration cannot continue.",
+                    e.getClass().getName(), e.getMessage());
             throw new BusinessException(ErrorCode.USER_CREATION_FAILED, authUser.getEmail());
         }
 
-        UUID socialUserId = UUID.fromString(response.getUserId());
-
-        // 2️⃣ Registrar usuario en AuthService
-        return authService.register(authUser, socialUserId);
+        log.info("Creating auth user with socialUserId: {}", socialUserId);
+        AuthResult result = authService.register(authUser, socialUserId);
+        log.info("Registration complete: {}", result);
+        return result;
     }
 }
