@@ -16,6 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.context.annotation.Bean;
@@ -28,17 +29,13 @@ import java.time.Instant;
 import java.util.Map;
 
 @AutoConfiguration
+@ConditionalOnMissingBean(GlobalErrorHandler.class)
 public class ErrorHandlingAutoConfiguration {
 
     private static final Logger log = LoggerFactory.getLogger(ErrorHandlingAutoConfiguration.class);
     private static final ObjectMapper mapper = new ObjectMapper()
             .registerModule(new JavaTimeModule())
             .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-
-    @Bean
-    GlobalErrorHandler globalErrorHandler() {
-        return new GlobalErrorHandler();
-    }
 
     @Bean
     @ConditionalOnClass(name = "org.springframework.dao.DataIntegrityViolationException")
