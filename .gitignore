@@ -69,3 +69,12 @@ wheels/
 *.egg
 
 probando e2e/
+
+# Neo4j data volumes
+infrastructure/volumes/neo4j_data/
+
+# Postgres data volumes
+infrastructure/volumes/postgres_data/
+
+# Redis data volumes
+infrastructure/volumes/redis_data/
