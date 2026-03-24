@@ -1,30 +1,30 @@
 services:
-  #Api-Gateway
-  api-gateway:
-    container_name: api-gateway
-    build:
-      context: services/api-gateway
-      dockerfile: Dockerfile
-    ports:
-      - "8084:4004"
-    depends_on:
-      socialuser-service:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    environment:
-      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set}
-    networks:
-      - net
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:4004/actuator/health" ]
-      interval: 5s
-      timeout: 3s
-      retries: 20
-    deploy:
-      resources:
-        limits:
-          memory: 256M
+#  #Api-Gateway
+#  api-gateway:
+#    container_name: api-gateway
+#    build:
+#      context: services/api-gateway
+#      dockerfile: Dockerfile
+#    ports:
+#      - "8084:4004"
+#    depends_on:
+#      socialuser-service:
+#        condition: service_healthy
+#      redis:
+#        condition: service_healthy
+#    environment:
+#      JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set}
+#    networks:
+#      - net
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "http://localhost:4004/actuator/health" ]
+#      interval: 5s
+#      timeout: 3s
+#      retries: 20
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 256M
 
   #SocialUser - Service
   socialuser-service:
@@ -36,6 +36,9 @@ services:
       SPRING_PROFILES_ACTIVE: docker
       SERVER_PORT: 8090
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      SPRING_NEO4J_URI: bolt://socialgraph-db:7687
+      SPRING_NEO4J_AUTHENTICATION_USERNAME: neo4j
+      SPRING_NEO4J_AUTHENTICATION_PASSWORD: ${NEO4J_PASSWORD:-neoSocial}
     depends_on:
       neo4j:
         condition: service_healthy
@@ -48,10 +51,10 @@ services:
       retries: 20
     networks:
       - net
-    volumes:
-      - ./services/socialuser-service/src/main/resources/application.yml:/app/config/application.yml:ro
-      - ./services/socialuser-service/src/main/resources/application-dev.yml:/app/config/application-dev.yml:ro
-      - ./services/socialuser-service/src/main/resources/application-docker.yml:/app/config/application-docker.yml:ro
+    # volumes:
+    #   - ./services/socialuser-service/src/main/resources/application.yml:/app/config/application.yml:ro
+    #   - ./services/socialuser-service/src/main/resources/application-dev.yml:/app/config/application-dev.yml:ro
+    #   - ./services/socialuser-service/src/main/resources/application-docker.yml:/app/config/application-docker.yml:ro
     deploy:
       resources:
         limits:
@@ -72,52 +75,55 @@ services:
       - "8085:8085"
     environment:
       SPRING_PROFILES_ACTIVE: docker
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-      REDIS_PASSWORD: ${REDIS_PASSWORD:-}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://auth-db:5432/authdb
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-authuser}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-authpass}
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATA_REDIS_HOST: redis
+      SPRING_DATA_REDIS_PORT: 6379
+      SPRING_DATA_REDIS_PASSWORD: ${REDIS_PASSWORD:-}
       SERVER_PORT: 8085
       SPRING_GRPC_CLIENT_USER_ADDRESS: socialuser-service:9090
       SPRING_GRPC_CLIENT_CHANNELS_USER_ADDRESS: socialuser-service:9090
-      SPRING_DATASOURCE_URL: jdbc:postgresql://auth-db:5432/authdb
       SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
       JWT_SECRET: ${JWT_SECRET:?JWT_SECRET must be set}
     networks:
       - net
-    volumes:
-      - ./services/auth-service/src/main/resources/application.yml:/app/config/application.yml:ro
-      - ./services/auth-service/src/main/resources/application-dev.yml:/app/config/application-dev.yml:ro
-      - ./services/auth-service/src/main/resources/application-docker.yml:/app/config/application-docker.yml:ro
+    # volumes:
+    #   - ./services/auth-service/src/main/resources/application.yml:/app/config/application.yml:ro
+    #   - ./services/auth-service/src/main/resources/application-dev.yml:/app/config/application-dev.yml:ro
+    #   - ./services/auth-service/src/main/resources/application-docker.yml:/app/config/application-docker.yml:ro
     deploy:
       resources:
         limits:
           memory: 512M
 
-  #Nexus - Service
-  nexus-service:
-    container_name: nexus-service
-    build:
-      context: .
-      dockerfile: services/nexus-service/Dockerfile
-    depends_on:
-      kafka:
-        condition: service_healthy
-    ports:
-      - "8086:8086"
-    environment:
-      SPRING_PROFILES_ACTIVE: test
-      KAFKA_HOST: kafka
-      KAFKA_PORT: 9092
-    networks:
-      - net
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8086/actuator/health" ]
-      interval: 5s
-      timeout: 3s
-      retries: 20
-    deploy:
-      resources:
-        limits:
-          memory: 512M
+#  #Nexus - Service
+#  nexus-service:
+#    container_name: nexus-service
+#    build:
+#      context: .
+#      dockerfile: services/nexus-service/Dockerfile
+#    depends_on:
+#      kafka:
+#        condition: service_healthy
+#    ports:
+#      - "8086:8086"
+#    environment:
+#      SPRING_PROFILES_ACTIVE: test
+#      KAFKA_HOST: kafka
+#      KAFKA_PORT: 9092
+#    networks:
+#      - net
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "http://localhost:8086/actuator/health" ]
+#      interval: 5s
+#      timeout: 3s
+#      retries: 20
+#    deploy:
+#      resources:
+#        limits:
+#          memory: 512M
 
   ## ==> DATABASES
   # Social Graph in Neo4j
@@ -130,7 +136,9 @@ services:
     #    restart: always
     environment:
       - NEO4J_AUTH=${NEO4J_USERNAME:-neo4j}/${NEO4J_PASSWORD:-neoSocial}
-      - NEO4J_server.memory.pagecache.size=1G
+      - NEO4J_dbms_memory_heap_initial__size=100M
+      - NEO4J_dbms_memory_heap_max__size=100M
+      - NEO4J_dbms_memory_pagecache_size=50M
     volumes:
       - ./infrastructure/volumes/neo4j_data:/var/lib/neo4j/data
     healthcheck:

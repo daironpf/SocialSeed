@@ -15,12 +15,12 @@ management:
 
 spring:
   neo4j:
-    uri: bolt://socialgraph-db:7687
+    uri: bolt://localhost:7687
     authentication:
-      username: ${NEO4J_USERNAME:-neo4j}
-      password: ${NEO4J_PASSWORD:-neoSocial}
+      username: neo4j
+      password: neoSocial
   kafka:
-    bootstrap-servers: kafka:9092
+    bootstrap-servers: localhost:9092
     consumer:
       group-id: socialuser-service-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer

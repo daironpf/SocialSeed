@@ -19,12 +19,9 @@ spring:
     name: auth-service
   # PgSQL auth-db
   datasource:
-    # Docker
-#    url: jdbc:postgresql://auth-db:5432/authdb
-    # Local
-    url: jdbc:postgresql://localhost:5433/authdb
-    username: ${POSTGRES_USER:-authuser}
-    password: ${POSTGRES_PASSWORD:-authpass}
+    url: jdbc:postgresql://localhost:5432/authdb
+    username: authuser
+    password: authpass
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -54,7 +51,7 @@ spring:
   data:
     redis:
       host: ${REDIS_HOST:localhost}
-      port: ${REDIS_PORT:7000}
+      port: ${REDIS_PORT:6380}
 
 kafka:
   topic:
@@ -65,8 +62,8 @@ security:
     default-id: ${ADMIN_DEFAULT_ID:00000000-0000-0000-0000-000000000001}
 
 jwt:
-  secret: ${JWT_SECRET}
-  expiration: 3600000 
+  secret: ${JWT_SECRET:defaultSecretKeyForDevelopmentOnly12345678901234567890}
+  expiration: 3600000
   jwks-path: /.well-known/jwks.json
   access-token-ttl: 900 # seconds
   refresh:

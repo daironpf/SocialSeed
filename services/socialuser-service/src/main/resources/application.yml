@@ -23,7 +23,7 @@ spring:
       username: neo4j
       password: neoSocial
   kafka:
-    bootstrap-servers: ${SPRING_KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+    bootstrap-servers: ${KAFKA_HOST:localhost}:${KAFKA_PORT:9092}
     consumer:
       group-id: socialuser-service-group
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
